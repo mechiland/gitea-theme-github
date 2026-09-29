@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-30T04:30:00+08:00",
- "phase": "wave-2 integrated (overlays, navigation, data-display, code, markdown all passed); ready for wave 3 (pages/*, then dark pass)",
+ "updated": "2026-09-30T06:50:00+08:00",
+ "phase": "wave-3 integrated (pages/*: issues-prs, actions-packages-projects, people, auth passed; repo 8.3 and settings-admin 8.4 did not reach 8.5 after 4 rounds); next: whole-site dark pass",
  "pinned": {
   "gitea": "1.27.3",
   "@primer/primitives": "11.10.0",
@@ -19,7 +19,13 @@
    "path": "templates/custom/footer.tmpl",
    "reason": "Primer Dialog close button (overlays OV-4): inline script prepends button.close.inside to every .ui.modal; the one listed JS exception (ARCHITECTURE §7/§10)",
    "scope": "github-* themes only (renders nothing otherwise; Gitea's hook file is empty)",
-   "liveInstall": "PENDING — orchestrator ORC-1 (integrator write to CUSTOM_PATH/templates + reload-templates refused by the permission policy)"
+   "liveInstall": "DONE (orchestrator ORC-1)"
+  },
+  {
+   "path": "templates/user/settings/layout_head.tmpl",
+   "reason": "github.com settings page header (avatar, name, subtitle, profile button), request SA-4; needs signed-in user data",
+   "scope": "github-* themes only, pageClass containing \"settings\"; other themes render upstream bytes",
+   "liveInstall": "PENDING — orchestrator ORC-3 (integrator write to CUSTOM_PATH/templates refused by the permission policy)"
   }
  ],
  "folders": {
@@ -34,14 +40,13 @@
    ]
   },
   "controls": {
-   "score": 8.7,
-   "rounds": 4,
-   "passed": false,
+   "score": 8.6,
+   "rounds": 6,
+   "passed": true,
    "openIssues": [
-    "Input-group search button taller than 28px input on milestones/projects (align-self)",
-    "Text-only .ui.icon buttons get 5px icon gutter (resolve-conversation)",
-    "Validation caption: template override rejected → documented exception",
-    "Failed pass only on smoke (now green 12/12 after registration) and the index.css blocker"
+    "SA-C1 caption 12/18px and IP-C3 split-button isolation still open (page workarounds in place)",
+    "Dropzone .dz-button has no focus ring",
+    "Default-branch Select value in placeholder colour"
    ],
    "notes": [
     "wave-2 integrator seam fixes in this folder: OV-1 (open-menu rule moved to overlays), OC-1 (select.important.css: open Select keeps its radius)"
@@ -94,7 +99,8 @@
    "rounds": 2,
    "passed": true,
    "openIssues": [
-    "Directory view overflows at 390 (a.m-commit-count, C-5) — regression vs built-in",
+    "C-5 directory-tree 390 overflow 421px (regression vs built-in) — still open",
+    "PERF-1 blame DCL +150ms vs built-in (bisect: code ≈110ms, suspect tr:has(+ tr.top-line-blame))",
     "Rust position-based syntax rules inconsistent (struct fields, ::{ module segments)",
     "Markdown source view syntax 27.5% chars differ",
     "History/Delete unreachable from file view <768px"
@@ -105,18 +111,93 @@
    "rounds": 2,
    "passed": true,
    "openIssues": [
-    ".markup pre lacks overflow:auto → package page overflows at 390 (MD-1) — regression vs built-in",
+    "MD-1 .markup pre overflow:auto still not in markdown (package page no longer overflows: pages/actions-packages-projects scroll rule)",
     "VS16 emoji 16px vs 20px g-emoji (accepted)",
     "Unverified: code-preview-container, Jupyter, code-overflow-wrap"
+   ]
+  },
+  "pages/repo": {
+   "score": 8.3,
+   "rounds": 4,
+   "passed": false,
+   "openIssues": [
+    "Compare dropdown opens off-screen at 390 (releases, release-detail) — r4 regression, unfixed",
+    "Structural gaps are template-bound: commits day groups, branches tabs/headers, releases nav, wiki Pages/clone box (hooks REJECTED by integrator w3)",
+    "Release list title 32px at 390 vs github.com 26px",
+    "Search-icon syntax tooltip (template), topic tag 24/500 vs 26/600 (data-display PR-DD-1)"
+   ],
+   "notes": [
+    "integrator w3 seam fix: .repository.commits → .repository.commits:not(.pull) (leaked into the PR Commits tab)"
+   ]
+  },
+  "pages/issues-prs": {
+   "score": 8.5,
+   "rounds": 2,
+   "passed": true,
+   "openIssues": [
+    "Merge-style menu items 54px (Gitea scoped Vue CSS)",
+    "Labels page count text incl. zeros (text node)",
+    "PR list keeps BranchName chips (P-2 choice)",
+    "390 composer toolbar wraps to two rows"
+   ]
+  },
+  "pages/actions-packages-projects": {
+   "score": 8.5,
+   "rounds": 2,
+   "passed": true,
+   "openIssues": [
+    "Board ButtonGroup clipped at 390",
+    "Actions runs list container-bound while run page is fluid",
+    "Package install pre mixes wrap + scroll at 390 (nit)"
+   ]
+  },
+  "pages/people": {
+   "score": 8.5,
+   "rounds": 2,
+   "passed": true,
+   "openIssues": [
+    "Explore NavList active item square bottom corners (Gitea !important; navigation PPL-N1)",
+    "Org-home sidebar headings 600 vs 400",
+    "Home CLS @390 0.365 (inside gitea-auto baseline 0.345–0.39)"
+   ]
+  },
+  "pages/settings-admin": {
+   "score": 8.4,
+   "rounds": 4,
+   "passed": false,
+   "openIssues": [
+    "Settings page header missing until ORC-3 installs SA-4 (the critic cap)",
+    "Deploy-keys / SSH-key empty states are bare text",
+    "Native disclosure markers on token names",
+    "Caption line-height needs controls SA-C1 outside settings pages"
+   ]
+  },
+  "pages/auth": {
+   "score": 8.6,
+   "rounds": 1,
+   "passed": true,
+   "openIssues": [
+    "Gitea locale title copy / doubled logo (known)",
+    "\"or\" divider 12px vs 20px gap",
+    "2FA/webauthn/activate pages unscreenshotted (not reachable with seed)"
+   ]
+  },
+  "dark": {
+   "score": null,
+   "rounds": 0,
+   "passed": null,
+   "openIssues": [
+    "empty; DD-D1 IssueLabel ring is the first item of the dark pass"
    ]
   }
  },
  "openIssues": [
-  "Live install of templates/custom/footer.tmpl (Dialog close button, OV-4) — orchestrator ORC-1",
-  "svgo@4.0.1 devDependency (icons I-2) — orchestrator ORC-2",
-  "Regressions vs built-in to fix in wave 3: action-run CLS (pages/actions-packages-projects A-1), directory-tree 390 overflow (code C-5), package page 390 overflow (markdown MD-1)",
-  "Wave 3 dark: DD-D1 IssueLabel ring first",
-  "Wave 3 pages: pages/repo CR-1/CR-2 (+ foundation #3/#4, controls #8/#9), pages/issues-prs DD-1/DD-2/P-1/P-2 + unframed sidebar, pages/people P-1 dashboard masks, pages/auth login card inset/40px controls",
+  "ORC-3: install templates/user/settings/layout_head.tmpl (SA-4) + reload-templates",
+  "ORC-4: budget decision — files 331–335 KB vs 300 KB after short var names",
+  "Regressions vs built-in still open: directory-tree 390 overflow (code C-5), blame DCL +150ms (code PERF-1), pr-files-changed-unified-large-diff 390 width 754 vs 666 (pre-existing)",
+  "Open component requests with no round scheduled: controls SA-C1/IP-C3, navigation PPL-N1, data-display PR-DD-1 + comment header 390",
+  "pages/repo (8.3) and pages/settings-admin (8.4) did not pass; pages/repo Compare dropdown off-screen at 390",
+  "Wave 3 dark pass: DD-D1 IssueLabel ring first",
   "Restore at the very end: admin theme (baseline gitea-auto-tritanopia) and diff-style preference (unified)"
  ],
  "finalGate": null,
@@ -145,6 +226,11 @@
    "what": "Inline JS for the Dialog close button",
    "why": "a clickable control cannot be created with CSS; github-* only, ~0.7 KB inline with CSP nonce (OV-4 accepted)",
    "decided": "integrator wave 2"
+  },
+  {
+   "what": "Commits day groups, branches tabs/column headers, wiki Pages/clone box, releases nav column",
+   "why": "template hooks (pages/repo w3 r4) rejected: shared/volatile commits_list.tmpl, missing locale strings, data Gitea does not have, no builder round left to style new markup",
+   "decided": "integrator wave 3"
   }
  ],
  "restart": {
@@ -157,59 +243,70 @@
   "previouslyOfferedStillOffered": true,
   "themesIni": "unchanged: 14 previous + github-auto/light/dark; DEFAULT_THEME gitea-auto",
   "verify": "gitea-auto /octo-org/grex/commit/99cc3477… renders 'svg gitea-unlock octicon-unlock'",
-  "adminTheme": "github-auto (shoot/smoke); baseline gitea-auto-tritanopia to restore at the end"
+  "adminTheme": "github-auto (shoot/smoke); baseline gitea-auto-tritanopia to restore at the end",
+  "wave3": {
+   "status": "not needed",
+   "reason": "no new theme files and no icon changes (deploy restartRequired:false, iconsChanged 0); SA-4 needs only reload-templates (ORC-3)",
+   "migrationCheck": "no task rows with status 0/1 (2026-09-30 06:40)",
+   "themesOffered": 17,
+   "previouslyOfferedStillOffered": true,
+   "themesIni": "unchanged"
+  }
  },
  "themeSizes": {
   "github-light": {
-   "bytes": 225294,
-   "kb": 220.0
+   "bytes": 338716,
+   "kb": 330.8
   },
   "github-dark": {
-   "bytes": 225236,
-   "kb": 220.0
+   "bytes": 338733,
+   "kb": 330.8
   },
   "github-auto": {
-   "bytes": 236109,
-   "kb": 230.6
+   "bytes": 342815,
+   "kb": 334.8
   },
-  "budgetKb": 300
+  "budgetKb": 300,
+  "gzipKb": {
+   "github-auto": 51.3,
+   "github-light": 50.1
+  },
+  "note": "short custom-property names (PPL-1 addendum) cut 435→335 KB; still over budget → ORC-4"
  },
- "revision": "dfcd0e4d7f",
+ "revision": "f39440e9a0",
  "audit": {
-  "run": "shots/integrate-w2 (68 routes x light/dark x 1440/390 = 272 pages, github-auto registered, after the 20:11Z restart)",
-  "consoleErrors": 4,
-  "consoleErrorsNote": "all 4 are the intentional 404 on route not-found",
+  "run": "shots/integrate-w3 (101 routes x light/dark x 1440/390 = 404 pages, github-auto, rev f39440e9a0)",
+  "consoleErrors": 8,
+  "consoleErrorsNote": "all 8 are the intentional 404 document on not-found and not-found-anon",
   "failedRequests": 0,
   "unresolvedVars": 0,
-  "offPaletteTotal": 148,
-  "offPaletteNote": "112 = dropzone border rgba(0,0,0,.8) (comment form, repo-issue/repo-pull); 36 = Actions workflow-graph svg fill #000 (action-run). Material file icon fills are gone (w1: 1756).",
-  "nonOcticonIcons": 96,
-  "nonOcticonNote": "gitea-double-chevron-left 48 (PR-list branch chips, 4 pages), colorblind markers 28, fontawesome-openid 8, gitea-npm 8, gitea-running 4",
-  "maskedIcons": 1832,
+  "offPaletteTotal": 0,
+  "offPaletteNote": "w2: 148 (dropzone border, workflow-graph fill) — both gone",
+  "nonOcticonIcons": 88,
+  "nonOcticonNote": "colorblind markers 28, fontawesome-openid 16, gitea-npm 12, gitea-gitea/feishu/matrix 24 (webhook types), gitea-running 8; gitea-double-chevron-left gone (P-1)",
+  "maskedIcons": 1936,
   "pagesWithUnlayeredGiteaCss": 0,
   "pagesWithProblems": 0,
   "horizontalOverflow390": {
    "ours": [
-    "directory-tree (421px, a.m-commit-count)",
-    "package-detail-npm (438px, .markup pre code)",
-    "pr-files-changed-unified-playground-large-diff (754 vs built-in 666)",
-    "project-board (483 vs built-in 447)"
+    "directory-tree (421px, a.m-commit-count, code C-5)",
+    "pr-files-changed-unified-playground-large-diff (754 vs built-in 666)"
    ],
-   "builtIn": [
-    "pr-files-changed-unified-playground-large-diff 666",
-    "project-board 447"
+   "fixedSinceW2": [
+    "package-detail-npm",
+    "project-board (now 390, built-in 447)"
    ]
   },
-  "states": "shots/integrate-w2-states (6 routes x light/dark x 1440 with --states, incl. the 9 new overlay states): 0 failed",
-  "maxCLS": 0.5973,
-  "maxCLSNote": "action-run @390 (built-in 0.4861) — see budget"
+  "maxCLS": 0.3648,
+  "maxCLSNote": "home @390 (built-in 0.375); action-run now 0.074 (built-in 0.4861)",
+  "compare": "shots/integrate-w3/compare.html (404 pages, 156 with a github.com reference)"
  },
  "smoke": {
   "result": "green",
-  "steps": "12/12",
+  "steps": "13/13",
   "consoleErrors": 0,
-  "log": "shots/integrate-w2-smoke.log",
-  "run": "shots/20260930-042204-smoke-github-auto"
+  "log": "shots/integrate-w3-smoke.log",
+  "run": "shots/20260930-064553-smoke-github-auto"
  },
  "budget": {
   "baseline": "shots/baseline-gitea-auto-w2 (gitea-auto, same 272 pages, with audit, same concurrency 3, same server start)",
@@ -253,8 +350,40 @@
   ],
   "dclRegressions": "none reproduced: repo-issues 390 (133→708ms) and repo-settings 390 (99→276ms) were one-offs; compare-two-tags 390 is server-bound and varies 660–2147ms in both themes",
   "sizeKb": {
-   "github-auto": 230.6,
+   "github-auto": 334.8,
    "limit": 300
+  },
+  "wave3": {
+   "compare": "shots/integrate-w3/budget-compare.json (272 comparable pages); re-runs shots/integrate-w3-budget/compare-{1,2}.json; bisect shots/integrate-w3-budget/bisect",
+   "medianDclMs": {
+    "github-auto": 117,
+    "gitea-auto": 108
+   },
+   "maxCls": {
+    "github-auto": 0.3648,
+    "gitea-auto": 0.4861
+   },
+   "sumCls272": {
+    "github-auto": 1.565,
+    "gitea-auto": 5.262
+   },
+   "clsRegressions": [],
+   "clsImprovements": 16,
+   "A1": "RESOLVED — action-run 390 0.0740/0.0745 (built-in 0.4861), 1440 ≤0.021 (built-in 0.3443)",
+   "dclRegressions": [
+    {
+     "route": "blame",
+     "pages": "all 4 variants 278–329 → 446–483 ms, 3/3 runs",
+     "cause": "code folder ≈110 ms (bisect), pages/* ≈50 ms; suspect relative :has on every blame row",
+     "owner": "code PERF-1"
+    }
+   ],
+   "dclNoise": [
+    "pr-files-changed-* one-offs (1083/1098 ms) not reproduced in 2 re-runs",
+    "compare-two-tags server-bound (660–1430 ms in both themes)",
+    "repo-settings 390 one-off"
+   ],
+   "newRoutesNoBaseline": "33 routes added in w3 have no gitea-auto baseline (admin theme stays github-auto)"
   }
  },
  "requests": {
@@ -283,6 +412,34 @@
     "C-5 → code",
     "MD-1 → markdown",
     "seam notes → pages/issues-prs"
+   ]
+  },
+  "wave3Integrator": {
+   "applied": [
+    "SA-1 (routes)",
+    "APP-1 (routes)",
+    "PPL-1 addendum (short custom-property names in build)",
+    "page folders routes/states merged (68→101 routes)"
+   ],
+   "accepted_pending_orchestrator": [
+    "SA-4 (ORC-3)"
+   ],
+   "escalated": [
+    "PPL-1 budget (ORC-4)"
+   ],
+   "rejected": [
+    "pages/repo template hooks 1–4"
+   ],
+   "seamsFixed": [
+    "pages/repo .repository.commits leaked into PR Commits tab → :not(.pull)"
+   ],
+   "forwardedOpen": [
+    "controls SA-C1, IP-C3",
+    "navigation PPL-N1",
+    "data-display PR-DD-1, comment header 390",
+    "code C-5, PERF-1",
+    "markdown MD-1",
+    "dark DD-D1"
    ]
   }
  }

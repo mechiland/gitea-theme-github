@@ -1,0 +1,8 @@
+/*
+ * gh-important for settings forms: nested sub-options carry Tailwind `tw-pl-4` (14px, `!important` in Gitea's layer:
+ * repo wiki / issue-tracker sub-fields, profile "Avatar email" / "Choose new avatar"). github.com nests a checkbox's
+ * sub-options under the option label text: 16px control + 8px gap = 24px.
+ */
+:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.form:not(.ui.modal *) .field.tw-pl-4 {
+  padding-left: var(--base-size-24) !important;
+}

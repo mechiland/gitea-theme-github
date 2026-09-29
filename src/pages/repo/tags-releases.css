@@ -1,0 +1,684 @@
+/*
+ * Releases & Tags — github.com /releases, /releases/tag/<t>, /tags (measured 2026-09-30, pemistahl/grex).
+ * Header: "Releases | Tags" subnav (32px, padding 0 16px, 14px medium, --borderColor-default, radius 6px on the
+ *   outer corners; selected = --bgColor-accent-emphasis / --fgColor-onEmphasis), RSS + "New release" at the right,
+ *   16px under it a 1px --borderColor-default rule, 16px gap to the list.
+ * Release card (Box, radius 6px): body padding 16px; title 32px / 48px semibold --fgColor-default + Label
+ *   (24px, padding 0 8px, 12px medium); meta row 14px --fgColor-muted (20px avatar, author semibold), 24px below it
+ *   a 1px --borderColor-default rule, 16px to the notes (16px markdown, markdown folder); assets in the Box footer:
+ *   "Assets" 20px semibold summary, then a condensed Box: rows padding 8px 16px, package icon 16px muted, name 14px
+ *   semibold --fgColor-accent, size / date 14px --fgColor-muted.
+ * Left column (Gitea .meta, github.com's classic release timeline column): tag, commit, Compare button, 14px muted,
+ *   right-aligned.
+ * Tags list (Box): rows padding 16px, tag name 16px semibold --fgColor-default, meta row 12px --fgColor-muted with
+ *   16px octicons, 16px apart.
+ * Gitea: templates/repo/release_tag_header.tmpl, release/list.tmpl (ul#release-list > li.release-entry > .meta +
+ *   .ui.segment.detail), tag/list.tmpl (#tags-table .tag-list-row); CSS web_src/css/repo/release-tag.css.
+ */
+
+/* ---------- header: Releases | Tags subnav ---------- */
+.repository.releases .small-menu-items.ui.compact.menu,
+.repository.tags .small-menu-items.ui.compact.menu {
+  gap: 0;
+  margin: 0;
+}
+
+.repository.releases .small-menu-items.ui.compact.menu .item,
+.repository.tags .small-menu-items.ui.compact.menu .item {
+  height: var(--control-medium-size);
+  min-height: 0;
+  padding: 0 var(--control-medium-paddingInline-spacious);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-medium);
+  line-height: var(--base-size-20);
+}
+
+.repository.releases .small-menu-items.ui.compact.menu .item + .item,
+.repository.tags .small-menu-items.ui.compact.menu .item + .item {
+  margin-left: calc(var(--borderWidth-thin) * -1);
+}
+
+.repository.releases .small-menu-items.ui.compact.menu .item:first-child,
+.repository.tags .small-menu-items.ui.compact.menu .item:first-child {
+  border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
+}
+
+.repository.releases .small-menu-items.ui.compact.menu .item:last-child,
+.repository.tags .small-menu-items.ui.compact.menu .item:last-child {
+  border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
+}
+
+.repository.releases .small-menu-items.ui.compact.menu .active.item,
+.repository.tags .small-menu-items.ui.compact.menu .active.item {
+  position: relative;
+  border-color: var(--bgColor-accent-emphasis);
+  color: var(--fgColor-onEmphasis);
+  font-weight: var(--base-text-weight-medium);
+}
+
+.repository.releases > .ui.container > .flex-text-block:first-child,
+.repository.tags > .ui.container > .flex-text-block:first-child {
+  gap: var(--base-size-8);
+}
+
+.repository.releases > .ui.container > .flex-text-block:first-child + .divider,
+.repository.tags > .ui.container > .flex-text-block:first-child + .divider {
+  height: 0;
+  margin: var(--base-size-24) 0 var(--base-size-16); /* github.com: segment → rule 24px, rule → tags Box 16px */
+  border: 0;
+  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+}
+
+/* github.com /releases: 48px from the rule to the first release card (measured pemistahl/grex 2026-09-30:
+   rule y=262, card y=311) */
+.repository.releases > .ui.container > .flex-text-block:first-child + .divider {
+  margin-bottom: var(--base-size-48);
+}
+
+/* "RSS Feed" / "New Release": github.com's "Draft a new release" is a medium (32px, 14px) Button, the same height
+   as the Releases | Tags segment next to it */
+.repository.releases > .ui.container > .flex-text-block:first-child > a.ui.button,
+.repository.tags > .ui.container > .flex-text-block:first-child > a.ui.button {
+  height: var(--control-medium-size);
+  min-height: 0;
+  margin: 0;
+  padding: 0 var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+}
+
+.repository.releases > .ui.container > .flex-text-block:first-child > .tw-flex-1,
+.repository.tags > .ui.container > .flex-text-block:first-child > .tw-flex-1 {
+  min-width: 0;
+}
+
+/* 390px: github.com keeps the segment on the first row and puts a full-width field (Find a release) on the
+   second. Here: segment + RSS on the first row (RSS becomes a 32px icon button; the "RSS Feed" text stays in the DOM
+   as its accessible name), and New Release fills whatever is left — the rest of the first row when it fits, else a
+   full-width second row (never a lone half-row button). */
+@media (max-width: 767.98px) {
+  .repository.releases > .ui.container > .flex-text-block:first-child,
+  .repository.tags > .ui.container > .flex-text-block:first-child {
+    flex-wrap: wrap;
+  }
+
+  .repository.releases > .ui.container > .flex-text-block:first-child + .divider {
+    margin-bottom: var(--base-size-24);
+  }
+
+  /* .tw-flex-1 is `flex: 1 1 0%` (!important): it grows, and max-content keeps the segment from being squeezed */
+  .repository.releases > .ui.container > .flex-text-block:first-child > .tw-flex-1,
+  .repository.tags > .ui.container > .flex-text-block:first-child > .tw-flex-1 {
+    min-width: max-content;
+  }
+
+  .repository.releases > .ui.container > .flex-text-block:first-child > a.ui.primary.button {
+    flex: 1 0 auto;
+    justify-content: center;
+  }
+
+  .repository.releases > .ui.container > .flex-text-block:first-child > a.ui.button[href$=".rss"],
+  .repository.tags > .ui.container > .flex-text-block:first-child > a.ui.button[href$=".rss"] {
+    justify-content: center;
+    width: var(--control-medium-size);
+    padding: 0;
+    font-size: 0;
+  }
+
+  .repository.releases > .ui.container > .flex-text-block:first-child > a.ui.button[href$=".rss"] > .svg,
+  .repository.tags > .ui.container > .flex-text-block:first-child > a.ui.button[href$=".rss"] > .svg {
+    margin: 0;
+  }
+}
+
+/* github.com centres the releases list and the tags list in a col-11 of the 1216px container (1114px at x=163 at
+   1440, 950px at 1100, 328px at 390; measured pemistahl/grex 2026-09-30). The single release page is full width
+   (override at the end of this file). */
+.repository.releases > .ui.container,
+.repository.tags > .ui.container {
+  width: calc((var(--breakpoint-xlarge) - 2 * var(--page-margin-x)) * 11 / 12);
+  max-width: calc((100% - 2 * var(--page-margin-x)) * 11 / 12);
+}
+
+/* ---------- release list ---------- */
+#release-list {
+  gap: var(--base-size-32); /* github.com: 32px between release cards */
+  margin: 0;
+}
+
+#release-list .release-entry {
+  gap: var(--base-size-40);
+}
+
+#release-list .release-entry .meta {
+  flex-basis: calc(var(--base-size-128) + var(--base-size-32) + var(--base-size-2)); /* github.com: 162px column */
+  flex-shrink: 0;
+  gap: var(--base-size-8);
+  align-items: flex-end;
+  padding: var(--base-size-16) 0 0;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+#release-list .release-entry .meta > a.muted {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base-size-4);
+  color: var(--fgColor-muted);
+  white-space: nowrap; /* never break a tag name mid-token ("v1.1.0-" / "rc.1" at 390) */
+}
+
+/* Compare: github.com's release Compare is a small (28px, 12px) Button with the condensed 8px padding (90×28) */
+#release-list .release-entry .meta .branch-dropdown-button {
+  height: var(--control-small-size);
+  min-height: 0;
+  padding: 0 var(--control-small-paddingInline-condensed);
+  font-size: var(--text-body-size-small);
+  line-height: var(--base-size-20);
+}
+
+#release-list .release-entry .meta > a.muted:hover {
+  color: var(--fgColor-accent);
+  text-decoration: none;
+}
+
+#release-list .release-entry .meta > a.muted > .svg {
+  margin: 0;
+}
+
+#release-list .release-entry .meta > a.tw-font-mono {
+  font-size: var(--text-body-size-small);
+}
+
+/* card */
+#release-list .release-entry > .ui.segment.detail {
+  padding: var(--base-size-16);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+  box-shadow: none;
+}
+
+/* title row: the title (with its status and Label) takes the free width and wraps inside itself; the edit pencil
+   stays at the top right, centred on the first title line (github.com) */
+#release-list .detail > .flex-left-right {
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+#release-list .detail > .flex-left-right > div:last-child {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: calc(var(--text-title-size-large) * var(--text-title-lineHeight-large));
+}
+
+#release-list .detail > .flex-left-right > div:last-child:empty {
+  display: none;
+}
+
+#release-list .release-list-title {
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  min-width: 0;
+  gap: var(--base-size-4) var(--base-size-16);
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-large);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-title-lineHeight-large);
+}
+
+#release-list .release-list-title > a.muted {
+  color: var(--fgColor-default);
+}
+
+#release-list .release-list-title > a.muted:hover {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+#release-list .release-list-title > .ui.label {
+  height: var(--base-size-24);
+  padding: 0 var(--base-size-8);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-medium);
+  line-height: calc(var(--base-size-24) - var(--borderWidth-thin) * 2);
+}
+
+/* edit pencil at the right of the title: 32px invisible icon button */
+#release-list .detail > .flex-left-right > div:last-child > a.muted {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-medium-size);
+  height: var(--control-medium-size);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+#release-list .detail > .flex-left-right > div:last-child > a.muted:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+/* "<avatar> author released this 3 days ago | 3 commits to main since this release" */
+#release-list .detail > p.tw-text-text-light {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--base-size-4);
+  margin: 0 0 var(--base-size-16);
+  padding: 0 0 var(--base-size-24);
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+#release-list .detail > p.tw-text-text-light .author {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base-size-4);
+}
+
+#release-list .detail > p.tw-text-text-light .author > a {
+  color: var(--fgColor-muted);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+#release-list .detail > p.tw-text-text-light .author > a:hover {
+  color: var(--fgColor-accent);
+}
+
+#release-list .detail > p.tw-text-text-light .author > .ui.avatar,
+#release-list .detail > p.tw-text-text-light .author > .svg {
+  width: var(--base-size-20);
+  height: var(--base-size-20);
+  margin: 0;
+}
+
+#release-list .detail > p.tw-text-text-light .ahead > a {
+  color: var(--fgColor-accent);
+}
+
+/* The template separates "… 3 days ago" and "3 commits to main since this release" with a bare "|" text node, which
+   dangles at a line end when the byline wraps. github.com uses a "·" that leads the wrapped part. The bare text is
+   hidden (font-size 0 on the row, restored on every span) and the dot is drawn before .ahead. The spacing is a
+   trailing 4px margin on each span instead of a column gap, so the (empty) anonymous item adds nothing and a wrapped
+   part starts flush left. */
+#release-list .detail > p.tw-text-text-light {
+  column-gap: 0;
+  font-size: 0;
+}
+
+#release-list .detail > p.tw-text-text-light > span {
+  margin-right: var(--base-size-4);
+  font-size: var(--text-body-size-medium);
+}
+
+#release-list .detail > p.tw-text-text-light > .ahead::before {
+  content: "·";
+  margin-right: var(--base-size-4);
+  color: var(--fgColor-muted);
+}
+
+/* assets = github.com Box-footer */
+#release-list .detail > .divider {
+  width: auto;
+  height: 0;
+  margin: var(--base-size-16) calc(var(--base-size-16) * -1) 0;
+  border: 0;
+  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+}
+
+#release-list .detail > details.download {
+  padding: var(--base-size-16) 0 0;
+}
+
+#release-list .detail > details.download > summary {
+  width: max-content;
+  margin: 0;
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-title-lineHeight-medium);
+  cursor: pointer;
+}
+
+#release-list .detail > details.download[open] > summary {
+  margin-bottom: var(--base-size-16);
+}
+
+#release-list .release-entry .attachment-list {
+  margin: 0;
+  padding: 0;
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+#release-list .release-entry .attachment-list > .item {
+  align-items: center;
+  gap: var(--base-size-8);
+  min-height: calc(var(--base-size-44) + var(--borderWidth-thin)); /* github.com: 45px rows */
+  margin: 0;
+  padding: var(--base-size-8) var(--base-size-16);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+}
+
+/* "Source code (zip / tar.gz)" rows: github.com 35px (8px + 18px line + 8px + rule), not the 45px asset rows */
+#release-list .release-entry .attachment-list > .item:has(> a.archive-link) {
+  min-height: 0;
+  line-height: calc(var(--base-size-16) + var(--base-size-2));
+}
+
+#release-list .release-entry .attachment-list > .item:first-child {
+  border-top: 0;
+}
+
+#release-list .release-entry .attachment-list > .item:hover {
+  background: var(--bgColor-muted);
+}
+
+#release-list .release-entry .attachment-list > .item > a > strong {
+  gap: var(--base-size-8);
+  color: var(--fgColor-accent);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+#release-list .release-entry .attachment-list > .item > a:hover > strong > span {
+  text-decoration: underline;
+}
+
+#release-list .release-entry .download-icon {
+  flex-shrink: 0;
+  color: var(--fgColor-muted);
+}
+
+#release-list .release-entry .attachment-list .attachment-right-info {
+  gap: var(--base-size-8);
+  color: var(--fgColor-muted);
+}
+
+#release-list .release-entry .attachment-list .attachment-right-info > .flex-text-inline {
+  color: var(--fgColor-muted);
+}
+
+@media (max-width: 767.98px) {
+  /* github.com keeps the release title at 32px / 600 on phones */
+  #release-list .release-list-title {
+    column-gap: var(--base-size-8);
+  }
+
+  /* github.com @390: the release cards use the full page width (x=16, 358 wide) while the header row and the tags
+     Box keep the col-11 width (x=31, 328). The container is (100vw - 2 margins) * 11/12, so the list grows by 1/11
+     and moves left by 1/22 of it. The single release page (full-width container) resets this in its @scope. */
+  #release-list {
+    width: calc(100% * 12 / 11);
+    margin-left: calc(100% / -22);
+  }
+
+  /* list and single page (github.com order inside the card at 390): title (+ Label), Compare under it, byline, then
+     tag · commit, then the notes — no rule under the byline. Gitea renders tag / commit / Compare in .meta BEFORE the card, so .meta becomes
+     `display: contents` and the card a row subgrid of the entry: its own children are placed on subgrid rows 1, 3,
+     5, 6, 7, and the rows it leaves empty (2 and 4) take Compare and tag / commit from the entry grid. */
+  #release-list > .release-entry {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    column-gap: var(--base-size-16);
+    row-gap: 0;
+  }
+
+  #release-list > .release-entry > .meta {
+    display: contents;
+  }
+
+  #release-list > .release-entry > .detail {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-row: 1 / span 7;
+    grid-column: 1 / -1;
+  }
+
+  #release-list > .release-entry > .detail:not(:has(.attachment-list > .item)) {
+    grid-row: 1 / span 5;
+  }
+
+  #release-list > .release-entry > .detail > .flex-left-right {
+    grid-row: 1;
+  }
+
+  #release-list > .release-entry > .detail > p.tw-text-text-light {
+    grid-row: 3;
+    margin: 0 0 var(--base-size-8);
+    padding: 0;
+    border: 0;
+  }
+
+  #release-list > .release-entry > .detail > .render-content {
+    grid-row: 5;
+  }
+
+  #release-list > .release-entry > .detail > .divider {
+    grid-row: 6;
+  }
+
+  #release-list > .release-entry > .detail > details.download {
+    grid-row: 7;
+  }
+
+  /* Compare: subgrid row 2, 16px under the title row's 8px margin → github.com's 8 / 16 rhythm */
+  #release-list > .release-entry > .meta > .release-branch-tag-selector {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    z-index: 1; /* painted above the card, which comes later in the DOM */
+    justify-self: start;
+    min-height: var(--control-small-size); /* reserved before the dropdown initialises (CLS) */
+    margin: 0 0 var(--base-size-16) calc(var(--base-size-16) + var(--borderWidth-thin));
+  }
+
+  /* tag · commit: subgrid row 4, aligned with the card's content edge, 16px above the notes */
+  #release-list > .release-entry > .meta > a {
+    z-index: 1;
+    grid-row: 4;
+    align-self: start;
+    margin-bottom: var(--base-size-16);
+  }
+
+  #release-list > .release-entry > .meta > a:first-child {
+    grid-column: 1;
+    margin-left: calc(var(--base-size-16) + var(--borderWidth-thin));
+  }
+
+  #release-list > .release-entry > .meta > a + a {
+    grid-column: 2;
+  }
+
+  /* github.com @390: the file name wraps (anywhere) on its own line, size / date go right-aligned under it */
+  #release-list .release-entry .attachment-list > .item {
+    flex-wrap: wrap;
+    row-gap: var(--base-size-4);
+  }
+
+  #release-list .release-entry .attachment-list > .item > a {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  #release-list .release-entry .attachment-list > .item > a > strong {
+    align-items: flex-start;
+  }
+
+  #release-list .release-entry .attachment-list > .item > a .gt-ellipsis {
+    overflow-wrap: anywhere; /* overflow / white-space: repo.important.css (.gt-ellipsis is !important) */
+  }
+
+  #release-list .release-entry .attachment-list .attachment-right-info {
+    flex: 1 1 100%;
+    justify-content: flex-end;
+  }
+
+  #release-list .release-entry .attachment-list .attachment-right-info > .tw-flex-1 {
+    display: none;
+  }
+}
+
+/* ---------- tags list ---------- */
+#tags-table .tag-list-row {
+  padding: var(--base-size-16);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+#tags-table .tag-list-row:first-child {
+  border-top: 0;
+}
+
+#tags-table .tag-list-row-title {
+  margin: 0 0 var(--base-size-16); /* github.com: 91px rows (16 + 24 title + 16 + meta + 16) */
+  font-size: var(--text-title-size-small);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-title-lineHeight-small);
+}
+
+#tags-table .tag-list-row-link {
+  color: var(--fgColor-default);
+}
+
+#tags-table .tag-list-row-link:hover {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+#tags-table .tag-list-row > .flex-text-block {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-small);
+}
+
+#tags-table .tag-list-row > .flex-text-block > .flex-text-inline {
+  gap: var(--base-size-4);
+  color: var(--fgColor-muted);
+}
+
+#tags-table .tag-list-row > .flex-text-block > a.flex-text-inline:hover {
+  color: var(--fgColor-accent);
+  text-decoration: none;
+}
+
+/* draft without assets / source archives: no empty Box, no "Downloads" summary and no footer rule */
+#release-list .release-entry details.download:not(:has(.attachment-list > .item)) {
+  display: none;
+}
+
+#release-list .release-entry .detail:not(:has(.attachment-list > .item)) > .divider {
+  display: none;
+}
+
+#release-list .release-entry .detail:not(:has(.attachment-list > .item)) > .render-content {
+  margin-bottom: 0;
+}
+
+/* single release (/releases/tag/<t>): Gitea 1.27 renders the list template with one entry and no marker class
+   (release.go SingleRelease sets PageIsReleaseList like the list and PageIsSingleTag only for tag-only releases, so
+   the Releases | Tags segment is identical too). github.com shows one full-width card (1216px): Compare (small) in
+   the card's top right corner, the tag / commit in the byline (here: a row above the card, where github.com has its
+   "Releases / v1.4.6" breadcrumb).
+   History: r1 keyed this on `.release-entry:only-child` (matched only once the list finished parsing → CLS 0.4363),
+   r2 on `html[lang^=en] … :not([aria-label="Releases"])` (English only). The only difference parsed before the list
+   is main[aria-label] = the page title: repo.release.releases on the list, the release title on the single page.
+   The list is excluded by that string in every locale Gitea 1.27.3 ships (options/locale/*.json, 27 distinct
+   values; a missing key falls back to "Releases"). A release literally titled like one of them keeps the (stable)
+   list layout on its own page. */
+@scope (.repository.releases:not(:is(
+    [aria-label="Eisiúintí"],
+    [aria-label="Julkaisut"],
+    [aria-label="Kiadások"],
+    [aria-label="Laidieni"],
+    [aria-label="Lanzamientos"],
+    [aria-label="Lançamentos"],
+    [aria-label="Publicaties"],
+    [aria-label="Publications"],
+    [aria-label="Releases"],
+    [aria-label="Rilasci"],
+    [aria-label="Rilis"],
+    [aria-label="Släpp"],
+    [aria-label="Sürümler"],
+    [aria-label="Versões"],
+    [aria-label="Veröffentlichungen"],
+    [aria-label="Vydání"],
+    [aria-label="Wydania"],
+    [aria-label="Útgáfur"],
+    [aria-label="Κυκλοφορίες"],
+    [aria-label="Релизы"],
+    [aria-label="Релізи"],
+    [aria-label="انتشارها"],
+    [aria-label="නිකුතු"],
+    [aria-label="リリース"],
+    [aria-label="版本发布"],
+    [aria-label="版本發布"],
+    [aria-label="릴리즈"]
+  ))) {
+  :scope.repository.releases > .ui.container {
+    width: calc(var(--breakpoint-xlarge) - 2 * var(--page-margin-x));
+    max-width: calc(100% - 2 * var(--page-margin-x));
+  }
+
+  :scope.repository.releases > .ui.container > .flex-text-block:first-child + .divider {
+    margin-bottom: var(--base-size-16);
+  }
+
+  /* ≥768px: tag · commit on a row above the card, Compare overlaid in the card's top right corner. `.meta` becomes
+     `display: contents` so its three children are grid items of the entry; the card and Compare share row 2. */
+  @media (min-width: 768px) {
+    #release-list > .release-entry {
+      display: grid;
+      grid-template-columns: auto auto minmax(0, 1fr);
+      column-gap: var(--base-size-16);
+      row-gap: var(--base-size-8);
+      align-items: center;
+    }
+
+    #release-list > .release-entry > .meta {
+      display: contents;
+    }
+
+    #release-list > .release-entry > .meta > a {
+      grid-row: 1;
+    }
+
+    #release-list > .release-entry > .meta > .release-branch-tag-selector {
+      z-index: 1;
+      grid-row: 2;
+      grid-column: 1 / -1;
+      align-self: start;
+      justify-self: end;
+      margin: var(--base-size-16) var(--base-size-16) 0 0; /* github.com: 16px from the card's top and right edges */
+    }
+
+    #release-list > .release-entry > .detail {
+      grid-row: 2;
+      grid-column: 1 / -1;
+      align-self: start;
+    }
+
+    /* keep the title clear of the Compare button */
+    #release-list .detail > .flex-left-right {
+      padding-right: var(--base-size-112); /* Compare (~90px) + gap, the edit pencil sits just left of it */
+    }
+  }
+
+  /* <768px: the list is already full width here (reset of the list's 12/11 widening) */
+  @media (max-width: 767.98px) {
+    #release-list {
+      width: auto;
+      margin-left: 0;
+    }
+  }
+}

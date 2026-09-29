@@ -1,0 +1,67 @@
+/* 404 / 500 / 503 — Primer Blankslate (spacious, large) instead of GitHub's illustrated 404:
+ * centred, 80px × 40px padding, 32px --fgColor-muted octicon 8px above a 32px semibold heading
+ * (--text-title-*-large), description 16px --fgColor-muted, links 16px below.
+ * Gitea: .status-page-error (base.css: 45vh top margin, 48px bold muted title). */
+
+.page-content .status-page-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: calc(var(--base-size-128) * 5);
+  margin: var(--base-size-40) auto;
+  padding: var(--base-size-80) var(--base-size-40);
+  text-align: center;
+}
+
+.page-content .status-page-error::before {
+  content: "";
+  width: var(--base-size-32);
+  height: var(--base-size-32);
+  margin: 0 0 var(--base-size-8);
+  background-color: var(--fgColor-muted);
+  mask: var(--gh-octicon-alert) center / contain no-repeat;
+}
+
+.page-content .status-page-error-title {
+  margin: 0 0 var(--base-size-4);
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-large);
+  font-weight: var(--text-title-weight-large);
+  line-height: var(--text-title-lineHeight-large);
+  text-align: center;
+}
+
+.page-content .status-page-error > .tw-text-center,
+.page-content .status-page-error > div:not(.status-page-error-title) {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-large);
+  line-height: var(--text-body-lineHeight-large);
+}
+
+
+.page-content .status-page-error > .tw-text-center > a {
+  font-size: var(--text-body-size-medium);
+}
+
+.page-content .status-page-error strong {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.page-content .status-page-error pre {
+  margin: var(--base-size-8) 0 0;
+  padding: var(--base-size-16);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-muted);
+  color: var(--fgColor-default);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  text-align: left;
+}
+
+/* phones: keep the Blankslate's 80px block padding, but only the page gutter at the sides */
+@media (max-width: 543.98px) {
+  .page-content .status-page-error {
+    padding: var(--base-size-80) 0;
+  }
+}

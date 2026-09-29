@@ -1,0 +1,237 @@
+/*
+ * PR merge box (repo/issue/view_content/pull_merge_box.tmpl + pull_merge_status_checks.tmpl + the Vue
+ * PullRequestMergeForm). github.com merge box:
+ *  - the timeline icon is a 40px rounded square (radius 6px) filled with the state's *-emphasis colour and a
+ *    24px --fgColor-onEmphasis git-merge octicon (green = mergeable, red = blocked/failed, purple = merged,
+ *    grey = closed / draft);
+ *  - sections separated by 1px --borderColor-default, padding 16px; the status-check summary is a 16px semibold
+ *    heading; check rows are compact (8px 16px, 12px text, name semibold, "Details" link right);
+ *  - status octicons: success --fgColor-success, failure --fgColor-danger, pending --fgColor-attention;
+ *  - "Merge pull request" green button + caret (controls' ButtonGroup), 32px.
+ */
+
+.repository.view.issue .pull-merge-box .timeline-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--base-size-40);
+  height: var(--base-size-40);
+  border-radius: var(--borderRadius-medium);
+  background-color: var(--bgColor-neutral-emphasis);
+}
+
+.repository.view.issue .pull-merge-box .timeline-avatar > .svg {
+  width: var(--base-size-24);
+  height: var(--base-size-24);
+  color: var(--fgColor-onEmphasis);
+}
+
+.repository.view.issue .pull-merge-box .timeline-avatar.tw-text-green {
+  background-color: var(--bgColor-success-emphasis);
+}
+
+.repository.view.issue .pull-merge-box .timeline-avatar.tw-text-red {
+  background-color: var(--bgColor-danger-emphasis);
+}
+
+.repository.view.issue .pull-merge-box .timeline-avatar.tw-text-purple {
+  background-color: var(--bgColor-done-emphasis);
+}
+
+.repository.view.issue .pull-merge-box .timeline-avatar.tw-text-yellow {
+  background-color: var(--bgColor-attention-emphasis);
+}
+
+/* sections */
+.repository.view.issue .merge-section > .item {
+  padding-top: var(--base-size-16);
+  padding-bottom: var(--base-size-16);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.repository.view.issue .merge-section > .item > .flex-text-block {
+  gap: var(--base-size-8);
+}
+
+.repository.view.issue .merge-section > .item > .flex-text-block > .svg {
+  color: var(--fgColor-muted);
+}
+
+.repository.view.issue .merge-section > .item > .flex-text-block > .svg.octicon-check {
+  color: var(--fgColor-success);
+}
+
+.repository.view.issue .merge-section > .item > .flex-text-block > .svg.octicon-alert {
+  color: var(--fgColor-attention);
+}
+
+.repository.view.issue .merge-section h3 {
+  margin: 0 0 var(--base-size-4);
+  font-size: var(--text-title-size-small);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-title-lineHeight-small);
+}
+
+/* status checks: summary heading + toggle link */
+.repository.view.issue .merge-section > .commit-status-toggle > div:first-child {
+  font-size: var(--text-title-size-small);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-title-lineHeight-small);
+}
+
+.repository.view.issue .merge-section > .commit-status-toggle > .btn {
+  color: var(--fgColor-accent);
+  font-size: var(--text-body-size-small);
+}
+
+.repository.view.issue .merge-section > .commit-status-toggle > .btn:hover {
+  text-decoration: underline;
+}
+
+.repository.view.issue .merge-section .commit-status-list {
+  max-height: calc(var(--base-size-40) * 6);
+  overflow-y: auto;
+  background: var(--bgColor-muted);
+}
+
+.repository.view.issue .merge-section .commit-status-list > .item {
+  gap: var(--base-size-8);
+  padding-top: var(--base-size-8);
+  padding-bottom: var(--base-size-8);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.repository.view.issue .merge-section .commit-status-list > .item .gt-ellipsis {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.repository.view.issue .merge-section .commit-status-list > .item .gt-ellipsis > span {
+  font-weight: var(--base-text-weight-normal);
+}
+
+.repository.view.issue .merge-section .commit-status-list > .item a {
+  font-size: var(--text-body-size-small);
+}
+
+/* "View command line instructions" disclosure */
+.repository.view.issue .merge-section details > summary {
+  color: var(--fgColor-default);
+  cursor: pointer;
+}
+
+.repository.view.issue .merge-section details > summary:hover {
+  color: var(--fgColor-accent);
+}
+
+.repository.view.issue .merge-section details h3 {
+  margin-top: var(--base-size-16);
+}
+
+.repository.view.issue .merge-section details .ui.secondary.segment {
+  margin: var(--base-size-8) 0;
+  padding: var(--base-size-8) var(--base-size-12);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+/* the Vue merge form, once expanded: title / message fields + Merge / Cancel + delete-branch checkbox */
+.repository.view.issue #pull-request-merge-form .ui.form .field {
+  margin-bottom: var(--base-size-8);
+}
+
+.repository.view.issue #pull-request-merge-form .ui.merge-button > .ui.button,
+.repository.view.issue #pull-request-merge-form .ui.form .ui.button {
+  height: var(--control-medium-size);
+}
+
+/* split buttons with a menu (merge style, "Update branch by merge"): controls' ButtonGroup isolation
+   (isolation: isolate) traps the menu's z-index inside the group, so the later comment-composer timeline item paints
+   over it; these groups must not be stacking contexts (request IP-C3 to controls) */
+.repository.view.issue .pull-merge-box .ui.buttons {
+  isolation: auto;
+}
+
+/* while a menu is open its caret carries .active (Fomantic), which turns the group into controls' SegmentedControl
+   (track background, transparent knobs); keep the ButtonGroup look with the caret pressed instead */
+.repository.view.issue .pull-merge-box .ui.buttons:has(> .active.dropdown.button) {
+  align-items: normal;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.repository.view.issue .pull-merge-box .ui.buttons:has(> .active.dropdown.button) > .button {
+  height: var(--control-medium-size);
+  margin: 0 calc(var(--borderWidth-thin) * -1) 0 0;
+  border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
+  border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-default-fgColor-rest);
+  font-weight: var(--base-text-weight-medium);
+}
+
+.repository.view.issue .pull-merge-box .ui.buttons:has(> .active.dropdown.button) > .button:last-child {
+  margin: 0;
+  border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
+}
+
+.repository.view.issue .pull-merge-box .ui.buttons:has(> .active.dropdown.button) > .button:hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+}
+
+.repository.view.issue .pull-merge-box .ui.buttons:has(> .active.dropdown.button) > .active.button {
+  z-index: 1;
+  border-color: var(--button-default-borderColor-active);
+  background: var(--button-default-bgColor-active);
+  box-shadow: none;
+}
+
+/* merge button: primary (green) */
+.repository.view.issue .pull-merge-box .ui.primary.buttons:has(> .active.dropdown.button) > .button {
+  border-color: var(--button-primary-borderColor-rest);
+  background: var(--button-primary-bgColor-rest);
+  box-shadow: var(--shadow-resting-small);
+  color: var(--button-primary-fgColor-rest);
+}
+
+.repository.view.issue .pull-merge-box .ui.primary.buttons:has(> .active.dropdown.button) > .button:hover {
+  border-color: var(--button-primary-borderColor-hover);
+  background: var(--button-primary-bgColor-hover);
+}
+
+.repository.view.issue .pull-merge-box .ui.primary.buttons:has(> .active.dropdown.button) > .active.button {
+  border-color: var(--button-primary-borderColor-active);
+  background: var(--button-primary-bgColor-active);
+  box-shadow: none;
+}
+
+.repository.view.issue .pull-merge-box .ui.primary.buttons:has(> .active.dropdown.button) > .button > .svg {
+  color: var(--button-primary-iconColor-rest);
+}
+
+/* merge button when checks failed / manual merge: danger */
+.repository.view.issue .pull-merge-box .ui.red.buttons:has(> .active.dropdown.button) > .button {
+  border-color: var(--button-danger-borderColor-rest);
+  background: var(--button-danger-bgColor-rest);
+  color: var(--button-danger-fgColor-rest);
+}
+
+.repository.view.issue .pull-merge-box .ui.red.buttons:has(> .active.dropdown.button) > .button > .svg {
+  color: var(--button-danger-iconColor-rest);
+}
+
+.repository.view.issue .pull-merge-box .ui.red.buttons:has(> .active.dropdown.button) > .active.button {
+  border-color: var(--button-danger-borderColor-active);
+  background: var(--button-danger-bgColor-active);
+  color: var(--button-danger-fgColor-active);
+}

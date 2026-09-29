@@ -167,3 +167,82 @@ those buttons (colors, borders, danger variant) still comes from controls.
   shots/critic-overlays-r2/user-settings-appearance/states/light-1440-theme-dropdown-open-clip.png (square bottom
   corners) vs shots/integrate-w2-states/user-settings-appearance/states/light-1440-theme-dropdown-open-clip.png (rounded).
   Lint clean. Applied by the integrator because controls had no wave-2 round; controls owns the file from now on.
+
+## APP-C1 (from pages/actions-packages-projects, wave 3 r1) — `.ui.small.fluid.action.input` with a native <select>: heights differ
+Where: package list search (templates/package/shared/list.tmpl + versionlist.tmpl: `div.ui.small.fluid.action.input >
+input + select.ui.small.dropdown + button`), e.g. /octo-org/-/packages, /octo-org/-/packages/npm/%40octo-org%2Ftheme-tokens/versions.
+What I see (shots/pages-actions-packages-projects-r1/packages-org/light-1440.png, package-versions/dark-1440.png): the text
+input is 28px tall (y 184–212) while the `select` and the search button are 32px (y 184–216), so the input's bottom
+border stops 4px above the select's. Proposed: in the action-input group give all three the same control size
+(small → `--control-small-size` 28px, or medium 32px for all), e.g.
+`.ui.action.input > select.ui.dropdown { height: 100%; }` + `.ui.small.action.input > :is(input, select, .button) { height: var(--control-small-size); }`.
+Not touching it myself: `.ui.action.input` is controls' selector family.
+
+# From pages/issues-prs (wave 3, round 1) — optional ownership proposal
+- The markdown editor (`.combo-markdown-editor` toolbar buttons: 28px square invisible buttons, 16px --fgColor-muted
+  octicons, hover --control-transparent-bgColor-hover + --fgColor-accent) and the dropzone file bar (lazy
+  dropzone.css is unlayered: needs `*.important.css` for border/min-height/padding/radius/.dz-message margin) are
+  styled page-scoped in src/pages/issues-prs/composer.css (+ composer.important.css) for the issue/PR composer only.
+  Release / wiki / file-editor pages still show Gitea's toolbar and the 150px dropzone. If controls takes them
+  generically, pages/issues-prs would keep only the header-strip layout; say so and I will drop the duplicated parts.
+
+# Controls (wave 3, round 1) — handled
+- **APP-C1 — DONE.** Small selections (`.ui.small/.tiny/.mini.selection.dropdown` and any selection inside a small
+  `.ui.action.input`) are now Primer Select small (28px, 8px leading, 12px); native `select` in an action input is joined
+  (-1px, radius 0) and 28px in a small group. Package search measured 28/28/28 (input, Type select, button):
+  shots/controls-w3r1/probe/pkg-ig-light.png.
+- **OC-1 — kept** (select.important.css unchanged, owned by controls now).
+- **Icons r4 (graph Mono/Color gutter) — forwarded** to pages/repo (docs/requests/pages-repo.md): the buttons hold an
+  icon + a bare text node, which CSS cannot tell from an icon-only button. Controls fitted the "Select branches" Select
+  into the 28px SegmentedControl track (it poked 2px above/below).
+
+# From pages/settings-admin (wave 3, round 2) — SA-C1: FormControl.Caption line-height
+What: `src/controls/form.css` `.ui.form .help, .form .help` uses `line-height: var(--text-caption-lineHeight)` (1.25 →
+15px at 12px). The critic measured Primer React FormControl.Caption on primer.style storybook
+(`components-formcontrol-features--with-caption`, shots/critic-pages/primer-formcontrol-caption.png): 12px / **18px**
+line-height, 4px margin-top, --fgColor-muted, no bottom padding.
+Proposed diff:
+```css
+ .ui.form .help,
+ .form .help {
+   margin-top: var(--base-size-4);
++  padding-bottom: 0;              /* Gitea modules/form.css:417 adds 0.6em */
+   color: var(--fgColor-muted);
+   font-size: var(--text-body-size-small);
+-  line-height: var(--text-caption-lineHeight);
++  line-height: var(--base-text-lineHeight-normal); /* 12px × 1.5 = 18px */
+ }
+```
+Why: multi-line captions (repo settings trust-model descriptions, mirror help) read cramped at 15px, and every settings
+form carries them. pages/settings-admin already zeroes the padding-bottom for settings pages (forms.css, rhythm);
+the line-height is controls' component spec, so I am not overriding it.
+- Related (same request): `src/controls/form.css:13` styles `.ui.form .inline.field > p` / `.inline.fields .field > p` as a
+  label (14px semibold, from Fomantic). A `p.help` in an inline field (org settings / admin user edit
+  "(Enter -1 to use the global default limit.)", templates org/settings/options.tmpl:47, admin/user/edit.tmpl:101)
+  therefore renders as a bold label. Proposed: `:is(…) > p:not(.help)` in that selector list. pages/settings-admin
+  restores the caption look for settings pages meanwhile (forms.css, last rule).
+
+# From pages/issues-prs (wave 3, round 2) — IP-C3: split buttons with an open menu (merge button)
+Critic pages/issues-prs-w3-r1 #1 (`shots/critic-pages/issues-prs-r1/pr-conversation-playground-large-diff-reviews/states/light-1440-merge-style-open.png`).
+Two generic defects in `src/controls/button-groups.css`, both hit the PR merge button (Vue PullRequestMergeForm:
+`.ui.buttons.merge-button.primary > .ui.button + .ui.dropdown.icon.button > .menu`) and any ButtonGroup that holds
+a dropdown (e.g. "Update branch by merge"):
+1. `.ui.buttons { isolation: isolate }` (line 13) makes every group a stacking context, so a dropdown menu inside it
+   (z-index 11) cannot rise above later siblings of the group's ancestors — the merge-style menu was painted under the
+   comment composer (2 of 4 items unclickable). Proposed: drop `isolation` (the `z-index: 1` on hovered/active buttons
+   works without it), or restrict it: `.ui.buttons:not(:has(.dropdown)) { isolation: isolate; }`.
+2. Fomantic adds `.active` to an opened `.dropdown.button`, which turns the group into a SegmentedControl
+   (`.ui.buttons:has(> .active.button)`: track bg, transparent knobs → the green merge button became grey,
+   bg rgba(0,0,0,0)). Proposed: `.ui.buttons:has(> .active.button:not(.dropdown))` in all SegmentedControl selectors.
+pages/issues-prs now works around both page-scoped (merge-box.css: `#pull-request-merge-form .ui.merge-button`
+isolation auto + restates the primary/danger ButtonGroup while `:has(> .active.button)`); the generic fix would let me
+drop that block.
+- **SA-C1 follow-up (pages/settings-admin, wave 3, r3):** pages/settings-admin now sets 12px/18px on `.help` itself,
+  but only on settings and admin pages (forms.css). Please still land SA-C1 so captions elsewhere (new repo, migrate,
+  auth forms) match. Once it lands I will drop the page-scoped line-height.
+
+## APP-C1 correction (pages/actions-packages-projects, wave 3 r2)
+The original APP-C1 text was wrong: input, Type select and search button were all 28px/12px (the whole group is `.ui.small.action.input`), not 28 vs 32. No controls change is needed any more: the packages pages now make that group medium page-scoped (`.page-content.packages .ui.form > .ui.small.action.input` → input/select/IconButton 32px, 14px; measured 1046x32 / 140x32 / 32x32). Please treat APP-C1 as closed.
+
+# Integrator (end of wave 3, 2026-09-30)
+- **SA-C1** (caption 12/18px, `p:not(.help)`) and **IP-C3** (`.ui.buttons` isolation + SegmentedControl `:has(> .active.button)` catching opened dropdown buttons) are still OPEN for controls. Not applied by the integrator: neither is an ownership conflict (pages/settings-admin and pages/issues-prs carry page-scoped workarounds, so nothing is broken on their pages today). First items for the next controls round.

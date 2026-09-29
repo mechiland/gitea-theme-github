@@ -1,0 +1,58 @@
+/* Title — github.com/login: 48px mark centred at the top, 12px to the title (the mark sits in a 44px wrapper,
+ * title top = mark top + 60px), title h1 20px semibold, 30px line, --fgColor-default, centred; 24px to the
+ * form. Gitea's attached Box header (.ui.top.attached.header) is restyled into that title; the Box chrome
+ * (muted background, border, radius, padding) is dropped. The mark is Gitea's own logo (no GitHub marks). */
+
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt) .ui.top.attached.header:not(.segment) {
+  display: block;
+  width: auto;
+  margin: 0 0 var(--base-size-24);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-medium);
+  font-weight: var(--text-title-weight-medium);
+  line-height: var(--base-text-lineHeight-normal);
+  letter-spacing: normal;
+  text-align: center;
+}
+
+/* Gitea's logo above the title (the OpenID page already renders its own logo image) */
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt, .openid) .ui.top.attached.header:not(.segment)::before {
+  content: "";
+  display: block;
+  width: var(--base-size-48);
+  height: var(--base-size-48);
+  margin: 0 auto var(--base-size-12);
+  background: url("../img/logo.svg") center / contain no-repeat;
+}
+
+/* sign-in: Gitea prints the flash before the title; github.com shows the title first, then the flash */
+.page-content.user.signin > .ui.page.grid > .column > .ui.container.fluid:has(> .ui.top.attached.header) {
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content.user.signin > .ui.page.grid > .column > .ui.container.fluid > .ui.top.attached.header {
+  order: -1;
+}
+
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) .ui.container.fluid > .flash-message,
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) .ui.attached.segment .flash-message,
+.page-content.user:is(.signin, .signup, .link-account) .ui.form > .flash-message {
+  margin: 0 0 var(--base-size-16);
+}
+
+/* the form body: Gitea's attached Box segment becomes a plain block under the title */
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt) .ui.top.attached.header:not(.segment) + .ui.attached.segment {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}

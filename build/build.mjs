@@ -1,11 +1,13 @@
 // Builds dist/theme-github-{light,dark,auto}.css from src/ and (with --deploy) syncs them into Gitea's CUSTOM_PATH.
 //
-//   node build/build.mjs [--deploy] [--exclude a,b] [--no-lint] [--no-prune]
+//   node build/build.mjs [--deploy] [--exclude a,b] [--no-lint] [--no-prune] [--no-rename]
 //
 // Per folder: postcss-import resolves the folder's index.css; *.important.css files go to @layer gh-important.
 // A folder that fails to parse/compile or lint is EXCLUDED (reported in dist/build-report.json) — the rest
 // of the theme is still produced (failure isolation). A folder can also be disabled with src/<folder>/.disabled.
 // Primer tokens not transitively referenced by the mapping or any folder are pruned to respect the size budget.
+// Custom properties the theme itself defines (Primer tokens, --gh-octicon-* masks) get short names in the minified
+// files only (request PPL-1 addendum); dist/theme-*.src.css keeps the real names and dist/varmap.json maps them.
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -126,7 +128,43 @@ const masks = flag('no-prune') ? masksCss : masksCss.split('\n').filter((line) =
 report.octiconMasks = {used: [...usedMasks].sort(), defined: (masksCss.match(/^\s*--gh-octicon-[\w-]+\s*:/gm) || []).length};
 for (const n of usedMasks) if (!masksCss.includes(`${n}:`)) console.warn(`! ${n} is referenced but not defined in src/icons/octicon-masks.css`);
 
+// ---- 2b. short custom-property names (minified output only) --------------------------------------------
+// Only names defined by the Primer token files and the octicon masks are renamed. Gitea's own names (--color-*,
+// --fonts-*, --is-dark-theme, … = gitea-map.css / scheme-*.css / folder-local names) are never touched, and any
+// Primer name that Gitea's source (web_src, templates) or our templates mention is kept verbatim.
+const RENAME = !flag('no-rename');
+const shortNames = new Map();
+if (RENAME) {
+  const ours = new Set([...(colorTokens.light + colorTokens.dark + scaleTokens + masksCss).matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]));
+  const keepVerbatim = new Set();
+  const scan = (dir) => {
+    if (!fs.existsSync(dir)) return;
+    for (const f of fs.readdirSync(dir, {recursive: true})) {
+      if (!/\.(tmpl|ts|js|vue|css|go)$/.test(f)) continue;
+      for (const m of read(path.join(dir, f)).matchAll(/--[a-zA-Z][\w-]*/g)) if (ours.has(m[0])) keepVerbatim.add(m[0]);
+    }
+  };
+  const GITEA_SRC = process.env.GITEA_SRC || path.resolve(ROOT, '../gitea-src-1.27.3');
+  for (const d of [path.join(GITEA_SRC, 'web_src'), path.join(GITEA_SRC, 'templates'), path.join(ROOT, 'templates')]) scan(d);
+  for (const n of keepVerbatim) ours.delete(n);
+  report.renamedKeptVerbatim = [...keepVerbatim].sort();
+  const everything = [giteaMap, schemeCss.light, schemeCss.dark, masksCss, tokens.scale, tokens.light, tokens.dark, allComponent].join('\n');
+  const freq = new Map();
+  for (const m of everything.matchAll(/--[\w-]+/g)) if (ours.has(m[0])) freq.set(m[0], (freq.get(m[0]) || 0) + 1);
+  const taken = new Set(everything.match(/--[\w-]+/g));
+  const A = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const gen = (i) => { let s = ''; do { s += A[i % 62]; i = Math.floor(i / 62) - 1; } while (i >= 0); return `--p${s}`; };
+  let i = 0;
+  for (const [n] of [...freq].sort((a, b) => b[1] - a[1])) {
+    let s; do { s = gen(i++); } while (taken.has(s));
+    shortNames.set(n, s);
+  }
+}
+const rename = (css) => (RENAME ? css.replace(/--[\w-]+/g, (n) => shortNames.get(n) || n) : css);
+report.renamedCustomProperties = shortNames.size;
+
 fs.mkdirSync(DIST, {recursive: true});
+if (RENAME) fs.writeFileSync(path.join(DIST, 'varmap.json'), JSON.stringify(Object.fromEntries([...shortNames].map(([a, b]) => [b, a])), null, 1));
 const version = JSON.parse(read(path.join(ROOT, 'package.json'))).version;
 const primerVersion = read(path.join(SRC, 'tokens/generated/VERSION')).trim();
 for (const [name, meta] of Object.entries(THEMES)) {
@@ -141,7 +179,7 @@ for (const [name, meta] of Object.entries(THEMES)) {
   const source = `${layerOrder}${wrap('gh.tokens', tokenCss)}${out}${wrap('gh-important', imp)}`;
   let min;
   try {
-    min = transform({filename: `${name}.css`, code: Buffer.from(source), minify: true, targets: TARGETS}).code.toString();
+    min = transform({filename: `${name}.css`, code: Buffer.from(rename(source)), minify: true, targets: TARGETS}).code.toString();
   } catch (e) {
     console.error(`✗ ${name}: minify failed: ${e.message}`);
     fs.writeFileSync(path.join(DIST, `${name}.debug.css`), source);

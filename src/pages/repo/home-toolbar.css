@@ -1,0 +1,180 @@
+/*
+ * Repo home toolbar — github.com order: [branch ▾] [⑂ 11 Branches] [◇ 16 Tags] … [Go to file] [Add file ▾] [<> Code ▾]
+ * (measured 1440px: all 32px tall on one row, 8px apart, 16px above the file list Box).
+ * Gitea renders the ref summary as a separate full-width bar ABOVE the toolbar (repo/sub_menu.tmpl:
+ * .repository-summary > .sub-menu > a.item.muted × Commits / Branches / Tags) and the toolbar as
+ * .repo-button-row > .repo-button-row-left (branch picker mount, compare button) + .repo-button-row-right.
+ * On the root view we flatten the toolbar (display: contents) into the file-list column's flex row and order the
+ * summary links right after the branch picker. "N Commits" is dropped here: github.com shows it at the right of the
+ * latest-commit header, which the code folder already renders (#repo-files-table .m-commit-count, request CR-1).
+ * The summary on other pages (commits, branches, release-less repos) is restyled as the same inline links.
+ */
+
+/* ---------- ref summary links: github.com invisible buttons (icon, semibold count, muted label) ---------- */
+.repository .repository-summary {
+  display: flex;
+  margin: 0 0 var(--base-size-16);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.repository .repository-summary > .sub-menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--base-size-4);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.repository .repository-summary > .sub-menu > .item {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base-size-4);
+  height: var(--control-medium-size);
+  padding: 0 var(--base-size-4);
+  border: var(--borderWidth-thin) solid transparent;
+  border-radius: var(--borderRadius-medium);
+  background: transparent;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-medium);
+  line-height: var(--text-body-lineHeight-medium);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.repository .repository-summary > .sub-menu > .item > .svg {
+  margin-right: var(--base-size-4);
+  color: var(--fgColor-muted);
+}
+
+.repository .repository-summary > .sub-menu > .item > b {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.repository .repository-summary > .sub-menu > .item:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--button-invisible-fgColor-hover);
+  text-decoration: none;
+}
+
+.repository .repository-summary > .sub-menu > .item:active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+.repository .repository-summary > .sub-menu > .item.active {
+  color: var(--fgColor-default);
+}
+
+/* ---------- root view: one toolbar row ---------- */
+.repo-grid-filelist-sidebar > .repo-home-filelist {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  gap: 0 var(--base-size-8);
+}
+
+.repo-grid-filelist-sidebar > .repo-home-filelist > * {
+  flex: 0 0 100%;
+  order: 6;
+  min-width: 0;
+}
+
+.repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row,
+.repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row > .repo-button-row-left {
+  display: contents;
+}
+
+.repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row > .repo-button-row-left > * {
+  order: 3;
+  margin: 0;
+}
+
+.repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row > .repo-button-row-left > [data-global-init="initRepoBranchTagSelector"] {
+  order: 1;
+}
+
+.repo-grid-filelist-sidebar > .repo-home-filelist > .repository-summary {
+  flex: 0 1 auto;
+  order: 2;
+}
+
+.repo-grid-filelist-sidebar > .repo-home-filelist > .repository-summary .item[href*="/commits/"] {
+  display: none;
+}
+
+.repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row > .repo-button-row-right {
+  flex: 0 0 auto;
+  order: 4;
+  gap: var(--base-size-8);
+  margin: 0 0 0 auto;
+}
+
+/* "Go to file": github.com 204px medium TextInput with a leading octicon-search (Vue RepoFileSearch mount:
+   .repo-file-search-container > div > .ui.small.input > input + kbd) */
+.repo-grid-filelist-sidebar .repo-button-row-right > .repo-file-search-container {
+  width: calc(var(--base-size-96) * 2 + var(--base-size-12));
+}
+
+/* the field itself: same 32px TextInput with the search octicon on repo home and in the directory / file view
+   (view_content.tmpl renders the same .repo-button-row-right on every code view; Gitea: 30px, no icon) */
+.repository .repo-button-row-right > .repo-file-search-container .ui.small.input {
+  position: relative;
+  width: 100%;
+  height: var(--control-medium-size);
+  font-size: var(--text-body-size-medium);
+}
+
+.repository .repo-button-row-right > .repo-file-search-container .ui.small.input::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: var(--base-size-8);
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  margin-top: calc(var(--base-size-8) * -1);
+  background: var(--fgColor-muted);
+  mask: var(--gh-octicon-search) center / contain no-repeat;
+  pointer-events: none;
+}
+
+.repository .repo-button-row-right > .repo-file-search-container .ui.small.input > input {
+  height: var(--control-medium-size);
+  padding: 0 var(--base-size-32) 0 var(--base-size-32);
+  font-size: var(--text-body-size-medium);
+}
+
+.repository .repo-button-row-right > .repo-file-search-container .ui.small.input > kbd {
+  position: absolute;
+  top: 50%;
+  right: var(--base-size-8);
+  transform: translateY(-50%);
+}
+
+/* mobile: github.com keeps branch picker + Code on one row and drops the ref links / Go to file */
+@media (max-width: 767.98px) {
+  /* flattened into the page flex flow, see home-layout.css (mobile CLS) */
+  .repo-grid-filelist-sidebar > .repo-home-filelist {
+    display: contents;
+  }
+
+  .repo-grid-filelist-sidebar > .repo-home-filelist > .repository-summary,
+  .repo-grid-filelist-sidebar .repo-button-row-left > #new-pull-request {
+    display: none;
+  }
+
+  .repo-grid-filelist-sidebar .repo-button-row-right > .repo-file-search-container {
+    display: none;
+  }
+}

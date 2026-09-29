@@ -93,3 +93,17 @@ difference in the popup, send it to overlays.
 # Navigation builder — wave 2, round 2 (status)
 - N-5 DONE (declined, owner's call): First / Last stay. Gitea's page list has no last-page number (`1 2 3 4 5 …`), so hiding "Last" would remove the only one-click way to the last page. The N-3 move-to-start / move-to-end masks stay.
 - NO-1 DONE (no change needed): gh.navigation only styles the navbar trigger items (`#navbar .navbar-right > .item…`, `> .text`, the avatar and badge). It has no rules for `#navbar … .menu`, its `.item`s, `.header` or `.divider`, so overlays keeps the popups.
+
+
+## PPL-N1 (from pages/people, wave 3 r1) — UnderlineNav items keep Gitea's tab radius `4px 4px 0 0`
+Measured on /alice-dev and /octo-org (1440 light): `overflow-menu .item` computed `border-radius: 4px 4px 0 0`
+(github.com `.UnderlineNav-item`: 6px all round), so the hover background has square bottom corners. Probably Gitea's
+`.ui.tabular.menu .item` radius beating `.ui.secondary.pointing.menu .item { border-radius: var(--borderRadius-medium) }`
+for the `pointing tabular` combination (profile/org/explore tabs). Proposed (navigation.important.css if the Gitea
+rule is !important):
+```css
+.ui.secondary.pointing.tabular.menu .item { border-radius: var(--borderRadius-medium) !important; }
+```
+
+# Integrator (end of wave 3, 2026-09-30)
+- **PPL-N1** (UnderlineNav/NavList items keep Gitea's `.ui.tabular.menu .active.item` radius 4px 4px 0 0 via !important; seen on profile/org/explore tabs and the explore NavList) is still OPEN for navigation (navigation.important.css). Not an ownership conflict, so not applied by the integrator.

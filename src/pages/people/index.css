@@ -1,1 +1,15 @@
-/* src/pages/people — see ARCHITECTURE.md for ownership. */
+/*
+ * src/pages/people → @layer gh.pages-people — see ARCHITECTURE.md for ownership.
+ * Owns (page-scoped): dashboard (.page-content.dashboard, #dashboard-repo-list, #activity-feed), contribution graph
+ * (#user-heatmap), user profile (.page-content.user.profile), organisation pages (.page-content.organization.*),
+ * explore (.page-content.explore.*), notifications (.page-content.user.notification, #notification_table).
+ * people.important.css → gh-important (Fomantic/Tailwind !important, inline heatmap fills).
+ */
+@import "./box.css";
+@import "./profile.css";
+@import "./repo-list.css";
+@import "./org.css";
+@import "./explore.css";
+@import "./dashboard.css";
+@import "./heatmap.css";
+@import "./notifications.css";

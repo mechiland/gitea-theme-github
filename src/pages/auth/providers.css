@@ -1,0 +1,44 @@
+/* "or" divider + external sign-in buttons — github.com/login: .authentication-divider margin 12px 0, the
+ * word 14px --fgColor-default with 8px on each side, 1px rules in --borderColor-default; the provider buttons
+ * are Primer secondary medium buttons stretched to 40px, full width, 8px apart (first one 8px below the
+ * divider), 16px leading visual with 8px gap. */
+
+.page-content.user:is(.signin, .signup, .link-account) .divider.divider-text {
+  height: auto;
+  margin: var(--base-size-12) 0;
+  padding: 0;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.page-content.user:is(.signin, .signup, .link-account) .divider.divider-text::before,
+.page-content.user:is(.signin, .signup, .link-account) .divider.divider-text::after {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+}
+
+.page-content.user:is(.signin, .signup, .link-account) .divider.divider-text::before {
+  margin-right: var(--base-size-8);
+}
+
+.page-content.user:is(.signin, .signup, .link-account) .divider.divider-text::after {
+  margin-left: var(--base-size-8);
+}
+
+.page-content.user:is(.signin, .signup, .link-account) #external-login-navigator .ui.button.external-login-link {
+  width: 100%;
+  height: var(--control-large-size);
+  min-height: var(--control-large-size);
+  margin: 0;
+  padding: 0 var(--control-medium-paddingInline-normal);
+  justify-content: center;
+}
+
+.page-content.user:is(.signin, .signup, .link-account) #external-login-navigator .external-login-link > :is(.svg, img) {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  min-width: var(--base-size-16);
+  min-height: var(--base-size-16);
+  flex-shrink: 0;
+}

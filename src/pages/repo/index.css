@@ -1,1 +1,16 @@
-/* src/pages/repo — see ARCHITECTURE.md for ownership. */
+/* src/pages/repo → @layer gh.pages-repo. Owner: pages/repo builder. See ARCHITECTURE.md §5.
+ * github.com repository pages: repo home (two-column layout, toolbar, About sidebar), ref summary links,
+ * commits list, branches, tags, releases, wiki. Page-scoped selectors only; generic components (buttons,
+ * labels, Box, file list table, markdown) belong to their component folders.
+ * Gitea `!important` (Tailwind tw-* utilities) that must be beaten live in repo.important.css (gh-important layer).
+ */
+@import "./home-layout.css";
+@import "./home-toolbar.css";
+@import "./home-sidebar.css";
+@import "./commits.css";
+@import "./branches.css";
+@import "./tags-releases.css";
+@import "./list-search.css";
+@import "./wiki.css";
+@import "./empty-repo.css";
+@import "./new-repo.css";

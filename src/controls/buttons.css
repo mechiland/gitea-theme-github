@@ -42,6 +42,14 @@
     border-color var(--base-duration-100) var(--base-easing-easeInOut);
 }
 
+/* Fomantic gives every button `margin: 0 .25em 0 0`. Between two buttons in block flow it is part of the
+   spacing (Update Avatar / Delete Current Avatar), but after the last button it only pulls a right-aligned or
+   fluid button 3.5px short of its column (Danger Zone buttons, "Sign in with OpenID", sidebar Unsubscribe).
+   Primer buttons carry no margin. */
+.ui.button:last-child {
+  margin-right: 0;
+}
+
 .ui.button:hover {
   background: var(--button-default-bgColor-hover);
   border-color: var(--button-default-borderColor-hover);
@@ -201,6 +209,16 @@
 .ui.icon.button > .svg,
 .ui.icon.button > .icon {
   margin: 0;
+}
+
+/* Gitea "icon" buttons that hold only a text label (diff "Resolve conversation": `.ui.icon.tiny.basic.button`
+   with no element child) are ordinary Primer text buttons: normal inline padding, not the icon gutter */
+.ui.icon.button:not(:has(> *)) {
+  padding: 0 var(--control-medium-paddingInline-normal);
+}
+
+.ui.icon.button:is(.small, .tiny, .mini):not(:has(> *)) {
+  padding: 0 var(--control-small-paddingInline-condensed);
 }
 
 /* ---------- primary (green) ---------- */

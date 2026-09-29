@@ -1,0 +1,243 @@
+/*
+ * Wiki — github.com /wiki/<page> (measured 2026-09-30, lgarron/folderify @1440):
+ *   title row: h1 32px / 36px normal --fgColor-default, small (28px) Edit / New page buttons at the right;
+ *   meta line 14px --fgColor-muted "… edited this page on … · N revisions", 16px padding-bottom + 1px
+ *   --borderColor-default rule; content 24px below: main column 896px, 24px gutter, 296px right sidebar
+ *   (Pages Box with filter + page list, then "Clone this wiki locally").
+ * Gitea: templates/repo/wiki/view.tmpl — .repository.wiki.view > .ui.container > .repo-button-row (Page ▾ filter
+ *   dropdown + Code clone panel) + .ui.dividing.header (history button, title + .ui.sub.header meta, Edit / New Page /
+ *   Delete Page) + .wiki-content-parts (markdown; box removed by the markdown folder). The page dropdown and clone
+ *   button are moved into the right sidebar column (github.com's Pages box / clone box positions).
+ *   wiki/pages.tmpl (?action=_pages): h2 + table.wiki-pages-list → Box rows.
+ */
+
+/* ---------- page view: header row + main / sidebar grid ----------
+   .wiki-content-parts is flattened (display: contents) so Gitea's TOC / _Sidebar / _Footer panels join the grid:
+   column 2 stacks [Page ▾ + Code] → TOC → _Sidebar; the main text spans rows 3–6 (row 6 is a 1fr filler that
+   takes the spanning height so the sidebar panels stay packed); _Footer follows the main column. */
+.repository.wiki.view > .ui.container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) calc(var(--base-size-128) * 2 + var(--base-size-40));
+  grid-template-rows: auto auto auto auto auto 1fr auto;
+  align-items: start;
+  column-gap: var(--base-size-24);
+}
+
+.repository.wiki.view > .ui.container > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.repository.wiki.view > .ui.container > .ui.dividing.header {
+  grid-row: 1;
+}
+
+.repository.wiki.view > .ui.container > .wiki-content-parts {
+  display: contents;
+}
+
+.repository.wiki.view .wiki-content-parts > .wiki-content-main {
+  grid-column: 1;
+  grid-row: 3 / 7;
+  float: none;
+  width: auto;
+  max-width: none;
+  margin: 0;
+}
+
+.repository.wiki.view .wiki-content-parts > .wiki-content-toc {
+  grid-column: 2;
+  grid-row: 4;
+}
+
+.repository.wiki.view .wiki-content-parts > .wiki-content-sidebar:not(.wiki-content-toc) {
+  grid-column: 2;
+  grid-row: 5;
+}
+
+.repository.wiki.view .wiki-content-parts > .wiki-content-sidebar {
+  float: none;
+  width: auto;
+  min-width: 0;
+  margin: var(--base-size-16) 0 0;
+}
+
+.repository.wiki.view .wiki-content-parts > .tw-clear-both {
+  display: none;
+}
+
+.repository.wiki.view .wiki-content-parts > .wiki-content-footer {
+  grid-column: 1;
+  grid-row: 7;
+  margin: var(--base-size-24) 0 0;
+}
+
+.repository.wiki.view > .ui.container > .repo-button-row {
+  grid-column: 2;
+  grid-row: 3;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--base-size-16);
+  margin: 0;
+}
+
+.repository.wiki.view > .ui.container > .repo-button-row > .flex-text-block {
+  flex: 0 0 auto;
+}
+
+.repository.wiki.view > .ui.container > .repo-button-row .ui.floating.filter.dropdown,
+.repository.wiki.view > .ui.container > .repo-button-row .ui.floating.filter.dropdown > .ui.button {
+  width: 100%;
+}
+
+.repository.wiki.view > .ui.container > .repo-button-row .ui.floating.filter.dropdown > .ui.button {
+  justify-content: space-between;
+  height: var(--control-medium-size);
+  font-size: var(--text-body-size-medium);
+}
+
+.repository.wiki.view > .ui.container > .repo-button-row .ui.floating.filter.dropdown > .menu {
+  width: 100%;
+}
+
+.repository.wiki.view > .ui.container > .repo-button-row > .js-btn-clone-panel {
+  align-self: flex-start;
+}
+
+/* title block */
+.repository.wiki.view .ui.dividing.header {
+  margin: 0 0 var(--base-size-24);
+  padding: 0 0 var(--base-size-16);
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-large);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--base-size-36);
+}
+
+.repository.wiki.view .ui.dividing.header > .flex-text-block {
+  align-items: flex-start;
+  gap: var(--base-size-8);
+}
+
+.repository.wiki.view .ui.dividing.header > .flex-text-block > .flex-text-block {
+  align-items: flex-start;
+}
+
+.repository.wiki.view .ui.dividing.header .ui.sub.header {
+  margin: var(--base-size-4) 0 0;
+  padding: 0;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+  text-transform: none;
+}
+
+/* history "N ⟲" → small invisible button after the title (github.com: "· N revisions" link in the meta) */
+.repository.wiki.view .ui.dividing.header > .flex-text-block > .flex-text-block > a.ui.basic.button {
+  order: 2;
+  gap: var(--base-size-4);
+  height: var(--control-small-size);
+  min-height: 0;
+  margin-top: var(--base-size-4);
+  padding: 0 var(--control-small-paddingInline-condensed);
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}
+
+.repository.wiki.view .ui.dividing.header > .flex-text-block > .flex-text-block > a.ui.basic.button:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-accent);
+}
+
+.repository.wiki.view .ui.dividing.header .repo-button-row {
+  gap: var(--base-size-4);
+  margin: var(--base-size-4) 0 0;
+}
+
+.repository.wiki.view .ui.dividing.header .repo-button-row > .ui.small.button {
+  height: var(--control-small-size);
+  min-height: 0;
+}
+
+/* Gitea custom sidebar / footer pages: Box like github.com's custom-sidebar panels */
+.repository.wiki .wiki-content-parts > .wiki-content-sidebar.markup,
+.repository.wiki .wiki-content-parts > .wiki-content-footer.markup {
+  padding: var(--base-size-16);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+}
+
+@media (max-width: 1011.98px) {
+  .repository.wiki.view > .ui.container {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+  }
+
+  .repository.wiki.view .wiki-content-parts > .wiki-content-main,
+  .repository.wiki.view .wiki-content-parts > .wiki-content-toc,
+  .repository.wiki.view .wiki-content-parts > .wiki-content-sidebar:not(.wiki-content-toc),
+  .repository.wiki.view .wiki-content-parts > .wiki-content-footer {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .repository.wiki.view .wiki-content-parts > .wiki-content-toc {
+    margin: 0 0 var(--base-size-16);
+  }
+
+  .repository.wiki.view > .ui.container > .repo-button-row {
+    grid-column: 1;
+    grid-row: 2;
+    flex-direction: row;
+    margin: 0 0 var(--base-size-16);
+  }
+
+  .repository.wiki.view > .ui.container > .repo-button-row > .flex-text-block {
+    flex: 1 1 auto;
+  }
+
+}
+
+/* ---------- page list (?action=_pages) ---------- */
+.repository.wiki.pages > .ui.container > h2.ui.header {
+  margin: 0 0 var(--base-size-16);
+  padding: 0 0 var(--base-size-16);
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-large);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--base-size-36);
+}
+
+.repository.wiki .wiki-pages-list {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+}
+
+.repository.wiki .wiki-pages-list td {
+  padding: var(--base-size-8) var(--base-size-16);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+}
+
+.repository.wiki .wiki-pages-list tr:first-child td {
+  border-top: 0;
+}
+
+.repository.wiki .wiki-pages-list td > .svg {
+  margin-right: var(--base-size-8);
+  color: var(--fgColor-muted);
+  vertical-align: text-bottom;
+}
+
+.repository.wiki .wiki-pages-list td > a:not(.wiki-git-entry) {
+  color: var(--fgColor-accent);
+  font-weight: var(--base-text-weight-semibold);
+}

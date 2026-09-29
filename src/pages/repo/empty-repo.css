@@ -1,0 +1,54 @@
+/*
+ * Empty repository quick setup — github.com empty repo page: one Box; the first row ("Quick setup — if you've done
+ * this kind of thing before" + clone URL) on --bgColor-accent-muted, the following rows plain; row headings 16px / 24px
+ * semibold --fgColor-default, 8px above their content; rows padding 16px, divided by 1px --borderColor-default.
+ * Gitea: templates/repo/empty.tmpl — .repository.quickstart: .ui.top.attached.header "Quick Guide" +
+ * .ui.attached.guide.table.segment.empty-repo-guide > .item (h3 + .repo-button-row / .markup pre) + .divider.
+ */
+.repository.quickstart .empty-repo-guide {
+  padding: 0;
+  overflow: hidden;
+}
+
+.repository.quickstart .empty-repo-guide > .item {
+  padding: var(--base-size-16);
+}
+
+.repository.quickstart .empty-repo-guide > .item:first-child {
+  background: var(--bgColor-accent-muted);
+}
+
+.repository.quickstart .empty-repo-guide > .item > h3 {
+  margin: 0 0 var(--base-size-8);
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-small);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--base-size-24);
+}
+
+.repository.quickstart .empty-repo-guide > .item > h3 > small {
+  margin-left: var(--base-size-4);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+}
+
+.repository.quickstart .empty-repo-guide > .item > .repo-button-row {
+  gap: var(--base-size-8);
+  margin: 0;
+}
+
+.repository.quickstart .empty-repo-guide > .item > .repo-button-row > .clone-buttons-combo {
+  flex: 1 1 auto;
+}
+
+.repository.quickstart .empty-repo-guide > .item > .markup pre {
+  margin: 0;
+}
+
+.repository.quickstart .empty-repo-guide > .divider {
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+}

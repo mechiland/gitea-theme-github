@@ -1,0 +1,65 @@
+/*
+ * Settings page header — github.com /settings/*: above the NavList and the main column, one row with
+ *   a 48px circular avatar, the account name (20px semibold, "Name (login)") over "Your personal account"
+ *   (14px --fgColor-muted), and a default button "Go to your personal profile" on the right; 24px below it.
+ *   Below 768px the button wraps under the name.
+ * Gitea has no such markup: it comes from the github-* only override of templates/user/settings/layout_head.tmpl
+ * proposed in docs/requests/integrator.md (SA-4). Without that override these rules match nothing.
+ */
+
+.page-content.settings > .gh-settings-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--base-size-8) var(--base-size-16);
+  margin-bottom: var(--base-size-24);
+}
+
+.page-content.settings > .gh-settings-header img.ui.avatar {
+  flex-shrink: 0;
+  width: var(--base-size-48);
+  height: var(--base-size-48);
+  border-radius: var(--borderRadius-full);
+  box-shadow: 0 0 0 var(--borderWidth-thin) var(--avatar-borderColor);
+}
+
+.page-content.settings > .gh-settings-header .gh-settings-header-text {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.page-content.settings > .gh-settings-header .gh-settings-header-title {
+  margin: 0;
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-title-lineHeight-small);
+  overflow-wrap: anywhere;
+}
+
+.page-content.settings > .gh-settings-header .gh-settings-header-title a {
+  color: inherit;
+}
+
+.page-content.settings > .gh-settings-header .gh-settings-header-subtitle {
+  margin: 0;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.page-content.settings > .gh-settings-header > .ui.button {
+  flex-shrink: 0;
+  margin: 0;
+}
+
+@media (max-width: 767.98px) {
+  .page-content.settings > .gh-settings-header > .ui.button {
+    margin-left: calc(var(--base-size-48) + var(--base-size-16));
+  }
+}
+
+/* the header takes over the page's top spacing; the settings grid follows it */
+.page-content.settings > .gh-settings-header + .flex-container {
+  margin-top: 0;
+}

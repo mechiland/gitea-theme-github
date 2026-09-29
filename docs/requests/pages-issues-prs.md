@@ -47,3 +47,32 @@ Either removes the 236 `gitea-double-chevron-left` non-Octicon hits (36 pages) t
 - The issue/PR sidebar (`.issue-content-right`) is drawn as a bordered Box because it is a `.ui.segment` (data-display
   Box rule). github.com's sidebar has no frame (shots/integrate-w2/repo-issue/dark-1440.png) — unframe it page-scoped.
 - Migrated-comment headers wrap badly at 390 ("comme-nted", shots/integrate-w2/repo-issue/dark-390.png, data-display known gap).
+
+# Handled by pages/issues-prs (wave 3, round 1)
+- P-1 → DONE: PR-list « masked with `--gh-octicon-arrow-left` (page-scoped, list.css); branch chips restyled as Primer BranchName tokens.
+- P-2 → DONE (chose "keep chips + P-1"): chips carry base/head info github.com shows in the PR header; restyled rather than hidden.
+- controls #3/#10 → DONE: issue-title buttons 32px, list top bar (search, Labels/Milestones ButtonGroup, New) 32px; comment-form buttons keep natural width on mobile (no full-width request).
+- D-3 → not done (timeline cross-reference icons are data-display's generic timeline; no page deviation needed yet).
+- DD-1 → DONE: #issue-filters / #issue-actions as the Box header (48px, --bgColor-muted), rows' top radii squared (list.css).
+- DD-2 → DONE: milestone list boxed under the Open/Closed header, rows 16px (labels-milestones.css).
+- Integrator: sidebar unframed → DONE (sidebar.css, github.com discussion-sidebar spec); migrated-comment header wrap at 390 → DONE (header.css, mobile-only `overflow-wrap: normal` on header parts).
+
+# Handled by pages/issues-prs (wave 3, round 2) — critique docs/critiques/pages/issues-prs-w3-r1.md
+- #1 merge-style menu under the composer → DONE page-scoped (merge-box.css: `.pull-merge-box .ui.buttons` isolation auto;
+  ButtonGroup look restored while `:has(> .active.dropdown.button)`, also for "Update branch by merge"); generic fix
+  requested from controls (docs/requests/controls.md IP-C3).
+- #2 new-PR compare form → DONE: layout/sidebar/composer scopes include `.repository.compare.pull`.
+- #3 Close issue icon purple → DONE (`#status-button > .status-button-icon > .svg { color: inherit }`).
+- #4 diffstat → DONE: 12px (header.important.css), github.com DiffSquares (whole 8px squares r2, green/red/neutral).
+- #5 390 header → DONE: actions above title, 26px title, StateLabel row + full-width meta, branch tokens ellipsis.
+- #6 toolbar centred on the tabs, #7 search input 14px, #8 labels one-line rows 57px, #9 reply form = composer → DONE.
+- #10 PR-list branch chips → kept (P-2 decision). #11 → "#N" 300, gap 10px, filter labels button-invisible fg,
+  pressed state = --control-transparent-bgColor-active, PR sidebar empty values default (issue sidebar stays muted).
+- D-3 still not done (timeline cross-reference icons are data-display's generic timeline).
+
+# Integrator (end of wave 3, 2026-09-30)
+- Critic w3-r2 #1 (PR Commits tab 32px wider, pages/repo selector leak) — FIXED in pages/repo (`.repository.commits:not(.pull)`),
+  verified shots/integrate-w3-seam/pr-commits-tab-playground/light-1440.png.
+- Your page-scoped merge-box workaround stays; the generic fix IP-C3 (docs/requests/controls.md) is still open for controls.
+- Routes merged into tools/shoot/routes.json: issue-new-playground, pr-compare-new-playground, issue-playground-1,
+  pr-compare-form-playground, milestone-issues + your r2 states.

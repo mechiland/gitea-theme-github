@@ -1,0 +1,6 @@
+/* gh-important: Tailwind utilities (!important) inside the issue sidebar */
+/* projects list: `.tw-my-2` (8px) → github.com: the list follows the heading's 8px margin directly */
+:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .issue-sidebar-project-cards.tw-my-2 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}

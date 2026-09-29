@@ -1,0 +1,469 @@
+/*
+ * Actions — workflow run page (Vue RepoActionView + ActionRunSummaryView + WorkflowGraph; its scoped CSS is part of
+ * Gitea's index.css, i.e. layer `gitea`, so plain selectors win here).
+ * github.com /actions/runs/<id> (measured 2026-09-30, pemistahl/grex run 36326137924, 1440):
+ *   PageHeader: parent link 14px --fgColor-muted, padding 4px 8px (margin-left -8px, radius 6px), arrow-left 16px;
+ *     title h1 20px/30px 600, status octicon 24px 8px before it, "#344" 20px 400 --fgColor-muted inline after it;
+ *     32px from the title to the page body.
+ *   Pane 288px (NavList: items 32px, padding 6px 8px, radius 6px, hover --control-transparent-bgColor-hover,
+ *     current --control-transparent-bgColor-selected + 600 + 4px --borderColor-accent-emphasis bar 8px to the left;
+ *     "All jobs" / "Run details" group headings 12px/18px 600 --fgColor-muted, padding 6px 8px), 48px to the main column.
+ *   Summary Box: 1px --borderColor-default, radius 6px, 20px padding; labels 12px/18px --fgColor-muted (4px below),
+ *     values 16px/24px 600 --fgColor-default.
+ *   Workflow graph: its own Box 16px below, --bgColor-inset, "python-build.yml" 16px/24px 600, "on: …" 12px muted.
+ *
+ * Layout shift (request A-1): the Vue app mounts with an empty run (no back link, empty title) and fills the header
+ * when the first POST returns, pushing the body down. The header reserves the height of its loaded state (back link
+ * 28px + one 32px title line on desktop; + a second title line and the 8px + 28px button row on narrow screens), and
+ * the pre-load title starts where the loaded title will be, so a one-line title causes no shift at all.
+ */
+
+/* ---------- header ---------- */
+.action-view-header {
+  gap: 0;
+  min-height: calc(var(--base-size-28) + var(--base-size-32));
+}
+
+/* before the run is loaded there is no back link: keep the title row where it will be */
+.action-view-header:not(:has(> .action-view-back)) {
+  padding-top: var(--base-size-28);
+}
+
+.action-view-back {
+  gap: var(--base-size-4);
+  height: var(--base-size-28);
+  margin-left: calc(var(--base-size-8) * -1);
+  padding: 0 var(--base-size-8);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-text-lineHeight-tight);
+}
+
+.action-view-back .svg {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+}
+
+.action-view-back:hover {
+  color: var(--fgColor-accent);
+  text-decoration: none;
+}
+
+.action-view-back:hover > span {
+  text-decoration: underline;
+}
+
+.action-view-back-name {
+  color: inherit;
+  font-weight: var(--base-text-weight-normal);
+}
+
+.action-info-summary {
+  align-items: flex-start;
+  gap: var(--base-size-8) var(--base-size-16);
+}
+
+/* title: icon hangs to the left, title + "#N" flow as one text block (github.com wraps "#344" after the title) */
+.action-info-summary-title {
+  display: block;
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: var(--base-size-32);
+  padding-left: calc(var(--base-size-24) + var(--base-size-8));
+  font-size: var(--text-title-size-medium);
+  line-height: var(--base-text-lineHeight-normal);
+}
+
+.action-info-summary-title > .svg {
+  position: absolute;
+  top: var(--base-size-4);
+  left: 0;
+  width: var(--base-size-24);
+  height: var(--base-size-24);
+}
+
+.action-info-summary-title-text {
+  display: inline;
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-medium);
+  font-weight: var(--text-title-weight-medium);
+  line-height: var(--base-text-lineHeight-normal);
+}
+
+.action-info-summary-title-text a {
+  color: var(--fgColor-accent);
+}
+
+.action-info-summary-title-index {
+  margin-left: var(--base-size-4);
+  color: var(--fgColor-muted);
+  font-size: var(--text-title-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--base-text-lineHeight-normal);
+}
+
+.action-info-summary > .flex-text-block {
+  align-self: center;
+}
+
+@media (max-width: 767.98px) {
+  /* loaded: back link + two title lines + 8px gap + the 28px button row */
+  .action-view-header {
+    min-height: calc(var(--base-size-28) + var(--base-size-64) + var(--base-size-4) + var(--base-size-28));
+  }
+
+  .action-info-summary-title {
+    flex-basis: 100%;
+  }
+}
+
+/* ---------- body: pane + main column ---------- */
+.action-view-body {
+  gap: var(--base-size-48);
+  padding-top: var(--base-size-24);
+  padding-bottom: var(--base-size-24);
+}
+
+/* github.com pane: 288px list whose items are inset 8px on both sides (272px), the 4px current bar on the list's
+   left edge, group headings and dividers full width. The pane starts 8px left of the page edge (the bar hangs
+   into the page margin) and the main column starts 48px after it. */
+.action-view-left {
+  flex: 0 0 auto;
+  width: calc(var(--base-size-96) * 3);
+  max-width: none;
+  margin-left: calc(var(--base-size-8) * -1);
+  padding-left: var(--base-size-8);
+  background: var(--bgColor-default);
+}
+
+.action-view-right {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  gap: var(--base-size-16);
+  color: var(--fgColor-muted);
+}
+
+/* before the run is loaded the jobs list is empty: reserve four 32px rows so the rows below (and, on narrow
+   screens, the whole main column) move less when the jobs arrive */
+.left-list-header + .action-view-sidebar-list:not(:has(> .item)) {
+  min-height: calc(var(--control-medium-size) * 4);
+}
+
+@media (max-width: 767.98px) {
+  .action-view-body {
+    gap: var(--base-size-16);
+    padding-top: var(--base-size-16);
+  }
+
+  /* narrow screens stack pane + main column, so the loaded page is always taller than the viewport: from the empty
+     mount point until the run is loaded, keep the footer below the fold instead of letting it jump away */
+  #repo-action-view:not(:has(.action-view-back)) {
+    min-height: 100vh;
+  }
+
+  .action-view-left {
+    width: auto;
+  }
+}
+
+/* NavList */
+.action-view-sidebar-list {
+  gap: 0;
+  margin: var(--base-size-8) 0;
+}
+
+.action-view-sidebar-list > .item {
+  position: relative;
+  margin-right: var(--base-size-8);
+  gap: var(--base-size-8);
+  min-height: var(--control-medium-size);
+  padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+  transition: background-color var(--base-duration-100) var(--base-easing-linear);
+}
+
+.action-view-sidebar-list > .item:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+  text-decoration: none;
+}
+
+.action-view-sidebar-list > .item:active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+.action-view-sidebar-list > .item.selected {
+  background: var(--control-transparent-bgColor-selected);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.action-view-sidebar-list > .item.selected::after {
+  content: "";
+  position: absolute;
+  top: var(--base-size-4);
+  left: calc(var(--base-size-8) * -1);
+  width: var(--base-size-4);
+  height: calc(100% - var(--base-size-8));
+  border-radius: var(--borderRadius-medium);
+  background: var(--borderColor-accent-emphasis);
+}
+
+.action-view-sidebar-list > .item:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: calc(var(--borderWidth-thick) * -1);
+}
+
+.action-view-sidebar-list > .item > .svg:not(.job-rerun-button) {
+  flex-shrink: 0;
+}
+
+.action-view-sidebar-list > .item .octicon-home,
+.action-view-sidebar-list > .item .octicon-file-code,
+.action-view-sidebar-list > .item .octicon-lock,
+.action-view-sidebar-list > .item .octicon-file {
+  color: var(--fgColor-muted);
+}
+
+/* run-details rows are a div.item wrapping the link: make the link fill the row */
+.action-view-sidebar-list > div.item > a.flex-text-block,
+.action-view-sidebar-list > div.item > span.flex-text-block {
+  flex: 1;
+  gap: var(--base-size-8);
+  min-width: 0;
+  color: var(--fgColor-default);
+}
+
+.action-view-sidebar-list > div.item:has(> a.flex-text-block) {
+  cursor: pointer;
+}
+
+.action-view-sidebar-list > .item .job-duration {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-normal);
+}
+
+.action-view-sidebar-list > .item .job-rerun-button {
+  color: var(--fgColor-muted);
+}
+
+.left-list-header {
+  margin-left: calc(var(--base-size-8) * -1);
+  padding: var(--base-size-6) var(--base-size-8);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--base-text-lineHeight-normal);
+}
+
+.left-list-header + .action-view-sidebar-list {
+  margin-top: 0;
+}
+
+.action-view-left > .ui.divider {
+  margin: var(--base-size-8) 0 var(--base-size-8) calc(var(--base-size-8) * -1);
+  width: calc(100% + var(--base-size-8));
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+  border-bottom: 0;
+}
+
+/* ---------- main column: summary Box + graph Box ---------- */
+.action-view-right-panel {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+.action-view-right-panel:has(> .action-run-summary-view) {
+  border: 0;
+  background: transparent;
+}
+
+.action-run-summary-view {
+  gap: var(--base-size-16);
+  color: var(--fgColor-muted);
+}
+
+.action-run-summary-block {
+  padding: var(--base-size-20);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+  box-shadow: var(--shadow-resting-small);
+}
+
+.action-run-summary-label {
+  margin-bottom: var(--base-size-4);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.action-run-summary-trigger {
+  margin-right: var(--base-size-40);
+}
+
+.action-run-summary-trigger-content {
+  gap: var(--base-size-4);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.action-run-summary-user {
+  gap: var(--base-size-4);
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.action-run-summary-user:hover span {
+  color: var(--fgColor-accent);
+}
+
+.action-run-summary-pr {
+  color: var(--fgColor-default);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+/* Primer BranchName */
+.action-run-summary-branch-label {
+  min-height: 0;
+  padding: var(--base-size-2) var(--base-size-6);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-accent-muted);
+  color: var(--fgColor-accent);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  line-height: var(--base-text-lineHeight-tight);
+}
+
+.action-run-summary-stat {
+  margin-left: var(--base-size-16);
+  margin-right: var(--base-size-40);
+}
+
+.action-run-summary-stat-value {
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-large);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-large);
+}
+
+.action-run-summary-stat-divider {
+  border-bottom-color: var(--borderColor-muted);
+}
+
+@media (max-width: 767.98px) {
+  .action-run-summary-block {
+    padding: var(--base-size-16);
+  }
+
+  .action-run-summary-trigger {
+    margin-right: 0;
+  }
+
+  .action-run-summary-stat {
+    margin-left: 0;
+    margin-right: var(--base-size-24);
+  }
+}
+
+/* workflow graph Box (github.com: p-2 color-bg-inset rounded header card on an inset canvas) */
+.workflow-graph {
+  overflow: hidden;
+  padding: var(--base-size-8);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-inset);
+  box-shadow: var(--shadow-resting-small);
+}
+
+/* unpainted SVG containers default to black fill (invisible, but off-palette in audits): paint with the text colour */
+.workflow-graph .graph-svg {
+  fill: currentcolor;
+}
+
+.workflow-graph .graph-header {
+  padding: var(--base-size-8) var(--base-size-12) 0;
+  background: transparent;
+}
+
+.workflow-graph .graph-workflow-name {
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-large);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-large);
+}
+
+.workflow-graph a.graph-workflow-name:hover {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+.workflow-graph .graph-workflow-trigger {
+  margin-top: 0;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.workflow-graph .graph-stats {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}
+
+.workflow-graph .graph-container {
+  border-radius: 0;
+  background: transparent;
+}
+
+.workflow-graph .job-rect {
+  fill: var(--bgColor-default);
+  stroke: var(--borderColor-default);
+}
+
+.workflow-graph .node-edge {
+  stroke: var(--borderColor-emphasis);
+}
+
+.workflow-graph .job-node-group:hover .job-rect,
+.workflow-graph .job-node-group.related-node .job-rect {
+  fill: var(--bgColor-default);
+  stroke: var(--borderColor-accent-emphasis);
+}
+
+.workflow-graph .highlighted-edge,
+.workflow-graph .highlighted-port {
+  stroke: var(--borderColor-accent-emphasis);
+}
+
+.workflow-graph .highlighted-port {
+  fill: var(--borderColor-accent-emphasis);
+}
+
+/* job summaries panel (markdown written by steps) */
+.job-summary-section-header {
+  padding: var(--base-size-16);
+  border-bottom-color: var(--borderColor-default);
+  background: var(--bgColor-muted);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+}
+
+.job-summary-list {
+  padding: var(--base-size-16);
+  gap: var(--base-size-16);
+}
+
+.job-summary-item {
+  padding: var(--base-size-16);
+  border-color: var(--borderColor-default);
+  background: var(--bgColor-default);
+}

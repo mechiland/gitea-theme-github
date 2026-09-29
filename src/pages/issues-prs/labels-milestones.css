@@ -1,0 +1,222 @@
+/*
+ * Labels page (repo/issue/labels/label_list.tmpl) and Milestones page (repo/issue/milestones.tmpl).
+ * github.com /labels: Box, header 48px (--bgColor-muted, count + Sort), rows 16px padding with 1px
+ * --borderColor-muted separators edge to edge; label token, description 12px --fgColor-muted, open count 12px muted
+ * with an octicon, row actions muted 12px links (hover --fgColor-accent).
+ * github.com /milestones: Box; the Open / Closed + Sort header (#issue-filters, styled in list.css) is its header;
+ * rows padding 16px, title 16px --fgColor-default, meta line 12px --fgColor-muted, progress (data-display) right.
+ */
+
+/* ---------- labels ---------- */
+.repository.labels .issue-navbar .ui.button,
+.repository.milestones .list-header > .ui.button {
+  height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
+}
+
+.repository.labels h4.ui.top.attached.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--base-size-48);
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: var(--text-body-size-medium);
+}
+
+.repository.labels h4.ui.top.attached.header .ui.dropdown {
+  color: var(--fgColor-muted);
+}
+
+.repository.labels .ui.attached.segment:has(> .issue-label-list) {
+  padding: 0;
+}
+
+.repository.labels .issue-label-list > .item,
+.repository.labels .issue-label-list > .item:first-child,
+.repository.labels .issue-label-list > .item:last-child {
+  align-items: center;
+  padding: var(--base-size-16);
+}
+
+.repository.labels .issue-label-list > .item {
+  min-height: calc(var(--base-size-48) + var(--base-size-8) + var(--borderWidth-thin));
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+.repository.labels .issue-label-list > .item:last-child {
+  border-bottom: 0;
+}
+
+/* one line per row like github.com /labels: token column (37.5% of the title area) | description column, then the
+   open count and the row actions right-aligned (Gitea: three 33% columns with the description under the token) */
+.repository.labels .issue-label-list > .item .label-title {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 5fr);
+  align-items: center;
+  column-gap: var(--base-size-16);
+  width: auto;
+  min-width: 0;
+  padding-right: var(--base-size-16);
+}
+
+.repository.labels .issue-label-list > .item .label-title > .ui.label {
+  justify-self: start;
+  max-width: 100%;
+}
+
+.repository.labels .issue-label-list > .item .label-title .desc {
+  grid-column: 2;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.repository.labels .issue-label-list > .item .label-issues {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  width: calc(var(--base-size-80) * 2 + var(--base-size-40));
+  padding-right: var(--base-size-16);
+}
+
+.repository.labels .issue-label-list > .item .label-operation {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: calc(var(--base-size-80) + var(--base-size-40));
+  gap: var(--base-size-16);
+}
+
+.repository.labels .issue-label-list > .item .label-title > br {
+  display: none;
+}
+
+.repository.labels .issue-label-list > .item .label-issues a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base-size-4);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}
+
+.repository.labels .issue-label-list > .item .label-operation a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base-size-4);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}
+
+.repository.labels .issue-label-list > .item :is(.label-issues, .label-operation) a:hover {
+  color: var(--fgColor-accent);
+  text-decoration: none;
+}
+
+.repository.labels .issue-label-list > .item :is(.label-issues, .label-operation) .svg {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+}
+
+/* phones (github.com /labels at 390): token, description under it, then the count and the actions */
+@media (max-width: 767.98px) {
+  .repository.labels .issue-label-list > .item {
+    flex-wrap: wrap;
+    row-gap: var(--base-size-8);
+  }
+
+  .repository.labels .issue-label-list > .item .label-title {
+    flex-basis: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--base-size-4);
+    padding-right: 0;
+  }
+
+  .repository.labels .issue-label-list > .item .label-title .desc {
+    grid-column: 1;
+  }
+
+  .repository.labels .issue-label-list > .item .label-issues {
+    flex: 1 1 auto;
+    width: auto;
+  }
+
+  .repository.labels .issue-label-list > .item .label-operation {
+    min-width: 0;
+  }
+}
+
+/* ---------- milestones ---------- */
+.repository.milestones .issue-list-toolbar ~ .milestone-list {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+.repository.milestones .milestone-list:not(:has(> .item)) {
+  border: 0;
+}
+
+.repository.milestones .milestone-list > .item {
+  gap: var(--base-size-4);
+  padding: var(--base-size-16);
+}
+
+.repository.milestones .milestone-list > .item:hover {
+  background: var(--bgColor-muted);
+}
+
+.repository.milestones .milestone-list > .item:last-child {
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
+}
+
+.repository.milestones .milestone-list .list-item-large-title {
+  gap: var(--base-size-8);
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-small);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.repository.milestones .milestone-list .list-item-large-title > .svg {
+  color: var(--fgColor-muted);
+}
+
+.repository.milestones .milestone-list .list-item-large-title > a {
+  color: var(--fgColor-default);
+}
+
+.repository.milestones .milestone-list .list-item-large-title > a:hover {
+  color: var(--fgColor-accent);
+}
+
+.repository.milestones .milestone-list .flex-left-right > .flex-text-inline {
+  gap: var(--base-size-8);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+}
+
+.repository.milestones .milestone-list .list-item-secondary-bar {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.repository.milestones .milestone-list .list-item-secondary-bar .svg {
+  width: var(--base-size-12);
+  height: var(--base-size-12);
+}
+
+.repository.milestones .milestone-list .list-item-secondary-bar a {
+  color: var(--fgColor-muted);
+}
+
+.repository.milestones .milestone-list .list-item-secondary-bar a:hover {
+  color: var(--fgColor-accent);
+}
+
+/* milestone description (rendered markdown under the meta line) */
+.repository.milestones .milestone-list .markup.content {
+  margin-top: var(--base-size-8);
+  color: var(--fgColor-muted);
+}

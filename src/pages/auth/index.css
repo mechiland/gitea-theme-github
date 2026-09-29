@@ -1,1 +1,31 @@
-/* src/pages/auth — see ARCHITECTURE.md for ownership. */
+/*
+ * src/pages/auth — github.com/login visual system for Gitea's sign-in, sign-up, forgot / reset password,
+ * activation, 2FA and OpenID pages, plus the 404 / 500 / 503 status pages (layer gh.pages-auth).
+ *
+ * Reference: github.com/login as captured 2026-09-30 (docs/reference/login, measured with Playwright):
+ *   one centred 352px column (390px viewport: full width minus 16px gutters), 48px mark, title 20px/600/30px,
+ *   24px to the form, no Box around the form, FormControl labels 14px semibold 4px above 40px inputs (16px text),
+ *   16px between fields, "Forgot password?" 14px link right-aligned in the password label row, 40px full-width
+ *   primary button, 12px "or" divider (1px --borderColor-default rules, 8px either side of the text), 40px
+ *   full-width secondary provider buttons 8px apart, then a plain centred 14px "New to …? Create an account" line.
+ * Gitea markup (templates/user/auth/*.tmpl): .page-content.user.<page> > .ui.page.grid > .column >
+ *   .ui.container.fluid > [flash] h4.ui.top.attached.header + .ui.attached.segment (form, .divider-text,
+ *   #external-login-navigator) and a second .ui.container.fluid > .ui.attached.segment.header.top (passkey,
+ *   register link). CSS recomposes it: the attached header becomes the page title (with Gitea's logo above it),
+ *   the Box chrome is removed, the second segment becomes the plain footer line.
+ *
+ *   layout.css           page grid / column width and gutters (+ layout.important.css: Tailwind !important utilities)
+ *   header.css           title + Gitea logo, flash placement
+ *   form.css             field rhythm, 40px inputs and primary button, label row, checkbox
+ *   providers.css        "or" divider and the OAuth / OpenID / SSPI buttons
+ *   footer-line.css      "Need an account? Register now." / passkey line
+ *   other-pages.css      forgot / reset password, activation, 2FA, OpenID specifics
+ *   status.css           404 / 500 / 503 → Primer Blankslate (spacious, large)
+ */
+@import "./layout.css";
+@import "./header.css";
+@import "./form.css";
+@import "./providers.css";
+@import "./footer-line.css";
+@import "./other-pages.css";
+@import "./status.css";

@@ -43,6 +43,67 @@
      },
      "clip": "#navbar",
      "pad": 0
+    },
+    {
+     "name": "repo-row-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#dashboard-repo-list .repo-list-link"
+     },
+     "clip": "#dashboard-repo-list",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "segmented-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#dashboard-repo-list .ui.two.item.menu > .item:not(.active)"
+     },
+     "clip": "#dashboard-repo-list .ui.two.item.menu",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "heatmap-day-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#user-heatmap rect.heatmap-day:not([style*=secondary-alpha])"
+     },
+     "clip": ".activity-heatmap-container",
+     "pad": 8,
+     "wait": 500,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "feed-link-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#activity-feed .item-main > div:first-child > a:nth-of-type(2)"
+     },
+     "clip": "#activity-feed > .item",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "search-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": "#dashboard-repo-list .repos-search input"
+     },
+     "clip": "#dashboard-repo-list .repos-search",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
     }
    ]
   },
@@ -67,6 +128,54 @@
      },
      "clip": ".page-content form .ui.dropdown .menu.visible",
      "pad": 16
+    },
+    {
+     "name": "navlist-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".explore > overflow-menu .item:not(.active)"
+     },
+     "clip": ".explore > overflow-menu .overflow-menu-items",
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "navlist-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".explore > overflow-menu .item:not(.active)"
+     },
+     "clip": ".explore > overflow-menu .overflow-menu-items",
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "meta-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".repositories .item-trailing > a"
+     },
+     "clip": ".flex-divided-list > .item",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "navlist-active-clip",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".explore > overflow-menu .item.active"
+     },
+     "clip": ".explore > overflow-menu .overflow-menu-items",
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
     }
    ]
   },
@@ -155,7 +264,45 @@
   {
    "id": "user-profile",
    "gitea": "/alice-dev",
-   "github": "https://github.com/pemistahl"
+   "github": "https://github.com/pemistahl",
+   "states": [
+    {
+     "name": "follow-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "li.follow .ui.button"
+     },
+     "clip": "#profile-avatar-card",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "follow-press",
+     "action": "press",
+     "selectors": {
+      "gitea": "li.follow .ui.button"
+     },
+     "clip": "li.follow",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "follow-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": "li.follow .ui.button"
+     },
+     "clip": "li.follow",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "site-admin",
@@ -212,7 +359,45 @@
   {
    "id": "notifications",
    "gitea": "/notifications",
-   "github": null
+   "github": null,
+   "states": [
+    {
+     "name": "row-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#notification_table .notifications-item"
+     },
+     "clip": "#notification_table .notifications-item",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "navlist-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".small-menu-items .item:not(.active)"
+     },
+     "clip": ".small-menu-items",
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "row-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": "#notification_table .notifications-item a.notifications-link"
+     },
+     "clip": "#notification_table .notifications-item",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "repo-home",
@@ -285,6 +470,48 @@
      "viewports": [
       1440
      ]
+    },
+    {
+     "name": "branches-link-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".repository-summary .item[href$=\"/branches\"]",
+      "github": "a[href$='/branches']:has(.octicon-git-branch)"
+     },
+     "pad": 16
+    },
+    {
+     "name": "branches-link-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".repository-summary .item[href$=\"/branches\"]",
+      "github": "a[href$='/branches']:has(.octicon-git-branch)"
+     },
+     "pad": 16
+    },
+    {
+     "name": "goto-file-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".repo-file-search-container input",
+      "github": "#file-finder-input, input[placeholder='Go to file'], button:has-text('Go to file')"
+     },
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "topic-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#repo-topics a.repo-topic",
+      "github": "a.topic-tag"
+     },
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
     }
    ]
   },
@@ -310,6 +537,99 @@
      },
      "clip": ".label-filter > .menu",
      "pad": 16
+    },
+    {
+     "name": "search-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".list-header-search input[name=q]"
+     },
+     "clip": ".list-header",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "new-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".list-header > .ui.primary.button"
+     },
+     "clip": ".list-header",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "new-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".list-header > .ui.primary.button"
+     },
+     "clip": ".list-header",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "labels-btn-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".list-header > .ui.button:not(.primary)"
+     },
+     "clip": ".list-header",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "filter-item-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".issue-list-toolbar-right .ui.secondary.filter.menu > .item"
+     },
+     "clip": "#issue-filters",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "filter-item-press",
+     "action": "press",
+     "selectors": {
+      "gitea": ".issue-list-toolbar-right .ui.secondary.filter.menu > .item"
+     },
+     "clip": "#issue-filters",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "filter-item-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".issue-list-toolbar-right .ui.secondary.filter.menu > .item"
+     },
+     "clip": "#issue-filters",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "select-all",
+     "action": "click",
+     "selectors": {
+      "gitea": ".issue-checkbox-all"
+     },
+     "clip": "#issue-actions",
+     "pad": 8
     }
    ]
   },
@@ -383,6 +703,96 @@
      },
      "clip": ".comment-header-right .select-reaction > .menu",
      "pad": 16
+    },
+    {
+     "name": "gear-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".issue-content-right .ui.dropdown.full-width > .fixed-text"
+     },
+     "clip": ".issue-content-right",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "toolbar-btn-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#comment-form markdown-toolbar .markdown-toolbar-button"
+     },
+     "clip": "#comment-form",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "toolbar-btn-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": "#comment-form markdown-toolbar .markdown-toolbar-button"
+     },
+     "clip": "#comment-form",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "textarea-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": "#comment-form textarea"
+     },
+     "clip": "#comment-form",
+     "pad": 8
+    },
+    {
+     "name": "close-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#status-button"
+     },
+     "clip": "#comment-form",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "comment-disabled",
+     "action": "disable",
+     "selectors": {
+      "gitea": "#comment-form .field.footer .ui.primary.button"
+     },
+     "clip": "#comment-form",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "preview-tab",
+     "action": "click",
+     "selectors": {
+      "gitea": "#comment-form .combo-markdown-editor > .ui.tabular.menu > .item:nth-child(2)"
+     },
+     "clip": "#comment-form",
+     "pad": 8
+    },
+    {
+     "name": "pin-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".issue-content-right > .single-button-form > .fluid.ui.button"
+     },
+     "clip": ".issue-content-right",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
     }
    ]
   },
@@ -408,13 +818,56 @@
    "id": "repo-commits",
    "gitea": "/octo-org/grex/commits/branch/main",
    "github": "https://github.com/pemistahl/grex/commits/main",
-   "giteaTemplate": "{{repo.theme-playground}}/commits/branch/{{branch.theme-playground}}"
+   "giteaTemplate": "{{repo.theme-playground}}/commits/branch/{{branch.theme-playground}}",
+   "states": [
+    {
+     "name": "row-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#commits-table tbody tr",
+      "github": "[data-testid='commit-row-item'], li[class*='ListItem']"
+     },
+     "pad": 8
+    },
+    {
+     "name": "sha-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#commits-table td.sha a",
+      "github": "[data-testid='commit-row-item'] a[href*='/commit/'][class*='Button'], li a[class*='prc-Button']"
+     },
+     "pad": 12
+    },
+    {
+     "name": "copy-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": "#commits-table .copy-commit-id",
+      "github": "[data-testid='commit-row-item'] button[aria-label*='Copy'], li button[aria-label*='Copy']"
+     },
+     "pad": 12
+    }
+   ]
   },
   {
    "id": "org-home",
    "gitea": "/octo-org",
    "github": "https://github.com/go-gitea",
-   "giteaTemplate": "{{org.octo-org}}"
+   "giteaTemplate": "{{org.octo-org}}",
+   "states": [
+    {
+     "name": "rss-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".organization > .flex-container .ui.basic.label.button"
+     },
+     "clip": ".organization > .flex-container .ui.header",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "repo-home-markdown-showcase-playground",
@@ -459,7 +912,27 @@
   {
    "id": "branches",
    "gitea": "/octo-org/grex/branches",
-   "github": "https://github.com/pemistahl/grex/branches"
+   "github": "https://github.com/pemistahl/grex/branches",
+   "states": [
+    {
+     "name": "delete-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".repository.branches .delete-branch-button",
+      "github": "button[aria-label^='Delete']"
+     },
+     "pad": 12
+    },
+    {
+     "name": "row-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".repository.branches table tbody tr",
+      "github": "table tbody tr"
+     },
+     "pad": 8
+    }
+   ]
   },
   {
    "id": "tags",
@@ -469,7 +942,21 @@
   {
    "id": "releases",
    "gitea": "/octo-org/grex/releases",
-   "github": "https://github.com/pemistahl/grex/releases"
+   "github": "https://github.com/pemistahl/grex/releases",
+   "states": [
+    {
+     "name": "segment-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".repository.releases .small-menu-items .item:not(.active)",
+      "github": "nav a[href$='/tags'], .subnav-item[href$='/tags']"
+     },
+     "pad": 12,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "release-detail",
@@ -494,7 +981,21 @@
   {
    "id": "wiki-page",
    "gitea": "/octo-org/folderify/wiki/Home",
-   "github": "https://github.com/lgarron/folderify/wiki/Home"
+   "github": "https://github.com/lgarron/folderify/wiki/Home",
+   "states": [
+    {
+     "name": "edit-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".repository.wiki a.ui.button[href$='?action=_edit']",
+      "github": "a.btn[href$='/_edit'], a[href$='_edit']"
+     },
+     "pad": 12,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "repo-home-readme-with-images-and-tables",
@@ -540,18 +1041,79 @@
      "clip": ".ui.modal.visible",
      "pad": 16,
      "wait": 600
+    },
+    {
+     "name": "row-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".issue-label-list > .item"
+     },
+     "clip": ".issue-label-list",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
     }
    ]
   },
   {
    "id": "milestones",
    "gitea": "/octo-org/grex/milestones",
-   "github": "https://github.com/pemistahl/grex/milestones"
+   "github": "https://github.com/pemistahl/grex/milestones",
+   "states": [
+    {
+     "name": "row-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".milestone-list > .item"
+     },
+     "clip": ".milestone-list",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "pr-conversation-open",
    "gitea": "/octo-org/grex/pulls/358",
-   "github": "https://github.com/pemistahl/grex/pull/358"
+   "github": "https://github.com/pemistahl/grex/pull/358",
+   "states": [
+    {
+     "name": "merge-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#pull-request-merge-form .merge-button > .ui.button"
+     },
+     "clip": ".pull-merge-box",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "merge-form-open",
+     "action": "click",
+     "selectors": {
+      "gitea": "#pull-request-merge-form .merge-button > .ui.button"
+     },
+     "clip": ".pull-merge-box",
+     "pad": 8
+    },
+    {
+     "name": "cmdline-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".merge-section details > summary"
+     },
+     "clip": ".pull-merge-box",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "pr-commits-tab",
@@ -571,7 +1133,60 @@
   {
    "id": "pr-conversation-playground-large-diff-reviews",
    "gitea": "/octo-org/theme-playground/pulls/16",
-   "github": null
+   "github": null,
+   "states": [
+    {
+     "name": "reply-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".code-comments-list .comment-form-reply"
+     },
+     "clip": ".code-comments-list .conversation-holder",
+     "pad": 8
+    },
+    {
+     "name": "reply-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".code-comments-list .comment-form-reply"
+     },
+     "clip": ".code-comments-list .conversation-holder",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "checks-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".merge-section .commit-status-list > .item"
+     },
+     "clip": ".pull-merge-box",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "merge-style-open",
+     "action": "click",
+     "selectors": {
+      "gitea": "#pull-request-merge-form .merge-button .ui.dropdown.icon.button"
+     },
+     "clip": ".pull-merge-box",
+     "pad": 8
+    },
+    {
+     "name": "update-branch-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".pull-merge-box .ui.buttons:not(.merge-button) .dropdown.button"
+     },
+     "clip": ".pull-merge-box",
+     "pad": 8
+    }
+   ]
   },
   {
    "id": "pr-files-changed-split-playground-large-diff",
@@ -601,12 +1216,100 @@
   {
    "id": "actions-list",
    "gitea": "/octo-org/theme-playground/actions",
-   "github": "https://github.com/pemistahl/grex/actions"
+   "github": "https://github.com/pemistahl/grex/actions",
+   "states": [
+    {
+     "name": "row-kebab-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".run-list > .item:first-child .ui.dropdown.jump"
+     },
+     "clip": ".run-list > .item:first-child",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "title-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".run-list > .item:first-child .item-title a"
+     },
+     "clip": ".run-list > .item:first-child",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "row-menu-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".run-list > .item:first-child .ui.dropdown.jump"
+     },
+     "clip": ".run-list > .item:first-child",
+     "pad": 120,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "status-filter-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".flex-container-main .ui.filter.menu .ui.dropdown:nth-child(2)"
+     },
+     "clip": ".flex-container-main > .ui.top.attached.header",
+     "pad": 200,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "nav-item-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".flex-container-nav .ui.vertical.menu a.item:nth-child(2)"
+     },
+     "clip": ".flex-container-nav",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "action-run",
    "gitea": "/octo-org/theme-playground/actions/runs/19",
-   "github": "https://github.com/pemistahl/grex/actions/runs/36326137924"
+   "github": "https://github.com/pemistahl/grex/actions/runs/36326137924",
+   "states": [
+    {
+     "name": "job-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".action-view-sidebar-list a.item:has(.job-duration)"
+     },
+     "clip": ".action-view-left",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "back-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".action-view-back"
+     },
+     "clip": ".action-view-header",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "packages-org",
@@ -621,12 +1324,88 @@
   {
    "id": "projects-list",
    "gitea": "/octo-org/theme-playground/projects",
-   "github": null
+   "github": null,
+   "states": [
+    {
+     "name": "title-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".milestone-list > .item:first-child .list-item-large-title a"
+     },
+     "clip": ".milestone-list",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "project-board",
    "gitea": "/octo-org/theme-playground/projects/2",
-   "github": null
+   "github": null,
+   "states": [
+    {
+     "name": "card-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".project-column .issue-card:first-child"
+     },
+     "clip": ".project-column:first-child",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "column-menu-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".project-column:first-child .project-column-header .ui.dropdown"
+     },
+     "clip": ".project-column:first-child",
+     "pad": 120,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "toolbar-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".project-header > .ui.compact.menu > a.item[href*='/edit']"
+     },
+     "clip": ".project-header",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "filter-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".project-header > .list-header-filters > .item:first-child"
+     },
+     "clip": ".project-header",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "filter-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".project-header > .list-header-filters > .item:nth-child(2)"
+     },
+     "clip": ".project-header",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "user-profile-stars-tab",
@@ -636,12 +1415,89 @@
   {
    "id": "user-profile-repositories-tab",
    "gitea": "/alice-dev?tab=repositories",
-   "github": "https://github.com/pemistahl?tab=repositories"
+   "github": "https://github.com/pemistahl?tab=repositories",
+   "states": [
+    {
+     "name": "filter-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".filter.menu .item.ui.dropdown"
+     },
+     "clip": ".filter.menu",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "filter-press",
+     "action": "press",
+     "selectors": {
+      "gitea": ".filter.menu .item.ui.dropdown"
+     },
+     "clip": ".filter.menu",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "filter-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".filter.menu .item.ui.dropdown"
+     },
+     "clip": ".filter.menu",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "filter-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".filter.menu .item.ui.dropdown"
+     },
+     "clip": ".filter.menu .menu.visible",
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "search-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".page-content input[name=q]"
+     },
+     "clip": ".page-content form",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "org-members",
    "gitea": "/org/octo-org/members",
-   "github": "https://github.com/orgs/go-gitea/people"
+   "github": "https://github.com/orgs/go-gitea/people",
+   "states": [
+    {
+     "name": "search-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".page-content input[name=q]"
+     },
+     "clip": ".page-content form",
+     "pad": 8,
+     "viewports": [
+      1440,
+      390
+     ]
+    }
+   ]
   },
   {
    "id": "org-teams",
@@ -652,6 +1508,736 @@
    "id": "admin-repos",
    "gitea": "/-/admin/repos",
    "github": null
+  },
+  {
+   "id": "repo-settings-collab",
+   "gitea": "/octo-org/grex/settings/collaboration",
+   "github": null
+  },
+  {
+   "id": "repo-settings-branches",
+   "gitea": "/octo-org/grex/settings/branches",
+   "github": null
+  },
+  {
+   "id": "repo-settings-hooks",
+   "gitea": "/octo-org/grex/settings/hooks",
+   "github": null
+  },
+  {
+   "id": "org-settings",
+   "gitea": "/org/octo-org/settings",
+   "github": null
+  },
+  {
+   "id": "admin-monitor-stats",
+   "gitea": "/-/admin/monitor/stats",
+   "github": null
+  },
+  {
+   "id": "user-settings-account",
+   "gitea": "/user/settings/account",
+   "github": null
+  },
+  {
+   "id": "user-settings-security",
+   "gitea": "/user/settings/security",
+   "github": null
+  },
+  {
+   "id": "user-settings-applications",
+   "gitea": "/user/settings/applications",
+   "github": null
+  },
+  {
+   "id": "admin-orgs",
+   "gitea": "/-/admin/orgs",
+   "github": null
+  },
+  {
+   "id": "admin-emails",
+   "gitea": "/-/admin/emails",
+   "github": null
+  },
+  {
+   "id": "admin-user-edit",
+   "gitea": "/-/admin/users/1/edit",
+   "github": null
+  },
+  {
+   "id": "org-settings-labels",
+   "gitea": "/org/octo-org/settings/labels",
+   "github": null,
+   "measure": {
+    "gitea": [
+     {
+      "name": "subhead",
+      "selector": ".flex-container-main .ui.top.attached.header"
+     },
+     {
+      "name": "nav-col",
+      "selector": ".flex-container-nav"
+     },
+     {
+      "name": "main-col",
+      "selector": ".flex-container-main"
+     },
+     {
+      "name": "field-label",
+      "selector": ".flex-container-main .ui.form .field > label"
+     },
+     {
+      "name": "field",
+      "selector": ".flex-container-main .ui.form .field"
+     },
+     {
+      "name": "help",
+      "selector": ".flex-container-main .ui.form .help"
+     },
+     {
+      "name": "input-text",
+      "selector": ".flex-container-main .ui.form input[type=text], .flex-container-main .ui.form input[type=email], .flex-container-main .ui.form input[type=password], .flex-container-main .ui.form input:not([type])"
+     },
+     {
+      "name": "danger-box",
+      "selector": ".flex-container-main .danger.segment"
+     },
+     {
+      "name": "danger-row",
+      "selector": ".flex-container-main .danger.segment .flex-divided-list > .item"
+     },
+     {
+      "name": "danger-title",
+      "selector": ".flex-container-main .danger.segment .item-title"
+     },
+     {
+      "name": "danger-body",
+      "selector": ".flex-container-main .danger.segment .item-body"
+     },
+     {
+      "name": "danger-btn",
+      "selector": ".flex-container-main .danger.segment .ui.red.button"
+     },
+     {
+      "name": "box-table-seg",
+      "selector": ".flex-container-main .ui.attached.table.segment"
+     },
+     {
+      "name": "table-td",
+      "selector": ".flex-container-main .ui.table td"
+     },
+     {
+      "name": "table-th",
+      "selector": ".flex-container-main .ui.table th"
+     },
+     {
+      "name": "dl-dt",
+      "selector": ".flex-container-main dl.admin-dl-horizontal > dt"
+     },
+     {
+      "name": "dl-dd",
+      "selector": ".flex-container-main dl.admin-dl-horizontal > dd"
+     },
+     {
+      "name": "primary-btn",
+      "selector": ".flex-container-main .ui.primary.button"
+     },
+     {
+      "name": "red-btn",
+      "selector": ".flex-container-main .ui.red.button"
+     },
+     {
+      "name": "nav-item",
+      "selector": ".flex-container-nav .item"
+     },
+     {
+      "name": "nav-header",
+      "selector": ".flex-container-nav .header, .flex-container-nav details > summary"
+     }
+    ]
+   }
+  },
+  {
+   "id": "org-settings-hooks",
+   "gitea": "/org/octo-org/settings/hooks",
+   "github": null,
+   "measure": {
+    "gitea": [
+     {
+      "name": "subhead",
+      "selector": ".flex-container-main .ui.top.attached.header"
+     },
+     {
+      "name": "nav-col",
+      "selector": ".flex-container-nav"
+     },
+     {
+      "name": "main-col",
+      "selector": ".flex-container-main"
+     },
+     {
+      "name": "field-label",
+      "selector": ".flex-container-main .ui.form .field > label"
+     },
+     {
+      "name": "field",
+      "selector": ".flex-container-main .ui.form .field"
+     },
+     {
+      "name": "help",
+      "selector": ".flex-container-main .ui.form .help"
+     },
+     {
+      "name": "input-text",
+      "selector": ".flex-container-main .ui.form input[type=text], .flex-container-main .ui.form input[type=email], .flex-container-main .ui.form input[type=password], .flex-container-main .ui.form input:not([type])"
+     },
+     {
+      "name": "danger-box",
+      "selector": ".flex-container-main .danger.segment"
+     },
+     {
+      "name": "danger-row",
+      "selector": ".flex-container-main .danger.segment .flex-divided-list > .item"
+     },
+     {
+      "name": "danger-title",
+      "selector": ".flex-container-main .danger.segment .item-title"
+     },
+     {
+      "name": "danger-body",
+      "selector": ".flex-container-main .danger.segment .item-body"
+     },
+     {
+      "name": "danger-btn",
+      "selector": ".flex-container-main .danger.segment .ui.red.button"
+     },
+     {
+      "name": "box-table-seg",
+      "selector": ".flex-container-main .ui.attached.table.segment"
+     },
+     {
+      "name": "table-td",
+      "selector": ".flex-container-main .ui.table td"
+     },
+     {
+      "name": "table-th",
+      "selector": ".flex-container-main .ui.table th"
+     },
+     {
+      "name": "dl-dt",
+      "selector": ".flex-container-main dl.admin-dl-horizontal > dt"
+     },
+     {
+      "name": "dl-dd",
+      "selector": ".flex-container-main dl.admin-dl-horizontal > dd"
+     },
+     {
+      "name": "primary-btn",
+      "selector": ".flex-container-main .ui.primary.button"
+     },
+     {
+      "name": "red-btn",
+      "selector": ".flex-container-main .ui.red.button"
+     },
+     {
+      "name": "nav-item",
+      "selector": ".flex-container-nav .item"
+     },
+     {
+      "name": "nav-header",
+      "selector": ".flex-container-nav .header, .flex-container-nav details > summary"
+     }
+    ]
+   }
+  },
+  {
+   "id": "user-settings-orgs",
+   "gitea": "/user/settings/organization",
+   "github": null,
+   "measure": {
+    "gitea": [
+     {
+      "name": "subhead",
+      "selector": ".flex-container-main .ui.top.attached.header"
+     },
+     {
+      "name": "nav-col",
+      "selector": ".flex-container-nav"
+     },
+     {
+      "name": "main-col",
+      "selector": ".flex-container-main"
+     },
+     {
+      "name": "field-label",
+      "selector": ".flex-container-main .ui.form .field > label"
+     },
+     {
+      "name": "field",
+      "selector": ".flex-container-main .ui.form .field"
+     },
+     {
+      "name": "help",
+      "selector": ".flex-container-main .ui.form .help"
+     },
+     {
+      "name": "input-text",
+      "selector": ".flex-container-main .ui.form input[type=text], .flex-container-main .ui.form input[type=email], .flex-container-main .ui.form input[type=password], .flex-container-main .ui.form input:not([type])"
+     },
+     {
+      "name": "danger-box",
+      "selector": ".flex-container-main .danger.segment"
+     },
+     {
+      "name": "danger-row",
+      "selector": ".flex-container-main .danger.segment .flex-divided-list > .item"
+     },
+     {
+      "name": "danger-title",
+      "selector": ".flex-container-main .danger.segment .item-title"
+     },
+     {
+      "name": "danger-body",
+      "selector": ".flex-container-main .danger.segment .item-body"
+     },
+     {
+      "name": "danger-btn",
+      "selector": ".flex-container-main .danger.segment .ui.red.button"
+     },
+     {
+      "name": "box-table-seg",
+      "selector": ".flex-container-main .ui.attached.table.segment"
+     },
+     {
+      "name": "table-td",
+      "selector": ".flex-container-main .ui.table td"
+     },
+     {
+      "name": "table-th",
+      "selector": ".flex-container-main .ui.table th"
+     },
+     {
+      "name": "dl-dt",
+      "selector": ".flex-container-main dl.admin-dl-horizontal > dt"
+     },
+     {
+      "name": "dl-dd",
+      "selector": ".flex-container-main dl.admin-dl-horizontal > dd"
+     },
+     {
+      "name": "primary-btn",
+      "selector": ".flex-container-main .ui.primary.button"
+     },
+     {
+      "name": "red-btn",
+      "selector": ".flex-container-main .ui.red.button"
+     },
+     {
+      "name": "nav-item",
+      "selector": ".flex-container-nav .item"
+     },
+     {
+      "name": "nav-header",
+      "selector": ".flex-container-nav .header, .flex-container-nav details > summary"
+     }
+    ]
+   }
+  },
+  {
+   "id": "repo-settings-deploykeys",
+   "gitea": "/octo-org/grex/settings/keys",
+   "github": null,
+   "measure": {
+    "gitea": [
+     {
+      "name": "subhead",
+      "selector": ".flex-container-main .ui.top.attached.header"
+     },
+     {
+      "name": "nav-col",
+      "selector": ".flex-container-nav"
+     },
+     {
+      "name": "main-col",
+      "selector": ".flex-container-main"
+     },
+     {
+      "name": "field-label",
+      "selector": ".flex-container-main .ui.form .field > label"
+     },
+     {
+      "name": "field",
+      "selector": ".flex-container-main .ui.form .field"
+     },
+     {
+      "name": "help",
+      "selector": ".flex-container-main .ui.form .help"
+     },
+     {
+      "name": "input-text",
+      "selector": ".flex-container-main .ui.form input[type=text], .flex-container-main .ui.form input[type=email], .flex-container-main .ui.form input[type=password], .flex-container-main .ui.form input:not([type])"
+     },
+     {
+      "name": "danger-box",
+      "selector": ".flex-container-main .danger.segment"
+     },
+     {
+      "name": "danger-row",
+      "selector": ".flex-container-main .danger.segment .flex-divided-list > .item"
+     },
+     {
+      "name": "danger-title",
+      "selector": ".flex-container-main .danger.segment .item-title"
+     },
+     {
+      "name": "danger-body",
+      "selector": ".flex-container-main .danger.segment .item-body"
+     },
+     {
+      "name": "danger-btn",
+      "selector": ".flex-container-main .danger.segment .ui.red.button"
+     },
+     {
+      "name": "box-table-seg",
+      "selector": ".flex-container-main .ui.attached.table.segment"
+     },
+     {
+      "name": "table-td",
+      "selector": ".flex-container-main .ui.table td"
+     },
+     {
+      "name": "table-th",
+      "selector": ".flex-container-main .ui.table th"
+     },
+     {
+      "name": "dl-dt",
+      "selector": ".flex-container-main dl.admin-dl-horizontal > dt"
+     },
+     {
+      "name": "dl-dd",
+      "selector": ".flex-container-main dl.admin-dl-horizontal > dd"
+     },
+     {
+      "name": "primary-btn",
+      "selector": ".flex-container-main .ui.primary.button"
+     },
+     {
+      "name": "red-btn",
+      "selector": ".flex-container-main .ui.red.button"
+     },
+     {
+      "name": "nav-item",
+      "selector": ".flex-container-nav .item"
+     },
+     {
+      "name": "nav-header",
+      "selector": ".flex-container-nav .header, .flex-container-nav details > summary"
+     }
+    ]
+   }
+  },
+  {
+   "id": "admin-dashboard-config-settings",
+   "gitea": "/-/admin/config/settings",
+   "github": null,
+   "measure": {
+    "gitea": [
+     {
+      "name": "subhead",
+      "selector": ".flex-container-main .ui.top.attached.header"
+     },
+     {
+      "name": "nav-col",
+      "selector": ".flex-container-nav"
+     },
+     {
+      "name": "main-col",
+      "selector": ".flex-container-main"
+     },
+     {
+      "name": "field-label",
+      "selector": ".flex-container-main .ui.form .field > label"
+     },
+     {
+      "name": "field",
+      "selector": ".flex-container-main .ui.form .field"
+     },
+     {
+      "name": "help",
+      "selector": ".flex-container-main .ui.form .help"
+     },
+     {
+      "name": "input-text",
+      "selector": ".flex-container-main .ui.form input[type=text], .flex-container-main .ui.form input[type=email], .flex-container-main .ui.form input[type=password], .flex-container-main .ui.form input:not([type])"
+     },
+     {
+      "name": "danger-box",
+      "selector": ".flex-container-main .danger.segment"
+     },
+     {
+      "name": "danger-row",
+      "selector": ".flex-container-main .danger.segment .flex-divided-list > .item"
+     },
+     {
+      "name": "danger-title",
+      "selector": ".flex-container-main .danger.segment .item-title"
+     },
+     {
+      "name": "danger-body",
+      "selector": ".flex-container-main .danger.segment .item-body"
+     },
+     {
+      "name": "danger-btn",
+      "selector": ".flex-container-main .danger.segment .ui.red.button"
+     },
+     {
+      "name": "box-table-seg",
+      "selector": ".flex-container-main .ui.attached.table.segment"
+     },
+     {
+      "name": "table-td",
+      "selector": ".flex-container-main .ui.table td"
+     },
+     {
+      "name": "table-th",
+      "selector": ".flex-container-main .ui.table th"
+     },
+     {
+      "name": "dl-dt",
+      "selector": ".flex-container-main dl.admin-dl-horizontal > dt"
+     },
+     {
+      "name": "dl-dd",
+      "selector": ".flex-container-main dl.admin-dl-horizontal > dd"
+     },
+     {
+      "name": "primary-btn",
+      "selector": ".flex-container-main .ui.primary.button"
+     },
+     {
+      "name": "red-btn",
+      "selector": ".flex-container-main .ui.red.button"
+     },
+     {
+      "name": "nav-item",
+      "selector": ".flex-container-nav .item"
+     },
+     {
+      "name": "nav-header",
+      "selector": ".flex-container-nav .header, .flex-container-nav details > summary"
+     }
+    ]
+   }
+  },
+  {
+   "id": "action-job",
+   "gitea": "/octo-org/theme-playground/actions/runs/19/jobs/89",
+   "github": null,
+   "states": [
+    {
+     "name": "step-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".job-step-section:nth-child(3) .job-step-summary"
+     },
+     "clip": ".action-view-right",
+     "pad": 0,
+     "wait": 1500
+    },
+    {
+     "name": "step-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".job-step-section:nth-child(2) .job-step-summary"
+     },
+     "clip": ".action-view-right",
+     "pad": 0,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "gear-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".job-info-header-right .ui.dropdown"
+     },
+     "clip": ".action-view-right",
+     "pad": 0,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
+  },
+  {
+   "id": "action-job-ok",
+   "gitea": "/octo-org/theme-playground/actions/runs/19/jobs/84",
+   "github": null,
+   "states": [
+    {
+     "name": "step-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".job-step-section:nth-child(2) .job-step-summary"
+     },
+     "clip": ".action-view-right",
+     "pad": 0,
+     "wait": 1500
+    }
+   ]
+  },
+  {
+   "id": "packages-repo",
+   "gitea": "/octo-org/theme-playground/packages",
+   "github": null
+  },
+  {
+   "id": "package-versions",
+   "gitea": "/octo-org/-/packages/npm/%40octo-org%2Ftheme-tokens/versions",
+   "github": null
+  },
+  {
+   "id": "packages-generic",
+   "gitea": "/octo-org/-/packages/generic/theme-demo",
+   "github": null
+  },
+  {
+   "id": "org-projects",
+   "gitea": "/octo-org/-/projects",
+   "github": null
+  },
+  {
+   "id": "actions-empty-filter",
+   "gitea": "/octo-org/theme-playground/actions?status=6",
+   "github": null
+  },
+  {
+   "id": "repo-create",
+   "gitea": "/repo/create",
+   "github": null,
+   "auth": true,
+   "states": [
+    {
+     "name": "submit-empty",
+     "action": "submitEmpty",
+     "selectors": {
+      "gitea": "form.ui.form button.ui.primary.button"
+     },
+     "pad": 8
+    },
+    {
+     "name": "name-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": "#repo_name"
+     },
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
+  },
+  {
+   "id": "issue-new-playground",
+   "gitea": "/octo-org/theme-playground/issues/new",
+   "github": null,
+   "auth": true,
+   "states": [
+    {
+     "name": "title-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": "#new-issue input[name=title]"
+     },
+     "clip": "#new-issue",
+     "pad": 8
+    },
+    {
+     "name": "preview-tab",
+     "action": "click",
+     "selectors": {
+      "gitea": "#new-issue .combo-markdown-editor > .ui.tabular.menu > .item:nth-child(2)"
+     },
+     "clip": "#new-issue",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pr-compare-new-playground",
+   "gitea": "/octo-org/theme-playground/compare/main...feature/kbd-hints",
+   "github": null,
+   "auth": true,
+   "states": []
+  },
+  {
+   "id": "issue-playground-1",
+   "gitea": "/octo-org/theme-playground/issues/1",
+   "github": null,
+   "auth": true,
+   "states": []
+  },
+  {
+   "id": "pr-compare-form-playground",
+   "gitea": "/octo-org/theme-playground/compare/main...experiment/alt-renderer?expand=1",
+   "github": null,
+   "auth": true,
+   "states": [
+    {
+     "name": "title-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": "#new-issue input[name=title]"
+     },
+     "clip": "#new-issue",
+     "pad": 8
+    }
+   ]
+  },
+  {
+   "id": "milestone-issues",
+   "gitea": "/octo-org/grex/milestone/8",
+   "github": null
+  },
+  {
+   "id": "forgot-password",
+   "gitea": "/user/forgot_password",
+   "github": null,
+   "auth": false,
+   "states": [
+    {
+     "name": "validation-error",
+     "action": "submitEmpty",
+     "selectors": {
+      "gitea": "form[action*=\"/user/forgot_password\"]"
+     },
+     "clip": ".page-content"
+    }
+   ]
+  },
+  {
+   "id": "openid-signin",
+   "gitea": "/user/login/openid",
+   "github": null,
+   "auth": false
+  },
+  {
+   "id": "reset-password-badcode",
+   "gitea": "/user/recover_account?code=invalid-theme-check",
+   "github": null,
+   "auth": false
+  },
+  {
+   "id": "not-found-anon",
+   "gitea": "/this-page-does-not-exist-theme-seed",
+   "github": null,
+   "auth": false,
+   "expectStatus": 404
   }
  ]
 }

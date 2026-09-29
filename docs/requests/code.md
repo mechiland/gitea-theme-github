@@ -81,3 +81,28 @@ In `.markup pre.code-block > code.chroma` (e.g. octo-org/theme-playground README
 past the viewport is `a.m-commit-count.muted` (x 393–421), the latest-commit History link un-hidden by
 src/code/file-list.css. gitea-auto has no overflow on this page (shots/baseline-gitea-auto-w2). Also reported by the
 navigation critic (w2 r2). Needs a mobile rule (hide the label / let the header wrap / `min-width: 0` on the message).
+
+## From pages/repo (wave 3, round 3): C-5 still open — directory-tree overflows 31px at 390
+The pages/repo critic (docs/critiques/pages/repo-w3-r2.md #5) measured it again on route directory-tree (light + dark
+390): document 421px wide, `A.m-commit-count` (history icon) at x 393–421, outside the file Box, triggered by the long
+latest-commit author string ("Joel Natividad and Peter M. Stahl"). The rules are src/code/file-list.css:254-259 (code
+folder), so pages/repo cannot fix it. Proposed (inside the existing `max-width: 767.98px` block):
+```css
+#repo-files-table .repo-file-last-commit .latest-commit { min-width: 0; flex: 1 1 0; }
+#repo-files-table .repo-file-last-commit .latest-commit .author-wrapper { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#repo-files-table .repo-file-last-commit .m-commit-count { flex: none; }
+```
+(or let the header row wrap). Evidence: shots/critic-pages/repo-r2/directory-tree/light-390.png, probe
+shots/critic-pages/repo-overflow.mjs.
+
+# Integrator (end of wave 3, 2026-09-30)
+- **C-5** (directory-tree 390 overflow, 31px, regression vs built-in) is still OPEN for code; the proposed diff above (pages/repo, w3 r3) is ready. Measured again in shots/integrate-w3 (see docs/STATUS.json audit.horizontalOverflow390).
+- **PERF-1 (new, budget ARCHITECTURE §10): blame DCL +150 ms vs built-in.** Route blame (/octo-org/grex/blame/…):
+  gitea-auto 278–329 ms, github-auto 446–483 ms on all 4 variants in 3 runs (shots/integrate-w3,
+  shots/integrate-w3-budget/run-{1,2}). Folder bisect (build --exclude, 8 loads each,
+  shots/integrate-w3-budget/bisect/*): all folders 476 ms median; without `code` 366; without pages/* 424; without
+  controls/overlays/navigation 479; without data-display/markdown/foundation 468. So `code` costs ≈ 110 ms here.
+  Prime suspect: `src/code/blame.css:89-90` `.file-view tr:has(+ tr.top-line-blame) > td` and
+  `tr:has(> .lines-commit):last-child` — relative `:has(+ …)` on every row of a thousands-row table forces sibling
+  invalidation during parse. Proposed: put the separator on the following row instead
+  (`.file-view tr.top-line-blame > td { border-top: … }`), which needs no `:has`, and re-measure.

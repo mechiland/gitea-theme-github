@@ -1,0 +1,110 @@
+/*
+ * pages/people — declarations that must beat Gitea `!important` rules (Fomantic grid widths, Tailwind utilities,
+ * navbar.css .secondary-nav background, base.css overflow-menu border) or inline styles (heatmap cell fills).
+ * No display / visibility here (lint rule).
+ */
+
+/* profile / org home / teams: CSS grids instead of the Fomantic column widths (grid.css: width: 25%/75%/50% !important) */
+.user.profile > .ui.container > .ui.grid > .column,
+.organization.profile > .ui.container > .ui.grid > .column,
+.organization.teams .ui.two.column.grid > .column {
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* org menu: tw-mb-4 on the overflow-menu would leave a 16px strip of band under the tabs */
+.organization > .ui.container > overflow-menu.tw-mb-4 {
+  margin-bottom: 0 !important;
+}
+
+/* org name: tw-text-2xl (21px) → 24px (github.com h1.h2; no Primitives type token is 24px); 20px on sub pages */
+.organization > .flex-container:first-child .tw-text-2xl {
+  font-size: var(--base-size-24) !important;
+}
+
+.organization:not(.profile) > .flex-container:first-child .tw-text-2xl {
+  font-size: var(--text-title-size-medium) !important;
+}
+
+@media (min-width: 768px) {
+  /* explore sidebar: menu.css .ui.attached.menu { width: calc(100% + 2px) !important } → the menu box reaches 40px
+     under the results column (explore.css); base.css overflow-menu border, navbar.css .secondary-nav background */
+  .explore > overflow-menu.secondary-nav:first-child {
+    width: calc(100% + var(--base-size-40)) !important;
+    border-bottom: 0 !important;
+    background: none !important;
+  }
+
+  /* explore/navbar.tmpl: .overflow-menu-items.tw-justify-center */
+  .explore > overflow-menu > .overflow-menu-items {
+    justify-content: flex-start !important;
+  }
+
+  .user.notification .small-menu-items {
+    min-height: 0 !important;
+  }
+
+  .user.notification .small-menu-items > .item.active {
+    background: var(--control-transparent-bgColor-selected) !important;
+  }
+}
+
+/* notifications: tw-text-16 title, tw-text-[0.95em] repo line, tw-self-start tw-mt-[2px] icon */
+#notification_table .notifications-link > .tw-text-16 {
+  padding: 0 !important;
+  font-size: var(--text-body-size-medium) !important;
+}
+
+#notification_table .notifications-link > .flex-text-block {
+  font-size: var(--text-body-size-small) !important;
+}
+
+#notification_table > .notifications-item > .tw-self-start {
+  align-self: center !important;
+  margin-top: 0 !important;
+}
+
+/* dashboard repo list (DashboardRepoList.vue scoped rules with !important) */
+#dashboard-repo-list .repos-filter .item {
+  padding: 0 var(--base-size-6) !important;
+}
+
+#dashboard-repo-list .repo-owner-name-list > li {
+  padding-top: var(--base-size-4) !important;
+  padding-bottom: var(--base-size-4) !important;
+}
+
+/* dashboard feed: the event octicon carries tw-mr-1 */
+#activity-feed > .item > .item-trailing > .svg {
+  margin-right: 0 !important;
+}
+
+/* ---------- contribution graph: inline style="fill: var(--color-…)" → Primer contribution levels */
+#user-heatmap rect[style*="--color-secondary-alpha-60"] {
+  fill: var(--contribution-default-bgColor-0) !important;
+}
+
+#user-heatmap rect[style*="--color-primary-light-4"] {
+  fill: var(--contribution-default-bgColor-1) !important;
+  stroke: var(--contribution-default-borderColor-1) !important;
+}
+
+#user-heatmap rect[style*="--color-primary-light-2"] {
+  fill: var(--contribution-default-bgColor-2) !important;
+  stroke: var(--contribution-default-borderColor-2) !important;
+}
+
+#user-heatmap rect[style*="--color-primary)"] {
+  fill: var(--contribution-default-bgColor-3) !important;
+  stroke: var(--contribution-default-borderColor-3) !important;
+}
+
+#user-heatmap rect:is([style*="--color-primary-dark-2"], [style*="--color-primary-dark-4"]) {
+  fill: var(--contribution-default-bgColor-4) !important;
+  stroke: var(--contribution-default-borderColor-4) !important;
+}
+
+#user-heatmap rect.heatmap-day:hover {
+  stroke: var(--fgColor-default) !important;
+}

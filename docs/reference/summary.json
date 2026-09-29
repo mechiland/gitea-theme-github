@@ -1,7 +1,7 @@
 {
  "target": "github",
  "theme": null,
- "generated": "2026-09-29T19:09:40.955Z",
+ "generated": "2026-09-29T21:46:58.714Z",
  "outDir": "docs/reference",
  "giteaBase": null,
  "giteaVersion": null,
@@ -17,555 +17,257 @@
  "appearance": null,
  "paletteVersion": "11.10.0",
  "totals": {
-  "pages": 20,
-  "pagesWithProblems": 0,
-  "consoleErrors": 8,
-  "failedRequests": 8,
-  "maxCLS": 0.1344,
+  "pages": 8,
+  "pagesWithProblems": 2,
+  "consoleErrors": 0,
+  "failedRequests": 0,
+  "maxCLS": 0.0015,
   "nonOcticonIcons": 0,
   "maskedIcons": 0,
   "pagesWithUnlayeredGiteaCss": 0
  },
  "pages": [
   {
-   "route": "critic-icons-w2r1-commit",
+   "route": "critic-sa-r4-releases-blankslate",
    "scheme": "light",
    "viewport": 1440,
-   "url": "https://github.com/pemistahl/grex/commit/99cc347707375e00514f938b76d885a201dfc110",
-   "png": "critic-icons-w2r1-commit/light-1440.png",
-   "json": "critic-icons-w2r1-commit/light-1440.json",
+   "url": "https://github.com/octocat/Hello-World/releases",
+   "png": "critic-sa-r4-releases-blankslate/light-1440.png",
+   "json": "critic-sa-r4-releases-blankslate/light-1440.json",
    "mainStatus": 200,
    "problems": [],
    "consoleErrors": 0,
    "consoleWarnings": 0,
    "failedRequests": 0,
-   "unresolvedVars": 63,
+   "unresolvedVars": 45,
    "unresolvedVarsLive": 1,
    "offPaletteDistinct": 7,
-   "offPaletteTotal": 28,
+   "offPaletteTotal": 27,
    "nonOcticonIcons": 0,
    "cls": 0,
    "maskedIcons": 0,
    "unlayeredGiteaCss": 0,
-   "cssBytes": 346452,
+   "cssBytes": 261265,
    "htmlTheme": "auto",
    "prefersDark": false,
-   "bodyBg": "rgb(255, 255, 255)"
+   "bodyBg": "rgb(255, 255, 255)",
+   "states": []
   },
   {
-   "route": "critic-icons-w2r1-commit",
+   "route": "critic-sa-r4-releases-blankslate",
    "scheme": "light",
    "viewport": 390,
-   "url": "https://github.com/pemistahl/grex/commit/99cc347707375e00514f938b76d885a201dfc110",
-   "png": "critic-icons-w2r1-commit/light-390.png",
-   "json": "critic-icons-w2r1-commit/light-390.json",
+   "url": "https://github.com/octocat/Hello-World/releases",
+   "png": "critic-sa-r4-releases-blankslate/light-390.png",
+   "json": "critic-sa-r4-releases-blankslate/light-390.json",
    "mainStatus": 200,
    "problems": [],
    "consoleErrors": 0,
    "consoleWarnings": 0,
    "failedRequests": 0,
-   "unresolvedVars": 63,
+   "unresolvedVars": 45,
    "unresolvedVarsLive": 1,
    "offPaletteDistinct": 4,
-   "offPaletteTotal": 13,
+   "offPaletteTotal": 12,
    "nonOcticonIcons": 0,
    "cls": 0,
    "maskedIcons": 0,
    "unlayeredGiteaCss": 0,
-   "cssBytes": 346985,
+   "cssBytes": 261021,
    "htmlTheme": "auto",
    "prefersDark": false,
-   "bodyBg": "rgb(255, 255, 255)"
+   "bodyBg": "rgb(255, 255, 255)",
+   "states": []
   },
   {
-   "route": "critic-icons-w2r1-commit",
+   "route": "critic-sa-r4-releases-blankslate",
    "scheme": "dark",
    "viewport": 1440,
-   "url": "https://github.com/pemistahl/grex/commit/99cc347707375e00514f938b76d885a201dfc110",
-   "png": "critic-icons-w2r1-commit/dark-1440.png",
-   "json": "critic-icons-w2r1-commit/dark-1440.json",
+   "url": "https://github.com/octocat/Hello-World/releases",
+   "png": "critic-sa-r4-releases-blankslate/dark-1440.png",
+   "json": "critic-sa-r4-releases-blankslate/dark-1440.json",
    "mainStatus": 200,
    "problems": [],
    "consoleErrors": 0,
    "consoleWarnings": 0,
    "failedRequests": 0,
-   "unresolvedVars": 63,
+   "unresolvedVars": 45,
    "unresolvedVarsLive": 1,
    "offPaletteDistinct": 5,
-   "offPaletteTotal": 24,
+   "offPaletteTotal": 23,
    "nonOcticonIcons": 0,
    "cls": 0,
    "maskedIcons": 0,
    "unlayeredGiteaCss": 0,
-   "cssBytes": 347391,
+   "cssBytes": 261444,
    "htmlTheme": "auto",
    "prefersDark": true,
-   "bodyBg": "rgb(13, 17, 23)"
+   "bodyBg": "rgb(13, 17, 23)",
+   "states": []
   },
   {
-   "route": "critic-icons-w2r1-commit",
+   "route": "critic-sa-r4-releases-blankslate",
    "scheme": "dark",
    "viewport": 390,
-   "url": "https://github.com/pemistahl/grex/commit/99cc347707375e00514f938b76d885a201dfc110",
-   "png": "critic-icons-w2r1-commit/dark-390.png",
-   "json": "critic-icons-w2r1-commit/dark-390.json",
+   "url": "https://github.com/octocat/Hello-World/releases",
+   "png": "critic-sa-r4-releases-blankslate/dark-390.png",
+   "json": "critic-sa-r4-releases-blankslate/dark-390.json",
    "mainStatus": 200,
    "problems": [],
    "consoleErrors": 0,
    "consoleWarnings": 0,
    "failedRequests": 0,
-   "unresolvedVars": 63,
+   "unresolvedVars": 45,
    "unresolvedVarsLive": 1,
    "offPaletteDistinct": 3,
-   "offPaletteTotal": 11,
+   "offPaletteTotal": 10,
    "nonOcticonIcons": 0,
    "cls": 0,
    "maskedIcons": 0,
    "unlayeredGiteaCss": 0,
-   "cssBytes": 347261,
+   "cssBytes": 261514,
    "htmlTheme": "auto",
    "prefersDark": true,
-   "bodyBg": "rgb(13, 17, 23)"
+   "bodyBg": "rgb(13, 17, 23)",
+   "states": []
   },
   {
-   "route": "critic-icons-w2r1-pulls",
+   "route": "critic-sa-r4-labels",
    "scheme": "light",
    "viewport": 1440,
-   "url": "https://github.com/pemistahl/grex/pulls?q=is%3Apr",
-   "png": "critic-icons-w2r1-pulls/light-1440.png",
-   "json": "critic-icons-w2r1-pulls/light-1440.json",
+   "url": "https://github.com/octocat/Hello-World/labels",
+   "png": "critic-sa-r4-labels/light-1440.png",
+   "json": "critic-sa-r4-labels/light-1440.json",
    "mainStatus": 200,
-   "problems": [],
+   "problems": [
+    "state btn-focus failed: locator.waitFor: Timeout 8000ms exceeded.",
+    "state btn-hover failed: locator.waitFor: Timeout 8000ms exceeded."
+   ],
    "consoleErrors": 0,
    "consoleWarnings": 0,
    "failedRequests": 0,
-   "unresolvedVars": 58,
+   "unresolvedVars": 73,
    "unresolvedVarsLive": 1,
    "offPaletteDistinct": 8,
-   "offPaletteTotal": 69,
+   "offPaletteTotal": 29,
    "nonOcticonIcons": 0,
-   "cls": 0.0014,
+   "cls": 0,
    "maskedIcons": 0,
    "unlayeredGiteaCss": 0,
-   "cssBytes": 333301,
+   "cssBytes": 329824,
    "htmlTheme": "auto",
    "prefersDark": false,
-   "bodyBg": "rgb(255, 255, 255)"
+   "bodyBg": "rgb(255, 255, 255)",
+   "states": [
+    {
+     "name": "btn-focus",
+     "ok": false,
+     "error": "locator.waitFor: Timeout 8000ms exceeded."
+    },
+    {
+     "name": "btn-hover",
+     "ok": false,
+     "error": "locator.waitFor: Timeout 8000ms exceeded."
+    }
+   ]
   },
   {
-   "route": "critic-icons-w2r1-pulls",
+   "route": "critic-sa-r4-labels",
    "scheme": "light",
    "viewport": 390,
-   "url": "https://github.com/pemistahl/grex/pulls?q=is%3Apr",
-   "png": "critic-icons-w2r1-pulls/light-390.png",
-   "json": "critic-icons-w2r1-pulls/light-390.json",
+   "url": "https://github.com/octocat/Hello-World/labels",
+   "png": "critic-sa-r4-labels/light-390.png",
+   "json": "critic-sa-r4-labels/light-390.json",
    "mainStatus": 200,
    "problems": [],
    "consoleErrors": 0,
    "consoleWarnings": 0,
    "failedRequests": 0,
-   "unresolvedVars": 58,
+   "unresolvedVars": 73,
    "unresolvedVarsLive": 1,
    "offPaletteDistinct": 5,
-   "offPaletteTotal": 54,
+   "offPaletteTotal": 14,
    "nonOcticonIcons": 0,
-   "cls": 0.0191,
+   "cls": 0.0015,
    "maskedIcons": 0,
    "unlayeredGiteaCss": 0,
-   "cssBytes": 333499,
+   "cssBytes": 330089,
    "htmlTheme": "auto",
    "prefersDark": false,
-   "bodyBg": "rgb(255, 255, 255)"
+   "bodyBg": "rgb(255, 255, 255)",
+   "states": []
   },
   {
-   "route": "critic-icons-w2r1-pulls",
+   "route": "critic-sa-r4-labels",
    "scheme": "dark",
    "viewport": 1440,
-   "url": "https://github.com/pemistahl/grex/pulls?q=is%3Apr",
-   "png": "critic-icons-w2r1-pulls/dark-1440.png",
-   "json": "critic-icons-w2r1-pulls/dark-1440.json",
+   "url": "https://github.com/octocat/Hello-World/labels",
+   "png": "critic-sa-r4-labels/dark-1440.png",
+   "json": "critic-sa-r4-labels/dark-1440.json",
+   "mainStatus": 200,
+   "problems": [
+    "state btn-focus failed: locator.waitFor: Timeout 8000ms exceeded.",
+    "state btn-hover failed: locator.waitFor: Timeout 8000ms exceeded."
+   ],
+   "consoleErrors": 0,
+   "consoleWarnings": 0,
+   "failedRequests": 0,
+   "unresolvedVars": 73,
+   "unresolvedVarsLive": 1,
+   "offPaletteDistinct": 8,
+   "offPaletteTotal": 29,
+   "nonOcticonIcons": 0,
+   "cls": 0,
+   "maskedIcons": 0,
+   "unlayeredGiteaCss": 0,
+   "cssBytes": 337634,
+   "htmlTheme": "auto",
+   "prefersDark": true,
+   "bodyBg": "rgb(13, 17, 23)",
+   "states": [
+    {
+     "name": "btn-focus",
+     "ok": false,
+     "error": "locator.waitFor: Timeout 8000ms exceeded."
+    },
+    {
+     "name": "btn-hover",
+     "ok": false,
+     "error": "locator.waitFor: Timeout 8000ms exceeded."
+    }
+   ]
+  },
+  {
+   "route": "critic-sa-r4-labels",
+   "scheme": "dark",
+   "viewport": 390,
+   "url": "https://github.com/octocat/Hello-World/labels",
+   "png": "critic-sa-r4-labels/dark-390.png",
+   "json": "critic-sa-r4-labels/dark-390.json",
    "mainStatus": 200,
    "problems": [],
    "consoleErrors": 0,
    "consoleWarnings": 0,
    "failedRequests": 0,
-   "unresolvedVars": 58,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 11,
-   "offPaletteTotal": 275,
-   "nonOcticonIcons": 0,
-   "cls": 0.0014,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 333750,
-   "htmlTheme": "auto",
-   "prefersDark": true,
-   "bodyBg": "rgb(13, 17, 23)"
-  },
-  {
-   "route": "critic-icons-w2r1-pulls",
-   "scheme": "dark",
-   "viewport": 390,
-   "url": "https://github.com/pemistahl/grex/pulls?q=is%3Apr",
-   "png": "critic-icons-w2r1-pulls/dark-390.png",
-   "json": "critic-icons-w2r1-pulls/dark-390.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 0,
-   "consoleWarnings": 0,
-   "failedRequests": 0,
-   "unresolvedVars": 58,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 9,
-   "offPaletteTotal": 262,
-   "nonOcticonIcons": 0,
-   "cls": 0.0191,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 333569,
-   "htmlTheme": "auto",
-   "prefersDark": true,
-   "bodyBg": "rgb(13, 17, 23)"
-  },
-  {
-   "route": "critic-icons-w2r1-issue",
-   "scheme": "light",
-   "viewport": 1440,
-   "url": "https://github.com/pemistahl/grex/issues/35",
-   "png": "critic-icons-w2r1-issue/light-1440.png",
-   "json": "critic-icons-w2r1-issue/light-1440.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 2,
-   "consoleWarnings": 0,
-   "failedRequests": 2,
-   "unresolvedVars": 77,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 8,
-   "offPaletteTotal": 31,
-   "nonOcticonIcons": 0,
-   "cls": 0,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 334348,
-   "htmlTheme": "auto",
-   "prefersDark": false,
-   "bodyBg": "rgb(255, 255, 255)"
-  },
-  {
-   "route": "critic-icons-w2r1-issue",
-   "scheme": "light",
-   "viewport": 390,
-   "url": "https://github.com/pemistahl/grex/issues/35",
-   "png": "critic-icons-w2r1-issue/light-390.png",
-   "json": "critic-icons-w2r1-issue/light-390.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 2,
-   "consoleWarnings": 0,
-   "failedRequests": 2,
-   "unresolvedVars": 77,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 5,
-   "offPaletteTotal": 18,
-   "nonOcticonIcons": 0,
-   "cls": 0,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 334613,
-   "htmlTheme": "auto",
-   "prefersDark": false,
-   "bodyBg": "rgb(255, 255, 255)"
-  },
-  {
-   "route": "critic-icons-w2r1-issue",
-   "scheme": "dark",
-   "viewport": 1440,
-   "url": "https://github.com/pemistahl/grex/issues/35",
-   "png": "critic-icons-w2r1-issue/dark-1440.png",
-   "json": "critic-icons-w2r1-issue/dark-1440.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 2,
-   "consoleWarnings": 0,
-   "failedRequests": 2,
-   "unresolvedVars": 77,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 8,
-   "offPaletteTotal": 35,
-   "nonOcticonIcons": 0,
-   "cls": 0.0008,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 334076,
-   "htmlTheme": "auto",
-   "prefersDark": true,
-   "bodyBg": "rgb(13, 17, 23)"
-  },
-  {
-   "route": "critic-icons-w2r1-issue",
-   "scheme": "dark",
-   "viewport": 390,
-   "url": "https://github.com/pemistahl/grex/issues/35",
-   "png": "critic-icons-w2r1-issue/dark-390.png",
-   "json": "critic-icons-w2r1-issue/dark-390.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 2,
-   "consoleWarnings": 0,
-   "failedRequests": 2,
-   "unresolvedVars": 77,
+   "unresolvedVars": 73,
    "unresolvedVarsLive": 1,
    "offPaletteDistinct": 6,
-   "offPaletteTotal": 28,
+   "offPaletteTotal": 16,
    "nonOcticonIcons": 0,
-   "cls": 0,
+   "cls": 0.0015,
    "maskedIcons": 0,
    "unlayeredGiteaCss": 0,
-   "cssBytes": 334177,
+   "cssBytes": 337308,
    "htmlTheme": "auto",
    "prefersDark": true,
-   "bodyBg": "rgb(13, 17, 23)"
-  },
-  {
-   "route": "critic-icons-w2r1-commits",
-   "scheme": "light",
-   "viewport": 1440,
-   "url": "https://github.com/pemistahl/grex/commits/main",
-   "png": "critic-icons-w2r1-commits/light-1440.png",
-   "json": "critic-icons-w2r1-commits/light-1440.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 0,
-   "consoleWarnings": 0,
-   "failedRequests": 0,
-   "unresolvedVars": 60,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 7,
-   "offPaletteTotal": 27,
-   "nonOcticonIcons": 0,
-   "cls": 0,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 347529,
-   "htmlTheme": "auto",
-   "prefersDark": false,
-   "bodyBg": "rgb(255, 255, 255)"
-  },
-  {
-   "route": "critic-icons-w2r1-commits",
-   "scheme": "light",
-   "viewport": 390,
-   "url": "https://github.com/pemistahl/grex/commits/main",
-   "png": "critic-icons-w2r1-commits/light-390.png",
-   "json": "critic-icons-w2r1-commits/light-390.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 0,
-   "consoleWarnings": 0,
-   "failedRequests": 0,
-   "unresolvedVars": 60,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 4,
-   "offPaletteTotal": 12,
-   "nonOcticonIcons": 0,
-   "cls": 0.1344,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 347550,
-   "htmlTheme": "auto",
-   "prefersDark": false,
-   "bodyBg": "rgb(255, 255, 255)"
-  },
-  {
-   "route": "critic-icons-w2r1-commits",
-   "scheme": "dark",
-   "viewport": 1440,
-   "url": "https://github.com/pemistahl/grex/commits/main",
-   "png": "critic-icons-w2r1-commits/dark-1440.png",
-   "json": "critic-icons-w2r1-commits/dark-1440.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 0,
-   "consoleWarnings": 0,
-   "failedRequests": 0,
-   "unresolvedVars": 60,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 5,
-   "offPaletteTotal": 23,
-   "nonOcticonIcons": 0,
-   "cls": 0,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 346942,
-   "htmlTheme": "auto",
-   "prefersDark": true,
-   "bodyBg": "rgb(13, 17, 23)"
-  },
-  {
-   "route": "critic-icons-w2r1-commits",
-   "scheme": "dark",
-   "viewport": 390,
-   "url": "https://github.com/pemistahl/grex/commits/main",
-   "png": "critic-icons-w2r1-commits/dark-390.png",
-   "json": "critic-icons-w2r1-commits/dark-390.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 0,
-   "consoleWarnings": 0,
-   "failedRequests": 0,
-   "unresolvedVars": 60,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 3,
-   "offPaletteTotal": 10,
-   "nonOcticonIcons": 0,
-   "cls": 0.1344,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 347041,
-   "htmlTheme": "auto",
-   "prefersDark": true,
-   "bodyBg": "rgb(13, 17, 23)"
-  },
-  {
-   "route": "critic-icons-w2r1-actions-running",
-   "scheme": "light",
-   "viewport": 1440,
-   "url": "https://github.com/microsoft/vscode/actions?query=is%3Ain_progress",
-   "png": "critic-icons-w2r1-actions-running/light-1440.png",
-   "json": "critic-icons-w2r1-actions-running/light-1440.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 0,
-   "consoleWarnings": 0,
-   "failedRequests": 0,
-   "unresolvedVars": 46,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 7,
-   "offPaletteTotal": 27,
-   "nonOcticonIcons": 0,
-   "cls": 0.0007,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 337248,
-   "htmlTheme": "auto",
-   "prefersDark": false,
-   "bodyBg": "rgb(255, 255, 255)"
-  },
-  {
-   "route": "critic-icons-w2r1-actions-running",
-   "scheme": "light",
-   "viewport": 390,
-   "url": "https://github.com/microsoft/vscode/actions?query=is%3Ain_progress",
-   "png": "critic-icons-w2r1-actions-running/light-390.png",
-   "json": "critic-icons-w2r1-actions-running/light-390.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 0,
-   "consoleWarnings": 0,
-   "failedRequests": 0,
-   "unresolvedVars": 46,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 4,
-   "offPaletteTotal": 12,
-   "nonOcticonIcons": 0,
-   "cls": 0,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 337121,
-   "htmlTheme": "auto",
-   "prefersDark": false,
-   "bodyBg": "rgb(255, 255, 255)"
-  },
-  {
-   "route": "critic-icons-w2r1-actions-running",
-   "scheme": "dark",
-   "viewport": 1440,
-   "url": "https://github.com/microsoft/vscode/actions?query=is%3Ain_progress",
-   "png": "critic-icons-w2r1-actions-running/dark-1440.png",
-   "json": "critic-icons-w2r1-actions-running/dark-1440.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 0,
-   "consoleWarnings": 0,
-   "failedRequests": 0,
-   "unresolvedVars": 46,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 5,
-   "offPaletteTotal": 23,
-   "nonOcticonIcons": 0,
-   "cls": 0.0007,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 337322,
-   "htmlTheme": "auto",
-   "prefersDark": true,
-   "bodyBg": "rgb(13, 17, 23)"
-  },
-  {
-   "route": "critic-icons-w2r1-actions-running",
-   "scheme": "dark",
-   "viewport": 390,
-   "url": "https://github.com/microsoft/vscode/actions?query=is%3Ain_progress",
-   "png": "critic-icons-w2r1-actions-running/dark-390.png",
-   "json": "critic-icons-w2r1-actions-running/dark-390.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 0,
-   "consoleWarnings": 0,
-   "failedRequests": 0,
-   "unresolvedVars": 46,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 3,
-   "offPaletteTotal": 10,
-   "nonOcticonIcons": 0,
-   "cls": 0,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 337427,
-   "htmlTheme": "auto",
-   "prefersDark": true,
-   "bodyBg": "rgb(13, 17, 23)"
+   "bodyBg": "rgb(13, 17, 23)",
+   "states": []
   }
  ],
  "offPalette": [
   {
-   "color": "rgba(95,168,253,0.3)",
-   "count": 168,
-   "props": {
-    "border-color": 84
-   },
-   "samples": [
-    "div.Title-module__container__ZzhV_ > span.Title-module__trailingBadgesContainer__INeSa > button.PullsListItem-module__filterLink__a5ZnW > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
-   ],
-   "key": "dark|rgba(95,168,253,0.3)",
-   "scheme": "dark",
-   "pages": [
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390"
-   ],
-   "pageCount": 2
-  },
-  {
-   "color": "rgba(153,153,153,0.3)",
-   "count": 168,
-   "props": {
-    "border-color": 84
-   },
-   "samples": [
-    "div.Title-module__container__ZzhV_ > span.Title-module__trailingBadgesContainer__INeSa > button.PullsListItem-module__filterLink__a5ZnW > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
-   ],
-   "key": "dark|rgba(153,153,153,0.3)",
-   "scheme": "dark",
-   "pages": [
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390"
-   ],
-   "pageCount": 2
-  },
-  {
    "color": "rgba(38,44,40,1)",
-   "count": 100,
+   "count": 40,
    "props": {
     "border-color": 12
    },
@@ -579,22 +281,16 @@
    "key": "light|rgba(38,44,40,1)",
    "scheme": "light",
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-actions-running/light-1440",
-    "critic-icons-w2r1-actions-running/light-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390"
    ],
-   "pageCount": 10
+   "pageCount": 4
   },
   {
    "color": "rgba(38,44,40,1)",
-   "count": 100,
+   "count": 40,
    "props": {
     "border-color": 12
    },
@@ -608,137 +304,16 @@
    "key": "dark|rgba(38,44,40,1)",
    "scheme": "dark",
    "pages": [
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390",
-    "critic-icons-w2r1-actions-running/dark-1440",
-    "critic-icons-w2r1-actions-running/dark-390"
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
-   "pageCount": 10
-  },
-  {
-   "color": "rgba(0,0,0,1)",
-   "count": 59,
-   "props": {
-    "background-color": 1,
-    "fill": 1
-   },
-   "samples": [
-    "react-partial.loaded > div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out",
-    "div#diff-content-parent > svg.DiffPlaceholder-module__DiffPlaceholderSVG__EwJUb",
-    "div.Title-module__container__ZzhV_ > span.Title-module__trailingBadgesContainer__INeSa > button.PullsListItem-module__filterLink__a5ZnW > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G",
-    "a.labels-module__labelLink__xj4nm.prc-Link-Link-9ZwDx > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3",
-    "a.LabelsList-module__labelLink__puy8d.prc-Link-Link-9ZwDx > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
-   ],
-   "key": "light|rgba(0,0,0,1)",
-   "scheme": "light",
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-actions-running/light-1440",
-    "critic-icons-w2r1-actions-running/light-390"
-   ],
-   "pageCount": 10
-  },
-  {
-   "color": "rgba(3,102,214,1)",
-   "count": 42,
-   "props": {
-    "background-color": 21
-   },
-   "samples": [
-    "div.Title-module__container__ZzhV_ > span.Title-module__trailingBadgesContainer__INeSa > button.PullsListItem-module__filterLink__a5ZnW > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
-   ],
-   "key": "light|rgba(3,102,214,1)",
-   "scheme": "light",
-   "pages": [
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390"
-   ],
-   "pageCount": 2
-  },
-  {
-   "color": "rgba(3,102,214,0.18)",
-   "count": 42,
-   "props": {
-    "background-color": 21
-   },
-   "samples": [
-    "div.Title-module__container__ZzhV_ > span.Title-module__trailingBadgesContainer__INeSa > button.PullsListItem-module__filterLink__a5ZnW > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
-   ],
-   "key": "dark|rgba(3,102,214,0.18)",
-   "scheme": "dark",
-   "pages": [
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390"
-   ],
-   "pageCount": 2
-  },
-  {
-   "color": "rgba(95,168,253,1)",
-   "count": 42,
-   "props": {
-    "color": 21
-   },
-   "samples": [
-    "button.PullsListItem-module__filterLink__a5ZnW > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
-   ],
-   "key": "dark|rgba(95,168,253,1)",
-   "scheme": "dark",
-   "pages": [
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390"
-   ],
-   "pageCount": 2
-  },
-  {
-   "color": "rgba(0,0,0,0.18)",
-   "count": 42,
-   "props": {
-    "background-color": 21
-   },
-   "samples": [
-    "div.Title-module__container__ZzhV_ > span.Title-module__trailingBadgesContainer__INeSa > button.PullsListItem-module__filterLink__a5ZnW > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
-   ],
-   "key": "dark|rgba(0,0,0,0.18)",
-   "scheme": "dark",
-   "pages": [
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390"
-   ],
-   "pageCount": 2
-  },
-  {
-   "color": "rgba(153,153,153,1)",
-   "count": 42,
-   "props": {
-    "color": 21
-   },
-   "samples": [
-    "button.PullsListItem-module__filterLink__a5ZnW > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
-   ],
-   "key": "dark|rgba(153,153,153,1)",
-   "scheme": "dark",
-   "pages": [
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390"
-   ],
-   "pageCount": 2
+   "pageCount": 4
   },
   {
    "color": "rgba(0,0,0,0.01)",
-   "count": 25,
+   "count": 10,
    "props": {
     "background-color": 3
    },
@@ -752,22 +327,16 @@
    "key": "light|rgba(0,0,0,0.01)",
    "scheme": "light",
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-actions-running/light-1440",
-    "critic-icons-w2r1-actions-running/light-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390"
    ],
-   "pageCount": 10
+   "pageCount": 4
   },
   {
    "color": "rgba(53,61,55,1)",
-   "count": 20,
+   "count": 8,
    "props": {
     "border-color": 4
    },
@@ -777,17 +346,14 @@
    "key": "light|rgba(53,61,55,1)",
    "scheme": "light",
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-actions-running/light-1440"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-labels/light-1440"
    ],
-   "pageCount": 5
+   "pageCount": 2
   },
   {
    "color": "rgba(255,255,255,0.06)",
-   "count": 20,
+   "count": 8,
    "props": {
     "border-color": 4
    },
@@ -797,17 +363,14 @@
    "key": "light|rgba(255,255,255,0.06)",
    "scheme": "light",
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-actions-running/light-1440"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-labels/light-1440"
    ],
-   "pageCount": 5
+   "pageCount": 2
   },
   {
    "color": "rgba(53,61,55,1)",
-   "count": 20,
+   "count": 8,
    "props": {
     "border-color": 4
    },
@@ -817,17 +380,14 @@
    "key": "dark|rgba(53,61,55,1)",
    "scheme": "dark",
    "pages": [
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-actions-running/dark-1440"
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-labels/dark-1440"
    ],
-   "pageCount": 5
+   "pageCount": 2
   },
   {
    "color": "rgba(255,255,255,0.06)",
-   "count": 20,
+   "count": 8,
    "props": {
     "border-color": 4
    },
@@ -837,36 +397,31 @@
    "key": "dark|rgba(255,255,255,0.06)",
    "scheme": "dark",
    "pages": [
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-actions-running/dark-1440"
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-labels/dark-1440"
    ],
-   "pageCount": 5
+   "pageCount": 2
   },
   {
-   "color": "rgba(163,238,239,0.3)",
-   "count": 20,
+   "color": "rgba(198,223,245,0.3)",
+   "count": 8,
    "props": {
-    "border-color": 8
+    "border-color": 4
    },
    "samples": [
-    "div.row-module__timelineBodyContent__nmY90 > div.labels-module__labelContainer__H8t0p > a.labels-module__labelLink__xj4nm.prc-Link-Link-9ZwDx > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G",
-    "div.Section-module__childrenContainer__tpT2L > div.LabelsList-module__labelsListContainer__q43kf > a.LabelsList-module__labelLink__puy8d.prc-Link-Link-9ZwDx > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G",
-    "div.IssueMetadata-module__metadataValue__VpFzn > div.LabelsList-module__labelsListContainer__q43kf > a.LabelsList-module__labelLink__puy8d.prc-Link-Link-9ZwDx > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
    ],
-   "key": "dark|rgba(163,238,239,0.3)",
+   "key": "dark|rgba(198,223,245,0.3)",
    "scheme": "dark",
    "pages": [
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "pageCount": 2
   },
   {
    "color": "rgba(25,31,27,1)",
-   "count": 15,
+   "count": 6,
    "props": {
     "box-shadow": 1,
     "border-color": 1
@@ -878,22 +433,36 @@
    "key": "light|rgba(25,31,27,1)",
    "scheme": "light",
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-actions-running/light-1440",
-    "critic-icons-w2r1-actions-running/light-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390"
    ],
-   "pageCount": 10
+   "pageCount": 4
+  },
+  {
+   "color": "rgba(0,0,0,1)",
+   "count": 6,
+   "props": {
+    "background-color": 1
+   },
+   "samples": [
+    "react-partial.loaded > div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out",
+    "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
+   ],
+   "key": "light|rgba(0,0,0,1)",
+   "scheme": "light",
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390"
+   ],
+   "pageCount": 4
   },
   {
    "color": "rgba(25,31,27,1)",
-   "count": 15,
+   "count": 6,
    "props": {
     "box-shadow": 1,
     "border-color": 1
@@ -905,49 +474,35 @@
    "key": "dark|rgba(25,31,27,1)",
    "scheme": "dark",
    "pages": [
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390",
-    "critic-icons-w2r1-actions-running/dark-1440",
-    "critic-icons-w2r1-actions-running/dark-390"
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
-   "pageCount": 10
+   "pageCount": 4
   },
   {
    "color": "rgba(0,0,0,1)",
-   "count": 12,
+   "count": 4,
    "props": {
-    "background-color": 1,
-    "fill": 1
+    "background-color": 1
    },
    "samples": [
-    "react-partial.loaded > div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out",
-    "div#diff-content-parent > svg.DiffPlaceholder-module__DiffPlaceholderSVG__EwJUb"
+    "react-partial.loaded > div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out"
    ],
    "key": "dark|rgba(0,0,0,1)",
    "scheme": "dark",
    "pages": [
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390",
-    "critic-icons-w2r1-actions-running/dark-1440",
-    "critic-icons-w2r1-actions-running/dark-390"
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
-   "pageCount": 10
+   "pageCount": 4
   },
   {
    "color": "rgba(255,255,255,0.12)",
-   "count": 5,
+   "count": 2,
    "props": {
     "background-color": 1
    },
@@ -957,67 +512,59 @@
    "key": "light|rgba(255,255,255,0.12)",
    "scheme": "light",
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-actions-running/light-1440"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-labels/light-1440"
    ],
-   "pageCount": 5
+   "pageCount": 2
   },
   {
-   "color": "rgba(162,238,239,1)",
-   "count": 5,
+   "color": "rgba(197,222,245,1)",
+   "count": 2,
    "props": {
-    "background-color": 2
+    "background-color": 1
    },
    "samples": [
-    "div.row-module__timelineBodyContent__nmY90 > div.labels-module__labelContainer__H8t0p > a.labels-module__labelLink__xj4nm.prc-Link-Link-9ZwDx > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G",
-    "div.Section-module__childrenContainer__tpT2L > div.LabelsList-module__labelsListContainer__q43kf > a.LabelsList-module__labelLink__puy8d.prc-Link-Link-9ZwDx > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G",
-    "div.IssueMetadata-module__metadataValue__VpFzn > div.LabelsList-module__labelsListContainer__q43kf > a.LabelsList-module__labelLink__puy8d.prc-Link-Link-9ZwDx > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
    ],
-   "key": "light|rgba(162,238,239,1)",
+   "key": "light|rgba(197,222,245,1)",
    "scheme": "light",
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390"
    ],
    "pageCount": 2
   },
   {
-   "color": "rgba(162,238,239,0.18)",
-   "count": 5,
+   "color": "rgba(197,222,245,0.18)",
+   "count": 2,
    "props": {
-    "background-color": 2
+    "background-color": 1
    },
    "samples": [
-    "div.row-module__timelineBodyContent__nmY90 > div.labels-module__labelContainer__H8t0p > a.labels-module__labelLink__xj4nm.prc-Link-Link-9ZwDx > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G",
-    "div.Section-module__childrenContainer__tpT2L > div.LabelsList-module__labelsListContainer__q43kf > a.LabelsList-module__labelLink__puy8d.prc-Link-Link-9ZwDx > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G",
-    "div.IssueMetadata-module__metadataValue__VpFzn > div.LabelsList-module__labelsListContainer__q43kf > a.LabelsList-module__labelLink__puy8d.prc-Link-Link-9ZwDx > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
    ],
-   "key": "dark|rgba(162,238,239,0.18)",
+   "key": "dark|rgba(197,222,245,0.18)",
    "scheme": "dark",
    "pages": [
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "pageCount": 2
   },
   {
-   "color": "rgba(163,238,239,1)",
-   "count": 5,
+   "color": "rgba(198,223,245,1)",
+   "count": 2,
    "props": {
-    "color": 2
+    "color": 1
    },
    "samples": [
-    "a.labels-module__labelLink__xj4nm.prc-Link-Link-9ZwDx > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3",
-    "a.LabelsList-module__labelLink__puy8d.prc-Link-Link-9ZwDx > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
+    "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
    ],
-   "key": "dark|rgba(163,238,239,1)",
+   "key": "dark|rgba(198,223,245,1)",
    "scheme": "dark",
    "pages": [
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "pageCount": 2
   }
@@ -1034,31 +581,27 @@
     ".Button--secondary",
     ".Button--danger"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".btn",
     ".Button--secondary",
     ".Button--danger"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--avatarSize-narrow",
-   "refs": 24,
+   "refs": 16,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
@@ -1066,30 +609,26 @@
     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--avatarSize-wide",
-   "refs": 24,
+   "refs": 16,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
@@ -1097,569 +636,572 @@
     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--label-bgColor-dark-rest",
-   "refs": 18,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "count": 20,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "pageCount": 20
-  },
-  {
-   "name": "--label-bgColor-dark-hover",
-   "refs": 18,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "count": 20,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "pageCount": 20
-  },
-  {
-   "name": "--label-bgColor-dark-active",
-   "refs": 18,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "count": 20,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "pageCount": 20
-  },
-  {
-   "name": "--label-fgColor-dark",
-   "refs": 18,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "count": 20,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "pageCount": 20
-  },
-  {
-   "name": "--label-fgColor-dark-hover",
-   "refs": 18,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "count": 20,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "pageCount": 20
-  },
-  {
-   "name": "--label-fgColor-dark-active",
-   "refs": 18,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "count": 20,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "pageCount": 20
-  },
-  {
-   "name": "--label-bgColor-light-rest",
-   "refs": 18,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "count": 20,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "pageCount": 20
-  },
-  {
-   "name": "--label-bgColor-light-hover",
-   "refs": 18,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "count": 20,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "pageCount": 20
-  },
-  {
-   "name": "--label-bgColor-light-active",
-   "refs": 18,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "count": 20,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "pageCount": 20
-  },
-  {
-   "name": "--label-fgColor-light",
-   "refs": 18,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "count": 20,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "pageCount": 20
-  },
-  {
-   "name": "--label-fgColor-light-hover",
-   "refs": 18,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "count": 20,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "pageCount": 20
-  },
-  {
-   "name": "--label-fgColor-light-active",
-   "refs": 18,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "count": 20,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
-    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
-   ],
-   "pageCount": 20
-  },
-  {
-   "name": "--anchored-overlay-anchor-offset-right",
    "refs": 12,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-bgColor-dark-hover",
+   "refs": 12,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-bgColor-dark-active",
+   "refs": 12,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-fgColor-dark",
+   "refs": 12,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-fgColor-dark-hover",
+   "refs": 12,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-fgColor-dark-active",
+   "refs": 12,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-bgColor-light-rest",
+   "refs": 12,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-bgColor-light-hover",
+   "refs": 12,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-bgColor-light-active",
+   "refs": 12,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-fgColor-light",
+   "refs": 12,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-fgColor-light-hover",
+   "refs": 12,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-fgColor-light-active",
+   "refs": 12,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--anchored-overlay-anchor-offset-right",
+   "refs": 8,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-bottom\"]",
     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-top\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-top\"]"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-bottom\"]",
     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-top\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-top\"]"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--anchored-overlay-anchor-offset-left",
-   "refs": 6,
+   "refs": 4,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"outside-bottom\"]"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"outside-bottom\"]"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--inputValidation-iconSize",
-   "refs": 6,
+   "refs": 4,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
     ".prc-components-ValidationIcon-sv29w"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".prc-components-ValidationIcon-sv29w"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--inputValidation-lineHeight",
-   "refs": 6,
+   "refs": 4,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
     ".prc-components-ValidationText-JEfut"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".prc-components-ValidationText-JEfut"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--grid-template-columns",
-   "refs": 6,
+   "refs": 4,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
     ".prc-DataTable-Table-7ux1n"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".prc-DataTable-Table-7ux1n"
    ],
-   "pageCount": 20
+   "pageCount": 8
+  },
+  {
+   "name": "--stackSize-narrow",
+   "refs": 4,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--stackSize-regular",
+   "refs": 4,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--stackSize-wide",
+   "refs": 4,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "count": 8,
+   "pages": [
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "pageCount": 8
   },
   {
    "name": "--color-mktg-btn-shadow-hover-muted",
@@ -1671,26 +1213,22 @@
     ".btn-muted-mktg:hover",
     ".btn-subtle-mktg:hover"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".btn-muted-mktg:hover",
     ".btn-subtle-mktg:hover"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--brand-heading-letterSpacing-200",
@@ -1702,84 +1240,72 @@
     ".Primer_Brand__AnchorNav-module__AnchorNav-link-label___8TkI7",
     ".Primer_Brand__Prose-module__Prose___8WnSE h5, .Primer_Brand__Prose-module__Prose___8WnSE h6"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".Primer_Brand__AnchorNav-module__AnchorNav-link-label___8TkI7",
     ".Primer_Brand__Prose-module__Prose___8WnSE h5, .Primer_Brand__Prose-module__Prose___8WnSE h6"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--color-attention-subtle",
    "refs": 1,
    "withFallback": 0,
-   "fallbackRefs": 18,
+   "fallbackRefs": 17,
    "matchedElements": 0,
    "selectors": [
     ".form-group.warn .warning"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".form-group.warn .warning"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--color-fg-muted",
    "refs": 1,
    "withFallback": 0,
-   "fallbackRefs": 124,
+   "fallbackRefs": 109,
    "matchedElements": 0,
    "selectors": [
     ".ipm-nudge-content p"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".ipm-nudge-content p"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--color-success-subtle",
@@ -1790,25 +1316,21 @@
    "selectors": [
     ".form-group.successed .success"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".form-group.successed .success"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--color-danger-subtle",
@@ -1819,25 +1341,21 @@
    "selectors": [
     ".form-group.errored .error"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".form-group.errored .error"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--color-mktg-btn-bg",
@@ -1848,25 +1366,21 @@
    "selectors": [
     ".btn-mktg"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".btn-mktg"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--color-mktg-btn-shadow-hover",
@@ -1877,25 +1391,21 @@
    "selectors": [
     ".btn-mktg:hover"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".btn-mktg:hover"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--fgColor-muted-hover",
@@ -1906,25 +1416,21 @@
    "selectors": [
     ".footer-session-authentication-links a:hover"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".footer-session-authentication-links a:hover"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--nested-level",
@@ -1935,25 +1441,21 @@
    "selectors": [
     ".ControlGroup-item"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".ControlGroup-item"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--brand-image-aspectRatio",
@@ -1964,25 +1466,21 @@
    "selectors": [
     ".Primer_Brand__Image-module__Image--aspect-ratio-custom___38Uyb"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".Primer_Brand__Image-module__Image--aspect-ratio-custom___38Uyb"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--brand-Hero-bgColor-gridlineGridInner",
@@ -1993,25 +1491,21 @@
    "selectors": [
     ".Primer_Brand__Hero-module__Hero-grid--contained___vfiGA"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".Primer_Brand__Hero-module__Hero-grid--contained___vfiGA"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--brand-River-spacing-outerInline",
@@ -2022,25 +1516,21 @@
    "selectors": [
     ".Primer_Brand__river-shared-module__River___PCP5W"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".Primer_Brand__river-shared-module__River___PCP5W"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--brand-fontWeight-300",
@@ -2051,25 +1541,21 @@
    "selectors": [
     ".Primer_Brand__Testimonial-module__Testimonial--variant-expressive___J1PIY .Primer_Brand__Testimonial-module__Testimonial__quoteMark___sC3I2"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".Primer_Brand__Testimonial-module__Testimonial--variant-expressive___J1PIY .Primer_Brand__Testimonial-module__Testimonial__quoteMark___sC3I2"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--brand-heading-letterSpacing-300",
@@ -2080,25 +1566,21 @@
    "selectors": [
     ".Primer_Brand__Prose-module__Prose___8WnSE h4"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".Primer_Brand__Prose-module__Prose___8WnSE h4"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--base-size-54",
@@ -2109,25 +1591,21 @@
    "selectors": [
     ".Primer_Brand__PricingOptions-module__PricingOptions__label-cell___gs_vJ"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".Primer_Brand__PricingOptions-module__PricingOptions__label-cell___gs_vJ"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--padding-block-start",
@@ -2138,25 +1616,21 @@
    "selectors": [
     ".Primer_Brand__Section-module__Section___O2zvq"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".Primer_Brand__Section-module__Section___O2zvq"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--brand-BreakoutBanner-bgColor",
@@ -2167,25 +1641,21 @@
    "selectors": [
     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner-container--background___Uex_J"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner-container--background___Uex_J"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--brand-color-canvas-backdrop",
@@ -2196,25 +1666,21 @@
    "selectors": [
     ".Primer_Brand__Tabs-module__Tabs___zia5x"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".Primer_Brand__Tabs-module__Tabs___zia5x"
    ],
-   "pageCount": 20
+   "pageCount": 8
   },
   {
    "name": "--brand-Tabs-slider-width",
@@ -2225,798 +1691,82 @@
    "selectors": [
     ".Primer_Brand__Tabs-module__Tabs__slider___tkaHu"
    ],
-   "count": 20,
+   "count": 8,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390",
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".Primer_Brand__Tabs-module__Tabs__slider___tkaHu"
    ],
-   "pageCount": 20
-  },
-  {
-   "name": "--stackSize-narrow",
-   "refs": 6,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
-   ],
-   "count": 16,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
-   ],
-   "pageCount": 16
-  },
-  {
-   "name": "--stackSize-regular",
-   "refs": 6,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
-   ],
-   "count": 16,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
-   ],
-   "pageCount": 16
-  },
-  {
-   "name": "--stackSize-wide",
-   "refs": 6,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
-   ],
-   "count": 16,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
-   ],
-   "pageCount": 16
-  },
-  {
-   "name": "--MarkdownRenderer_streaming-fade-duration",
-   "refs": 2,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".MarkdownRenderer-module__fadeInContent__Z6XDA :not(.MarkdownRenderer-module__noFade__koxjj, .MarkdownRenderer-module__noFade__koxjj *, li:first-child > p:first-child, li:first-child > p:first-child *)"
-   ],
-   "count": 16,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".MarkdownRenderer-module__fadeInContent__Z6XDA :not(.MarkdownRenderer-module__noFade__koxjj, .MarkdownRenderer-module__noFade__koxjj *, li:first-child > p:first-child, li:first-child > p:first-child *)"
-   ],
-   "pageCount": 16
-  },
-  {
-   "name": "--fontFamily-mono",
-   "refs": 2,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".RefSelectorV1-module__RefActionText__PX9V2"
-   ],
-   "count": 16,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".RefSelectorV1-module__RefActionText__PX9V2"
-   ],
-   "pageCount": 16
-  },
-  {
-   "name": "--color-fg-subtle",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 13,
-   "matchedElements": 0,
-   "selectors": [
-    ".MilestoneDescription-module__subtle__PRcar"
-   ],
-   "count": 16,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".MilestoneDescription-module__subtle__PRcar"
-   ],
-   "pageCount": 16
-  },
-  {
-   "name": "--slash-menu-top",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
-   ],
-   "count": 16,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
-   ],
-   "pageCount": 16
-  },
-  {
-   "name": "--slash-menu-left",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
-   ],
-   "count": 16,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
-   ],
-   "pageCount": 16
-  },
-  {
-   "name": "--zIndex-tooltip",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".ModelInfoPopover-module__modelInfoPopover__m111U"
-   ],
-   "count": 16,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".ModelInfoPopover-module__modelInfoPopover__m111U"
-   ],
-   "pageCount": 16
-  },
-  {
-   "name": "--tool-preview-height-threshold",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".Tool-module__toolContentPreview__D2_Nq"
-   ],
-   "count": 16,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".Tool-module__toolContentPreview__D2_Nq"
-   ],
-   "pageCount": 16
-  },
-  {
-   "name": "--copilot-animation-sprite",
-   "refs": 10,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".Affirmative-module__affirmative__aUo9D",
-    ".Celebrate-module__celebrate__BMHSa",
-    ".Confirm-module__confirm__SVUK5",
-    ".Idle-module__idle__p5XiF",
-    ".JumpWiggle-module__jumpWiggle__u9hJG"
-   ],
-   "count": 12,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390"
-   ],
-   "samples": [
-    ".Affirmative-module__affirmative__aUo9D",
-    ".Celebrate-module__celebrate__BMHSa",
-    ".Confirm-module__confirm__SVUK5",
-    ".Idle-module__idle__p5XiF",
-    ".JumpWiggle-module__jumpWiggle__u9hJG"
-   ],
-   "pageCount": 12
+   "pageCount": 8
   },
   {
    "name": "--truncate-max-width",
-   "refs": 6,
+   "refs": 4,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
     ".prc-Truncate-Truncate-2G1eo"
    ],
-   "count": 12,
+   "count": 4,
    "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390",
-    "critic-icons-w2r1-actions-running/light-1440",
-    "critic-icons-w2r1-actions-running/light-390",
-    "critic-icons-w2r1-actions-running/dark-1440",
-    "critic-icons-w2r1-actions-running/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390"
    ],
    "samples": [
     ".prc-Truncate-Truncate-2G1eo"
    ],
-   "pageCount": 12
+   "pageCount": 4
   },
   {
-   "name": "--text-body-style",
-   "refs": 3,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".TokenUsageInfoContent-module__tokenUsageDetailMuted__p9N0O",
-    ".TokenUsageInfoContent-module__tokenUsageDetail__ypQaV",
-    ".TokenUsageInfoContent-module__tokenUsageDetailRight__IfR2m"
-   ],
-   "count": 12,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390"
-   ],
-   "samples": [
-    ".TokenUsageInfoContent-module__tokenUsageDetailMuted__p9N0O",
-    ".TokenUsageInfoContent-module__tokenUsageDetail__ypQaV",
-    ".TokenUsageInfoContent-module__tokenUsageDetailRight__IfR2m"
-   ],
-   "pageCount": 12
-  },
-  {
-   "name": "--color-canvas-inset",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 7,
-   "matchedElements": 0,
-   "selectors": [
-    ".AutomatedReviewThreadComment-module__automatedComment__O1g7b:not(:first-child)"
-   ],
-   "count": 12,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390"
-   ],
-   "samples": [
-    ".AutomatedReviewThreadComment-module__automatedComment__O1g7b:not(:first-child)"
-   ],
-   "pageCount": 12
-  },
-  {
-   "name": "--leadingVisual-size-default",
+   "name": "--header-height",
    "refs": 1,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 12,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 12
-  },
-  {
-   "name": "--leadingVisual-marginTop-default",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 12,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 12
-  },
-  {
-   "name": "--leadingVisual-size-narrow",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 12,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 12
-  },
-  {
-   "name": "--leadingVisual-marginTop-narrow",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 12,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 12
-  },
-  {
-   "name": "--leadingVisual-size-regular",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 12,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 12
-  },
-  {
-   "name": "--leadingVisual-marginTop-regular",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 12,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 12
-  },
-  {
-   "name": "--leadingVisual-size-wide",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 12,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 12
-  },
-  {
-   "name": "--leadingVisual-marginTop-wide",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 12,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 12
-  },
-  {
-   "name": "--accent-fg",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".AutomatedReviewThreadComment-module__automatedComment__O1g7b :target, .AutomatedReviewThreadComment-module__automatedComment__O1g7b :focus"
-   ],
-   "count": 12,
-   "pages": [
-    "critic-icons-w2r1-commit/light-1440",
-    "critic-icons-w2r1-commit/light-390",
-    "critic-icons-w2r1-commit/dark-1440",
-    "critic-icons-w2r1-commit/dark-390",
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390",
-    "critic-icons-w2r1-commits/light-1440",
-    "critic-icons-w2r1-commits/light-390",
-    "critic-icons-w2r1-commits/dark-1440",
-    "critic-icons-w2r1-commits/dark-390"
-   ],
-   "samples": [
-    ".AutomatedReviewThreadComment-module__automatedComment__O1g7b :target, .AutomatedReviewThreadComment-module__automatedComment__O1g7b :focus"
-   ],
-   "pageCount": 12
-  },
-  {
-   "name": "--author-font-color",
-   "refs": 5,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".AuthorDisplayName-module__Text__OP5Q9",
-    ".AuthorAvatar-module__authorHoverableLink__MHTT8",
-    ".AuthorAvatar-module__authorHoverableLink__MHTT8:hover",
-    ".AuthorLink-module__authorNameLink__ClG6W",
-    ".AuthorLink-module__authorNameLink__ClG6W:hover"
+    ".html-auth .authentication-header-page"
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390"
+    "critic-sa-r4-releases-blankslate/light-1440",
+    "critic-sa-r4-releases-blankslate/light-390",
+    "critic-sa-r4-releases-blankslate/dark-1440",
+    "critic-sa-r4-releases-blankslate/dark-390"
    ],
    "samples": [
-    ".AuthorDisplayName-module__Text__OP5Q9",
-    ".AuthorAvatar-module__authorHoverableLink__MHTT8",
-    ".AuthorAvatar-module__authorHoverableLink__MHTT8:hover",
-    ".AuthorLink-module__authorNameLink__ClG6W",
-    ".AuthorLink-module__authorNameLink__ClG6W:hover"
+    ".html-auth .authentication-header-page"
    ],
    "pageCount": 4
   },
   {
-   "name": "--author-font-weight",
-   "refs": 3,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".AuthorDisplayName-module__Text__OP5Q9",
-    ".AuthorAvatar-module__authorHoverableLink__MHTT8",
-    ".AuthorLink-module__authorNameLink__ClG6W"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390"
-   ],
-   "samples": [
-    ".AuthorDisplayName-module__Text__OP5Q9",
-    ".AuthorAvatar-module__authorHoverableLink__MHTT8",
-    ".AuthorLink-module__authorNameLink__ClG6W"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--line-number-cell-width",
+   "name": "--color-canvas-subtle",
    "refs": 1,
    "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
+   "fallbackRefs": 46,
+   "matchedElements": 1,
    "selectors": [
-    ".ExpandableHunkHeaderDiffLine-module__expand-button-line__Nw5Pq"
+    ".SearchBar-module__searchInput__t30yK"
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
-    ".ExpandableHunkHeaderDiffLine-module__expand-button-line__Nw5Pq"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--line-number-cell-width-unified",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".ExpandableHunkHeaderDiffLine-module__expand-button-unified__H6Vo1"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-icons-w2r1-pulls/light-1440",
-    "critic-icons-w2r1-pulls/light-390",
-    "critic-icons-w2r1-pulls/dark-1440",
-    "critic-icons-w2r1-pulls/dark-390"
-   ],
-   "samples": [
-    ".ExpandableHunkHeaderDiffLine-module__expand-button-unified__H6Vo1"
+    ".SearchBar-module__searchInput__t30yK"
    ],
    "pageCount": 4
   },
@@ -3027,21 +1777,21 @@
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
-    ".IssueTypePickerItemLeadingVisual-module__issueTypeColorIndicator__W1kQd",
     ".DefaultIssueTypePickerAnchor-module__issueTypeDot__tFF3h",
-    ".MetadataFooter-module__SingleSelectFieldDot__Y1QVg"
+    ".MetadataFooter-module__SingleSelectFieldDot__Y1QVg",
+    ".IssueTypePickerItemLeadingVisual-module__issueTypeColorIndicator__W1kQd"
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
-    ".IssueTypePickerItemLeadingVisual-module__issueTypeColorIndicator__W1kQd",
     ".DefaultIssueTypePickerAnchor-module__issueTypeDot__tFF3h",
-    ".MetadataFooter-module__SingleSelectFieldDot__Y1QVg"
+    ".MetadataFooter-module__SingleSelectFieldDot__Y1QVg",
+    ".IssueTypePickerItemLeadingVisual-module__issueTypeColorIndicator__W1kQd"
    ],
    "pageCount": 4
   },
@@ -3058,10 +1808,10 @@
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".SidePanel-module__Backdrop__y9iyE",
@@ -3082,10 +1832,10 @@
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".SingleSelectToken-module__Token__f1S1H",
@@ -3105,10 +1855,10 @@
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".SingleSelectToken-module__Token__f1S1H",
@@ -3128,10 +1878,10 @@
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".SingleSelectToken-module__Token__f1S1H",
@@ -3151,10 +1901,10 @@
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".SidePanel-module__Backdrop__y9iyE",
@@ -3174,10 +1924,10 @@
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".ChecksStatusBadge-module__ChecksStatusBadgeButton__vTwYt svg",
@@ -3186,25 +1936,172 @@
    "pageCount": 4
   },
   {
-   "name": "--icon-picker-selected-bg",
+   "name": "--color-text-primary",
    "refs": 2,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
-    ".IconAndColorPicker-module__iconPickerButtonSelected__oa7RL",
-    ".IconAndColorPicker-module__iconPickerButtonSelected__oa7RL:hover:not([aria-disabled]), .IconAndColorPicker-module__iconPickerButtonSelected__oa7RL:focus-visible:not([aria-disabled])"
+    ".RepositoryLabel-module__heading__yp3oj",
+    ".RepositoryMilestone-module__heading__RdaHD"
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
-    ".IconAndColorPicker-module__iconPickerButtonSelected__oa7RL",
-    ".IconAndColorPicker-module__iconPickerButtonSelected__oa7RL:hover:not([aria-disabled]), .IconAndColorPicker-module__iconPickerButtonSelected__oa7RL:focus-visible:not([aria-disabled])"
+    ".RepositoryLabel-module__heading__yp3oj",
+    ".RepositoryMilestone-module__heading__RdaHD"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--color-fg-subtle",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 13,
+   "matchedElements": 0,
+   "selectors": [
+    ".MilestoneDescription-module__subtle__PRcar"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".MilestoneDescription-module__subtle__PRcar"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--MarkdownRenderer_streaming-fade-duration",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".MarkdownRenderer-module__fadeInContent__Z6XDA :not(.MarkdownRenderer-module__noFade__koxjj, .MarkdownRenderer-module__noFade__koxjj *, li:first-child > p:first-child, li:first-child > p:first-child *)"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".MarkdownRenderer-module__fadeInContent__Z6XDA :not(.MarkdownRenderer-module__noFade__koxjj, .MarkdownRenderer-module__noFade__koxjj *, li:first-child > p:first-child, li:first-child > p:first-child *)"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--zIndex-tooltip",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".ModelInfoPopover-module__modelInfoPopover__m111U"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".ModelInfoPopover-module__modelInfoPopover__m111U"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--tool-preview-height-threshold",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Tool-module__toolContentPreview__D2_Nq"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".Tool-module__toolContentPreview__D2_Nq"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--fontFamily-mono",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".RefSelectorV1-module__RefActionText__PX9V2"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".RefSelectorV1-module__RefActionText__PX9V2"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--slash-menu-top",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--slash-menu-left",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
    ],
    "pageCount": 4
   },
@@ -3219,10 +2116,10 @@
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".IssueTypePickerItemLeadingVisual-module__issueTypeColorIndicator__W1kQd"
@@ -3240,10 +2137,10 @@
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".SingleSelectToken-module__colorIndicator__krSWU"
@@ -3261,13 +2158,181 @@
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".SingleSelectToken-module__colorIndicator__krSWU"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--leadingVisual-size-default",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--leadingVisual-marginTop-default",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--leadingVisual-size-narrow",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--leadingVisual-marginTop-narrow",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--leadingVisual-size-regular",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--leadingVisual-marginTop-regular",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--leadingVisual-size-wide",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--leadingVisual-marginTop-wide",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".LeadingVisual-module__outer__SRqB8"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
+   ],
+   "samples": [
+    ".LeadingVisual-module__outer__SRqB8"
    ],
    "pageCount": 4
   },
@@ -3282,10 +2347,10 @@
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".RelationshipsAlertDialog-module__footer__gTIMF button"
@@ -3303,10 +2368,10 @@
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
     ".IssueBody-module__modernUxEditButton__ixYeZ"
@@ -3320,207 +2385,24 @@
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
-    ".PinnedIssue-module__Octicon__OhWUR"
+    ".PinnedIssueCard-module__Octicon__ZtzXr"
    ],
    "count": 4,
    "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
+    "critic-sa-r4-labels/light-1440",
+    "critic-sa-r4-labels/light-390",
+    "critic-sa-r4-labels/dark-1440",
+    "critic-sa-r4-labels/dark-390"
    ],
    "samples": [
-    ".PinnedIssue-module__Octicon__OhWUR"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--color-picker-fg",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".IconAndColorPicker-module__colorPickerButton__FcIpa"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".IconAndColorPicker-module__colorPickerButton__FcIpa"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--color-picker-bg",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".IconAndColorPicker-module__colorPickerButton__FcIpa"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".IconAndColorPicker-module__colorPickerButton__FcIpa"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--color-picker-hover-fg",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".IconAndColorPicker-module__colorPickerButton__FcIpa:hover:not([aria-disabled]), .IconAndColorPicker-module__colorPickerButton__FcIpa:focus:not([aria-disabled])"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".IconAndColorPicker-module__colorPickerButton__FcIpa:hover:not([aria-disabled]), .IconAndColorPicker-module__colorPickerButton__FcIpa:focus:not([aria-disabled])"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--color-picker-hover-bg",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".IconAndColorPicker-module__colorPickerButton__FcIpa:hover:not([aria-disabled]), .IconAndColorPicker-module__colorPickerButton__FcIpa:focus:not([aria-disabled])"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".IconAndColorPicker-module__colorPickerButton__FcIpa:hover:not([aria-disabled]), .IconAndColorPicker-module__colorPickerButton__FcIpa:focus:not([aria-disabled])"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--icon-picker-hover-bg",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".IconAndColorPicker-module__iconPickerButton__PMGJK:hover:not([aria-disabled]), .IconAndColorPicker-module__iconPickerButton__PMGJK:focus-visible:not([aria-disabled])"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [
-    ".IconAndColorPicker-module__iconPickerButton__PMGJK:hover:not([aria-disabled]), .IconAndColorPicker-module__iconPickerButton__PMGJK:focus-visible:not([aria-disabled])"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--color-icon-primary",
-   "refs": 11,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [],
-   "count": 4,
-   "pages": [
-    "critic-icons-w2r1-actions-running/light-1440",
-    "critic-icons-w2r1-actions-running/light-390",
-    "critic-icons-w2r1-actions-running/dark-1440",
-    "critic-icons-w2r1-actions-running/dark-390"
-   ],
-   "samples": [],
-   "pageCount": 4
-  },
-  {
-   "name": "--header-height",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".html-auth .authentication-header-page"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-icons-w2r1-actions-running/light-1440",
-    "critic-icons-w2r1-actions-running/light-390",
-    "critic-icons-w2r1-actions-running/dark-1440",
-    "critic-icons-w2r1-actions-running/dark-390"
-   ],
-   "samples": [
-    ".html-auth .authentication-header-page"
+    ".PinnedIssueCard-module__Octicon__ZtzXr"
    ],
    "pageCount": 4
   }
  ],
  "nonOcticonIcons": [],
  "maskedIcons": [],
- "consoleErrors": [
-  {
-   "text": "Failed to load resource: the server responded with a status of 404 ()",
-   "count": 8,
-   "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [],
-   "pageCount": 4
-  }
- ],
- "failedRequests": [
-  {
-   "url": "https://github.com/copilot/agent-sessions/pemistahl/grex/agents",
-   "status": 404,
-   "count": 4,
-   "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [],
-   "pageCount": 4
-  },
-  {
-   "url": "https://github.com/pemistahl/grex/issues/35/agent_tasks",
-   "status": 404,
-   "count": 4,
-   "pages": [
-    "critic-icons-w2r1-issue/light-1440",
-    "critic-icons-w2r1-issue/light-390",
-    "critic-icons-w2r1-issue/dark-1440",
-    "critic-icons-w2r1-issue/dark-390"
-   ],
-   "samples": [],
-   "pageCount": 4
-  }
- ],
+ "consoleErrors": [],
+ "failedRequests": [],
  "skipped": []
 }

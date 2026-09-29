@@ -144,9 +144,14 @@ textarea {
   line-height: var(--base-size-20);
 }
 
+/* Primer .input-sm / TextInput size="small": 28px, 8px inline, 12px/20px. `.ui.form` is repeated so the
+   size wins over form.css's generic `.ui.form input` font-size (same layer, equal specificity, later file). */
 .ui.small.input > input,
 .ui.tiny.input > input,
-.ui.mini.input > input {
+.ui.mini.input > input,
+.ui.form .ui.small.input > input,
+.ui.form .ui.tiny.input > input,
+.ui.form .ui.mini.input > input {
   height: var(--control-small-size);
   padding: 0 var(--control-small-paddingInline-condensed);
   font-size: var(--text-body-size-small);
@@ -193,8 +198,14 @@ textarea {
 }
 
 /* ---------- input group (.ui.action.input: input + attached button / dropdown) ---------- */
+/* The group is as tall as its input: Primer never stretches a TextInput group to its flex row (projects list:
+   the row is 40px, milestones 30px because of the Sort / Labels menus next to it), so the attached button
+   (align-self: stretch below) matches the 28 / 32px input instead of hanging below it. Auto block margins
+   centre the group in a row (and stop the stretch) and are 0 in block flow. */
 .ui.action.input {
   align-items: stretch;
+  height: fit-content;
+  margin-block: auto;
 }
 
 .ui.action.input:not([class*="left action"]) > input,
@@ -216,6 +227,18 @@ textarea {
   margin: 0 0 0 -1px;
   border-radius: 0;
   box-shadow: none;
+}
+
+/* attached IconButton is square (Primer ButtonGroup of TextInput + IconButton): 32px next to a medium input,
+   28px next to a small one (a .ui.small group whose input is its direct child; repo home's search nests a
+   medium .ui.input inside a .small group, so its button is 32px) */
+.ui.action.input > .icon.button {
+  min-width: var(--control-medium-size);
+}
+
+.ui.action.input:is(.small, .tiny, .mini):has(> input:not([type="hidden"])) > .icon.button,
+.ui.action.input:has(> .ui.input:is(.small, .tiny, .mini)) > .icon.button {
+  min-width: var(--control-small-size);
 }
 
 .ui.action.input > .button:last-child,
@@ -246,6 +269,24 @@ textarea {
 
 .ui.action.input > .ui.dropdown.selection:last-child {
   border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
+}
+
+/* native <select> between the input and the button (package list / versions search, request APP-C1):
+   joined like the dropdown, and small in a small group so input, select and button share one 28px line */
+.ui.action.input > select {
+  margin-left: -1px;
+  border-radius: 0;
+}
+
+.ui.action.input > select:focus {
+  position: relative;
+  z-index: 1;
+}
+
+.ui.action.input:is(.small, .tiny, .mini) > select {
+  height: var(--control-small-size);
+  padding-left: var(--control-small-paddingInline-condensed);
+  font-size: var(--text-body-size-small);
 }
 
 .ui.form .ui[class*="left action"].input > input {
@@ -299,4 +340,22 @@ input[type="file"]:focus-visible {
 input[type="file"]:focus-visible::file-selector-button {
   outline: var(--focus-outline-width) solid var(--focus-outlineColor);
   outline-offset: var(--focus-outline-offset);
+}
+
+/* ---------- date / time inputs ---------- */
+/* Chrome's datetime editor adds 1px padding to its fields wrapper and lays the fields out with the input's
+   20px line-height inside a 26-30px box: the text sat 2-3px below the TextInput's text line and the "yyyy"
+   descenders were clipped (issue sidebar due date). With the UA padding removed and a normal line-height
+   the fields share the text input's baseline. */
+:is(input[type="date"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"])::-webkit-datetime-edit {
+  line-height: normal;
+}
+
+:is(input[type="date"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"])::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+/* the calendar glyph is Chrome's own (follows color-scheme); only the pointer is set */
+:is(input[type="date"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"])::-webkit-calendar-picker-indicator {
+  cursor: pointer;
 }

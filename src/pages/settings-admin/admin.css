@@ -1,0 +1,145 @@
+/*
+ * Site admin panel (Gitea-only, no github.com equivalent) — built from the same Primer patterns as the settings
+ * pages (ARCHITECTURE §8):
+ *   definition lists (config, system status): a Box of key/value rows — padding 8px 16px (Box-row--condensed), key 14px semibold
+ *     --fgColor-default in a 300px column, value --fgColor-default; groups separated by a 1px --borderColor-muted
+ *     Box-row line (Gitea's .divider), no inner padding around the list;
+ *   maintenance operations: a DataTable whose rows carry a default (secondary) "Run" button — a list of
+ *     identical green primary buttons is not a github.com pattern (one primary action per view);
+ *   user / repo / org / email lists: DataTable in a Box (data-display), 14px cells, filter bar above it.
+ * Gitea: admin.css (.admin dl.admin-dl-horizontal padding 1em, dt/dd 5px 0, dt 300px), admin/*.tmpl.
+ * Rows are Box-row--condensed (8px 16px → 37px for a one-line row); the group divider is a full-width row separator.
+ */
+
+.page-content.admin .flex-container-main dl.admin-dl-horizontal {
+  margin: 0;
+  padding: 0;
+}
+
+.page-content.admin .flex-container-main dl.admin-dl-horizontal > dt,
+.page-content.admin .flex-container-main dl.admin-dl-horizontal > dd {
+  padding: var(--base-size-8) var(--base-size-16); /* Box-row--condensed */
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.page-content.admin .flex-container-main dl.admin-dl-horizontal > dt {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.page-content.admin .flex-container-main dl.admin-dl-horizontal > dd {
+  color: var(--fgColor-default);
+}
+
+.page-content.admin .flex-container-main dl.admin-dl-horizontal > dd .svg {
+  vertical-align: text-bottom;
+}
+
+.page-content.admin .flex-container-main dl.admin-dl-horizontal > .divider {
+  flex-basis: 100%;
+  margin: 0;
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+  border-bottom: 0;
+}
+
+/* phones: key over value (a 300px key column leaves no room for the value) */
+@media (max-width: 543.98px) {
+  .page-content.admin .flex-container-main dl.admin-dl-horizontal > dt,
+  .page-content.admin .flex-container-main dl.admin-dl-horizontal > dd {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+  }
+
+  .page-content.admin .flex-container-main dl.admin-dl-horizontal > dt {
+    padding-bottom: 0;
+  }
+
+  .page-content.admin .flex-container-main dl.admin-dl-horizontal > dd {
+    padding-top: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* maintenance operations: the table fills the Box (Gitea adds tw-px-4 → admin.important.css) */
+.page-content.admin.dashboard .flex-container-main .ui.table > tbody > tr > td {
+  vertical-align: middle;
+}
+
+/* secondary actions that Gitea renders as green primary buttons are default buttons on github.com:
+   maintenance "Run", config "Test" (cache), Subhead "Add webhook" / "Add deploy key" (btn-sm, not btn-primary;
+   github.com keeps primary only for the page's main create action, e.g. "New SSH key") */
+:is(
+  .page-content.admin.dashboard .flex-container-main .ui.table .ui.primary.button,
+  .page-content.admin .flex-container-main dd .ui.primary.button,
+  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.jump.dropdown > .ui.primary.button,
+  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.primary.button[data-panel="#add-deploy-key-panel"],
+  .page-content.settings .flex-container-main .ui.form .ui.primary.button[name="request_reindex_type"],
+  .page-content.admin .flex-container-main .ui.top.attached.header a.ui.primary.button[href$="/-/admin/repos/unadopted"]
+) {
+  border-color: var(--button-default-borderColor-rest);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-default-fgColor-rest);
+}
+
+:is(
+  .page-content.admin.dashboard .flex-container-main .ui.table .ui.primary.button,
+  .page-content.admin .flex-container-main dd .ui.primary.button,
+  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.jump.dropdown > .ui.primary.button,
+  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.primary.button[data-panel="#add-deploy-key-panel"],
+  .page-content.settings .flex-container-main .ui.form .ui.primary.button[name="request_reindex_type"],
+  .page-content.admin .flex-container-main .ui.top.attached.header a.ui.primary.button[href$="/-/admin/repos/unadopted"]
+):hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+  color: var(--button-default-fgColor-rest);
+}
+
+:is(
+  .page-content.admin.dashboard .flex-container-main .ui.table .ui.primary.button,
+  .page-content.admin .flex-container-main dd .ui.primary.button,
+  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.jump.dropdown > .ui.primary.button,
+  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.primary.button[data-panel="#add-deploy-key-panel"],
+  .page-content.settings .flex-container-main .ui.form .ui.primary.button[name="request_reindex_type"],
+  .page-content.admin .flex-container-main .ui.top.attached.header a.ui.primary.button[href$="/-/admin/repos/unadopted"]
+):active {
+  background: var(--button-default-bgColor-active);
+}
+
+.page-content.admin.dashboard .flex-container-main .ui.table .ui.primary.button > .svg {
+  color: var(--fgColor-muted);
+}
+
+/* filter bar above a list (search input + Filter / Sort menus) */
+.page-content.admin .flex-container-main .ui.attached.segment > .ui.form.flex-text-block {
+  gap: var(--base-size-8);
+}
+
+/* list tables: cells stay on one line (DataTable); a table wider than the Box scrolls inside it (Gitea:
+   .admin .ui.table.segment overflow-x auto) */
+.page-content.admin .flex-container-main .ui.table:has(th[data-sortt-asc]) > tbody > tr > td {
+  white-space: nowrap;
+}
+
+.page-content.admin .flex-container-main .ui.table > tbody > tr > td {
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+  vertical-align: middle;
+}
+
+/* the Subhead "Add webhook" menu: keyboard focus lands on the .ui.jump.dropdown wrapper (base_list.tmpl), whose
+   radius is 0 — the focus ring follows the 6px button inside (Primer focusOutline) */
+:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.jump.dropdown {
+  border-radius: var(--borderRadius-medium);
+}
+
+/* admin users list: Active / Restricted / 2FA flags are check / x octicons — green check, muted x (github.com
+   check-mark columns) */
+.page-content.admin .flex-container-main .ui.table > tbody > tr > td > .svg.octicon-check {
+  color: var(--fgColor-success);
+}
+
+.page-content.admin .flex-container-main .ui.table > tbody > tr > td > .svg.octicon-x {
+  color: var(--fgColor-muted);
+}

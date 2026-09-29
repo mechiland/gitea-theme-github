@@ -1,0 +1,25 @@
+/* Tailwind utilities in Gitea's auth templates are `!important` (tw-max-w-2xl = 42rem = 588px, tw-gap-4 = 14px,
+ * tw-my-5): only the gh-important layer can restate them. Primer values: 352px content + 2 × 16px gutter,
+ * 16px between the form block and the footer line (github.com/login .authentication-footer). */
+
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) > .ui.page.grid > .column {
+  max-width: calc(var(--gh-auth-content-width) + 2 * var(--base-size-16)) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  gap: var(--base-size-16) !important;
+}
+
+.page-content.user.link-account > .ui.page.grid > .column > .ui.tab > div {
+  gap: var(--base-size-16) !important;
+}
+
+.page-content.user.signin > .ui.page.grid > .column > form.ui.form {
+  max-width: none !important;
+}
+
+/* phones: github.com uses the whole width minus the 16px gutters (390 → 358px content) */
+@media (max-width: 543.98px) {
+  .page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) > .ui.page.grid > .column {
+    max-width: none !important;
+  }
+}

@@ -6,3 +6,6 @@
 438px wide; the overflowing element is the `code` inside the .npmrc `pre` (x 48–438). gitea-auto has no overflow there.
 Primer markdown/code.scss sets `overflow: auto` next to `overflow-wrap: normal`; src/markdown/code.css copies only the
 latter. Proposed: `.markup pre { overflow: auto; }`.
+
+# Integrator (end of wave 3, 2026-09-30)
+- **MD-1** (`.markup pre { overflow: auto }`) is still OPEN for markdown. Status of the package page overflow at 390 is in docs/STATUS.json audit.horizontalOverflow390 (shots/integrate-w3).

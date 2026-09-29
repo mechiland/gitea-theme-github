@@ -1,0 +1,30 @@
+/*
+ * gh-important for pages/actions-packages-projects — only what Gitea sets with !important or inline style.
+ */
+
+/* project board: Gitea centres the columns with `margin-left/right: auto !important` on the first/last column;
+   github.com's board is left aligned (columns start at the 16px board padding). */
+.project-column:first-child {
+  margin-left: 0 !important;
+}
+
+.project-column:last-child {
+  margin-right: 0 !important;
+}
+
+/* Actions job NavList: Vue sets `padding-left: 10px` inline (+16px per nesting level); github.com items are 8px */
+.action-view-sidebar-list > .item[style="padding-left: 10px;"] {
+  padding-left: var(--control-medium-paddingInline-condensed) !important;
+}
+
+/* job log links: Gitea colours them `var(--color-console-link) !important` (muted in our mapping) — github.com:
+   --fgColor-muted + underline, hover --fgColor-accent */
+.job-step-logs .log-msg a:hover {
+  color: var(--fgColor-accent) !important;
+}
+
+/* runs list kebab: Gitea's `tw-p-2` is `padding: .5rem !important` (7px on the 14px root) — github.com's
+   timeline-comment-action btn-link is 24x34: 8px 4px padding + 1px border around the 16px octicon */
+.page-content.repository.actions .run-list .run-list-item-trailing > .ui.dropdown.jump.tw-p-2 {
+  padding: calc(var(--base-size-8) + var(--borderWidth-thin)) var(--base-size-4) !important;
+}

@@ -1,0 +1,351 @@
+/*
+ * Actions — workflow runs list (templates/repo/actions/list.tmpl + runs_list.tmpl), github.com /<repo>/actions
+ * (measured 2026-09-30, pemistahl/grex):
+ *   Box header 66px: padding 16px, "N workflow runs" 14px/600, filter triggers (Workflow/Event/Status/Branch/Actor)
+ *     = invisible buttons, 14px --fgColor-muted.
+ *   Box-row 79px: padding 16px, --borderColor-muted separators, no hover fill.
+ *     status octicon 16px top-aligned (margin-top 2px on the 24px title line), 8px to the title;
+ *     title 16px/24px 600 --fgColor-default (Link--primary: hover --fgColor-accent), single line, ellipsis;
+ *     meta 12px/18px --fgColor-muted, "<b>Workflow</b> #N:" semibold, links Link--muted + underline (inTextBlock);
+ *     branch = Primer BranchName: mono 12px, --fgColor-accent on --bgColor-accent-muted, radius 6px, 2px 6px;
+ *     right: calendar + time / stopwatch + duration, 12px/15px --fgColor-muted, 16px octicons, 4px icon gap;
+ *     kebab: btn-link 24x34, --fgColor-muted, hover --fgColor-accent.
+ *   Pagination below the Box (not inside it).
+ * Gitea: the list sits in `.ui.attached.segment` (16px padding, rows bleed via data-display's negative margins) and
+ * the paginator is rendered inside the segment → the segment becomes a frameless wrapper and the list is the Box body.
+ */
+
+/* ---------- Box header ---------- */
+.page-content.repository.actions .flex-container-main > .ui.top.attached.header {
+  align-items: center;
+  min-height: 0;
+  padding: var(--base-size-16);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.page-content.repository.actions .flex-container-main > .ui.top.attached.header > strong {
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.page-content.repository.actions .flex-container-main > .ui.top.attached.header .ui.filter.menu {
+  align-items: center;
+  gap: 0;
+  min-height: 0;
+  margin: calc(var(--base-size-6) * -1) calc(var(--base-size-8) * -1) calc(var(--base-size-6) * -1) 0;
+}
+
+.page-content.repository.actions .flex-container-main > .ui.top.attached.header .ui.filter.menu > .item {
+  gap: var(--base-size-4);
+  height: var(--control-medium-size);
+  margin: 0;
+  padding: 0 var(--control-medium-paddingInline-condensed);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.page-content.repository.actions .flex-container-main > .ui.top.attached.header .ui.filter.menu > .item:hover,
+.page-content.repository.actions .flex-container-main > .ui.top.attached.header .ui.filter.menu > .item.active {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+.page-content.repository.actions .flex-container-main > .ui.top.attached.header .ui.filter.menu > .item:active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+.page-content.repository.actions .flex-container-main > .ui.top.attached.header .ui.filter.menu > .item.disabled {
+  background: transparent;
+  color: var(--fgColor-disabled);
+}
+
+.page-content.repository.actions .flex-container-main > .ui.top.attached.header .ui.filter.menu > .item > .dropdown.icon {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  margin: 0;
+}
+
+/* the kebab next to the filters (workflow badge / disable workflow): IconButton invisible 32px */
+.page-content.repository.actions .flex-container-main > .ui.top.attached.header .ui.filter.menu > button.btn {
+  width: var(--control-medium-size);
+  height: var(--control-medium-size);
+  padding: 0;
+  justify-content: center;
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+/* ---------- Box body: the segment is only a wrapper; the run list is the Box body ---------- */
+.page-content.repository.actions .flex-container-main > .ui.attached.segment:has(> .run-list) {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.page-content.repository.actions .run-list {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-top: 0;
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+.page-content.repository.actions .run-list > .item,
+.page-content.repository.actions .run-list > .item:first-child,
+.page-content.repository.actions .run-list > .item:last-child {
+  align-items: flex-start;
+  gap: var(--base-size-8) var(--base-size-16);
+  margin: 0;
+  padding: var(--base-size-16);
+}
+
+.page-content.repository.actions .run-list > .item:last-child {
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
+}
+
+/* empty state inside the Box (no runs / no filter result) */
+.page-content.repository.actions .run-list > .empty-placeholder {
+  padding: var(--base-size-32) var(--base-size-16);
+}
+
+/* leading status icon on the title's 24px line, 8px to the title (github: pl-2 on the title) */
+.page-content.repository.actions .run-list > .item > .item-leading {
+  display: flex;
+  align-self: flex-start;
+  align-items: center;
+  height: var(--base-size-24);
+  margin-right: calc(var(--base-size-8) * -1);
+}
+
+.page-content.repository.actions .run-list > .item > .item-leading .svg {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+}
+
+.page-content.repository.actions .run-list .item-main {
+  gap: 0;
+  min-width: 0;
+}
+
+/* title: Link--primary 16px/24px semibold, one line */
+.page-content.repository.actions .run-list .item-title {
+  display: block;
+  margin-bottom: var(--base-size-4);
+  overflow: hidden;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-large);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-large);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-content.repository.actions .run-list .item-title a {
+  color: var(--fgColor-default);
+  line-height: inherit;
+}
+
+.page-content.repository.actions .run-list .item-title a:hover {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+/* issue references inside the title keep the link colour, like github.com's markdown-title */
+.page-content.repository.actions .run-list .item-title a.ref-issue {
+  color: var(--fgColor-accent);
+}
+
+/* meta line: text-small --fgColor-muted, workflow name + #N semibold, links Link--muted Link--inTextBlock */
+.page-content.repository.actions .run-list .item-body {
+  display: block;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+/* the template trims the whitespace after "<b>CI #N</b>:" (the flex gap used to stand in for it) */
+.page-content.repository.actions .run-list .item-body > span:first-child {
+  margin-right: var(--base-size-4);
+}
+
+.page-content.repository.actions .run-list .item-body b {
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.page-content.repository.actions .run-list .item-body a {
+  color: var(--fgColor-muted);
+  text-decoration: underline;
+}
+
+.page-content.repository.actions .run-list .item-body a:hover {
+  color: var(--fgColor-accent);
+}
+
+.page-content.repository.actions .run-list .item-body > .flex-text-inline {
+  vertical-align: middle;
+}
+
+.page-content.repository.actions .run-list .item-body > .flex-text-inline .svg {
+  width: var(--base-size-12);
+  height: var(--base-size-12);
+}
+
+/* trailing: branch | time + duration | kebab. github.com gives the branch its own column (BranchName max 200px,
+   left aligned, so chips line up from row to row) and pushes time / duration + kebab to the row end; Gitea's
+   trailing block is a fixed 280px, right-aligned flex row → widen it on desktop and left-align the chip. */
+.page-content.repository.actions .run-list .run-list-item-trailing {
+  align-self: center;
+  justify-content: flex-start;
+  gap: var(--base-size-16);
+}
+
+.page-content.repository.actions .run-list .run-list-item-trailing > .run-list-item-right {
+  margin-left: auto;
+}
+
+@media (min-width: 1012px) {
+  .page-content.repository.actions .run-list .run-list-item-trailing {
+    flex: 0 0 calc(var(--base-size-128) * 3);
+    width: calc(var(--base-size-128) * 3);
+  }
+}
+
+/* Primer BranchName */
+.page-content.repository.actions .run-list .ui.label.run-list-ref {
+  display: inline-block;
+  min-height: 0;
+  max-width: calc(var(--base-size-96) * 2 + var(--base-size-8));
+  padding: var(--base-size-2) var(--base-size-6);
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-accent-muted);
+  color: var(--fgColor-accent);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--base-text-lineHeight-tight);
+}
+
+.page-content.repository.actions .run-list a.ui.label.run-list-ref:hover {
+  border: 0;
+  background: var(--bgColor-accent-muted);
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+.page-content.repository.actions .run-list .run-list-item-right {
+  gap: 0;
+  width: calc(var(--base-size-128) + var(--base-size-8));
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--base-text-lineHeight-tight);
+}
+
+.page-content.repository.actions .run-list .run-list-meta {
+  gap: var(--base-size-4);
+  margin: var(--base-size-4) 0;
+  white-space: nowrap;
+}
+
+.page-content.repository.actions .run-list .run-list-meta .svg {
+  flex-shrink: 0;
+  color: var(--fgColor-muted);
+}
+
+/* kebab: github.com timeline-comment-action btn-link (24x34, muted, hover accent) */
+.page-content.repository.actions .run-list .run-list-item-trailing > .ui.dropdown.jump {
+  justify-content: center;
+  padding: var(--base-size-8) var(--base-size-4);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+.page-content.repository.actions .run-list .run-list-item-trailing > .ui.dropdown.jump:hover,
+.page-content.repository.actions .run-list .run-list-item-trailing > .ui.dropdown.jump.active {
+  color: var(--fgColor-accent);
+}
+
+/* paginator: below the Box, like github.com's paginate-container (16px margin) */
+.page-content.repository.actions .run-list + .center.page.buttons {
+  margin: var(--base-size-16) 0;
+}
+
+/* narrow viewports (github.com < md): the title stays one truncated line and the time / duration / branch drop
+   under the meta line, aligned with the title; the kebab stays at the row's end */
+@media (max-width: 767.98px) {
+  .page-content.repository.actions .run-list > .item,
+  .page-content.repository.actions .run-list > .item:first-child,
+  .page-content.repository.actions .run-list > .item:last-child {
+    flex-wrap: wrap;
+    row-gap: var(--base-size-4);
+  }
+
+  .page-content.repository.actions .run-list .item-main {
+    flex: 1 1 0;
+  }
+
+  .page-content.repository.actions .run-list .run-list-item-trailing {
+    flex: 1 0 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: none;
+    width: auto;
+    gap: var(--base-size-4) var(--base-size-16);
+    padding-left: var(--base-size-24);
+  }
+
+  .page-content.repository.actions .run-list .run-list-item-right {
+    order: -1;
+    width: auto;
+    max-width: none;
+  }
+
+  .page-content.repository.actions .run-list .run-list-item-trailing > .run-list-item-right {
+    margin-left: 0;
+  }
+
+  /* kebab: vertically centred on the whole row at its end (github.com), out of the wrapped trailing line */
+  .page-content.repository.actions .run-list > .item {
+    position: relative;
+  }
+
+  .page-content.repository.actions .run-list .item-main {
+    padding-right: var(--base-size-32);
+  }
+
+  .page-content.repository.actions .run-list .run-list-item-trailing > .ui.dropdown.jump {
+    position: absolute;
+    top: 50%;
+    right: var(--base-size-16);
+    transform: translateY(-50%);
+  }
+
+  /* Box--responsive: the runs Box goes edge to edge (no side borders, no radius) like github.com below md */
+  .page-content.repository.actions .flex-container-main > .ui.top.attached.header,
+  .page-content.repository.actions .flex-container-main > .ui.attached.segment:has(> .run-list) {
+    width: calc(100% + var(--page-margin-x) * 2);
+    max-width: none;
+    margin-inline: calc(var(--page-margin-x) * -1);
+  }
+
+  .page-content.repository.actions .flex-container-main > .ui.top.attached.header,
+  .page-content.repository.actions .flex-container-main .run-list {
+    border-inline: 0;
+    border-radius: 0;
+  }
+
+  .page-content.repository.actions .flex-container-main .run-list > .item {
+    border-radius: 0;
+  }
+
+  /* time, duration, then the BranchName stacked under the meta line (github.com < md) */
+  .page-content.repository.actions .run-list .run-list-item-trailing {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--base-size-4);
+  }
+}

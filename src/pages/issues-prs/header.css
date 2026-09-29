@@ -1,0 +1,247 @@
+/*
+ * Issue / PR detail header (repo/issue/view_title.tmpl) + PR tab bar (repo/pulls/tab_menu.tmpl).
+ * github.com (pemistahl/grex/issues/35, /pull/358, measured 2026-09-30):
+ *  - title: 32px / 40px, weight 400, --fgColor-default; "#35" in --fgColor-muted, weight 400;
+ *  - header actions right (Edit, New issue): 32px medium buttons;
+ *  - meta row 8px under the title: StateLabel (data-display) + 14px / 21px text, author semibold;
+ *  - PR meta: BranchName tokens (mono 12px / 18px, padding 2px 6px, radius 6px, --bgColor-accent-muted,
+ *    --fgColor-accent), copy button muted;
+ *  - 16px between the meta row and the tab bar; diffstat "+35 −1" 12px semibold + 5 × 8px blocks (1px apart).
+ * Tabs themselves: navigation (.ui.tabular.menu = TabNav).
+ */
+
+.repository.view.issue .issue-title-header {
+  padding-bottom: 0;
+  margin-bottom: var(--base-size-16);
+}
+
+.repository.view.issue .issue-title {
+  gap: var(--base-size-8);
+  align-items: flex-start;
+  margin-bottom: calc(var(--base-size-8) + var(--base-size-2));
+  min-height: var(--base-size-40);
+}
+
+.repository.view.issue .issue-title h1 {
+  padding-right: var(--base-size-8);
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-large);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--base-text-lineHeight-tight);
+}
+
+.repository.view.issue .issue-title h1 .index {
+  color: var(--fgColor-muted);
+  font-weight: var(--base-text-weight-light);
+}
+
+.repository.view.issue .issue-title-buttons {
+  align-items: center;
+  gap: var(--base-size-8);
+  min-height: var(--base-size-40);
+}
+
+.repository.view.issue .issue-title-buttons > .ui.button {
+  height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
+}
+
+/* title editor (Edit → input + Cancel / Save) */
+.repository.view.issue #issue-title-editor .ui.input {
+  height: var(--control-medium-size);
+}
+
+.repository.view.issue #issue-title-editor .ui.input input {
+  font-size: var(--text-body-size-medium);
+  padding: 0 var(--control-medium-paddingInline-normal);
+}
+
+/* StateLabel → text: 10px (github.com pull/358); Gitea's `tw-ml-2` on the text is zeroed in header.important.css */
+.repository.view.issue .issue-title-meta {
+  gap: calc(var(--base-size-8) + var(--base-size-2));
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.repository.view.issue .issue-title-meta a {
+  color: var(--fgColor-muted);
+}
+
+.repository.view.issue .issue-title-meta a.author,
+.repository.view.issue .issue-title-meta .author,
+.repository.view.issue .pull-desc > a:not(:has(code)) {
+  color: var(--fgColor-muted);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.repository.view.issue .issue-title-meta a:hover {
+  color: var(--fgColor-accent);
+}
+
+/* BranchName tokens in "wants to merge N commits from <head> into <base>" */
+.repository.view.issue .pull-desc code {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base-size-4);
+  margin: 0 var(--base-size-2);
+  padding: var(--base-size-2) var(--base-size-6);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-accent-muted);
+  color: var(--fgColor-accent);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+  vertical-align: 1px;
+}
+
+.repository.view.issue .pull-desc code a {
+  color: inherit;
+}
+
+.repository.view.issue .pull-desc code a:hover {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* copy-branch button inside the head token: muted octicon like github.com's CopyToClipboard after the tokens */
+.repository.view.issue .pull-desc code .btn {
+  color: var(--fgColor-muted);
+}
+
+.repository.view.issue .pull-desc code .btn:hover {
+  color: var(--fgColor-accent);
+}
+
+/* ---------- PR tab bar ---------- */
+.repository.view.issue .pull.tabs.container {
+  margin-bottom: var(--base-size-16);
+}
+
+/* Files changed (fluid page): the tab bar spans the page like the header above it (github.com: full width) */
+.repository.view.issue .ui.container.fluid > .pull.tabs.container {
+  width: auto;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.repository.view.issue .pull.tabular.menu .svg {
+  margin-right: 0;
+}
+
+/* diffstat: "+35 −1" 12px semibold (header.important.css beats Gitea's tw-text-[13px]) + github.com DiffSquares:
+   five 8px squares, 1px apart, radius 2px; whole squares — floor(5 × additions / total) green
+   (--bgColor-success-emphasis), floor(5 × deletions / total) red (--bgColor-danger-emphasis), the rest neutral
+   (--bgColor-neutral-muted with a 1px --borderColor-default ring). Gitea renders one bar (red) with an inline
+   `width: N%` green child; the child's pseudo-elements quantise that width with round() (square pitch 9px). */
+.pull.tabular.menu > .flex-text-block {
+  gap: var(--base-size-8);
+  align-self: center;
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-small);
+}
+
+.pull.tabular.menu > .flex-text-block > span:first-child {
+  display: inline-flex;
+  gap: var(--base-size-4);
+}
+
+.pull.tabular.menu .diff-stats-bar {
+  position: relative;
+  width: calc(var(--base-size-8) * 5 + var(--base-size-4));
+  height: var(--base-size-8);
+  background:
+    linear-gradient(to bottom, var(--borderColor-default) 0 1px, transparent 1px calc(var(--base-size-8) - 1px), var(--borderColor-default) calc(var(--base-size-8) - 1px)),
+    repeating-linear-gradient(to right, var(--borderColor-default) 0 1px, var(--bgColor-neutral-muted) 1px calc(var(--base-size-8) - 1px), var(--borderColor-default) calc(var(--base-size-8) - 1px) var(--base-size-8), transparent var(--base-size-8) calc(var(--base-size-8) + 1px));
+  mask-image:
+    linear-gradient(to right, transparent var(--base-size-2), var(--fgColor-default) var(--base-size-2) var(--base-size-6), transparent var(--base-size-6)),
+    linear-gradient(to bottom, transparent var(--base-size-2), var(--fgColor-default) var(--base-size-2) var(--base-size-6), transparent var(--base-size-6)),
+    radial-gradient(circle var(--base-size-2) at var(--base-size-2) var(--base-size-2), var(--fgColor-default) 100%, transparent 100%),
+    radial-gradient(circle var(--base-size-2) at var(--base-size-6) var(--base-size-2), var(--fgColor-default) 100%, transparent 100%),
+    radial-gradient(circle var(--base-size-2) at var(--base-size-2) var(--base-size-6), var(--fgColor-default) 100%, transparent 100%),
+    radial-gradient(circle var(--base-size-2) at var(--base-size-6) var(--base-size-6), var(--fgColor-default) 100%, transparent 100%);
+  mask-size: var(--base-size-8) var(--base-size-8);
+  mask-repeat: space no-repeat;
+}
+
+.pull.tabular.menu .diff-stats-bar .diff-stats-add-bar {
+  position: relative;
+  background: transparent;
+}
+
+.pull.tabular.menu .diff-stats-bar .diff-stats-add-bar::before,
+.pull.tabular.menu .diff-stats-bar .diff-stats-add-bar::after {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  content: "";
+}
+
+/* 100% = the green share of 44px; × 45/44 maps it onto 5 pitches of 9px, rounded down to whole squares */
+.pull.tabular.menu .diff-stats-bar .diff-stats-add-bar::before {
+  left: 0;
+  width: round(down, calc(100% * 45 / 44 + 1px / 100), calc(var(--base-size-8) + 1px));
+  background: var(--bgColor-success-emphasis);
+}
+
+.pull.tabular.menu .diff-stats-bar .diff-stats-add-bar::after {
+  right: calc(100% - (var(--base-size-8) + 1px) * 5);
+  width: round(down, calc((var(--base-size-8) + 1px) * 5 - 100% * 45 / 44 + 1px / 100), calc(var(--base-size-8) + 1px));
+  background: var(--bgColor-danger-emphasis);
+}
+
+/* phones (github.com PageHeader at 390): actions row above the title, title 26px / 1.25, the StateLabel on its own
+   row and the meta text full width below it; BranchName tokens stay on one line and truncate with an ellipsis */
+@media (max-width: 767.98px) {
+  .repository.view.issue #issue-title-display {
+    flex-direction: column-reverse;
+    gap: var(--base-size-8);
+  }
+
+  .repository.view.issue #issue-title-display > .issue-title-buttons {
+    justify-content: flex-end;
+    min-height: 0;
+  }
+
+  .repository.view.issue #issue-title-display > .issue-title-buttons:not(:has(> *)) {
+    display: none;
+  }
+
+  .repository.view.issue .issue-title h1 {
+    font-size: calc(var(--text-title-size-large) * 13 / 16);
+    line-height: var(--base-text-lineHeight-tight);
+  }
+
+  /* a one-column grid (Gitea's meta text is `tw-flex-1`, an !important flex-basis 0 that defeats wrapping) */
+  .repository.view.issue .issue-title-meta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+    gap: var(--base-size-8);
+  }
+
+  .repository.view.issue .pull-desc code {
+    max-width: 40%;
+    vertical-align: bottom;
+  }
+
+  .repository.view.issue .pull-desc code a {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/* comment headers (author · "commented …" · "(Migrated from github.com)"): Gitea's overflow-wrap:anywhere lets the
+   flex items shrink to one character at 390px ("comme-nted"); break only between words. Only below 768px: on wide
+   screens the parts fit on one line, and a no-shrink rule there would wrap the line while <relative-time> still
+   shows its long ISO text (layout shift). */
+@media (max-width: 767.98px) {
+  .repository.view.issue .comment-header-left > * {
+    overflow-wrap: normal;
+    min-width: auto;
+  }
+}

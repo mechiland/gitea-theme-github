@@ -108,3 +108,26 @@ the class of today's (pre-restart) file (`svg gitea-unlock octicon-unverified`),
 
 # Status (data-display, wave 2 round 3)
 - No new incoming requests. Outgoing: DD-D1 (docs/requests/dark.md) still open; escalated as DD-I1 in docs/requests/integrator.md because `src/dark/` is empty until wave 3.
+
+# From pages/repo (wave 3, round 1)
+## PR-DD-1 Topic pill text sits at the top of the 24px pill
+`.ui.label.repo-topic` is `.ui.large.label.gt-ellipsis` (inline-block) with `min-height: 24px` but Fomantic's line-height,
+so the 12px text is top-aligned (visible on repo home sidebar and explore repo lists). pages/repo fixes it page-scoped
+on repo home only (`#repo-topics > .repo-topic { line-height: 22px via calc }`). Proposed generic fix in labels.css:
+```css
+a.ui.label[href*="topic=1"],
+.ui.label.repo-topic {
+  line-height: calc(var(--base-size-24) - var(--borderWidth-thin) * 2);
+}
+```
+FYI measured on github.com 2026-09-30 (pemistahl/grex About): TopicTag is 26px tall, padding 2px 12px, 12px **600**,
+1px transparent border, radius full (the brief's 24px / 500 / 0 10px is an older spec). Your call which to follow.
+
+# From pages/issues-prs (wave 3, round 1)
+- Comment header at 390px: `.comment-header-right` (role label, reaction, kebab) wraps onto its own ~40px row under
+  the author line (shots/pages-issues-prs-final/crop-issue-390.png). github.com keeps the kebab on the author line.
+  Proposal: at <768px `.comment-header { flex-wrap: nowrap; align-items: flex-start }` + `.comment-header-left { min-width: 0; flex: 1 }`
+  so the right cluster stays top-right. Not done page-scoped because the comment shell is yours.
+
+# Integrator (end of wave 3, 2026-09-30)
+- **PR-DD-1** (topic pill centring; github.com now 26px / 600 / 2px 12px) and the pages/issues-prs comment-header-at-390 proposal are still OPEN for data-display. pages/repo keeps its repo-home-only line-height fix meanwhile.

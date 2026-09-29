@@ -1,0 +1,73 @@
+/* Form — github.com/login: label 14px semibold (controls' FormControl label), 4px to the control, 16px
+ * between fields, inputs 40px (Primer large TextInput: --control-large-size, 16px text, 12px inline padding),
+ * the primary button 40px full width. The look of inputs/buttons/checkboxes is controls'; this file only
+ * sizes them for the auth column. */
+
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) .ui.form .field {
+  margin: 0 0 var(--base-size-16);
+}
+
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) .ui.form .field:last-child {
+  margin-bottom: 0;
+}
+
+/* github.com/login labels sit on a 21px line (14px × 1.5) */
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) .ui.form .field > label,
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) .ui.form .field > .tw-flex > label {
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+/* label row "Password ···· Forgot password?" (div.tw-flex > label.tw-flex-1 + a) */
+.page-content.user:is(.signin, .link-account) .ui.form .field > .tw-flex > label {
+  margin: 0;
+}
+
+.page-content.user:is(.signin, .link-account) .ui.form .field > .tw-flex > a {
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+/* sign-in shows no required marker on github.com (both fields are required anyway) */
+.page-content.user.signin form:has(input[autocomplete="current-password"]) .required.field > label::after {
+  content: none;
+}
+
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) .ui.form :is(
+  input:not([type]),
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="number"]
+) {
+  width: 100%;
+  height: var(--control-large-size);
+  padding: 0 var(--control-large-paddingInline-normal);
+  font-size: var(--text-body-size-large);
+  line-height: var(--base-size-20);
+}
+
+/* primary action: Primer large block button */
+.page-content.user:is(.signin, .signup, .forgot, .reset, .link-account) .ui.form .ui.primary.button {
+  width: 100%;
+  height: var(--control-large-size);
+  min-height: var(--control-large-size);
+  margin: 0;
+  padding: 0 var(--control-large-paddingInline-spacious);
+}
+
+/* "Remember this device" row */
+.page-content.user:is(.signin, .reset, .link-account) .ui.form .inline.field:has(> .ui.checkbox) {
+  display: flex;
+  align-items: center;
+}
+
+.page-content.user:is(.signin, .reset, .link-account) .ui.form .inline.field > .ui.checkbox label {
+  font-weight: var(--base-text-weight-normal);
+}
+
+/* intro paragraph on the first-registration sign-up form */
+.page-content.user:is(.signup, .signin) .ui.attached.segment > p {
+  margin: 0 0 var(--base-size-16);
+  color: var(--fgColor-muted);
+}

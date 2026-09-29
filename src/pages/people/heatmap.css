@@ -1,0 +1,144 @@
+/*
+ * Contribution graph (Vue ActivityHeatmap, #user-heatmap) — github.com profile (measured 2026-09-30, 1440):
+ *   "1,051 contributions in the last year" 16px/24px, 8px above a Box (1px --borderColor-default, radius 6) holding
+ *   the calendar: cells ~11px on a ~15px pitch, radius 2px, 1px --contribution-default-borderColor-N ring, fills
+ *   --contribution-default-bgColor-0…4; labels 12px; footer "Less ▢▢▢▢▢ More" 12px muted, right-aligned, 4px gaps.
+ *   Phones: the calendar keeps its size and scrolls horizontally inside the Box (most recent weeks visible).
+ * Gitea's component: <div> > svg.heatmap-svg (viewBox ≈ 663 × 99 units, 10-unit cells, 9-unit labels) +
+ * .heatmap-footer (total text | .heatmap-legend: "Less" svg(viewBox 12 0 80 10, 6 squares) "More").
+ * ≥ 768px the root div is a grid: heading, svg, legend; the Box is its ::before behind rows 2–3 (box.css).
+ * The svg is capped at 832px (1.25 × → 12.5px cells, 15px pitch, 11px labels).
+ * Cell colours are inline `style="fill: var(--color-…)"` → people.important.css maps them to Primer's contribution
+ * tokens (Gitea's 6-step legend: steps 5 and 6 both map to level 4; the 6th legend square is hidden).
+ */
+
+/* fixed height against layout shift: heading 24 + 8, Box 1 + 12 + svg + 8 + 18 + 12 + 1 = 84px + svg height */
+@container (width > 0) {
+  #user-heatmap {
+    height: calc(min(100cqw - var(--base-size-32), var(--base-size-128) * 6 + var(--base-size-64)) * 0.1493 + var(--base-size-80) + var(--base-size-4));
+  }
+}
+
+#user-heatmap > div {
+  display: grid;
+  grid-template: auto auto auto / minmax(0, 1fr);
+  position: relative;
+}
+
+#user-heatmap > div::before {
+  content: "";
+  grid-area: 2 / 1 / 4;
+}
+
+#user-heatmap .heatmap-svg {
+  display: block;
+  grid-area: 2 / 1;
+  z-index: 0;
+  width: calc(100% - var(--base-size-32));
+  max-width: calc(var(--base-size-128) * 6 + var(--base-size-64));
+  margin: var(--base-size-12) var(--base-size-16) 0;
+}
+
+#user-heatmap .heatmap-footer {
+  display: contents;
+}
+
+#user-heatmap .heatmap-footer > :first-child {
+  grid-area: 1 / 1;
+  margin-bottom: var(--base-size-8);
+  font-size: var(--text-body-size-large);
+}
+
+#user-heatmap .heatmap-legend {
+  grid-area: 3 / 1;
+  z-index: 0;
+  justify-self: end;
+  gap: var(--base-size-4);
+  margin: var(--base-size-8) var(--base-size-16) var(--base-size-12);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}
+
+#user-heatmap .heatmap-legend > div {
+  padding: 0;
+}
+
+/* 12px tall = 1.2 × the viewBox; the hidden 6th square leaves 22 units (26.4px) empty at the right end */
+#user-heatmap .heatmap-legend-svg {
+  height: var(--base-size-12);
+  margin-right: calc(var(--base-size-24) * -1 - var(--base-size-2));
+}
+
+#user-heatmap .heatmap-legend-svg rect:last-child {
+  display: none;
+}
+
+#user-heatmap :is(.heatmap-day, .heatmap-legend-svg rect) {
+  rx: calc(var(--borderRadius-small) / 2);
+  stroke: var(--contribution-default-borderColor-0);
+  vector-effect: non-scaling-stroke;
+}
+
+#user-heatmap .heatmap-day:hover {
+  outline: 0;
+}
+
+/* phones: the Box scrolls horizontally (rtl start = the most recent weeks); heading and legend stay outside the
+   scroller (absolutely positioned against #user-heatmap, so the scroller does not clip or move them) */
+@media (max-width: 767.98px) {
+  @container (width > 0) {
+    #user-heatmap {
+      height: calc((var(--base-size-128) * 5 + var(--base-size-80)) * 0.1493 + var(--base-size-80) + var(--base-size-4));
+    }
+  }
+
+  #user-heatmap {
+    padding-top: var(--base-size-32);
+  }
+
+  #user-heatmap > div {
+    display: block;
+    position: static;
+    padding: var(--base-size-12) var(--base-size-16) calc(var(--base-size-40) - var(--base-size-2));
+    overflow-x: auto;
+    scrollbar-width: none;
+    direction: rtl;
+    border: var(--borderWidth-thin) solid var(--borderColor-default);
+    border-radius: var(--borderRadius-medium);
+    background: var(--bgColor-default);
+  }
+
+  #user-heatmap > div::before {
+    content: none;
+  }
+
+  #user-heatmap .heatmap-svg {
+    width: calc(var(--base-size-128) * 5 + var(--base-size-80));
+    max-width: none;
+    margin: 0;
+    direction: ltr;
+  }
+
+  #user-heatmap .heatmap-footer {
+    direction: ltr;
+  }
+
+  #user-heatmap .heatmap-footer > :first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  #user-heatmap .heatmap-legend {
+    position: absolute;
+    right: var(--base-size-16);
+    bottom: var(--base-size-12);
+    margin: 0;
+  }
+}
+
+/* the rule Gitea puts under the graph: github.com has spacing only */
+.activity-heatmap-container + .divider {
+  margin: var(--base-size-16) 0 0;
+  border: 0;
+}

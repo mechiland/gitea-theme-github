@@ -1,0 +1,10 @@
+/* #external-login-navigator carries tw-py-1 tw-gap-3 and each link tw-gap-3 (Tailwind !important):
+ * github.com: 8px from the divider to the first button, 8px between buttons, 8px icon-to-label gap. */
+.page-content.user:is(.signin, .signup, .link-account) #external-login-navigator {
+  padding: var(--base-size-8) 0 0 !important;
+  gap: var(--base-size-8) !important;
+}
+
+.page-content.user:is(.signin, .signup, .link-account) #external-login-navigator .external-login-link {
+  gap: var(--base-size-8) !important;
+}
