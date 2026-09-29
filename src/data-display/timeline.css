@@ -1,0 +1,227 @@
+/*
+ * Timeline + comment shell — Primer TimelineItem / timeline-comment (measured on github.com PR conversation):
+ *  - discussion: margin-left 40px, padding-left 16px; TimelineItem: margin-left 16px, padding 16px 0,
+ *    2px --borderColor-muted line at the item's left edge;
+ *  - TimelineItem-badge: 32px circle, margin 0 8px 0 -15px, 2px --bgColor-default ring, --bgColor-muted,
+ *    --fgColor-muted 16px octicon; state badges filled with *-emphasis + --fgColor-onEmphasis;
+ *  - TimelineItem-body: 14px --fgColor-muted, margin-top 5px (centres the 21px line on the 32px badge);
+ *  - comment: Box (1px --borderColor-default, 6px radius) starting 16px left of the item, 40px round avatar
+ *    72px left of the item, caret pointing at it; header 38px (padding 0 16px) on --bgColor-muted, 14px
+ *    --fgColor-muted with the author semibold --fgColor-default; body padding 16px.
+ * Gitea: .comment-list / .timeline-item / .badge / .comment-header / .comment-body (repo.css 240-660,1231-1290).
+ * The rendered body (.markup) belongs to the markdown folder.
+ */
+
+/* the list is its own stacking context so the z-index:-1 line stays above the page background */
+.comment-list {
+  isolation: isolate;
+}
+
+/* the vertical line: Gitea draws it once on the list; aligned with the item's left edge like github.com */
+.comment-list::before {
+  left: var(--base-size-32);
+  width: var(--borderWidth-thick);
+  margin-top: 0;
+  background-color: var(--borderColor-muted);
+}
+
+.comment-list .timeline-item,
+.comment-list .timeline-item-group {
+  padding: var(--base-size-16) 0;
+}
+
+.comment-list .timeline-item.comment {
+  padding: 0 0 var(--base-size-16);
+}
+
+.comment-list .timeline-item-group .timeline-item {
+  padding-top: var(--base-size-8);
+  padding-bottom: var(--base-size-8);
+}
+
+.comment-list .timeline-item .timeline-avatar {
+  left: calc(var(--base-size-negative-40) + var(--base-size-negative-32));
+}
+
+/* event rows: badge + avatar + text, centred on the badge */
+.comment-list .event {
+  gap: var(--base-size-4);
+  padding-left: 0;
+  color: var(--fgColor-muted);
+}
+
+.comment-list .timeline-item .badge {
+  position: relative;
+  z-index: 1;
+  width: var(--base-size-32);
+  height: var(--base-size-32);
+  margin: 0 var(--base-size-4) 0 calc(var(--base-size-negative-16) + 1px);
+  border: var(--borderWidth-thick) solid var(--bgColor-default);
+  border-radius: var(--borderRadius-full);
+  background-color: var(--bgColor-muted);
+  color: var(--fgColor-muted);
+}
+
+.comment-list .timeline-item .badge .svg {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  min-width: var(--base-size-16);
+  min-height: var(--base-size-16);
+  padding: 0;
+}
+
+/* commit rows use a borderless badge on the page background (github.com: octicon on --bgColor-default) */
+.comment-list .timeline-item .badge.badge-commit {
+  border-color: transparent;
+  background: var(--bgColor-default);
+}
+
+.comment-list .timeline-item.commits-list .badge {
+  height: var(--base-size-32);
+}
+
+.comment-list .event > .avatar-with-link {
+  height: var(--base-size-32);
+}
+
+.comment-list .event .avatar-with-link img.ui.avatar {
+  width: var(--base-size-20);
+  height: var(--base-size-20);
+}
+
+.comment-text-line {
+  color: var(--fgColor-muted);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.comment-text-line a {
+  color: inherit;
+}
+
+.comment-text-line a.author,
+.comment-text-line .author,
+.comment-text-line a.tw-font-semibold,
+.comment-text-line b,
+.comment-text-line strong {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.comment-text-line a:hover,
+.comment-text-line a:hover :is(b, strong) {
+  color: var(--fgColor-accent);
+}
+
+/* labels inside event lines: IssueLabel tokens on the text line */
+.comment-text-line .ui.label {
+  line-height: 1;
+  vertical-align: 1px;
+}
+
+.comment-list .event > .detail {
+  margin-left: var(--base-size-36);
+  color: var(--fgColor-muted);
+}
+
+/* ---- comment box ---- */
+.comment-list .comment .comment-container {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+.comment-list .comment > .content > div:first-child {
+  border-top-left-radius: var(--borderRadius-medium);
+  border-top-right-radius: var(--borderRadius-medium);
+}
+
+.comment-list .comment > .content > div:last-child {
+  border-bottom-left-radius: var(--borderRadius-medium);
+  border-bottom-right-radius: var(--borderRadius-medium);
+}
+
+.comment-header {
+  gap: var(--base-size-4);
+  min-height: calc(var(--base-size-36) + var(--base-size-2));
+  padding: var(--base-size-4) var(--base-size-16);
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  background: var(--bgColor-muted);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.comment-header.avatar-content-left-arrow {
+  min-height: calc(var(--base-size-36) + var(--base-size-2));
+}
+
+.comment-header-left,
+.comment-header-right {
+  gap: var(--base-size-4);
+}
+
+.comment-header .author {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+/* secondary links in the header (timestamp permalink, "edited") stay muted; the author link
+   (shared/user/authorlink.tmpl renders a.tw-font-semibold without .author) is --fgColor-default like
+   github.com .timeline-comment-header .author */
+.comment-header .comment-text-line a:not(.author, .tw-font-semibold) {
+  color: var(--fgColor-muted);
+}
+
+/* review-conversation comment headers (conversation.tmpl: span.tw-text-text-light.muted-links > a.tw-font-semibold) */
+.comment-header a.tw-font-semibold {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.comment-header a.tw-font-semibold:hover {
+  color: var(--fgColor-accent);
+}
+
+/* author association Label ("Owner", "Author", "Member") */
+.comment-header-right .role-label {
+  color: var(--fgColor-muted);
+}
+
+.comment-body {
+  padding: var(--base-size-16);
+  background: var(--bgColor-default);
+}
+
+/* caret pointing at the avatar (github.com .timeline-comment--caret: 8px wide, 16px tall, top 11px) */
+.avatar-content-left-arrow::before,
+.avatar-content-left-arrow::after {
+  top: var(--base-size-20);
+}
+
+.avatar-content-left-arrow::before {
+  border-width: var(--base-size-8);
+  margin-top: var(--base-size-negative-8);
+  border-right-color: var(--borderColor-default);
+}
+
+.avatar-content-left-arrow::after {
+  border-width: calc(var(--base-size-8) - 1px);
+  margin-top: calc(var(--base-size-negative-8) + 1px);
+  border-right-color: var(--bgColor-default);
+}
+
+.comment-header.avatar-content-left-arrow::after {
+  border-right-color: var(--bgColor-muted);
+}
+
+/* the new-comment form box (timeline-item.comment.form > .ui.segment.avatar-content-left-arrow) */
+.avatar-content-left-arrow:not(.comment-header) {
+  border-color: var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+}
+
+@media (max-width: 767.98px) {
+  .comment-list::before {
+    left: var(--base-size-16);
+  }
+}

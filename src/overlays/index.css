@@ -1,1 +1,17 @@
-/* src/overlays — see ARCHITECTURE.md for ownership. Entry file: @import this folder's files here. */
+/*
+ * src/overlays → @layer gh.overlays. Owner: overlays builder. See ARCHITECTURE.md §5.
+ * Owns every surface that pops up over the page: Fomantic dropdown popups (`.ui.dropdown .menu`, items, headers,
+ * dividers, filter inputs), tippy popovers/menus/tooltips, `.ui.modal` + `.ui.dimmer`, toastify toasts and
+ * `.ui.message` / flash banners, plus the repo Code popover content (`.clone-panel-*`, shown only inside a tippy).
+ * The dropdown *trigger* (closed control) belongs to controls.
+ * Specs: Primer React Overlay / ActionList / SelectPanel / Dialog / TooltipV2 (CSS read from github.com,
+ * 2026-09-30), @primer/css toasts/, Primer Flash. Declarations Gitea sets with !important or inline live in
+ * overlays.important.css (built into @layer gh-important).
+ */
+@import "./action-menu.css";
+@import "./tippy.css";
+@import "./clone-panel.css";
+@import "./dialog.css";
+@import "./toast.css";
+@import "./flash.css";
+@import "./search-results.css";

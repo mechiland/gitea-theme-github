@@ -16,7 +16,7 @@
     "gitea-join": "octicon-rows",
     "gitea-lock": "octicon-verified",
     "gitea-lock-cog": "octicon-shield-check",
-    "gitea-unlock": "octicon-unverified",
+    "gitea-unlock": "octicon-unlock",
     "fontawesome-save": "octicon-check",
     "fontawesome-send": "octicon-key",
     "material-invert-colors": "octicon-circle",
@@ -24,8 +24,5 @@
     "material-folder-symlink": "octicon-file-directory-symlink"
   },
   "missing": [],
-  "restored": [
-    "gitea-double-chevron-left",
-    "gitea-double-chevron-right"
-  ]
+  "restored": []
 }

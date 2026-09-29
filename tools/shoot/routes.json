@@ -252,6 +252,39 @@
       "gitea": "#repo-files-table .repo-file-item, #repo-files-table .repo-file-line",
       "github": "table[aria-labelledby=folders-and-files] tbody tr.react-directory-row"
      }
+    },
+    {
+     "name": "add-file-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".repo-button-row .repo-add-file",
+      "github": "button:has-text('Add file')"
+     },
+     "clips": {
+      "gitea": ".repo-add-file > .menu",
+      "github": "[class*='prc-Overlay-Overlay']"
+     },
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "tooltip-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#navbar .navbar-right .ui.dropdown:has(.octicon-plus)",
+      "github": "header button[aria-label='Search or jump to…'], header [data-target='qbsearch-input.inputButton']"
+     },
+     "clips": {
+      "gitea": ".tippy-box[data-theme=tooltip]",
+      "github": "[class*='prc-TooltipV2-Tooltip']:popover-open, [role=tooltip]:popover-open"
+     },
+     "pad": 24,
+     "wait": 800,
+     "viewports": [
+      1440
+     ]
     }
    ]
   },
@@ -267,6 +300,15 @@
       "gitea": ".ui.secondary.filter.menu.labels .item.ui.dropdown.jump:has-text('Sort')"
      },
      "clip": ".ui.secondary.filter.menu .menu.visible",
+     "pad": 16
+    },
+    {
+     "name": "label-filter-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".issue-list-toolbar-right .ui.dropdown.label-filter"
+     },
+     "clip": ".label-filter > .menu",
      "pad": 16
     }
    ]
@@ -284,6 +326,16 @@
      },
      "clip": ".ui.modal.visible, .ui.modal.active",
      "pad": 16
+    },
+    {
+     "name": "delete-modal-open",
+     "action": "click",
+     "selectors": {
+      "gitea": "button.show-modal[data-modal='#delete-repo-modal']"
+     },
+     "clip": "#delete-repo-modal",
+     "pad": 16,
+     "wait": 600
     }
    ]
   },
@@ -303,7 +355,36 @@
    "id": "repo-issue",
    "gitea": "/octo-org/grex/issues/35",
    "github": "https://github.com/pemistahl/grex/issues/35",
-   "giteaTemplate": "{{issue.theme-playground}}"
+   "giteaTemplate": "{{issue.theme-playground}}",
+   "states": [
+    {
+     "name": "labels-panel-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".issue-content-right .ui.dropdown:has(strong:text-is('Labels'))"
+     },
+     "clip": ".issue-content-right .ui.dropdown > .menu.visible",
+     "pad": 16
+    },
+    {
+     "name": "comment-menu-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".comment-header-right .context-dropdown"
+     },
+     "clip": ".comment-header-right .context-dropdown > .menu",
+     "pad": 16
+    },
+    {
+     "name": "reaction-picker-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".comment-header-right .select-reaction"
+     },
+     "clip": ".comment-header-right .select-reaction > .menu",
+     "pad": 16
+    }
+   ]
   },
   {
    "id": "repo-pulls",
@@ -438,7 +519,29 @@
   {
    "id": "labels",
    "gitea": "/octo-org/grex/labels",
-   "github": "https://github.com/pemistahl/grex/labels"
+   "github": "https://github.com/pemistahl/grex/labels",
+   "states": [
+    {
+     "name": "confirm-modal-open",
+     "action": "click",
+     "selectors": {
+      "gitea": "a.link-action[data-modal-confirm-header]"
+     },
+     "clip": ".ui.modal.visible",
+     "pad": 16,
+     "wait": 600
+    },
+    {
+     "name": "edit-modal-open",
+     "action": "click",
+     "selectors": {
+      "gitea": "a.edit-label-button"
+     },
+     "clip": ".ui.modal.visible",
+     "pad": 16,
+     "wait": 600
+    }
+   ]
   },
   {
    "id": "milestones",

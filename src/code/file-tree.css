@@ -1,0 +1,103 @@
+/*
+ * Code-view file tree (Vue ViewFileTree / ViewFileTreeItem) — Primer TreeView as used by github.com's file tree pane.
+ * Measured on github.com/pemistahl/grex/blob/main/src/main.rs (1440):
+ *   pane 320px, items 32px tall, radius 6; toggle column 16px with a 12px chevron (--fgColor-muted);
+ *   content padding-inline 8px, leading visual 16px, 8px gap, text 14px --fgColor-default;
+ *   each nesting level indents by 8px (half the toggle width), no guide lines;
+ *   hover --control-transparent-bgColor-hover; current item --control-transparent-bgColor-selected plus a
+ *   4×24px --fgColor-accent bar 8px left of the item.
+ */
+.repo-view-file-tree-container {
+  flex: 0 0 clamp(var(--overlay-width-xsmall), 22%, var(--overlay-width-small));
+}
+
+.repo-view-file-tree-container > .repo-button-row {
+  gap: var(--base-size-8);
+  font-size: var(--text-title-size-small);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+#view-file-tree {
+  padding-left: var(--base-size-8);
+}
+
+.view-file-tree-items {
+  gap: 0;
+  margin-right: 0;
+}
+
+.view-file-tree-items .tree-item {
+  position: relative;
+  grid-template-columns: var(--base-size-16) minmax(0, 1fr);
+  gap: 0;
+  min-height: var(--base-size-32);
+  padding: 0;
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.view-file-tree-items .tree-item:hover {
+  background: var(--control-transparent-bgColor-hover);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-default);
+}
+
+.view-file-tree-items .tree-item.selected {
+  background: var(--control-transparent-bgColor-selected);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-default);
+}
+
+.view-file-tree-items .tree-item.selected::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - var(--base-size-12));
+  left: calc(-1 * var(--base-size-8));
+  width: var(--base-size-4);
+  height: var(--base-size-24);
+  border-radius: var(--borderRadius-medium);
+  background: var(--fgColor-accent);
+}
+
+.view-file-tree-items .item-toggle {
+  justify-content: center;
+  color: var(--fgColor-muted);
+}
+
+/* C-3: chevrons 12px like github.com */
+.view-file-tree-items .item-toggle .svg {
+  width: var(--base-size-12);
+  height: var(--base-size-12);
+  min-width: var(--base-size-12);
+  min-height: var(--base-size-12);
+}
+
+.view-file-tree-items .item-content {
+  gap: var(--base-size-8);
+  padding: 0 var(--base-size-8);
+}
+
+.view-file-tree-items .item-content .svg {
+  flex-shrink: 0;
+}
+
+/* nesting: github.com indents 8px per level inside full-width rows (no border guide) */
+.view-file-tree-items .sub-items {
+  gap: 0;
+  margin-left: 0;
+  border-left: 0;
+}
+
+.view-file-tree-items .sub-items .tree-item { padding-left: var(--base-size-8); }
+.view-file-tree-items .sub-items .sub-items .tree-item { padding-left: var(--base-size-16); }
+.view-file-tree-items .sub-items .sub-items .sub-items .tree-item { padding-left: var(--base-size-24); }
+.view-file-tree-items .sub-items .sub-items .sub-items .sub-items .tree-item { padding-left: var(--base-size-32); }
+.view-file-tree-items .sub-items .sub-items .sub-items .sub-items .sub-items .tree-item { padding-left: var(--base-size-40); }
+.view-file-tree-items .sub-items .sub-items .sub-items .sub-items .sub-items .sub-items .tree-item { padding-left: var(--base-size-48); }
+
+/* padding-left moves the grid; keep the toggle column where the padding ends */
+.view-file-tree-items .sub-items .tree-item {
+  grid-template-columns: var(--base-size-16) minmax(0, 1fr);
+}

@@ -1,0 +1,41 @@
+/*
+ * ProgressBar — Primer CSS .Progress (progress/progress.scss): track --progressBar-track-bgColor, radius 6px,
+ * fill --progressBar-bgColor-success (milestones). Measured on github.com /milestones: the milestone list bar is
+ * .Progress--small = 5px tall, 3px radius, track rgb(209,217,224) (= --progressBar-track-bgColor).
+ * Gitea renders native <progress> everywhere (milestones list, dashboard milestones, milestone page, issue
+ * checklists, viewed-files summary).
+ */
+
+progress {
+  height: var(--base-size-8);
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+  background: var(--progressBar-track-bgColor);
+  overflow: hidden;
+  vertical-align: middle;
+  appearance: none;
+}
+
+progress::-webkit-progress-bar {
+  border-radius: inherit;
+  background: var(--progressBar-track-bgColor);
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--progressBar-bgColor-success);
+}
+
+progress::-moz-progress-bar {
+  background-color: var(--progressBar-bgColor-success);
+}
+
+.milestone-progress-big {
+  height: var(--base-size-8);
+}
+
+/* milestone lists (repo milestones, dashboard milestones): Progress--small */
+.list-item-title-progress,
+#issue-list .checklist progress {
+  height: calc(var(--base-size-4) + 1px);
+  border-radius: var(--borderRadius-small);
+}

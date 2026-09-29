@@ -1,0 +1,29 @@
+/*
+ * CounterLabel — Primer React CounterLabel (measured on github.com `.Counter` / prc-CounterLabel):
+ * 20px tall, min-width 20px, padding 0 6px, 1px --counter-borderColor border, radius full, 12px/500 (18px line),
+ * --counter-bgColor-muted background, --fgColor-default text.
+ * Gitea counters: `.ui.small.label` (repo/org/user tabs, PR tabs, sidebar release count; navigation ND-1: 18px line, no margin — the menu
+ * item's gap spaces it) and `.ui.circular.label`
+ * (project column count). `.ui.basic.small.label` stays a Label (labels.css).
+ */
+
+.ui.small.label:not(.basic),
+.ui.circular.label {
+  justify-content: center;
+  min-width: var(--base-size-20);
+  min-height: var(--base-size-20);
+  padding: 0 var(--base-size-6);
+  border: var(--borderWidth-thin) solid var(--counter-borderColor);
+  border-radius: var(--borderRadius-full);
+  background: var(--counter-bgColor-muted);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-medium);
+  line-height: calc(var(--base-size-20) - 2 * var(--borderWidth-thin));
+  text-align: center;
+}
+
+/* Gitea forces `padding: .5em !important` on circular labels; the size comes from min-width/height above */
+.ui.circular.label {
+  min-height: var(--base-size-20);
+}

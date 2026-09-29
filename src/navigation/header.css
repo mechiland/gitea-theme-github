@@ -1,0 +1,301 @@
+/*
+ * Global header — Primer AppHeader (signed-in github.com global bar).
+ * 64px tall: 16px padding around 32px controls, bg --bgColor-inset, 1px bottom rule drawn inside the box.
+ * Left: logo (32px) + Gitea's text links (Issues / Pull requests / Milestones / Explore) as AppHeader context items
+ * (14px semibold, 32px tall, radius 6, transparent hover). Right: IconButtons with a 1px --borderColor-default border
+ * (notifications, create "+ ▾") and a bare 32px avatar. Mobile (<768): hamburger left, logo, icons right.
+ */
+
+#navbar {
+  min-height: var(--base-size-64);
+  padding: var(--base-size-16);
+  gap: var(--base-size-12);
+  background: var(--bgColor-inset);
+  border-bottom: 0;
+  box-shadow: inset 0 calc(var(--borderWidth-thin) * -1) 0 var(--borderColor-default);
+  color: var(--fgColor-default);
+}
+
+/* The 1px rule stays on repo pages too: the repo band below is --page-header-bgColor (github.com
+   #repository-container-header), which is --bgColor-default in dark, so header and band are two blocks there, like
+   github.com (header rule, then the band). */
+
+#navbar .navbar-left,
+#navbar .navbar-right {
+  min-height: var(--control-medium-size);
+  gap: var(--base-size-8);
+}
+
+.navbar-left > .item,
+.navbar-right > .item,
+.navbar-mobile-right > .item {
+  gap: var(--base-size-4);
+  min-height: var(--control-medium-size);
+  min-width: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-condensed);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-medium);
+  transition: background-color var(--base-duration-100) var(--base-easing-easeInOut);
+}
+
+#navbar a.item:hover,
+#navbar button.item:hover,
+#navbar .item.ui.dropdown:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+  text-decoration: none;
+}
+
+#navbar a.item:active,
+#navbar button.item:active,
+#navbar .item.ui.dropdown.active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+#navbar .item.active {
+  background: var(--control-transparent-bgColor-selected);
+}
+
+#navbar .item.ui.dropdown {
+  padding-right: var(--control-medium-paddingInline-condensed);
+}
+
+/* ---------- logo ---------- */
+#navbar #navbar-logo {
+  justify-content: center;
+  padding: 0;
+  margin-right: var(--base-size-8);
+}
+
+#navbar #navbar-logo:hover {
+  background: transparent;
+}
+
+#navbar #navbar-logo > img {
+  width: var(--base-size-32);
+  height: var(--base-size-32);
+}
+
+/* ---------- right side: IconButtons (desktop) ---------- */
+@media (min-width: 768px) {
+  #navbar .navbar-right > .item {
+    justify-content: center;
+    padding: 0;
+    border: var(--borderWidth-thin) solid var(--borderColor-default);
+    color: var(--fgColor-muted);
+  }
+
+  #navbar .navbar-right > .item:hover {
+    color: var(--fgColor-muted);
+  }
+
+  /* create menu: "+ ▾" button, 4px between the glyphs like github.com */
+  #navbar .navbar-right > .item.ui.dropdown:not(:has(.navbar-avatar)) {
+    padding: 0 var(--base-size-6);
+  }
+
+  #navbar .navbar-right > .item.ui.dropdown .flex-text-block {
+    gap: var(--base-size-4);
+  }
+
+  /* avatar menu: bare 32px circle, no border, no caret (github.com) */
+  #navbar .navbar-right > .item.ui.dropdown:has(.navbar-avatar) {
+    padding: 0;
+    border: 0;
+    border-radius: var(--borderRadius-full);
+    margin-left: var(--base-size-4);
+  }
+
+  #navbar .navbar-right > .item.ui.dropdown:has(.navbar-avatar):hover {
+    background: transparent;
+  }
+
+  #navbar .navbar-right > .item.ui.dropdown:has(.navbar-avatar) > .text > .not-mobile {
+    display: none;
+  }
+
+  /* anonymous: "Sign in" text link, then "Sign up" as a bordered button (github.com order) */
+  #navbar .navbar-right > a.item[href*="/user/"] {
+    padding: 0 var(--control-medium-paddingInline-condensed);
+    color: var(--fgColor-default);
+  }
+
+  #navbar .navbar-right > a.item[href*="/user/login"] {
+    border-color: transparent;
+    background: transparent;
+  }
+
+  #navbar .navbar-right > a.item[href*="/user/login"]:hover {
+    background: var(--control-transparent-bgColor-hover);
+  }
+
+  #navbar .navbar-right > a.item[href*="/user/sign_up"] {
+    order: 1;
+    padding: 0 var(--control-medium-paddingInline-normal);
+    background: var(--button-default-bgColor-rest);
+    border-color: var(--button-default-borderColor-rest);
+    box-shadow: var(--button-default-shadow-resting);
+  }
+
+  #navbar .navbar-right > a.item[href*="/user/sign_up"]:hover {
+    background: var(--button-default-bgColor-hover);
+    border-color: var(--button-default-borderColor-hover);
+  }
+
+  #navbar .navbar-right > a.item[href*="/user/"] > .svg {
+    display: none;
+  }
+}
+
+#navbar .navbar-right > .item.ui.dropdown > .text {
+  gap: var(--base-size-8);
+}
+
+#navbar .navbar-avatar > .ui.avatar {
+  width: var(--base-size-32);
+  height: var(--base-size-32);
+  min-width: var(--base-size-32);
+  border-radius: var(--borderRadius-full);
+}
+
+/* ---------- unread indicator: github.com shows a dot, not a number (the count stays in the accessible text) ---------- */
+#navbar a.item .notification_count {
+  left: auto;
+  right: calc(var(--base-size-8) * -1);
+  bottom: auto;
+  top: calc(var(--base-size-8) * -1);
+  min-width: 0;
+  width: var(--base-size-12);
+  height: var(--base-size-12);
+  padding: 0;
+  border: var(--borderWidth-thick) solid var(--bgColor-inset);
+  border-radius: var(--borderRadius-full);
+  background: var(--bgColor-accent-emphasis);
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+}
+
+#navbar a.item:hover .notification_count {
+  border-color: var(--bgColor-inset);
+}
+
+#navbar .item .navbar-admin-badge {
+  left: auto;
+  right: calc(var(--base-size-4) * -1);
+  bottom: calc(var(--base-size-4) * -1);
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  min-width: var(--base-size-16);
+  padding: var(--base-size-2);
+  border: var(--borderWidth-thin) solid var(--bgColor-inset);
+  border-radius: var(--borderRadius-full);
+  background: var(--bgColor-accent-emphasis);
+  color: var(--fgColor-onEmphasis);
+}
+
+/* ---------- mobile (<768): hamburger | logo ........ bell ---------- */
+@media (max-width: 767.98px) {
+  /* no gap: the (empty, closed) .navbar-right must not push the bell 12px away from the 16px edge */
+  #navbar {
+    align-items: center;
+    gap: 0;
+    padding: var(--base-size-16);
+  }
+
+  /* hamburger + logo on the left (also signed out, where there is no bell to push the logo aside) */
+  #navbar .navbar-left {
+    justify-content: flex-start;
+    gap: var(--base-size-8);
+  }
+
+  /* lift the bell and the hamburger into the .navbar-left flex row so they can be ordered */
+  #navbar .navbar-mobile-right {
+    display: contents;
+  }
+
+  #navbar #navbar-expand-toggle {
+    order: -1;
+    justify-content: center;
+    width: var(--control-medium-size);
+    height: var(--control-medium-size);
+    min-height: var(--control-medium-size);
+    padding: 0;
+    border: var(--borderWidth-thin) solid var(--borderColor-default);
+    border-radius: var(--borderRadius-medium);
+    background: transparent;
+    box-shadow: none;
+    color: var(--fgColor-muted);
+  }
+
+  #navbar #navbar-expand-toggle:hover {
+    background: var(--control-transparent-bgColor-hover);
+  }
+
+  #navbar .navbar-mobile-right > a.item {
+    margin-left: auto;
+    justify-content: center;
+    width: var(--control-medium-size);
+    padding: 0;
+    border: var(--borderWidth-thin) solid var(--borderColor-default);
+    color: var(--fgColor-muted);
+  }
+
+  #navbar #navbar-logo {
+    margin-right: 0;
+  }
+
+  /* open menu: rows like a NavList (32px, radius 6, transparent hover) */
+  /* column layout: both halves full width, so the toggle does not move and every row starts at the 16px edge */
+  #navbar.navbar-menu-open {
+    align-items: stretch;
+    padding-bottom: var(--base-size-8);
+  }
+
+  #navbar.navbar-menu-open .navbar-left,
+  #navbar.navbar-menu-open .navbar-right {
+    width: 100%;
+  }
+
+  #navbar.navbar-menu-open .navbar-left > .item:not(#navbar-logo),
+  #navbar.navbar-menu-open .navbar-right > .item {
+    min-height: var(--control-medium-size);
+    padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
+    font-weight: var(--base-text-weight-normal);
+    line-height: var(--base-size-20);
+  }
+
+  #navbar.navbar-menu-open .navbar-left {
+    row-gap: 0;
+  }
+
+  /* the avatar row is a 32px NavList row too: 20px leading avatar instead of the 32px header circle */
+  #navbar.navbar-menu-open .navbar-avatar > .ui.avatar {
+    width: var(--base-size-20);
+    height: var(--base-size-20);
+    min-width: var(--base-size-20);
+  }
+
+  #navbar.navbar-menu-open .item .navbar-admin-badge {
+    width: var(--base-size-12);
+    height: var(--base-size-12);
+    min-width: var(--base-size-12);
+    padding: 0;
+  }
+
+  #navbar.navbar-menu-open .navbar-left > .item:not(#navbar-logo):first-of-type {
+    margin-top: var(--base-size-8);
+  }
+
+  #navbar.navbar-menu-open .navbar-right {
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    padding-top: var(--base-size-8);
+    border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+  }
+}

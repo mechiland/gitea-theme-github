@@ -1,1 +1,16 @@
-/* src/markdown — see ARCHITECTURE.md for ownership. Entry file: @import this folder's files here. */
+/* src/markdown → @layer gh.markdown. Owner: markdown builder. See ARCHITECTURE.md §5.
+ *
+ * Rendered markdown (`.markup`, = GitHub `.markdown-body`). Spec: github.com's live `.markdown-body` rules
+ * (dumped 2026-09-30, shots/markdown-r1/github-markdown-rules.css) and @primer/css/markdown/*.scss.
+ * Gitea's markup/content.css already follows the same github-markdown-css ancestry, so this folder only
+ * declares what differs (colors from Primer tokens, 1px hr, alerts, footnotes, heading anchors, copy button,
+ * link underlines, task-list checkboxes). Declarations that must beat a Gitea `!important` live in
+ * *.important.css (collected by the build into @layer gh-important, not imported here). */
+@import "./base.css";
+@import "./headings.css";
+@import "./lists.css";
+@import "./tables.css";
+@import "./code.css";
+@import "./alerts.css";
+@import "./footnotes.css";
+@import "./embeds.css";

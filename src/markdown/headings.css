@@ -1,0 +1,125 @@
+/* Headings: sizes (2/1.5/1.25/1/.875/.85em), weight 600, line-height 1.25, margins 24/16 and the h1/h2 .3em
+ * padding are already Gitea's (content.css:69-122). Differences: h1/h2 rule is borderColor-muted, h6 is
+ * fgColor-muted.
+ * Permalink: Gitea's JS prepends <a class="anchor"><svg octicon-link></a> to each heading and floats it
+ * 20px to the left. github.com (.markdown-heading .anchor) puts a 28x28 box at left:-28px, vertically
+ * centred on the heading (h1/h2 lifted by .3rem for the bottom padding), radius 6px, octicon in
+ * fgColor-default, shown on heading hover / keyboard focus. */
+.markup h1,
+.markup h2,
+.markup h3,
+.markup h4,
+.markup h5,
+.markup h6 {
+  position: relative;
+  color: var(--fgColor-default);
+}
+
+.markup h1,
+.markup h2 {
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+.markup h6 {
+  color: var(--fgColor-muted);
+}
+
+.markup h1 code,
+.markup h2 code,
+.markup h3 code,
+.markup h4 code,
+.markup h5 code,
+.markup h6 code,
+.markup h1 tt,
+.markup h2 tt,
+.markup h3 tt,
+.markup h4 tt,
+.markup h5 tt,
+.markup h6 tt {
+  padding: 0 0.2em;
+}
+
+.markup a.anchor {
+  position: absolute;
+  top: 50%;
+  left: var(--base-size-negative-28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--base-size-28);
+  height: var(--base-size-28);
+  box-sizing: border-box;
+  padding: 0 var(--base-size-4) 0 0;
+  margin: 0;
+  font-size: var(--text-body-size-large);
+  font-weight: var(--base-text-weight-normal);
+  line-height: 1;
+  color: var(--fgColor-default);
+  text-decoration: none;
+  border-radius: var(--borderRadius-medium);
+  transform: translateY(-50%);
+}
+
+/* h1/h2: GitHub centres on the .markdown-heading wrapper, whose box includes the heading's 1px bottom rule;
+ * the heading's own padding box (our containing block) excludes it, so move down by half the rule. */
+.markup h1 .anchor,
+.markup h2 .anchor {
+  top: calc(50% + var(--borderWidth-thin) / 2);
+  margin-top: 0;
+  transform: translateY(calc(-50% - var(--base-size-16) * 0.3)); /* .3rem on github.com (16px root) */
+}
+
+.markup a.anchor:hover {
+  text-decoration: none;
+}
+
+.markup .anchor .svg {
+  color: var(--fgColor-default);
+  vertical-align: middle;
+}
+
+.markup h2 .anchor .svg,
+.markup h3 .anchor .svg,
+.markup h4 .anchor .svg {
+  top: 0;
+}
+
+.markup .anchor:focus {
+  outline: none;
+}
+
+.markup .anchor:focus-visible {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: calc(var(--focus-outline-width) * -1);
+}
+
+.markup .anchor:focus-visible .svg {
+  visibility: visible;
+}
+
+/* headings used as <summary> content (Primer: inline-block, no rule, anchor at -40px) */
+.markup summary h1,
+.markup summary h2,
+.markup summary h3,
+.markup summary h4,
+.markup summary h5,
+.markup summary h6 {
+  display: inline-block;
+}
+
+.markup summary h1,
+.markup summary h2 {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+@media (hover: none) {
+  .markup h1 .anchor .svg,
+  .markup h2 .anchor .svg,
+  .markup h3 .anchor .svg,
+  .markup h4 .anchor .svg,
+  .markup h5 .anchor .svg,
+  .markup h6 .anchor .svg {
+    visibility: visible;
+  }
+}

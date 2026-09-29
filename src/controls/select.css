@@ -29,13 +29,8 @@
   min-width: 0;
 }
 
-/* …but its open menu keeps an overlay minimum (Primer ActionMenu/SelectPanel: --overlay-width-xsmall)
-   and grows to its longest item instead of wrapping a branch name onto two lines; capped to the screen */
-.ui.selection.dropdown.tw-flex-1 > .menu {
-  width: max-content;
-  min-width: max(100% + 2 * var(--borderWidth-thin), var(--overlay-width-xsmall));
-  max-width: calc(100vw - 2 * var(--base-size-16));
-}
+/* (The open menu's width — overlay minimum, max-content, screen cap — is owned by overlays:
+   src/overlays/action-menu.css `.ui.selection.dropdown > .menu`. Moved there by the integrator, wave 2, OV-1.) */
 
 .ui.selection.dropdown:focus,
 .ui.selection.dropdown:focus-within,

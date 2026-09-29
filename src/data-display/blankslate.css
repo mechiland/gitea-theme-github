@@ -1,0 +1,41 @@
+/*
+ * Blankslate — Primer React Blankslate: centred, padding 32px, 24px --fgColor-muted octicon with 8px below
+ * (icons D-1, measured on github.com releases/tags empty states), heading 20px semibold (--text-title-size-medium)
+ * with 4px below, description 14px --fgColor-muted, actions 16px below.
+ * Gitea: .empty-placeholder (base.css) — 40px vertical padding, 48px icon, h2 in Gitea sizes.
+ */
+
+.empty-placeholder {
+  padding: var(--base-size-32);
+  color: var(--fgColor-default);
+}
+
+.empty-placeholder > .svg {
+  width: var(--base-size-24);
+  height: var(--base-size-24);
+  min-width: var(--base-size-24);
+  min-height: var(--base-size-24);
+  margin: 0 0 var(--base-size-8);
+  color: var(--fgColor-muted);
+}
+
+.empty-placeholder > h2 {
+  margin: 0 0 var(--base-size-4);
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-title-lineHeight-medium);
+}
+
+.empty-placeholder > p {
+  margin: 0;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.empty-placeholder > p + p,
+.empty-placeholder > .ui.button,
+.empty-placeholder > a.ui.button {
+  margin-top: var(--base-size-16);
+}

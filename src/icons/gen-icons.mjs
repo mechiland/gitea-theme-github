@@ -5,7 +5,7 @@
 // 1. Octicons upgrade: every octicon-*.svg Gitea ships (gitea-src/public/assets/img/svg) is regenerated from
 //    @primer/octicons (pinned 19.38.0) exactly the way Gitea's own tools/generate-svg.ts does it (svgo 4.0.1,
 //    same plugin list). Only files whose bytes differ from Gitea's are written.
-// 2. Replacements (+ RESTORED: retired overrides re-emitted as Gitea's original bytes until deploy can delete, I-7): purely presentational non-Octicon icons (gitea-*, fontawesome-*, material-* UI glyphs) are
+// 2. Replacements (RESTORED is empty since w2 r1: deploy deletes retired overrides, I-7): purely presentational non-Octicon icons (gitea-*, fontawesome-*, material-* UI glyphs) are
 //    replaced by the closest Octicon drawing. The file keeps its original name and class (`svg <name>`) so
 //    Gitea's CSS/JS hooks still match, plus an `octicon-<x>` class so audits see it's an Octicon.
 //    Decisions + reasons: docs/icons-audit.md.
@@ -49,7 +49,10 @@ export const REPLACEMENTS = {
   'gitea-join': 'rows', // diff: switch to unified view
   'gitea-lock': 'verified', // commit signature verified (known user)
   'gitea-lock-cog': 'shield-check', // commit signature verified by instance/trusted key
-  'gitea-unlock': 'unverified', // commit signed but unverified
+  'gitea-unlock': 'unlock', // commit signature not verified OR commit not signed (commit_page.tmpl:174) → keep Gitea's
+  //   meaning ("open padlock") in every theme; GitHub themes: data-display masks the signed-but-unverified case
+  //   (`.commit-sign-badge.commit-is-signed .svg.gitea-unlock`) with --gh-octicon-unverified, D-4 hides unsigned.
+  //   (w1 used `unverified`, which told Gitea-theme users an unsigned commit was "Unverified": critic w2r0 #1.)
   'fontawesome-save': 'check', // "Save" buttons in label/push-mirror modals
   'fontawesome-send': 'key', // access-token list item icon (32px)
   'material-invert-colors': 'circle', // commit graph: monochrome (hollow = "no colour"; circle-slash read as "blocked")
@@ -57,17 +60,10 @@ export const REPLACEMENTS = {
   'material-folder-symlink': 'file-directory-symlink', // symlink to directory (material file-icon theme)
 };
 
-// Retired overrides: names this theme overrode in an earlier round and no longer does. `npm run deploy` never deletes
-// files from CUSTOM_PATH/public/assets/img/svg (integrator request I-7), so the stale override would keep being served
-// after a restart. Until I-7 lands we emit Gitea's ORIGINAL bytes for these names: the deployed file is overwritten
-// with the original drawing, which is the same as having no override (Gitea reads custom first, same content).
-// Remove a name from this list once I-7 deletes retired files on deploy.
-//  - gitea-double-chevron-left/right (round 4, critic r3 issue A): used by base/paginate.tmpl (First/Last) AND by
-//    shared/issuelist.tmpl:68 (12px "base « head" in every PR row). A file override is global, so the round-3
-//    move-to-start drawing put `main ⇤ head` into Gitea's own themes (DEFAULT_THEME gitea-auto, Modern, Studio),
-//    which no CSS in this repo reaches. Policy §6: files only for purely presentational glyphs. In GitHub themes
-//    the glyphs are masked instead: pagination → move-to-start/end (navigation N-3), PR list → arrow-left (P-1).
-export const RESTORED = ['gitea-double-chevron-left', 'gitea-double-chevron-right'];
+// Retired overrides re-emitted with Gitea's ORIGINAL bytes. Empty since wave 2 r1: deploy now deletes files it placed
+// earlier that are no longer in src/icons/svg (integrator I-7, `.gh-icons-manifest.json`), so a withdrawn override
+// simply disappears and Gitea serves its bundled copy. (w1 r4 listed gitea-double-chevron-left/right here.)
+export const RESTORED = [];
 
 // Octicons exported as CSS mask data-URIs (src/icons/octicon-masks.css → `--gh-octicon-<name>`), for icons that
 // cannot be replaced by a file: Vue/JS-bundled icons and material file icons (<svg class="git-entry-icon"><use>).
@@ -76,6 +72,8 @@ export const RESTORED = ['gitea-double-chevron-left', 'gitea-double-chevron-righ
 export const MASKS = [
   'alert', 'stop', 'x-circle', 'info', 'check-circle', 'arrow-left', 'arrow-right', 'move-to-start', 'move-to-end',
   'file', 'file-directory-fill', 'file-directory-open-fill', 'file-submodule', 'file-symlink-file', 'file-directory-symlink',
+  'unverified', // w2 r1: signed-but-unverified commit badge in GitHub themes (data-display D-5)
+  'issue-opened', 'git-pull-request', 'milestone', 'telescope', 'search', // w2 r1: navigation NI-1 (AppHeader icon buttons)
 ];
 
 async function loadSvgo() {

@@ -1,0 +1,174 @@
+/*
+ * NavList — settings / admin sidebars (`.flex-container-nav > .ui.fluid.vertical.menu`), Primer React NavList
+ * (prc-ActionList-* rules read from the live stylesheet 2026-09-30):
+ *   item: padding 6px 8px, 14px/20px --fgColor-default, radius 6, hover --control-transparent-bgColor-hover,
+ *         pressed --control-transparent-bgColor-active
+ *   current: --control-transparent-bgColor-selected, semibold, ::after 4px bar --borderColor-accent-emphasis
+ *            (radius 6) 8px left of the item, 4px from top and bottom
+ *   group heading: 12px/18px semibold --fgColor-muted, padding 6px 8px
+ *   collapsible group (details): summary looks like an item with a trailing chevron; sub-items indented 16px
+ */
+
+.ui.vertical.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.ui.vertical.menu .item {
+  display: flex;
+  align-items: center;
+  gap: var(--control-medium-gap);
+  position: relative;
+  min-height: var(--control-medium-size);
+  padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
+  margin: 0;
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+  background: transparent;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--base-size-20);
+  text-decoration: none;
+  text-indent: 0;
+  transition: background-color var(--base-duration-100) var(--base-easing-linear);
+}
+
+.ui.vertical.menu .item::before {
+  display: none;
+}
+
+.ui.vertical.menu > .item:first-child,
+.ui.vertical.menu > .item:last-child,
+.ui.vertical.menu > .active.item:first-child,
+.ui.vertical.menu > .active.item:last-child,
+.ui.vertical.menu > .active.item:only-child {
+  border-radius: var(--borderRadius-medium);
+}
+
+.ui.vertical.menu a.item:hover,
+.ui.vertical.menu .item .menu a.item:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+  text-decoration: none;
+}
+
+.ui.vertical.menu a.item:active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+.ui.vertical.menu .active.item,
+.ui.vertical.menu .item .menu .active.item {
+  background: var(--control-transparent-bgColor-selected);
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.ui.vertical.menu .active.item:hover,
+.ui.vertical.menu .item .menu .active.item:hover {
+  background: var(--control-transparent-bgColor-hover);
+}
+
+.ui.vertical.menu .active.item::after {
+  content: "";
+  position: absolute;
+  top: var(--base-size-4);
+  left: calc(var(--base-size-8) * -1);
+  width: var(--base-size-4);
+  height: calc(100% - var(--base-size-8));
+  border-radius: var(--borderRadius-medium);
+  background: var(--borderColor-accent-emphasis);
+}
+
+.ui.vertical.menu .item > .svg {
+  color: var(--fgColor-muted);
+}
+
+/* group heading */
+.ui.vertical.menu .header.item,
+.ui.vertical.menu .item > .header:not(.ui) {
+  min-height: 0;
+  padding: var(--base-size-6) var(--control-medium-paddingInline-condensed);
+  background: transparent;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--base-text-lineHeight-normal);
+  text-transform: none;
+}
+
+.ui.vertical.menu > .header.item:not(:first-child) {
+  margin-top: var(--base-size-8);
+}
+
+/* ---------- collapsible groups (admin, repo / user / org settings: <details class="item">) ---------- */
+.ui.vertical.menu > details.item {
+  display: block;
+  min-height: 0;
+  padding: 0;
+}
+
+.ui.vertical.menu > details.item > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--control-medium-gap);
+  min-height: var(--control-medium-size);
+  padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
+  border-radius: var(--borderRadius-medium);
+  cursor: pointer;
+  list-style: none;
+}
+
+.ui.vertical.menu > details.item > summary:hover {
+  background: var(--control-transparent-bgColor-hover);
+}
+
+.ui.vertical.menu > details.item > summary::after {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  border: 0;
+  background: var(--fgColor-muted);
+  transition: transform var(--base-duration-200) var(--base-easing-easeInOut);
+}
+
+/* a closed group that contains the current page: selected look on the summary (NavList collapsed parent) */
+.ui.vertical.menu > details.item:not([open]):has(.active.item) > summary {
+  position: relative;
+  background: var(--control-transparent-bgColor-selected);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.ui.vertical.menu > details.item:not([open]):has(.active.item) > summary::before {
+  content: "";
+  position: absolute;
+  top: var(--base-size-4);
+  left: calc(var(--base-size-8) * -1);
+  width: var(--base-size-4);
+  height: calc(100% - var(--base-size-8));
+  border-radius: var(--borderRadius-medium);
+  background: var(--borderColor-accent-emphasis);
+}
+
+.ui.vertical.menu > details.item > .menu,
+.ui.vertical.menu > details.item > .menu.items-full-width {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+}
+
+.ui.vertical.menu .item .menu .item,
+.ui.vertical.menu > details.item > .menu.items-full-width > .item {
+  padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed)
+    var(--control-medium-paddingBlock) calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16));
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+}

@@ -1,0 +1,97 @@
+/*
+ * Blame (templates/repo/blame.tmpl) — github.com blame view.
+ * Measured on github.com/pemistahl/grex/blame/main/README.md (1440, light):
+ *   commit column ~350px: age 12px --fgColor-muted (14px from the box edge), avatar 18px round, message 12px
+ *   --fgColor-muted link (accent + underline on hover), re-blame invisible IconButton 28px (--fgColor-muted);
+ *   segments separated by 1px --borderColor-muted, 5px padding above/below each segment's lines;
+ *   line numbers / code as in the file view (12px/20px mono).
+ * Not reproducible: the per-segment "heat" age stripe (Gitea emits no age data), the Older/Newer legend.
+ */
+.file-view .lines-commit {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}
+
+.lines-commit .blame-info {
+  width: calc(var(--overlay-width-small) - var(--base-size-32));
+  padding: 0 var(--base-size-8) 0 var(--base-size-16);
+  line-height: var(--base-size-20);
+}
+
+.lines-commit .blame-info .blame-data {
+  align-items: center;
+  gap: var(--base-size-8);
+  min-height: var(--base-size-20);
+  font-family: var(--fontStack-sansSerif);
+  font-size: var(--text-body-size-small);
+}
+
+/* github.com order: age · avatar · message */
+.lines-commit .blame-info .blame-data .blame-time {
+  order: -1;
+  min-width: calc(var(--base-size-80) + var(--base-size-4));
+  color: var(--fgColor-muted);
+}
+
+.blame-avatar {
+  margin-right: 0;
+}
+
+.blame-avatar img.ui.avatar,
+.blame-avatar .avatar-stack img {
+  width: calc(var(--base-size-16) + var(--base-size-2));
+  height: calc(var(--base-size-16) + var(--base-size-2));
+  border-radius: var(--borderRadius-full);
+}
+
+.lines-commit .blame-info .blame-data .blame-message a {
+  color: var(--fgColor-muted);
+}
+
+.lines-commit .blame-info .blame-data .blame-message a:hover {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+/* re-blame button column */
+.file-view .lines-blame-btn {
+  padding: 0 var(--base-size-4);
+}
+
+.file-view .lines-blame-btn > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--base-size-24);
+  height: var(--base-size-20);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+.file-view .lines-blame-btn > a:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+/* segments */
+tr.top-line-blame {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+tr.top-line-blame:first-of-type {
+  border-top: 0;
+}
+
+.file-view tr.top-line-blame > td {
+  padding-top: calc(var(--base-size-4) + var(--borderWidth-thin));
+}
+
+.file-view tr:has(+ tr.top-line-blame) > td,
+.file-view tr:has(> .lines-commit):last-child > td {
+  padding-bottom: calc(var(--base-size-4) + var(--borderWidth-thin));
+}
+
+/* code-inner carries Tailwind's `tw-pl-2` (0.5rem !important): 12px + 7px ≈ github.com's 20px */
+.file-view .lines-code.blame-code {
+  padding-left: var(--base-size-12);
+}

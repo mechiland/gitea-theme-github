@@ -1,0 +1,12 @@
+/* gh-important: Gitea repo.css `.issue-state-label { padding: 7px 10px !important; font-size: 14px !important;
+   border-radius: var(--border-radius-medium) !important }` → Primer StateLabel (see state-labels.css). */
+.issue-state-label {
+  padding: var(--base-size-8) var(--base-size-12) !important;
+  border-radius: var(--borderRadius-full) !important;
+  font-size: var(--text-body-size-medium) !important;
+}
+
+/* Counters: Gitea `.ui.circular.label { padding: .5em !important }` (modules/label.css) */
+.ui.circular.label {
+  padding: 0 var(--base-size-6) !important;
+}

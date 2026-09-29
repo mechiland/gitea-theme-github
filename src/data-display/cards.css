@@ -1,0 +1,55 @@
+/*
+ * Cards / lists — Gitea's Fomantic leftovers (.ui.card(s), .ui.list) mapped to the Box look:
+ * 1px --borderColor-default, radius 6px, 16px content padding, --borderColor-muted separators.
+ */
+
+.ui.cards > .card,
+.ui.card {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+.ui.cards > .card > .content,
+.ui.card > .content {
+  padding: var(--base-size-16);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+.ui.cards > .card > .content:first-child,
+.ui.card > .content:first-child {
+  border-top: 0;
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+}
+
+.ui.cards > .card > :last-child,
+.ui.card > :last-child {
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
+}
+
+.ui.cards > .card > .content > .header:not(.ui),
+.ui.card > .content > .header:not(.ui) {
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-large);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-large);
+}
+
+.ui.cards > .card .meta > a:not(.ui),
+.ui.card .meta > a:not(.ui) {
+  color: var(--fgColor-muted);
+}
+
+.ui.cards a.card:hover,
+a.ui.card:hover {
+  border-color: var(--borderColor-default);
+  background: var(--bgColor-default);
+}
+
+.ui.divided.list > .item {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+.ui.divided.list > .item:first-child {
+  border-top: 0;
+}

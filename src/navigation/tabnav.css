@@ -1,0 +1,121 @@
+/*
+ * TabNav — github.com .tabnav / .tabnav-tab (live stylesheet 2026-09-30), used for the PR tabs
+ * (Conversation / Commits / Files changed: repo/pulls/tab_menu.tmpl), the markdown editor Write/Preview tabs and
+ * the webhook history tabs: `.ui.tabular.menu` that is not an UnderlineNav (`.pointing`).
+ *   bar: border-bottom 1px --borderColor-default
+ *   tab: padding 8px 12px, 14px / 23px, --fgColor-default (github.com PR tabs, PullRequestHeaderTabNav, measured
+ *        2026-09-30), 1px transparent border (no bottom), radius 6 6 0 0
+ *   selected: --fgColor-default on --bgColor-default with --borderColor-default border, overlapping the bar rule
+ *   icon 16px muted 8px before the text (mr-2); counter 8px after, colour inherited
+ * Also: the issue / PR list Open / Closed state links (repo/issue/openclose.tmpl, `.small-menu-items`), which
+ * github.com draws as text links with an icon and a count: selected --fgColor-default semibold, others muted.
+ */
+
+.ui.tabular.menu:not(.pointing) {
+  gap: 0;
+  min-height: 0;
+  margin: 0;
+  border: 0;
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0;
+  background: transparent;
+}
+
+.ui.tabular.menu:not(.pointing) .item {
+  display: flex;
+  align-items: center;
+  gap: var(--control-medium-gap);
+  padding: var(--base-size-8) var(--control-medium-paddingInline-normal);
+  margin: 0 0 calc(var(--borderWidth-thin) * -1);
+  border: var(--borderWidth-thin) solid transparent;
+  border-bottom: 0;
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+  background: transparent;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: calc(var(--base-size-24) - var(--borderWidth-thin));
+  text-decoration: none;
+  transition: color var(--base-duration-200) var(--base-easing-easeInOut);
+}
+
+.ui.tabular.menu:not(.pointing) .item:hover {
+  background: transparent;
+  color: var(--fgColor-default);
+}
+
+.ui.tabular.menu:not(.pointing) .active.item,
+.ui.tabular.menu:not(.pointing) .active.item:hover {
+  border-color: var(--borderColor-default);
+  border-top-width: var(--borderWidth-thin);
+  background: var(--bgColor-default);
+  color: var(--fgColor-default);
+}
+
+.ui.tabular.menu:not(.pointing) .item > .svg {
+  margin: 0;
+  color: var(--fgColor-muted);
+}
+
+.ui.tabular.menu:not(.pointing) .item > .ui.label {
+  display: inline-flex;
+  align-items: center;
+  min-width: var(--base-size-20);
+  height: var(--base-size-20);
+  padding: 0 var(--base-size-6);
+  margin: 0;
+  border: var(--borderWidth-thin) solid var(--counter-borderColor);
+  border-radius: var(--borderRadius-full);
+  background: var(--counter-bgColor-muted);
+  color: inherit;
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-medium);
+  line-height: var(--base-text-lineHeight-normal);
+}
+
+/* ---------- Open / Closed state links in issue / PR / milestone lists (github.com: 30px tall, padding 0 8px) ---------- */
+.small-menu-items.ui.compact.menu {
+  gap: var(--base-size-4);
+  min-height: calc(var(--base-size-32) - var(--base-size-2));
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.small-menu-items.ui.compact.menu .item {
+  gap: var(--base-size-4);
+  min-height: calc(var(--base-size-32) - var(--base-size-2));
+  padding: 0 var(--control-medium-paddingInline-condensed);
+  border-radius: var(--borderRadius-medium);
+  background: transparent;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+  text-decoration: none;
+}
+
+.small-menu-items.ui.compact.menu .item::before {
+  display: none;
+}
+
+.small-menu-items.ui.compact.menu .item:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+.small-menu-items.ui.compact.menu .active.item,
+.small-menu-items.ui.compact.menu .active.item:hover {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.small-menu-items.ui.compact.menu .active.item {
+  background: transparent;
+}
+
+.small-menu-items.ui.compact.menu .item > .svg {
+  margin: 0;
+}

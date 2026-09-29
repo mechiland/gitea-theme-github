@@ -1,0 +1,6 @@
+/* gh-important: Gitea modules/header.css:165 `.attention-header { padding: .5em .75em !important;
+ * color: var(--color-text) !important }`. GitHub .markdown-alert: padding 8px 16px, color inherit. */
+.markup blockquote.attention-header {
+  padding: var(--base-size-8) var(--base-size-16) !important;
+  color: inherit !important;
+}

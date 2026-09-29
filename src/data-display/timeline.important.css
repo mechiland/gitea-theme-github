@@ -1,0 +1,36 @@
+/* gh-important: timeline state badges are coloured with Tailwind utilities (tw-bg-*, !important) that map to
+   foreground tokens. github.com fills them with the *-emphasis background tokens: reopened → open, closed issue →
+   done (purple), closed PR → closed (red), merged → done, dismissed/neutral → neutral emphasis. */
+.timeline-item .badge.tw-bg-green {
+  background-color: var(--bgColor-open-emphasis) !important;
+}
+
+.timeline-item .badge.tw-bg-red {
+  background-color: var(--bgColor-done-emphasis) !important;
+}
+
+.page-content:has(.pull.tabular.menu) .timeline-item .badge.tw-bg-red,
+.timeline-item .badge.tw-bg-red:not(:has(.octicon-issue-closed)) {
+  background-color: var(--bgColor-closed-emphasis) !important;
+}
+
+.timeline-item .badge.tw-bg-purple {
+  background-color: var(--bgColor-done-emphasis) !important;
+}
+
+.timeline-item .badge.tw-bg-grey {
+  background-color: var(--bgColor-neutral-emphasis) !important;
+}
+
+.timeline-item .badge.tw-text-white:is(.tw-bg-green, .tw-bg-red, .tw-bg-purple, .tw-bg-grey) {
+  color: var(--fgColor-onEmphasis) !important;
+}
+
+/* a plain "reviewed" (comment review, type 2) badge is rendered `badge tw-text-white` with no fill: github.com
+   shows the muted octicon on the muted badge */
+.timeline-item .badge.tw-text-white:not(.tw-bg-green, .tw-bg-red, .tw-bg-purple, .tw-bg-grey) {
+  color: var(--fgColor-muted) !important;
+}
+
+/* Gitea repo.css: `.comment-list .timeline-item:first-child:not(.commit) { padding-top: 0 !important }` keeps the
+   first item flush; github.com's first comment also starts at the top, so only the event rows are restated. */

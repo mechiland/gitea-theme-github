@@ -1,0 +1,57 @@
+/* Footnotes. github.com: <section class="footnotes" data-footnotes><ol><li id="user-content-fn-1">…
+ * → 12px, fgColor-muted, border-top 1px borderColor-default; ol padding-left 16px; :target li gets a 2px
+ * accent-emphasis ring; references read "[1]".
+ * Gitea (goldmark footnote extension, sanitized) renders <div><hr><ol><li id="fn:user-content-1">…</div>
+ * and references <sup id="fnref:user-content-1"><a href="#fn:user-content-1">1 </a></sup>. The hr becomes
+ * the section's top border (0 margin, the preceding block's 16px bottom margin stays). */
+.markup div:has(> ol > li[id^="fn:"]) {
+  font-size: var(--text-body-size-small);
+  color: var(--fgColor-muted);
+}
+
+.markup div:has(> ol > li[id^="fn:"]) > hr {
+  margin: 0;
+}
+
+.markup ol:has(> li[id^="fn:"]) {
+  padding-left: var(--base-size-16);
+}
+
+.markup ol:has(> li[id^="fn:"]) ul {
+  display: inline-block;
+  padding-left: var(--base-size-16);
+  margin-top: var(--base-size-16);
+}
+
+.markup li[id^="fn:"] {
+  position: relative;
+}
+
+.markup li[id^="fn:"]:target {
+  color: var(--fgColor-default);
+}
+
+.markup li[id^="fn:"]:target::before {
+  position: absolute;
+  top: var(--base-size-negative-8);
+  right: var(--base-size-negative-8);
+  bottom: var(--base-size-negative-8);
+  left: var(--base-size-negative-24);
+  pointer-events: none;
+  content: "";
+  border: 2px solid var(--borderColor-accent-emphasis);
+  border-radius: var(--borderRadius-medium);
+}
+
+/* "[1]": inline-flex drops the trailing space Gitea leaves inside the link text. */
+.markup sup[id^="fnref:"] > a {
+  display: inline-flex;
+}
+
+.markup sup[id^="fnref:"] > a::before {
+  content: "[";
+}
+
+.markup sup[id^="fnref:"] > a::after {
+  content: "]";
+}

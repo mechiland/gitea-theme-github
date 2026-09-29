@@ -1,0 +1,224 @@
+/*
+ * UnderlineNav — github.com .UnderlineNav (read from the live stylesheet 2026-09-30):
+ *   nav: min-height 48px, box-shadow inset 0 -1px 0 --borderColor-muted, items 8px apart, vertically centred
+ *   item: 30px line box, padding 0 8px, 14px --fgColor-default, radius 6, hover bg --control-transparent-bgColor-hover
+ *   icon: 16px --fgColor-muted, 8px gap; counter 8px after the text
+ *   current: semibold + ::after 2px bar (--underlineNav-borderColor-active, radius 6) on the nav's bottom edge
+ * Gitea: repo tabs (repo/header.tmpl), profile / org / explore tabs, image diff tabs — all
+ * `overflow-menu.ui.secondary.pointing[.tabular].menu > .overflow-menu-items > a.item`.
+ */
+
+.ui.secondary.pointing.menu {
+  align-items: center;
+  gap: var(--control-medium-gap);
+  min-height: var(--base-size-48);
+  margin-left: 0;
+  margin-right: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: inset 0 calc(var(--borderWidth-thin) * -1) 0 var(--borderColor-muted);
+}
+
+overflow-menu .overflow-menu-items {
+  align-items: center;
+  gap: var(--control-medium-gap);
+  min-width: 0;
+}
+
+.ui.secondary.pointing.menu .item {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  gap: var(--control-medium-gap);
+  position: relative;
+  min-height: calc(var(--base-size-32) - var(--base-size-2));
+  padding: 0 var(--control-medium-paddingInline-condensed);
+  margin: 0;
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+  background: transparent;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: calc(var(--base-size-32) - var(--base-size-2));
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color var(--base-duration-100) var(--base-easing-easeOut);
+}
+
+.ui.secondary.pointing.menu a.item:hover,
+.ui.secondary.pointing.menu .dropdown.item:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+  text-decoration: none;
+}
+
+.ui.secondary.pointing.menu a.item:active,
+.ui.secondary.pointing.menu .dropdown.item:active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+.ui.secondary.pointing.menu .active.item,
+.ui.secondary.pointing.menu .active.item:hover {
+  border: 0;
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.ui.secondary.pointing.menu .active.item:hover {
+  background: var(--control-transparent-bgColor-hover);
+}
+
+.ui.secondary.pointing.menu .item::after {
+  display: none;
+}
+
+.ui.secondary.pointing.menu .active.item::after {
+  content: "";
+  display: block;
+  visibility: visible;
+  position: absolute;
+  top: auto;
+  left: auto;
+  right: 50%;
+  bottom: calc(50% - var(--base-size-24));
+  z-index: 1;
+  width: 100%;
+  height: var(--base-size-2);
+  margin: 0;
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+  background: var(--underlineNav-borderColor-active);
+  transform: translate(50%, -50%);
+}
+
+.ui.secondary.pointing.menu .item > .svg {
+  margin: 0;
+  color: var(--underlineNav-iconColor-rest);
+}
+
+.ui.secondary.pointing.menu .active.item > .svg {
+  color: inherit;
+}
+
+/* counter (Primer CounterLabel inside UnderlineNav: 20px, 12px medium, neutral-muted pill) */
+.ui.secondary.pointing.menu .item > .ui.label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--base-size-20);
+  height: var(--base-size-20);
+  padding: 0 var(--base-size-6);
+  margin: 0;
+  border: var(--borderWidth-thin) solid var(--counter-borderColor);
+  border-radius: var(--borderRadius-full);
+  background: var(--counter-bgColor-muted);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-medium);
+  line-height: var(--base-text-lineHeight-normal);
+}
+
+/* space-filler before "Settings" */
+overflow-menu .overflow-menu-items .item-flex-space {
+  align-self: stretch;
+}
+
+/* ---------- overflow "…" button and its popup (ActionMenu) ---------- */
+/* github.com UnderlineNav "More" button: a 32px default IconButton (bordered square, muted kebab) */
+overflow-menu .overflow-menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex: 0 0 auto;
+  width: var(--control-medium-size);
+  height: var(--control-medium-size);
+  border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--fgColor-muted);
+  transition: background-color var(--base-duration-100) var(--base-easing-easeOut);
+}
+
+overflow-menu .overflow-menu-button:hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+  color: var(--fgColor-muted);
+}
+
+overflow-menu .overflow-menu-button:active {
+  background: var(--button-default-bgColor-active);
+}
+
+overflow-menu .overflow-menu-button:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: calc(var(--borderWidth-thick) * -1);
+}
+
+overflow-menu.ui.secondary.pointing.menu .overflow-menu-button.active {
+  position: relative;
+  padding: 0;
+  border-bottom-width: var(--borderWidth-thin);
+  background: var(--button-default-bgColor-rest);
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+overflow-menu.ui.secondary.pointing.menu .overflow-menu-button.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(50% - var(--base-size-24) + var(--base-size-2) / 2);
+  height: var(--base-size-2);
+  border-radius: var(--borderRadius-medium);
+  background: var(--underlineNav-borderColor-active);
+}
+
+overflow-menu .overflow-menu-popup {
+  top: calc(100% + var(--base-size-4));
+  min-width: calc(var(--base-size-128) + var(--base-size-64));
+  padding: var(--base-size-8) 0;
+  border: 0;
+  border-radius: var(--borderRadius-large);
+  background: var(--overlay-bgColor);
+  box-shadow: var(--shadow-floating-small);
+  color: var(--fgColor-default);
+}
+
+overflow-menu .overflow-menu-popup::before,
+overflow-menu .overflow-menu-popup::after {
+  display: none;
+}
+
+overflow-menu .overflow-menu-popup > .item {
+  gap: var(--control-medium-gap);
+  width: calc(100% - var(--base-size-16));
+  min-height: var(--control-medium-size);
+  margin: 0 var(--base-size-8);
+  border-radius: var(--borderRadius-medium);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+}
+
+overflow-menu .overflow-menu-popup > .item > .svg {
+  color: var(--fgColor-muted);
+}
+
+overflow-menu .overflow-menu-popup > .item.active {
+  position: relative;
+  font-weight: var(--base-text-weight-semibold);
+}
+
+overflow-menu .overflow-menu-popup > .item.active::after {
+  content: "";
+  position: absolute;
+  top: var(--base-size-2);
+  bottom: var(--base-size-2);
+  left: 0;
+  width: var(--base-size-2);
+  background: var(--underlineNav-borderColor-active);
+}
