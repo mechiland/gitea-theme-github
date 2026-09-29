@@ -1,0 +1,33 @@
+/* Primer base/base.scss: body text 14px / 1.5, fgColor-default on bgColor-default.
+ * Gitea: html, body { font-size: 14px } and body { line-height: 20px } (base.css:75-90). */
+html {
+  /* no white flash / overscroll band in dark mode */
+  background-color: var(--bgColor-default);
+}
+
+body {
+  font-family: var(--fonts-regular); /* = Primer --fontStack-sansSerif (mapped in tokens) + Gitea's CJK override hook */
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-lineHeight-medium);
+  color: var(--fgColor-default);
+  background-color: var(--bgColor-default);
+  letter-spacing: normal;
+}
+
+/* Gitea: p { line-height: 1.4285 } (20px). GitHub paragraphs inherit the 1.5 body line-height. */
+p:where(:not(.markup *)) {
+  line-height: inherit;
+}
+
+/* Primer base/base.scss: p { margin: 0 0 10px } (Gitea: 0 0 1em = 14px). Only the bottom margin of
+ * non-last paragraphs; Gitea's :first-child/:last-child resets and its component paragraphs (forms, menus,
+ * home hero, markdown editor preview) keep their own rules. Tailwind tw-m* utilities are !important and still win. */
+p:where(:not(:last-child, .markup *, .ui.form > p, .ui.menu *, .home *, .EasyMDEContainer *)) {
+  margin-bottom: calc(var(--base-size-8) + var(--base-size-2));
+}
+
+/* Primer base/typography-base.scss: small { font-size: 90% } (normalize sets 80%) */
+small:where(:not(.markup *)) {
+  font-size: 90%;
+}

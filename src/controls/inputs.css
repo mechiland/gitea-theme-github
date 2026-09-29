@@ -1,0 +1,302 @@
+/*
+ * Text inputs & textareas — Primer React TextInput / Textarea (prc-components-TextInputBaseWrapper):
+ * 32px, padding-inline 12px, 14px/20px, bg --bgColor-default, 1px --control-borderColor-rest,
+ * radius 6px, inset shadow; focus = accent border + 2px accent outline (offset -1px);
+ * disabled = --control-bgColor-disabled; error = --borderColor-danger-emphasis.
+ * Small (Gitea .small/.tiny/.mini inputs) = 28px, padding-inline 8px, 12px.
+ */
+
+:is(
+  input:not([type]),
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="search"],
+  input[type="url"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"]
+) {
+  height: var(--control-medium-size);
+  margin: 0;
+  padding: 0 var(--control-medium-paddingInline-normal);
+  border: var(--borderWidth-thin) solid var(--control-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+  box-shadow: var(--shadow-inset);
+  color: var(--fgColor-default);
+  font-family: inherit;
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+  vertical-align: middle;
+}
+
+textarea {
+  margin: 0;
+  padding: var(--base-size-8) var(--control-medium-paddingInline-normal);
+  border: var(--borderWidth-thin) solid var(--control-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+  box-shadow: var(--shadow-inset);
+  color: var(--fgColor-default);
+  font-family: inherit;
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+}
+
+:is(input, textarea)::placeholder {
+  color: var(--fgColor-muted);
+  opacity: 1;
+}
+
+:is(
+  input:not([type]),
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="search"],
+  input[type="url"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  textarea
+):focus {
+  border-color: var(--borderColor-accent-emphasis);
+  outline: var(--borderWidth-thick) solid var(--borderColor-accent-emphasis);
+  outline-offset: -1px;
+  background: var(--bgColor-default);
+  color: var(--fgColor-default);
+}
+
+/* readonly (e.g. clone URL): Primer uses the muted surface for read-only copy fields */
+:is(
+  input:not([type]),
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="search"],
+  input[type="url"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  textarea
+)[readonly] {
+  background: var(--bgColor-muted);
+}
+
+/* disabled */
+:is(
+  input:not([type]),
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="search"],
+  input[type="url"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  textarea
+):disabled {
+  border-color: var(--control-borderColor-disabled);
+  background: var(--control-bgColor-disabled);
+  box-shadow: none;
+  color: var(--control-fgColor-disabled);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.ui.disabled.input,
+.ui.input:not(.disabled) input[disabled] {
+  opacity: 1;
+}
+
+.ui.disabled.input > input {
+  border-color: var(--control-borderColor-disabled);
+  background: var(--control-bgColor-disabled);
+  box-shadow: none;
+  color: var(--control-fgColor-disabled);
+}
+
+/* ---------- .ui.input wrapper ---------- */
+.ui.input {
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+}
+
+.ui.input > input {
+  padding: 0 var(--control-medium-paddingInline-normal);
+  line-height: var(--base-size-20);
+}
+
+.ui.small.input > input,
+.ui.tiny.input > input,
+.ui.mini.input > input {
+  height: var(--control-small-size);
+  padding: 0 var(--control-small-paddingInline-condensed);
+  font-size: var(--text-body-size-small);
+}
+
+.ui.small.input,
+.ui.tiny.input,
+.ui.mini.input {
+  font-size: var(--text-body-size-small);
+}
+
+/* icon inside input (Primer leading/trailing visual) */
+.ui.icon.input > input {
+  padding-right: var(--base-size-32);
+}
+
+.ui[class*="left icon"].input > input {
+  padding-right: var(--control-medium-paddingInline-normal);
+  padding-left: var(--base-size-32);
+}
+
+.ui.icon.input > i.icon {
+  width: var(--base-size-32);
+  color: var(--fgColor-muted);
+  opacity: 1;
+}
+
+/* ---------- error / validation ---------- */
+.ui.input.error > input,
+.ui.form .field.error :is(input:not([type="checkbox"], [type="radio"]), textarea, select),
+.ui.form .fields.error .field :is(input:not([type="checkbox"], [type="radio"]), textarea, select) {
+  border-color: var(--borderColor-danger-emphasis);
+  background: var(--bgColor-default);
+  color: var(--fgColor-default);
+}
+
+.ui.input.error > input:focus,
+.ui.form .field.error :is(input:not([type="checkbox"], [type="radio"]), textarea, select):focus,
+.ui.form .fields.error .field :is(input:not([type="checkbox"], [type="radio"]), textarea, select):focus {
+  border-color: var(--control-borderColor-danger);
+  outline: var(--borderWidth-thick) solid var(--control-borderColor-danger);
+  outline-offset: -1px;
+  background: var(--bgColor-default);
+}
+
+/* ---------- input group (.ui.action.input: input + attached button / dropdown) ---------- */
+.ui.action.input {
+  align-items: stretch;
+}
+
+.ui.action.input:not([class*="left action"]) > input,
+.ui.action.input:not([class*="left action"]) > .ui.input > input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ui.action.input > input:focus {
+  position: relative;
+  z-index: 1;
+}
+
+.ui.action.input > .button,
+.ui.action.input > .buttons > .button {
+  align-self: stretch;
+  height: auto;
+  min-height: 0;
+  margin: 0 0 0 -1px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.ui.action.input > .button:last-child,
+.ui.action.input > .buttons:last-child > .button:last-child {
+  border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
+}
+
+.ui.action.input > .button:first-child,
+.ui.action.input > .buttons:first-child > .button:first-child {
+  margin-left: 0;
+  border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
+}
+
+.ui.action.input > .button:hover,
+.ui.action.input > .button:focus-visible {
+  z-index: 1;
+}
+
+.ui.action.input > .ui.dropdown.selection {
+  margin-left: -1px;
+  border-radius: 0;
+}
+
+.ui.action.input > .ui.dropdown.selection:first-child {
+  margin-left: 0;
+  border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
+}
+
+.ui.action.input > .ui.dropdown.selection:last-child {
+  border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
+}
+
+.ui.form .ui[class*="left action"].input > input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ui.action.input.error > .ui.button,
+.ui.form .field.error > .ui.action.input > .ui.button {
+  border-top-color: var(--borderColor-danger-emphasis);
+  border-bottom-color: var(--borderColor-danger-emphasis);
+}
+
+/* ---------- file input: bare field, the picker button is a Primer default button ---------- */
+input[type="file"],
+.ui.form input[type="file"] {
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+}
+
+input[type="file"]::file-selector-button {
+  height: var(--control-medium-size);
+  margin: 0 var(--base-size-8) 0 0;
+  padding: 0 var(--control-medium-paddingInline-normal);
+  border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-default-fgColor-rest);
+  font-family: inherit;
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-medium);
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+}
+
+input[type="file"]:focus-visible {
+  outline: none;
+}
+
+input[type="file"]:focus-visible::file-selector-button {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: var(--focus-outline-offset);
+}

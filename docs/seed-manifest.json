@@ -1,0 +1,1260 @@
+{
+  "generated_at": "2026-09-29T16:57:15.685Z",
+  "generator": "tools/seed/seed.mjs",
+  "gitea_base": "http://localhost:3000",
+  "note": "Everything listed here was created by the seed script. Seeded users share the password documented in tools/seed/README.md. Pre-seed baseline (admin, ai, admin/jiri, ai/jiri) is untouched.",
+  "run": {
+    "changes": 0,
+    "failures": []
+  },
+  "users": [
+    {
+      "login": "alice-dev",
+      "full_name": "Alice Anders",
+      "gitea_url": "http://localhost:3000/alice-dev",
+      "github_url": null
+    },
+    {
+      "login": "bob-dev",
+      "full_name": "Bob Brennan",
+      "gitea_url": "http://localhost:3000/bob-dev",
+      "github_url": null
+    },
+    {
+      "login": "carol-ops",
+      "full_name": "Carol Chen",
+      "gitea_url": "http://localhost:3000/carol-ops",
+      "github_url": null
+    },
+    {
+      "login": "dave-qa",
+      "full_name": "Dave Diaz",
+      "gitea_url": "http://localhost:3000/dave-qa",
+      "github_url": null
+    }
+  ],
+  "orgs": [
+    {
+      "name": "octo-org",
+      "gitea_url": "http://localhost:3000/octo-org",
+      "teams": [
+        {
+          "name": "Owners",
+          "gitea_url": "http://localhost:3000/org/octo-org/teams/owners"
+        },
+        {
+          "name": "core",
+          "gitea_url": "http://localhost:3000/org/octo-org/teams/core"
+        },
+        {
+          "name": "triage",
+          "gitea_url": "http://localhost:3000/org/octo-org/teams/triage"
+        }
+      ]
+    },
+    {
+      "name": "pixel-guild",
+      "gitea_url": "http://localhost:3000/pixel-guild",
+      "teams": []
+    }
+  ],
+  "repos": [
+    {
+      "full_name": "octo-org/grex",
+      "source": "github-migration",
+      "github_repo": "pemistahl/grex",
+      "why": "Rust CLI: 7 milestones (6 closed), 16 releases with notes, 13 labels, README with tables/images, ~290 merged/closed/open PRs",
+      "gitea_url": "http://localhost:3000/octo-org/grex",
+      "github_url": "https://github.com/pemistahl/grex",
+      "default_branch": "main",
+      "head_sha": "99cc347707375e00514f938b76d885a201dfc110",
+      "open_issues": 8,
+      "open_prs": 12,
+      "release_tags": [
+        "v1.4.6",
+        "v1.4.5",
+        "v1.4.4",
+        "v1.4.3",
+        "v1.4.2",
+        "v1.4.1",
+        "v1.4.0",
+        "v1.3.0",
+        "v1.2.0",
+        "v1.1.0",
+        "v1.0.0",
+        "v0.3.2",
+        "v0.3.1",
+        "v0.3.0",
+        "v0.2.0",
+        "v0.1.0"
+      ],
+      "release_count": 16,
+      "milestones": [
+        {
+          "title": "grex 1.1.0",
+          "state": "closed"
+        },
+        {
+          "title": "grex 1.2.0",
+          "state": "closed"
+        },
+        {
+          "title": "grex 1.3.0",
+          "state": "closed"
+        },
+        {
+          "title": "grex 1.4.0",
+          "state": "closed"
+        },
+        {
+          "title": "grex 1.4.2",
+          "state": "closed"
+        },
+        {
+          "title": "grex 1.4.3",
+          "state": "closed"
+        },
+        {
+          "title": "grex 1.5.0",
+          "state": "open"
+        }
+      ],
+      "wiki_pages": [],
+      "most_commented_issue": {
+        "number": 35,
+        "comments": 9,
+        "title": "Provide more installation options"
+      },
+      "pulls": {
+        "merged": 337,
+        "closed_unmerged": 348,
+        "open": 358,
+        "largest_merged": {
+          "number": 42,
+          "changed_files": 53,
+          "additions": 7349,
+          "deletions": 2705
+        },
+        "counts": {
+          "merged": 177,
+          "closed_unmerged": 103,
+          "open": 12
+        }
+      }
+    },
+    {
+      "full_name": "octo-org/prom_ex",
+      "source": "github-migration",
+      "github_repo": "akoutmos/prom_ex",
+      "why": "Elixir library: 3 milestones, 16 releases with notes, README with many images and tables, open/merged/closed PRs",
+      "gitea_url": "http://localhost:3000/octo-org/prom_ex",
+      "github_url": "https://github.com/akoutmos/prom_ex",
+      "default_branch": "master",
+      "head_sha": "2ebcd0ed4a6f68f7cc802f99b6fbc3208650ddc3",
+      "open_issues": 44,
+      "open_prs": 13,
+      "release_tags": [
+        "1.12.0",
+        "1.11.0",
+        "1.10.0",
+        "1.9.0",
+        "1.8.0",
+        "1.7.1",
+        "1.7.0",
+        "1.6.0",
+        "1.5.0",
+        "1.4.1",
+        "1.4.0",
+        "1.3.0",
+        "1.2.0",
+        "1.1.1",
+        "1.1.0",
+        "0.1.2-alpha"
+      ],
+      "release_count": 16,
+      "milestones": [
+        {
+          "title": "1.7.0",
+          "state": "open"
+        },
+        {
+          "title": "1.8.0",
+          "state": "open"
+        },
+        {
+          "title": "1.9.0",
+          "state": "open"
+        }
+      ],
+      "wiki_pages": [],
+      "most_commented_issue": {
+        "number": 101,
+        "comments": 18,
+        "title": "Empty grafana dashboards "
+      },
+      "pulls": {
+        "merged": 286,
+        "closed_unmerged": 287,
+        "open": 291,
+        "largest_merged": {
+          "number": 249,
+          "changed_files": 24,
+          "additions": 1661,
+          "deletions": 5334
+        },
+        "counts": {
+          "merged": 138,
+          "closed_unmerged": 23,
+          "open": 13
+        }
+      }
+    },
+    {
+      "full_name": "octo-org/folderify",
+      "source": "github-migration",
+      "github_repo": "lgarron/folderify",
+      "why": "Small Rust CLI with a real GitHub wiki, 1 milestone, 53 releases, README images",
+      "gitea_url": "http://localhost:3000/octo-org/folderify",
+      "github_url": "https://github.com/lgarron/folderify",
+      "default_branch": "main",
+      "head_sha": "ee5c14d4c7d28dbc551430dd5b5c36e497059c07",
+      "open_issues": 19,
+      "open_prs": 3,
+      "release_tags": [
+        "v4.1.3",
+        "v4.1.2",
+        "v4.1.1",
+        "v4.1.0",
+        "v4.0.1",
+        "v4.0.0",
+        "v3.2.4",
+        "v3.2.2",
+        "v3.2.1",
+        "v3.2.0",
+        "v3.1.2",
+        "v3.1.1",
+        "v3.1.0",
+        "v3.0.13",
+        "v3.0.12",
+        "v3.0.11",
+        "v2.4.2",
+        "v2.4.1",
+        "v3.0.10",
+        "v3.0.9"
+      ],
+      "release_count": 53,
+      "milestones": [
+        {
+          "title": "macOS 26 Tahoe",
+          "state": "open"
+        }
+      ],
+      "wiki_pages": [
+        "Home"
+      ],
+      "most_commented_issue": {
+        "number": 41,
+        "comments": 14,
+        "title": "Dark mode icons"
+      },
+      "pulls": {
+        "merged": 82,
+        "closed_unmerged": 50,
+        "open": 108,
+        "largest_merged": {
+          "number": 13,
+          "changed_files": 5,
+          "additions": 0,
+          "deletions": 0
+        },
+        "counts": {
+          "merged": 6,
+          "closed_unmerged": 3,
+          "open": 3
+        }
+      }
+    },
+    {
+      "full_name": "octo-org/theme-playground",
+      "source": "native",
+      "gitea_url": "http://localhost:3000/octo-org/theme-playground",
+      "github_url": null,
+      "head_sha": "5ccec59aa9bf0d8870ce54ff2136624c3fe7aa67",
+      "stars": 3,
+      "forks": 1
+    },
+    {
+      "full_name": "octo-org/.profile",
+      "source": "native",
+      "gitea_url": "http://localhost:3000/octo-org/.profile",
+      "github_url": null
+    },
+    {
+      "full_name": "alice-dev/.profile",
+      "source": "native",
+      "gitea_url": "http://localhost:3000/alice-dev/.profile",
+      "github_url": null
+    },
+    {
+      "full_name": "bob-dev/theme-playground",
+      "source": "fork",
+      "gitea_url": "http://localhost:3000/bob-dev/theme-playground",
+      "github_url": null
+    }
+  ],
+  "playground": {
+    "repo": "octo-org/theme-playground",
+    "gitea_url": "http://localhost:3000/octo-org/theme-playground",
+    "issues": {
+      "roadmap": {
+        "number": 1,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/1"
+      },
+      "alerts": {
+        "number": 2,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/2"
+      },
+      "diff-overflow": {
+        "number": 3,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/3"
+      },
+      "kbd": {
+        "number": 4,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/4"
+      },
+      "typos": {
+        "number": 5,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/5"
+      },
+      "scoped": {
+        "number": 6,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/6"
+      },
+      "motion": {
+        "number": 7,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/7"
+      },
+      "ci-node18": {
+        "number": 8,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/8"
+      },
+      "dup": {
+        "number": 9,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/9"
+      },
+      "mermaid": {
+        "number": 10,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/10"
+      },
+      "a11y": {
+        "number": 11,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/11"
+      },
+      "ie11": {
+        "number": 12,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/12"
+      },
+      "release-checklist": {
+        "number": 13,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/13"
+      },
+      "unicode": {
+        "number": 14,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/14"
+      },
+      "flaky-test": {
+        "number": 15,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/issues/15"
+      }
+    },
+    "notable": {
+      "pinned_issue": 1,
+      "issue_with_most_comments": 2,
+      "large_diff_pr": 16,
+      "merged_pr": 17,
+      "closed_unmerged_pr": 18,
+      "draft_pr": 19,
+      "open_pr": 20
+    },
+    "pulls": {
+      "large_diff": {
+        "number": 16,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/pulls/16",
+        "files_url": "http://localhost:3000/octo-org/theme-playground/pulls/16/files"
+      },
+      "merged": {
+        "number": 17,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/pulls/17",
+        "files_url": "http://localhost:3000/octo-org/theme-playground/pulls/17/files"
+      },
+      "closed_unmerged": {
+        "number": 18,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/pulls/18",
+        "files_url": "http://localhost:3000/octo-org/theme-playground/pulls/18/files"
+      },
+      "draft": {
+        "number": 19,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/pulls/19",
+        "files_url": "http://localhost:3000/octo-org/theme-playground/pulls/19/files"
+      },
+      "open": {
+        "number": 20,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/pulls/20",
+        "files_url": "http://localhost:3000/octo-org/theme-playground/pulls/20/files"
+      }
+    },
+    "releases": [
+      {
+        "tag": "v0.9.0",
+        "draft": false,
+        "prerelease": false,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/releases/tag/v0.9.0"
+      },
+      {
+        "tag": "v1.0.0",
+        "draft": false,
+        "prerelease": false,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/releases/tag/v1.0.0"
+      },
+      {
+        "tag": "v1.1.0-rc.1",
+        "draft": false,
+        "prerelease": true,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/releases/tag/v1.1.0-rc.1"
+      },
+      {
+        "tag": "v1.2.0",
+        "draft": true,
+        "prerelease": false,
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/releases/tag/v1.2.0"
+      }
+    ],
+    "wiki": [
+      {
+        "title": "Home",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/wiki/Home"
+      },
+      {
+        "title": "Getting-Started",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/wiki/Getting-Started"
+      },
+      {
+        "title": "Architecture",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/wiki/Architecture"
+      },
+      {
+        "title": "FAQ",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/wiki/FAQ"
+      },
+      {
+        "title": "_Sidebar",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/wiki/_Sidebar"
+      }
+    ],
+    "projects": [
+      {
+        "id": 2,
+        "title": "Theme v1 board",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/projects/2"
+      },
+      {
+        "id": 3,
+        "title": "Bug triage",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/projects/3"
+      }
+    ],
+    "actions_runs": [
+      {
+        "id": 27,
+        "run_number": 22,
+        "event": "push",
+        "head_branch": "main",
+        "status": "queued",
+        "title": "Merge pull request 'Smoke PR 20260929165600' (#28) from smoke-20260929165600 into main",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/27"
+      },
+      {
+        "id": 26,
+        "run_number": 21,
+        "event": "pull_request",
+        "status": "queued",
+        "title": "Smoke edit 20260929165600",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/26"
+      },
+      {
+        "id": 25,
+        "run_number": 20,
+        "event": "push",
+        "head_branch": "main",
+        "status": "queued",
+        "title": "Merge pull request 'Smoke PR 20260929165344' (#26) from smoke-20260929165344 into main",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/25"
+      },
+      {
+        "id": 24,
+        "run_number": 19,
+        "event": "pull_request",
+        "status": "queued",
+        "title": "Smoke edit 20260929165344",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/24"
+      },
+      {
+        "id": 23,
+        "run_number": 18,
+        "event": "push",
+        "head_branch": "main",
+        "status": "queued",
+        "title": "Merge pull request 'Smoke PR 20260929164511' (#24) from smoke-20260929164511 into main",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/23"
+      },
+      {
+        "id": 22,
+        "run_number": 17,
+        "event": "pull_request",
+        "status": "queued",
+        "title": "Smoke edit 20260929164511",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/22"
+      },
+      {
+        "id": 21,
+        "run_number": 16,
+        "event": "push",
+        "head_branch": "main",
+        "status": "queued",
+        "title": "Merge pull request 'Smoke PR 20260929163148' (#22) from smoke-20260929163148 into main",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/21"
+      },
+      {
+        "id": 20,
+        "run_number": 15,
+        "event": "pull_request",
+        "status": "queued",
+        "title": "Smoke edit 20260929163148",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/20"
+      },
+      {
+        "id": 19,
+        "run_number": 14,
+        "event": "workflow_dispatch",
+        "head_branch": "main",
+        "status": "queued",
+        "title": "Merge pull request 'docs: fix typos in getting started guide' (#17) from docs/fix-typos into main",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/19"
+      },
+      {
+        "id": 18,
+        "run_number": 13,
+        "event": "pull_request",
+        "status": "queued",
+        "title": "Show keyboard shortcut hints on buttons",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/18"
+      },
+      {
+        "id": 17,
+        "run_number": 12,
+        "event": "pull_request",
+        "status": "queued",
+        "title": "WIP: dimmed dark palette",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/17"
+      },
+      {
+        "id": 16,
+        "run_number": 11,
+        "event": "pull_request",
+        "status": "queued",
+        "title": "Experiment: swap renderer for a streaming implementation",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/16"
+      },
+      {
+        "id": 15,
+        "run_number": 10,
+        "event": "push",
+        "head_branch": "main",
+        "status": "queued",
+        "title": "Merge pull request 'docs: fix typos in getting started guide' (#17) from docs/fix-typos into main",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/15"
+      },
+      {
+        "id": 14,
+        "run_number": 9,
+        "event": "pull_request",
+        "status": "queued",
+        "title": "docs: fix typos in getting started guide",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/14"
+      },
+      {
+        "id": 13,
+        "run_number": 8,
+        "event": "pull_request",
+        "status": "queued",
+        "title": "Address review feedback: document Resolve fallback",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/13"
+      },
+      {
+        "id": 12,
+        "run_number": 7,
+        "event": "pull_request",
+        "status": "queued",
+        "title": "Address review feedback: document Resolve fallback",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/12"
+      },
+      {
+        "id": 11,
+        "run_number": 6,
+        "event": "push",
+        "head_branch": "main",
+        "status": "queued",
+        "title": "docs: reference the first commit in the README",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/11"
+      },
+      {
+        "id": 10,
+        "run_number": 5,
+        "event": "push",
+        "head_branch": "main",
+        "status": "queued",
+        "title": "docs: reference the first commit in the README",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/10"
+      },
+      {
+        "id": 9,
+        "run_number": 4,
+        "event": "push",
+        "head_branch": "main",
+        "status": "queued",
+        "title": "docs: reference the first commit in the README",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/9"
+      },
+      {
+        "id": 8,
+        "run_number": 3,
+        "event": "push",
+        "head_branch": "main",
+        "status": "queued",
+        "title": "docs: reference the first commit in the README",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/8"
+      },
+      {
+        "id": 7,
+        "run_number": 2,
+        "event": "push",
+        "head_branch": "main",
+        "status": "queued",
+        "title": "docs: reference the first commit in the README",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/7"
+      },
+      {
+        "id": 6,
+        "run_number": 1,
+        "event": "push",
+        "head_branch": "main",
+        "status": "queued",
+        "title": "docs: reference the first commit in the README",
+        "gitea_url": "http://localhost:3000/octo-org/theme-playground/actions/runs/6"
+      }
+    ],
+    "actions_note": "Runs stay queued: the only runner (gitea-runner-1) is registered as a user-level runner of admin (owner_id=1), so it only executes jobs for repos owned by admin. Register an org/instance runner to execute them.",
+    "foreign_activity_note": "Items in theme-playground not listed here (e.g. \"Smoke issue/PR ...\" by admin) were created by other sessions, not by this script."
+  },
+  "migrated": {
+    "grex": {
+      "default_branch": "main",
+      "head_sha": "99cc347707375e00514f938b76d885a201dfc110",
+      "open_issues": 8,
+      "open_prs": 12,
+      "release_tags": [
+        "v1.4.6",
+        "v1.4.5",
+        "v1.4.4",
+        "v1.4.3",
+        "v1.4.2",
+        "v1.4.1",
+        "v1.4.0",
+        "v1.3.0",
+        "v1.2.0",
+        "v1.1.0",
+        "v1.0.0",
+        "v0.3.2",
+        "v0.3.1",
+        "v0.3.0",
+        "v0.2.0",
+        "v0.1.0"
+      ],
+      "release_count": 16,
+      "milestones": [
+        {
+          "title": "grex 1.1.0",
+          "state": "closed"
+        },
+        {
+          "title": "grex 1.2.0",
+          "state": "closed"
+        },
+        {
+          "title": "grex 1.3.0",
+          "state": "closed"
+        },
+        {
+          "title": "grex 1.4.0",
+          "state": "closed"
+        },
+        {
+          "title": "grex 1.4.2",
+          "state": "closed"
+        },
+        {
+          "title": "grex 1.4.3",
+          "state": "closed"
+        },
+        {
+          "title": "grex 1.5.0",
+          "state": "open"
+        }
+      ],
+      "wiki_pages": [],
+      "most_commented_issue": {
+        "number": 35,
+        "comments": 9,
+        "title": "Provide more installation options"
+      },
+      "pulls": {
+        "merged": 337,
+        "closed_unmerged": 348,
+        "open": 358,
+        "largest_merged": {
+          "number": 42,
+          "changed_files": 53,
+          "additions": 7349,
+          "deletions": 2705
+        },
+        "counts": {
+          "merged": 177,
+          "closed_unmerged": 103,
+          "open": 12
+        }
+      }
+    },
+    "prom_ex": {
+      "default_branch": "master",
+      "head_sha": "2ebcd0ed4a6f68f7cc802f99b6fbc3208650ddc3",
+      "open_issues": 44,
+      "open_prs": 13,
+      "release_tags": [
+        "1.12.0",
+        "1.11.0",
+        "1.10.0",
+        "1.9.0",
+        "1.8.0",
+        "1.7.1",
+        "1.7.0",
+        "1.6.0",
+        "1.5.0",
+        "1.4.1",
+        "1.4.0",
+        "1.3.0",
+        "1.2.0",
+        "1.1.1",
+        "1.1.0",
+        "0.1.2-alpha"
+      ],
+      "release_count": 16,
+      "milestones": [
+        {
+          "title": "1.7.0",
+          "state": "open"
+        },
+        {
+          "title": "1.8.0",
+          "state": "open"
+        },
+        {
+          "title": "1.9.0",
+          "state": "open"
+        }
+      ],
+      "wiki_pages": [],
+      "most_commented_issue": {
+        "number": 101,
+        "comments": 18,
+        "title": "Empty grafana dashboards "
+      },
+      "pulls": {
+        "merged": 286,
+        "closed_unmerged": 287,
+        "open": 291,
+        "largest_merged": {
+          "number": 249,
+          "changed_files": 24,
+          "additions": 1661,
+          "deletions": 5334
+        },
+        "counts": {
+          "merged": 138,
+          "closed_unmerged": 23,
+          "open": 13
+        }
+      }
+    },
+    "folderify": {
+      "default_branch": "main",
+      "head_sha": "ee5c14d4c7d28dbc551430dd5b5c36e497059c07",
+      "open_issues": 19,
+      "open_prs": 3,
+      "release_tags": [
+        "v4.1.3",
+        "v4.1.2",
+        "v4.1.1",
+        "v4.1.0",
+        "v4.0.1",
+        "v4.0.0",
+        "v3.2.4",
+        "v3.2.2",
+        "v3.2.1",
+        "v3.2.0",
+        "v3.1.2",
+        "v3.1.1",
+        "v3.1.0",
+        "v3.0.13",
+        "v3.0.12",
+        "v3.0.11",
+        "v2.4.2",
+        "v2.4.1",
+        "v3.0.10",
+        "v3.0.9"
+      ],
+      "release_count": 53,
+      "milestones": [
+        {
+          "title": "macOS 26 Tahoe",
+          "state": "open"
+        }
+      ],
+      "wiki_pages": [
+        "Home"
+      ],
+      "most_commented_issue": {
+        "number": 41,
+        "comments": 14,
+        "title": "Dark mode icons"
+      },
+      "pulls": {
+        "merged": 82,
+        "closed_unmerged": 50,
+        "open": 108,
+        "largest_merged": {
+          "number": 13,
+          "changed_files": 5,
+          "additions": 0,
+          "deletions": 0
+        },
+        "counts": {
+          "merged": 6,
+          "closed_unmerged": 3,
+          "open": 3
+        }
+      }
+    }
+  },
+  "packages": [
+    {
+      "type": "generic",
+      "name": "theme-demo",
+      "version": "1.0.0",
+      "gitea_url": "http://localhost:3000/octo-org/-/packages/generic/theme-demo/1.0.0"
+    },
+    {
+      "type": "generic",
+      "name": "theme-demo",
+      "version": "1.1.0",
+      "gitea_url": "http://localhost:3000/octo-org/-/packages/generic/theme-demo/1.1.0"
+    },
+    {
+      "type": "npm",
+      "name": "@octo-org/theme-tokens",
+      "version": "1.0.0",
+      "gitea_url": "http://localhost:3000/octo-org/-/packages/npm/%40octo-org%2Ftheme-tokens/1.0.0"
+    }
+  ],
+  "social": {
+    "fork": "http://localhost:3000/bob-dev/theme-playground",
+    "stars": [
+      {
+        "user": "alice-dev",
+        "repo": "octo-org/theme-playground"
+      },
+      {
+        "user": "bob-dev",
+        "repo": "octo-org/theme-playground"
+      },
+      {
+        "user": "carol-ops",
+        "repo": "octo-org/theme-playground"
+      },
+      {
+        "user": "alice-dev",
+        "repo": "octo-org/grex"
+      },
+      {
+        "user": "bob-dev",
+        "repo": "octo-org/folderify"
+      },
+      {
+        "user": "carol-ops",
+        "repo": "octo-org/prom_ex"
+      },
+      {
+        "user": "dave-qa",
+        "repo": "octo-org/grex"
+      }
+    ]
+  },
+  "routes": [
+    {
+      "name": "dashboard",
+      "auth": "admin",
+      "gitea": "http://localhost:3000/",
+      "github": "https://github.com/"
+    },
+    {
+      "name": "repo home",
+      "gitea": "http://localhost:3000/octo-org/grex",
+      "github": "https://github.com/pemistahl/grex"
+    },
+    {
+      "name": "repo home (markdown showcase, playground)",
+      "gitea": "http://localhost:3000/octo-org/theme-playground",
+      "github": null
+    },
+    {
+      "name": "file view (source)",
+      "gitea": "http://localhost:3000/octo-org/grex/src/branch/main/src/main.rs",
+      "github": "https://github.com/pemistahl/grex/blob/main/src/main.rs"
+    },
+    {
+      "name": "file view (markdown)",
+      "gitea": "http://localhost:3000/octo-org/grex/src/branch/main/README.md",
+      "github": "https://github.com/pemistahl/grex/blob/main/README.md"
+    },
+    {
+      "name": "file view (large file, playground)",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/src/branch/main/internal/palette/generated.go",
+      "github": null
+    },
+    {
+      "name": "file view (image, playground)",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/src/branch/main/assets/images/logo.png",
+      "github": null
+    },
+    {
+      "name": "directory tree",
+      "gitea": "http://localhost:3000/octo-org/grex/src/branch/main/src",
+      "github": "https://github.com/pemistahl/grex/tree/main/src"
+    },
+    {
+      "name": "blame",
+      "gitea": "http://localhost:3000/octo-org/grex/blame/branch/main/README.md",
+      "github": "https://github.com/pemistahl/grex/blame/main/README.md"
+    },
+    {
+      "name": "blame (playground, multiple authors)",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/blame/branch/main/internal/render/render.go",
+      "github": null
+    },
+    {
+      "name": "commits",
+      "gitea": "http://localhost:3000/octo-org/grex/commits/branch/main",
+      "github": "https://github.com/pemistahl/grex/commits/main"
+    },
+    {
+      "name": "commit detail",
+      "gitea": "http://localhost:3000/octo-org/grex/commit/99cc347707375e00514f938b76d885a201dfc110",
+      "github": "https://github.com/pemistahl/grex/commit/99cc347707375e00514f938b76d885a201dfc110"
+    },
+    {
+      "name": "branches",
+      "gitea": "http://localhost:3000/octo-org/grex/branches",
+      "github": "https://github.com/pemistahl/grex/branches"
+    },
+    {
+      "name": "tags",
+      "gitea": "http://localhost:3000/octo-org/grex/tags",
+      "github": "https://github.com/pemistahl/grex/tags"
+    },
+    {
+      "name": "releases",
+      "gitea": "http://localhost:3000/octo-org/grex/releases",
+      "github": "https://github.com/pemistahl/grex/releases"
+    },
+    {
+      "name": "release detail",
+      "gitea": "http://localhost:3000/octo-org/grex/releases/tag/v1.4.6",
+      "github": "https://github.com/pemistahl/grex/releases/tag/v1.4.6"
+    },
+    {
+      "name": "releases (playground, with assets/prerelease/draft)",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/releases",
+      "github": null
+    },
+    {
+      "name": "wiki home",
+      "gitea": "http://localhost:3000/octo-org/folderify/wiki",
+      "github": "https://github.com/lgarron/folderify/wiki"
+    },
+    {
+      "name": "wiki page list",
+      "gitea": "http://localhost:3000/octo-org/folderify/wiki/?action=_pages",
+      "github": "https://github.com/lgarron/folderify/wiki/_pages"
+    },
+    {
+      "name": "wiki page",
+      "gitea": "http://localhost:3000/octo-org/folderify/wiki/Home",
+      "github": "https://github.com/lgarron/folderify/wiki/Home"
+    },
+    {
+      "name": "repo home (README with images and tables)",
+      "gitea": "http://localhost:3000/octo-org/prom_ex",
+      "github": "https://github.com/akoutmos/prom_ex"
+    },
+    {
+      "name": "wiki page (playground)",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/wiki/Architecture",
+      "github": null
+    },
+    {
+      "name": "issues list",
+      "gitea": "http://localhost:3000/octo-org/grex/issues",
+      "github": "https://github.com/pemistahl/grex/issues"
+    },
+    {
+      "name": "issues list (closed)",
+      "gitea": "http://localhost:3000/octo-org/grex/issues?state=closed",
+      "github": "https://github.com/pemistahl/grex/issues?q=is%3Aissue%20state%3Aclosed"
+    },
+    {
+      "name": "issue detail (most comments)",
+      "gitea": "http://localhost:3000/octo-org/grex/issues/35",
+      "github": "https://github.com/pemistahl/grex/issues/35"
+    },
+    {
+      "name": "issue detail (playground, reactions/alerts/tables)",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/issues/2",
+      "github": null
+    },
+    {
+      "name": "labels",
+      "gitea": "http://localhost:3000/octo-org/grex/labels",
+      "github": "https://github.com/pemistahl/grex/labels"
+    },
+    {
+      "name": "milestones",
+      "gitea": "http://localhost:3000/octo-org/grex/milestones",
+      "github": "https://github.com/pemistahl/grex/milestones"
+    },
+    {
+      "name": "PR list",
+      "gitea": "http://localhost:3000/octo-org/grex/pulls",
+      "github": "https://github.com/pemistahl/grex/pulls"
+    },
+    {
+      "name": "PR conversation (merged)",
+      "gitea": "http://localhost:3000/octo-org/grex/pulls/42",
+      "github": "https://github.com/pemistahl/grex/pull/42"
+    },
+    {
+      "name": "PR conversation (open)",
+      "gitea": "http://localhost:3000/octo-org/grex/pulls/358",
+      "github": "https://github.com/pemistahl/grex/pull/358"
+    },
+    {
+      "name": "PR commits tab",
+      "gitea": "http://localhost:3000/octo-org/grex/pulls/42/commits",
+      "github": "https://github.com/pemistahl/grex/pull/42/commits"
+    },
+    {
+      "name": "PR conversation (closed unmerged)",
+      "gitea": "http://localhost:3000/octo-org/grex/pulls/348",
+      "github": "https://github.com/pemistahl/grex/pull/348"
+    },
+    {
+      "name": "PR files changed (split)",
+      "gitea": "http://localhost:3000/octo-org/grex/pulls/42/files?style=split",
+      "github": "https://github.com/pemistahl/grex/pull/42/files?diff=split"
+    },
+    {
+      "name": "PR files changed (unified)",
+      "gitea": "http://localhost:3000/octo-org/grex/pulls/42/files?style=unified",
+      "github": "https://github.com/pemistahl/grex/pull/42/files?diff=unified"
+    },
+    {
+      "name": "PR conversation (playground large diff, reviews)",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/pulls/16",
+      "github": null
+    },
+    {
+      "name": "PR files changed split (playground large diff)",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/pulls/16/files?style=split",
+      "github": null
+    },
+    {
+      "name": "PR files changed unified (playground large diff)",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/pulls/16/files?style=unified",
+      "github": null
+    },
+    {
+      "name": "PR commits tab (playground)",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/pulls/16/commits",
+      "github": null
+    },
+    {
+      "name": "PR draft/WIP (playground)",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/pulls/19",
+      "github": null
+    },
+    {
+      "name": "compare (two tags)",
+      "gitea": "http://localhost:3000/octo-org/grex/compare/v1.4.5...v1.4.6",
+      "github": "https://github.com/pemistahl/grex/compare/v1.4.5...v1.4.6"
+    },
+    {
+      "name": "actions list",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/actions",
+      "github": "https://github.com/pemistahl/grex/actions"
+    },
+    {
+      "name": "action run",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/actions/runs/19",
+      "github": "https://github.com/pemistahl/grex/actions/runs/36326137924"
+    },
+    {
+      "name": "packages (org)",
+      "gitea": "http://localhost:3000/octo-org/-/packages",
+      "github": null
+    },
+    {
+      "name": "package detail (npm)",
+      "gitea": "http://localhost:3000/octo-org/-/packages/npm/%40octo-org%2Ftheme-tokens/1.0.0",
+      "github": null
+    },
+    {
+      "name": "projects list",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/projects",
+      "github": null
+    },
+    {
+      "name": "project board",
+      "gitea": "http://localhost:3000/octo-org/theme-playground/projects/2",
+      "github": null
+    },
+    {
+      "name": "user profile",
+      "gitea": "http://localhost:3000/alice-dev",
+      "github": "https://github.com/pemistahl"
+    },
+    {
+      "name": "user profile (stars tab)",
+      "gitea": "http://localhost:3000/alice-dev?tab=stars",
+      "github": "https://github.com/pemistahl?tab=stars"
+    },
+    {
+      "name": "user profile (repositories tab)",
+      "gitea": "http://localhost:3000/alice-dev?tab=repositories",
+      "github": "https://github.com/pemistahl?tab=repositories"
+    },
+    {
+      "name": "org home",
+      "gitea": "http://localhost:3000/octo-org",
+      "github": "https://github.com/go-gitea"
+    },
+    {
+      "name": "org members",
+      "gitea": "http://localhost:3000/org/octo-org/members",
+      "github": "https://github.com/orgs/go-gitea/people"
+    },
+    {
+      "name": "org teams",
+      "auth": "admin",
+      "gitea": "http://localhost:3000/org/octo-org/teams",
+      "github": null
+    },
+    {
+      "name": "explore repos",
+      "gitea": "http://localhost:3000/explore/repos",
+      "github": "https://github.com/explore"
+    },
+    {
+      "name": "explore users",
+      "gitea": "http://localhost:3000/explore/users",
+      "github": null
+    },
+    {
+      "name": "explore orgs",
+      "gitea": "http://localhost:3000/explore/organizations",
+      "github": null
+    },
+    {
+      "name": "repo settings",
+      "auth": "admin",
+      "gitea": "http://localhost:3000/octo-org/grex/settings",
+      "github": null
+    },
+    {
+      "name": "user settings: profile",
+      "auth": "admin",
+      "gitea": "http://localhost:3000/user/settings",
+      "github": "https://github.com/settings/profile"
+    },
+    {
+      "name": "user settings: appearance",
+      "auth": "admin",
+      "gitea": "http://localhost:3000/user/settings/appearance",
+      "github": "https://github.com/settings/appearance"
+    },
+    {
+      "name": "user settings: keys",
+      "auth": "admin",
+      "gitea": "http://localhost:3000/user/settings/keys",
+      "github": "https://github.com/settings/keys"
+    },
+    {
+      "name": "admin dashboard",
+      "auth": "admin",
+      "gitea": "http://localhost:3000/-/admin",
+      "github": null
+    },
+    {
+      "name": "admin users",
+      "auth": "admin",
+      "gitea": "http://localhost:3000/-/admin/users",
+      "github": null
+    },
+    {
+      "name": "admin repos",
+      "auth": "admin",
+      "gitea": "http://localhost:3000/-/admin/repos",
+      "github": null
+    },
+    {
+      "name": "admin config",
+      "auth": "admin",
+      "gitea": "http://localhost:3000/-/admin/config",
+      "github": null
+    },
+    {
+      "name": "sign in",
+      "auth": "anonymous",
+      "gitea": "http://localhost:3000/user/login",
+      "github": "https://github.com/login"
+    },
+    {
+      "name": "sign up",
+      "auth": "anonymous",
+      "gitea": "http://localhost:3000/user/sign_up",
+      "github": "https://github.com/signup"
+    },
+    {
+      "name": "404",
+      "gitea": "http://localhost:3000/this-page-does-not-exist-theme-seed",
+      "github": "https://github.com/this-page-does-not-exist-theme-seed"
+    }
+  ]
+}

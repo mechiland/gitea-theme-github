@@ -1,1 +1,17 @@
-/* src/foundation — see ARCHITECTURE.md for ownership. Entry file: @import this folder's files here. */
+/* src/foundation → @layer gh.foundation. Owner: foundation builder. See ARCHITECTURE.md §5.
+ *
+ * Rule of thumb for this folder: we sit ABOVE every Gitea rule (layer "gitea"), so a declaration on a broad
+ * element selector (a, h2, code…) would also beat Gitea's more specific component rules. Therefore:
+ *  - only declare what differs from Gitea's already-token-mapped defaults;
+ *  - exclude foreign territory with zero-specificity :where() lists (.markup, code views, menus…);
+ *  - never style controls, menus, labels, boxes or markdown here.
+ */
+@import "./base.css";
+@import "./typography.css";
+@import "./focus.css";
+@import "./selection.css";
+@import "./code.css";
+@import "./kbd.css";
+@import "./dividers.css";
+@import "./layout.css";
+@import "./helpers.css";

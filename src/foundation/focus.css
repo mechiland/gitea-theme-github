@@ -1,0 +1,23 @@
+/* Primer base/base.scss "global focus styles" + support/mixins/misc.scss focusOutline:
+ *   :focus-visible → outline: 2px solid var(--focus-outlineColor); outline-offset: -2px; box-shadow: none
+ *   (Primer CSS gives classless links offset 0, but github.com's Primer React links — file names, commit
+ *   messages, sidebar links — all measure outline-offset -2px, so links keep -2px here too.)
+ * Keyboard only: :focus-visible never matches a mouse click on links/buttons, and
+ * :focus:not(:focus-visible) draws a transparent 1px outline (kept for Windows High Contrast).
+ * Gitea (base.css:280-286) uses --color-primary (= fgColor-accent), which is lighter than
+ * --focus-outlineColor in dark mode. Controls/navigation may refine the offset for their widgets.
+ * Not applied to programmatic focus targets (tabindex=-1) or the CodeMirror content element. */
+:focus-visible:where(:not([tabindex="-1"], .cm-content)) {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: var(--focus-outline-offset);
+}
+
+:where(a, button, summary, [role="button"]):focus:not(:focus-visible) {
+  outline: var(--borderWidth-thin) solid transparent;
+}
+
+@media (forced-colors: active) {
+  :focus-visible:where(:not([tabindex="-1"], .cm-content)) {
+    outline: var(--borderWidth-thin) solid transparent;
+  }
+}

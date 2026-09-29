@@ -1,0 +1,292 @@
+/*
+ * Button groups.
+ *  .ui.buttons                       → Primer ButtonGroup (joined buttons, -1px overlap)
+ *  .ui.buttons:has(> .active.button) → Primer SegmentedControl (Gitea uses a group with one
+ *                                      .active button as a view switcher: file view source/rendered,
+ *                                      diff/graph toggles)
+ *  .ui.labeled.button                → Primer Button with a Counter inside (Watch / Star / Fork)
+ */
+
+/* ---------- ButtonGroup ---------- */
+.ui.buttons {
+  display: inline-flex;
+  isolation: isolate;
+  vertical-align: middle;
+}
+
+.ui.basic.buttons {
+  border: 0;
+  border-radius: 0;
+}
+
+.ui.buttons .button,
+.ui.basic.buttons .button {
+  position: relative;
+  flex-shrink: 0;
+  margin: 0 -1px 0 0;
+  border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
+  border-radius: 0;
+}
+
+.ui.buttons .button:last-child {
+  margin-right: 0;
+}
+
+.ui.buttons .button:hover,
+.ui.buttons .button:focus-visible,
+.ui.buttons .button:active {
+  z-index: 1;
+}
+
+.ui.buttons .button:first-child,
+.ui.buttons .button.tw-hidden:first-child + .button {
+  border-top-left-radius: var(--borderRadius-medium);
+  border-bottom-left-radius: var(--borderRadius-medium);
+}
+
+.ui.buttons .button:last-child,
+.ui.buttons .button:nth-last-child(2):has(+ .button.tw-hidden) {
+  border-top-right-radius: var(--borderRadius-medium);
+  border-bottom-right-radius: var(--borderRadius-medium);
+}
+
+.ui.buttons .button:hover + .button,
+.ui.buttons .button.active + .button {
+  border-left: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
+}
+
+.ui.buttons .button.active {
+  border-left: var(--borderWidth-thin) solid var(--button-default-borderColor-active);
+  border-right: var(--borderWidth-thin) solid var(--button-default-borderColor-active);
+}
+
+.ui.primary.buttons .button,
+.ui.green.buttons .button {
+  border-color: var(--button-primary-borderColor-rest);
+}
+
+/* ---------- SegmentedControl ---------- */
+.ui.buttons:has(> .active.button) {
+  align-items: stretch;
+  height: var(--control-medium-size);
+  padding: 0;
+  border: var(--borderWidth-thin) solid var(--controlTrack-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background: var(--controlTrack-bgColor-rest);
+}
+
+.ui.buttons:has(> .active.button) > .button,
+.ui.buttons:has(> .active.button) > .button:first-child,
+.ui.buttons:has(> .active.button) > .button:last-child {
+  height: auto;
+  min-height: 0;
+  margin: -1px 0;
+  padding: 0 var(--control-medium-paddingInline-normal);
+  border: var(--borderWidth-thin) solid transparent;
+  border-radius: var(--borderRadius-medium);
+  background: transparent;
+  box-shadow: none;
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-normal);
+}
+
+.ui.buttons:has(> .active.button) > .button:first-child {
+  margin-left: -1px;
+}
+
+.ui.buttons:has(> .active.button) > .button:last-child {
+  margin-right: -1px;
+}
+
+.ui.buttons:has(> .active.button) > .icon.button {
+  min-width: var(--control-medium-size);
+  padding: 0;
+}
+
+/* inner hover/press "pill" inset by 4px (Primer --segmented-control-button-bg-inset) */
+.ui.buttons:has(> .active.button) > .button:not(.active):hover {
+  background: var(--controlTrack-bgColor-hover);
+  box-shadow: inset 0 0 0 var(--base-size-4) var(--controlTrack-bgColor-rest);
+}
+
+.ui.buttons:has(> .active.button) > .button:not(.active):active {
+  background: var(--controlTrack-bgColor-active);
+  box-shadow: inset 0 0 0 var(--base-size-4) var(--controlTrack-bgColor-rest);
+}
+
+.ui.buttons:has(> .active.button) > .active.button,
+.ui.buttons:has(> .active.button) > .active.button:hover {
+  z-index: 1;
+  border-color: var(--controlKnob-borderColor-rest);
+  background: var(--controlKnob-bgColor-rest);
+  box-shadow: none;
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.ui.buttons:has(> .active.button) > .button > .svg {
+  color: var(--fgColor-muted);
+}
+
+.ui.buttons:has(> .active.button) > .button:focus-visible {
+  outline: var(--focus-outline-width) solid var(--fgColor-accent);
+  outline-offset: -1px;
+}
+
+/* divider between two unselected items */
+.ui.buttons:has(> .active.button) > .button:not(.active, :last-child, :has(+ .active)):not(:hover)::after {
+  content: "";
+  position: absolute;
+  top: var(--base-size-8);
+  right: -1px;
+  bottom: var(--base-size-8);
+  width: 1px;
+  background: var(--borderColor-default);
+}
+
+/* icon-only items (group carries .icon) are square like Primer SegmentedControl.IconButton */
+.ui.icon.buttons:has(> .active.button) > .button {
+  min-width: var(--control-medium-size);
+  padding: 0;
+}
+
+/* Primer SegmentedControl size="small" (28px, 12px text): the group or its items are Gitea small/tiny/mini
+   (e.g. file view source/rendered toggle = .ui.compact.icon.buttons > .ui.mini.button) */
+.ui.small.buttons:has(> .active.button),
+.ui.tiny.buttons:has(> .active.button),
+.ui.mini.buttons:has(> .active.button),
+.ui.buttons:has(> .active.button):has(> .small.button, > .tiny.button, > .mini.button) {
+  height: var(--control-small-size);
+  font-size: var(--text-body-size-small);
+}
+
+.ui.small.buttons:has(> .active.button) > .button,
+.ui.tiny.buttons:has(> .active.button) > .button,
+.ui.mini.buttons:has(> .active.button) > .button,
+.ui.buttons:has(> .active.button) > .small.button,
+.ui.buttons:has(> .active.button) > .tiny.button,
+.ui.buttons:has(> .active.button) > .mini.button {
+  padding: 0 var(--control-small-paddingInline-condensed);
+  font-size: var(--text-body-size-small);
+}
+
+.ui.small.icon.buttons:has(> .active.button) > .button,
+.ui.tiny.icon.buttons:has(> .active.button) > .button,
+.ui.mini.icon.buttons:has(> .active.button) > .button,
+.ui.icon.buttons:has(> .active.button) > .small.button,
+.ui.icon.buttons:has(> .active.button) > .tiny.button,
+.ui.icon.buttons:has(> .active.button) > .mini.button {
+  min-width: var(--control-small-size);
+  padding: 0;
+}
+
+.ui.buttons:has(> .active.button):has(> .small.button, > .tiny.button, > .mini.button) > .button:not(.active, :last-child, :has(+ .active)):not(:hover)::after {
+  top: var(--base-size-6);
+  bottom: var(--base-size-6);
+}
+
+/* ---------- Button with counter (Gitea .ui.labeled.button: Watch / Star / Fork) ---------- */
+/* github.com repo header .btn-sm: no resting shadow; the focus ring encloses the whole control */
+.ui.labeled.button:not(.icon) {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: none;
+  cursor: default;
+}
+
+.ui.labeled.button:not(.icon):hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+}
+
+.ui.labeled.button:not(.icon):has(> .button:active) {
+  border-color: var(--button-default-borderColor-active);
+  background: var(--button-default-bgColor-active);
+}
+
+.ui.labeled.button:not(.icon):has(> .button:focus-visible) {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: var(--focus-outline-offset);
+}
+
+.ui.labeled.button > .button,
+.ui.labeled.button > .button:hover,
+.ui.labeled.button > .button:active {
+  align-self: stretch;
+  height: auto;
+  min-height: calc(var(--control-medium-size) - 2px);
+  margin: 0;
+  padding: 0 0 0 var(--control-medium-paddingInline-normal);
+  border: 0;
+  border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
+  background: transparent;
+  box-shadow: none;
+}
+
+.ui.labeled.button > .small.button,
+.ui.labeled.button > .tiny.button,
+.ui.labeled.button > .mini.button {
+  gap: var(--base-size-8);
+  min-height: calc(var(--control-small-size) - 2px);
+  padding-left: var(--control-small-paddingInline-normal);
+}
+
+.ui.labeled.button > .button:only-child {
+  padding-right: var(--control-medium-paddingInline-normal);
+  border-radius: var(--borderRadius-medium);
+}
+
+/* Primer .btn .Counter */
+.ui.labeled.button > .label,
+.ui.labeled.button > .label:hover {
+  display: inline-block;
+  min-width: var(--base-size-20);
+  margin: 0 var(--control-small-paddingInline-normal) 0 var(--base-size-8); /* !important twin in buttons.important.css */
+  padding: 0 var(--base-size-6);
+  border: var(--borderWidth-thin) solid var(--counter-borderColor);
+  border-radius: var(--borderRadius-full);
+  background: var(--buttonCounter-default-bgColor-rest);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-medium);
+  line-height: calc(var(--base-size-20) - var(--borderWidth-thick));
+  text-align: center;
+  text-decoration: none;
+}
+
+/* the ring is drawn by the wrapper (above); the counter link keeps its own ring */
+.ui.labeled.button > .button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.ui.labeled.button > .label:focus-visible {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: var(--borderWidth-thin);
+}
+
+.ui.labeled.button > .button > .octicon-star-fill {
+  color: var(--button-star-iconColor);
+}
+
+.ui.labeled.button.disabled,
+.ui.labeled.button:has(> .button.disabled) {
+  border-color: var(--button-default-borderColor-disabled);
+  background: var(--button-default-bgColor-disabled);
+  box-shadow: none;
+  color: var(--control-fgColor-disabled);
+}
+
+.ui.labeled.button.disabled > .button,
+.ui.labeled.button > .button.disabled {
+  background: transparent;
+  color: var(--control-fgColor-disabled);
+}

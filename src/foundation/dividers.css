@@ -1,0 +1,29 @@
+/* Primer base/base.scss hr: 1px --borderColor-muted bottom border, 16px (15px) vertical margin.
+ * Gitea .divider (modules/divider.css) uses --color-secondary (= borderColor-default). */
+hr:where(:not(.markup *)) {
+  height: 0;
+  margin: var(--base-size-16) 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+.divider:not(.divider-text) {
+  border-top-color: var(--borderColor-muted);
+}
+
+.divider.divider-text {
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  color: var(--fgColor-muted);
+}
+
+.divider.divider-text::before,
+.divider.divider-text::after {
+  border-top-color: var(--borderColor-muted);
+}
+
+.inline-divider {
+  border-left-color: var(--borderColor-muted);
+}

@@ -1,0 +1,51 @@
+/* Page gutters and container width — github.com repo pages (measured 2026-09-30):
+ *   container-xl: max-width 1280px *including* the gutter; gutter 16px below 1012px, 32px from 1012px
+ *   (1440 → content x=112 w=1216; 1300 → x=42; 1100 → x=32; 800/390 → x=16).
+ * Gitea: .ui.container { width: 1280px; max-width: calc(100% - 2 * --page-margin-x) } with
+ * --page-margin-x 32/16/8px at >1200 / 768-1200 / <768 (base.css:34,51-61). We keep Gitea's model
+ * (outer margin, not padding) so utility max-widths such as tw-max-w-[500px] keep meaning content width. */
+:root {
+  --page-margin-x: var(--base-size-16);
+}
+
+@media (min-width: 1012px) {
+  :root {
+    --page-margin-x: var(--base-size-32);
+  }
+}
+
+.ui.container {
+  width: calc(var(--breakpoint-xlarge) - 2 * var(--page-margin-x));
+}
+
+.ui.fluid.container {
+  width: 100%;
+}
+
+/* Primer container-md (768px) for narrow form pages (new repo, new org, migrate…) */
+.ui.container.medium-width {
+  width: var(--breakpoint-medium);
+}
+
+.ui.message.web-banner-container > .web-banner-content {
+  width: calc(var(--breakpoint-xlarge) - 2 * var(--page-margin-x));
+}
+
+/* Space between the page header (repo/org/user nav) and the content: 24px on github.com at every width. */
+.page-content > :first-child.secondary-nav {
+  margin-bottom: var(--base-size-24);
+}
+
+.page-content > :first-child:not(.secondary-nav) {
+  margin-top: var(--base-size-24);
+}
+
+.page-content > :first-child.ui.grid {
+  /* Gitea keeps its grid (margin -1rem, column padding 1rem = 14px); content starts 24px below */
+  margin-top: calc(var(--base-size-24) - var(--base-size-12) - var(--base-size-2));
+}
+
+/* .ui.grid gutters are deliberately NOT restyled. Gitea's Fomantic grid (modules/grid.css) is a web of
+ * exceptions (.page / very relaxed margins, .row padding 0, stackable !important rules on mobile,
+ * .ui.grid + .grid); overriding its base margin/padding from a higher layer breaks them (round 1: the sign-in
+ * page grid overflowed by 16px). The 14px vs 16px gutter difference is left to the page folders. */

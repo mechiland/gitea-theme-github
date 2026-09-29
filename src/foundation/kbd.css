@@ -1,0 +1,17 @@
+/* Primer base/kbd.scss: padding 4px; font 11px mono; line-height 10px; fgColor-default on bgColor-muted;
+ * 1px borderColor-neutral-muted border; radius 6px; inset 0 -1px 0 shadow.
+ * Gitea modules/shortcut.css: 11px, --color-text-light-2 on box body, --color-secondary border.
+ * display/min-width/centering stay Gitea's (inline-flex keeps the key letter centered in inputs). */
+kbd:where(:not(.markup *)) {
+  padding: var(--base-size-4);
+  font-family: var(--fontStack-monospace);
+  font-size: calc(var(--base-text-size-xs) * 11 / 12); /* 11px, Primer kbd */
+  line-height: calc(var(--base-size-12) - var(--base-size-2)); /* 10px, Primer kbd */
+  color: var(--fgColor-default);
+  vertical-align: middle;
+  background-color: var(--bgColor-muted);
+  border: var(--borderWidth-thin) solid var(--borderColor-neutral-muted);
+  border-bottom-color: var(--borderColor-neutral-muted);
+  border-radius: var(--borderRadius-medium);
+  box-shadow: inset 0 -1px 0 var(--borderColor-neutral-muted);
+}
