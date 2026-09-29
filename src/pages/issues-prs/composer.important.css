@@ -1,0 +1,24 @@
+/*
+ * gh-important: the dropzone library CSS is a lazy chunk (dropzone.*.css, unlayered):
+ * `.dropzone { min-height: 150px; border: 1px solid rgba(0,0,0,.8); border-radius: 5px; padding: 20px }`.
+ * github.com file bar under the comment textarea: 1px --borderColor-default (the textarea draws the dashed rule),
+ * radius 0 0 6 6, padding 8px.
+ */
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .ui.dropzone {
+  min-height: 0 !important;
+  padding: var(--base-size-8) !important;
+  border: var(--borderWidth-thin) solid var(--borderColor-default) !important;
+  border-top-width: 0 !important;
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium) !important;
+}
+
+/* "Close issue": issue-closed octicon in --fgColor-done (Gitea: span.status-button-icon.tw-text-red) */
+#status-button .status-button-icon.tw-text-red:has(.octicon-issue-closed) {
+  color: var(--fgColor-done) !important;
+}
+
+/* dropzone.css: `.dropzone .dz-message { text-align: center; margin: 3em 0 }` */
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .ui.dropzone .dz-message {
+  margin: 0 !important;
+  text-align: left !important;
+}

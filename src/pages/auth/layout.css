@@ -1,0 +1,37 @@
+/* Page grid → one centred column. github.com/login: .authentication is 352px of content with a 16px gutter
+ * each side; at 390px it is the full width minus 16px gutters. Content starts 32px below the header.
+ * Gitea's Fomantic .ui.page.grid (15% / 3% / 2em side padding, "very relaxed" -2.5rem margins, 2.5rem column
+ * padding) is reset for these pages only. */
+
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) {
+  --gh-auth-content-width: calc(var(--base-size-128) * 2 + var(--base-size-96));
+}
+
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) > .ui.page.grid {
+  display: block;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) > .ui.page.grid > .column {
+  /* Fomantic makes grid columns inline-block, which ignores the auto side margins (forgot / reset / activate
+     columns have no tw-flex); sign-in's tw-flex (!important) still wins */
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--base-size-32) var(--base-size-16) var(--base-size-16);
+}
+
+/* the fluid containers inside the column (sign-in / sign-up) must not subtract the page gutter again */
+.page-content.user:is(.signin, .signup, .link-account) > .ui.page.grid > .column .ui.container.fluid {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* link-account: tabs above, the column inside a tab */
+.page-content.user.link-account > .ui.page.grid > .column > .ui.tab > div {
+  margin: 0 auto;
+}

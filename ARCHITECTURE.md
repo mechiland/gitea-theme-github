@@ -170,6 +170,7 @@ keep the non-GitHub output byte-identical.
 |---|---|---|---|
 | `templates/base/head_style.tmpl` | Cascade layering (§3) + cache-busting `?github_revision=`. Shared with the Modern theme's existing override: our branch is additive, the else-branch is untouched. | `github-*` themes only | integrator, wave 0 |
 | `templates/custom/footer.tmpl` | Primer Dialog close button (request OV-4): Gitea's modals mostly have no `×`; a 12-line inline script (CSP nonce) prepends `button.close.inside` to every `.ui.modal` (Fomantic closes on `> .close`). `custom/footer` is Gitea's empty extension hook, so no upstream markup is replaced. Install is done by the orchestrator (docs/requests/ORCHESTRATOR.md ORC-1). | `github-*` themes only (renders nothing otherwise) | integrator, wave 2 |
+| `templates/user/settings/layout_head.tmpl` | github.com settings page header (48px avatar, name, subtitle, profile button; request SA-4): needs the signed-in user's data, CSS cannot create it. Upstream 1.27.3 file + one trimmed `{{- if … }}` block; copy text is Gitea's `your_settings` / `your_profile` locale keys (Gitea has no "Your personal account" string). Styled by `src/pages/settings-admin/header.css`. Install: docs/requests/ORCHESTRATOR.md ORC-3. | `github-*` themes only, pages whose pageClass contains `settings` (other themes: upstream bytes) | integrator, wave 3 |
 
 (Pre-existing overrides owned by the Modern theme — `repo/view_content.tmpl`, `repo/view_list.tmpl` — render
 Gitea's standard markup for non-Modern themes; we build against that output and never edit them.)
@@ -188,6 +189,13 @@ column colors, repo units, federation, wiki clone box, etc.) get the **closest P
 - `npm run build` — PostCSS (`postcss-import`) per folder → validate with Lightning CSS → wrap in `@layer` → assemble
   per scheme (+ pruned tokens) → minify (Lightning CSS, evergreen targets) → `dist/theme-github-*.css`
   (+ `*.src.css` unminified for debugging) → `dist/build-report.json`.
+- Short custom-property names (wave 3, request PPL-1): in the minified `dist/theme-github-*.css` only, every custom
+  property defined by the Primer token files or `src/icons/octicon-masks.css` is renamed to `--p<base62>` (most used =
+  shortest), −100 KB per file. Gitea's own names (`--color-*`, `--is-dark-theme`, anything in gitea-map.css /
+  scheme-*.css / folder-local names) and any Primer name mentioned in Gitea's web_src/templates or our templates are
+  never renamed. `dist/theme-github-*.src.css` keeps the real names; `dist/varmap.json` maps short → Primer name.
+  So in DevTools a computed `--fgColor-muted` reads as `--p…` — look it up in varmap.json, or build with `--no-rename`
+  (identical rendering: pixel-diffed on 8 routes × 2 schemes, only the footer's server-timing text differs).
 - `npm run deploy` — build, then atomically copy the three files to `CUSTOM_PATH/public/assets/css/`, copy icons,
   bump `github_revision` in `head_style.tmpl`, `gitea manager reload-templates`, then **fetch each file back from
   Gitea and compare SHA-256** (the deploy fails if Gitea serves different bytes). Reports `restartRequired` when theme

@@ -1,0 +1,184 @@
+/*
+ * Comment composer (timeline-item.comment.form > .ui.segment > form#comment-form) and the new-issue form
+ * (form#new-issue ... .ui.segment.content): github.com classic CommentBox —
+ *  - the Box (data-display draws the frame + caret) holds a --bgColor-muted header strip (padding 8px 8px 0,
+ *    1px --borderColor-default rule) with the Write / Preview TabNav tabs and, on the right, the markdown toolbar:
+ *    16px --fgColor-muted octicons in 28px square invisible buttons (hover --fgColor-accent);
+ *  - body padding 8px: textarea (1px --borderColor-default, radius 6 6 0 0, min-height 100px, padding 8px) directly
+ *    over the file bar ("Paste, drop, or click to add files": 12px --fgColor-muted, --bgColor-muted, 1px border,
+ *    dashed top, radius 0 0 6 6, padding 8px);
+ *  - footer right-aligned: "Close issue" default Button (issue-closed octicon --fgColor-done) + green "Comment".
+ * Scope: issue / PR view and the new-issue page only (the editor on other pages keeps the controls look).
+ */
+
+:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) :is(.comment.form, #new-issue) .ui.segment.avatar-content-left-arrow {
+  padding: 0;
+}
+
+/* the caret sits on the muted header strip */
+.repository.view.issue .timeline-item.comment.form .ui.segment.avatar-content-left-arrow::after {
+  border-right-color: var(--bgColor-muted);
+}
+
+.repository.view.issue #comment-form > .field,
+:is(.repository.new.issue, .repository.compare.pull) #new-issue .ui.segment > .field {
+  margin: 0;
+}
+
+/* new-issue title input sits in the Box body above the editor */
+:is(.repository.new.issue, .repository.compare.pull) #new-issue .ui.segment > .field:first-child {
+  padding: var(--base-size-16) var(--base-size-8) var(--base-size-8);
+}
+
+:is(.repository.new.issue, .repository.compare.pull) #new-issue .ui.segment > .field:first-child > input {
+  height: var(--control-medium-size);
+}
+
+/* ---- editor header strip ---- */
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .combo-markdown-editor {
+  position: relative;
+}
+
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .combo-markdown-editor > .ui.tabular.menu {
+  padding: var(--base-size-8) var(--base-size-8) 0;
+  background: var(--bgColor-muted);
+}
+
+#comment-form .combo-markdown-editor > .ui.tabular.menu {
+  border-top-left-radius: var(--borderRadius-medium);
+  border-top-right-radius: var(--borderRadius-medium);
+}
+
+/* the new-issue form's editor header follows the title field: full-width strip with a top rule */
+#new-issue .combo-markdown-editor > .ui.tabular.menu {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+}
+
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .combo-markdown-editor > .ui.tab {
+  padding: var(--base-size-8) var(--base-size-8) 0;
+}
+
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .combo-markdown-editor > .ui.tab.markup[data-tab-panel="markdown-previewer"] {
+  min-height: calc(var(--base-size-96) + var(--base-size-4));
+  padding: var(--base-size-8);
+  border-bottom: 0;
+}
+
+/* toolbar: lifted into the header strip on wide screens */
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .combo-markdown-editor markdown-toolbar {
+  gap: 0;
+  padding: 0;
+}
+
+@media (min-width: 1012px) {
+  :is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .combo-markdown-editor markdown-toolbar {
+    position: absolute;
+    /* vertically centred on the 40px Write / Preview tabs, which sit 8px below the strip's top edge */
+    top: calc(var(--base-size-8) + (var(--base-size-40) - var(--control-small-size)) / 2);
+    right: var(--base-size-8);
+    flex-wrap: nowrap;
+  }
+
+  #new-issue .combo-markdown-editor markdown-toolbar {
+    top: calc(var(--base-size-8) + (var(--base-size-40) - var(--control-small-size)) / 2 + 1px);
+  }
+}
+
+@media (max-width: 1011.98px) {
+  :is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .combo-markdown-editor markdown-toolbar {
+    padding-bottom: var(--base-size-8);
+  }
+}
+
+:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .combo-markdown-editor markdown-toolbar .markdown-toolbar-group {
+  gap: 0;
+  padding: 0 var(--base-size-4);
+  border-left: 0;
+}
+
+:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .combo-markdown-editor markdown-toolbar .markdown-toolbar-group:last-child {
+  flex: 0 0 auto;
+}
+
+:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .combo-markdown-editor markdown-toolbar .markdown-toolbar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-small-size);
+  height: var(--control-small-size);
+  padding: 0;
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .combo-markdown-editor markdown-toolbar .markdown-toolbar-button:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-accent);
+}
+
+:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .combo-markdown-editor markdown-toolbar .markdown-toolbar-button:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: calc(var(--borderWidth-thick) * -1);
+}
+
+:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .combo-markdown-editor markdown-toolbar .markdown-toolbar-button[aria-checked="true"] {
+  color: var(--fgColor-accent);
+}
+
+/* md-header digit (H¹ H² H³) */
+:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .combo-markdown-editor markdown-toolbar md-header::after {
+  top: var(--base-size-4);
+  right: var(--base-size-2);
+  font-size: var(--text-caption-size);
+  line-height: 1;
+}
+
+/* ---- textarea + file bar ---- */
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .combo-markdown-editor textarea.markdown-text-editor {
+  min-height: calc(var(--base-size-96) + var(--base-size-4));
+  padding: var(--base-size-8);
+  border-bottom-style: dashed;
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .field:has(> .ui.dropzone) {
+  padding: 0 var(--base-size-8);
+}
+
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .ui.dropzone {
+  background: var(--bgColor-muted);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  text-align: left;
+}
+
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .ui.dropzone .dz-message {
+  margin: 0;
+}
+
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .ui.dropzone .dz-button {
+  padding: 0;
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .ui.dropzone:hover .dz-button {
+  color: var(--fgColor-accent);
+}
+
+/* ---- footer buttons ---- */
+.repository.view.issue #comment-form > .field.footer,
+:is(.repository.new.issue, .repository.compare.pull) #new-issue .ui.segment > .flex-text-block:last-child {
+  padding: var(--base-size-8);
+}
+
+.repository.view.issue #comment-form > .field.footer > .flex-text-block {
+  gap: var(--base-size-4);
+}
+
+/* "Close issue" / "Close pull request" / "Reopen" icon keeps the state colour of its span (issue-closed → done purple,
+   see composer.important.css; PR closed → red; reopen → green) — controls mutes leading svgs of default buttons */
+.repository.view.issue #status-button > .status-button-icon > .svg {
+  color: inherit;
+}

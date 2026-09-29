@@ -1,0 +1,140 @@
+/*
+ * Review threads in the PR conversation timeline (repo/issue/view_content/conversation.tmpl inside
+ * .timeline-item.code-comments-list). github.com review thread:
+ *  - one Box (1px --borderColor-default, radius 6px); file header on --bgColor-muted, padding 8px 16px, path as a
+ *    12px monospace --fgColor-accent link; the diff excerpt (code folder); then the comments, NOT boxed:
+ *    each comment padding 8px 16px, 20px avatar, author semibold, muted time, body indented under the name,
+ *    comments separated by 1px --borderColor-muted;
+ *  - footer on --bgColor-muted with a 1px top rule, padding 8px 16px: "Resolve conversation" default Button
+ *    and the reply trigger (a default Button here, github.com has no green button in threads).
+ */
+
+.repository.view.issue .code-comments-list .conversation-holder {
+  overflow: hidden;
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+  box-shadow: none;
+}
+
+/* file header */
+.repository.view.issue .code-comments-list .conversation-holder > .collapsible-comment-box {
+  min-height: calc(var(--base-size-36) + var(--base-size-2));
+  margin: 0;
+  padding-left: var(--base-size-16);
+  padding-right: var(--base-size-16);
+  border: 0;
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0;
+  background: var(--bgColor-muted);
+}
+
+.repository.view.issue .code-comments-list .conversation-holder .file-comment {
+  color: var(--fgColor-accent);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+}
+
+.repository.view.issue .code-comments-list .conversation-holder .file-comment:hover {
+  text-decoration: underline;
+}
+
+/* the diff excerpt spans the Box edge to edge */
+.repository.view.issue .code-comments-list .conversation-holder > .ui.table.segment {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.repository.view.issue .code-comments-list .conversation-holder .diff-file-box {
+  margin: 0;
+  border: 0;
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0;
+}
+
+/* comments: unboxed rows */
+.repository.view.issue .code-comments-list .conversation-holder > .comment-code-cloud {
+  padding: 0;
+  border: 0;
+}
+
+.repository.view.issue .code-comments-list .conversation-holder > .comment-code-cloud > .ui.comments {
+  margin: 0;
+  padding: 0;
+}
+
+.repository.view.issue .code-comments-list .conversation-holder .comment + .comment {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+.repository.view.issue .code-comments-list .conversation-holder .comment-container {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.repository.view.issue .code-comments-list .conversation-holder .comment-header {
+  min-height: 0;
+  padding: var(--base-size-8) var(--base-size-16) 0;
+  border-bottom: 0;
+  background: transparent;
+}
+
+.repository.view.issue .code-comments-list .conversation-holder .comment-header::before,
+.repository.view.issue .code-comments-list .conversation-holder .comment-header::after {
+  display: none;
+}
+
+.repository.view.issue .code-comments-list .conversation-holder .comment-header-left img.ui.avatar {
+  width: var(--base-size-20);
+  height: var(--base-size-20);
+}
+
+.repository.view.issue .code-comments-list .conversation-holder .comment-content {
+  padding: var(--base-size-4) var(--base-size-16) var(--base-size-12) calc(var(--base-size-16) + var(--base-size-28));
+}
+
+/* footer: Resolve conversation + Reply */
+.repository.view.issue .code-comments-list .conversation-holder > .comment-code-cloud > .flex-text-block {
+  padding: var(--base-size-8) var(--base-size-16);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+  background: var(--bgColor-muted);
+}
+
+.repository.view.issue .code-comments-list .conversation-holder .comment-form-reply.ui.primary.button {
+  border-color: var(--button-default-borderColor-rest);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-default-fgColor-rest);
+}
+
+.repository.view.issue .code-comments-list .conversation-holder .comment-form-reply.ui.primary.button:hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+}
+
+.repository.view.issue .code-comments-list .conversation-holder .comment-form-reply.ui.primary.button:active {
+  background: var(--button-default-bgColor-active);
+}
+
+/* the inline reply form (hidden until Reply): on the muted footer strip, the same editor as the main composer
+   (composer.css: tabs + toolbar row, textarea with a dashed bottom edge over the slim file bar, buttons right) */
+.repository.view.issue .code-comments-list .conversation-holder > .comment-code-cloud > form.comment-form {
+  padding: 0 var(--base-size-8);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+  background: var(--bgColor-muted);
+}
+
+.repository.view.issue .code-comments-list .conversation-holder > .comment-code-cloud > form.comment-form > .field {
+  margin: 0;
+}
+
+.repository.view.issue .code-comments-list .conversation-holder > .comment-code-cloud > form.comment-form > .field.footer {
+  padding: var(--base-size-8);
+}
+
+.repository.view.issue .code-comments-list .conversation-holder > .comment-code-cloud > form.comment-form > .field.footer > .flex-text-block {
+  gap: var(--base-size-4);
+}

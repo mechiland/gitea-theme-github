@@ -1,0 +1,85 @@
+/*
+ * Key / token rows — github.com /settings/keys and repository deploy keys: a Box of Box-rows, each with
+ *   a 32px key octicon (--fgColor-muted; --fgColor-success when recently used) in a leading column,
+ *   title 14px semibold --fgColor-default, fingerprint in the monospace stack 12px --fgColor-muted,
+ *   "Added on … / Last used …" 12px --fgColor-muted, a red Delete btn-sm on the right, rows 16px padded.
+ * Gitea: .items-with-main > .item > .item-leading (octicon-key 32) + .item-main (.item-title, .item-body ×2) +
+ * .item-trailing (.ui.red.tiny.button) — user/settings/keys_{ssh,gpg,principal}.tmpl, repo/settings/deploy_keys.tmpl,
+ * user/settings/applications.tmpl (access tokens).
+ */
+
+:is(.page-content.settings, .page-content.admin) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-leading {
+  color: var(--fgColor-muted);
+}
+
+:is(.page-content.settings, .page-content.admin) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-title {
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+:is(.page-content.settings, .page-content.admin) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-main {
+  gap: var(--base-size-4);
+}
+
+:is(.page-content.settings, .page-content.admin) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-body {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-small);
+}
+
+/* the first body line after the title is the fingerprint */
+:is(.page-content.settings, .page-content.admin) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-title + .item-body {
+  font-family: var(--fontStack-monospace);
+  overflow-wrap: anywhere;
+}
+
+:is(.page-content.settings, .page-content.admin) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-body i {
+  font-style: normal;
+}
+
+/* inline octicons in a row's meta line ("— ⓘ Last used …" on keys and access tokens) follow the 12px text */
+:is(.page-content.settings, .page-content.admin) .flex-container-main .items-with-main > .item .item-body .svg {
+  width: var(--base-size-12);
+  height: var(--base-size-12);
+  min-width: var(--base-size-12); /* Gitea .svg[width="16"] { min-width: 16px } */
+  min-height: var(--base-size-12);
+  vertical-align: text-bottom;
+}
+
+:is(.page-content.settings, .page-content.admin) .flex-container-main .items-with-main > .item .item-trailing {
+  align-self: center;
+}
+
+/* text Delete buttons in key / token / application rows: github.com uses a text-only btn-danger btn-sm (the trash
+   octicon stays on icon-only buttons such as the push-mirror remove button) */
+:is(.page-content.settings, .page-content.admin) .flex-container-main .flex-divided-list .item-trailing .ui.red.button:not(.basic) > .svg.octicon-trash {
+  display: none;
+}
+
+/* every settings list row (teams, collaborators, organizations, OAuth2 apps): github.com settings rows use a 14px
+   semibold title, not the 16px list title of explore / repo lists */
+:is(.page-content.settings, .page-content.admin) .flex-container-main .flex-divided-list.items-with-main > .item .item-title {
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+/* access tokens: the name is a disclosure summary (applications.tmpl: details > summary > span.item-title). Gitea's
+   .item-title is inline-flex (flex-list.css), so a long name cannot wrap and drops below the ▸ marker at 390px —
+   inline text wraps beside the marker like github.com's token names */
+:is(.page-content.settings, .page-content.admin) .flex-container-main .items-with-main > .item .item-main > details > summary > .item-title {
+  display: inline;
+  overflow-wrap: anywhere;
+}
+
+/* empty list row (branch protection "There are no protected branches."): Primer Blankslate (spacious 32px, muted
+   centred text) instead of a plain left-aligned row */
+/* (beats subhead.css's "description-only first row" padding reset: a text-only row matches that rule too) */
+.page-content.settings .flex-container-main .ui.attached.segment > .flex-divided-list > .item.tw-text-center:only-child:not(:has(> *)) {
+  justify-content: center;
+  padding: var(--base-size-32) var(--base-size-16);
+  border: var(--borderWidth-thin) solid var(--borderColor-default); /* github.com: the Blankslate sits in a Box */
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}

@@ -23,10 +23,37 @@
   box-shadow: var(--shadow-inset);
 }
 
+/* Primer Select size="small": 28px, 8px leading padding, 12px text. Gitea .small/.tiny/.mini selections, and any
+   selection inside a small input group (package list / versions search: input + type select + button) */
+.ui.small.selection.dropdown,
+.ui.tiny.selection.dropdown,
+.ui.mini.selection.dropdown,
+.ui.action.input:is(.small, .tiny, .mini) > .ui.selection.dropdown {
+  min-height: var(--control-small-size);
+  padding-top: calc((var(--control-small-size) - var(--base-size-20)) / 2 - 1px);
+  padding-bottom: calc((var(--control-small-size) - var(--base-size-20)) / 2 - 1px);
+  padding-left: var(--control-small-paddingInline-condensed);
+  font-size: var(--text-body-size-small);
+}
+
 /* a select that fills a flex row (Gitea tw-flex-1, e.g. settings/branches "default branch" + Update button)
    yields to the button on narrow screens instead of holding Gitea's 14em minimum (Primer Select has none) */
 .ui.selection.dropdown.tw-flex-1 {
   min-width: 0;
+}
+
+/* …but it never gets narrower than 160px: on a phone the row (Select + "Update Default Branch") wraps and the
+   button drops below the full-width Select, as github.com's form rows do, instead of squeezing the Select to
+   a 65-100px stub at 320px */
+@media (max-width: 767.98px) {
+  .flex-text-block:has(> .ui.selection.dropdown.tw-flex-1 + .ui.button) {
+    flex-wrap: wrap;
+    row-gap: var(--base-size-8);
+  }
+
+  .flex-text-block > .ui.selection.dropdown.tw-flex-1:has(+ .ui.button) {
+    min-width: min(100%, var(--base-size-128) + var(--base-size-32));
+  }
 }
 
 /* (The open menu's width — overlay minimum, max-content, screen cap — is owned by overlays:
@@ -119,6 +146,10 @@
   box-shadow: none;
   line-height: var(--base-size-20);
   outline: none;
+}
+
+.ui.search.selection.dropdown:is(.small, .tiny, .mini):not(.multiple) > input.search {
+  padding-left: var(--control-small-paddingInline-condensed);
 }
 
 .ui.search.selection.dropdown:not(.multiple) > input.search:focus {

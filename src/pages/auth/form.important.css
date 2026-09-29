@@ -1,0 +1,5 @@
+/* the password label row carries tw-mb-1 (Tailwind !important, 0.25rem = 3.5px at Gitea's 14px root):
+ * Primer FormControl puts the control 4px under the label. */
+.page-content.user:is(.signin, .link-account) .ui.form .field > .tw-flex.tw-mb-1 {
+  margin-bottom: var(--base-size-4) !important;
+}

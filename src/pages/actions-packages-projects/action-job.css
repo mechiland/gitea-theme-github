@@ -1,0 +1,226 @@
+/*
+ * Actions — job log panel (Vue ActionRunJobView: scoped rules + a global block for the log lines built outside Vue;
+ * both live in Gitea's index.css → layer `gitea`).
+ * github.com job view (actions stylesheet, 2026-09-30 — the job page itself needs sign-in, so the spec is read from
+ * github.githubassets.com/assets/actions-*.css): the log is NOT a dark console any more, it follows the theme:
+ *   .CheckRun            --bgColor-inset, 1px --borderColor-muted
+ *   .CheckRun-header     80px tall, --bgColor-inset, 1px --borderColor-muted bottom border, sticky
+ *   .CheckStep-header    36px, --fgColor-muted on --bgColor-inset; hover --control-transparent-bgColor-hover;
+ *                        open: --fgColor-default on --control-bgColor-active; chevron rotates 90deg in 100ms
+ *   .CheckStep-line      12px mono, 20px line-height, --fgColor-default; hover --bgColor-neutral-muted;
+ *                        selected (:target) --bgColor-accent-muted, number --fgColor-accent + underline
+ *   line number          48px, right aligned, --fgColor-muted, not selectable
+ *   commands             --fgColor-accent; error line --bgColor-danger-muted; warning --bgColor-attention-muted
+ *                        (number --fgColor-attention); debug --fgColor-done; section/group 600 --fgColor-success
+ */
+
+.action-view-right-panel:has(> .job-info-header) {
+  overflow: clip;
+  border-color: var(--borderColor-muted);
+  background: var(--bgColor-inset);
+}
+
+/* ---------- CheckRun header ---------- */
+.job-info-header {
+  height: var(--base-size-80);
+  padding: 0 var(--base-size-16) 0 var(--base-size-24);
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+  background: var(--bgColor-inset);
+}
+
+.job-info-header .job-info-header-title {
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-small);
+  font-weight: var(--text-title-weight-small);
+  line-height: var(--text-title-lineHeight-small);
+}
+
+.job-info-header .job-info-header-detail {
+  margin: 0;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+/* gear: github.com btn-link octicon in the CheckRun header (muted; hover default on --bgColor-neutral-muted) */
+.job-info-header-right .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-medium-size);
+  height: var(--control-medium-size);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+.job-info-header-right .btn .svg {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+}
+
+.job-info-header-right .btn:hover {
+  background: var(--bgColor-neutral-muted);
+  color: var(--fgColor-default);
+}
+
+/* ---------- steps ---------- */
+.job-step-container {
+  padding: var(--base-size-8) 0;
+  border-top: 0;
+  background: var(--bgColor-inset);
+}
+
+.job-step-section {
+  margin: 0 var(--base-size-8);
+}
+
+.job-step-container .job-step-summary {
+  gap: var(--base-size-8);
+  min-height: var(--base-size-36);
+  padding: 0 var(--base-size-8);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+}
+
+.job-step-container .job-step-summary.step-expandable:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+.job-step-container .job-step-summary.selected {
+  top: var(--base-size-80);
+  background: var(--control-bgColor-active);
+  color: var(--fgColor-default);
+}
+
+.job-step-container .job-step-summary .step-summary-chevron {
+  margin-right: 0;
+  color: var(--fgColor-muted);
+  transition: transform var(--base-duration-100) var(--base-easing-linear);
+}
+
+.job-step-container .job-step-summary .step-summary-duration {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}
+
+.job-step-container .job-step-summary .step-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-xsmall-size);
+  height: var(--control-xsmall-size);
+  margin: 0;
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+.job-step-container .job-step-summary .step-copy-btn:hover {
+  background: var(--bgColor-neutral-muted);
+  color: var(--fgColor-default);
+}
+
+/* ---------- log lines ---------- */
+.job-step-section .job-step-logs {
+  margin: var(--base-size-8) 0;
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  line-height: var(--base-size-20);
+}
+
+.job-step-section .job-step-logs .job-log-line {
+  color: var(--fgColor-default);
+}
+
+.job-log-line:hover {
+  background: var(--bgColor-neutral-muted);
+}
+
+.job-log-line:target {
+  background: var(--bgColor-accent-muted);
+  scroll-margin-top: calc(var(--base-size-80) + var(--base-size-36) + var(--base-size-8));
+}
+
+.job-log-line .line-num,
+.job-log-line .log-time-seconds {
+  width: var(--base-size-48);
+  flex-shrink: 0;
+  color: var(--fgColor-muted);
+  text-decoration: none;
+}
+
+.job-log-line .line-num:hover {
+  color: var(--fgColor-default);
+  text-decoration: underline;
+}
+
+.job-log-line:target > .line-num {
+  color: var(--fgColor-accent);
+}
+
+.job-log-line .log-time,
+.job-log-line .log-time-stamp {
+  color: var(--fgColor-muted);
+}
+
+.job-step-logs .job-log-line .log-msg {
+  margin-left: var(--base-size-16);
+}
+
+.job-step-logs .job-log-line .log-cmd-command {
+  color: var(--fgColor-accent);
+}
+
+.job-step-logs .log-line-error {
+  background: var(--bgColor-danger-muted);
+}
+
+.job-step-logs .log-line-warning {
+  background: var(--bgColor-attention-muted);
+}
+
+.job-step-logs .log-line-warning > .line-num {
+  color: var(--fgColor-attention);
+}
+
+.job-step-logs .log-line-notice {
+  background: var(--bgColor-accent-muted);
+}
+
+.job-step-logs .log-line-debug {
+  background: transparent;
+  color: var(--fgColor-done);
+}
+
+.job-step-logs .log-cmd-error > .log-msg-label {
+  color: var(--fgColor-danger);
+}
+
+.job-step-logs .log-cmd-warning > .log-msg-label {
+  color: var(--fgColor-attention);
+}
+
+.job-step-logs .log-cmd-notice > .log-msg-label {
+  color: var(--fgColor-accent);
+}
+
+.job-step-logs .log-cmd-debug > .log-msg-label {
+  color: var(--fgColor-done);
+}
+
+/* ::group:: rows: github.com section lines (600) with a chevron */
+.log-line-group .log-msg {
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.log-line-group .log-msg::before {
+  border-left-color: var(--fgColor-muted);
+}
+
+/* fullscreen: the header is 80px now */
+.full.height > .action-view-right > .job-step-container {
+  height: calc(100% - var(--base-size-80));
+}

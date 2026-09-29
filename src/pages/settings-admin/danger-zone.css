@@ -1,0 +1,68 @@
+/*
+ * Danger zone — github.com repository settings: Subhead "Danger Zone", then a Box with a 1px
+ * --borderColor-danger-emphasis border (radius 6px); each Box-row (padding 16px, 1px --borderColor-muted separator)
+ * has a 14px semibold title, a 14px --fgColor-default description and a right-aligned btn-danger (32px) centred
+ * vertically. Gitea: h4.ui.top.attached.error.header + div.ui.attached.error.danger.segment > .flex-divided-list
+ * (repo/settings/options.tmpl, org/settings/options_dangerzone.tmpl).
+ */
+
+/* the heading is a plain Subhead (no danger border under it) */
+:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.error.header {
+  border-bottom-color: var(--borderColor-muted);
+  color: var(--fgColor-default);
+}
+
+:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.danger.segment {
+  padding: 0;
+  border: var(--borderWidth-thin) solid var(--borderColor-danger-emphasis);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.danger.segment > .flex-divided-list > .item {
+  align-items: center;
+  margin: 0;
+  padding: var(--base-size-16);
+}
+
+:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.danger.segment > .flex-divided-list > .item + .item {
+  border-top-color: var(--borderColor-muted);
+}
+
+:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.danger.segment .item-main {
+  gap: 0;
+}
+
+:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.danger.segment .item-title {
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.danger.segment .item-body {
+  display: block; /* a flex body splits "…removed. This <strong>CANNOT</strong> be undone!" into wrapping flex items */
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.danger.segment .item-trailing {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* phones: a 150px+ button beside the text leaves 3–4 words per line; the button wraps under the description */
+@media (max-width: 543.98px) {
+  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.danger.segment > .flex-divided-list > .item {
+    flex-wrap: wrap;
+  }
+
+  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.danger.segment .item-main {
+    flex-basis: 100%;
+  }
+
+  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.danger.segment .item-trailing {
+    align-self: flex-start;
+  }
+}

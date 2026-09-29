@@ -124,7 +124,10 @@
   font-weight: var(--base-text-weight-semibold);
 }
 
+/* Primer SegmentedControl icons are 16px in both sizes (Gitea's file-view Code / Preview toggle passes 15) */
 .ui.buttons:has(> .active.button) > .button > .svg {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
   color: var(--fgColor-muted);
 }
 
@@ -291,4 +294,16 @@
 .ui.labeled.button > .button.disabled {
   background: transparent;
   color: var(--control-fgColor-disabled);
+}
+
+/* a Select inside a SegmentedControl group (commit graph: "Select branches" + Mono / Color in one
+   .ui.icon.buttons.tiny) fills the track height and shares its outer border instead of poking 2px above
+   and below the 28px track */
+.ui.buttons:has(> .active.button) > .ui.selection.dropdown {
+  align-self: stretch;
+  min-height: 0;
+  margin: -1px var(--base-size-4) -1px -1px;
+  padding-top: 0;
+  padding-bottom: 0;
+  align-items: center;
 }

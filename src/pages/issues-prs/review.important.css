@@ -1,0 +1,11 @@
+/* gh-important: review-thread footer in the conversation timeline is `.flex-text-block.tw-my-2` (Tailwind !important
+   8px margins) → github.com: the muted footer sits flush at the bottom of the thread Box */
+.repository.view.issue .code-comments-list .conversation-holder > .comment-code-cloud > .flex-text-block.tw-my-2 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* review.css (Gitea): `.comment-code-cloud { padding: .5rem !important }` → the comments and footer run edge to edge */
+.repository.view.issue .code-comments-list .conversation-holder > .comment-code-cloud {
+  padding: 0 !important;
+}

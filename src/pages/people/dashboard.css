@@ -1,0 +1,322 @@
+/*
+ * Dashboard (signed-in home) — github.com's signed-in dashboard (no logged-out reference; Primer spec + github.com):
+ *   full-width page: left sidebar (320px, 1px --borderColor-muted right rule, 24px/16px padding) with
+ *   "Top repositories": 14px semibold heading, filter input, rows of 16px icon + "owner/repo" 14px semibold
+ *   --fgColor-default (hover: accent + underline), no separators;
+ *   feed column (24px/32px padding, ≤ 1076px): activity rows = 32px avatar, 14px text with the actor and targets as
+ *   semibold links, 12px muted relative time; pushed commits / comments in a Box card (box.css).
+ * Gitea: templates/user/dashboard/dashboard.tmpl (.page-content.dashboard.feeds > .secondary-nav context bar +
+ * .ui.container.flex-container > .flex-container-main (heatmap, #activity-feed) + #dashboard-repo-list
+ * .flex-container-sidebar (Vue DashboardRepoList, scoped CSS inside Gitea's layered index.css)).
+ */
+
+/* ---------- page layout ---------- */
+/* The sidebar comes after the feed in the HTML, so the feed paints first. The container reserves the sidebar's
+   320px as padding and the sidebar pulls itself into it (margin-left −320px): the feed never moves when the sidebar
+   arrives (a plain `order: -1` shifted the whole feed by 320px, CLS +0.19). */
+.feeds > .flex-container {
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding-left: calc(var(--base-size-128) * 2 + var(--base-size-64));
+  gap: 0;
+}
+
+.dashboard > .secondary-nav:first-child {
+  margin-bottom: 0;
+}
+
+.feeds > .flex-container > .flex-container-sidebar {
+  order: -1;
+  flex: 0 0 auto;
+  width: calc(var(--base-size-128) * 2 + var(--base-size-64));
+  margin-left: calc((var(--base-size-128) * 2 + var(--base-size-64)) * -1);
+  padding: var(--base-size-24) var(--base-size-16);
+  border-right: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+.feeds > .flex-container > .flex-container-main {
+  max-width: calc(var(--breakpoint-large) + var(--base-size-64));
+  padding: var(--base-size-24) var(--base-size-32) var(--base-size-40);
+}
+
+@media (max-width: 767.98px) {
+  .feeds > .flex-container {
+    padding-left: 0;
+  }
+
+  .feeds > .flex-container > .flex-container-sidebar {
+    width: auto;
+    margin-left: 0;
+    border-right: 0;
+    border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+  }
+
+  .feeds > .flex-container > .flex-container-main {
+    padding: var(--base-size-16);
+  }
+}
+
+/* ---------- context bar (switch dashboard context / org tabs) ---------- */
+.dashboard > .secondary-nav > .ui.menu {
+  align-items: center;
+  min-height: var(--base-size-48);
+  padding: 0 var(--base-size-8);
+}
+
+.dashboard > .secondary-nav .ui.dropdown > .text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base-size-8);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.dashboard > .secondary-nav .ui.dropdown > .text > * {
+  margin: 0;
+}
+
+.dashboard > .secondary-nav .ui.dropdown > .text > .icon,
+.dashboard > .secondary-nav .right.menu > .item > .svg {
+  color: var(--fgColor-muted);
+}
+
+.dashboard > .secondary-nav .right.menu > .item {
+  gap: var(--base-size-8);
+  border-radius: var(--borderRadius-medium);
+}
+
+.dashboard > .secondary-nav .right.menu > a.item:hover {
+  background: var(--control-transparent-bgColor-hover);
+}
+
+.dashboard > .secondary-nav .right.menu > .item.active {
+  background: var(--control-transparent-bgColor-selected);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+/* ---------- sidebar: DashboardRepoList.vue ---------- */
+/* Repository | Organization → SegmentedControl (track 32px, knob on the selected item) */
+#dashboard-repo-list .ui.two.item.menu {
+  min-height: var(--control-medium-size);
+  margin: 0 0 var(--base-size-16);
+  border: var(--borderWidth-thin) solid var(--controlTrack-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background: var(--controlTrack-bgColor-rest);
+}
+
+#dashboard-repo-list .ui.two.item.menu > .item {
+  flex: 1 1 0;
+  padding: 0 var(--base-size-12);
+  border: var(--borderWidth-thin) solid transparent;
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+  cursor: pointer;
+}
+
+#dashboard-repo-list .ui.two.item.menu > .item::before {
+  display: none;
+}
+
+#dashboard-repo-list .ui.two.item.menu > .item:hover {
+  background: var(--controlTrack-bgColor-hover);
+}
+
+#dashboard-repo-list .ui.two.item.menu > .item.active {
+  border-color: var(--controlKnob-borderColor-rest);
+  background: var(--controlKnob-bgColor-rest);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+/* "Repositories 8  +" heading */
+#dashboard-repo-list .ui.top.attached.header {
+  gap: var(--base-size-8);
+  margin: 0;
+  padding: 0 0 var(--base-size-8);
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+
+#dashboard-repo-list .ui.header > a.muted {
+  justify-content: center;
+  width: var(--control-small-size);
+  height: var(--control-small-size);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+#dashboard-repo-list .ui.header > a.muted:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+#dashboard-repo-list .ui.attached.segment {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+#dashboard-repo-list .ui.attached.segment.repos-search {
+  margin-bottom: var(--base-size-8);
+}
+
+/* Gitea focuses the filter input on load; the focused input (position: relative; z-index: 1 in controls) would paint
+   over the absolutely positioned leading search icon */
+#dashboard-repo-list .repos-search i.icon {
+  z-index: 1;
+}
+
+/* All / Sources / Forks / Mirrors / Collaborative: a compact UnderlineNav */
+#dashboard-repo-list .repos-filter {
+  min-height: var(--base-size-40);
+}
+
+#dashboard-repo-list .repos-filter .overflow-menu-items {
+  gap: 0;
+}
+
+#dashboard-repo-list .repos-filter .item {
+  gap: var(--base-size-4);
+  font-size: var(--text-body-size-small);
+}
+
+#dashboard-repo-list .repos-filter .active.item::after {
+  bottom: calc(50% - var(--base-size-20));
+}
+
+/* repo rows */
+
+#dashboard-repo-list .repo-owner-name-list > li {
+  gap: var(--base-size-8);
+  padding-left: 0;
+  padding-right: 0;
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+}
+
+#dashboard-repo-list .repo-owner-name-list > li.active {
+  background: var(--control-transparent-bgColor-hover);
+}
+
+#dashboard-repo-list .repo-list-link {
+  gap: var(--base-size-8);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+#dashboard-repo-list .repo-list-link:hover {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+#dashboard-repo-list .repo-list-link .svg {
+  margin: 0;
+}
+
+#dashboard-repo-list .repo-owner-name-list .ui.label {
+  font-weight: var(--base-text-weight-medium);
+}
+
+/* org rows: "N ⎕" repo count */
+#dashboard-repo-list .repo-owner-name-list > li > .tw-text-grey-light {
+  gap: var(--base-size-4);
+  font-size: var(--text-body-size-small);
+}
+
+#dashboard-repo-list .empty-repo-or-org {
+  margin: var(--base-size-16) 0;
+  color: var(--fgColor-muted);
+}
+
+/* paging under the list */
+#dashboard-repo-list .tw-text-center > .divider {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+/* icons P-1: Gitea glyphs in the Vue list → Octicons via CSS mask (the icons are bundled in JS) */
+.dashboard-repos :is(.gitea-exclamation, .gitea-double-chevron-left, .gitea-double-chevron-right) {
+  background-color: currentColor;
+  mask: var(--gh-octicon-alert) center / contain no-repeat;
+}
+
+.dashboard-repos .gitea-double-chevron-left {
+  mask-image: var(--gh-octicon-move-to-start);
+}
+
+.dashboard-repos .gitea-double-chevron-right {
+  mask-image: var(--gh-octicon-move-to-end);
+}
+
+.dashboard-repos :is(.gitea-exclamation, .gitea-double-chevron-left, .gitea-double-chevron-right) > * {
+  visibility: hidden;
+}
+
+/* ---------- activity feed (dashboard + profile "Public Activity") ---------- */
+#activity-feed > .item {
+  gap: var(--base-size-16);
+}
+
+#activity-feed > .item > .item-leading img.ui.avatar {
+  width: var(--base-size-32);
+  height: var(--base-size-32);
+}
+
+#activity-feed .item-main > div:first-child > a {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+#activity-feed .item-main > div:first-child > a:hover,
+#activity-feed .item-main > a.issue.title:hover {
+  color: var(--fgColor-accent);
+}
+
+#activity-feed .item-main > div:first-child > relative-time {
+  margin-left: var(--base-size-4);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}
+
+/* the event octicon: 16px muted on the text's first line */
+#activity-feed > .item > .item-trailing {
+  align-self: flex-start;
+  color: var(--fgColor-muted);
+}
+
+#activity-feed > .item > .item-trailing > .svg {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  margin: var(--base-size-2) 0 0;
+}
+
+/* pushed commits (Box card) */
+#activity-feed .item-main > div:has(> .flex-text-block > .sha) {
+  padding: var(--base-size-12) var(--base-size-16);
+}
+
+#activity-feed .item-main > div > .flex-text-block {
+  font-size: var(--text-body-size-small);
+}
+
+#activity-feed .item-main > a[href*="/compare/"] {
+  align-self: flex-start;
+  font-size: var(--text-body-size-small);
+}
+
+/* issue / PR title under the event line */
+#activity-feed .item-main > .issue.title {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+/* comment excerpt (Box card), muted text */
+#activity-feed .item-main > .truncated-markup {
+  padding: var(--base-size-12) var(--base-size-16);
+  color: var(--fgColor-muted);
+}
+
+#activity-feed > :is(.ui.pagination.menu, .center.page.buttons) {
+  margin-top: var(--base-size-16);
+}

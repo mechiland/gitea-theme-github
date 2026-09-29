@@ -1,1 +1,13 @@
-/* src/pages/actions-packages-projects — see ARCHITECTURE.md for ownership. */
+/*
+ * src/pages/actions-packages-projects — layer gh.pages-actions-packages-projects (see ARCHITECTURE.md §5).
+ * Owns (page-scoped): Actions runs list (.page-content.repository.actions, .run-list*), the Vue run view
+ * (.action-view-*, .action-info-summary*, .action-run-summary-*, .workflow-graph, .job-*, .job-step-*,
+ * .job-log-line, .left-list-header), packages (.page-content.packages, .packages-content*), projects list
+ * (.page-content.projects) and board (.projects-view, #project-board, .project-column*, cards inside columns).
+ * *.important.css in this folder is placed in @layer gh-important by the build.
+ */
+@import "./actions-list.css";
+@import "./action-run.css";
+@import "./action-job.css";
+@import "./packages.css";
+@import "./projects.css";

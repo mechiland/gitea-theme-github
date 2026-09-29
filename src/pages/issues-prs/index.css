@@ -1,1 +1,15 @@
-/* src/pages/issues-prs — see ARCHITECTURE.md for ownership. */
+/*
+ * src/pages/issues-prs — github.com issue & PR pages (layer gh.pages-issues-prs).
+ * Owns page-scoped selectors of: issue/PR lists (.issue-list, .milestone-issue-list), issue/PR detail
+ * (.repository.view.issue: title header, PR tabs chrome, two-column layout, sidebar, comment composer, merge box,
+ * review threads), labels & milestones pages, new issue / new PR (compare) forms.
+ * Shared components (rows, timeline, labels, buttons, tabs) belong to data-display / controls / navigation.
+ */
+@import "./list.css";
+@import "./header.css";
+@import "./layout.css";
+@import "./sidebar.css";
+@import "./composer.css";
+@import "./merge-box.css";
+@import "./review.css";
+@import "./labels-milestones.css";

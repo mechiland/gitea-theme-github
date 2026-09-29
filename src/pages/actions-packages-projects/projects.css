@@ -1,0 +1,446 @@
+/*
+ * Projects — list (projects/list.tmpl: repo + org "Projects" tabs) and board (projects/view.tmpl, #project-board).
+ *
+ * github.com /orgs/<org>/projects (2026-09-30, orgs/github): Box, rows padding 16px with --borderColor-muted
+ * separators; project octicon 16px 8px before the title; title 16px/24px 600 --fgColor-default (hover accent);
+ * description 14px --fgColor-default; meta 12px --fgColor-muted.
+ *
+ * github.com board view (measured 2026-09-30, orgs/github/projects/4247):
+ *   board padding 8px 16px, columns 350px wide, 8px apart, left aligned;
+ *   column: --bgColor-inset (= --bgColor-muted in light), 1px --borderColor-default, radius 6px;
+ *   column header 44px: padding 8px 8px 4px 16px, name 14px/600, count CounterLabel (12px/600 --fgColor-muted on
+ *     --bgColor-neutral-muted, radius 20px, 2px 6px) 8px after it, "…" IconButton at the end;
+ *   cards area padding 4px 8px, cards 8px apart;
+ *   card: --bgColor-default, 1px --borderColor-default, radius 6px, --shadow-resting-small, padding 8px 12px 12px,
+ *     meta line 12px --fgColor-muted with the issue state octicon, title 14px/1.3 400 --fgColor-default.
+ * Gitea-only: column colours are inline `background … !important` (exempt, see research §5); the text colour
+ * then comes inline too, so everything in the header inherits it.
+ */
+
+/* ---------- list ---------- */
+.page-content.projects .milestone-list {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+.page-content.projects .milestone-list:not(:has(> .item)) {
+  border: 0;
+  background: transparent;
+}
+
+.page-content.projects .milestone-list > .item {
+  gap: var(--base-size-4);
+  padding: var(--base-size-16);
+}
+
+.page-content.projects .milestone-list > .item:first-child {
+  border-top-left-radius: var(--borderRadius-medium);
+  border-top-right-radius: var(--borderRadius-medium);
+}
+
+.page-content.projects .milestone-list > .item:last-child {
+  border-bottom-left-radius: var(--borderRadius-medium);
+  border-bottom-right-radius: var(--borderRadius-medium);
+}
+
+.page-content.projects .milestone-list .list-item-large-title {
+  display: flex;
+  align-items: center;
+  gap: var(--base-size-8);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-large);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-large);
+}
+
+.page-content.projects .milestone-list .list-item-large-title > .svg {
+  flex-shrink: 0;
+  color: var(--fgColor-default);
+}
+
+.page-content.projects .milestone-list .list-item-large-title > a {
+  color: var(--fgColor-default);
+}
+
+.page-content.projects .milestone-list .list-item-large-title > a:hover {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+.page-content.projects .milestone-list .list-item-secondary-bar {
+  gap: var(--base-size-8) var(--base-size-16);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.page-content.projects .milestone-list .list-item-secondary-bar .flex-text-block {
+  gap: var(--base-size-4) var(--base-size-12);
+}
+
+.page-content.projects .milestone-list .list-item-secondary-bar .flex-text-inline {
+  gap: var(--base-size-4);
+}
+
+.page-content.projects .milestone-list .list-item-secondary-bar .svg {
+  width: var(--base-size-12);
+  height: var(--base-size-12);
+}
+
+.page-content.projects .milestone-list .list-item-secondary-bar a {
+  color: var(--fgColor-muted);
+}
+
+.page-content.projects .milestone-list .list-item-secondary-bar a:hover {
+  color: var(--fgColor-accent);
+  text-decoration: none;
+}
+
+.page-content.projects .milestone-list .list-item-secondary-bar a.tw-text-red:hover {
+  color: var(--fgColor-danger);
+}
+
+.page-content.projects .milestone-list > .item > .render-content {
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.page-content.projects .milestone-list > .center.page.buttons {
+  padding: var(--base-size-16);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+/* ---------- board page ---------- */
+/* github.com project pages are full width: title, toolbar, description and columns share one left edge. Gitea keeps
+   the header / description in a 1280px `.ui.container` while the board (and the repo header above) spans the fluid
+   page, a 64px seam at 1440 → the header parts fill the fluid `.projects-view` and the board has no inline padding,
+   so every part starts at the page margin (x=32 at 1440, like the repo header). The repo "Labels / Milestones /
+   New issue" row above the board is widened the same way. */
+.projects-view .project-header,
+.projects-view .project-description {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+
+/* a .ui.container keeps its page-margin max-width and auto margins: 100% width = the fluid page width */
+.page-content.view-project > .ui.container.padded:not(.projects-view) {
+  width: 100%;
+}
+
+.projects-view .project-header {
+  gap: var(--base-size-8);
+  padding: var(--base-size-8) 0;
+}
+
+/* toolbar, part 1: the Label / Assignee / Milestone filters (Fomantic secondary menu items, 39px, 11px 13px
+   padding) → Primer invisible buttons, 32px, 14px/500, 12px inline padding, trailing triangle-down 16px */
+.projects-view .project-header > .list-header-filters {
+  align-items: center;
+  gap: var(--base-size-4);
+  min-height: 0;
+}
+
+.projects-view .project-header > .list-header-filters > .item {
+  gap: var(--base-size-4);
+  height: var(--control-medium-size);
+  margin: 0;
+  padding: 0 var(--control-medium-paddingInline-normal);
+  border-radius: var(--borderRadius-medium);
+  background: transparent;
+  color: var(--button-invisible-fgColor-rest);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.projects-view .project-header > .list-header-filters > .item:hover,
+.projects-view .project-header > .list-header-filters > .item.active {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--button-invisible-fgColor-rest);
+}
+
+.projects-view .project-header > .list-header-filters > .item:active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+.projects-view .project-header > .list-header-filters > .item:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: calc(var(--borderWidth-thick) * -1);
+}
+
+.projects-view .project-header > .list-header-filters > .item > .dropdown.icon {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  margin: 0;
+  color: var(--button-invisible-iconColor-rest);
+}
+
+/* toolbar, part 2: Fullscreen / Edit / Close / Delete / New column (Fomantic `.ui.compact.mini.menu`, 38px, 11px
+   text, em paddings) → Primer ButtonGroup of default buttons: 32px, 14px/500, 12px inline padding, 8px icon gap,
+   joined 1px borders, 6px outer radius. */
+.projects-view .project-header > .ui.compact.menu {
+  align-items: stretch;
+  min-height: 0;
+  height: var(--control-medium-size);
+  margin: 0;
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+  background: transparent;
+  box-shadow: var(--button-default-shadow-resting);
+  font-size: var(--text-body-size-medium);
+}
+
+.projects-view .project-header > .ui.compact.menu > .item {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--base-size-8);
+  height: var(--control-medium-size);
+  margin: 0 calc(var(--borderWidth-thin) * -1) 0 0;
+  padding: 0 var(--control-medium-paddingInline-normal);
+  border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
+  border-radius: 0;
+  background: var(--button-default-bgColor-rest);
+  color: var(--button-default-fgColor-rest);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-medium);
+  line-height: var(--text-body-lineHeight-medium);
+  white-space: nowrap;
+}
+
+.projects-view .project-header > .ui.compact.menu > .item::before {
+  display: none;
+}
+
+.projects-view .project-header > .ui.compact.menu > .item:first-child,
+.projects-view .project-header > .ui.compact.menu > .item.tw-hidden:first-child + .item {
+  border-top-left-radius: var(--borderRadius-medium);
+  border-bottom-left-radius: var(--borderRadius-medium);
+}
+
+.projects-view .project-header > .ui.compact.menu > .item:last-child {
+  margin-right: 0;
+  border-top-right-radius: var(--borderRadius-medium);
+  border-bottom-right-radius: var(--borderRadius-medium);
+}
+
+.projects-view .project-header > .ui.compact.menu > .item > .svg {
+  flex-shrink: 0;
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  margin: 0;
+  color: var(--fgColor-muted);
+}
+
+.projects-view .project-header > .ui.compact.menu > .item:hover {
+  position: relative;
+  z-index: 1;
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+  color: var(--button-default-fgColor-rest);
+}
+
+.projects-view .project-header > .ui.compact.menu > .item:active {
+  background: var(--button-default-bgColor-active);
+}
+
+.projects-view .project-header > .ui.compact.menu > .item:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: var(--focus-outline);
+  outline-offset: calc(var(--borderWidth-thick) * -1);
+}
+
+/* Delete: Primer danger treatment on hover (default at rest, like github.com's "Delete" in a group) */
+.projects-view .project-header > .ui.compact.menu > .item[data-url*="/delete"]:hover {
+  border-color: var(--button-danger-borderColor-hover);
+  background: var(--button-danger-bgColor-hover);
+  color: var(--button-danger-fgColor-hover);
+}
+
+.projects-view .project-header > .ui.compact.menu > .item[data-url*="/delete"]:hover > .svg {
+  color: inherit;
+}
+
+/* the button group is wider than a phone: scroll it instead of widening the page */
+.projects-view .project-header > .ui.compact.menu {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.projects-view .project-header h2 {
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-medium);
+  font-weight: var(--text-title-weight-medium);
+  line-height: var(--base-text-lineHeight-normal);
+}
+
+.projects-view .project-description .divider {
+  margin: var(--base-size-8) 0 var(--base-size-16);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+  border-bottom: 0;
+}
+
+#project-board {
+  gap: var(--base-size-8);
+  margin: 0;
+  padding: var(--base-size-8) 0;
+}
+
+.project-column {
+  width: calc(var(--base-size-128) * 2 + var(--base-size-96) - var(--base-size-2));
+  margin: 0;
+  padding: 0;
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--color-project-column-bg);
+  color: var(--fgColor-default);
+}
+
+/* column header: name · count … menu */
+.project-column-header {
+  justify-content: flex-start;
+  gap: var(--base-size-8);
+  min-height: var(--base-size-44);
+  padding: var(--base-size-8) var(--base-size-8) var(--base-size-4) var(--base-size-16);
+}
+
+.project-column-header .project-column-title-text {
+  order: -1;
+  min-width: 0;
+  gap: var(--base-size-4);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.project-column-header .project-column-title-text .svg {
+  flex-shrink: 0;
+  color: inherit;
+}
+
+/* Primer CounterLabel (size, padding and 18px line come from data-display counters.css: 20px pill); github.com's
+   board counter is the muted variant: --fgColor-muted on --bgColor-neutral-muted, no border */
+.project-column-header .ui.label.project-column-issue-count {
+  flex-shrink: 0;
+  margin: 0;
+  border-color: transparent;
+  background: var(--bgColor-neutral-muted);
+  color: var(--fgColor-muted);
+}
+
+.project-column[style] .project-column-header .ui.label.project-column-issue-count {
+  color: inherit;
+}
+
+/* "…" column menu: IconButton invisible 28px */
+.project-column-header > .ui.dropdown {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-small-size);
+  height: var(--control-small-size);
+  margin-left: auto;
+  padding: 0;
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+.project-column[style] .project-column-header > .ui.dropdown {
+  color: inherit;
+}
+
+.project-column-header > .ui.dropdown:hover,
+.project-column-header > .ui.dropdown.active {
+  background: var(--control-transparent-bgColor-hover);
+}
+
+.project-column > .divider {
+  display: none;
+}
+
+.project-column > .ui.cards {
+  gap: var(--base-size-8);
+  padding: var(--base-size-4) var(--base-size-8) var(--base-size-8);
+}
+
+/* card */
+.project-column .issue-card {
+  gap: var(--base-size-4);
+  padding: var(--base-size-8) var(--base-size-12) var(--base-size-12);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+  box-shadow: var(--shadow-resting-small);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+}
+
+.project-column .issue-card:hover {
+  border-color: var(--borderColor-emphasis);
+}
+
+.project-column .issue-card > .content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--base-size-4);
+}
+
+.project-column .issue-card .issue-card-icon {
+  margin-top: var(--base-size-2);
+}
+
+.project-column .issue-card .issue-card-title {
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.project-column .issue-card .issue-card-title:hover {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+.project-column .issue-card .meta {
+  margin: 0;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.project-column .issue-card .meta a {
+  color: var(--fgColor-muted);
+}
+
+.project-column .issue-card .meta a:hover {
+  color: var(--fgColor-accent);
+}
+
+.project-column .issue-card .meta .svg {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+}
+
+.project-column .issue-card .issue-card-bottom {
+  align-items: flex-end;
+  gap: var(--base-size-8);
+  margin-top: var(--base-size-4);
+}
+
+.project-column .issue-card .issue-card-bottom-part.labels-list {
+  gap: var(--base-size-4);
+}
+
+.project-column .issue-card .issue-card-bottom-part img.ui.avatar {
+  width: var(--base-size-20);
+  height: var(--base-size-20);
+}
+
+/* drag placeholder: dashed outline of a card */
+.project-column .issue-card.card-ghost {
+  box-shadow: none;
+}

@@ -1,0 +1,382 @@
+/*
+ * Branches — github.com /branches (measured 2026-09-30, pemistahl/grex): DataTable in a Box, 12px / 20px rows,
+ * cells padding 8px 12px (16px at the row ends), rows divided by 1px --borderColor-default;
+ *   branch name = Primer BranchName: mono 12px --fgColor-accent on --bgColor-accent-muted, padding 2px 6px, radius 6px,
+ *   followed by a 32px invisible copy button; Behind | Ahead counts 12px muted split by a 1px rule;
+ *   PR state = small StateLabel; row actions = 28px invisible icon buttons (--fgColor-muted, delete = danger on hover).
+ * Gitea: templates/repo/branch/list.tmpl — .repository.branches: top attached header + attached table segment per
+ * group (Default Branch, Branches), table.ui.very.basic.fixed.table.single.line, td > .flex-text-block >
+ * a.branch-name + copy .btn, p.info (commit, message, updated, pusher), .commit-divergence bars, PR label/button,
+ * action .btn.interact-bg.tw-p-2 icons. GitHub's Overview / Yours / Active / Stale / All tabs have no Gitea data.
+ */
+.repository.branches .ui.table > tbody > tr > td,
+.repository.branches .ui.table > tr > td {
+  padding: var(--base-size-8) var(--base-size-12);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+  font-size: var(--text-body-size-small);
+  line-height: var(--base-size-20);
+  vertical-align: middle;
+}
+
+.repository.branches .ui.table > tbody > tr:first-child > td {
+  border-top: 0;
+}
+
+.repository.branches .ui.table > tbody > tr > td:first-child {
+  padding-left: var(--base-size-16);
+}
+
+.repository.branches .ui.table > tbody > tr > td:last-child {
+  padding-right: var(--base-size-16);
+}
+
+.repository.branches .ui.attached.table.segment {
+  padding: 0;
+}
+
+/* branch name pill */
+.repository.branches .branch-name {
+  flex: 0 1 auto;
+  padding: var(--base-size-2) var(--base-size-6);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-accent-muted);
+  color: var(--fgColor-accent);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  line-height: var(--base-size-20);
+}
+
+.repository.branches a.branch-name:hover {
+  text-decoration: underline;
+}
+
+.repository.branches td > .flex-text-block {
+  gap: var(--base-size-4);
+}
+
+/* copy button next to the name: github.com 32px invisible IconButton, 16px octicon, --fgColor-muted
+   (colour needs repo.important.css: .interact-fg forces `color: inherit !important`) */
+.repository.branches td > .flex-text-block > .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-medium-size);
+  height: var(--control-medium-size);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+.repository.branches td > .flex-text-block > .btn > .svg {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+}
+
+.repository.branches td > .flex-text-block > .btn:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+/* commit / updated line under the name */
+.repository.branches td > p.info {
+  gap: var(--base-size-4);
+  margin: var(--base-size-4) 0 0;
+  overflow: hidden;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--base-size-20);
+  white-space: nowrap;
+}
+
+.repository.branches td > p.info > .commit-message {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.repository.branches td > p.info > a {
+  flex-shrink: 0;
+  color: var(--fgColor-muted);
+}
+
+.repository.branches td > p.info > .svg + a {
+  font-family: var(--fontStack-monospace);
+}
+
+.repository.branches td > p.info > a:hover {
+  color: var(--fgColor-accent);
+}
+
+.repository.branches td > p.info .commit-message code {
+  font-size: var(--text-body-size-small);
+}
+
+.repository.branches td > p.info .ui.avatar {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+}
+
+/* Behind | Ahead */
+.repository.branches .commit-divergence {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--base-size-20);
+}
+
+.repository.branches .commit-divergence .bar-group:last-child {
+  border-left-color: var(--borderColor-default);
+}
+
+/* github.com's classic ahead/behind bars are a solid light grey (#dfe2e5 era); --bgColor-neutral-muted (12% alpha)
+   barely shows on white, the opaque --borderColor-default grey does */
+.repository.branches .commit-divergence .bar {
+  height: var(--base-size-4);
+  border-radius: var(--borderRadius-small);
+  background-color: var(--borderColor-default);
+}
+
+.repository.branches .commit-divergence .bar.bar-behind {
+  border-radius: var(--borderRadius-small) 0 0 var(--borderRadius-small);
+}
+
+.repository.branches .commit-divergence .bar.bar-ahead {
+  border-radius: 0 var(--borderRadius-small) var(--borderRadius-small) 0;
+}
+
+/* PR cell: "#123" link + small StateLabel */
+.repository.branches td .ref-issue {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}
+
+.repository.branches td .ref-issue:hover {
+  color: var(--fgColor-accent);
+}
+
+.repository.branches td > a.ui.large.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base-size-4);
+  height: var(--base-size-24);
+  margin-left: var(--base-size-4);
+  padding: 0 var(--base-size-8);
+  border: 0;
+  border-radius: var(--borderRadius-full);
+  color: var(--fgColor-onEmphasis);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-medium);
+  vertical-align: middle;
+}
+
+.repository.branches td > a.ui.green.large.label {
+  background: var(--bgColor-open-emphasis);
+}
+
+.repository.branches td > a.ui.purple.large.label {
+  background: var(--bgColor-done-emphasis);
+}
+
+.repository.branches td > a.ui.red.large.label {
+  background: var(--bgColor-closed-emphasis);
+}
+
+.repository.branches td > a.ui.large.label > .svg {
+  width: var(--base-size-12);
+  height: var(--base-size-12);
+  margin: 0;
+}
+
+/* row action icon buttons */
+.repository.branches td .tw-flex > .btn,
+.repository.branches td .tw-flex > .ui.dropdown.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-small-size);
+  height: var(--control-small-size);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+.repository.branches td .tw-flex > .btn:hover,
+.repository.branches td .tw-flex > .ui.dropdown.btn:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+.repository.branches td .tw-flex > .btn.delete-branch-button:hover {
+  background: var(--control-danger-bgColor-hover);
+}
+
+/* Default Branch header "switch" link: muted icon at the right */
+.repository.branches .ui.top.attached.header > a.right {
+  display: inline-flex;
+  margin-left: auto;
+  color: var(--fgColor-muted);
+}
+
+.repository.branches .ui.top.attached.header > a.right:hover {
+  color: var(--fgColor-accent);
+}
+
+/* ---------- page frame ---------- */
+/* github.com /branches (and /commits): full container-xl, 1280px at x=80 at 1440, 24px page gutter from 768px
+   (x=24 at 1100), 16px below (measured 2026-09-30). Gitea's 1216px container would start 32px further in. */
+@media (min-width: 768px) {
+  .repository.branches > .ui.container,
+  .repository.commits:not(.pull) > .ui.container {
+    width: var(--breakpoint-xlarge);
+    max-width: calc(100% - 2 * var(--base-size-24));
+  }
+}
+
+/* row hover: github.com DataTable rows turn --bgColor-muted */
+.repository.branches .ui.table > tbody > tr:hover > td {
+  background: var(--bgColor-muted);
+}
+
+/* "Default Branch" / "Branches": github.com has a plain 14px semibold heading ("Default", "Your branches") 8px
+   above each Box, not a Box header. The table segment after it is the Box (full border, radius). */
+.repository.branches .ui.top.attached.header {
+  display: flex;
+  align-items: center;
+  gap: var(--base-size-4);
+  width: auto; /* Fomantic attached: calc(100% + 2px) with -1px margins */
+  min-height: 0;
+  margin: var(--base-size-24) 0 var(--base-size-8);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.repository.branches .repository-summary + .ui.top.attached.header {
+  margin-top: 0;
+}
+
+.repository.branches .ui.top.attached.header > a.right {
+  width: var(--control-xsmall-size);
+  height: var(--control-xsmall-size);
+  align-items: center;
+  justify-content: center;
+  margin-left: 0;
+  border-radius: var(--borderRadius-medium);
+}
+
+.repository.branches .ui.top.attached.header > a.right:hover {
+  background: var(--control-transparent-bgColor-hover);
+}
+
+/* search form: github.com's full-width 32px search field sits outside the Box */
+.repository.branches .ui.attached.segment:has(> form) {
+  width: auto;
+  margin: 0 0 var(--base-size-16);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+/* the search field itself: list-search.css */
+
+.repository.branches .ui.attached.segment:not(:has(> form)) {
+  width: auto;
+  margin: 0;
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  overflow: hidden;
+}
+
+/* ---------- 390px: Fomantic stacks every cell (display: block !important) → compact two-block rows:
+   name + copy, commit line (wraps), then Behind|Ahead · PR on the left and the action icons on the right */
+@media (max-width: 767.98px) {
+  .repository.branches .ui.table > tbody > tr {
+    position: relative;
+    padding: var(--base-size-12) var(--base-size-16);
+    border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+    border-bottom: 0;
+  }
+
+  .repository.branches .ui.table > tbody > tr:first-child {
+    border-top: 0;
+  }
+
+  .repository.branches .ui.table > tbody > tr::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .repository.branches .ui.table > tbody > tr > td,
+  .repository.branches .ui.table > tbody > tr > td:first-child,
+  .repository.branches .ui.table > tbody > tr > td:last-child {
+    padding: 0;
+    border: 0;
+    text-align: left;
+  }
+
+  .repository.branches .ui.table > tbody > tr > td:not(:first-child) {
+    float: left;
+    min-height: var(--control-small-size);
+    margin-top: var(--base-size-4);
+    margin-right: var(--base-size-12);
+    line-height: var(--control-small-size);
+  }
+
+  .repository.branches .ui.table > tbody > tr > td:last-child:not(:first-child) {
+    float: right;
+    margin-right: 0;
+  }
+
+  /* github.com drops the Behind | Ahead column on phones; Fomantic forces the cell to display: block !important,
+     so it is taken out of the flow and clipped instead (still in the accessibility tree) */
+  .repository.branches .ui.table > tbody > tr > td:has(> .commit-divergence) {
+    position: absolute;
+    clip-path: inset(50%);
+    overflow: hidden;
+  }
+
+  .repository.branches td > p.info {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+
+  .repository.branches td > p.info > .commit-message {
+    white-space: nowrap;
+  }
+}
+
+/* ---------- ≥768px: one-line rows (github.com DataTable rows are 49px: 8 + 32px copy button + 8 + 1px rule) ----------
+   Gitea stacks the name (+ copy) and the commit line (p.info.tw-flex, display is !important) in the first cell,
+   which gives 75px rows. The name block floats left and the commit line (its own BFC through overflow: hidden)
+   takes the rest of the cell on the same line, vertically centred on the 32px copy button. */
+@media (min-width: 768px) {
+  .repository.branches .ui.table > tbody > tr > td > .flex-text-block {
+    float: left;
+    max-width: 50%;
+    margin-right: var(--base-size-16);
+  }
+
+  .repository.branches .ui.table > tbody > tr > td > p.info {
+    height: var(--control-xsmall-size); /* + the 4px tw-my-1 margins = the 32px name row */
+  }
+
+  /* column widths (fixed table): Fomantic's eight / two / three wide = 50 / 12.5 / 18.75% leaves the one-line name +
+     commit cell too narrow for the commit message; github.com gives the Branch column most of the row and keeps
+     Behind | Ahead and Pull request compact. Actions keep ≥ 5 × 28px + padding (17% = 218px at 1280). */
+  .repository.branches .ui.table > tbody > tr > td.eight.wide {
+    width: 60%;
+  }
+
+  .repository.branches .ui.table > tbody > tr > td.two.wide {
+    width: 10%;
+  }
+
+  .repository.branches .ui.table > tbody > tr > td.three.wide {
+    width: 13%;
+  }
+}

@@ -1,0 +1,108 @@
+/*
+ * Explore (repositories / users / organizations) — github.com/search results layout (measured 2026-09-30, 1440):
+ *   full-width page, left sidebar 256px (1px --borderColor-muted right rule down to the footer, 16px padding) with a
+ *   NavList (32px items, 8px padding, radius 6, 16px muted octicons; current item --control-transparent-bgColor-selected,
+ *   semibold, 4px × 24px --borderColor-accent-emphasis bar 8px left of the item), results 24px to the right as
+ *   bordered cards (padding 16px, radius 6, 16px apart; box.css). Below 768px: horizontal UnderlineNav above results.
+ * Gitea: templates/explore/navbar.tmpl (overflow-menu.ui.secondary.pointing.tabular.top.attached.borderless.menu
+ * .secondary-nav) + .ui.container (explore/search.tmpl or shared/repo/search.tmpl, list, paginate).
+ * overflow-menu (web component) moves an item into its "…" popup when the item's right edge comes within 38px of
+ * the menu's right edge, so the vertical items must end ≥ 38px before the menu box edge.
+ */
+
+@media (min-width: 768px) {
+  /* the page fills the space down to the footer so the sidebar rule does too */
+  .full.height:has(> .explore) {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+  .page-content.explore {
+    display: grid;
+    flex-grow: 1;
+    grid-template-columns: calc(var(--base-size-128) * 2) minmax(0, 1fr);
+  }
+
+  /* the menu box runs 40px under the results column (width in people.important.css) so its items can span the
+     visible sidebar while still ending 56px before the menu's right edge (see the overflow-menu note above) */
+  .explore > overflow-menu {
+    display: block;
+    grid-area: 1 / 1;
+    min-height: 0;
+    max-width: none;
+    margin: 0;
+    padding: var(--base-size-16) calc(var(--base-size-48) + var(--base-size-8)) var(--base-size-16) var(--base-size-16);
+    box-shadow: none;
+  }
+
+  .explore > overflow-menu > .overflow-menu-items {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--base-size-2);
+  }
+
+  .explore > overflow-menu .overflow-menu-items > .item {
+    align-self: stretch;
+    justify-content: flex-start;
+    min-height: var(--control-medium-size);
+    border-radius: var(--borderRadius-medium);
+    line-height: var(--text-body-lineHeight-medium);
+  }
+
+  .explore > overflow-menu .overflow-menu-items > .active.item {
+    background: var(--control-transparent-bgColor-selected);
+  }
+
+  /* current item: the accent bar on the left instead of the UnderlineNav underline */
+  .explore > overflow-menu .overflow-menu-items > .active.item::after {
+    inset: calc(50% - var(--base-size-12)) auto auto calc(var(--base-size-8) * -1);
+    width: var(--base-size-4);
+    height: var(--base-size-24);
+    background: var(--borderColor-accent-emphasis);
+    transform: none;
+  }
+
+  .explore > overflow-menu .overflow-menu-items > .item:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: calc(var(--borderWidth-thick) * -1);
+  }
+
+  /* results column; its left rule is the sidebar's divider */
+  .page-content.explore > .ui.container {
+    grid-area: 1 / 2;
+    max-width: calc(var(--breakpoint-large) + var(--base-size-48));
+    margin: 0;
+    padding: var(--base-size-24) var(--base-size-24) var(--base-size-40);
+    border-left: var(--borderWidth-thin) solid var(--borderColor-muted);
+  }
+}
+
+/* ---------- users / organizations results (cards: box.css, repo-list.css) ---------- */
+.explore.users .flex-divided-list > .item img.ui.avatar {
+  width: var(--base-size-40);
+  height: var(--base-size-40);
+}
+
+.explore.users .flex-divided-list .item-title {
+  gap: var(--base-size-8);
+  font-weight: var(--base-text-weight-medium);
+}
+
+.explore.users .flex-divided-list .item-title > a {
+  color: var(--fgColor-accent);
+}
+
+.explore.users .flex-divided-list .item-body {
+  gap: var(--base-size-4) var(--base-size-16);
+  font-size: var(--text-body-size-small);
+}
+
+.explore.users .flex-divided-list .item-body a:hover {
+  color: var(--fgColor-accent);
+}
+
+/* empty result */
+.explore > .ui.container > .flex-divided-list > :only-child:not(:has(.item-main)) {
+  color: var(--fgColor-muted);
+}

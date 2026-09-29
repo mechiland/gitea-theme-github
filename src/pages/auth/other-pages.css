@@ -1,0 +1,70 @@
+/* Forgot / reset password, activation, 2FA and OpenID pages — same visual system as sign-in: logo + title,
+ * no Box, 40px controls, full-width primary button. Gitea separates the field from the button with a plain
+ * .divider; github.com uses the 16px field rhythm instead. */
+
+.page-content.user:is(.forgot, .reset, .activate, .signin) .ui.top.attached.header:not(.segment) + .ui.attached.segment > .divider:not(.divider-text) {
+  display: none;
+}
+
+/* status paragraphs ("reset mail sent", "resend limit", activation prompts) */
+.page-content.user:is(.forgot, .reset, .activate) .ui.attached.segment > p {
+  margin: 0 0 var(--base-size-16);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.page-content.user:is(.forgot, .reset, .activate) .ui.attached.segment > p:last-child {
+  margin-bottom: 0;
+}
+
+/* activation: the "change e-mail" disclosure and its input */
+.page-content.user.activate .ui.attached.segment > details {
+  margin: 0 0 var(--base-size-16);
+}
+
+.page-content.user.activate .ui.attached.segment > details > summary {
+  color: var(--fgColor-accent);
+  cursor: pointer;
+}
+
+.page-content.user.activate .ui.attached.segment > details label {
+  display: block;
+  margin: 0 0 var(--base-size-4);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+/* 2FA / reset: "Verify" + "Use a scratch code" → full-width button, centred link 16px below */
+.page-content.user:is(.signin, .reset) .ui.form .inline.field:has(> .ui.primary.button + a) {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--base-size-16);
+  text-align: center;
+}
+
+.page-content.user.activate .ui.form .text > .ui.primary.button {
+  width: 100%;
+  height: var(--control-large-size);
+  min-height: var(--control-large-size);
+  margin: 0;
+}
+
+/* OpenID sign-in: Gitea's own 100px logo link above the form → 48px mark like the other auth pages */
+.page-content.user.signin.openid > .ui.page.grid > .column > a > img {
+  display: block;
+  width: var(--base-size-48);
+  height: var(--base-size-48);
+}
+
+.page-content.user.signin.openid > .ui.page.grid > .column > a {
+  margin-bottom: calc(var(--base-size-12) - var(--base-size-16));
+}
+
+.page-content.user.signin.openid .ui.top.attached.header > .svg {
+  vertical-align: text-bottom;
+}
+
+.page-content.user.signin.openid .ui.form .field > label > .svg {
+  vertical-align: text-bottom;
+}

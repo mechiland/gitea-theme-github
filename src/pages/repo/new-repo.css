@@ -1,0 +1,61 @@
+/*
+ * New repository form — github.com /new: a single column of stacked fields (label above control, 14px semibold,
+ * 8px gap; help text 12px muted under the control; sections split by 1px --borderColor-muted rules) instead of
+ * Gitea's two-column "left-right-form" (250px right-aligned labels, 50% controls).
+ * Gitea: templates/repo/create.tmpl — .repository.new-repo > .ui.container.medium-width > top attached header +
+ * attached segment > form.ui.form.left-right-form.new-repo-form > .inline.field (label, control, .help).
+ */
+.repository.new-repo .new-repo-form .inline.field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--base-size-8);
+  margin: 0 0 var(--base-size-16);
+}
+
+.repository.new-repo .new-repo-form .inline.field > label {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-medium);
+  text-align: left;
+}
+
+.repository.new-repo .new-repo-form .inline.field > label:empty {
+  display: none;
+}
+
+.repository.new-repo .new-repo-form .inline.field > .help {
+  margin: 0;
+}
+
+.repository.new-repo .new-repo-form .inline.field input:not([type="checkbox"], [type="radio"]),
+.repository.new-repo .new-repo-form .inline.field > .ui.dropdown,
+.repository.new-repo .new-repo-form .inline.field > textarea {
+  width: 100%;
+  max-width: calc(var(--base-size-128) * 3 + var(--base-size-48) + var(--base-size-8));
+}
+
+.repository.new-repo .new-repo-form .inline.field > .ui.checkbox + .ui.checkbox {
+  margin: 0;
+}
+
+.repository.new-repo .new-repo-form > .divider,
+.repository.new-repo .new-repo-form .divider {
+  margin: var(--base-size-24) 0;
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+  border-bottom: 0;
+}
+
+/* create_helper.tmpl intro ("A repository contains all project files … Migrate repository"): Gitea centres it
+   (p.ui.center); github.com's /new intro text is left-aligned with the stacked fields, 14px muted */
+.repository.new-repo .ui.attached.segment > p.ui.center {
+  margin: 0 0 var(--base-size-16);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+  text-align: left;
+}

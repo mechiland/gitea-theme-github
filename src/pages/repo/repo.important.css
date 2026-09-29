@@ -1,0 +1,92 @@
+/* src/pages/repo — declarations that must beat Gitea `!important` (Tailwind tw-* utilities, important: true).
+ * Built into @layer gh-important. Never display/visibility here.
+ */
+
+/* home_sidebar_top.tmpl: #repo-topics.tw-gap-1.tw-my-1 → github.com TopicTag group: 8px between rows, 2px between
+   tags (measured pemistahl/grex 2026-09-30), no extra block margin (the website row above keeps 12px). */
+.repo-home-sidebar-top #repo-topics {
+  gap: var(--base-size-8) var(--base-size-2) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* repo/sub_menu.tmpl: .repository-summary.tw-my-0 — the ref-summary bar sits 16px above the list it summarises
+   (commits / branches pages); on the root view it is a flex item of the toolbar row (row gap handles spacing). */
+.repository .repository-summary {
+  margin-bottom: var(--base-size-16) !important;
+}
+
+.repo-grid-filelist-sidebar > .repo-home-filelist > .repository-summary,
+.repository.commits:not(.pull) > .ui.container > .repository-summary {
+  margin-bottom: 0 !important; /* commits: it shares the toolbar row with the branch picker (commits.css) */
+}
+
+/* commits_list.tmpl: date cell is td.tw-text-right, action buttons are .btn.tw-p-2 (8px) → github.com puts the
+   date after the author on the meta line and uses 28px square icon buttons. */
+#commits-table > tbody > tr > td:nth-child(4) {
+  text-align: left !important;
+}
+
+#commits-table td:last-child > .btn {
+  padding: 0 !important;
+}
+
+/* branch/list.tmpl: row action icons are .btn.tw-p-2 / copy .btn.tw-px-1 and the delete icon is .tw-text-red →
+   github.com: 28px invisible icon buttons, all --fgColor-muted, danger colour only on hover. */
+.repository.branches td .tw-flex > .btn,
+.repository.branches td .tw-flex > .ui.dropdown.btn,
+.repository.branches td > .flex-text-block > .btn {
+  padding: 0 !important;
+}
+
+.repository.branches td .tw-flex > .btn.delete-branch-button {
+  color: var(--fgColor-muted) !important;
+}
+
+.repository.branches td .tw-flex > .btn.delete-branch-button:hover {
+  color: var(--fgColor-danger) !important;
+}
+
+/* release_tag_header.tmpl "Releases | Tags": navigation.important.css forces `.small-menu-items .item.active`
+   transparent (!important) for the Open/Closed text links; on these pages github.com draws a selected segment. */
+.repository.releases .small-menu-items .item.active,
+.repository.tags .small-menu-items .item.active {
+  background: var(--bgColor-accent-emphasis) !important;
+}
+
+/* branch/list.tmpl copy button is .btn.interact-fg (color: inherit !important → --fgColor-default);
+   github.com's copy IconButton is --fgColor-muted, --fgColor-default on hover */
+.repository.branches td > .flex-text-block > .btn.interact-fg {
+  color: var(--fgColor-muted) !important;
+}
+
+.repository.branches td > .flex-text-block > .btn.interact-fg:hover {
+  color: var(--fgColor-default) !important;
+}
+
+/* tag/list.tmpl: .tag-list-row.tw-p-4 (1rem !important = 14px at Gitea's 14px root) → github.com 16px */
+#tags-table .tag-list-row {
+  padding: var(--base-size-16) !important;
+}
+
+/* 390px: `.gt-ellipsis` (overflow hidden / nowrap / ellipsis, all !important) would cut the release asset name
+   to "grex-v…" and the wiki "… edited this page …" meta line. github.com wraps both on phones. */
+@media (max-width: 767.98px) {
+  #release-list .release-entry .attachment-list > .item > a.gt-ellipsis,
+  #release-list .release-entry .attachment-list > .item > a .gt-ellipsis,
+  .repository.wiki.view .ui.dividing.header .gt-ellipsis {
+    overflow: visible !important;
+    white-space: normal !important;
+  }
+}
+
+/* tag/list.tmpl: h3.tag-list-row-title.tw-mb-2 (0.5rem !important = 7px) → github.com 91px rows need ~16px */
+#tags-table .tag-list-row-title {
+  margin-bottom: var(--base-size-16) !important;
+}
+
+/* tag/list.tmpl meta row is .flex-text-block.tw-gap-4 (1rem !important both ways): github.com wraps the meta line
+   with 4px between lines (22px pitch at 390), 16px between items */
+#tags-table .tag-list-row > .flex-text-block {
+  row-gap: var(--base-size-4) !important;
+}

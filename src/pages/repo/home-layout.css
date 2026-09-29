@@ -1,0 +1,50 @@
+/*
+ * Repo home two-column layout — github.com repo overview (measured 2026-09-30 at 1440px, pemistahl/grex):
+ *   content box x 112…1328 (1216) → main column 904px, 40px gutter, sidebar content 272px (296px pane minus
+ *   its 24px right inset) whose first heading ("About") sits on the toolbar row (y 206 = toolbar top).
+ * Gitea: .repo-grid-filelist-sidebar > .repo-home-filelist | .repo-home-sidebar-top | .repo-home-sidebar-bottom
+ *   (web_src/css/repo/home.css: columns auto 280px, rows auto auto 1fr, gap --page-spacing).
+ * Below 768px Gitea stacks sidebar-top, file list, sidebar-bottom (kept: github.com's mobile layout shows the
+ * About block above the files as part of the repo header).
+ */
+.repo-grid-filelist-sidebar {
+  grid-template-columns: minmax(0, 1fr) calc(var(--base-size-128) * 2 + var(--base-size-16));
+  column-gap: var(--base-size-40);
+  row-gap: 0;
+}
+
+.repo-grid-filelist-sidebar > .repo-home-filelist {
+  grid-row: 1 / 4;
+}
+
+/* Below 768px Gitea stacks sidebar-top ABOVE the file list (grid rows), but the sidebar comes AFTER the file list
+   in the HTML: the first paint (before the sidebar is parsed) shows the files at y≈250 and they jump ~500px down
+   once the sidebar arrives (CLS 0.34 on gitea-auto as well, request CR-2). Here the file-list column is flattened
+   into one flex flow: toolbar → file table → About → README → Releases / Languages, so nothing that is painted
+   early moves (the README is below the fold on first paint). */
+@media (max-width: 767.98px) {
+  .repo-grid-filelist-sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--base-size-8);
+  }
+
+  .repo-grid-filelist-sidebar > .repo-home-sidebar-top {
+    flex: 0 0 100%;
+    order: 7;
+    min-width: 0;
+  }
+
+  .repo-grid-filelist-sidebar > .repo-home-filelist > #readme {
+    order: 8;
+    margin-top: var(--base-size-16);
+  }
+
+  .repo-grid-filelist-sidebar > .repo-home-sidebar-bottom {
+    flex: 0 0 100%;
+    order: 9;
+    min-width: 0;
+    margin-top: var(--base-size-16);
+  }
+}

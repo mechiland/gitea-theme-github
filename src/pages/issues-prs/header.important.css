@@ -1,0 +1,12 @@
+/*
+ * gh-important: Gitea's diff stats template carries Tailwind `tw-text-[13px]` (Tailwind is `important: true`);
+ * github.com's PR header diffstat is 12px / 600.
+ */
+.pull.tabular.menu > .flex-text-block.tw-text-\[13px\] {
+  font-size: var(--text-body-size-small) !important;
+}
+
+/* the meta text's Tailwind `tw-ml-2` (7px) would add to the flex gap: github.com has 10px in all */
+.repository.view.issue .issue-title-meta > .tw-ml-2 {
+  margin-left: 0 !important;
+}

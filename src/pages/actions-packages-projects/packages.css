@@ -1,0 +1,298 @@
+/*
+ * Packages — list (package/shared/list.tmpl, versionlist.tmpl: org / user / repo "Packages" tabs) and package page
+ * (package/shared/view.tmpl + content/<type>.tmpl + metadata/<type>.tmpl).
+ *
+ * github.com /orgs/<org>/packages (measured 2026-09-30, orgs/github):
+ *   Box, rows Box-row: padding 16px, --borderColor-muted separators; name Link--primary 16px/24px 600;
+ *   meta f6 12px/18px --fgColor-muted, links Link--secondary + underline, repo link 600; right: download count
+ *   12px muted with a 16px download octicon.
+ * Gitea renders every package as its own one-row `.flex-divided-list.items-with-main` inside a plain <div> that also
+ * holds the paginator → the lists are stacked into one Box: first gets the top border/radius, last the bottom.
+ *
+ * github.com package page (github/combobox-nav/pkgs/npm/combobox-nav): main column of Boxes; the install Box has
+ * 12px --fgColor-muted captions with a 16px muted octicon over --bgColor-muted code blocks; the right column is not
+ * a Box: "Details" 16px/24px 600, rows 14px with 16px --fgColor-muted octicons 8px before the text and ~8px between
+ * rows, sections separated by 1px --borderColor-muted rules with 16px around them; links --fgColor-default
+ * (Link--primary), hover --fgColor-accent.
+ */
+
+/* ---------- list: stacked one-row lists → one Box ---------- */
+.page-content.packages .flex-divided-list.items-with-main {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-top-color: var(--borderColor-muted);
+  border-bottom: 0;
+  background: var(--bgColor-default);
+}
+
+.page-content.packages .flex-divided-list.items-with-main:first-child {
+  border-top-color: var(--borderColor-default);
+  border-top-left-radius: var(--borderRadius-medium);
+  border-top-right-radius: var(--borderRadius-medium);
+}
+
+.page-content.packages .flex-divided-list.items-with-main:not(:has(~ .flex-divided-list)) {
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-bottom-left-radius: var(--borderRadius-medium);
+  border-bottom-right-radius: var(--borderRadius-medium);
+}
+
+.page-content.packages .flex-divided-list.items-with-main > .item {
+  padding: var(--base-size-16);
+}
+
+.page-content.packages .flex-divided-list.items-with-main .item-main {
+  gap: 0;
+}
+
+.page-content.packages .flex-divided-list.items-with-main .item-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--base-size-4) var(--base-size-8);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-large);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-large);
+}
+
+.page-content.packages .flex-divided-list.items-with-main .item-title > a,
+.page-content.packages .flex-divided-list.items-with-main a.item-title {
+  color: var(--fgColor-default);
+}
+
+.page-content.packages .flex-divided-list.items-with-main .item-title > a:hover,
+.page-content.packages .flex-divided-list.items-with-main a.item-title:hover {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+/* package type: Primer Label (small) with the registry icon */
+.page-content.packages .flex-divided-list.items-with-main .item-title .label-list .ui.label {
+  gap: var(--base-size-4);
+}
+
+.page-content.packages .flex-divided-list.items-with-main .item-title .label-list .ui.label .svg {
+  width: var(--base-size-12);
+  height: var(--base-size-12);
+}
+
+.page-content.packages .flex-divided-list.items-with-main .item-body {
+  display: block;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.page-content.packages .flex-divided-list.items-with-main .item-body a {
+  color: var(--fgColor-muted);
+  text-decoration: underline;
+}
+
+.page-content.packages .flex-divided-list.items-with-main .item-body a:hover {
+  color: var(--fgColor-accent);
+}
+
+.page-content.packages .flex-divided-list.items-with-main .item-body strong {
+  font-weight: var(--base-text-weight-semibold);
+}
+
+/* search row above the list: 16px to the Box */
+.page-content.packages .ui.form:has(> .ui.action.input) {
+  margin-bottom: var(--base-size-16);
+}
+
+/* github.com's packages search (auto-search-group input + Type / Visibility / Sort buttons) is medium: 32px, 14px.
+   Gitea marks this group .small (28px / 12px) → medium on the packages pages only: input 32px with 12px inline
+   padding, the Type select 32px / 14px with Primer Select's 12px leading padding, the IconButton 32px square. */
+.page-content.packages .ui.form > .ui.small.action.input {
+  font-size: var(--text-body-size-medium);
+}
+
+.page-content.packages .ui.form > .ui.small.action.input > input {
+  height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
+}
+
+.page-content.packages .ui.form > .ui.small.action.input > .ui.selection.dropdown,
+.page-content.packages .ui.form > .ui.small.action.input > select {
+  min-height: var(--control-medium-size);
+  padding-top: calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--borderWidth-thin));
+  padding-bottom: calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--borderWidth-thin));
+  padding-left: var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
+}
+
+.page-content.packages .ui.form > .ui.small.action.input > select {
+  height: var(--control-medium-size);
+}
+
+.page-content.packages .ui.form > .ui.small.action.input > .icon.button {
+  min-width: var(--control-medium-size);
+  font-size: var(--text-body-size-medium);
+}
+
+/* ---------- package page ---------- */
+.page-content.packages .issue-title-header {
+  margin-bottom: var(--base-size-16);
+  padding-bottom: 0;
+  border-bottom: 0;
+  color: var(--fgColor-muted);
+}
+
+.page-content.packages .issue-title-header h1 {
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-large);
+  font-weight: var(--text-title-weight-large);
+  line-height: var(--base-size-40);
+  overflow-wrap: anywhere;
+}
+
+.page-content.packages .issue-title-header > div:last-child a {
+  color: var(--fgColor-accent);
+}
+
+.packages-content {
+  gap: var(--base-size-24);
+}
+
+.packages-content-left {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+}
+
+/* Boxes of the main column: 16px between them (header + segment pairs) */
+.packages-content-left > .ui.top.attached.header:not(:first-child) {
+  margin-top: var(--base-size-16);
+}
+
+/* install captions: 12px --fgColor-muted with a muted 16px octicon (github.com "Install from the command line:") */
+.packages-content-left .ui.form .field > label {
+  display: flex;
+  align-items: center;
+  gap: var(--base-size-8);
+  margin-bottom: var(--base-size-8);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.packages-content-left .ui.form .field > label > .svg {
+  flex-shrink: 0;
+  color: var(--fgColor-muted);
+}
+
+.packages-content-left .ui.form .field:last-child > label {
+  display: block;
+  margin-bottom: 0;
+}
+
+.packages-content-left .ui.form .field + .field {
+  margin-top: var(--base-size-16);
+}
+
+.packages-content-left .ui.form .field > .markup pre {
+  margin-bottom: 0;
+}
+
+/* install commands: github.com's code-block uses 12px mono (markdown's 85% em gives 11.9px here) */
+.packages-content-left .ui.form .field > .markup pre,
+.packages-content-left .ui.form .field > .markup pre code {
+  font-size: var(--text-body-size-small);
+}
+
+/* long registry URLs / commands have no break opportunity: scroll inside the code block instead of widening the
+   page (390px: the .npmrc line overflowed the viewport by 48px) */
+.packages-content-left .markup pre.code-block {
+  overflow-x: auto;
+}
+
+/* right column: plain sidebar sections, not a Box */
+.packages-content-right {
+  flex: 0 0 auto;
+  width: calc(var(--base-size-96) * 3 + var(--base-size-8));
+}
+
+.page-content.packages .ui.segment.packages-content-right {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.packages-content-right > strong {
+  display: inline-block;
+  margin-bottom: var(--base-size-8);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-large);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-large);
+}
+
+.packages-content-right > a.tw-float-right {
+  color: var(--fgColor-accent);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-large);
+}
+
+.packages-content-right > .divider {
+  margin: var(--base-size-16) 0;
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+  border-bottom: 0;
+}
+
+.packages-content-right > .ui.list {
+  margin: 0;
+  padding: 0;
+}
+
+.packages-content-right > .ui.list > .item {
+  gap: var(--base-size-8);
+  padding: var(--base-size-4) 0;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.packages-content-right > .ui.list > .item > .svg {
+  flex-shrink: 0;
+  color: var(--fgColor-muted);
+}
+
+.packages-content-right > .ui.list > .item a {
+  color: var(--fgColor-default);
+}
+
+.packages-content-right > .ui.list > .item a:hover {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+/* assets / versions: accent links with muted 12px trailing meta */
+.packages-content-right > .ui.list:not(.flex-items-block) > .item a {
+  color: var(--fgColor-accent);
+}
+
+.packages-content-right > .ui.list:not(.flex-items-block) > .item > span {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}
+
+/* "Delete version" is destructive */
+.packages-content-right > .ui.list > .item:has(> .octicon-trash) a,
+.packages-content-right > .ui.list > .item:has(> .octicon-trash) > .svg {
+  color: var(--fgColor-danger);
+}
+
+@media (max-width: 767.98px) {
+  .packages-content-left,
+  .packages-content-right {
+    flex-basis: auto;
+    width: 100%;
+  }
+}

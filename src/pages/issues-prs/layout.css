@@ -1,0 +1,42 @@
+/*
+ * Issue / PR detail two-column layout (repo/issue/view_content.tmpl: .issue-content > -left | -right).
+ * github.com PR conversation (pull/358, 1440 wide, 1216 container): main 872px, 24px gap, sidebar 320px;
+ * the timeline's comment Boxes end at the main column's right edge.
+ */
+
+:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content {
+  gap: var(--stack-gap-spacious);
+}
+
+/* explicit width (not flex: 1): the sidebar is initialised by JS, and a flexible main column would first take
+   the full width and then jump when the sidebar appears (CLS 0.10 measured) */
+:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-left {
+  min-width: 0;
+  width: calc(100% - var(--base-size-80) * 4 - var(--stack-gap-spacious));
+}
+
+:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right {
+  flex-shrink: 0;
+  width: calc(var(--base-size-80) * 4);
+}
+
+@media (max-width: 1011.98px) {
+  :is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-left {
+    width: calc(100% - var(--base-size-64) * 4 - var(--stack-gap-spacious));
+  }
+
+  :is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right {
+    width: calc(var(--base-size-64) * 4);
+  }
+}
+
+@media (max-width: 767.98px) {
+  :is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content {
+    gap: var(--base-size-16);
+  }
+
+  :is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-left,
+  :is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right {
+    width: 100%;
+  }
+}

@@ -1,0 +1,22 @@
+/*
+ * gh-important for pages/settings-admin: the maintenance-operations table carries Tailwind `tw-px-4` and `tw-mt-0`
+ * (`!important` utilities in Gitea's layer) which inset every row 16px inside the Box; a DataTable fills its Box and
+ * pads its cells instead (admin/dashboard.tmpl).
+ */
+.page-content.admin.dashboard .flex-container-main .ui.attached.table.segment > form > .ui.table {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* config "Test Cache" row: Gitea pins the key to tw-py-1 and the value to tw-py-0 (`!important`), which leaves the
+   28px button touching the Box's bottom border. Box-row--condensed: key 8px, button cell 4px → one 37px row with
+   the key text and the button on the same centre line. */
+.page-content.admin .flex-container-main dl.admin-dl-horizontal > dt.tw-py-1 {
+  padding-top: var(--base-size-8) !important;
+  padding-bottom: var(--base-size-8) !important;
+}
+
+.page-content.admin .flex-container-main dl.admin-dl-horizontal > dd.tw-py-0 {
+  padding-top: var(--base-size-4) !important;
+  padding-bottom: var(--base-size-4) !important;
+}

@@ -1,0 +1,35 @@
+/* The second container ("Need an account? Register now." + "Sign in with a passkey") — github.com/login
+ * .authentication-footer: no Box, centred 14px normal text, 16px below the form block (+4px top margin of
+ * the paragraph), the sign-up line first and the passkey link (Button--link, 14px medium) 16px below it. */
+
+.page-content.user:is(.signin, .signup, .link-account) .ui.container.fluid > .ui.attached.segment.header {
+  width: auto;
+  margin: 0;
+  padding: var(--base-size-4) 0 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+  gap: var(--base-size-16);
+  text-align: center;
+}
+
+.page-content.user:is(.signin, .signup, .link-account) .ui.container.fluid > .ui.attached.segment.header > .field {
+  order: -1;
+  margin: 0;
+}
+
+.page-content.user:is(.signin, .signup, .link-account) .ui.container.fluid > .ui.attached.segment.header .signin-passkey {
+  font-weight: var(--base-text-weight-medium);
+  cursor: pointer;
+}
+
+.page-content.user:is(.signin, .signup, .link-account) .ui.container.fluid > .ui.attached.segment.header > .ui.message {
+  width: 100%;
+  margin: 0;
+  text-align: left;
+}

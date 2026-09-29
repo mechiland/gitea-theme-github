@@ -1,0 +1,200 @@
+/*
+ * Issue / PR list pages (templates/repo/issue/list.tmpl → shared/issuelist.tmpl, repo/issue/filters.tmpl).
+ * github.com (pemistahl/grex/issues, /pulls, measured 2026-09-30):
+ *  - top bar: full-width 32px search input with a trailing search IconButton, green "New issue" 32px (medium,
+ *    padding 0 12px, weight 500); classic GitHub puts Labels / Milestones as a joined button group next to it;
+ *  - list Box header: 48px, --bgColor-muted, 1px --borderColor-default, radius 6px 6px 0 0, padding 8px 16px;
+ *    "Open N / Closed N" links 30px tall (navigation owns .small-menu-items); filter triggers are invisible
+ *    Buttons 32px, padding 0 12px, 14px --button-invisible-fgColor-rest label + 16px muted caret,
+ *    hover --control-transparent-bgColor-hover, pressed --control-transparent-bgColor-active;
+ *  - rows (data-display #issue-list) hang under the header with square top corners.
+ * Scope: .page-content.repository.issue-list (repo issues/pulls), .page-content.repository.milestone-issue-list
+ * (issues of one milestone) — both render the same toolbar.
+ */
+
+/* ---------- top bar: search + Labels/Milestones group + New ---------- */
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header {
+  gap: var(--base-size-8);
+  align-items: center;
+}
+
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header-search .ui.input > input {
+  height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-condensed) 0 var(--control-medium-paddingInline-normal);
+  border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
+  font-size: var(--text-body-size-medium);
+}
+
+/* trailing search button: an IconButton joined to the input (github.com: 32x32, --bgColor-muted, 1px border) */
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header-search .ui.input > .ui.button {
+  width: var(--control-medium-size);
+  min-width: var(--control-medium-size);
+  height: var(--control-medium-size);
+  padding: 0;
+  justify-content: center;
+  margin-left: -1px;
+  border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
+  color: var(--fgColor-muted);
+}
+
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header-search .ui.input > .ui.button:hover {
+  color: var(--fgColor-default);
+}
+
+/* "Go to issue #N" quick jump (shown by JS when the query is a number) keeps its text */
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header-search #issue-list-quick-goto {
+  width: auto;
+  padding: 0 var(--control-medium-paddingInline-condensed);
+  gap: var(--control-small-gap);
+}
+
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header > .ui.button {
+  height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-medium);
+}
+
+/* Labels | Milestones → Primer ButtonGroup (joined, shared border) */
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header > .ui.button:not(.primary):has(+ .ui.button:not(.primary)) {
+  margin-right: calc(var(--base-size-negative-8) - 1px);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header > .ui.button:not(.primary) + .ui.button:not(.primary) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header > .ui.button:not(.primary):hover {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- list Box header (#issue-filters) and bulk-action bar (#issue-actions) ---------- */
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar {
+  align-items: center;
+  gap: var(--base-size-8);
+  min-height: var(--base-size-48);
+  margin-top: var(--base-size-16);
+  padding: var(--base-size-8) var(--base-size-16);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-bottom: 0;
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+  background: var(--bgColor-muted);
+}
+
+/* the rows' Box continues the header: square top corners */
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar ~ #issue-list {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar ~ #issue-list > .item:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* an empty list (no rows): the header closes the Box itself */
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar:has(~ #issue-list:empty) {
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+}
+
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar-left {
+  gap: var(--base-size-8);
+}
+
+/* select-all checkbox: aligned with the row checkboxes (row padding 16px) */
+:is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar-left > .issue-checkbox-all {
+  margin: 0 var(--base-size-8) 0 0;
+}
+
+/* filter triggers: Primer invisible Button (ListFilterButton) */
+.issue-list-toolbar-right .ui.secondary.filter.menu {
+  align-items: center;
+  gap: 0;
+  min-height: 0;
+  margin: 0;
+}
+
+.issue-list-toolbar-right .ui.secondary.filter.menu > .item {
+  gap: var(--control-medium-gap);
+  height: var(--control-medium-size);
+  margin: 0;
+  padding: 0 var(--control-medium-paddingInline-normal);
+  border-radius: var(--borderRadius-medium);
+  color: var(--button-invisible-fgColor-rest);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.issue-list-toolbar-right .ui.secondary.filter.menu > .item:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--button-invisible-fgColor-hover);
+}
+
+/* pressed / menu open: Primer invisible Button active background */
+.issue-list-toolbar-right .ui.secondary.filter.menu > .item:active,
+.issue-list-toolbar-right .ui.secondary.filter.menu > .item.active {
+  background: var(--control-transparent-bgColor-active);
+  color: var(--button-invisible-fgColor-active);
+}
+
+.issue-list-toolbar-right .ui.secondary.filter.menu > .item.disabled {
+  background: transparent;
+  color: var(--fgColor-disabled);
+}
+
+.issue-list-toolbar-right .ui.secondary.filter.menu > .item > .dropdown.icon {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  margin: 0;
+  color: var(--button-invisible-iconColor-rest);
+}
+
+/* ---------- rows: page-only deviations (the Box and rows are data-display's) ---------- */
+
+/* PR rows: "base ← head" branch chips as Primer BranchName tokens (mono 12px, --bgColor-accent-muted,
+   --fgColor-accent, radius 6px, padding 0 6px) with the arrow-left octicon instead of Gitea's «. */
+:is(.issue-list, .milestone-issue-list, .repository.milestones) #issue-list .branches {
+  gap: var(--base-size-4);
+}
+
+:is(.issue-list, .milestone-issue-list, .repository.milestones) #issue-list .branches .branch {
+  padding: 0 var(--base-size-6);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-accent-muted);
+  color: var(--fgColor-accent);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+:is(.issue-list, .milestone-issue-list, .repository.milestones) #issue-list .branches .branch a {
+  color: inherit;
+}
+
+:is(.issue-list, .milestone-issue-list, .repository.milestones) #issue-list .branches > .svg.gitea-double-chevron-left {
+  background-color: currentColor;
+  mask: var(--gh-octicon-arrow-left) center / contain no-repeat;
+}
+
+:is(.issue-list, .milestone-issue-list, .repository.milestones) #issue-list .branches > .svg.gitea-double-chevron-left > * {
+  visibility: hidden;
+}
+
+/* ---------- narrow viewports ---------- */
+@media (max-width: 767.98px) {
+  :is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: var(--base-size-8);
+  }
+
+  .issue-list-toolbar-right .ui.secondary.filter.menu > .item {
+    padding: 0 var(--control-medium-paddingInline-condensed);
+  }
+}
