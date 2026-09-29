@@ -1,0 +1,2005 @@
+{
+ "target": "github",
+ "theme": null,
+ "generated": "2026-09-29T15:58:59.534Z",
+ "outDir": "docs/reference",
+ "giteaBase": null,
+ "giteaVersion": null,
+ "browser": "151.0.7922.34",
+ "schemes": [
+  "light",
+  "dark"
+ ],
+ "viewports": [
+  1440,
+  390
+ ],
+ "appearance": null,
+ "paletteVersion": "11.10.0",
+ "totals": {
+  "pages": 8,
+  "pagesWithProblems": 0,
+  "consoleErrors": 0,
+  "failedRequests": 0,
+  "maxCLS": 0.2156
+ },
+ "pages": [
+  {
+   "route": "explore-repos",
+   "scheme": "light",
+   "viewport": 1440,
+   "url": "https://github.com/explore",
+   "png": "explore-repos/light-1440.png",
+   "json": "explore-repos/light-1440.json",
+   "mainStatus": 200,
+   "problems": [],
+   "consoleErrors": 0,
+   "consoleWarnings": 2,
+   "failedRequests": 0,
+   "unresolvedVars": 49,
+   "unresolvedVarsLive": 1,
+   "offPaletteDistinct": 9,
+   "offPaletteTotal": 29,
+   "nonOcticonIcons": 0,
+   "cls": 0.012,
+   "cssBytes": 438255,
+   "htmlTheme": "auto",
+   "prefersDark": false,
+   "bodyBg": "rgb(255, 255, 255)"
+  },
+  {
+   "route": "explore-repos",
+   "scheme": "light",
+   "viewport": 390,
+   "url": "https://github.com/explore",
+   "png": "explore-repos/light-390.png",
+   "json": "explore-repos/light-390.json",
+   "mainStatus": 200,
+   "problems": [],
+   "consoleErrors": 0,
+   "consoleWarnings": 2,
+   "failedRequests": 0,
+   "unresolvedVars": 49,
+   "unresolvedVarsLive": 1,
+   "offPaletteDistinct": 5,
+   "offPaletteTotal": 13,
+   "nonOcticonIcons": 0,
+   "cls": 0.0391,
+   "cssBytes": 438009,
+   "htmlTheme": "auto",
+   "prefersDark": false,
+   "bodyBg": "rgb(255, 255, 255)"
+  },
+  {
+   "route": "explore-repos",
+   "scheme": "dark",
+   "viewport": 1440,
+   "url": "https://github.com/explore",
+   "png": "explore-repos/dark-1440.png",
+   "json": "explore-repos/dark-1440.json",
+   "mainStatus": 200,
+   "problems": [],
+   "consoleErrors": 0,
+   "consoleWarnings": 2,
+   "failedRequests": 0,
+   "unresolvedVars": 49,
+   "unresolvedVarsLive": 1,
+   "offPaletteDistinct": 7,
+   "offPaletteTotal": 25,
+   "nonOcticonIcons": 0,
+   "cls": 0.0121,
+   "cssBytes": 440232,
+   "htmlTheme": "auto",
+   "prefersDark": true,
+   "bodyBg": "rgb(13, 17, 23)"
+  },
+  {
+   "route": "explore-repos",
+   "scheme": "dark",
+   "viewport": 390,
+   "url": "https://github.com/explore",
+   "png": "explore-repos/dark-390.png",
+   "json": "explore-repos/dark-390.json",
+   "mainStatus": 200,
+   "problems": [],
+   "consoleErrors": 0,
+   "consoleWarnings": 2,
+   "failedRequests": 0,
+   "unresolvedVars": 49,
+   "unresolvedVarsLive": 1,
+   "offPaletteDistinct": 4,
+   "offPaletteTotal": 11,
+   "nonOcticonIcons": 0,
+   "cls": 0.0391,
+   "cssBytes": 440863,
+   "htmlTheme": "auto",
+   "prefersDark": true,
+   "bodyBg": "rgb(13, 17, 23)"
+  },
+  {
+   "route": "repo-home",
+   "scheme": "light",
+   "viewport": 1440,
+   "url": "https://github.com/go-gitea/gitea",
+   "png": "repo-home/light-1440.png",
+   "json": "repo-home/light-1440.json",
+   "mainStatus": 200,
+   "problems": [],
+   "consoleErrors": 0,
+   "consoleWarnings": 0,
+   "failedRequests": 0,
+   "unresolvedVars": 48,
+   "unresolvedVarsLive": 1,
+   "offPaletteDistinct": 7,
+   "offPaletteTotal": 27,
+   "nonOcticonIcons": 0,
+   "cls": 0.0012,
+   "cssBytes": 301235,
+   "htmlTheme": "auto",
+   "prefersDark": false,
+   "bodyBg": "rgb(255, 255, 255)"
+  },
+  {
+   "route": "repo-home",
+   "scheme": "light",
+   "viewport": 390,
+   "url": "https://github.com/go-gitea/gitea",
+   "png": "repo-home/light-390.png",
+   "json": "repo-home/light-390.json",
+   "mainStatus": 200,
+   "problems": [],
+   "consoleErrors": 0,
+   "consoleWarnings": 0,
+   "failedRequests": 0,
+   "unresolvedVars": 48,
+   "unresolvedVarsLive": 1,
+   "offPaletteDistinct": 4,
+   "offPaletteTotal": 12,
+   "nonOcticonIcons": 0,
+   "cls": 0.2156,
+   "cssBytes": 301326,
+   "htmlTheme": "auto",
+   "prefersDark": false,
+   "bodyBg": "rgb(255, 255, 255)"
+  },
+  {
+   "route": "repo-home",
+   "scheme": "dark",
+   "viewport": 1440,
+   "url": "https://github.com/go-gitea/gitea",
+   "png": "repo-home/dark-1440.png",
+   "json": "repo-home/dark-1440.json",
+   "mainStatus": 200,
+   "problems": [],
+   "consoleErrors": 0,
+   "consoleWarnings": 0,
+   "failedRequests": 0,
+   "unresolvedVars": 48,
+   "unresolvedVarsLive": 1,
+   "offPaletteDistinct": 5,
+   "offPaletteTotal": 23,
+   "nonOcticonIcons": 0,
+   "cls": 0.0012,
+   "cssBytes": 301543,
+   "htmlTheme": "auto",
+   "prefersDark": true,
+   "bodyBg": "rgb(13, 17, 23)"
+  },
+  {
+   "route": "repo-home",
+   "scheme": "dark",
+   "viewport": 390,
+   "url": "https://github.com/go-gitea/gitea",
+   "png": "repo-home/dark-390.png",
+   "json": "repo-home/dark-390.json",
+   "mainStatus": 200,
+   "problems": [],
+   "consoleErrors": 0,
+   "consoleWarnings": 0,
+   "failedRequests": 0,
+   "unresolvedVars": 48,
+   "unresolvedVarsLive": 1,
+   "offPaletteDistinct": 3,
+   "offPaletteTotal": 10,
+   "nonOcticonIcons": 0,
+   "cls": 0.2156,
+   "cssBytes": 301288,
+   "htmlTheme": "auto",
+   "prefersDark": true,
+   "bodyBg": "rgb(13, 17, 23)"
+  }
+ ],
+ "offPalette": [
+  {
+   "color": "rgba(38,44,40,1)",
+   "count": 40,
+   "props": {
+    "border-color": 12
+   },
+   "samples": [
+    "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.HeaderSearch-module__searchSlot__oVOUS > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.AuthCTAs-module__signInWrap__q2P60 > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > div.AuthCTAs-module__mobileActions__NNzeV > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > div.AuthCTAs-module__mobileActions__NNzeV > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw"
+   ],
+   "key": "light|rgba(38,44,40,1)",
+   "scheme": "light",
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "repo-home/light-1440",
+    "repo-home/light-390"
+   ],
+   "pageCount": 4
+  },
+  {
+   "color": "rgba(38,44,40,1)",
+   "count": 40,
+   "props": {
+    "border-color": 12
+   },
+   "samples": [
+    "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.HeaderSearch-module__searchSlot__oVOUS > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.AuthCTAs-module__signInWrap__q2P60 > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > div.AuthCTAs-module__mobileActions__NNzeV > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > div.AuthCTAs-module__mobileActions__NNzeV > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw"
+   ],
+   "key": "dark|rgba(38,44,40,1)",
+   "scheme": "dark",
+   "pages": [
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "pageCount": 4
+  },
+  {
+   "color": "rgba(0,0,0,0.01)",
+   "count": 10,
+   "props": {
+    "background-color": 3
+   },
+   "samples": [
+    "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.HeaderSearch-module__searchSlot__oVOUS > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.AuthCTAs-module__signInWrap__q2P60 > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > div.AuthCTAs-module__mobileActions__NNzeV > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > div.AuthCTAs-module__mobileActions__NNzeV > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw"
+   ],
+   "key": "light|rgba(0,0,0,0.01)",
+   "scheme": "light",
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "repo-home/light-1440",
+    "repo-home/light-390"
+   ],
+   "pageCount": 4
+  },
+  {
+   "color": "rgba(53,61,55,1)",
+   "count": 8,
+   "props": {
+    "border-color": 4
+   },
+   "samples": [
+    "span.Primer_Brand__Button-module__Button__text___ED0bX > span.Primer_Brand__Text-module__Text___XeGJJ.Primer_Brand__Text-module__Text-font--mona-sans___a8XJD.Primer_Brand__Text-module__Text--default___GhPh_ > span.HeaderSearch-module__content__kMpxU > kbd.HeaderSearch-module__kbd__HNG0o"
+   ],
+   "key": "light|rgba(53,61,55,1)",
+   "scheme": "light",
+   "pages": [
+    "explore-repos/light-1440",
+    "repo-home/light-1440"
+   ],
+   "pageCount": 2
+  },
+  {
+   "color": "rgba(255,255,255,0.06)",
+   "count": 8,
+   "props": {
+    "border-color": 4
+   },
+   "samples": [
+    "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--secondary___gHnw_.Primer_Brand__Button-module__Button--size-small___zQrEw"
+   ],
+   "key": "light|rgba(255,255,255,0.06)",
+   "scheme": "light",
+   "pages": [
+    "explore-repos/light-1440",
+    "repo-home/light-1440"
+   ],
+   "pageCount": 2
+  },
+  {
+   "color": "rgba(53,61,55,1)",
+   "count": 8,
+   "props": {
+    "border-color": 4
+   },
+   "samples": [
+    "span.Primer_Brand__Button-module__Button__text___ED0bX > span.Primer_Brand__Text-module__Text___XeGJJ.Primer_Brand__Text-module__Text-font--mona-sans___a8XJD.Primer_Brand__Text-module__Text--default___GhPh_ > span.HeaderSearch-module__content__kMpxU > kbd.HeaderSearch-module__kbd__HNG0o"
+   ],
+   "key": "dark|rgba(53,61,55,1)",
+   "scheme": "dark",
+   "pages": [
+    "explore-repos/dark-1440",
+    "repo-home/dark-1440"
+   ],
+   "pageCount": 2
+  },
+  {
+   "color": "rgba(255,255,255,0.06)",
+   "count": 8,
+   "props": {
+    "border-color": 4
+   },
+   "samples": [
+    "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--secondary___gHnw_.Primer_Brand__Button-module__Button--size-small___zQrEw"
+   ],
+   "key": "dark|rgba(255,255,255,0.06)",
+   "scheme": "dark",
+   "pages": [
+    "explore-repos/dark-1440",
+    "repo-home/dark-1440"
+   ],
+   "pageCount": 2
+  },
+  {
+   "color": "rgba(25,31,27,1)",
+   "count": 6,
+   "props": {
+    "box-shadow": 1,
+    "border-color": 1
+   },
+   "samples": [
+    "span.Primer_Brand__Button-module__Button__text___ED0bX > span.Primer_Brand__Text-module__Text___XeGJJ.Primer_Brand__Text-module__Text-font--mona-sans___a8XJD.Primer_Brand__Text-module__Text--default___GhPh_ > span.HeaderSearch-module__content__kMpxU > kbd.HeaderSearch-module__kbd__HNG0o",
+    "div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out > div.MarketingHeader-module__bottomBorder__uZT38"
+   ],
+   "key": "light|rgba(25,31,27,1)",
+   "scheme": "light",
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "repo-home/light-1440",
+    "repo-home/light-390"
+   ],
+   "pageCount": 4
+  },
+  {
+   "color": "rgba(25,31,27,1)",
+   "count": 6,
+   "props": {
+    "box-shadow": 1,
+    "border-color": 1
+   },
+   "samples": [
+    "span.Primer_Brand__Button-module__Button__text___ED0bX > span.Primer_Brand__Text-module__Text___XeGJJ.Primer_Brand__Text-module__Text-font--mona-sans___a8XJD.Primer_Brand__Text-module__Text--default___GhPh_ > span.HeaderSearch-module__content__kMpxU > kbd.HeaderSearch-module__kbd__HNG0o",
+    "div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out > div.MarketingHeader-module__bottomBorder__uZT38"
+   ],
+   "key": "dark|rgba(25,31,27,1)",
+   "scheme": "dark",
+   "pages": [
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "pageCount": 4
+  },
+  {
+   "color": "rgba(0,0,0,1)",
+   "count": 4,
+   "props": {
+    "background-color": 1
+   },
+   "samples": [
+    "react-partial.loaded > div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out"
+   ],
+   "key": "light|rgba(0,0,0,1)",
+   "scheme": "light",
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "repo-home/light-1440",
+    "repo-home/light-390"
+   ],
+   "pageCount": 4
+  },
+  {
+   "color": "rgba(0,0,0,1)",
+   "count": 4,
+   "props": {
+    "background-color": 1
+   },
+   "samples": [
+    "react-partial.loaded > div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out"
+   ],
+   "key": "dark|rgba(0,0,0,1)",
+   "scheme": "dark",
+   "pages": [
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "pageCount": 4
+  },
+  {
+   "color": "rgba(255,255,255,0.12)",
+   "count": 2,
+   "props": {
+    "background-color": 1
+   },
+   "samples": [
+    "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--secondary___gHnw_.Primer_Brand__Button-module__Button--size-small___zQrEw"
+   ],
+   "key": "light|rgba(255,255,255,0.12)",
+   "scheme": "light",
+   "pages": [
+    "explore-repos/light-1440",
+    "repo-home/light-1440"
+   ],
+   "pageCount": 2
+  },
+  {
+   "color": "rgba(0,0,0,0.1)",
+   "count": 2,
+   "props": {
+    "box-shadow": 1
+   },
+   "samples": [
+    "div.logged-out.env-production.page-responsive > div.application-main > main > div.site-subnav.color-bg-default.site-subnav-sticky"
+   ],
+   "key": "light|rgba(0,0,0,0.1)",
+   "scheme": "light",
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390"
+   ],
+   "pageCount": 2
+  },
+  {
+   "color": "rgba(0,0,0,0.1)",
+   "count": 2,
+   "props": {
+    "box-shadow": 1
+   },
+   "samples": [
+    "div.logged-out.env-production.page-responsive > div.application-main > main > div.site-subnav.color-bg-default.site-subnav-sticky"
+   ],
+   "key": "dark|rgba(0,0,0,0.1)",
+   "scheme": "dark",
+   "pages": [
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390"
+   ],
+   "pageCount": 2
+  },
+  {
+   "color": "rgba(16,116,231,1)",
+   "count": 1,
+   "props": {
+    "border-color": 1
+   },
+   "samples": [
+    "div.site-subnav.color-bg-default.site-subnav-sticky > nav.container-lg.mx-auto.p-responsive > div.d-flex.flex-wrap.flex-items-center > a.selected.d-inline-block.subnav-primary"
+   ],
+   "key": "light|rgba(16,116,231,1)",
+   "scheme": "light",
+   "pages": [
+    "explore-repos/light-1440"
+   ],
+   "pageCount": 1
+  },
+  {
+   "color": "rgba(16,116,231,1)",
+   "count": 1,
+   "props": {
+    "border-color": 1
+   },
+   "samples": [
+    "div.site-subnav.color-bg-default.site-subnav-sticky > nav.container-lg.mx-auto.p-responsive > div.d-flex.flex-wrap.flex-items-center > a.selected.d-inline-block.subnav-primary"
+   ],
+   "key": "dark|rgba(16,116,231,1)",
+   "scheme": "dark",
+   "pages": [
+    "explore-repos/dark-1440"
+   ],
+   "pageCount": 1
+  }
+ ],
+ "unresolvedVars": [
+  {
+   "name": "--button-default-shadow-inset",
+   "refs": 3,
+   "withFallback": 1,
+   "fallbackRefs": 0,
+   "matchedElements": 3,
+   "selectors": [
+    ".btn",
+    ".Button--secondary",
+    ".Button--danger"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".btn",
+    ".Button--secondary",
+    ".Button--danger"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--avatarSize-narrow",
+   "refs": 12,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
+    ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
+    ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--avatarSize-wide",
+   "refs": 12,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
+    ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
+    ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-bgColor-dark-rest",
+   "refs": 9,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-bgColor-dark-hover",
+   "refs": 9,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-bgColor-dark-active",
+   "refs": 9,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-fgColor-dark",
+   "refs": 9,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-fgColor-dark-hover",
+   "refs": 9,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-fgColor-dark-active",
+   "refs": 9,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-bgColor-light-rest",
+   "refs": 9,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-bgColor-light-hover",
+   "refs": 9,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-bgColor-light-active",
+   "refs": 9,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-fgColor-light",
+   "refs": 9,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-fgColor-light-hover",
+   "refs": 9,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--label-fgColor-light-active",
+   "refs": 9,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+    "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--anchored-overlay-anchor-offset-right",
+   "refs": 6,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-bottom\"]",
+    ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-top\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-top\"]"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-bottom\"]",
+    ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-top\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-top\"]"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--brand-heading-letterSpacing-200",
+   "refs": 4,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__AnchorNav-module__AnchorNav-link-label___x3JtK",
+    ".Primer_Brand__Prose-module__Prose___X2BXE h5, .Primer_Brand__Prose-module__Prose___X2BXE h6",
+    ".Primer_Brand__AnchorNav-module__AnchorNav-link-label___8TkI7",
+    ".Primer_Brand__Prose-module__Prose___8WnSE h5, .Primer_Brand__Prose-module__Prose___8WnSE h6"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__AnchorNav-module__AnchorNav-link-label___x3JtK",
+    ".Primer_Brand__Prose-module__Prose___X2BXE h5, .Primer_Brand__Prose-module__Prose___X2BXE h6",
+    ".Primer_Brand__AnchorNav-module__AnchorNav-link-label___8TkI7",
+    ".Primer_Brand__Prose-module__Prose___8WnSE h5, .Primer_Brand__Prose-module__Prose___8WnSE h6"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--anchored-overlay-anchor-offset-left",
+   "refs": 3,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"outside-bottom\"]"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"outside-bottom\"]"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--inputValidation-iconSize",
+   "refs": 3,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-components-ValidationIcon-sv29w"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".prc-components-ValidationIcon-sv29w"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--inputValidation-lineHeight",
+   "refs": 3,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-components-ValidationText-JEfut"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".prc-components-ValidationText-JEfut"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--grid-template-columns",
+   "refs": 3,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-DataTable-Table-7ux1n"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".prc-DataTable-Table-7ux1n"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--brand-Hero-bgColor-gridlineGridInner",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Hero-module__Hero-grid--contained___AU1X0",
+    ".Primer_Brand__Hero-module__Hero-grid--contained___vfiGA"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__Hero-module__Hero-grid--contained___AU1X0",
+    ".Primer_Brand__Hero-module__Hero-grid--contained___vfiGA"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--brand-image-aspectRatio",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Image-module__Image--aspect-ratio-custom___gXFxx",
+    ".Primer_Brand__Image-module__Image--aspect-ratio-custom___38Uyb"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__Image-module__Image--aspect-ratio-custom___gXFxx",
+    ".Primer_Brand__Image-module__Image--aspect-ratio-custom___38Uyb"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--brand-River-spacing-outerInline",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__river-shared-module__River___eSXvR",
+    ".Primer_Brand__river-shared-module__River___PCP5W"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__river-shared-module__River___eSXvR",
+    ".Primer_Brand__river-shared-module__River___PCP5W"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--brand-fontWeight-300",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Testimonial-module__Testimonial--variant-expressive___VLMNM .Primer_Brand__Testimonial-module__Testimonial__quoteMark___cC2M1",
+    ".Primer_Brand__Testimonial-module__Testimonial--variant-expressive___J1PIY .Primer_Brand__Testimonial-module__Testimonial__quoteMark___sC3I2"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__Testimonial-module__Testimonial--variant-expressive___VLMNM .Primer_Brand__Testimonial-module__Testimonial__quoteMark___cC2M1",
+    ".Primer_Brand__Testimonial-module__Testimonial--variant-expressive___J1PIY .Primer_Brand__Testimonial-module__Testimonial__quoteMark___sC3I2"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--brand-heading-letterSpacing-300",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Prose-module__Prose___X2BXE h4",
+    ".Primer_Brand__Prose-module__Prose___8WnSE h4"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__Prose-module__Prose___X2BXE h4",
+    ".Primer_Brand__Prose-module__Prose___8WnSE h4"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--base-size-54",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__PricingOptions-module__PricingOptions__label-cell___K6KaM",
+    ".Primer_Brand__PricingOptions-module__PricingOptions__label-cell___gs_vJ"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__PricingOptions-module__PricingOptions__label-cell___K6KaM",
+    ".Primer_Brand__PricingOptions-module__PricingOptions__label-cell___gs_vJ"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--padding-block-start",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Section-module__Section___wNnZR",
+    ".Primer_Brand__Section-module__Section___O2zvq"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__Section-module__Section___wNnZR",
+    ".Primer_Brand__Section-module__Section___O2zvq"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--brand-BreakoutBanner-bgColor",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__BreakoutBanner-module__BreakoutBanner-container--background___i0tOy",
+    ".Primer_Brand__BreakoutBanner-module__BreakoutBanner-container--background___Uex_J"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__BreakoutBanner-module__BreakoutBanner-container--background___i0tOy",
+    ".Primer_Brand__BreakoutBanner-module__BreakoutBanner-container--background___Uex_J"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--brand-color-canvas-backdrop",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Tabs-module__Tabs___p41NK",
+    ".Primer_Brand__Tabs-module__Tabs___zia5x"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__Tabs-module__Tabs___p41NK",
+    ".Primer_Brand__Tabs-module__Tabs___zia5x"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--brand-Tabs-slider-width",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Tabs-module__Tabs__slider___hLsBB",
+    ".Primer_Brand__Tabs-module__Tabs__slider___tkaHu"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__Tabs-module__Tabs__slider___hLsBB",
+    ".Primer_Brand__Tabs-module__Tabs__slider___tkaHu"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--color-attention-subtle",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 17,
+   "matchedElements": 0,
+   "selectors": [
+    ".form-group.warn .warning"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".form-group.warn .warning"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--color-fg-muted",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 102,
+   "matchedElements": 0,
+   "selectors": [
+    ".ipm-nudge-content p"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".ipm-nudge-content p"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--color-success-subtle",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 9,
+   "matchedElements": 0,
+   "selectors": [
+    ".form-group.successed .success"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".form-group.successed .success"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--color-danger-subtle",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 7,
+   "matchedElements": 0,
+   "selectors": [
+    ".form-group.errored .error"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".form-group.errored .error"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--header-height",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".html-auth .authentication-header-page"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".html-auth .authentication-header-page"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--fgColor-muted-hover",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".footer-session-authentication-links a:hover"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".footer-session-authentication-links a:hover"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--nested-level",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".ControlGroup-item"
+   ],
+   "count": 8,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390",
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".ControlGroup-item"
+   ],
+   "pageCount": 8
+  },
+  {
+   "name": "--truncate-max-width",
+   "refs": 3,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-Truncate-Truncate-2G1eo"
+   ],
+   "count": 4,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390"
+   ],
+   "samples": [
+    ".prc-Truncate-Truncate-2G1eo"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--stackSize-narrow",
+   "refs": 3,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "count": 4,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390"
+   ],
+   "samples": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--stackSize-regular",
+   "refs": 3,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "count": 4,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390"
+   ],
+   "samples": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--stackSize-wide",
+   "refs": 3,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "count": 4,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390"
+   ],
+   "samples": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--brand-color-text-disabled",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__NavList-module__NavList__link--disabled___gPpvz",
+    ".Primer_Brand__NavList-module__NavList__accordionButton___Jii1C:disabled"
+   ],
+   "count": 4,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__NavList-module__NavList__link--disabled___gPpvz",
+    ".Primer_Brand__NavList-module__NavList__accordionButton___Jii1C:disabled"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--mktg-accent-primary",
+   "refs": 2,
+   "withFallback": 1,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".gradient-border-mktg::before",
+    "[data-target=\"card-skew.shine\"]"
+   ],
+   "count": 4,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390"
+   ],
+   "samples": [
+    ".gradient-border-mktg::before",
+    "[data-target=\"card-skew.shine\"]"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--animation-order",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__SubdomainNavBar-module__SubdomainNavBar-primary-nav-list-item___sz8e9"
+   ],
+   "count": 4,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__SubdomainNavBar-module__SubdomainNavBar-primary-nav-list-item___sz8e9"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--base-size-14",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__SubdomainNavBar-module__SubdomainNavBar-search-close-button___aVOiQ"
+   ],
+   "count": 4,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__SubdomainNavBar-module__SubdomainNavBar-search-close-button___aVOiQ"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--brand-heading-weight-300",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__ComparisonTable-module__ComparisonTable___N2YLX tbody .Primer_Brand__ComparisonTable-module__ComparisonTable-cell-heading___QlGCM"
+   ],
+   "count": 4,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__ComparisonTable-module__ComparisonTable___N2YLX tbody .Primer_Brand__ComparisonTable-module__ComparisonTable-cell-heading___QlGCM"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--brand-heading-lineHeight-300",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__ComparisonTable-module__ComparisonTable___N2YLX tbody .Primer_Brand__ComparisonTable-module__ComparisonTable-cell-heading___QlGCM"
+   ],
+   "count": 4,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__ComparisonTable-module__ComparisonTable___N2YLX tbody .Primer_Brand__ComparisonTable-module__ComparisonTable-cell-heading___QlGCM"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--animation-delay",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__TextRevealAnimation-module__TextRevealAnimation--animated___NuoAA::after"
+   ],
+   "count": 4,
+   "pages": [
+    "explore-repos/light-1440",
+    "explore-repos/light-390",
+    "explore-repos/dark-1440",
+    "explore-repos/dark-390"
+   ],
+   "samples": [
+    ".Primer_Brand__TextRevealAnimation-module__TextRevealAnimation--animated___NuoAA::after"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--copilot-app-banner-night-compact",
+   "refs": 3,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"dark\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]",
+    "[data-color-mode=\"auto\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
+   ],
+   "count": 4,
+   "pages": [
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"dark\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]",
+    "[data-color-mode=\"auto\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--color-mktg-btn-shadow-hover-muted",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".btn-muted-mktg:hover",
+    ".btn-subtle-mktg:hover"
+   ],
+   "count": 4,
+   "pages": [
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".btn-muted-mktg:hover",
+    ".btn-subtle-mktg:hover"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--copilot-app-banner-night",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    "[data-color-mode=\"auto\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]",
+    "[data-color-mode=\"dark\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
+   ],
+   "count": 4,
+   "pages": [
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    "[data-color-mode=\"auto\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]",
+    "[data-color-mode=\"dark\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--blame-virt-total-size",
+   "refs": 2,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Blame-module__virtualBlameWrapper__lAWXx"
+   ],
+   "count": 4,
+   "pages": [
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".Blame-module__virtualBlameWrapper__lAWXx"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--color-mktg-btn-bg",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".btn-mktg"
+   ],
+   "count": 4,
+   "pages": [
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".btn-mktg"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--color-mktg-btn-shadow-hover",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".btn-mktg:hover"
+   ],
+   "count": 4,
+   "pages": [
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".btn-mktg:hover"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--copilot-app-banner-day",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
+   ],
+   "count": 4,
+   "pages": [
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--copilot-app-banner-day-compact",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
+   ],
+   "count": 4,
+   "pages": [
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--fontFamily-mono",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".RefSelectorV1-module__RefActionText__PX9V2"
+   ],
+   "count": 4,
+   "pages": [
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".RefSelectorV1-module__RefActionText__PX9V2"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--blame-segments-count",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Blame-module__virtualBlameWrapper__lAWXx"
+   ],
+   "count": 4,
+   "pages": [
+    "repo-home/light-1440",
+    "repo-home/light-390",
+    "repo-home/dark-1440",
+    "repo-home/dark-390"
+   ],
+   "samples": [
+    ".Blame-module__virtualBlameWrapper__lAWXx"
+   ],
+   "pageCount": 4
+  }
+ ],
+ "nonOcticonIcons": [],
+ "consoleErrors": [],
+ "failedRequests": [],
+ "skipped": []
+}

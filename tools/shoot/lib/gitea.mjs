@@ -84,6 +84,12 @@ export async function ensureAppearance(browser, stateFile, { theme, lang = 'en-U
     changes.push({ field: 'language', from: cur.lang, to: lang, status: r.status });
   }
   if (theme && cur.theme !== theme) {
+    if (cur.available.length && !cur.available.includes(theme) && theme.startsWith('github-')) {
+      // Deployed but not registered until Gitea restarts: preview mode (see lib/preview.mjs).
+      await ctx.close();
+      const base = await ensureAppearance(browser, stateFile, { theme: 'gitea-auto', lang });
+      return { ...base, preview: theme };
+    }
     if (cur.available.length && !cur.available.includes(theme)) {
       await ctx.close();
       throw new Error(`Theme "${theme}" is not offered by this Gitea instance. Available: ${cur.available.join(', ')}`);

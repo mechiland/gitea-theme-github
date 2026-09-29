@@ -3,16 +3,16 @@
 // diff ours vs github.com directly (compare.mjs renders the diff table).
 export const DEFAULT_MEASURES = [
   { name: 'header', gitea: '#navbar', github: '.AppHeader, header.HeaderMktg, header[role=banner]' },
-  { name: 'button', gitea: '.ui.button:not(.primary):not(.red):not(.basic):not(.icon):not(.link-action)', github: '.btn:not(.btn-primary):not(.btn-danger), button.Button--secondary, a.Button--secondary' },
-  { name: 'button-primary', gitea: '.ui.primary.button', github: '.btn-primary, .Button--primary' },
-  { name: 'button-small', gitea: '.ui.small.button, .ui.tiny.button, .ui.mini.button', github: '.btn-sm, .Button--small' },
+  { name: 'button', gitea: '.ui.button:not(.primary):not(.red):not(.basic):not(.icon):not(.link-action)', github: '.btn:not(.btn-primary):not(.btn-danger), .Button--secondary, [class*=prc-Button-ButtonBase][data-variant=default]' },
+  { name: 'button-primary', gitea: '.ui.primary.button', github: '.btn-primary, .Button--primary, [class*=prc-Button-ButtonBase][data-variant=primary]' },
+  { name: 'button-small', gitea: '.ui.small.button, .ui.tiny.button, .ui.mini.button', github: '.btn-sm, .Button--small, [class*=prc-Button-ButtonBase][data-size=small]' },
   { name: 'input-text', gitea: 'input[type=text]:not([type=hidden]), input[type=search], input[type=email], input[type=password], input:not([type])', github: '.form-control, .FormControl-input, input[type=text], input[type=search]' },
   { name: 'textarea', gitea: 'textarea', github: 'textarea' },
   { name: 'underline-nav-item', gitea: '.ui.secondary.pointing.menu .item, .overflow-menu-items .item', github: '.UnderlineNav-item, .UnderlineNav-body a, nav[aria-label] .UnderlineItem' },
   { name: 'underline-nav-item-active', gitea: '.ui.secondary.pointing.menu .active.item, .overflow-menu-items .active.item', github: '.UnderlineNav-item.selected, .UnderlineNav-item[aria-current]:not([aria-current=false]), .UnderlineItem[aria-current=page]' },
-  { name: 'label', gitea: '.ui.label:not(.small)', github: '.Label, .IssueLabel' },
+  { name: 'label', gitea: '.ui.label:not(.small)', github: '.Label, .IssueLabel, [class*=prc-Label-Label]' },
   { name: 'label-small', gitea: '.ui.label.small, .ui.small.label', github: '.Label--small, .IssueLabel' },
-  { name: 'counter', gitea: '.ui.label.small.circular, .menu .item .ui.label, .ui.circular.label', github: '.Counter' },
+  { name: 'counter', gitea: '.ui.label.small.circular, .menu .item .ui.label, .ui.circular.label', github: '.Counter, [class*=prc-CounterLabel]' },
   { name: 'box', gitea: '.ui.segment, .ui.attached.segment', github: '.Box' },
   { name: 'box-header', gitea: '.ui.top.attached.header', github: '.Box-header' },
   { name: 'box-row', gitea: '.flex-item, .flex-list > .flex-item', github: '.Box-row' },
@@ -28,7 +28,6 @@ export const DEFAULT_MEASURES = [
   { name: 'markdown-table', gitea: '.markup table', github: '.markdown-body table' },
   { name: 'markdown-td', gitea: '.markup table td, .markup table th', github: '.markdown-body table td, .markdown-body table th' },
   { name: 'avatar', gitea: 'img.avatar, img.ui.avatar', github: 'img.avatar' },
-  { name: 'tooltip-trigger', gitea: '[data-tooltip-content]', github: '[aria-label][data-view-component] ' },
 ];
 
 export const MEASURE_PROPS = [
