@@ -1,0 +1,16 @@
+/* Mermaid, math, front matter, external renders. The diagrams themselves render inside an iframe
+ * (mermaid theme neutral/dark chosen by Gitea's JS from --is-dark-theme); only the chrome is ours. */
+.markup .mermaid-block .view-controller .ui.button {
+  color: var(--fgColor-muted);
+  border-radius: var(--borderRadius-medium);
+}
+
+/* Math: KaTeX display blocks scroll horizontally instead of widening the page (markup no longer clips). */
+.markup .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.markup details.frontmatter-content summary {
+  color: var(--fgColor-muted);
+}

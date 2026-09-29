@@ -1,0 +1,477 @@
+/*
+ * ActionMenu / ActionList — every Fomantic dropdown popup (`.ui.dropdown > .menu`).
+ * Spec: Primer React Overlay + ActionList (inset variant), CSS read from github.com 2026-09-30
+ * (prc-Overlay-Overlay, prc-ActionList-*):
+ *   overlay: --overlay-bgColor, no border, --shadow-floating-small (1px ring + drop), radius --borderRadius-large,
+ *            min-width --overlay-width-xsmall (192px), anchored --overlay-offset (4px) below the trigger;
+ *   list:    padding-block 8px; item margin-inline 8px, radius 6px, padding 6px 8px, 14px/20px (32px row),
+ *            hover --control-transparent-bgColor-hover, active --control-transparent-bgColor-active;
+ *   leading visual 16px, --fgColor-muted, gap 8px; description 12px muted;
+ *   divider 1px --borderColor-muted, margin-block 7px 8px (full bleed);
+ *   group heading 12px semibold muted, padding 6px 16px, line-height 18px;
+ *   single-select: 16px check in a reserved leading column (items of that list are indented 24px).
+ * Padding / background / color of items are also set by Gitea with !important → overlays.important.css.
+ */
+
+/* ---------- overlay container ---------- */
+.ui.dropdown > .menu {
+  min-width: var(--overlay-width-xsmall);
+  padding: var(--base-size-8) 0;
+  border: 0;
+  border-radius: var(--borderRadius-large);
+  background: var(--overlay-bgColor);
+  box-shadow: var(--shadow-floating-small);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+}
+
+/* anchored 4px below (or above) the trigger, like Primer's AnchoredOverlay */
+.ui.dropdown:not(.upward) > .menu,
+.ui.menu .dropdown.item > .menu,
+.ui.secondary.menu .dropdown.item > .menu,
+.ui.pointing.dropdown > .menu,
+.ui.top.right.pointing.dropdown > .menu,
+.ui.floating.dropdown:not(.upward) > .menu,
+.repo-button-row .ui.dropdown > .menu,
+.ui.dropdown.branch-selector-dropdown > .menu {
+  margin-top: var(--overlay-offset);
+}
+
+.ui.upward.dropdown > .menu,
+.ui.upward.floating.dropdown > .menu {
+  margin-bottom: var(--overlay-offset);
+  border-radius: var(--borderRadius-large);
+  box-shadow: var(--shadow-floating-small);
+}
+
+/* no pointer arrows on Primer overlays */
+.ui.pointing.dropdown > .menu:not(.hidden)::after {
+  display: none;
+}
+
+/* nested lists (scrolling menus inside a popup) are plain list areas, not overlays */
+.ui.dropdown .menu .menu,
+.ui.dropdown .scrolling.menu {
+  min-width: 0;
+  max-width: none;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* ---------- items (ActionList.Item) ---------- */
+.ui.dropdown .menu > .item,
+.ui.menu .ui.dropdown .menu > .item,
+.ui.selection.dropdown .menu > .item,
+.user-menu > .item {
+  width: auto;
+  min-height: var(--control-medium-size);
+  margin: 0 var(--base-size-8);
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+  background: var(--control-transparent-bgColor-rest);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--base-size-20);
+  text-decoration: none;
+  transition: background-color var(--base-duration-100) var(--base-easing-easeOut);
+}
+
+.ui.dropdown .menu .item:first-of-type,
+.ui.dropdown .menu .item:last-of-type,
+.ui.selection.dropdown .menu .item:first-of-type {
+  border-radius: var(--borderRadius-medium);
+}
+
+.ui.dropdown .menu > .item:hover,
+.ui.menu .ui.dropdown .menu > .item:hover,
+.ui.dropdown .menu > .item.selected,
+.ui.menu .ui.dropdown .menu > .selected.item {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+/* one highlighted row at a time: while the pointer is over the list, the hovered row wins over Fomantic's
+   keyboard/Enter target (.selected) */
+.ui.dropdown .menu:hover > .item.selected:not(:hover) {
+  background: var(--control-transparent-bgColor-rest);
+}
+
+.ui.dropdown .menu > .item:active,
+.ui.dropdown .menu > .item.selected:active {
+  background: var(--control-transparent-bgColor-active);
+  color: var(--fgColor-default);
+}
+
+.ui.dropdown .menu > .item:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: 0;
+  box-shadow: none;
+}
+
+/* current value / current page: Primer ActionList [data-active] (selected bg + semibold label) */
+.ui.dropdown .menu .active.item,
+.ui.menu .ui.dropdown .menu > .active.item {
+  background: var(--control-transparent-bgColor-rest);
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-normal);
+  box-shadow: none;
+}
+
+.ui.dropdown .menu .active.item:hover,
+.ui.menu .ui.dropdown .menu > .active.item:hover {
+  background: var(--control-transparent-bgColor-hover);
+}
+
+/* single-select menus (a list that marks its current value): reserve the leading check column for every item
+   and draw Primer's 16px check on the chosen one — ActionMenu selectionVariant="single" */
+.ui.dropdown:not(.branch-selector-dropdown) .menu:not(.user-menu):has(> .item.active:not(.clear-selection)) > .item,
+.ui.dropdown:not(.branch-selector-dropdown) .menu:not(.user-menu):has(> .item.active:not(.clear-selection)) > .item:hover {
+  padding-left: calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16) + var(--control-medium-gap));
+}
+
+.ui.dropdown:not(.branch-selector-dropdown) .menu:not(.user-menu) > .item.active:not(.clear-selection)::after,
+.branch-selector-dropdown.select-branch .scrolling.menu > .item.active::after,
+.branch-selector-dropdown:not(.select-branch) .scrolling.menu > .item.selected::after {
+  /* ::after, because Gitea hides every `.ui.secondary.menu .item::before` with !important */
+  content: "";
+  display: block;
+  visibility: visible;
+  position: absolute;
+  top: calc(var(--control-medium-size) / 2 - var(--base-size-8));
+  left: var(--control-medium-paddingInline-condensed);
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  margin: 0;
+  border: 0;
+  transform: none;
+  background: var(--fgColor-muted);
+  mask: var(--checkbox-mask-checked) center / var(--base-size-12) auto no-repeat;
+}
+
+/* the user menu's current page (Settings / Site Administration) → NavList current item */
+.user-menu > .item.active {
+  background: var(--control-transparent-bgColor-selected);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.ui.dropdown .menu > .disabled.item,
+.ui.dropdown .menu > .item.disabled {
+  color: var(--fgColor-disabled);
+  opacity: 1;
+}
+
+/* danger items (delete, remove…) → ActionList variant="danger" */
+.ui.dropdown .menu > .item:is(.delete-comment, .red, .danger, .text.red),
+.ui.dropdown .menu > .item.tw-text-red {
+  color: var(--fgColor-danger);
+}
+
+.ui.dropdown .menu > .item:is(.delete-comment, .red, .danger, .text.red):hover {
+  background: var(--control-danger-bgColor-hover);
+  color: var(--control-danger-fgColor-hover);
+}
+
+/* leading visual: 16px, muted, 8px gap */
+.ui.dropdown .menu > .item > svg,
+.ui.dropdown .menu > .item > .svg,
+.ui.menu .ui.dropdown .menu > .item > svg {
+  margin: 0 var(--control-medium-gap) 0 0;
+  color: var(--fgColor-muted);
+  vertical-align: text-bottom;
+  flex-shrink: 0;
+}
+
+.ui.dropdown .menu > .item > img.ui.avatar,
+.ui.dropdown .menu > .item > img,
+.ui.dropdown .menu > .item > .image {
+  width: var(--base-size-20);
+  height: var(--base-size-20);
+  max-height: none;
+  margin: 0 var(--control-medium-gap) 0 0;
+  vertical-align: top;
+}
+
+.ui.dropdown .menu.flex-items-menu > .item {
+  gap: var(--control-medium-gap);
+}
+
+.ui.dropdown .menu.flex-items-menu > .item > svg,
+.ui.dropdown .menu.flex-items-menu > .item > img {
+  margin: 0;
+}
+
+/* trailing description (ActionList.Description inline) */
+.ui.dropdown > .text > .description,
+.ui.dropdown .menu > .item > .description {
+  margin: 0 0 0 var(--control-medium-gap);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}
+
+/* ---------- group heading ---------- */
+.ui.dropdown .menu > .header,
+.ui.dropdown .menu > .header:not(.ui) {
+  margin: 0;
+  padding: var(--base-size-6) var(--base-size-16);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--base-size-20);
+  text-transform: none;
+}
+
+/* the "Signed in as …" header of the user menu reads as body text in GitHub's account menu */
+.ui.dropdown .user-menu > .header:not(.ui) {
+  padding: var(--base-size-6) var(--base-size-16);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+}
+
+.user-menu > .header strong {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+/* ---------- divider ---------- */
+.ui.dropdown .menu > .divider,
+.ui.dropdown .menu .divider {
+  height: 0;
+  margin: calc(var(--base-size-8) - var(--borderWidth-thin)) 0 var(--base-size-8);
+  border: 0;
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+/* ---------- no-results / info text ---------- */
+.ui.dropdown .menu > .message,
+.ui.dropdown .menu > .message:not(.ui) {
+  padding: var(--base-size-6) var(--base-size-16);
+  color: var(--fgColor-muted);
+  font-weight: var(--base-text-weight-normal);
+}
+
+/* ---------- filter input (SelectPanel header) ---------- */
+.ui.dropdown.dropdown .menu > .input,
+.ui.dropdown .menu > .ui.input {
+  display: flex;
+  min-width: 0;
+  margin: 0 var(--base-size-8) var(--base-size-8);
+}
+
+.ui.dropdown .menu > .header + .input {
+  margin-top: 0;
+}
+
+.ui.dropdown .menu > .input:not(.transparent) input,
+.ui.dropdown .menu > .ui.icon.input > input {
+  width: 100%;
+  padding: 0 var(--control-medium-paddingInline-normal) 0 calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16) + var(--control-medium-gap));
+}
+
+/* leading search/filter visual, like Primer TextInput leadingVisual */
+.ui.dropdown .menu > .ui.icon.input > i.icon {
+  right: auto;
+  left: 0;
+  width: calc(var(--control-medium-paddingInline-condensed) * 2 + var(--base-size-16));
+  color: var(--fgColor-muted);
+}
+
+/* SelectPanel filter visual is a search icon on github.com (Gitea renders octicon-filter) */
+.ui.dropdown .menu > .ui.icon.input > i.icon > .svg.octicon-filter {
+  background-color: currentcolor;
+  mask: var(--gh-octicon-search) center / contain no-repeat;
+}
+
+.ui.dropdown .menu > .ui.icon.input > i.icon > .svg.octicon-filter > * {
+  visibility: hidden;
+}
+
+/* ---------- scrolling list area ---------- */
+.ui.dropdown .scrolling.menu,
+.ui.scrolling.dropdown .menu {
+  padding: 0;
+}
+
+.ui.dropdown .scrolling.menu > .item,
+.ui.scrolling.dropdown .menu .item.item.item {
+  border-top: 0;
+}
+
+/* narrow screens: Gitea caps scrolling lists at 144px (~4 rows); keep the desktop 9-row list, bounded by half the
+   viewport, so SelectPanels (branch picker, sidebar labels) stay usable */
+@media (max-width: 767.98px) {
+  .ui.dropdown .scrolling.menu,
+  .ui.scrolling.dropdown .menu {
+    max-height: min(calc(var(--control-medium-size) * 9), 50vh);
+  }
+}
+
+/* ---------- selection dropdown's open list (anchored overlay under a Select) ---------- */
+.ui.selection.dropdown > .menu,
+.ui.selection.active.dropdown > .menu,
+.ui.selection.dropdown:focus > .menu,
+.ui.selection.active.dropdown:hover > .menu,
+.ui.upward.selection.dropdown > .menu {
+  width: max-content;
+  min-width: max(100%, var(--overlay-width-xsmall));
+  max-width: calc(100vw - 2 * var(--base-size-16));
+  margin: var(--overlay-offset) 0 0;
+  border: 0;
+  border-radius: var(--borderRadius-large);
+  box-shadow: var(--shadow-floating-small);
+}
+
+.ui.upward.selection.dropdown > .menu {
+  margin: 0 0 var(--overlay-offset);
+}
+
+.ui.selection.dropdown .menu > .item {
+  border-top: 0;
+  white-space: nowrap;
+}
+
+/* ---------- reaction picker (GitHub ReactionsMenu: one row of 32px emoji buttons) ---------- */
+.ui.dropdown.select-reaction > .menu {
+  min-width: 0;
+  padding: var(--base-size-4);
+  gap: var(--base-size-4);
+}
+
+.ui.dropdown.select-reaction .menu.visible {
+  grid-template-columns: repeat(8, var(--base-size-32));
+}
+
+.ui.dropdown.select-reaction .menu > .item {
+  width: var(--base-size-32);
+  height: var(--base-size-32);
+  min-height: 0;
+  margin: 0;
+  border-radius: var(--borderRadius-medium);
+  font-size: var(--text-body-size-large);
+  line-height: 1;
+}
+
+/* ---------- branch / tag selector popup (Vue RepoBranchTagSelector + issue ref selector) ---------- */
+.ui.dropdown.branch-selector-dropdown > .menu {
+  width: var(--overlay-width-small);
+  min-width: var(--overlay-width-small);
+}
+
+.ui.dropdown.branch-selector-dropdown .scrolling.menu {
+  max-width: none;
+}
+
+/* SelectPanel header: filter input, a full-bleed divider, then the Branches/Tags underline tabs */
+.branch-selector-dropdown .branch-tag-tab {
+  display: flex;
+  gap: var(--base-size-8);
+  padding: var(--base-size-8) var(--base-size-16) 0 var(--base-size-8);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+.branch-selector-dropdown .branch-tag-item {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  gap: var(--base-size-8);
+  height: var(--control-medium-size);
+  margin-bottom: var(--base-size-8);
+  padding: 0 var(--base-size-8);
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+  background: transparent;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+}
+
+.branch-selector-dropdown .branch-tag-item:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+  text-decoration: none;
+}
+
+/* GitHub's ref picker tabs are text-only */
+.branch-selector-dropdown .branch-tag-item > svg {
+  display: none;
+}
+
+/* current tab → UnderlineNav current item (semibold + 2px --underlineNav-borderColor-active under it) */
+.branch-selector-dropdown .branch-tag-item.active {
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+  background: transparent;
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.branch-selector-dropdown .branch-tag-item.active::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: calc(-1 * var(--base-size-8));
+  left: 0;
+  height: var(--borderWidth-thick);
+  border-radius: var(--borderRadius-medium);
+  background: var(--underlineNav-borderColor-active);
+}
+
+.branch-selector-dropdown .branch-tag-divider {
+  margin: 0 0 var(--base-size-8);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+/* github.com RefSelector rows: 8px padding, a 16px check box (12px glyph + 4px padding) and the name right after it
+   (text 32px from the overlay edge); long ref names wrap instead of being cut */
+.branch-selector-dropdown .scrolling.menu > .item {
+  padding-left: calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16));
+  overflow-wrap: anywhere;
+}
+
+.branch-selector-dropdown .scrolling.menu > .item::after {
+  width: var(--base-size-12);
+  mask-size: calc(var(--base-size-12) * 0.75) auto;
+}
+
+/* Vue RepoBranchTagSelector: .selected = current ref (check, no fill), .active = keyboard row (hover fill) */
+.branch-selector-dropdown:not(.select-branch) .scrolling.menu > .item.selected {
+  background: var(--control-transparent-bgColor-rest);
+  font-weight: var(--base-text-weight-normal);
+}
+
+.branch-selector-dropdown:not(.select-branch) .scrolling.menu > .item.selected:hover,
+.branch-selector-dropdown:not(.select-branch) .scrolling.menu > .item.active {
+  background: var(--control-transparent-bgColor-hover);
+}
+
+/* "default" badge → Primer Label (small, outline) */
+.branch-selector-dropdown .scrolling.menu > .item > .ui.label {
+  float: right;
+  height: var(--base-size-20);
+  margin: 0;
+  padding: 0 var(--base-size-6);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-full);
+  background: transparent;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-medium);
+  line-height: calc(var(--base-size-20) - 2 * var(--borderWidth-thin));
+}
+
+.branch-selector-dropdown .scrolling.menu > .item:has(> .ui.label) .rss-icon {
+  right: var(--base-size-4);
+}
+
+.branch-selector-dropdown .menu .item .rss-icon {
+  color: var(--fgColor-muted);
+}
+
+/* footer link ("View all branches") under the divider: full-width list row like SelectPanel's footer */
+.branch-selector-dropdown > .menu > .divider + .item {
+  margin-top: var(--base-size-8);
+}

@@ -122,3 +122,8 @@ If a page needs a different gap, set it in the page folder (later layer wins).
   Added `.empty-placeholder *` to both `:not()` lists, and tightened the utility exclusion from `[class*="tw-m"]`
   (which also matched tw-mx-/tw-max-/tw-min-/tw-mono) to `[class*="tw-m-"], [class*="tw-mt-"], [class*="tw-mb-"],
   [class*="tw-my-"]` (critic r4 nit). No other change in the folder. Lint clean.
+
+# Integrator (end of wave 2, 2026-09-30)
+- **#1 — DONE (live).** CUSTOM_PATH/templates/base/head_style.tmpl now carries the inert `media="not all"` link (identical to
+  the project copy modulo `github_revision`; installed by the orchestrator at 03:50). Full audit shots/integrate-w2:
+  `pagesWithUnlayeredGiteaCss: 0` on 272 pages. `npm run deploy` now also reports template drift (`templatesPending`).

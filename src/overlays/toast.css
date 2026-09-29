@@ -1,0 +1,99 @@
+/*
+ * Toast — Gitea toastify toasts (web_src/js/modules/toast.ts, CSS modules/toast.css):
+ *   div.toastify[style="background: var(--color-green|orange|red)"][data-toast-unique-key="<level>-<msg>"]
+ *     > .toast-icon (octicon-check | gitea-exclamation) + .toast-body + button.btn.toast-close (octicon-x)
+ * Spec: Primer CSS toasts/toasts.scss (.Toast): --bgColor-default, radius 6px,
+ *   inset 1px --borderColor-default ring + floating shadow, 48px icon column on the level's emphasis
+ *   background with --fgColor-onEmphasis icon, content padding 16px, 16px-padded dismiss button,
+ *   max-width 450px. The inline background is overridden in overlays.important.css.
+ * Level: info → success (Gitea's info toast is the green "done" toast), warning → attention, error → danger.
+ */
+
+.toastify {
+  align-items: stretch;
+  width: max-content;
+  min-width: min(var(--overlay-width-small), calc(100vw - 2 * var(--base-size-16)));
+  max-width: min(450px, calc(100vw - 2 * var(--base-size-16)));
+  padding: 0;
+  border-radius: var(--borderRadius-medium);
+  box-shadow: inset 0 0 0 var(--borderWidth-thin) var(--borderColor-default), var(--shadow-floating-small);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+}
+
+.toast-icon {
+  flex-shrink: 0;
+  align-self: stretch;
+  width: var(--base-size-48);
+  height: auto;
+  border: var(--borderWidth-thin) solid transparent;
+  border-right: 0;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+  background-color: var(--bgColor-accent-emphasis);
+  color: var(--fgColor-onEmphasis);
+}
+
+.toastify[style*="--color-green"] .toast-icon,
+.toastify[data-toast-unique-key^="info-"] .toast-icon {
+  background-color: var(--bgColor-success-emphasis);
+}
+
+.toastify[style*="--color-orange"] .toast-icon,
+.toastify[data-toast-unique-key^="warning-"] .toast-icon {
+  background-color: var(--bgColor-attention-emphasis);
+}
+
+.toastify[style*="--color-red"] .toast-icon,
+.toastify[data-toast-unique-key^="error-"] .toast-icon {
+  background-color: var(--bgColor-danger-emphasis);
+}
+
+/* gitea-exclamation (JS-bundled, not an Octicon) → octicon alert (warning) / stop (error) as a mask */
+.toast-icon .gitea-exclamation {
+  background-color: currentColor;
+  mask: var(--gh-octicon-alert) center / contain no-repeat;
+}
+
+.toast-icon .gitea-exclamation > * {
+  visibility: hidden;
+}
+
+.toastify[style*="--color-red"] .toast-icon .gitea-exclamation,
+.toastify[data-toast-unique-key^="error-"] .toast-icon .gitea-exclamation {
+  mask-image: var(--gh-octicon-stop);
+}
+
+.toast-body {
+  align-self: center;
+  padding: var(--base-size-16);
+  line-height: var(--base-size-20);
+}
+
+.toast-duplicate-number {
+  color: var(--fgColor-muted);
+}
+
+.toast-close,
+.toastify .btn.toast-close {
+  flex-shrink: 0;
+  width: auto;
+  height: auto;
+  max-height: calc(var(--base-size-16) * 2 + var(--base-size-20) + 2px);
+  padding: var(--base-size-16);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.toast-close:hover {
+  background: transparent;
+  opacity: 0.7;
+}
+
+.toast-close:active {
+  background: transparent;
+  opacity: 0.5;
+}

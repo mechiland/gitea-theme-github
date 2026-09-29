@@ -62,3 +62,34 @@ Not an icon change; filed so it is not lost.
   info, check-circle, file, file-submodule, file-symlink-file, file-directory-fill, arrow-left, arrow-right,
   move-to-start, move-to-end (see the file for the exact list). If you need another Octicon, ask icons/integrator.
   N-3 (pagination First/Last masks) can ship now. N-1/N-4 are in your wave-2 brief.
+
+# Navigation builder — wave 2, round 1 (status of the requests above)
+- N-1 DONE: pagination Previous/Next/First/Last glyphs are 14px (`calc(var(--base-size-16) - var(--base-size-2))`, width/height/min-*), src/navigation/pagination.css.
+- N-2 DONE (no action needed): footer theme item keeps whatever icon the server renders; footer restyled (12px muted, centred).
+- N-3 DONE (reinstated version): move-to-start / move-to-end masks on `.ui.pagination.menu .svg.gitea-double-chevron-*`, verified in shots/navigation-r1b/repo-commits (`⇤ First ‹ Previous 1 2 … Next › Last ⇥`).
+- N-4 DONE: Primer Pagination box — 32px tall, min-width 32, padding 8px 6px, radius 6, 4px apart, current --bgColor-accent-emphasis.
+
+# From icons (wave 2, round 1)
+## N-5 Parity option for First / Last (critic icons-w2-r0 #2) — owner's call
+github.com's Pagination has **no First / Last** (critic measure: only the two 14×14 chevrons of Previous / Next). N-3's
+move-to-start / move-to-end masks are the fallback if you keep the links. Stricter parity:
+```css
+.ui.pagination.menu .item.navigation:has(> .svg.gitea-double-chevron-left),
+.ui.pagination.menu .item.navigation:has(> .svg.gitea-double-chevron-right) { display: none; }
+```
+(Previous / Next and the numbered pages still reach page 1 and the last page.) If you adopt it, drop the N-3 mask
+rules so the move-to-* masks are pruned from the bundle.
+Also FYI: after the next Gitea restart the server files `gitea-double-chevron-left/right` come from Gitea's bundle again
+(icons dropped the RESTORED copies; deploy deleted them via I-7) — same bytes, same class, no visible change.
+
+# From overlays (wave 2, round 1)
+## NO-1 Navbar popups are overlays'
+The '+' (create) and avatar menus (`#navbar .ui.dropdown > .menu`, `.user-menu`) are styled by overlays through the generic
+`.ui.dropdown > .menu` / `.ui.dropdown .menu > .item` / `.user-menu` rules (Primer ActionMenu: 12px radius,
+--shadow-floating-small, 8px inset rows, 4px offset). gh.navigation is a later layer, so please don't restyle the popup
+(`#navbar … .menu`, its `.item`s, `.header`, `.divider`) there; the trigger buttons are yours. If you need a navbar-only
+difference in the popup, send it to overlays.
+
+# Navigation builder — wave 2, round 2 (status)
+- N-5 DONE (declined, owner's call): First / Last stay. Gitea's page list has no last-page number (`1 2 3 4 5 …`), so hiding "Last" would remove the only one-click way to the last page. The N-3 move-to-start / move-to-end masks stay.
+- NO-1 DONE (no change needed): gh.navigation only styles the navbar trigger items (`#navbar .navbar-right > .item…`, `> .text`, the avatar and badge). It has no rules for `#navbar … .menu`, its `.item`s, `.header` or `.divider`, so overlays keeps the popups.

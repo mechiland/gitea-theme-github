@@ -1,0 +1,126 @@
+/*
+ * gh-important for overlays: only declarations that Gitea sets with !important (or inline) and that the
+ * Primer spec changes. Everything else lives in the normal files.
+ *  - modules/dropdown.css: `.ui.dropdown .menu > .item` / `.ui.selection.dropdown .menu > .item` padding !important,
+ *    `.ui.floating.dropdown .menu` shadow/radius !important, `.scrolling.menu .item.selected` semibold !important;
+ *  - modules/menu.css: `.ui.menu .ui.dropdown .menu > .item` padding/font-size/background/color/font-weight !important
+ *    (+ :hover / .selected / .active variants);
+ *  - modules/modal.css (< 768px): header/content/actions paddings !important;
+ *  - tippy.ts inline `max-width: 500px` on tooltip boxes; toast.ts inline `background: var(--color-…)`;
+ *  - flash messages centre one-liners with Tailwind `tw-text-center` (!important).
+ */
+
+/* ---------- ActionList item box: 32px row = 6px + 20px + 6px, 8px inline ---------- */
+.ui.dropdown .menu > .item,
+.ui.selection.dropdown .menu > .item,
+.ui.menu .ui.dropdown .menu > .item {
+  padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed) !important;
+}
+
+/* single-select lists reserve the 16px check column (see action-menu.css) */
+.ui.dropdown:not(.branch-selector-dropdown) .menu:not(.user-menu):has(> .item.active:not(.clear-selection)) > .item {
+  padding-left: calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16) + var(--control-medium-gap)) !important;
+}
+
+/* github.com RefSelector: the name follows the 16px check box directly and long names wrap
+   (Gitea: `.ellipsis-text-items .menu > .item` nowrap/ellipsis !important) */
+.branch-selector-dropdown .scrolling.menu > .item {
+  padding-left: calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16)) !important;
+  white-space: normal !important;
+}
+
+.ui.dropdown.select-reaction .menu > .item {
+  padding: 0 !important;
+}
+
+/* base.css: `.user-menu > .item { border-radius: 0 !important }` */
+.user-menu > .item {
+  border-radius: var(--borderRadius-medium) !important;
+}
+
+/* items of dropdowns that sit inside a `.ui.menu` (issue filters, sort menus, secondary menus) */
+.ui.menu .ui.dropdown .menu > .item {
+  background: var(--control-transparent-bgColor-rest) !important;
+  color: var(--fgColor-default) !important;
+  font-size: var(--text-body-size-medium) !important;
+  font-weight: var(--base-text-weight-normal) !important;
+}
+
+.ui.menu .ui.dropdown .menu > .active.item {
+  background: var(--control-transparent-bgColor-rest) !important;
+  font-weight: var(--base-text-weight-normal) !important;
+}
+
+.ui.menu .ui.dropdown .menu > .item:hover,
+.ui.menu .ui.dropdown .menu > .selected.item,
+.ui.menu .ui.dropdown .menu > .active.item:hover {
+  background: var(--control-transparent-bgColor-hover) !important;
+  color: var(--fgColor-default) !important;
+}
+
+/* one highlighted row at a time (Fomantic's .selected Enter target vs the hovered row) */
+.ui.menu .ui.dropdown .menu:hover > .selected.item:not(:hover) {
+  background: var(--control-transparent-bgColor-rest) !important;
+}
+
+.ui.menu .ui.dropdown .menu > .item:active {
+  background: var(--control-transparent-bgColor-active) !important;
+}
+
+/* the branch selector's current branch is marked by the check, not by weight */
+.scrolling.menu .item.selected {
+  font-weight: var(--base-text-weight-normal) !important;
+}
+
+/* floating dropdowns: Primer overlay chrome */
+.ui.floating.dropdown .menu,
+.ui.floating.dropdown > .menu {
+  border-radius: var(--borderRadius-large) !important;
+  box-shadow: var(--shadow-floating-small) !important;
+}
+
+/* nested scrolling lists inside floating menus stay flat */
+.ui.floating.dropdown .menu .menu,
+.ui.floating.dropdown .scrolling.menu {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ---------- tooltip: Primer TooltipV2 max-width (tippy sets max-width: 500px inline) ---------- */
+.tippy-box[data-theme="tooltip"] {
+  max-width: 250px !important;
+}
+
+/* ---------- toast: Primer Toast surface instead of Gitea's inline green/orange/red fill ---------- */
+.toastify {
+  background: var(--bgColor-default) !important;
+}
+
+/* ---------- flash messages are left-aligned on GitHub ---------- */
+.ui.message.flash-message > .tw-text-center {
+  text-align: left !important;
+}
+
+/* ---------- Dialog paddings on small screens (Gitea: header 12px 36px 12px 16px, actions 16px 16px 0) ---------- */
+@media (max-width: 767.98px) {
+  .ui.modal > .header {
+    padding: calc(var(--base-size-8) + var(--base-size-6)) var(--base-size-16) !important;
+  }
+
+  .ui.modal:has(> .close) > .header {
+    padding-right: calc(var(--base-size-8) + var(--control-medium-size) + var(--base-size-8)) !important;
+  }
+
+  .ui.modal > .content {
+    padding: var(--base-size-16) !important;
+  }
+
+  .ui.modal > .actions {
+    padding: var(--base-size-16) !important;
+  }
+
+  .ui.modal > .close {
+    top: var(--base-size-8) !important;
+    right: var(--base-size-8) !important;
+  }
+}

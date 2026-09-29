@@ -1,1 +1,23 @@
-/* src/data-display — see ARCHITECTURE.md for ownership. Entry file: @import this folder's files here. */
+/*
+ * src/data-display — Primer data display for Gitea (layer gh.data-display).
+ * Owns: .ui.label*, .ui.labels, .labels-list, .ui.circular.label, .badge (timeline), .ui.avatar, img.avatar,
+ * .avatar-stack*, .ui.segment*, .ui.attached.header/segment, .flex-divided-list/.items-with-main rows,
+ * .ui.table*, .ui.list, .timeline-item* / comment shell, .empty-placeholder, progress, .ui.cards/.card.
+ * Specs: Primer React Label / CounterLabel / StateLabel / Avatar / AvatarStack / Box / Timeline / Blankslate /
+ * ProgressBar / DataTable, measured against github.com (docs/reference + shots/data-display-ghprobe.mjs).
+ *
+ * gh.data-display is a later layer than foundation/controls/overlays/navigation, so every generic rule here also
+ * beats those folders on shared elements; generic selectors exclude the contexts other folders own
+ * (e.g. the Watch/Star/Fork counter `.ui.labeled.button > .label`, controls).
+ */
+@import "./labels.css";
+@import "./counters.css";
+@import "./state-labels.css";
+@import "./avatars.css";
+@import "./box.css";
+@import "./list-rows.css";
+@import "./tables.css";
+@import "./timeline.css";
+@import "./blankslate.css";
+@import "./progress.css";
+@import "./cards.css";

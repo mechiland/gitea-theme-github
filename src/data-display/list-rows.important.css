@@ -1,0 +1,11 @@
+/* gh-important: shared/issueicon.tmpl colours closed issues with `tw-text-red` (Tailwind, !important).
+   github.com: a closed ("completed") issue is purple (--fgColor-done); closed PRs stay red (--fgColor-closed). */
+.svg.octicon-issue-closed.tw-text-red {
+  color: var(--fgColor-done) !important;
+}
+
+/* issue list meta line: `.item-body.tw-gap-2` (Tailwind, !important) → github.com Description gap 4px, no row gap
+   (wrapped parts sit on the 18px line grid) */
+#issue-list > .item .item-body.tw-gap-2 {
+  gap: 0 var(--base-size-4) !important;
+}

@@ -1,0 +1,91 @@
+/*
+ * gh-important for the code folder: only declarations that Gitea itself marks !important
+ * (web_src/css/repo.css, review.css). No display/visibility here (lint rule).
+ */
+
+/* repo.css `.file-header { padding: 6px 12px !important; font-size: 13px !important }` → github.com blob header */
+.file-header {
+  padding: var(--base-size-8) !important;
+  font-size: var(--text-body-size-medium) !important;
+}
+
+/* the left part carries Tailwind `tw-py-2` (!important) → 50px header; github.com's blob header is 46px */
+.file-header .file-header-left {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* repo.css `.diff-file-header { padding: 5px 8px !important }` → github.com file header 4px 8px */
+.diff-file-header {
+  padding: var(--base-size-4) var(--base-size-8) !important;
+}
+
+/* repo.css `.diff-file-box:target { border-color / border-radius / box-shadow !important }` */
+.diff-file-box:target {
+  border-color: var(--borderColor-accent-emphasis) !important;
+  border-radius: var(--borderRadius-medium) !important;
+  box-shadow: 0 0 0 var(--borderWidth-thin) var(--borderColor-accent-emphasis) !important;
+}
+
+/* repo.css `.code-diff td { padding: 0 0 0 10px !important }`, `.code-diff .lines-num { padding: 0 5px !important }`:
+   github.com blob-num padding 0 10px; marker 8px in; code text 22px after the number column */
+.repository .diff-file-box .code-diff .lines-num {
+  padding: 0 var(--base-size-8) 0 var(--base-size-8) !important;
+}
+
+.repository .diff-file-box .code-diff td.lines-type-marker {
+  padding: 0 !important;
+}
+
+.repository .diff-file-box .code-diff td.lines-code {
+  padding: 0 var(--base-size-8) 0 var(--base-size-2) !important;
+}
+
+/* hunk header text: github.com .blob-code-hunk padding 4px 10px */
+.repository .diff-file-box .code-diff .tag-code td.lines-code {
+  padding: var(--base-size-4) var(--base-size-8) var(--base-size-4) var(--base-size-4) !important;
+}
+
+/* CodeMirror 6 injects its base theme as an unlayered <style> at runtime (style-mod), e.g.
+   `.ͼ2 .cm-gutters { background-color: #f5f5f5; color: #6c6c6c; border-right: 1px solid #ddd }`,
+   `.ͼ1 .cm-scroller { font-family: monospace; line-height: 1.4 }`, `.ͼ1.cm-focused { outline: 1px dotted }`,
+   `.ͼ2 .cm-activeLine(Gutter)`; those beat every layered rule, so the editor chrome is restated here. */
+.code-editor-container .cm-editor.cm-focused {
+  outline: none !important;
+}
+
+.code-editor-container .cm-scroller {
+  font-family: var(--fontStack-monospace) !important;
+  line-height: var(--base-size-20) !important;
+}
+
+.code-editor-container .cm-gutters {
+  background-color: var(--codeMirror-gutters-bgColor) !important;
+  color: var(--codeMirror-lineNumber-fgColor) !important;
+  border-right: 0 !important;
+}
+
+.code-editor-container .cm-activeLine {
+  background-color: var(--codeMirror-activeline-bgColor) !important;
+}
+
+/* --codeMirror-gutterMarker-fgColor-default is var(--bgColor-default) in Primer 11.10 (a marker drawn on an
+   emphasis fill), so the active line number uses --fgColor-default like github.com's hovered/active numbers */
+.code-editor-container .cm-activeLineGutter {
+  background-color: var(--codeMirror-activeline-bgColor) !important;
+  color: var(--fgColor-default) !important;
+}
+
+/* CodeMirror's base theme sets `.cm-lineNumbers .cm-gutterElement { padding: 0 3px 0 5px }` unlayered */
+.code-editor-container .cm-gutters .cm-lineNumbers .cm-gutterElement {
+  padding: 0 var(--base-size-8) 0 var(--base-size-16) !important;
+}
+
+.code-editor-container .cm-editor .cm-selectionBackground,
+.code-editor-container .cm-editor.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground {
+  background-color: var(--codeMirror-selection-bgColor) !important;
+}
+
+.code-editor-container .cm-editor .cm-cursor {
+  border-left-color: var(--codeMirror-cursor-fgColor) !important;
+}

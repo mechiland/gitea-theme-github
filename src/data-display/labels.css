@@ -1,0 +1,294 @@
+/*
+ * Label — Primer React Label (size small: 20px tall, pill, 12px/500, 1px border) and IssueLabel/Token
+ * (measured on github.com: association label "Owner" 20px, padding 0 6px + 1px border, --borderColor-default,
+ * --fgColor-muted; issue label token 20px, padding 0 8px + 1px border, radius full, 12px/500).
+ * Gitea: .ui.label (modules/label.css) — 2px 6px, 4px radius, filled --color-label-bg.
+ *
+ * Issue labels carry their colors in an inline `style="color:… !important; background-color:… !important"`
+ * (RenderLabel) — nothing can beat that, so only shape/size/font are set for them.
+ * Excluded everywhere: the Watch/Star/Fork counter (`.ui.labeled.button > .label`, owned by controls) and the
+ * counters (`.ui.small.label`, `.ui.circular.label` → counters.css).
+ */
+
+.ui.label:where(:not(.ui.labeled.button > .label)) {
+  min-height: var(--base-size-20);
+  padding: 0 var(--base-size-6);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-full);
+  background: transparent;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-medium);
+  line-height: 1;
+}
+
+/* issue labels (inline colours) and labels inside a labels list: GitHub IssueLabel token.
+   Gitea picks black or white text for the label colour; a 1px border tinted from that text colour outlines light
+   labels (white "wontfix" stays visible on a white page, like github.com) and vanishes on dark ones. */
+.ui.label[style],
+.labels-list .ui.label {
+  min-height: var(--base-size-20);
+  padding: 0 var(--base-size-8);
+  border-color: transparent;
+  color: var(--fgColor-default);
+}
+
+/* labels in the issue sidebar / list title rows keep a 20px pill even though Gitea sets min-height only there */
+.ui.label > .gt-ellipsis {
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+a.ui.label:where(:not(.ui.labeled.button > .label)):hover {
+  background: var(--control-transparent-bgColor-hover);
+  border-color: var(--borderColor-default);
+  color: var(--fgColor-default);
+  text-decoration: none;
+}
+
+a.ui.label[style]:hover {
+  border-color: transparent;
+}
+
+/* github.com IssueLabel border = the label colour at alpha 0 (invisible); only a white label gets an outline
+   so it stays visible on the white page */
+.ui.label[style*="background-color: #ffffff"],
+.ui.label[style*="background-color: #fff;"],
+.ui.label[style*="background-color: #fff "] {
+  border-color: var(--borderColor-default);
+}
+
+/* Topics → github.com topic-tag: --bgColor-accent-muted pill, --fgColor-accent 12px/500, 0 10px, 24px tall;
+   hover fills with --bgColor-accent-emphasis */
+a.ui.label[href*="topic=1"],
+.ui.label.repo-topic {
+  min-height: var(--base-size-24);
+  padding: 0 var(--base-size-12);
+  border-color: transparent;
+  background: var(--bgColor-accent-muted);
+  color: var(--fgColor-accent);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-medium);
+}
+
+a.ui.label[href*="topic=1"]:hover {
+  border-color: transparent;
+  background: var(--bgColor-accent-emphasis);
+  color: var(--fgColor-onEmphasis);
+}
+
+/* Basic label = Primer Label default variant (outline, muted text) */
+.ui.basic.label {
+  background: transparent;
+  border-color: var(--borderColor-default);
+  color: var(--fgColor-muted);
+}
+
+a.ui.basic.label:hover {
+  background: var(--control-transparent-bgColor-hover);
+  border-color: var(--borderColor-default);
+  color: var(--fgColor-default);
+}
+
+/* Colour variants → Primer Label variants (outlined, never filled on github.com). */
+.ui.primary.label,
+.ui.blue.label {
+  background: transparent;
+  border-color: var(--borderColor-accent-emphasis);
+  color: var(--fgColor-accent);
+}
+
+.ui.green.label {
+  background: transparent;
+  border-color: var(--borderColor-success-emphasis);
+  color: var(--fgColor-success);
+}
+
+.ui.red.label {
+  background: transparent;
+  border-color: var(--borderColor-danger-emphasis);
+  color: var(--fgColor-danger);
+}
+
+.ui.orange.label {
+  background: transparent;
+  border-color: var(--borderColor-severe-emphasis);
+  color: var(--fgColor-severe);
+}
+
+.ui.yellow.label {
+  background: transparent;
+  border-color: var(--borderColor-attention-emphasis);
+  color: var(--fgColor-attention);
+}
+
+.ui.purple.label,
+.ui.violet.label {
+  background: transparent;
+  border-color: var(--borderColor-done-emphasis);
+  color: var(--fgColor-done);
+}
+
+.ui.grey.label {
+  background: transparent;
+  border-color: var(--borderColor-default);
+  color: var(--fgColor-muted);
+}
+
+a.ui.primary.label:hover,
+a.ui.blue.label:hover {
+  background: var(--bgColor-accent-muted);
+  border-color: var(--borderColor-accent-emphasis);
+  color: var(--fgColor-accent);
+}
+
+/* Sizes: Primer Label large = 24px; Gitea "horizontal" labels are the fat standalone ones */
+.ui.large.label,
+.ui.horizontal.label {
+  min-height: var(--base-size-24);
+  min-width: 0;
+  padding: 0 var(--base-size-8);
+  font-size: var(--text-body-size-small);
+}
+
+.ui.horizontal.label {
+  margin: 0 var(--base-size-4) 0 0;
+}
+
+.ui.mini.label,
+.ui.tiny.label {
+  font-size: var(--text-body-size-small);
+}
+
+/* labels next to a heading (org name, repo title) sit on the text line, no Fomantic nudge */
+.ui.header > .ui.label {
+  margin-top: 0;
+}
+
+.ui.label > .detail {
+  margin-left: var(--base-size-4);
+  font-weight: var(--base-text-weight-medium);
+}
+
+/* labels list: GitHub spaces issue labels 4px apart */
+.labels-list {
+  font-size: var(--text-body-size-small);
+}
+
+/* Scoped labels: Gitea renders scope-parent > scope-left + scope-right; the pill wraps both halves */
+.ui.label.scope-parent {
+  border: 0;
+  overflow: hidden;
+}
+
+.ui.label.scope-left {
+  padding-right: var(--base-size-6);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ui.label.scope-middle {
+  border-radius: 0;
+}
+
+.ui.label.scope-right {
+  padding-left: var(--base-size-6);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ui.label.archived-label {
+  opacity: 1;
+  filter: grayscale(0.5);
+}
+
+/* Commit SHA "labels": github.com renders SHAs as monospace text buttons (12px, 6px radius) */
+.ui.label.commit-id-short,
+.ui.sha.label {
+  min-height: var(--base-size-24);
+  padding: 0 var(--base-size-6);
+  border-radius: var(--borderRadius-medium);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-normal);
+  color: var(--fgColor-default);
+}
+
+.ui.label.commit-sign-badge {
+  min-height: var(--base-size-24);
+  padding: 0 var(--base-size-6);
+  border-radius: var(--borderRadius-medium);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-normal);
+}
+
+.ui.label.commit-id-short > .commit-sign-badge {
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* icons D-4: no "unsigned" badge on the commit page (github.com only badges signed commits) */
+.commit-sign-badge:not(.commit-is-signed) {
+  display: none;
+}
+
+/* Multiple-selection dropdown chips → Primer Token (20px pill, neutral) */
+.ui.multiple.dropdown > .label {
+  min-height: var(--base-size-24);
+  padding: 0 var(--base-size-8);
+  border-color: var(--borderColor-default);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-small);
+  box-shadow: none;
+}
+
+/* Comment reactions → github.com .social-reaction-summary-item (26px, padding 0 4px, full radius, 12px,
+   --borderColor-default) */
+.bottom-reactions .ui.label {
+  min-height: calc(var(--base-size-24) + 2px);
+  padding: 0 var(--base-size-4);
+  border-color: var(--borderColor-default);
+  background: transparent;
+  color: var(--fgColor-muted);
+  font-weight: var(--base-text-weight-normal);
+}
+
+.bottom-reactions .ui.label.primary {
+  border-color: var(--borderColor-accent-emphasis);
+  color: var(--fgColor-accent);
+}
+
+.bottom-reactions {
+  gap: var(--base-size-4);
+  margin: 0 var(--base-size-16) var(--base-size-16);
+}
+
+.bottom-reactions .ui.label {
+  gap: 0;
+}
+
+/* github.com .social-button-emoji: 16×16 box, 12px glyph; count margin-left 2px + padding 0 4px (count text starts
+   6px after the emoji, pill 41.6×26 for one digit) */
+.bottom-reactions .ui.label .reaction {
+  justify-content: center;
+  align-items: center;
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  font-size: var(--text-body-size-small);
+}
+
+.bottom-reactions .reaction-count {
+  margin-left: 2px;
+  padding: 0 var(--base-size-4);
+  font-size: var(--text-body-size-small);
+}
+
+/* icons D-5: signed-but-unverified commit badge shows GitHub's `unverified` glyph */
+.commit-sign-badge.commit-is-signed .svg.gitea-unlock {
+  background-color: currentColor;
+  mask: var(--gh-octicon-unverified) center / contain no-repeat;
+}
+
+.commit-sign-badge.commit-is-signed .svg.gitea-unlock > * {
+  visibility: hidden;
+}

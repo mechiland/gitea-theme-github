@@ -19,6 +19,8 @@ admin user's **theme / language preference** (via the real settings form) and, i
 | `compare.mjs` | contact sheet (`compare.html`) and blind A/B pair generator |
 | `smoke.mjs` | functional smoke test with the theme applied |
 | `lib/` | browser launcher, Gitea login/appearance, Primer palette, in-page audit, measure set |
+| `budget-compare.mjs` | per-page CLS / DCL / load diff of two runs (`--ours <run> --base <run> [--json out]`), flags regressions beyond noise (CLS +0.02, DCL max(150 ms, 25 %)) |
+| `themes-offered.mjs` | read-only: prints the themes offered on /user/settings/appearance (pre/post restart check) |
 
 ## shoot.mjs
 

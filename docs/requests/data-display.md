@@ -57,3 +57,54 @@ Gitea's lists. Accepted limitation, documented in docs/icons-audit.md §2.
   bundled into `gh.tokens`; referencing it is enough (unreferenced masks are pruned). Available: alert, stop, x-circle,
   info, check-circle, file, file-submodule, file-symlink-file, file-directory-fill, arrow-left, arrow-right,
   move-to-start, move-to-end (see the file for the exact list). If you need another Octicon, ask icons/integrator.
+
+# From navigation (wave 2, round 1)
+## ND-1 Counters inside UnderlineNav / TabNav items
+gh.data-display is a later layer than gh.navigation, so your generic `.ui.label` / `.ui.small.label` rules win over
+navigation's counter rules (`.ui.secondary.pointing.menu .item > .ui.label`, `.ui.tabular.menu:not(.pointing) .item > .ui.label`).
+Measured on repo-home (shots/navigation-r1c): the tab counter renders 20px tall but `line-height: 12px` and
+`color: --fgColor-default` vs github.com `.UnderlineNav .Counter` (12px / **18px**, weight 500, padding 0 6px, radius 2em,
+bg `--bgColor-neutral-muted`, color `--fgColor-default`, 1px `--counter-borderColor` border, margin-left 8px).
+Please either make your CounterLabel rule for `.menu .item > .ui.label` match that spec (line-height `--text-caption-lineHeight`),
+or exclude `.menu .item > .ui.label` from the properties you set so navigation's rule applies. Navigation sets
+`margin: 0` (spacing comes from the item's 8px gap) — please do not add a margin to menu-item counters.
+## ND-2 Navbar avatar
+`#navbar .navbar-avatar > .ui.avatar` is sized 32px circle by navigation (github.com AppHeader avatar). If your `.ui.avatar`
+rules set width/height/border-radius, please exclude `#navbar .ui.avatar` (or keep them attribute-driven), otherwise the
+header avatar falls back to 24px.
+
+# Status (data-display, wave 2 round 1)
+- **D-1 DONE** — `src/data-display/blankslate.css`: `.empty-placeholder > .svg` 24px `--fgColor-muted`, mb 8px; h2 20px semibold mb 4px; p 14px muted; padding 32px.
+- **D-2 DONE** — `src/data-display/list-rows.css`: `.svg.commit-status` 16px (width/height/min-*).
+- **D-3 N/A** — Gitea 1.27.3 reference events (`comments.tmpl` types 3/5/6) render no state octicon next to the referenced title, so there is nothing to size (github.com's 12px state icons have no Gitea counterpart).
+- **D-4 DONE** — `src/data-display/labels.css`: `.commit-sign-badge:not(.commit-is-signed) { display: none }` (limitation from the D-4 correction accepted).
+- **Integrator / controls #2 DONE** — every generic label rule is `.ui.label:where(:not(.ui.labeled.button > .label))`; counters (`.ui.small.label`) never match the labeled-button counter's selector (it has no `.small`).
+- **Blankslate headings DONE** — icon→heading gap owned here (8px).
+
+# From icons (wave 2, round 1)
+## D-5 Signed-but-unverified commit badge: `unverified` glyph in GitHub themes
+Critic icons-w2-r0 #1: the w1 file override `gitea-unlock` → `unverified` also changed **unsigned** commits in
+Gitea's own themes (commit page renders the badge without a Commit, `commit_page.tmpl:174`), telling them "Unverified".
+Icons w2 r1 changes the file to `octicon-unlock` (same meaning as Gitea's open padlock, correct in every theme; live
+after the next Gitea restart). D-4 still hides unsigned badges in GitHub themes. For the remaining signed-but-unverified
+case (`.commit-sign-badge.commit-is-signed` without verified → `sign-warning`), GitHub's glyph is `unverified`; mask
+it in GitHub themes (the mask is in `src/icons/octicon-masks.css`, kept in the bundle once referenced):
+```css
+.commit-sign-badge.commit-is-signed .svg.gitea-unlock {
+  background-color: currentColor;
+  mask: var(--gh-octicon-unverified) center / contain no-repeat;
+}
+.commit-sign-badge.commit-is-signed .svg.gitea-unlock > * { visibility: hidden; }
+```
+Verified by injection on /octo-org/grex/commit/99cc3477… with the badge forced to `commit-is-signed sign-warning`
+(no signed-unverified commit is seeded): 16×16, mask applied, currentColor rgb(89,99,110) light / rgb(145,152,161)
+dark (`shots/icons-w2r1/sim-sheet-1440.png`, `shots/icons-w2r1/sim/report.json`). Note: `.svg.gitea-unlock` is also
+the class of today's (pre-restart) file (`svg gitea-unlock octicon-unverified`), so the rule is correct before and after.
+
+# Status (data-display, wave 2 round 2)
+- **ND-1 DONE** — `counters.css`: CounterLabel line-height `calc(--base-size-20 - 2 × --borderWidth-thin)` = 18px (measured 18px on the repo-issues tab counter); no margin is set on counters, so the menu item's gap spaces them; color stays `--fgColor-default`.
+- **ND-2 DONE (no conflict)** — `avatars.css` sets no width/height on `.ui.avatar`; the only sized avatar rule is scoped to `.comment-list .event`, so `#navbar .ui.avatar` keeps navigation's 32px.
+- **D-5 DONE** — `labels.css`: `.commit-sign-badge.commit-is-signed .svg.gitea-unlock` masked with `--gh-octicon-unverified` (proposal applied verbatim). Not screenshotted: no seeded signed-but-unverified commit exists.
+
+# Status (data-display, wave 2 round 3)
+- No new incoming requests. Outgoing: DD-D1 (docs/requests/dark.md) still open; escalated as DD-I1 in docs/requests/integrator.md because `src/dark/` is empty until wave 3.

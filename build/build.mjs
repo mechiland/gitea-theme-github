@@ -230,6 +230,17 @@ async function deploy() {
   } else {
     d.templateWarning = 'head_style.tmpl has no github branch — cascade layering and cache-busting inactive (integrator: install templates/base/head_style.tmpl)';
   }
+  // read-only drift check: every project template override must match the live copy (head_style modulo the
+  // revision). Installing templates is an orchestrator/integrator step (docs/requests/ORCHESTRATOR.md), not deploy.
+  const tmplRoot = path.join(ROOT, 'templates');
+  const norm = (s) => s.replace(/github_revision=[0-9a-f]+/g, 'github_revision=REV');
+  d.templatesPending = [];
+  for (const rel of fs.existsSync(tmplRoot) ? fs.readdirSync(tmplRoot, {recursive: true}).filter((f) => f.endsWith('.tmpl')).sort() : []) {
+    const live = path.join(CUSTOM_PATH, 'templates', rel);
+    let state = 'missing';
+    try { state = norm(read(live)) === norm(read(path.join(tmplRoot, rel))) ? 'ok' : 'differs'; } catch {}
+    if (state !== 'ok') d.templatesPending.push(`${rel}: ${state} in CUSTOM_PATH (install it: docs/requests/ORCHESTRATOR.md)`);
+  }
   // verify Gitea serves the new bytes
   for (const name of Object.keys(THEMES)) {
     const want = crypto.createHash('sha256').update(fs.readFileSync(path.join(DIST, `theme-${name}.css`))).digest('hex');

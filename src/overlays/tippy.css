@@ -1,0 +1,131 @@
+/*
+ * tippy.js popups (Gitea web_src/js/modules/tippy.ts, CSS modules/tippy.css).
+ *  - popovers (theme default / menu / box-with-header / bare) → Primer Overlay: --overlay-bgColor, no border,
+ *    --shadow-floating-small, radius --borderRadius-large, no arrow;
+ *  - theme "menu" → ActionList inside the overlay (same item metrics as action-menu.css);
+ *  - theme "tooltip" → Primer TooltipV2 (github.com prc-TooltipV2-Tooltip, 2026-09-30): --tooltip-bgColor /
+ *    --tooltip-fgColor, 12px / 1.625 (--text-body-shorthand-small), padding 4px 8px, radius 6px, max-width 250px
+ *    (inline max-width → overlays.important.css), centred balanced text, no arrow, 4px (--overlay-offset) from
+ *    the anchor. Gitea offsets every tippy 6px (tippy.ts `offset: [0, 6]`), so every box is nudged 2px back.
+ */
+
+.tippy-box {
+  border: 0;
+  border-radius: var(--borderRadius-large);
+  background-color: var(--overlay-bgColor);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.tippy-box[data-theme="default"],
+.tippy-box[data-theme="bare"],
+.tippy-box[data-theme="menu"],
+.tippy-box[data-theme="box-with-header"] {
+  border: 0;
+  box-shadow: var(--shadow-floating-small);
+}
+
+/* Primer overlays and tooltips have no pointer */
+.tippy-box > .tippy-svg-arrow {
+  display: none;
+}
+
+/* the content is a block formatting context, so the first/last child's margins (e.g. the clone panel's 10px
+   field margins) no longer collapse through the borderless box and push it away from its anchor */
+.tippy-box > .tippy-content {
+  display: flow-root;
+}
+
+/* anchor gap: Gitea places every tippy 6px (= --base-size-6, tippy.ts `offset: [0, 6]`) from its anchor; Primer
+   overlays and tooltips sit --overlay-offset (4px) away. The code editor's context menu opens at the pointer
+   (offset 0) and is left alone. */
+.tippy-box[data-placement^="top"]:not(:has(> .tippy-content > .cm-context-menu)) {
+  translate: 0 calc(var(--base-size-6) - var(--overlay-offset));
+}
+
+.tippy-box[data-placement^="bottom"]:not(:has(> .tippy-content > .cm-context-menu)) {
+  translate: 0 calc(var(--overlay-offset) - var(--base-size-6));
+}
+
+.tippy-box[data-placement^="left"]:not(:has(> .tippy-content > .cm-context-menu)) {
+  translate: calc(var(--base-size-6) - var(--overlay-offset)) 0;
+}
+
+.tippy-box[data-placement^="right"]:not(:has(> .tippy-content > .cm-context-menu)) {
+  translate: calc(var(--overlay-offset) - var(--base-size-6)) 0;
+}
+
+/* ---------- menu theme (e.g. code line "…" menu, commit/branch action menus) ---------- */
+.tippy-box[data-theme="menu"] {
+  background-color: var(--overlay-bgColor);
+  color: var(--fgColor-default);
+}
+
+.tippy-box[data-theme="menu"] .tippy-content {
+  padding: var(--base-size-8) 0;
+}
+
+.tippy-box[data-theme="menu"] .item {
+  gap: var(--control-medium-gap);
+  width: auto;
+  min-height: var(--control-medium-size);
+  margin: 0 var(--base-size-8);
+  padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+}
+
+.tippy-box[data-theme="menu"] .item:hover,
+.tippy-box[data-theme="menu"] .item:focus {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+  text-decoration: none;
+}
+
+.tippy-box[data-theme="menu"] .item:active,
+.tippy-box[data-theme="menu"] .item.active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+.tippy-box[data-theme="menu"] .item:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: 0;
+}
+
+.tippy-box[data-theme="menu"] .item > svg {
+  color: var(--fgColor-muted);
+}
+
+/* ---------- box-with-header theme (e.g. stopwatch, issue hover card) ---------- */
+.tippy-box[data-theme="box-with-header"] .tippy-content {
+  border-radius: var(--borderRadius-large);
+  background: var(--overlay-bgColor);
+  overflow: hidden;
+}
+
+/* ---------- tooltip theme ---------- */
+.tippy-box[data-theme="tooltip"] {
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+  background-color: var(--tooltip-bgColor);
+  box-shadow: none;
+  color: var(--tooltip-fgColor);
+  font: var(--text-body-shorthand-small);
+  text-align: center;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.tippy-box[data-theme="tooltip"] .tippy-content {
+  padding: var(--overlay-paddingBlock-condensed) var(--overlay-padding-condensed);
+}
+
+
+.tippy-box[data-theme="tooltip"] .tippy-svg-arrow-inner,
+.tippy-box[data-theme="tooltip"] .tippy-svg-arrow-outer {
+  fill: var(--tooltip-bgColor);
+}

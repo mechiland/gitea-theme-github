@@ -1,1 +1,19 @@
-/* src/navigation — see ARCHITECTURE.md for ownership. Entry file: @import this folder's files here. */
+/*
+ * src/navigation — GitHub navigation chrome for Gitea (layer gh.navigation).
+ * Owns: #navbar* / .navbar-* (global header = Primer AppHeader), .secondary-nav / .repo-header / .secondary-info
+ * (repo header band), overflow-menu* / .ui.secondary.pointing.menu (Primer UnderlineNav), .ui.tabular.menu (TabNav),
+ * the issue-list Open/Closed state switcher (.small-menu-items), .ui.vertical.menu (settings / admin sidebars =
+ * Primer NavList), .breadcrumb, .ui.pagination.menu (Primer Pagination), .page-footer.
+ * Specs: github.com CSS read from the live site 2026-09-30 (.UnderlineNav*, .tabnav*, prc-Pagination-*,
+ * prc-ActionList-* as used by NavList, footer metrics) + @primer/css pagination/, navigation/.
+ * Note: gh.data-display is a LATER layer, so whatever it sets on .ui.label / .ui.avatar wins over the counter and
+ * avatar rules here (see docs/requests/data-display.md, navigation section).
+ */
+@import "./header.css";
+@import "./repo-header.css";
+@import "./underline-nav.css";
+@import "./tabnav.css";
+@import "./nav-list.css";
+@import "./pagination.css";
+@import "./breadcrumb.css";
+@import "./footer.css";

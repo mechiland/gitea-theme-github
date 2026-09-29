@@ -1,0 +1,72 @@
+/* Lists: padding 2em, li + li .25em, li > p 16px, nested lists without margins and ol ol lower-roman are
+ * Gitea's already (content.css:132-205). Differences: task lists, explicit bullet styles.
+ * Bullets: GitHub relies on the UA (ul disc, ul-in-list circle, 3rd level square) and Primer base
+ * (ol ol / ul ol lower-roman, 3rd-level ol lower-alpha). The UA counts lists *outside* the markdown body too,
+ * so a .markup inside a list (release bodies sit in ul#release-list > li) would start at circle; counting
+ * only lists inside .markup restores GitHub's levels. */
+.markup ul {
+  list-style-type: disc;
+}
+
+.markup :is(ul, ol) ul {
+  list-style-type: circle;
+}
+
+.markup :is(ul, ol) :is(ul, ol) ul {
+  list-style-type: square;
+}
+
+.markup :is(ul, ol) :is(ul, ol) ol {
+  list-style-type: lower-alpha;
+}
+
+.markup ol[type="a s"] {
+  list-style-type: lower-alpha;
+}
+
+.markup ol[type="A s"] {
+  list-style-type: upper-alpha;
+}
+
+.markup ol[type="i s"] {
+  list-style-type: lower-roman;
+}
+
+.markup ol[type="I s"] {
+  list-style-type: upper-roman;
+}
+
+.markup ol[type="1"] {
+  list-style-type: decimal;
+}
+
+/* GitHub .task-list-item: no bullet; items 4px apart; a nested list starts right below (Gitea adds 4px). */
+.markup .task-list-item > ul,
+.markup .task-list-item > ol {
+  margin-top: 0;
+}
+
+/* GitHub renders the task checkbox as the browser's native (13px) checkbox:
+ * .task-list-item-checkbox { margin: 0 .2em .25em -1.4em; vertical-align: middle }, followed by a space.
+ * Gitea emits no space after the input, so the right margin also carries the width of that space.
+ * `all: revert` drops Gitea's and the controls folder's custom 16px checkbox (appearance:none + ::before). */
+.markup .task-list-item input[type="checkbox"] {
+  all: revert;
+  font-size: inherit;
+  margin: 0 0.45em 0.25em -1.4em;
+  vertical-align: middle;
+  cursor: default;
+}
+
+.markup .task-list-item input[type="checkbox"]:not([disabled]) {
+  cursor: pointer;
+}
+
+.markup .task-list-item input[type="checkbox"]:focus-visible {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: 2px;
+}
+
+.markup .task-list-item input[type="checkbox"] + p {
+  margin-inline-start: 0;
+}

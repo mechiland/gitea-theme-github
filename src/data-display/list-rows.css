@@ -1,0 +1,183 @@
+/*
+ * Box rows — Primer Box-row: padding 16px, 1px --borderColor-muted separators, navigable rows highlight on hover.
+ * Gitea: .flex-divided-list > .item (+ .items-with-main leading/main/trailing, shared/flex-list.css): 10px 0 rows
+ * separated by --color-secondary.
+ *
+ * Inside a Box body (.ui.segment) the rows bleed to the Box edge (negative inline margin = the 16px Box padding),
+ * like Box-row separators on github.com. Outside a Box (explore / profile repo lists) rows keep Gitea's full-width
+ * layout with muted separators.
+ *
+ * Issue / PR list (github.com ListView, measured): boxed list, rows 8px 16px, 16px/24px semibold title
+ * (--fgColor-default, hover --fgColor-accent), 4px gap, 12px/18px --fgColor-muted meta line, 16px state octicon
+ * (open --fgColor-open, closed issue --fgColor-done, closed PR --fgColor-closed, merged --fgColor-done,
+ * draft --fgColor-muted), rows highlight --bgColor-muted on hover.
+ */
+
+.flex-divided-list > .item + .item {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+.flex-divided-list > .item {
+  padding: var(--base-size-16) 0;
+}
+
+.flex-divided-list.items-px-default > .item {
+  padding-left: var(--base-size-16);
+  padding-right: var(--base-size-16);
+}
+
+.items-with-main > .item {
+  gap: var(--base-size-8) var(--base-size-16);
+}
+
+.items-with-main > .item .item-main {
+  gap: var(--base-size-4);
+}
+
+.items-with-main > .item .item-title {
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-large);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-large);
+}
+
+.items-with-main > .item .item-body {
+  gap: var(--base-size-4);
+  color: var(--fgColor-muted);
+}
+
+/* rows inside a Box body: full-bleed separators */
+.ui.segment:not(.fitted) > .flex-divided-list > .item {
+  margin-left: var(--base-size-negative-16);
+  margin-right: var(--base-size-negative-16);
+  padding-left: var(--base-size-16);
+  padding-right: var(--base-size-16);
+}
+
+.ui.segment:not(.fitted) > .flex-divided-list > .item:first-child {
+  padding-top: 0;
+}
+
+.ui.segment:not(.fitted) > .flex-divided-list > .item:last-child {
+  padding-bottom: 0;
+}
+
+/* -------- issue / PR list (shared/issuelist.tmpl): github.com ListView -------- */
+#issue-list {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+#issue-list:empty {
+  border: 0;
+}
+
+/* github.com ListItem (measured): title container padding-top 8px, 24px title, 4px gap, 18px meta line,
+   meta padding-bottom 10px = 64px row */
+#issue-list > .item {
+  padding: var(--base-size-8) var(--base-size-16) calc(var(--base-size-8) + 2px);
+  gap: var(--base-size-8);
+}
+
+#issue-list > .item:first-child {
+  border-top-left-radius: var(--borderRadius-medium);
+  border-top-right-radius: var(--borderRadius-medium);
+}
+
+#issue-list > .item:last-child {
+  border-bottom-left-radius: var(--borderRadius-medium);
+  border-bottom-right-radius: var(--borderRadius-medium);
+}
+
+#issue-list > .item:hover {
+  background: var(--bgColor-muted);
+}
+
+/* the leading column: checkbox + 16px state icon on the title's 24px line */
+#issue-list > .item .item-leading > .flex-text-inline {
+  min-height: var(--base-size-24);
+}
+
+#issue-list > .item .item-main {
+  gap: var(--base-size-4);
+}
+
+#issue-list .list-item-large-title {
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-large);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-large);
+}
+
+#issue-list > .item .item-header {
+  line-height: var(--text-body-lineHeight-large);
+}
+
+#issue-list > .item .item-body {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+/* github.com separates the meta parts with " · " (Description-module: gap 4px); the space before the dot is the
+   parts' own 4px flex gap (.flex-text-inline) or, when flowing inline on mobile, the collapsed trailing space */
+#issue-list > .item .item-body > :not(:last-child)::after {
+  content: "·";
+  color: var(--fgColor-muted);
+}
+
+/* narrow viewports: the meta line flows as text like github.com instead of wrapping whole flex items onto
+   8px-spaced rows (the "opened … by" part is plain text and may break inside) */
+@media (max-width: 767.98px) {
+  #issue-list > .item .item-body {
+    display: block;
+  }
+
+  #issue-list > .item .item-body > .flex-text-inline:not(:has(.svg)) {
+    display: inline;
+  }
+}
+
+#issue-list > .item .item-body .svg {
+  width: var(--base-size-12);
+  height: var(--base-size-12);
+  min-width: var(--base-size-12);
+  min-height: var(--base-size-12);
+}
+
+#issue-list > .item .item-trailing {
+  align-self: center;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}
+
+#issue-list > .item .item-trailing .flex-text-block {
+  gap: var(--base-size-4);
+}
+
+/* labels next to the title: GitHub IssueLabel tokens sit centred on the 24px title line */
+#issue-list .labels-list > .item {
+  margin-right: var(--base-size-4);
+  vertical-align: 2px;
+}
+
+/* no margin before the labels: the collapsed space after the title is the 4px gap github.com shows, and a wrapped
+   label list starts flush with the title */
+/* state octicons (shared/issueicon.tmpl) — colours via tw-text-* (!important) → list-rows.important.css */
+#issue-list .item-leading .svg {
+  flex-shrink: 0;
+}
+
+/* checklist progress in the meta line */
+#issue-list .checklist progress {
+  width: var(--base-size-64);
+}
+
+/* icons D-2: commit status icons are 16px on github.com (Gitea renders them at 18px) */
+.svg.commit-status {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  min-width: var(--base-size-16);
+  min-height: var(--base-size-16);
+}

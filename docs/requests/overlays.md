@@ -1,6 +1,6 @@
 # Requests from `icons` (wave 1, round 1)
 
-## O-1 Toast icon `gitea-exclamation` is JS-bundled → CSS mask
+## O-1 Toast icon `gitea-exclamation` is JS-bundled → CSS mask — DONE (overlays r1: src/overlays/toast.css, alert/stop masks keyed on the inline background var and data-toast-unique-key)
 `web_src/js/modules/toast.ts:20-35`: warning and error toasts render `<div class="toast-icon">` + `gitea-exclamation`
 from the JS bundle (a server-side override cannot reach it). Primer Toast uses `octicon-alert` (warning) and
 `octicon-stop` (error). The level is visible on the element as `data-toast-unique-key="<level>-<message>"` (when
@@ -20,3 +20,5 @@ preventDuplicates, the default). Needs `src/icons/octicon-masks.css` in the buil
 - **Hand-over from controls:** `src/controls/select.css` currently styles `.ui.selection.dropdown.tw-flex-1 > .menu`
   (min-width of the open select menu, ~192px Primer overlay minimum). The open menu is yours: take that rule over and tell
   the integrator, who removes it from controls in the same build (the lint rejects the same selector in two folders).
+  — DONE (overlays r1): generalized as `.ui.selection.dropdown > .menu` in action-menu.css (all open selects); integrator
+  asked to delete the controls rule (docs/requests/integrator.md OV-1).

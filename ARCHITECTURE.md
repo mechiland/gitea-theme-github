@@ -169,6 +169,7 @@ keep the non-GitHub output byte-identical.
 | Template | Reason | Scope | Added by |
 |---|---|---|---|
 | `templates/base/head_style.tmpl` | Cascade layering (§3) + cache-busting `?github_revision=`. Shared with the Modern theme's existing override: our branch is additive, the else-branch is untouched. | `github-*` themes only | integrator, wave 0 |
+| `templates/custom/footer.tmpl` | Primer Dialog close button (request OV-4): Gitea's modals mostly have no `×`; a 12-line inline script (CSP nonce) prepends `button.close.inside` to every `.ui.modal` (Fomantic closes on `> .close`). `custom/footer` is Gitea's empty extension hook, so no upstream markup is replaced. Install is done by the orchestrator (docs/requests/ORCHESTRATOR.md ORC-1). | `github-*` themes only (renders nothing otherwise) | integrator, wave 2 |
 
 (Pre-existing overrides owned by the Modern theme — `repo/view_content.tmpl`, `repo/view_list.tmpl` — render
 Gitea's standard markup for non-Modern themes; we build against that output and never edit them.)
@@ -197,7 +198,8 @@ column colors, repo units, federation, wiki clone box, etc.) get the **closest P
 ## 10. Budget
 
 - ≤ 300 KB per theme file minified (build fails otherwise). Current sizes in `docs/STATUS.json`.
-- No added JavaScript. (If a control truly cannot match without JS, it is listed here with the reason — none so far.)
+- No added JavaScript, with one listed exception: the Dialog close button (`templates/custom/footer.tmpl`, §7) —
+  a clickable control cannot be created with CSS. ~0.7 KB inline, github-* themes only, no network request.
 - No layout shift: the screenshot tool records CLS per route; must not exceed the built-in theme's.
 - No page-load regression: same number of render-blocking requests as the built-in theme (1 Gitea CSS + 1 theme CSS;
   the Gitea CSS is preloaded, then `@import`ed into the layer). The tool records DCL/load/CSS bytes for `github-auto`

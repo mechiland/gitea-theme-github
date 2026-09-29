@@ -1,0 +1,176 @@
+/*
+ * Dialog — Gitea `.ui.modal` (Fomantic modal JS, CSS modules/modal.css) inside `.ui.dimmer.modals`.
+ * Spec: Primer React Dialog, CSS read from github.com 2026-09-30 (prc-Dialog-*):
+ *   backdrop --overlay-backdrop-bgColor; dialog --overlay-bgColor, radius --borderRadius-large,
+ *   --shadow-floating-small, max 100vw/100vh − 64px;
+ *   header padding 8px + title block 6px 8px (= 14px 16px), title 14px semibold, divider = 0 1px 0 --borderColor-default;
+ *   close = 32px invisible IconButton in the header's top-right corner;
+ *   body padding 16px; footer padding 16px, buttons right-aligned, gap 8px, no divider/background.
+ * Widths: Gitea mini → 320 (--overlay-width-small), tiny/small/confirm → 480 (--overlay-width-medium),
+ * default → 640 (--overlay-width-large).
+ * Gitea's mobile paddings are !important → overlays.important.css.
+ */
+
+/* ---------- backdrop ---------- */
+.ui.dimmer {
+  background: var(--overlay-backdrop-bgColor);
+  animation-duration: var(--base-duration-200);
+}
+
+/* ---------- dialog ---------- */
+.ui.modal {
+  width: var(--overlay-width-large);
+  max-width: calc(100vw - var(--base-size-64));
+  border: 0;
+  border-radius: var(--borderRadius-large);
+  background: var(--overlay-bgColor);
+  box-shadow: var(--shadow-floating-small);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.ui.mini.modal {
+  width: var(--overlay-width-small);
+}
+
+.ui.tiny.modal,
+.ui.small.modal,
+.ui.modal.g-modal-confirm {
+  width: var(--overlay-width-medium);
+}
+
+.ui.modal.g-modal-confirm {
+  max-width: calc(100vw - var(--base-size-64));
+}
+
+.ui.modal > :first-child:not(.icon) {
+  border-top-left-radius: var(--borderRadius-large);
+  border-top-right-radius: var(--borderRadius-large);
+}
+
+.ui.modal > :last-child {
+  border-bottom-left-radius: var(--borderRadius-large);
+  border-bottom-right-radius: var(--borderRadius-large);
+}
+
+/* ---------- header (Dialog.Header + Dialog.Title) ---------- */
+.ui.modal > .header,
+.ui.modal > .header:not(.ui),
+.ui.mini.modal > .header:not(.ui),
+.ui.tiny.modal > .header:not(.ui),
+.ui.small.modal > .header:not(.ui),
+.ui.modal > .close.inside + .header {
+  padding: calc(var(--base-size-8) + var(--base-size-6)) var(--base-size-16);
+  border: 0;
+  background: transparent;
+  box-shadow: 0 var(--borderWidth-thin) 0 var(--borderColor-default);
+  color: var(--fgColor-default);
+  font-family: inherit;
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--text-title-weight-large);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+/* keep the title clear of the close button */
+.ui.modal:has(> .close) > .header,
+.ui.modal:has(> .close) > .header:not(.ui) {
+  padding-right: calc(var(--base-size-8) + var(--control-medium-size) + var(--base-size-8));
+}
+
+.ui.modal > .header .svg {
+  color: var(--fgColor-muted);
+  vertical-align: text-bottom;
+}
+
+/* close "X" → invisible 32px IconButton, 8px from the top-right corner */
+.ui.modal > .close,
+.ui.modal > .close.inside,
+.ui.modal > .close.icon[height="16"],
+.ui.modal.g-modal-confirm > .inside.close.icon {
+  box-sizing: border-box;
+  top: var(--base-size-8);
+  right: var(--base-size-8);
+  width: var(--control-medium-size);
+  height: var(--control-medium-size);
+  padding: calc((var(--control-medium-size) - var(--base-size-16)) / 2);
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+  background: transparent;
+  color: var(--fgColor-muted);
+  line-height: 0;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.ui.modal > .close:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-muted);
+}
+
+.ui.modal > .close:active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+/* ---------- body ---------- */
+.ui.modal > .content,
+.ui.modal form > .content {
+  padding: var(--base-size-16);
+  background: transparent;
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.ui.modal > .content > p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- footer ---------- */
+.ui.modal > .actions,
+.ui.modal .content + .actions,
+.ui.modal .content + form > .actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--base-size-8);
+  padding: var(--base-size-16);
+  border: 0;
+  background: transparent;
+}
+
+/* a footer placed inside the body (form layouts) keeps the body's padding and adds the Primer 16px gap */
+.ui.modal .content > form > .actions,
+.ui.modal .content > .actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--base-size-8);
+  padding: var(--base-size-16) 0 0;
+  border: 0;
+  background: transparent;
+}
+
+.ui.modal .actions > .button,
+.ui.modal .actions > .ui.button {
+  margin: 0;
+}
+
+/* Dialog footer buttons are medium (32px) Primer buttons, even where Gitea marks them small/tiny */
+.ui.modal .actions > .ui.button:is(.small, .tiny, .mini) {
+  gap: var(--control-medium-gap);
+  height: var(--control-medium-size);
+  min-height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
+}
+
+/* GitHub dialog buttons are text-only (Gitea adds x / check icons to Cancel / OK) */
+.ui.modal .actions > .ui.button:not(.icon, .danger) > .svg {
+  display: none;
+}
+
+/* single danger button ("I understand the consequences…") spans the footer like GitHub's repo deletion */
+.ui.modal .actions > .ui.button.danger {
+  width: 100%;
+  margin: 0;
+}

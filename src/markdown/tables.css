@@ -1,0 +1,25 @@
+/* Tables: github.com .markdown-body table — display block, width max-content (max 100%, scrolls), tabular
+ * numbers; th 600; cells 6px 13px with a 1px borderColor-default border (Gitea, !important, same values);
+ * rows bgColor-default with a borderColor-muted top rule, even rows bgColor-muted. */
+.markup table {
+  width: max-content;
+  max-width: 100%;
+  font-variant: tabular-nums;
+}
+
+.markup table tr {
+  background-color: var(--bgColor-default);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+.markup table tr:nth-child(2n) {
+  background-color: var(--bgColor-muted);
+}
+
+.markup table td > :last-child {
+  margin-bottom: 0;
+}
+
+.markup table img {
+  background-color: transparent;
+}

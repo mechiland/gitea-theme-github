@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-30T02:40:00+08:00",
- "phase": "wave-1 integrated (foundation, controls, icons); ready for wave 2 (overlays, navigation, data-display, code, markdown)",
+ "updated": "2026-09-30T04:30:00+08:00",
+ "phase": "wave-2 integrated (overlays, navigation, data-display, code, markdown all passed); ready for wave 3 (pages/*, then dark pass)",
  "pinned": {
   "gitea": "1.27.3",
   "@primer/primitives": "11.10.0",
@@ -11,21 +11,26 @@
  "templateOverrides": [
   {
    "path": "templates/base/head_style.tmpl",
-   "reason": "cascade layering + cache-busting; inert media=\"not all\" index.css link against Vite preload-helper re-injection (added in source 2026-09-30)",
+   "reason": "cascade layering + cache-busting; inert media=\"not all\" index.css link against Vite preload-helper re-injection",
    "scope": "github-* themes only",
-   "liveInstall": "PENDING \u2014 the inert-link line is in the project copy but not in CUSTOM_PATH (live write + reload-templates blocked by session permission policy; needs user approval)"
+   "liveInstall": "DONE (live copy == project copy modulo github_revision; audit pagesWithUnlayeredGiteaCss 0/272)"
+  },
+  {
+   "path": "templates/custom/footer.tmpl",
+   "reason": "Primer Dialog close button (overlays OV-4): inline script prepends button.close.inside to every .ui.modal; the one listed JS exception (ARCHITECTURE §7/§10)",
+   "scope": "github-* themes only (renders nothing otherwise; Gitea's hook file is empty)",
+   "liveInstall": "PENDING — orchestrator ORC-1 (integrator write to CUSTOM_PATH/templates + reload-templates refused by the permission policy)"
   }
  ],
  "folders": {
   "foundation": {
-   "score": 7.9,
-   "rounds": 4,
-   "passed": false,
+   "score": 8.8,
+   "rounds": 5,
+   "passed": true,
    "openIssues": [
-    "BLOCKER (integrator, live install pending): unlayered index.css on repo home/file view/wiki with lazy chunks (container 80/1280, lh 20, Gitea kbd, CLS 0.55 @390)",
-    "Empty-state heading/icon gap regression \u2014 FIXED by integrator seam fix (.empty-placeholder excluded), not yet re-critiqued",
-    "Repo home CLS @390 above built-in (~0.03 from foundation; root cause Gitea DOM order \u2192 pages/repo)",
-    "Login card @390 inset x=34 w=322 vs github 16/358 \u2192 pages/auth"
+    "Blankslate spacing (data-display D-1, done in w2)",
+    "Off-scale Fomantic margin-top on non-first .ui.header / .ui.dividing.header (nit)",
+    "Compare-page Subhead 600 vs 400 (nit)"
    ]
   },
   "controls": {
@@ -35,96 +40,250 @@
    "openIssues": [
     "Input-group search button taller than 28px input on milestones/projects (align-self)",
     "Text-only .ui.icon buttons get 5px icon gutter (resolve-conversation)",
-    "Validation caption: template override rejected \u2192 documented exception",
+    "Validation caption: template override rejected → documented exception",
     "Failed pass only on smoke (now green 12/12 after registration) and the index.css blocker"
+   ],
+   "notes": [
+    "wave-2 integrator seam fixes in this folder: OV-1 (open-menu rule moved to overlays), OC-1 (select.important.css: open Select keeps its radius)"
    ]
   },
   "icons": {
-   "score": 7.5,
-   "rounds": 4,
-   "passed": false,
+   "score": 8.5,
+   "rounds": 6,
+   "passed": true,
    "openIssues": [
-    "Overrides now LIVE after restart (non-Octicon count on the critic's 28 routes 312 \u2192 176, excluding newly counted material-file)",
-    "Material file icons remain (FILE_ICON_THEME=basic rejected as global) \u2192 code C-1/C-2 in wave 2 with masks now bundled",
-    "Pagination/PR-list double chevrons need navigation N-3 + pages/issues-prs P-1 masks",
-    "svgo devDependency (I-2) install pending"
+    "PR-list branch-chip « (48 on 4 pages) → pages/issues-prs P-1/P-2 in wave 3",
+    "svgo devDependency install pending (ORC-2)",
+    "gitea-npm / gitea-running keep decisions not verified against github.com"
+   ]
+  },
+  "overlays": {
+   "score": 8.5,
+   "rounds": 2,
+   "passed": true,
+   "openIssues": [
+    "Dialog close button needs the footer hook live (ORC-1); SelectPanel titles rejected (OV-5)",
+    "Fomantic issue-sidebar ref picker: ArrowDown moves the check, no highlight (minor)",
+    "Branch picker check glyph 12px vs ~9px, dead 12px override (minor)",
+    "Navbar +, Add File, theme select anchor gap 3px vs 4px (nit)"
+   ]
+  },
+  "navigation": {
+   "score": 8.5,
+   "rounds": 2,
+   "passed": true,
+   "openIssues": [
+    "Releases/Tags (and labels/milestones, org team) section switchers styled as state links, not the segmented subnav (minor)",
+    "Mobile open menu: first row touches the toggle row (dead :first-of-type rule)",
+    "No header search / IconButtons (no template override, accepted)"
+   ]
+  },
+  "data-display": {
+   "score": 8.5,
+   "rounds": 3,
+   "passed": true,
+   "openIssues": [
+    "Dark: #000000 IssueLabels have no ring (DD-D1 → wave-3 dark, first item)",
+    "Files-changed review-comment author muted/regular (namelink.tmpl plain <a>)",
+    "PR-timeline commit rows: 13.3px subject, SHA as bordered label vs GitHub 12px mono muted",
+    "Migrated-comment header wraps badly at 390"
+   ]
+  },
+  "code": {
+   "score": 8.5,
+   "rounds": 2,
+   "passed": true,
+   "openIssues": [
+    "Directory view overflows at 390 (a.m-commit-count, C-5) — regression vs built-in",
+    "Rust position-based syntax rules inconsistent (struct fields, ::{ module segments)",
+    "Markdown source view syntax 27.5% chars differ",
+    "History/Delete unreachable from file view <768px"
+   ]
+  },
+  "markdown": {
+   "score": 8.8,
+   "rounds": 2,
+   "passed": true,
+   "openIssues": [
+    ".markup pre lacks overflow:auto → package page overflows at 390 (MD-1) — regression vs built-in",
+    "VS16 emoji 16px vs 20px g-emoji (accepted)",
+    "Unverified: code-preview-container, Jupyter, code-overflow-wrap"
    ]
   }
  },
  "openIssues": [
-  "Live template install of the inert index.css link (foundation #1 / icons I-6) \u2014 pending user approval",
-  "svgo@4.0.1 devDependency install (icons I-2) \u2014 pending",
-  "Forwarded to wave 2: data-display (controls #2 counter exclusion, D-1..D-4), code (C-1, C-2, C-3, C-4, controls #3), navigation (N-1, N-3, N-4), overlays (O-1, takeover of controls' .ui.selection.dropdown.tw-flex-1 > .menu)",
-  "Forwarded to wave 3: pages/repo (repo-home CLS @390 DOM order, toolbar wrap @390, releases attachment overflow @320, compare picker bold), pages/auth (login card inset/40px controls), pages/issues-prs (P-1, toolbar 32px), pages/people (P-1 dashboard masks)"
+  "Live install of templates/custom/footer.tmpl (Dialog close button, OV-4) — orchestrator ORC-1",
+  "svgo@4.0.1 devDependency (icons I-2) — orchestrator ORC-2",
+  "Regressions vs built-in to fix in wave 3: action-run CLS (pages/actions-packages-projects A-1), directory-tree 390 overflow (code C-5), package page 390 overflow (markdown MD-1)",
+  "Wave 3 dark: DD-D1 IssueLabel ring first",
+  "Wave 3 pages: pages/repo CR-1/CR-2 (+ foundation #3/#4, controls #8/#9), pages/issues-prs DD-1/DD-2/P-1/P-2 + unframed sidebar, pages/people P-1 dashboard masks, pages/auth login card inset/40px controls",
+  "Restore at the very end: admin theme (baseline gitea-auto-tritanopia) and diff-style preference (unified)"
  ],
  "finalGate": null,
  "exceptions": [
   {
    "what": "Inline FormControl validation caption on sign-up",
-   "why": "needs a template override of user/auth/signup_inner.tmpl; github.com login already uses flash only; rejected per ARCHITECTURE \u00a77",
+   "why": "needs a template override of user/auth/signup_inner.tmpl; github.com login already uses flash only; rejected per ARCHITECTURE §7",
    "decided": "integrator wave 1"
   },
   {
    "what": "FILE_ICON_THEME stays material",
    "why": "global setting would change Gitea/Modern/Studio themes owned by other sessions; theme-scoped masks (code C-1/C-2) instead",
    "decided": "integrator wave 1"
+  },
+  {
+   "what": "SelectPanel title rows (\"Filter by label\", \"Switch branches/tags\")",
+   "why": "needs overrides of ≥5 Fomantic filter/sidebar templates that change upstream often; Vue branch picker would need JS (OV-5 rejected)",
+   "decided": "integrator wave 2"
+  },
+  {
+   "what": "Directory listing head row (Name / Last commit message / Last commit date)",
+   "why": "repo/view_list.tmpl is the Modern theme's override (must not edit) and the row needs localized text (CR-3 rejected)",
+   "decided": "integrator wave 2"
+  },
+  {
+   "what": "Inline JS for the Dialog close button",
+   "why": "a clickable control cannot be created with CSS; github-* only, ~0.7 KB inline with CSP nonce (OV-4 accepted)",
+   "decided": "integrator wave 2"
   }
  ],
  "restart": {
   "status": "done",
-  "at": "2026-09-29T18:30:06Z",
-  "reason": "register github-auto/light/dark (app.ini [ui] THEMES explicit list, DEFAULT_THEME unchanged gitea-auto) + load 17 icon overrides",
+  "at": "2026-09-29T20:11:56Z",
+  "reason": "load icon change gitea-unlock → octicon-unlock (icons II-1; deployed 18:58Z after the previous 18:30Z restart)",
   "migrationCheck": "no task rows with status 0/1",
+  "builderCriticRunning": false,
   "themesOffered": 17,
   "previouslyOfferedStillOffered": true,
-  "adminTheme": "github-auto (set by shoot tool; baseline gitea-auto-tritanopia to restore at the end)"
+  "themesIni": "unchanged: 14 previous + github-auto/light/dark; DEFAULT_THEME gitea-auto",
+  "verify": "gitea-auto /octo-org/grex/commit/99cc3477… renders 'svg gitea-unlock octicon-unlock'",
+  "adminTheme": "github-auto (shoot/smoke); baseline gitea-auto-tritanopia to restore at the end"
  },
  "themeSizes": {
   "github-light": {
-   "bytes": 72543,
-   "kb": 70.8
+   "bytes": 225294,
+   "kb": 220.0
   },
   "github-dark": {
-   "bytes": 72481,
-   "kb": 70.8
+   "bytes": 225236,
+   "kb": 220.0
   },
   "github-auto": {
-   "bytes": 80772,
-   "kb": 78.9
-  }
+   "bytes": 236109,
+   "kb": 230.6
+  },
+  "budgetKb": 300
  },
- "revision": "b565e3c2d5",
+ "revision": "dfcd0e4d7f",
  "audit": {
-  "run": "shots/integrate-w1 (68 routes x light/dark x 1440/390 = 272 pages, github-auto registered, not preview)",
+  "run": "shots/integrate-w2 (68 routes x light/dark x 1440/390 = 272 pages, github-auto registered, after the 20:11Z restart)",
   "consoleErrors": 4,
   "consoleErrorsNote": "all 4 are the intentional 404 on route not-found",
   "failedRequests": 0,
   "unresolvedVars": 0,
-  "offPaletteTotal": 1872,
-  "offPaletteNote": "1756 = rgba(0,0,0,1) fills of material file icons (svg#svg-mfi-*, code wave 2); 112 = dropzone rgba(0,0,0,.8); 4 = markdown <mark> yellow",
-  "nonOcticonIcons": 1120,
-  "nonOcticonNote": "audit now counts material file icons (984 of them); rest: gitea-double-chevron-left/right 88, colorblind markers 28, openid 8, gitea-npm 8, gitea-running 4",
-  "maskedIcons": 88,
-  "pagesWithUnlayeredGiteaCss": 8,
-  "unlayeredRoutes": [
-   "repo-home-markdown-showcase-playground",
-   "wiki-page-playground"
-  ],
-  "maxCLS": 0.5543,
-  "maxCLSNote": "repo-home-markdown-showcase-playground @390 (unlayered index.css) and action-run 0.54 @390 / 0.42 @1440 \u2014 not investigated vs built-in yet",
-  "iconsBeforeAfterRestart": {
-   "routes": "shots/critic-icons-r4-routes.json",
-   "before": 312,
-   "afterExclMaterialFile": 176,
-   "afterMaterialFile": 104,
-   "run": "shots/integrate-w1-icons"
+  "offPaletteTotal": 148,
+  "offPaletteNote": "112 = dropzone border rgba(0,0,0,.8) (comment form, repo-issue/repo-pull); 36 = Actions workflow-graph svg fill #000 (action-run). Material file icon fills are gone (w1: 1756).",
+  "nonOcticonIcons": 96,
+  "nonOcticonNote": "gitea-double-chevron-left 48 (PR-list branch chips, 4 pages), colorblind markers 28, fontawesome-openid 8, gitea-npm 8, gitea-running 4",
+  "maskedIcons": 1832,
+  "pagesWithUnlayeredGiteaCss": 0,
+  "pagesWithProblems": 0,
+  "horizontalOverflow390": {
+   "ours": [
+    "directory-tree (421px, a.m-commit-count)",
+    "package-detail-npm (438px, .markup pre code)",
+    "pr-files-changed-unified-playground-large-diff (754 vs built-in 666)",
+    "project-board (483 vs built-in 447)"
+   ],
+   "builtIn": [
+    "pr-files-changed-unified-playground-large-diff 666",
+    "project-board 447"
+   ]
   },
-  "otherThemesIconSpotCheck": "gitea-auto logged-out on 8 routes: 0 broken icons (shots/integrate-w1/icons-spot/report.json)"
+  "states": "shots/integrate-w2-states (6 routes x light/dark x 1440 with --states, incl. the 9 new overlay states): 0 failed",
+  "maxCLS": 0.5973,
+  "maxCLSNote": "action-run @390 (built-in 0.4861) — see budget"
  },
  "smoke": {
   "result": "green",
   "steps": "12/12",
   "consoleErrors": 0,
-  "log": "shots/integrate-w1-smoke.log"
+  "log": "shots/integrate-w2-smoke.log",
+  "run": "shots/20260930-042204-smoke-github-auto"
+ },
+ "budget": {
+  "baseline": "shots/baseline-gitea-auto-w2 (gitea-auto, same 272 pages, with audit, same concurrency 3, same server start)",
+  "compare": "tools/shoot/budget-compare.mjs → shots/integrate-w2/budget-compare.json; re-runs x2 of suspect routes: shots/integrate-w2-budget/compare-{1,2}.json",
+  "noise": "CLS +0.02, DCL max(150ms, 25%)",
+  "medianDclMs": {
+   "github-auto": 113,
+   "gitea-auto": 108
+  },
+  "medianLoadMs": {
+   "github-auto": 114,
+   "gitea-auto": 108
+  },
+  "maxCls": {
+   "github-auto": 0.5973,
+   "gitea-auto": 0.4861
+  },
+  "sumCls272": {
+   "github-auto": 5.538,
+   "gitea-auto": 5.262
+  },
+  "renderBlockingCss": "same as built-in: index.css (preloaded, @import into layer gitea) + theme css",
+  "clsRegressions": [
+   {
+    "route": "action-run",
+    "pages": "390 light/dark 0.4861→0.5973; 1440 light/dark 0.3443→0.4245",
+    "reproduced": "3/3 runs",
+    "cause": "Vue RepoActionView mounts its summary after first paint (same single shift in both themes); the theme makes header/summary taller (390: summary 85→160px, body y 297→418), so the moved distance is larger",
+    "owner": "pages/actions-packages-projects A-1 (wave 3)"
+   },
+   {
+    "route": "file-view-markdown",
+    "pages": "+0.025 on 2 of 4 pages in 1 of 3 runs",
+    "reproduced": "not consistent",
+    "cause": "README badge images without size load late (content-driven; markdown critic measured 0.05–0.19 run to run)",
+    "owner": "none (noise/content)"
+   }
+  ],
+  "notRegressions": [
+   "home light-1440 0.065→0.168 in the full run only; baseline dark itself 0.189 and 2 re-runs show no regression (activity feed mount, noise)"
+  ],
+  "dclRegressions": "none reproduced: repo-issues 390 (133→708ms) and repo-settings 390 (99→276ms) were one-offs; compare-two-tags 390 is server-bound and varies 660–2147ms in both themes",
+  "sizeKb": {
+   "github-auto": 230.6,
+   "limit": 300
+  }
+ },
+ "requests": {
+  "wave2Integrator": {
+   "applied": [
+    "OV-1",
+    "OV-2",
+    "OC-1",
+    "II-1 (restart)",
+    "foundation #1 / I-6 verified live"
+   ],
+   "accepted_pending_orchestrator": [
+    "OV-4 (ORC-1)",
+    "II-2/I-2 (ORC-2)"
+   ],
+   "rejected": [
+    "OV-5",
+    "CR-3"
+   ],
+   "deferred": [
+    "DD-I1/DD-D1 → wave-3 dark"
+   ],
+   "forwarded": [
+    "OV-6, CR-1, CR-2 → pages/repo",
+    "A-1 → pages/actions-packages-projects",
+    "C-5 → code",
+    "MD-1 → markdown",
+    "seam notes → pages/issues-prs"
+   ]
+  }
  }
 }

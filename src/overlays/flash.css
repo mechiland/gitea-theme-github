@@ -1,0 +1,142 @@
+/*
+ * Flash — Gitea `.ui.message` (modules/message.css; field-level validation messages inside `.field` stay controls') and flash messages
+ * (`.ui.{negative|warning|info|positive}.message.flash-message.flash-{error|warning|info|success}`, base/alert.tmpl).
+ * Spec: Primer Flash (github.com .flash, 2026-09-30): padding 20px 16px, 1px border --borderColor-<v>-muted,
+ *   background --bgColor-<v>-muted, --fgColor-default text, radius --borderRadius-medium, 14px/1.5;
+ *   info → accent, success → success, error → danger, warning → attention. Leading octicons (if any) use the
+ *   variant's fgColor with a 12px gap. A plain `.ui.message` (no variant) is a neutral Flash (--bgColor-muted).
+ * Flash messages are left-aligned like GitHub's (Gitea centres one-liners with tw-text-center → important file).
+ */
+
+.ui.message:not(.field *) {
+  margin: var(--base-size-16) 0;
+  padding: var(--base-size-20) var(--control-medium-paddingInline-spacious);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-muted);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.ui.message:not(.field *):first-child {
+  margin-top: 0;
+}
+
+.ui.message:not(.field *):last-child {
+  margin-bottom: 0;
+}
+
+.ui.message:not(.field *) > p:last-child {
+  margin-bottom: 0;
+}
+
+.ui.message:not(.field *) .header {
+  color: inherit;
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.ui.message:not(.field *) > .svg,
+.ui.message:not(.field *) > svg {
+  margin-right: var(--base-size-12);
+  color: var(--fgColor-muted);
+  vertical-align: text-bottom;
+}
+
+/* ---------- variants ---------- */
+.ui.info.message:not(.field *),
+.ui.attached.info.message:not(.field *),
+.ui.blue.message:not(.field *),
+.ui.attached.blue.message:not(.field *) {
+  border-color: var(--borderColor-accent-muted);
+  background: var(--bgColor-accent-muted);
+  color: var(--fgColor-default);
+}
+
+.ui.success.message:not(.field *),
+.ui.attached.success.message:not(.field *),
+.ui.positive.message:not(.field *),
+.ui.attached.positive.message:not(.field *) {
+  border-color: var(--borderColor-success-muted);
+  background: var(--bgColor-success-muted);
+  color: var(--fgColor-default);
+}
+
+.ui.error.message:not(.field *),
+.ui.attached.error.message:not(.field *),
+.ui.red.message:not(.field *),
+.ui.negative.message:not(.field *),
+.ui.attached.negative.message:not(.field *) {
+  border-color: var(--borderColor-danger-muted);
+  background: var(--bgColor-danger-muted);
+  color: var(--fgColor-default);
+}
+
+.ui.warning.message:not(.field *),
+.ui.attached.warning.message:not(.field *) {
+  border-color: var(--borderColor-attention-muted);
+  background: var(--bgColor-attention-muted);
+  color: var(--fgColor-default);
+}
+
+.ui.info.message:not(.field *) > :is(svg, .svg),
+.ui.blue.message:not(.field *) > :is(svg, .svg) {
+  color: var(--fgColor-accent);
+}
+
+.ui:is(.success, .positive).message:not(.field *) > :is(svg, .svg) {
+  color: var(--fgColor-success);
+}
+
+.ui:is(.error, .red, .negative).message:not(.field *) > :is(svg, .svg) {
+  color: var(--fgColor-danger);
+}
+
+.ui.warning.message:not(.field *) > :is(svg, .svg) {
+  color: var(--fgColor-attention);
+}
+
+/* ---------- attached (message glued to a box) ---------- */
+.ui.attached.message:not(.field *) {
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+}
+
+.ui.attached + .ui.attached.message:not(.field *):not(.top, .bottom) {
+  border-radius: 0;
+}
+
+.ui.bottom.attached.message:not(.field *) {
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
+}
+
+.ui.bottom.attached.message:not(.field *):not(:last-child) {
+  margin-bottom: var(--base-size-16);
+}
+
+/* ---------- details messages (error with a collapsible stack) ---------- */
+details.ui.message:not(.field *) {
+  padding: 0;
+}
+
+details.ui.message:not(.field *) summary {
+  padding: var(--base-size-20) var(--control-medium-paddingInline-spacious);
+}
+
+details.ui.message:not(.field *) pre {
+  margin: calc(-1 * var(--base-size-12)) 0 0;
+  padding: var(--base-size-8) var(--control-medium-paddingInline-spacious) var(--base-size-16);
+  font-size: var(--text-body-size-small);
+}
+
+/* ---------- dismiss icon ---------- */
+.ui.message:not(.field *) > .close.icon {
+  top: var(--base-size-16);
+  right: var(--base-size-16);
+  color: var(--fgColor-default);
+  opacity: 1;
+}
+
+.ui.message:not(.field *) > .close.icon:hover {
+  opacity: 0.7;
+}

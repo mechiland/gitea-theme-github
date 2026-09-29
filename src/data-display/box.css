@@ -1,0 +1,161 @@
+/*
+ * Box — Primer Box: 1px --borderColor-default, radius 6px (--borderRadius-medium), --bgColor-default,
+ * Box-body padding 16px; Box-header: --bgColor-muted, padding 16px, 1px bottom border, title 14px semibold.
+ * Gitea: .ui.segment / .ui.segments / .ui.attached.segment / .ui.attached.header (modules/segment.css,
+ * modules/header.css) use 1em (14px) padding and 0.2857rem (4px) radii, restated here with Primer values.
+ */
+
+.ui.segment,
+.ui.segments {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+  color: var(--fgColor-default);
+}
+
+.ui.segment {
+  padding: var(--base-size-16);
+}
+
+.ui.segments > .segment {
+  border: 0;
+  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0;
+}
+
+.ui.segments:not(.horizontal) > .segment:first-child {
+  border-top: 0;
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+}
+
+.ui.segments:not(.horizontal) > .segment:last-child {
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
+}
+
+.ui.segments:not(.horizontal) > .segment:only-child,
+.ui.segments:not(.horizontal) > .segment:has(~ .tw-hidden) {
+  border-radius: var(--borderRadius-medium);
+}
+
+.ui.horizontal.segments {
+  border-radius: var(--borderRadius-medium);
+}
+
+.ui.horizontal.segments > .segment {
+  border: 0;
+  border-left: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0;
+}
+
+.ui.horizontal.segments:not(.stackable) > .segment:first-child {
+  border-left: 0;
+}
+
+.ui.horizontal.segments > .segment:first-child {
+  border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
+}
+
+.ui.horizontal.segments > .segment:last-child {
+  border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
+}
+
+.ui.grid.segment {
+  border-radius: var(--borderRadius-medium);
+}
+
+.ui.fitted.segment,
+.ui.table.segment {
+  padding: 0;
+}
+
+.ui.secondary.segment {
+  background: var(--bgColor-muted);
+  color: var(--fgColor-muted);
+}
+
+.ui.error.segment {
+  border-color: var(--borderColor-danger-emphasis);
+}
+
+.ui.warning.segment {
+  border-color: var(--borderColor-attention-emphasis);
+}
+
+/* attached segments: Box body under a Box-header */
+.ui.attached.segment {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0;
+  background: var(--bgColor-default);
+}
+
+.ui.attached:not(.message) + .ui.attached.segment:not(.top) {
+  border-top: 0;
+}
+
+.ui.attached.segment:has(+ .ui[class*="top attached"].header),
+.ui.attached.segment:has(+ .page.buttons),
+.ui.attached.segment:last-child,
+.ui.segment:has(+ .ui.segment:not(.attached)),
+.ui.attached.segment:has(+ .ui.modal) {
+  border-bottom-left-radius: var(--borderRadius-medium);
+  border-bottom-right-radius: var(--borderRadius-medium);
+}
+
+.ui[class*="top attached"].segment {
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+}
+
+.ui[class*="top attached"].segment:last-child {
+  border-radius: var(--borderRadius-medium);
+}
+
+.ui.segment[class*="bottom attached"] {
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
+}
+
+/* Box-header */
+.ui.attached.header {
+  padding: var(--base-size-16);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0;
+  background: var(--bgColor-muted);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.ui.attached:not(.top).header {
+  border-top: 0;
+}
+
+.ui.top.attached.header {
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+}
+
+.ui.bottom.attached.header {
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
+}
+
+/* header actions (Gitea positions `.ui.right` absolutely inside the header) */
+.ui.attached.header > .ui.right {
+  right: var(--base-size-16);
+  gap: var(--base-size-8);
+}
+
+.ui.attached.header > .ui.right .ui.tiny.button {
+  font-weight: var(--base-text-weight-medium);
+}
+
+.ui.segments + .ui.top.attached.header,
+.ui.attached.segment + .ui.top.attached.header {
+  margin-top: var(--base-size-16);
+}
+
+.ui.error.header {
+  border-color: var(--borderColor-danger-emphasis);
+}
+
+.ui.warning.header {
+  border-color: var(--borderColor-attention-emphasis);
+}

@@ -1,0 +1,213 @@
+/*
+ * Syntax highlighting: Chroma token classes (.chroma .k, .nf …) → github.com "prettylights" colours.
+ * The token map (src/tokens/gitea-map.css) points Gitea's --color-syntax-* at --prettylights-syntax-*;
+ * this file fixes the classes where Chroma's token *kind* lands on a different GitHub colour.
+ *
+ * Verified per character against github.com on the same files (shots/code-r1/cmp-syntax.py: GitHub's
+ * stylingDirectives rendered with its own CSS vs. our computed colours, light + dark):
+ * grex src/main.rs (Rust) and README.md (Markdown source); token classes of go-gitea/gitea
+ * modules/setting/ui.go (Go) and pallets/flask src/flask/config.py (Python) sampled on github.com.
+ *
+ * Chroma tokenises differently from GitHub's TextMate grammars, and the same Chroma class means different
+ * things per language (e.g. .cp = C preprocessor → red keyword, but Rust #[attributes] → blue constant;
+ * .sd = Rust /// doc comments → comment, but Python docstrings → string). So a generic mapping is followed by
+ * small language-scoped corrections. Language is known from:
+ *   file view / blame: the breadcrumb's last segment `.active.section[title$=".rs"]`
+ *   diffs: `table.chroma[data-path$=".rs"]`
+ *   markdown fences: `code.chroma.language-rust`
+ */
+
+/* ---------- generic corrections ---------- */
+.chroma .fm { color: var(--prettylights-syntax-entity); }            /* NameFunctionMagic: Rust macros println!, __init__ */
+.chroma .se { color: var(--prettylights-syntax-string); }            /* escapes inside strings keep the string colour */
+.chroma .nx { color: inherit; }                                       /* NameOther (JS identifiers, TOML keys) */
+.chroma .nn { color: inherit; }                                       /* namespaces: default text on github.com */
+.chroma .na { color: var(--prettylights-syntax-entity); }            /* HTML/XML attribute names (pl-e) */
+.chroma .no { color: var(--prettylights-syntax-constant); }          /* constants */
+.chroma .ne { color: var(--prettylights-syntax-variable); }          /* Exception / OSError → pl-v (Python) */
+.chroma .kt { color: inherit; }                                       /* int / bool / string: pl-smi (Go, Python) */
+.chroma .o,
+.chroma .ow { color: var(--prettylights-syntax-constant); }          /* = == is not or → pl-c1 (Go, Python, JS) */
+/* .nb (len, open, super) keeps Gitea's entity mapping: pl-en on github.com (Python) */
+.chroma .sd { color: var(--prettylights-syntax-comment); }           /* doc comments: Rust ///, Elixir @doc */
+.chroma .w { color: inherit; }
+.chroma .gh,
+.chroma .gu { color: var(--prettylights-syntax-markup-heading); font-weight: var(--base-text-weight-semibold); }
+.chroma .ge { color: inherit; font-style: normal; }                  /* github.com source view: *emphasis* unstyled */
+.chroma .gs { color: inherit; font-weight: var(--base-text-weight-normal); }
+
+/* ---------- Rust ---------- */
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.cp) {
+  color: var(--prettylights-syntax-constant);                         /* #[derive(…)] attributes */
+}
+
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.nb, .kt, .nc, .o) {
+  color: inherit;                                                     /* Vec, String, bool, struct names, ! & = */
+}
+
+/* Rust identifiers. Chroma emits almost every identifier as plain .n, while github.com (tree-sitter) colours
+   struct fields blue (pl-c1), method / function calls purple (pl-en), capitalised paths / constructors orange
+   (pl-v) and leaves locals, `self` and macro arguments in the default colour. Chroma's element structure tells
+   most of them apart: `.` `(` `,` are .p spans while `::` and `: ` are bare text (so `a::B` is `.n + .n`), `let`
+   is .kd while `use` is .k. The positional rules below were derived from github.com's own colours on five grex
+   files (src/main.rs, builder.rs, dfa.rs, expression.rs, regexp.rs — ~2000 lines; scripts in shots/code-r2/:
+   learn.py / cv2.py / gen.py) and kept only where they also improve a file left out of the derivation
+   (leave-one-file-out: 18.8 % → 9.7 % of characters differing). All Rust rules use :where() after the scope so
+   they share one specificity and the later rule wins. */
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.kp, .na) {
+  color: var(--prettylights-syntax-constant);
+}
+
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.no) {
+  color: var(--prettylights-syntax-variable);
+}
+
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.bp) {
+  color: inherit;
+}
+
+/* by position: previous two siblings, the token, next two siblings (text nodes such as `::` / `: ` are invisible to `+`) */
+
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(
+  .w + .n + .n:has(+ .p + .n),
+  .w + .p + .n:has(+ .p + .n),
+  .s + .p + .n:has(+ .p + .w),
+  .p + .nb + .n:has(+ .p + .s),
+  .w + .n + .n:has(+ .p + .o),
+  .nc + .p + .n:has(+ .p + .n),
+  .n + .p + .n:has(+ .p + .o),
+  .n + .nc + .n:has(+ .p + .w),
+  .n + .n + .n:has(+ .p + .n),
+  .w + .bp + .n:has(+ .p + .n),
+  .n + .p + .n:has(+ .p + .s),
+  .k + .w + .nb:has(+ .p + .n),
+  .n + .p + .n:has(+ .p + .mi),
+  .mi + .p + .n:has(+ .p + .w),
+  .w + .n + .n:has(+ .p + .s),
+  .n + .o + .n:has(+ .p + .n),
+  .p + .n + .n:has(+ .p + .w),
+  .w + .bp + .n:has(+ .p + .w),
+  .o + .bp + .n:has(+ .p + .o),
+  .p + .n + .n:has(+ .p + .s),
+  .w + .bp + .n:has(+ .p + .o),
+  .w + .nb + .n:has(+ .p + .n),
+  .n + .p + .n:has(+ .p + .sc),
+  .o + .bp + .n:has(+ .p + .w),
+  .w + .p + .n:has(+ .p + .sc)
+) {
+  color: var(--prettylights-syntax-entity);
+}
+
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(
+  .n + .n + .n:has(+ .p + .w),
+  .w:first-child + .nb:has(+ .p + .w),
+  .w:first-child + .nb:has(+ .p + .n),
+  .w + .n + .n:has(+ .w + .o),
+  .k + .n + .n:has(+ .p + .w),
+  .k + .w + .no:has(+ .kp + .kt),
+  .p + .w + .no:has(+ .p + .w),
+  .w:first-child + .n:has(+ .p + .nb),
+  .n + .p + .nb:has(+ .p + .w)
+) {
+  color: var(--prettylights-syntax-variable);
+}
+
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(
+  .w:first-child + .n:has(+ .nb + .o),
+  .w:first-child + .n:has(+ .kt + .p),
+  .n + .p + .n:has(+ .w + .p),
+  .n + .p + .o:has(+ .n + .p),
+  .p + .w + .n:has(+ .nb + .o),
+  .w:first-child + .n:has(+ .nc + .p),
+  .w:first-child + .n:has(+ .nc + .n),
+  .nf + .p + .o:has(+ .k + .w),
+  .p + .w + .kp:has(+ .nc + .w),
+  .bp + .p + .n:has(+ .p + .n),
+  .n + .p + .n:has(+ .w + .o),
+  .bp + .p + .n:has(+ .p + .w),
+  .n + .kp + .na:has(+ .nc + .p),
+  .n + .o + .na:has(+ .o + .w),
+  .w + .n + .kp:has(+ .nc + .p),
+  .bp + .p + .n:has(+ .w:last-child),
+  .n + .o + .na:has(+ .o + .p),
+  .p + .w + .o:has(+ .n + .p),
+  .nc + .o + .na:has(+ .o + .p)
+) {
+  color: var(--prettylights-syntax-constant);
+}
+
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(
+  .w:first-child + .bp:has(+ .w + .p),
+  .k + .w + .bp:has(+ .p + .w),
+  .nc + .w + .bp:has(+ .w + .p),
+  .w:first-child + .bp:has(+ .p + .n),
+  .w:first-child + .bp:has(+ .w:last-child),
+  .k + .w + .bp:has(+ .p + .n),
+  .o + .w + .bp:has(+ .n + .p),
+  .p + .o + .bp:has(+ .p + .w),
+  .p + .o + .bp:has(+ .p + .n),
+  .p + .w + .bp:has(+ .p + .n),
+  .o + .w + .bp:has(+ .p + .n),
+  .w:first-child + .bp:has(+ .k + .p),
+  .w + .o + .bp:has(+ .n + .p),
+  .w:first-child + .bp:has(+ .n + .p)
+) {
+  color: inherit;
+}
+
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(
+  .w + .kp + .nc:has(+ .w + .bp)
+) {
+  color: var(--prettylights-syntax-keyword);
+}
+
+/* hand-written structure (also validated leave-one-file-out) */
+
+/* struct field declarations `    name: u32,` / `    name: Option<…>,` */
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(:is(.w:first-child + .n, .n:first-child):has(+ :is(.kt, .nb))) {
+  color: var(--prettylights-syntax-constant);
+}
+
+/* chained calls on their own line `    .with_x(…)`, path calls `cli::run(&…)` / `String::from("…")` */
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.w:first-child + .p + .n:has(+ .p), :is(.n, .nb) + .n:has(+ .p + :is(.o, .s))) {
+  color: var(--prettylights-syntax-entity);
+}
+
+/* imported capitalised names `use clap::ArgAction;`, `use std::path::PathBuf;` */
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.k + .w + .n + .n:has(+ .p), .k + .w + .n + .n + .n:has(+ .p)) {
+  color: var(--prettylights-syntax-variable);
+}
+
+/* Ok / Err / Some called with a value → function colour; as a match pattern `Err(e) =>` → constructor colour */
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.nb:has(+ .p + :is(.s, .fm, .nb, .sa, .mi))) {
+  color: var(--prettylights-syntax-entity);
+}
+
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.nb:has(+ .p + .n + .p + .w + .o)) {
+  color: var(--prettylights-syntax-variable);
+}
+
+/* macro arguments `assert_eq!(dfa.graph.node_count(), 5)` are plain token trees on github.com */
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.fm ~ .n) {
+  color: inherit;
+}
+
+/* ---------- Python: docstrings are strings on github.com ---------- */
+:is(.page-content:has(.breadcrumb > .active.section:is([title$=".py" i], [title$=".pyi" i])) .file-view, table.chroma:is([data-path$=".py" i], [data-path$=".pyi" i]), code.chroma.language-python) .sd {
+  color: var(--prettylights-syntax-string);
+}
+
+/* ---------- Markdown source ---------- */
+:is(.page-content:has(.breadcrumb > .active.section:is([title$=".md" i], [title$=".markdown" i])) .file-view, table.chroma:is([data-path$=".md" i], [data-path$=".markdown" i])) .na {
+  color: var(--prettylights-syntax-string);                           /* link URLs (pl-corl) */
+  text-decoration: underline;
+}
+
+:is(.page-content:has(.breadcrumb > .active.section:is([title$=".md" i], [title$=".markdown" i])) .file-view, table.chroma:is([data-path$=".md" i], [data-path$=".markdown" i])) :is(.nt, .o, .m, .nb) {
+  color: inherit;                                                     /* link text, regex/table punctuation, numbers */
+}
+
+:is(.page-content:has(.breadcrumb > .active.section:is([title$=".md" i], [title$=".markdown" i])) .file-view, table.chroma:is([data-path$=".md" i], [data-path$=".markdown" i])) .sb {
+  color: var(--prettylights-syntax-constant);                         /* `inline code` (markup.raw → pl-c1) */
+}
+

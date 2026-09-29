@@ -1,0 +1,130 @@
+/* Container, text-level elements, links, blockquote, hr, dl, images.
+ * github.com .markdown-body: font 16px/1.5 (README) — comments use 14px like Gitea; overflow-wrap break-word;
+ * clearfix pseudo elements instead of overflow:hidden so the heading permalink (28px left of the heading)
+ * is not clipped (Gitea content.css:1-6 clips it). */
+.markup {
+  overflow: visible;
+  color: var(--fgColor-default);
+}
+
+.markup::before {
+  display: table;
+  content: "";
+}
+
+.markup::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+/* Gitea base.css gives every <p> line-height 1.4285 (20px @14px); GitHub paragraphs inherit 1.5. */
+.markup p {
+  line-height: inherit;
+}
+
+/* Links: github.com underlines links inside markdown bodies (data-a11y-link-underlines="true", the default):
+ * text-decoration underline, text-underline-offset .2rem (3.2px). Anchors without href stay plain. */
+.markup a[href] {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+  text-underline-offset: calc(var(--base-size-16) * 0.2);
+}
+
+.markup a[href]:hover {
+  text-decoration: underline;
+}
+
+/* @mentions: github.com `.user-mention, .team-mention` = fgColor-default, semibold, nowrap (still underlined).
+ * Gitea (modules/markup/html_mention.go → createLink with no class) emits <a href="/user" data-markdown-generated-content>;
+ * autolinks have absolute hrefs, mailto links start with "mailto:", issue/commit refs carry a class. */
+.markup a[data-markdown-generated-content][href^="/"]:not([class]) {
+  font-weight: var(--base-text-weight-semibold);
+  color: var(--fgColor-default);
+  white-space: nowrap;
+}
+
+/* Primer base: mark { background: bgColor-attention-muted; color: fgColor-default } (UA default is yellow/black). */
+.markup mark {
+  color: var(--fgColor-default);
+  background-color: var(--bgColor-attention-muted);
+}
+
+.markup .absent {
+  color: var(--fgColor-danger);
+}
+
+/* hr: github.com now draws 1px (was .25em), margin 24px 0, background borderColor-default. */
+.markup hr {
+  height: 1px;
+  margin: var(--base-size-24) 0;
+  background-color: var(--borderColor-default);
+}
+
+/* blockquote: padding 0 1em, 0.25em left rule in borderColor-default, fgColor-muted; no UA side margin. */
+.markup blockquote {
+  padding: 0 1em;
+  margin-inline: 0;
+  color: var(--fgColor-muted);
+  border-left: 0.25em solid var(--borderColor-default);
+}
+
+/* dl: GitHub dd has no UA 40px indent, only padding 0 16px. */
+.markup dl dd {
+  margin-left: 0;
+}
+
+.markup dl dt + dt {
+  margin-top: 0;
+}
+
+/* Images: GitHub paints no background behind markdown images (Gitea: --color-box-body). */
+.markup img,
+.markup video {
+  box-sizing: content-box;
+  background-color: transparent;
+}
+
+.markup img[align="left"],
+.markup video[align="left"] {
+  padding-inline-end: var(--base-size-20);
+}
+
+.markup span.frame > span {
+  border-color: var(--borderColor-default);
+}
+
+.markup span.frame span span {
+  color: var(--fgColor-default);
+}
+
+/* Emoji rendered as <span class="emoji"> inherit the text size like GitHub's plain unicode emoji. */
+.markup .emoji {
+  max-width: none;
+  background-color: transparent;
+}
+
+/* <details>: GitHub keeps the UA marker and a pointer cursor on the summary. */
+.markup summary {
+  cursor: pointer;
+}
+
+.markup del code {
+  text-decoration: inherit;
+}
+
+/* README box padding (.file-view.markup, 32px like github.com) is owned by the code folder. */
+
+/* Wiki page body: github.com renders the page as a plain 16px .markdown-body, not boxed (Gitea wiki.css:18-24:
+ * 14px, 1px border, 1em padding). Sidebar/footer/ToC parts stay boxed at 14px like GitHub's wiki sidebar Box. */
+.repository.wiki .wiki-content-parts .wiki-content-main.markup {
+  padding: 0;
+  font-size: var(--text-body-size-large);
+  border: 0;
+  border-radius: 0;
+}
+
+/* Release bodies: github.com renders the release notes as a 16px .markdown-body (li 16px, h3 20px), Gitea at 14px. */
+#release-list .release-entry .markup {
+  font-size: var(--text-body-size-large);
+}

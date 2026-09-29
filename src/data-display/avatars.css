@@ -1,0 +1,44 @@
+/*
+ * Avatar — Primer React Avatar (github.com `img.avatar`, measured: 40px timeline avatar, radius 50% for users,
+ * box-shadow 0 0 0 1px --avatar-borderColor, --avatar-bgColor behind transparent images).
+ * Organisations/bots are rounded squares on github.com (Avatar square: radius 6px for ≥24px, 4px below).
+ * Gitea renders every avatar as `img.ui.avatar` (modules/templates/util_avatar.go) without a user/org marker,
+ * so squares are applied only where the context is known to be an organisation.
+ */
+
+img.ui.avatar,
+.ui.avatar img {
+  border-radius: var(--borderRadius-full);
+  background-color: var(--avatar-bgColor);
+  box-shadow: 0 0 0 var(--borderWidth-thin) var(--avatar-borderColor);
+}
+
+.ui.avatar svg {
+  border-radius: var(--borderRadius-full);
+}
+
+/* organisation avatars: org header (org home / members / teams), profile "Organizations", explore → organizations */
+.page-content.organization img.ui.avatar[width="100"],
+.user-orgs img.ui.avatar,
+.page-content.explore.users:has(.active.item[href$="/explore/organizations"]) .flex-divided-list img.ui.avatar {
+  border-radius: var(--borderRadius-medium);
+}
+
+/* AvatarStack (commit authors): 20px avatars overlapping, 1px page-coloured ring like Primer's AvatarStack */
+.avatar-stack .avatar {
+  border: 0;
+  background: var(--avatar-bgColor);
+  box-shadow: 0 0 0 var(--borderWidth-thin) var(--bgColor-default);
+}
+
+.avatar-stack-overflow-chip {
+  border-color: var(--bgColor-default);
+  border-radius: var(--borderRadius-full);
+  background: var(--bgColor-neutral-muted);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-small);
+}
+
+.avatar-stack-popup > a:hover {
+  background: var(--control-transparent-bgColor-hover);
+}

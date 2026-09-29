@@ -1,0 +1,472 @@
+/*
+ * Diffs (templates/repo/diff/box.tmpl, section_unified.tmpl, section_split.tmpl) — github.com diff view with
+ * Primer diffBlob tokens. Row geometry follows the github.com PR "Files changed" view (classic diff table),
+ * measured on github.com/pemistahl/grex/pull/42/files (1440, light):
+ *   file box: 1px --borderColor-default, radius 6.
+ *   file header: --bgColor-muted, 41px (4px 8px padding, 32px line), bottom border; path 12px mono
+ *     --fgColor-default; diffstat 12px semibold + five 8px squares with 1px gaps
+ *     (--bgColor-success-emphasis / --bgColor-danger-emphasis).
+ *   rows 20px; line numbers 12px mono --fgColor-muted, right-aligned, padding 0 10px, min-width 50px;
+ *   code 12px mono, text 22px after the number column (marker at 8px).
+ *   hunk row 28px: code --diffBlob-hunkLine-bgColor (--fgColor-muted text, 4px 10px padding),
+ *     expander cell (both number columns) --diffBlob-hunkNum-bgColor-rest, hover
+ *     --diffBlob-hunkNum-bgColor-hover + --diffBlob-hunkNum-fgColor-hover.
+ *   added: line --diffBlob-additionLine-bgColor, number --diffBlob-additionNum-bgColor (fg default),
+ *     word --diffBlob-additionWord-bgColor radius ~0.2em; deleted likewise with deletion*.
+ *   split: empty side --diffBlob-emptyLine-bgColor / emptyNum; 1px divider between the halves.
+ * Gitea `padding: … !important` rules on these cells are overridden in code.important.css.
+ */
+
+/* ---------- toolbar above the files (C-4: icon buttons → Primer invisible IconButton 32×32) ---------- */
+.repository .diff-detail-box {
+  background: var(--bgColor-default);
+  font-size: var(--text-body-size-medium);
+}
+
+.repository .diff-detail-box .diff-detail-stats strong:nth-of-type(1) {
+  color: var(--fgColor-default);
+}
+
+.repository .diff-detail-box .diff-detail-stats strong:nth-of-type(2) {
+  color: var(--fgColor-success);
+}
+
+.repository .diff-detail-box .diff-detail-stats strong:nth-of-type(3) {
+  color: var(--fgColor-danger);
+}
+
+.diff-detail-actions {
+  gap: var(--base-size-4);
+}
+
+.diff-detail-actions > .ui.basic.button,
+.diff-detail-actions > .ui.dropdown.basic.button,
+.diff-detail-actions #diff-commit-select .ui.basic.button,
+.diff-toggle-file-tree-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-medium-size);
+  min-width: var(--control-medium-size);
+  height: var(--control-medium-size);
+  min-height: var(--control-medium-size);
+  padding: 0;
+  border: var(--borderWidth-thin) solid transparent;
+  border-radius: var(--borderRadius-medium);
+  background: var(--button-invisible-bgColor-rest);
+  box-shadow: none;
+  color: var(--button-invisible-iconColor-rest);
+}
+
+.diff-detail-actions > .ui.basic.button:hover,
+.diff-detail-actions > .ui.dropdown.basic.button:hover,
+.diff-detail-actions #diff-commit-select .ui.basic.button:hover,
+.diff-toggle-file-tree-button:hover {
+  border-color: transparent;
+  background: var(--button-invisible-bgColor-hover);
+  color: var(--button-invisible-iconColor-hover);
+}
+
+.diff-detail-actions > .ui.basic.button:active,
+.diff-detail-actions > .ui.dropdown.basic.button.active,
+.diff-detail-actions #diff-commit-select .ui.basic.button:active,
+.diff-toggle-file-tree-button:active {
+  background: var(--button-invisible-bgColor-active);
+}
+
+#viewed-files-summary-label {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}
+
+#viewed-files-summary {
+  height: var(--base-size-8);
+  accent-color: var(--bgColor-accent-emphasis);
+}
+
+/* ---------- file box ---------- */
+.diff-file-box {
+  border-radius: var(--borderRadius-medium);
+}
+
+.diff-file-box + .diff-file-box {
+  margin-top: var(--base-size-16);
+}
+
+.diff-file-box:target {
+  border-color: var(--borderColor-accent-emphasis);
+  box-shadow: 0 0 0 var(--borderWidth-thin) var(--borderColor-accent-emphasis);
+}
+
+.diff-file-header {
+  gap: var(--base-size-8);
+  min-height: calc(var(--base-size-32) + 2 * var(--base-size-4) + var(--borderWidth-thin));
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+  background: var(--bgColor-muted);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--base-size-20);
+  box-shadow: 0 calc(-1 * var(--borderWidth-thin)) 0 var(--borderWidth-thin) var(--bgColor-default);
+}
+
+.diff-file-box[data-folded="true"] .diff-file-header {
+  border-radius: var(--borderRadius-medium);
+}
+
+.diff-file-header .diff-file-name {
+  gap: var(--base-size-4);
+}
+
+.diff-file-header .file-link {
+  color: var(--fgColor-default);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+}
+
+.diff-file-header .file-link:hover {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+/* fold chevron, copy-path and kebab: invisible icon buttons (28px) */
+.diff-file-header .fold-file,
+.diff-file-header .diff-header-popup-btn,
+.diff-file-header .diff-file-name .btn[data-clipboard-text] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-small-size);
+  height: var(--control-small-size);
+  border-radius: var(--borderRadius-medium);
+  background: transparent;
+  color: var(--fgColor-muted);
+}
+
+.diff-file-header .fold-file:hover,
+.diff-file-header .diff-header-popup-btn:hover,
+.diff-file-header .diff-file-name .btn[data-clipboard-text]:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+/* source / rendered toggle (Gitea: 30px, 12px padding) → Primer small buttons (28px) */
+.diff-file-header .ui.button {
+  height: var(--control-small-size);
+  min-height: var(--control-small-size);
+  padding: 0 var(--control-small-paddingInline-condensed);
+}
+
+/* +N −M counts */
+.diff-file-header .diff-file-header-actions {
+  gap: var(--base-size-8);
+}
+
+.diff-file-header-actions strong {
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+/* diffstat: github.com shows five 8px squares (1px apart, square corners): floor(5 × additions / total) green
+   (--bgColor-success-emphasis), floor(5 × deletions / total) red (--bgColor-danger-emphasis), the rest
+   --bgColor-neutral-muted — e.g. +3 −3 → ■■■■□. Gitea only emits a proportional bar (the add part's width is an
+   inline percentage), so the add bar becomes a size container and its ::before / ::after round the green and red
+   runs down to whole 9px steps (round() on 100cqw); the bar itself is the neutral colour, masked into squares.
+   (container-type does not make the add bar a containing block, so both pseudos are positioned in the bar.) */
+.diff-stats-bar {
+  --gh-diffstat-step: calc(var(--base-size-8) + var(--borderWidth-thin));
+  --gh-diffstat-eps: 0.01px;
+  position: relative;
+  width: calc(5 * var(--gh-diffstat-step));
+  height: var(--base-size-8);
+  background-color: var(--bgColor-neutral-muted);
+  mask: repeating-linear-gradient(to right, currentColor 0 var(--base-size-8), transparent var(--base-size-8) var(--gh-diffstat-step));
+  vertical-align: middle;
+}
+
+.diff-stats-bar .diff-stats-add-bar {
+  container-type: inline-size;
+  height: 100%;
+  background-color: transparent;
+}
+
+.diff-stats-bar .diff-stats-add-bar::before,
+.diff-stats-bar .diff-stats-add-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+.diff-stats-bar .diff-stats-add-bar::before {
+  left: 0;
+  width: round(down, 100cqw + var(--gh-diffstat-eps), var(--gh-diffstat-step));
+  background-color: var(--bgColor-success-emphasis);
+}
+
+/* red run starts right after the green one, the neutral squares stay at the end (■■■■□ for +3 −3) */
+.diff-stats-bar .diff-stats-add-bar::after {
+  left: round(down, 100cqw + var(--gh-diffstat-eps), var(--gh-diffstat-step));
+  width: round(down, 5 * var(--gh-diffstat-step) - 100cqw + var(--gh-diffstat-eps), var(--gh-diffstat-step));
+  background-color: var(--bgColor-danger-emphasis);
+}
+
+/* Viewed toggle → small default button with the checkbox inside */
+.diff-file-header .viewed-file-form {
+  gap: var(--base-size-4);
+  height: var(--control-small-size);
+  padding: 0 var(--control-small-paddingInline-condensed);
+  border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-default-fgColor-rest);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-medium);
+  cursor: pointer;
+}
+
+.diff-file-header .viewed-file-form:hover {
+  background: var(--button-default-bgColor-hover);
+  border-color: var(--button-default-borderColor-hover);
+}
+
+.diff-file-header .viewed-file-form.viewed-file-checked-form {
+  border-color: var(--borderColor-accent-muted);
+  background: var(--bgColor-accent-muted);
+}
+
+.diff-file-header .viewed-file-form input {
+  margin: 0 var(--base-size-4) 0 0;
+}
+
+/* ---------- body / table ---------- */
+.diff-file-box .diff-file-body {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-top: 0;
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+.repository .diff-file-box .file-body.file-code {
+  background: var(--bgColor-default);
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
+}
+
+.code-diff .lines-num,
+.code-diff .lines-escape,
+.code-diff .lines-type-marker,
+.code-diff .lines-code {
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  line-height: var(--base-size-20);
+}
+
+.code-diff .lines-num {
+  min-width: var(--base-size-44);
+  color: var(--fgColor-muted);
+  cursor: pointer;
+}
+
+.code-diff .lines-num:hover {
+  color: var(--fgColor-default);
+}
+
+.code-diff .lines-code {
+  color: var(--fgColor-default);
+}
+
+.code-diff .code-inner {
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  line-height: var(--base-size-20);
+}
+
+/* Gitea's <colgroup> (50 | 50 | 10 escape | 10 marker | code) → github.com 44px number columns; the marker
+   sits in its 10px column right after the 10px escape column, so the code text starts 22px after the numbers. */
+.code-diff-unified col:nth-child(-n+2),
+.code-diff-split col:nth-child(4n+1) {
+  width: var(--base-size-44);
+}
+
+.repository .diff-file-box .code-diff tbody tr .lines-type-marker {
+  width: calc(var(--base-size-8) + var(--base-size-2));
+  min-width: calc(var(--base-size-8) + var(--base-size-2));
+  color: var(--fgColor-default);
+}
+
+/* ---------- hunk header rows ---------- */
+.code-diff .tag-code {
+  height: var(--base-size-28);
+}
+
+.code-diff .tag-code,
+.code-diff .tag-code td,
+.code-diff .tag-code.line-expanded {
+  background-color: var(--diffBlob-hunkLine-bgColor);
+  color: var(--diffBlob-hunkLine-fgColor);
+}
+
+.code-diff .tag-code .lines-code .code-inner,
+.code-diff .tag-code .blob-hunk .code-inner {
+  color: var(--fgColor-muted);
+}
+
+.diff-file-body tr.tag-code:last-child > td {
+  background: var(--diffBlob-hunkLine-bgColor);
+}
+
+.diff-file-body tr.tag-code:last-child td:first-child,
+.diff-file-body tr.tag-code:last-child td:first-child * {
+  border-bottom-left-radius: calc(var(--borderRadius-medium) - var(--borderWidth-thin));
+}
+
+.diff-file-body tr.tag-code:last-child td:last-child,
+.diff-file-body tr.tag-code:last-child td:last-child * {
+  border-bottom-right-radius: calc(var(--borderRadius-medium) - var(--borderWidth-thin));
+}
+
+.code-diff .tag-code .lines-num {
+  background: var(--diffBlob-hunkNum-bgColor-rest);
+}
+
+.code-expander-button {
+  height: var(--base-size-28);
+  background: var(--diffBlob-hunkNum-bgColor-rest);
+  color: var(--diffBlob-hunkNum-fgColor-rest);
+}
+
+.code-expander-buttons[data-expand-direction="updown"] .code-expander-button {
+  height: var(--base-size-20);
+}
+
+.code-expander-button:hover {
+  background: var(--diffBlob-hunkNum-bgColor-hover);
+  color: var(--diffBlob-hunkNum-fgColor-hover);
+}
+
+.code-expander-buttons .code-comment-more {
+  background-color: var(--bgColor-accent-emphasis);
+  color: var(--fgColor-onEmphasis);
+  font-size: var(--text-caption-size);
+  border-radius: var(--borderRadius-full);
+}
+
+/* ---------- added / removed lines ---------- */
+.code-diff-unified .del-code,
+.code-diff-unified .del-code td,
+.code-diff-split .del-code .lines-num-old,
+.code-diff-split .del-code .lines-escape-old,
+.code-diff-split .del-code .lines-type-marker-old,
+.code-diff-split .del-code .lines-code-old {
+  background: var(--diffBlob-deletionLine-bgColor);
+  border-color: var(--diffBlob-deletionLine-bgColor);
+}
+
+.code-diff-unified .add-code,
+.code-diff-unified .add-code td,
+.code-diff-split .add-code .lines-type-marker-new,
+.code-diff-split .add-code .lines-escape-new,
+.code-diff-split .add-code .lines-code-new,
+.code-diff-split .del-code .add-code.lines-type-marker-new,
+.code-diff-split .del-code .add-code.lines-escape-new,
+.code-diff-split .del-code .add-code.lines-code-new {
+  background: var(--diffBlob-additionLine-bgColor);
+  border-color: var(--diffBlob-additionLine-bgColor);
+}
+
+.code-diff-unified .del-code .lines-num,
+.code-diff-split .del-code .lines-num {
+  background: var(--diffBlob-deletionNum-bgColor);
+  color: var(--diffBlob-deletionNum-fgColor);
+}
+
+.code-diff-unified .add-code .lines-num,
+.code-diff-split .add-code .lines-num,
+.code-diff-split .del-code .add-code.lines-num {
+  background: var(--diffBlob-additionNum-bgColor);
+  color: var(--diffBlob-additionNum-fgColor);
+}
+
+.code-diff-split .del-code .lines-type-marker-new,
+.code-diff-split .del-code .lines-code-new,
+.code-diff-split .del-code .lines-escape-new,
+.code-diff-split .add-code .lines-escape-old,
+.code-diff-split .add-code .lines-type-marker-old,
+.code-diff-split .add-code .lines-code-old {
+  background: var(--diffBlob-emptyLine-bgColor);
+}
+
+.code-diff-split .add-code .lines-num.lines-num-old,
+.code-diff-split .del-code .lines-num.lines-num-new {
+  background: var(--diffBlob-emptyNum-bgColor);
+}
+
+.code-diff-split tbody tr td:nth-child(5),
+.code-diff-split tbody tr td.add-comment-right {
+  border-left: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+/* word-level highlights */
+.removed-code {
+  background: var(--diffBlob-deletionWord-bgColor);
+  color: var(--diffBlob-deletionWord-fgColor);
+  border-radius: var(--borderRadius-small);
+}
+
+.added-code {
+  background: var(--diffBlob-additionWord-bgColor);
+  color: var(--diffBlob-additionWord-fgColor);
+  border-radius: var(--borderRadius-small);
+}
+
+/* ---------- add line comment "+" (Primer: blue square, white plus, radius 6); it straddles the number / code
+   boundary like classic github.com, leaving the +/- marker visible ---------- */
+.ui.button.add-code-comment {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--base-size-20);
+  height: var(--base-size-20);
+  min-height: var(--base-size-20);
+  padding: 0;
+  margin-left: calc(-1 * (var(--base-size-20) + var(--base-size-12)));
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-accent-emphasis);
+  color: var(--fgColor-onEmphasis);
+  transition: transform var(--base-duration-100) var(--base-easing-easeInOut);
+}
+
+.ui.button.add-code-comment:hover {
+  background: var(--bgColor-accent-emphasis);
+  color: var(--fgColor-onEmphasis);
+  transform: scale(1.2);
+}
+
+.ui.button.add-code-comment .svg {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+}
+
+/* ---------- inline review threads ---------- */
+.code-diff .add-comment-left,
+.code-diff .add-comment-right,
+.code-diff .conversation-holder {
+  background: var(--bgColor-default);
+  font-family: var(--fontStack-sansSerif);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.code-diff .conversation-holder .comment-code-cloud {
+  margin: var(--base-size-8) var(--base-size-16);
+  background: var(--bgColor-default);
+}
+
+/* image / binary / csv diffs keep Gitea's layout; only neutralise the box colours */
+.diff-file-body .image-diff,
+.diff-file-body .data-table {
+  background: var(--bgColor-default);
+}

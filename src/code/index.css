@@ -1,1 +1,13 @@
-/* src/code — see ARCHITECTURE.md for ownership. Entry file: @import this folder's files here. */
+/* src/code → @layer gh.code. Owner: code builder. See ARCHITECTURE.md §5.
+ * github.com code surfaces: repo file list, file trees (TreeView), file view + blame, diffs, syntax colours,
+ * web editor chrome. Gitea `!important` rules that must be beaten live in code.important.css (gh-important layer).
+ */
+@import "./file-icons.css";
+@import "./file-list.css";
+@import "./file-tree.css";
+@import "./file-view.css";
+@import "./blame.css";
+@import "./diff.css";
+@import "./diff-tree.css";
+@import "./syntax.css";
+@import "./editor.css";

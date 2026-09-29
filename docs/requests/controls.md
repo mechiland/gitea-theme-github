@@ -137,3 +137,33 @@ say so and controls will drop the rule.
 - **Seam (overlays):** `src/controls/select.css` styles `.ui.selection.dropdown.tw-flex-1 > .menu`; the open menu
   belongs to overlays. Left in place for now (no lint conflict, overlays is empty); overlays' wave-2 brief takes it
   over — when overlays ships its `.ui.dropdown .menu` rules, delete this rule from controls (noted in overlays.md).
+
+# From overlays (wave 2, round 1)
+## OC-1 Open Select keeps its bottom corners
+Gitea: `.ui.selection.active.dropdown { border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important }`
+and `.ui.active.upward.selection.dropdown` / `.ui.upward.selection.dropdown.visible { border-radius: 0 0 r r !important }`
+(modules/dropdown.css). The open list is now a detached Primer overlay 4px below the control (overlays), so the square
+corners show (see shots/overlays-r1/shoot/user-settings-appearance/states/light-1440-theme-dropdown-open-clip.png).
+Proposed `src/controls/select.important.css`:
+```css
+.ui.selection.active.dropdown,
+.ui.active.upward.selection.dropdown,
+.ui.upward.selection.dropdown.visible {
+  border-radius: var(--borderRadius-medium) !important;
+}
+```
+## OC-2 FYI: dialog footer buttons
+`src/overlays/dialog.css` resizes `.ui.modal .actions > .ui.button:is(.small, .tiny, .mini)` to the medium (32px) Primer
+button and hides the octicon Gitea puts in Cancel/OK/Save (GitHub dialog buttons are text-only). Everything else about
+those buttons (colors, borders, danger variant) still comes from controls.
+
+# Integrator (end of wave 2, 2026-09-30) — seam fixes applied in this folder (overlays ↔ controls)
+- **OV-1 — DONE (ownership):** deleted `.ui.selection.dropdown.tw-flex-1 > .menu` from `select.css` (a comment points
+  to overlays' `.ui.selection.dropdown > .menu`, which already won by layer — no visual change). The `min-width: 0` on
+  the closed `.ui.selection.dropdown.tw-flex-1` stays (trigger = controls).
+- **OC-1 — DONE (seam):** new `select.important.css` restores `--borderRadius-medium` on the open Select
+  (`.ui.selection.active.dropdown`, `.ui.active.upward.selection.dropdown`, `.ui.upward.selection.dropdown.visible`),
+  beating Gitea's `!important` square corners now that overlays detaches the list. Verified before/after:
+  shots/critic-overlays-r2/user-settings-appearance/states/light-1440-theme-dropdown-open-clip.png (square bottom
+  corners) vs shots/integrate-w2-states/user-settings-appearance/states/light-1440-theme-dropdown-open-clip.png (rounded).
+  Lint clean. Applied by the integrator because controls had no wave-2 round; controls owns the file from now on.

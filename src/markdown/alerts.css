@@ -1,0 +1,72 @@
+/* GitHub alerts. github.com: <div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title">
+ * <svg octicon mr-2>Note</p>…  → padding 8px 16px, margin-bottom 16px, color inherit, .25em left rule;
+ * title: flex, align-items center, line-height 1, weight 500, color = variant fg; icon 16px, 8px gap.
+ * Gitea (modules/markup/markdown/transform_blockquote.go) renders:
+ * <blockquote class="attention-header attention-note"><p><svg class="attention-icon attention-note octicon-info">
+ * <strong class="attention-note">Note</strong></p><p>…</p></blockquote>
+ * Variants: note → accent, tip → success, important → done, warning → attention, caution → danger. */
+.markup blockquote.attention-header {
+  margin-inline: 0;
+  margin-bottom: var(--base-size-16);
+  border-left: 0.25em solid var(--borderColor-default);
+}
+
+.markup blockquote.attention-header > p:first-child {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.markup blockquote.attention-header > p:first-child > strong {
+  font-weight: var(--base-text-weight-medium);
+}
+
+.markup .attention-header .attention-icon {
+  flex-shrink: 0;
+  margin: 0 var(--base-size-8) 0 0;
+}
+
+.markup blockquote.attention-note {
+  border-left-color: var(--borderColor-accent-emphasis);
+}
+
+.markup .attention-header svg.attention-note,
+.markup .attention-header strong.attention-note {
+  color: var(--fgColor-accent);
+}
+
+.markup blockquote.attention-tip {
+  border-left-color: var(--borderColor-success-emphasis);
+}
+
+.markup .attention-header svg.attention-tip,
+.markup .attention-header strong.attention-tip {
+  color: var(--fgColor-success);
+}
+
+.markup blockquote.attention-important {
+  border-left-color: var(--borderColor-done-emphasis);
+}
+
+.markup .attention-header svg.attention-important,
+.markup .attention-header strong.attention-important {
+  color: var(--fgColor-done);
+}
+
+.markup blockquote.attention-warning {
+  border-left-color: var(--borderColor-attention-emphasis);
+}
+
+.markup .attention-header svg.attention-warning,
+.markup .attention-header strong.attention-warning {
+  color: var(--fgColor-attention);
+}
+
+.markup blockquote.attention-caution {
+  border-left-color: var(--borderColor-danger-emphasis);
+}
+
+.markup .attention-header svg.attention-caution,
+.markup .attention-header strong.attention-caution {
+  color: var(--fgColor-danger);
+}

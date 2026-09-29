@@ -1,0 +1,38 @@
+/*
+ * File-path breadcrumbs (repo/view_content.tmpl, repo/editor/common_breadcrumb.tmpl) — github.com code view
+ * breadcrumbs (measured 2026-09-30 on /tree/main/src): 16px / 24px; repo root link --fgColor-accent semibold,
+ * intermediate folders --fgColor-accent regular, current item --fgColor-default semibold, "/" separators
+ * --fgColor-default regular with about 6px each side (2px gap + 4px padding).
+ */
+
+.breadcrumb {
+  gap: var(--base-size-2);
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-small);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--base-size-24);
+}
+
+.breadcrumb > a.section {
+  color: var(--fgColor-accent);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.breadcrumb .section > a {
+  color: var(--fgColor-accent);
+}
+
+.breadcrumb > a.section:hover,
+.breadcrumb .section > a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb .active.section {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.breadcrumb .breadcrumb-divider {
+  padding: 0 var(--base-size-4);
+  color: var(--fgColor-default);
+}

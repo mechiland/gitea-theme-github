@@ -1,0 +1,44 @@
+/*
+ * File-type icons like github.com (docs/requests/code.md C-1, C-2).
+ * github.com: directories `file-directory-fill` in --treeViewItem-leadingVisual-iconColor-rest (light blue in light,
+ * muted in dark), files `file` in --fgColor-muted, 16px, monochrome.
+ * Gitea keeps FILE_ICON_THEME = material (global app.ini setting, shared with other themes), so the coloured
+ * Material symbols (<svg class="svg git-entry-icon octicon-file"><use href="#svg-mfi-…">) are masked with the
+ * Octicon `file` drawing and painted with the muted colour; the <use> clone is hidden.
+ */
+.svg.octicon-file-directory-fill,
+.svg.octicon-file-directory-open-fill {
+  color: var(--treeViewItem-leadingVisual-iconColor-rest);
+}
+
+.svg.octicon-file,
+.svg.octicon-file-symlink-file,
+.svg.octicon-file-directory-symlink,
+.svg.octicon-file-submodule {
+  color: var(--fgColor-muted);
+}
+
+svg.git-entry-icon {
+  fill: currentColor;
+  background-color: var(--fgColor-muted);
+  mask: var(--gh-octicon-file) center / contain no-repeat;
+}
+
+svg.git-entry-icon > use {
+  visibility: hidden;
+}
+
+svg.git-entry-icon.octicon-file-submodule {
+  mask-image: var(--gh-octicon-file-submodule);
+}
+
+svg.git-entry-icon.octicon-file-symlink-file {
+  mask-image: var(--gh-octicon-file-symlink-file);
+}
+
+/* the Material symbol pool (FileIconPoolHTML) carries hard-coded brand fills; nothing shows it directly (the <use>
+   clones above are hidden), so flatten it to the muted colour to keep the page on the Primer palette */
+svg[id^="svg-mfi-"],
+svg[id^="svg-mfi-"] * {
+  fill: var(--fgColor-muted);
+}

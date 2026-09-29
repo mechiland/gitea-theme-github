@@ -1,0 +1,18 @@
+{{- /* gitea-theme-github (ARCHITECTURE.md §7/§10, request OV-4): Primer Dialogs always have a close IconButton.
+     Most Gitea modals have none, and CSS cannot add a clickable control. For github-* themes only, prepend a
+     `button.close.inside` to every .ui.modal (Fomantic closes a modal on click of any `> .close` child; overlays
+     styles it). Other themes: this template renders nothing (Gitea's custom/footer.tmpl is empty). */ -}}
+{{- if StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-" -}}
+<template id="gh-dialog-close"><button type="button" class="close inside" aria-label="{{ctx.Locale.Tr "modal.cancel"}}">{{svg "octicon-x" 16}}</button></template>
+<script nonce="{{ctx.CspScriptNonce}}">
+(() => {
+  const tpl = document.querySelector('#gh-dialog-close');
+  if (!tpl) return;
+  const add = (m) => { if (!m.querySelector(':scope > .close')) m.prepend(tpl.content.firstElementChild.cloneNode(true)); };
+  const scan = (n) => { if (n.matches?.('.ui.modal')) add(n); n.querySelectorAll?.('.ui.modal').forEach(add); };
+  scan(document.body);
+  new MutationObserver((ms) => { for (const m of ms) for (const n of m.addedNodes) if (n.nodeType === 1) scan(n); })
+    .observe(document.body, {childList: true, subtree: true});
+})();
+</script>
+{{- end -}}

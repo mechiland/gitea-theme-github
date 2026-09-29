@@ -1,0 +1,133 @@
+/*
+ * Pagination — Primer React Pagination (prc-Pagination-* read from github.com 2026-09-30):
+ *   page: min-width 32, height 32, padding 8px 6px, radius 6, 4px apart, 14px --fgColor-default, line-height 1,
+ *         hover/focus bg --control-transparent-bgColor-hover, focus-visible 2px --bgColor-accent-emphasis inset
+ *   current: --bgColor-accent-emphasis / --fgColor-onEmphasis
+ *   Previous / Next: --fgColor-accent, chevron 1em (14px) 4px from the text; disabled / gap: --fgColor-disabled
+ *   container: centred, 20px above, 15px below
+ * Gitea: base/paginate.tmpl `.center.page.buttons > .ui.borderless.pagination.menu > a.item[.active|.disabled|.navigation]`.
+ * First / Last ("gitea-double-chevron-*" files = Gitea's « ») are masked with move-to-start / move-to-end (icons N-3).
+ */
+
+.page.buttons {
+  /* repo.css adds padding-top 15px on top of the margin */
+  padding-top: 0;
+  margin-top: var(--base-size-20);
+  margin-bottom: var(--base-size-16);
+}
+
+.ui.pagination.menu {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--base-size-4);
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.ui.pagination.menu .item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-width: var(--control-medium-size);
+  height: var(--control-medium-size);
+  padding: var(--base-size-8) var(--base-size-6);
+  margin: 0;
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+  background: transparent;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  user-select: none;
+  transition: background-color var(--base-duration-200) var(--base-easing-easeInOut);
+}
+
+.ui.pagination.menu .item::before {
+  display: none;
+}
+
+.ui.pagination.menu .item:first-child,
+.ui.pagination.menu .item:last-child {
+  border-radius: var(--borderRadius-medium);
+}
+
+.ui.pagination.menu a.item[href]:hover,
+.ui.pagination.menu a.item[href]:focus {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+  text-decoration: none;
+}
+
+.ui.pagination.menu a.item[href]:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: calc(var(--borderWidth-thick) * -1);
+}
+
+.ui.pagination.menu .active.item,
+.ui.pagination.menu .active.item:hover {
+  padding-top: var(--base-size-8);
+  background: var(--bgColor-accent-emphasis);
+  color: var(--fgColor-onEmphasis);
+}
+
+/* Previous / Next (and First / Last): same 8px 6px box as a page, chevron 4px from the label (the template's
+   tw-mr-1 / tw-ml-1 margins are zeroed in navigation.important.css) */
+.ui.pagination.menu .item.navigation {
+  gap: var(--base-size-4);
+  color: var(--fgColor-accent);
+}
+
+.ui.pagination.menu a.item.navigation[href]:hover {
+  color: var(--fgColor-accent);
+}
+
+.ui.pagination.menu .item.navigation > .svg {
+  width: calc(var(--base-size-16) - var(--base-size-2));
+  height: calc(var(--base-size-16) - var(--base-size-2));
+  min-width: calc(var(--base-size-16) - var(--base-size-2));
+  min-height: calc(var(--base-size-16) - var(--base-size-2));
+}
+
+.ui.pagination.menu .disabled.item,
+.ui.pagination.menu .disabled.item:hover,
+.ui.pagination.menu .item.navigation.disabled {
+  background: transparent;
+  color: var(--fgColor-disabled);
+  cursor: default;
+}
+
+/* First / Last glyphs: Gitea ships « » in gitea-double-chevron-*; github-style move-to-start / move-to-end */
+.ui.pagination.menu .svg.gitea-double-chevron-left {
+  background-color: currentColor;
+  mask: var(--gh-octicon-move-to-start) center / contain no-repeat;
+}
+
+.ui.pagination.menu .svg.gitea-double-chevron-right {
+  background-color: currentColor;
+  mask: var(--gh-octicon-move-to-end) center / contain no-repeat;
+}
+
+.ui.pagination.menu .svg.gitea-double-chevron-left > *,
+.ui.pagination.menu .svg.gitea-double-chevron-right > * {
+  visibility: hidden;
+}
+
+/* narrow: Gitea keeps only First / Previous / current / Next / Last and drops the labels (menu.css); restate it,
+   because the base rule above sets display on every item */
+@media (max-width: 767.98px) {
+  .ui.pagination.menu .item:not(.active, .navigation),
+  .ui.pagination.menu .item.navigation span.navigation_label {
+    display: none;
+  }
+}

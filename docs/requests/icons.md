@@ -199,3 +199,20 @@ pagination (`move-to-start/end`), overlays toasts (`alert`, `x-circle`, `info`, 
   icon file is newer than `docker inspect gitea-server .State.StartedAt`, not only when this deploy changed something.
 - **P-1 pointer:** created docs/requests/pages-issues-prs.md. **C-3 ID collision** in code.md: the round-4 "Diff
   toolbar icon buttons" item is renamed C-4 there.
+
+# Icons builder — wave 2, round 1 (status)
+- I-1 DONE (integrator restart 2026-09-29T18:30Z). A new restart is needed for w2 r1 → integrator.md II-1.
+- I-2 still pending install → reminder integrator.md II-2.
+- I-3 REJECTED — accepted; material file icons are handled by code C-1/C-2 (masks available).
+- I-4 DONE — masks now 21 (added `unverified` for data-display D-5; issue-opened, git-pull-request, milestone, telescope, search for navigation NI-1).
+- I-5 DONE — used in this round's audit (`material-file:*`, `maskedIcons`).
+- I-6 PARTIAL (integrator) — not icons-owned.
+- I-7 DONE — used: `RESTORED` emptied; w2 r1 deploy removed the two chevron copies (`iconsRemoved`).
+- P-1 open at pages/issues-prs; parity alternative P-2 filed there. N-5 (hide First/Last, parity) filed at navigation.
+
+# Integrator (end of wave 2, 2026-09-30)
+- **II-1 — DONE:** restart 2026-09-29T20:11:56Z; gitea-auto shows `octicon-unlock` for unsigned commits (curl verified).
+- **I-6 — DONE (live)**, see foundation.md #1. **I-2/II-2 — PENDING** (ORC-2 in ORCHESTRATOR.md, package download).
+- Audit after restart (shots/integrate-w2, 272 pages): nonOcticon 96 = PR-list `gitea-double-chevron-left` 48 (4 pages,
+  pages/issues-prs P-1/P-2 in wave 3), colorblind markers 28, fontawesome-openid 8, gitea-npm 8, gitea-running 4;
+  masked 1832; material file icons 0 unmasked.
