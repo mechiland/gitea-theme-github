@@ -31,3 +31,9 @@
 - Label colors are inline `style` with `!important` → cannot be overridden; exempt.
 - Vue-only areas: dashboard repo list, branch/tag selector, file trees, diff commit selector, Actions run view, heatmap, PR merge form, go-to-file, issue hover card; charts are canvas (colors read from CSS vars at load); Mermaid renders in a same-origin iframe.
 - Playwright: networkidle never fires on signed-in pages (event stream) — tools/shoot handles it.
+
+## Seeded environment additions (2026-09-30)
+- Seed manifest: docs/seed-manifest.json (octo-org/{grex,prom_ex,folderify} migrated from pemistahl/grex, akoutmos/prom_ex, lgarron/folderify; octo-org/theme-playground; users alice-dev, bob-dev, carol-ops, dave-qa; orgs octo-org, pixel-guild; packages). tools/shoot/routes.json now has 68 routes paired with github.com where the same content exists.
+- Extra Docker container `gitea-theme-runner` (volume `gitea-theme-runner-data`, label purpose=gitea-theme-github-seed): act runner registered to org `octo-org` only, so the playground's Actions runs execute. The pre-existing `gitea-runner-1` (admin-scoped) is untouched.
+- Smoke test edits `SMOKE.md` in octo-org/theme-playground (never README.md, the markdown showcase).
+- Visiting `?style=split|unified` as admin saves the admin's diff-style preference (baseline: unified) → restore at the end together with the theme (baseline: gitea-auto-tritanopia).

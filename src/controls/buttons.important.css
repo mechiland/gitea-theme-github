@@ -1,0 +1,18 @@
+/*
+ * gh-important: Gitea sets `opacity: var(--opacity-disabled) !important` on disabled buttons
+ * (modules/button.css). Primer disabled buttons are fully opaque and use the *-disabled color
+ * tokens instead (see buttons.css), so the opacity is reset here.
+ */
+.ui.buttons .disabled.button:not(.basic),
+.ui.disabled.button,
+.ui.button:disabled,
+.ui.disabled.button:hover,
+.ui.disabled.active.button {
+  opacity: 1 !important;
+}
+
+/* Gitea: `.ui.labeled.button > .label { margin: 0 0 0 -1px !important }` — the counter sits inside
+   the button in Primer, spaced like `.btn .Counter`. */
+.ui.labeled.button > .label {
+  margin: 0 var(--control-small-paddingInline-normal) 0 var(--base-size-8) !important;
+}

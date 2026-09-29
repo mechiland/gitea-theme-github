@@ -1,0 +1,84 @@
+/* Headings outside rendered markdown — Primer base/typography-base.scss sizes (h1 32, h2 24, h3 20, h4 16,
+ * h5 14, h6 12), weight semibold, expressed with Primer title/body tokens.
+ * Gitea base.css:121-176 uses Fomantic sizes (28/24/18/15/14), weight 500 and line-height 1.2857.
+ * Excluded (zero specificity, so page folders can still override): .markup (markdown folder), the landing hero,
+ * the issue title (GitHub: 32px regular, pages/issues-prs), h2 used as a menu, h4 used as a text divider, and
+ * every heading that Gitea sizes as a component — our layer would otherwise beat those rules regardless of their
+ * specificity: box headers (.ui.attached.header → data-display), release titles (#release-list .release-list-title),
+ * tag titles (#tags-table .tag-list-row-title), user-card names (.user-cards .name, .user.followers .header.name). */
+:where(h1, h2, h3, h4, h5, h6):where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.attached.header, .release-list-title, .tag-list-row-title, .user-cards .name, .header.name)) {
+  font-weight: var(--base-text-weight-semibold);
+}
+
+h1:where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.attached.header, .release-list-title, .tag-list-row-title, .user-cards .name, .header.name)) {
+  font-size: var(--text-title-size-large);
+  line-height: var(--text-title-lineHeight-large);
+}
+
+h2:where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.attached.header, .release-list-title, .tag-list-row-title, .user-cards .name, .header.name)) {
+  font-size: var(--base-size-24); /* Primer $h2-size (24px); no title token exists between 20 and 32 */
+  line-height: var(--text-title-lineHeight-large);
+}
+
+h3:where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.attached.header, .release-list-title, .tag-list-row-title, .user-cards .name, .header.name)) {
+  font-size: var(--text-title-size-medium);
+  line-height: var(--text-title-lineHeight-medium);
+}
+
+h4:where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.attached.header, .release-list-title, .tag-list-row-title, .user-cards .name, .header.name)) {
+  font-size: var(--text-title-size-small);
+  line-height: var(--text-title-lineHeight-small);
+}
+
+h5:where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.attached.header, .release-list-title, .tag-list-row-title, .user-cards .name, .header.name)) {
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+h6:where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.attached.header, .release-list-title, .tag-list-row-title, .user-cards .name, .header.name)) {
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+/* Gitea's generic heading component (modules/header.css). Box headers (.ui.attached.header) belong to
+ * data-display and keep Gitea's size (div: 1em); this only removes the Fomantic look: weight 500,
+ * line-height 1.2857, 18px default size. */
+.ui.header {
+  font-family: var(--fonts-regular);
+  font-weight: var(--base-text-weight-semibold);
+  color: var(--fgColor-default);
+}
+
+.ui.header:where(:not(h1, h2, h3, h4, h5, h6, .attached, .name)) {
+  font-size: var(--text-title-size-small);
+  line-height: var(--text-title-lineHeight-small);
+}
+
+.ui.header .sub.header {
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+  color: var(--fgColor-muted);
+}
+
+.ui.sub.header {
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-normal);
+}
+
+/* GitHub "Subhead": 24px regular heading over a muted rule (new milestone, forks, stargazers, release form). */
+.ui.dividing.header {
+  padding-bottom: var(--base-size-8);
+  margin-bottom: var(--base-size-16);
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+h2.ui.dividing.header {
+  font-weight: var(--base-text-weight-normal);
+}
+
+/* Gitea/Fomantic pull a first-child .ui.header up by -0.1428em (optical cap-height trim), which eats 3px of the
+ * 24px page-header gap (stargazers, compare). Primer headings have margin-top 0. */
+.ui.header:where(:first-child) {
+  margin-top: 0;
+}

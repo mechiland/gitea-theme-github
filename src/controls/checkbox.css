@@ -1,0 +1,217 @@
+/*
+ * Checkbox / Radio — Primer React Checkbox & Radio (16px, --control-borderColor-emphasis,
+ * checked --control-checked-bgColor-rest, radio checked = 4px ring, focus-visible 2px offset 2px).
+ * Toggle — Gitea `.ui.toggle.checkbox` rendered as Primer ToggleSwitch (small: 48x24,
+ * radius 6px, knob = half the track, on/off glyphs).
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  margin: 0;
+  border: var(--borderWidth-thin) solid var(--control-borderColor-emphasis);
+  background: var(--bgColor-default);
+  color: var(--fgColor-default);
+  cursor: pointer;
+  transition: background-color var(--base-duration-100) var(--base-easing-easeOut),
+    border-color var(--base-duration-100) var(--base-easing-easeOut);
+}
+
+input[type="checkbox"] {
+  border-radius: var(--borderRadius-small);
+}
+
+input[type="checkbox"]::before {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  clip-path: inset(var(--base-size-16) 0 0 0);
+  background: var(--control-checked-fgColor-rest);
+}
+
+input[type="checkbox"]:checked,
+input[type="checkbox"]:indeterminate {
+  border-color: var(--control-checked-borderColor-rest);
+  background: var(--control-checked-bgColor-rest);
+}
+
+input[type="checkbox"]:checked::before,
+input[type="checkbox"]:indeterminate::before {
+  clip-path: inset(0);
+}
+
+input[type="radio"] {
+  border-radius: var(--borderRadius-full);
+}
+
+input[type="radio"]:checked {
+  border: var(--borderWidth-thicker) solid var(--control-checked-bgColor-rest);
+  background: var(--control-checked-fgColor-rest);
+}
+
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+input[type="checkbox"]:disabled,
+input[type="radio"]:disabled {
+  border-color: var(--control-borderColor-disabled);
+  background: var(--control-bgColor-disabled);
+  cursor: not-allowed;
+}
+
+input[type="checkbox"]:disabled:checked,
+input[type="checkbox"]:disabled:indeterminate {
+  border-color: var(--control-checked-borderColor-disabled);
+  background: var(--control-checked-bgColor-disabled);
+}
+
+input[type="checkbox"]:disabled:checked::before,
+input[type="checkbox"]:disabled:indeterminate::before {
+  background: var(--control-checked-fgColor-disabled);
+}
+
+input[type="radio"]:disabled:checked {
+  border-color: var(--control-checked-bgColor-disabled);
+  background: var(--control-checked-fgColor-disabled);
+}
+
+/* ---------- .ui.checkbox wrapper: 16px box + 8px gap, 20px text line ---------- */
+.ui.checkbox {
+  min-width: var(--base-size-16);
+  min-height: var(--base-size-20);
+  padding: 0;
+  line-height: var(--base-size-20);
+}
+
+.ui.checkbox input[type="checkbox"],
+.ui.checkbox input[type="radio"] {
+  top: var(--base-size-2);
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+}
+
+.ui.checkbox label,
+.ui.radio.checkbox label {
+  margin-left: var(--base-size-24);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+  cursor: pointer;
+}
+
+.ui.disabled.checkbox input,
+.ui.disabled.checkbox label,
+.ui.checkbox input[disabled] ~ label {
+  opacity: 1;
+  color: var(--fgColor-disabled);
+}
+
+label.gt-checkbox {
+  gap: var(--base-size-8);
+}
+
+/* ---------- ToggleSwitch (small) ---------- */
+.ui.toggle.checkbox {
+  min-height: var(--base-size-24);
+  line-height: var(--base-size-20);
+}
+
+.ui.toggle.checkbox input {
+  top: 0;
+  width: var(--base-size-48);
+  height: var(--base-size-24);
+}
+
+.ui.toggle.checkbox label {
+  min-height: var(--base-size-24);
+  margin-left: 0;
+  padding-top: var(--base-size-2);
+  padding-left: calc(var(--base-size-48) + var(--base-size-8));
+}
+
+/* track, with Primer's on "|" glyph (left half, visible when checked) and off "o" glyph (right half) */
+.ui.toggle.checkbox label::before {
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: var(--base-size-48);
+  height: var(--base-size-24);
+  border: var(--borderWidth-thin) solid var(--controlTrack-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background-color: var(--controlTrack-bgColor-rest);
+  background-image: radial-gradient(
+    circle at 75% 50%,
+    transparent 0 calc(var(--base-size-4) - var(--borderWidth-thin)),
+    var(--controlTrack-fgColor-rest) calc(var(--base-size-4) - var(--borderWidth-thin)) var(--base-size-4),
+    transparent var(--base-size-4)
+  );
+  transition: background-color var(--base-duration-100) var(--base-easing-easeOut),
+    border-color var(--base-duration-100) var(--base-easing-easeOut);
+}
+
+.ui.toggle.checkbox input:focus ~ label::before,
+.ui.toggle.checkbox label::before {
+  background-color: var(--controlTrack-bgColor-rest);
+}
+
+.ui.toggle.checkbox input:hover ~ label::before {
+  background-color: var(--controlTrack-bgColor-hover);
+}
+
+.ui.toggle.checkbox input:active ~ label::before {
+  background-color: var(--controlTrack-bgColor-active);
+}
+
+.ui.toggle.checkbox input:checked ~ label::before,
+.ui.toggle.checkbox input:focus:checked ~ label::before {
+  border-color: var(--control-checked-borderColor-rest);
+  background-color: var(--control-checked-bgColor-rest);
+  background-image: linear-gradient(var(--control-checked-fgColor-rest), var(--control-checked-fgColor-rest));
+  background-position: 25% 50%;
+  background-size: 1px var(--base-size-8);
+  background-repeat: no-repeat;
+}
+
+.ui.toggle.checkbox input:checked:hover ~ label::before {
+  background-color: var(--control-checked-bgColor-hover);
+}
+
+.ui.toggle.checkbox input:focus-visible ~ label::before {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: calc(var(--borderWidth-thin) + var(--borderWidth-thick));
+}
+
+/* knob: half the track, 1px inside the border */
+.ui.toggle.checkbox label::after,
+.ui.toggle.checkbox input ~ label::after {
+  top: var(--base-size-2);
+  left: var(--base-size-2);
+  box-sizing: border-box;
+  width: calc(var(--base-size-24) - 1px);
+  height: var(--base-size-20);
+  border: var(--borderWidth-thin) solid var(--controlKnob-borderColor-rest);
+  border-radius: calc(var(--borderRadius-medium) - var(--borderWidth-thick));
+  background: var(--controlKnob-bgColor-rest);
+  box-shadow: none;
+  transition: left var(--base-duration-100) var(--base-easing-easeOut);
+}
+
+.ui.toggle.checkbox input:checked ~ label::after {
+  left: calc(var(--base-size-24) - 1px);
+  border-color: var(--controlKnob-borderColor-checked);
+}
+
+.ui.toggle.checkbox input:disabled ~ label::before {
+  border-color: transparent;
+  background-color: var(--controlTrack-bgColor-disabled);
+  background-image: none;
+}
+
+.ui.toggle.checkbox input:disabled ~ label::after {
+  border-color: var(--controlTrack-bgColor-disabled);
+  background: var(--controlKnob-bgColor-disabled);
+}

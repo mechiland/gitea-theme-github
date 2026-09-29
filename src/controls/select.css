@@ -1,0 +1,206 @@
+/*
+ * Select — Primer React Select (TextInputBaseWrapper + up/down ArrowIndicator).
+ * Gitea renders most selects as the Fomantic `.ui.selection.dropdown` (closed control styled here;
+ * the open menu belongs to overlays) and some as native `select` / `.native-select > select`.
+ * The arrow is Gitea's own `--select-arrows` data-URI, which is the Primer Select glyph.
+ */
+
+/* ---------- .ui.selection.dropdown (closed control) ---------- */
+.ui.selection.dropdown {
+  min-height: var(--control-medium-size);
+  padding: calc((var(--control-medium-size) - var(--base-size-20)) / 2 - 1px) var(--base-size-32)
+    calc((var(--control-medium-size) - var(--base-size-20)) / 2 - 1px) var(--control-medium-paddingInline-normal);
+  border: var(--borderWidth-thin) solid var(--control-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+  box-shadow: var(--shadow-inset);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+}
+
+.ui.selection.dropdown:hover {
+  box-shadow: var(--shadow-inset);
+}
+
+.ui.selection.dropdown:focus,
+.ui.selection.dropdown:focus-within,
+.ui.selection.active.dropdown,
+.ui.selection.active.dropdown:hover {
+  border-color: var(--borderColor-accent-emphasis);
+  outline: var(--borderWidth-thick) solid var(--borderColor-accent-emphasis);
+  outline-offset: -1px;
+  box-shadow: none;
+}
+
+.ui.selection.dropdown > .text:not(.default),
+.ui.selection.visible.dropdown > .text:not(.default) {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-normal);
+}
+
+.ui.selection.dropdown > .default.text,
+.ui.selection.dropdown > .text.default {
+  color: var(--fgColor-muted);
+}
+
+.ui.selection.dropdown.ellipsis-text-items > .text {
+  line-height: var(--base-size-20);
+}
+
+/* multiple selection (chips inside): Gitea's compact padding restated on the 32px grid */
+.ui.ui.multiple.selection.dropdown {
+  padding: var(--base-size-2) var(--base-size-32) var(--base-size-2) var(--base-size-4);
+}
+
+.ui.multiple.dropdown > .text,
+.ui.multiple.search.dropdown > .text {
+  margin: calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--base-size-2) - 1px) 0
+    calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--base-size-2) - 1px) var(--base-size-8);
+  line-height: var(--base-size-20);
+}
+
+.ui.multiple.search.dropdown > input.search {
+  position: static;
+  width: var(--base-size-32);
+  height: var(--base-size-20);
+  margin: calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--base-size-2) - 1px) 0
+    calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--base-size-2) - 1px) var(--base-size-8);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  line-height: var(--base-size-20);
+  outline: none;
+}
+
+/* Primer arrow: the 16px up/down glyph, drawn through the existing svg box */
+.ui.selection.dropdown > .dropdown.icon {
+  right: var(--base-size-8);
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  background-color: var(--fgColor-muted);
+  opacity: 1;
+  mask: var(--select-arrows) center / contain no-repeat;
+}
+
+.ui.selection.dropdown > .dropdown.icon > * {
+  fill: transparent;
+}
+
+/* selection dropdowns rendered without an icon (e.g. repo/create.tmpl search selections) */
+.ui.selection.dropdown:not(:has(> .dropdown.icon))::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: var(--base-size-8);
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  transform: translateY(-50%);
+  background-color: var(--fgColor-muted);
+  mask: var(--select-arrows) center / contain no-repeat;
+  pointer-events: none;
+}
+
+.ui.search.selection.dropdown:not(.multiple) > input.search {
+  height: 100%;
+  padding: 0 var(--base-size-32) 0 var(--control-medium-paddingInline-normal);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  line-height: var(--base-size-20);
+  outline: none;
+}
+
+.ui.search.selection.dropdown:not(.multiple) > input.search:focus {
+  outline: none;
+}
+
+.ui.selection.dropdown.disabled,
+.ui.disabled.selection.dropdown {
+  border-color: var(--control-borderColor-disabled);
+  background: var(--control-bgColor-disabled);
+  box-shadow: none;
+  color: var(--control-fgColor-disabled);
+  cursor: not-allowed;
+}
+
+/* ---------- native select ---------- */
+select,
+.ui.form select {
+  height: var(--control-medium-size);
+  padding: 0 var(--base-size-8) 0 var(--control-medium-paddingInline-normal);
+  border: var(--borderWidth-thin) solid var(--control-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background-color: var(--bgColor-default);
+  box-shadow: var(--shadow-inset);
+  color: var(--fgColor-default);
+  font-family: inherit;
+  font-size: var(--text-body-size-medium);
+  line-height: var(--base-size-20);
+  cursor: pointer;
+}
+
+select:focus,
+.ui.form select:focus {
+  border-color: var(--borderColor-accent-emphasis);
+  outline: var(--borderWidth-thick) solid var(--borderColor-accent-emphasis);
+  outline-offset: -1px;
+}
+
+select:disabled {
+  border-color: var(--control-borderColor-disabled);
+  background-color: var(--control-bgColor-disabled);
+  box-shadow: none;
+  color: var(--control-fgColor-disabled);
+  cursor: not-allowed;
+}
+
+.native-select > select {
+  padding: 0 var(--base-size-32) 0 var(--control-medium-paddingInline-normal);
+  border-color: var(--control-borderColor-rest);
+}
+
+.native-select::after {
+  right: var(--base-size-8);
+  background: var(--fgColor-muted);
+}
+
+select.ui.dropdown {
+  height: var(--control-medium-size);
+  padding: 0 var(--base-size-8) 0 var(--control-medium-paddingInline-normal);
+  border: var(--borderWidth-thin) solid var(--control-borderColor-rest);
+}
+
+/* chips inside a multiple selection → Primer Token (large, 24px) */
+.ui.multiple.selection.dropdown > .label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base-size-4);
+  height: var(--base-size-24);
+  margin: 1px var(--base-size-4) 1px 0;
+  padding: 0 var(--base-size-4) 0 var(--base-size-8);
+  border: var(--borderWidth-thin) solid transparent;
+  border-radius: var(--borderRadius-full);
+  background: var(--bgColor-neutral-muted);
+  box-shadow: none;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-medium);
+  line-height: var(--base-size-20);
+}
+
+.ui.multiple.selection.dropdown > .label > .delete.icon {
+  color: var(--fgColor-muted);
+  opacity: 1;
+}
+
+/* avatar inside the closed control (e.g. repo owner picker, 28px "mini" avatar): Primer keeps the
+   control at 32px → 20px avatar centred on the 20px text line */
+.ui.selection.dropdown > .text > img.ui.avatar,
+.ui.selection.dropdown > .text > .avatar {
+  width: var(--base-size-20);
+  height: var(--base-size-20);
+  margin-block: 0;
+  vertical-align: top;
+}

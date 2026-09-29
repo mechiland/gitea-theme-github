@@ -1,0 +1,389 @@
+/*
+ * Buttons — Primer React Button (prc-Button-ButtonBase) / IconButton.
+ * Gitea → Primer variant map:
+ *   .ui.button, .ui.basic.button, .ui.basic.green.button   → default
+ *   .ui.primary.button, .ui.green.button                    → primary (green)
+ *   .ui.basic.primary.button                                → outline (blue text)
+ *   .ui.red.button, .ui.basic.red.button, .ui.danger.button → danger
+ * Gitea → Primer size map:
+ *   default / .compact / .medium             → medium 32px
+ *   .small / .tiny / .mini (+ their .buttons) → small 28px
+ *   .large / .big / .huge                     → large 40px
+ */
+
+/* ---------- base (medium, default variant) ---------- */
+.ui.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-medium-gap);
+  height: var(--control-medium-size); /* Primer: fixed height, so flex rows cannot stretch it */
+  min-height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-normal);
+  border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-default-fgColor-rest);
+  font-family: inherit;
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-medium);
+  line-height: var(--base-size-20);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  appearance: none;
+  transition: color var(--base-duration-100) var(--base-easing-easeInOut),
+    background-color var(--base-duration-100) var(--base-easing-easeInOut),
+    border-color var(--base-duration-100) var(--base-easing-easeInOut);
+}
+
+.ui.button:hover {
+  background: var(--button-default-bgColor-hover);
+  border-color: var(--button-default-borderColor-hover);
+  color: var(--button-default-fgColor-rest);
+  text-decoration: none;
+}
+
+.ui.button:active,
+.ui.button[aria-expanded="true"],
+.ui.active.dropdown.button {
+  background: var(--button-default-bgColor-active);
+  border-color: var(--button-default-borderColor-active);
+  box-shadow: none; /* github.com: pressed buttons carry no shadow */
+  color: var(--button-default-fgColor-rest);
+  transition: none;
+}
+
+/* Gitea .active on a lone button = Primer "selected" */
+.ui.active.button,
+.ui.active.button:hover {
+  background: var(--button-default-bgColor-selected);
+  border-color: var(--button-default-borderColor-active);
+  box-shadow: var(--shadow-inset);
+  color: var(--button-default-fgColor-rest);
+}
+
+.ui.button:focus {
+  outline: 1px solid transparent;
+}
+
+.ui.button:focus-visible {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: var(--focus-outline-offset);
+  box-shadow: none;
+}
+
+/* leading/trailing octicons: 16px, muted on default buttons (Primer .prc-Button-Visual) */
+.ui.button > .svg,
+.ui.button > .icon:not(.button) {
+  flex-shrink: 0;
+  margin: 0;
+  opacity: 1;
+  color: var(--fgColor-muted);
+  vertical-align: text-bottom;
+}
+
+.ui.button > .text,
+.ui.button > span {
+  line-height: var(--base-size-20);
+}
+
+/* dropdown caret (octicon-triangle-down "dropdown icon"): Primer trailingAction — the button keeps
+   its normal padding, the caret is static and pulled 4px into it (margin-right: -4px) */
+.ui.button.dropdown > .dropdown.icon,
+.ui.button.dropdown > .icon.icon {
+  position: static;
+  transform: none;
+  margin: 0;
+}
+
+.ui.button > .dropdown.icon:last-child {
+  margin-right: calc(var(--base-size-4) * -1);
+}
+
+/* ---------- sizes ---------- */
+.ui.small.button,
+.ui.tiny.button,
+.ui.mini.button,
+.ui.small.buttons .button,
+.ui.tiny.buttons .button,
+.ui.mini.buttons .button {
+  gap: var(--control-small-gap);
+  height: var(--control-small-size);
+  min-height: var(--control-small-size);
+  padding: 0 var(--control-small-paddingInline-condensed);
+  font-size: var(--text-body-size-small);
+}
+
+.ui.large.button,
+.ui.big.button,
+.ui.huge.button {
+  gap: var(--control-large-gap);
+  height: var(--control-large-size);
+  min-height: var(--control-large-size);
+  padding: 0 var(--control-large-paddingInline-spacious);
+}
+
+.ui.fluid.button {
+  width: 100%;
+}
+
+/* ---------- icon-only (Primer IconButton: square) ---------- */
+.ui.icon.button,
+.ui.icon.buttons .button {
+  min-width: var(--control-medium-size);
+  padding: 0;
+}
+
+.ui.small.icon.button,
+.ui.tiny.icon.button,
+.ui.mini.icon.button,
+.ui.small.icon.buttons .button,
+.ui.tiny.icon.buttons .button,
+.ui.mini.icon.buttons .button {
+  min-width: var(--control-small-size);
+  padding: 0;
+}
+
+.ui.icon.button > .svg,
+.ui.icon.button > .icon {
+  margin: 0;
+}
+
+/* ---------- primary (green) ---------- */
+.ui.primary.button,
+.ui.primary.buttons .button,
+.ui.green.button,
+.ui.green.buttons .button {
+  background: var(--button-primary-bgColor-rest);
+  border-color: var(--button-primary-borderColor-rest);
+  box-shadow: var(--shadow-resting-small);
+  color: var(--button-primary-fgColor-rest);
+}
+
+.ui.primary.button:hover,
+.ui.primary.buttons .button:hover,
+.ui.green.button:hover,
+.ui.green.buttons .button:hover {
+  background: var(--button-primary-bgColor-hover);
+  border-color: var(--button-primary-borderColor-hover);
+  color: var(--button-primary-fgColor-rest);
+}
+
+.ui.primary.button:active,
+.ui.primary.button[aria-expanded="true"],
+.ui.primary.active.button,
+.ui.primary.buttons .button:active,
+.ui.green.button:active,
+.ui.green.buttons .button:active {
+  background: var(--button-primary-bgColor-active);
+  border-color: var(--button-primary-borderColor-active);
+  box-shadow: none; /* github.com: no inset shadow while pressed */
+  color: var(--button-primary-fgColor-rest);
+}
+
+.ui.primary.button:focus-visible,
+.ui.primary.buttons .button:focus-visible,
+.ui.green.button:focus-visible {
+  box-shadow: inset 0 0 0 calc(var(--borderWidth-thin) + var(--borderWidth-thick)) var(--fgColor-onEmphasis);
+}
+
+.ui.primary.button > .svg,
+.ui.primary.button > .icon:not(.button),
+.ui.primary.buttons .button > .svg,
+.ui.green.button > .svg {
+  color: var(--button-primary-iconColor-rest);
+}
+
+/* ---------- outline (Gitea basic primary) ---------- */
+.ui.basic.primary.button,
+.ui.basic.primary.buttons .button {
+  background: var(--button-outline-bgColor-rest);
+  border-color: var(--button-default-borderColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-outline-fgColor-rest);
+}
+
+.ui.basic.primary.button:hover,
+.ui.basic.primary.buttons .button:hover {
+  background: var(--button-outline-bgColor-hover);
+  border-color: var(--button-outline-borderColor-hover);
+  box-shadow: var(--shadow-resting-small);
+  color: var(--button-outline-fgColor-hover);
+}
+
+.ui.basic.primary.button:active,
+.ui.basic.primary.active.button,
+.ui.basic.primary.buttons .button:active {
+  background: var(--button-outline-bgColor-active);
+  border-color: var(--button-outline-borderColor-active);
+  box-shadow: none;
+  color: var(--button-outline-fgColor-active);
+}
+
+.ui.basic.primary.button > .svg,
+.ui.basic.primary.buttons .button > .svg {
+  color: inherit;
+}
+
+/* ---------- basic green → default ---------- */
+.ui.basic.green.button,
+.ui.basic.green.buttons .button {
+  background: var(--button-default-bgColor-rest);
+  border-color: var(--button-default-borderColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-default-fgColor-rest);
+}
+
+.ui.basic.green.button:hover,
+.ui.basic.green.buttons .button:hover {
+  background: var(--button-default-bgColor-hover);
+  border-color: var(--button-default-borderColor-hover);
+  color: var(--button-default-fgColor-rest);
+}
+
+.ui.basic.green.button > .svg {
+  color: var(--fgColor-muted);
+}
+
+/* ---------- danger (Gitea red / basic red) ---------- */
+.ui.red.button,
+.ui.red.buttons .button,
+.ui.danger.button {
+  background: var(--button-danger-bgColor-rest);
+  border-color: var(--button-danger-borderColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-danger-fgColor-rest);
+}
+
+.ui.red.button > .svg,
+.ui.red.buttons .button > .svg,
+.ui.danger.button > .svg {
+  color: var(--button-danger-iconColor-rest);
+}
+
+.ui.red.button:hover,
+.ui.red.buttons .button:hover,
+.ui.danger.button:hover {
+  background: var(--button-danger-bgColor-hover);
+  border-color: var(--button-danger-borderColor-hover);
+  box-shadow: var(--shadow-resting-small);
+  color: var(--button-danger-fgColor-hover);
+}
+
+.ui.red.button:hover > .svg,
+.ui.red.buttons .button:hover > .svg,
+.ui.danger.button:hover > .svg {
+  color: var(--button-danger-iconColor-hover);
+}
+
+.ui.red.button:active,
+.ui.red.button[aria-expanded="true"],
+.ui.red.buttons .button:active,
+.ui.danger.button:active {
+  background: var(--button-danger-bgColor-active);
+  border-color: var(--button-danger-borderColor-active);
+  box-shadow: none;
+  color: var(--button-danger-fgColor-active);
+}
+
+.ui.red.button:active > .svg,
+.ui.danger.button:active > .svg {
+  color: var(--button-danger-iconColor-hover);
+}
+
+/* ---------- Gitea "toggle" button (active = on) ---------- */
+.ui.button.toggle.active,
+.ui.button.toggle.active:hover {
+  background: var(--button-default-bgColor-selected);
+  border-color: var(--button-default-borderColor-active);
+  box-shadow: var(--shadow-inset);
+  color: var(--button-default-fgColor-rest);
+}
+
+/* ---------- disabled (opacity reset lives in buttons.important.css) ---------- */
+.ui.button:disabled,
+.ui.disabled.button,
+.ui.button[aria-disabled="true"],
+.ui.buttons .disabled.button {
+  background: var(--button-default-bgColor-disabled);
+  border-color: var(--button-default-borderColor-disabled);
+  box-shadow: none;
+  color: var(--control-fgColor-disabled);
+  cursor: not-allowed;
+}
+
+.ui.button:disabled > .svg,
+.ui.disabled.button > .svg,
+.ui.button[aria-disabled="true"] > .svg {
+  color: inherit;
+}
+
+.ui.primary.button:disabled,
+.ui.primary.disabled.button,
+.ui.primary.button[aria-disabled="true"],
+.ui.green.button:disabled,
+.ui.green.disabled.button {
+  background: var(--button-primary-bgColor-disabled);
+  border-color: var(--button-primary-borderColor-disabled);
+  box-shadow: none;
+  color: var(--button-primary-fgColor-disabled);
+}
+
+.ui.primary.button:disabled > .svg,
+.ui.primary.disabled.button > .svg {
+  color: var(--button-primary-iconColor-disabled);
+}
+
+.ui.basic.primary.button:disabled,
+.ui.basic.primary.disabled.button {
+  background: var(--button-outline-bgColor-disabled);
+  border-color: var(--button-default-borderColor-disabled);
+  color: var(--button-outline-fgColor-disabled);
+}
+
+.ui.red.button:disabled,
+.ui.red.disabled.button,
+.ui.danger.button:disabled,
+.ui.danger.disabled.button {
+  background: var(--button-danger-bgColor-disabled);
+  border-color: var(--button-default-borderColor-disabled);
+  box-shadow: none;
+  color: var(--button-danger-fgColor-disabled);
+}
+
+.ui.red.button:disabled > .svg,
+.ui.red.disabled.button > .svg {
+  color: var(--button-danger-iconColor-disabled);
+}
+
+/* ---------- hidden-text expander ("…" after commit messages) — Primer .ellipsis-expander ---------- */
+.ui.button.ellipsis-button {
+  display: inline-block;
+  min-height: 0;
+  height: var(--base-size-12);
+  white-space: normal;
+  padding: 0 var(--base-size-4) var(--base-size-4);
+  border: 0;
+  border-radius: var(--borderRadius-small);
+  background: var(--bgColor-neutral-muted);
+  box-shadow: none;
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: calc(var(--base-size-12) / 2);
+  vertical-align: middle;
+}
+
+.ui.button.ellipsis-button:hover {
+  background: var(--bgColor-accent-muted);
+  color: var(--fgColor-default);
+}
+
+.ui.button.ellipsis-button:active,
+.ui.button.ellipsis-button[aria-expanded="true"] {
+  background: var(--bgColor-accent-emphasis);
+  box-shadow: none;
+  color: var(--fgColor-onEmphasis);
+}

@@ -1,0 +1,13 @@
+/* Monospace base (Primer base/typography-base.scss: code, samp, tt, pre → mono stack at the small size;
+ * GitHub renders inline/preformatted code at 85% of the surrounding text).
+ * Gitea base.css:96-119 uses 0.95em. Excluded: .markup (markdown folder) and code views (code folder),
+ * where Gitea sets exact 12px on .code-inner / .lines-* cells. */
+:where(pre, code, samp, tt):where(:not(.markup *, .code-inner, .lines-num *, .lines-code *, .code-view *, .chroma *, .EasyMDEContainer *)) {
+  font-family: var(--fontStack-monospace);
+  font-size: 85%;
+}
+
+/* no compounding: code inside pre/code keeps the parent's size */
+:where(pre, code) :where(code, samp, tt):where(:not(.markup *, .code-inner)) {
+  font-size: 100%;
+}

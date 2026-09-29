@@ -1,0 +1,9 @@
+/* github.com leaves ::selection unstyled (getComputedStyle(el, '::selection') is transparent there), so the
+ * browser's native highlight is what GitHub users see, in both schemes. Gitea (base.css:233-237) paints a solid
+ * --color-primary-light-1 with white text. `revert` rolls both properties back to the user-agent origin, which
+ * reproduces the native highlight exactly (verified light + dark against an unstyled page). */
+::selection,
+relative-time::part(root)::selection {
+  color: revert;
+  background-color: revert;
+}

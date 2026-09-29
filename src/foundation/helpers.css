@@ -1,0 +1,18 @@
+/* Help / caption text. GitHub FormControl caption & .note: 12px, --fgColor-muted, 4px above.
+ * Gitea .form .help (modules/form.css:414): --color-secondary-dark-5 at body size. */
+.help {
+  margin-top: var(--base-size-4);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-medium);
+  color: var(--fgColor-muted);
+}
+
+.help code {
+  color: var(--fgColor-muted);
+}
+
+/* Gitea's "text-light" helpers, used for secondary metadata: Primer color-fg-muted. */
+.ui .text.grey,
+.text.grey {
+  color: var(--fgColor-muted);
+}

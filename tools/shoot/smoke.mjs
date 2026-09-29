@@ -138,7 +138,7 @@ try {
   await step('edit-file-new-branch', async () => {
     const tree = await api('GET', `/repos/${repo}/contents?ref=${encodeURIComponent(defaultBranch)}`);
     const files = (tree.json || []).filter((f) => f.type === 'file');
-    const file = (files.find((f) => /^readme(\.md)?$/i.test(f.name)) || files.find((f) => /\.(md|txt)$/i.test(f.name)) || files[0]);
+    const file = (files.find((f) => f.name === "SMOKE.md") || files.find((f) => /\.(txt)$/i.test(f.name)) || files[0]); // never README: it is the markdown showcase
     expect(file, 'seeded repo has no file at the root to edit');
     state.branch = `smoke-${ts}`;
     await page.goto(`${R}/_edit/${encodeURIComponent(defaultBranch)}/${file.path.split('/').map(encodeURIComponent).join('/')}`);

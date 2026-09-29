@@ -1,332 +1,554 @@
 {
-  "$comment": "Route list for tools/shoot. gitea = path on the Gitea instance (or absolute URL); github = reference URL on github.com (logged out) or null to skip. auth:false = capture logged out. {{...}} placeholders are filled by routes-from-manifest.mjs from docs/seed-manifest.json; routes still containing placeholders are skipped. states[].selectors.{gitea,github} override states[].selector per target.",
-  "giteaBase": "http://localhost:3000",
-  "defaultTheme": "github-auto",
-  "routes": [
+ "$comment": "Route list for tools/shoot. gitea = path on the Gitea instance (or absolute URL); github = reference URL on github.com (logged out) or null to skip. auth:false = capture logged out. {{...}} placeholders are filled by routes-from-manifest.mjs from docs/seed-manifest.json; routes still containing placeholders are skipped. states[].selectors.{gitea,github} override states[].selector per target.",
+ "giteaBase": "http://localhost:3000",
+ "defaultTheme": "github-auto",
+ "routes": [
+  {
+   "id": "home",
+   "gitea": "/",
+   "github": null,
+   "states": [
     {
-      "id": "home",
-      "gitea": "/",
-      "github": null,
-      "states": [
-        {
-          "name": "create-menu-open",
-          "action": "click",
-          "selectors": {
-            "gitea": "#navbar .navbar-right .ui.dropdown:has(.octicon-plus)"
-          },
-          "clip": "#navbar .navbar-right .ui.dropdown .menu.visible, #navbar .navbar-right .ui.dropdown .menu",
-          "pad": 16,
-          "viewports": [
-            1440
-          ]
-        },
-        {
-          "name": "avatar-menu-open",
-          "action": "click",
-          "selectors": {
-            "gitea": "#navbar .navbar-right .ui.dropdown:has(.navbar-avatar)"
-          },
-          "clip": "#navbar .navbar-right .ui.dropdown .menu.visible, #navbar .navbar-right .ui.dropdown .menu",
-          "pad": 16,
-          "viewports": [
-            1440
-          ]
-        },
-        {
-          "name": "mobile-menu-open",
-          "action": "click",
-          "viewports": [
-            390
-          ],
-          "selectors": {
-            "gitea": "#navbar-expand-toggle"
-          },
-          "clip": "#navbar",
-          "pad": 0
-        }
-      ]
+     "name": "create-menu-open",
+     "action": "click",
+     "selectors": {
+      "gitea": "#navbar .navbar-right .ui.dropdown:has(.octicon-plus)"
+     },
+     "clip": "#navbar .navbar-right .ui.dropdown .menu.visible, #navbar .navbar-right .ui.dropdown .menu",
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
     },
     {
-      "id": "explore-repos",
-      "gitea": "/explore/repos",
-      "github": "https://github.com/explore",
-      "states": [
-        {
-          "name": "search-focus",
-          "action": "focus",
-          "selectors": {
-            "gitea": ".page-content input[name=q]",
-            "github": "header input, header button[aria-label*=Search i], .header-search-button"
-          }
-        },
-        {
-          "name": "sort-open",
-          "action": "click",
-          "selectors": {
-            "gitea": ".page-content form .item.ui.small.dropdown:has-text('Sort')"
-          },
-          "clip": ".page-content form .ui.dropdown .menu.visible",
-          "pad": 16
-        }
-      ]
+     "name": "avatar-menu-open",
+     "action": "click",
+     "selectors": {
+      "gitea": "#navbar .navbar-right .ui.dropdown:has(.navbar-avatar)"
+     },
+     "clip": "#navbar .navbar-right .ui.dropdown .menu.visible, #navbar .navbar-right .ui.dropdown .menu",
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
     },
     {
-      "id": "explore-users",
-      "gitea": "/explore/users",
-      "github": "https://github.com/search?q=gitea&type=users"
-    },
-    {
-      "id": "explore-orgs",
-      "gitea": "/explore/organizations",
-      "github": "https://github.com/search?q=gitea+type%3Aorg&type=users"
-    },
-    {
-      "id": "login",
-      "gitea": "/user/login",
-      "github": "https://github.com/login",
-      "auth": false,
-      "states": [
-        {
-          "name": "input-focus",
-          "action": "focus",
-          "selectors": {
-            "gitea": "#user_name",
-            "github": "#login_field"
-          }
-        },
-        {
-          "name": "primary-hover",
-          "action": "hover",
-          "selectors": {
-            "gitea": "form button.ui.primary.button",
-            "github": "input[type=submit][name=commit]"
-          }
-        },
-        {
-          "name": "primary-press",
-          "action": "press",
-          "selectors": {
-            "gitea": "form button.ui.primary.button",
-            "github": "input[type=submit][name=commit]"
-          }
-        },
-        {
-          "name": "primary-focus",
-          "action": "focus",
-          "selectors": {
-            "gitea": "form button.ui.primary.button",
-            "github": "input[type=submit][name=commit]"
-          }
-        },
-        {
-          "name": "primary-disabled",
-          "action": "disable",
-          "selectors": {
-            "gitea": "form button.ui.primary.button",
-            "github": "input[type=submit][name=commit]"
-          }
-        },
-        {
-          "name": "validation-error",
-          "action": "submitEmpty",
-          "selectors": {
-            "gitea": "form[action*='/user/login']"
-          },
-          "clip": "main, .page-content, [role=main]"
-        }
-      ]
-    },
-    {
-      "id": "signup",
-      "gitea": "/user/sign_up",
-      "github": "https://github.com/signup",
-      "auth": false,
-      "states": [
-        {
-          "name": "validation-error",
-          "action": "submitEmpty",
-          "selectors": {
-            "gitea": "form[action*='/user/sign_up']"
-          },
-          "clip": ".page-content"
-        }
-      ]
-    },
-    {
-      "id": "user-profile",
-      "gitea": "/admin",
-      "github": "https://github.com/octocat"
-    },
-    {
-      "id": "site-admin",
-      "gitea": "/-/admin",
-      "github": null
-    },
-    {
-      "id": "site-admin-users",
-      "gitea": "/-/admin/users",
-      "github": null
-    },
-    {
-      "id": "site-admin-config",
-      "gitea": "/-/admin/config",
-      "github": null
-    },
-    {
-      "id": "user-settings",
-      "gitea": "/user/settings",
-      "github": null
-    },
-    {
-      "id": "user-settings-appearance",
-      "gitea": "/user/settings/appearance",
-      "github": null,
-      "states": [
-        {
-          "name": "theme-dropdown-open",
-          "action": "click",
-          "selectors": {
-            "gitea": "form[action$='/theme'] .ui.selection.dropdown"
-          },
-          "clip": "form[action$='/theme']",
-          "pad": 16
-        }
-      ]
-    },
-    {
-      "id": "user-settings-keys",
-      "gitea": "/user/settings/keys",
-      "github": null,
-      "states": [
-        {
-          "name": "add-key-panel",
-          "action": "click",
-          "selectors": {
-            "gitea": "button.show-panel.toggle[data-panel='#add-ssh-key-panel'], .user-setting-content button.show-panel"
-          },
-          "clip": ".user-setting-content",
-          "pad": 0
-        }
-      ]
-    },
-    {
-      "id": "notifications",
-      "gitea": "/notifications",
-      "github": null
-    },
-    {
-      "id": "repo-home",
-      "gitea": "/admin/jiri",
-      "github": "https://github.com/go-gitea/gitea",
-      "states": [
-        {
-          "name": "branch-menu-open",
-          "action": "click",
-          "selectors": {
-            "gitea": ".branch-dropdown-button",
-            "github": "button[data-testid='anchor-button']:has(.octicon-git-branch), #branch-picker-repos-header-ref-selector, button:has(svg.octicon-git-branch)"
-          },
-          "pad": 16,
-          "clips": {
-            "gitea": ".branch-selector-dropdown .menu",
-            "github": "[class*='prc-Overlay-Overlay'], [class*='AnchoredOverlay'], [role=dialog]"
-          }
-        },
-        {
-          "name": "code-menu-open",
-          "action": "click",
-          "selectors": {
-            "gitea": ".repo-button-row .ui.primary.button:has(.octicon-code), .repo-home-sidebar-top .clone-panel-button, #repo-clone-panel-btn, .clone-panel-button, button:has-text('Code')",
-            "github": "button:has-text('Code')"
-          },
-          "pad": 16,
-          "clips": {
-            "gitea": ".tippy-box",
-            "github": "[class*='prc-Overlay-Overlay'], [class*='AnchoredOverlay'], [role=dialog]"
-          }
-        },
-        {
-          "name": "file-row-hover",
-          "action": "hover",
-          "selectors": {
-            "gitea": "#repo-files-table .repo-file-item, #repo-files-table .repo-file-line",
-            "github": "table[aria-labelledby=folders-and-files] tbody tr.react-directory-row"
-          }
-        }
-      ]
-    },
-    {
-      "id": "repo-issues",
-      "gitea": "/admin/jiri/issues",
-      "github": "https://github.com/go-gitea/gitea/issues",
-      "states": [
-        {
-          "name": "filter-open",
-          "action": "click",
-          "selectors": {
-            "gitea": ".ui.secondary.filter.menu.labels .item.ui.dropdown.jump:has-text('Sort')"
-          },
-          "clip": ".ui.secondary.filter.menu .menu.visible",
-          "pad": 16
-        }
-      ]
-    },
-    {
-      "id": "repo-settings",
-      "gitea": "/admin/jiri/settings",
-      "github": null,
-      "states": [
-        {
-          "name": "modal-open",
-          "action": "click",
-          "selectors": {
-            "gitea": "button.show-modal[data-modal='#transfer-repo-modal']"
-          },
-          "clip": ".ui.modal.visible, .ui.modal.active",
-          "pad": 16
-        }
-      ]
-    },
-    {
-      "id": "not-found",
-      "gitea": "/this-page-does-not-exist-404",
-      "github": "https://github.com/this-page-does-not-exist-404/nope",
-      "expectStatus": 404
-    },
-    {
-      "id": "repo-code-file",
-      "gitea": "{{repo.theme-playground}}/src/branch/{{branch.theme-playground}}/README.md",
-      "github": "https://github.com/go-gitea/gitea/blob/main/README.md"
-    },
-    {
-      "id": "repo-issue",
-      "gitea": "{{issue.theme-playground}}",
-      "github": "https://github.com/go-gitea/gitea/issues/1"
-    },
-    {
-      "id": "repo-pulls",
-      "gitea": "{{repo.theme-playground}}/pulls",
-      "github": "https://github.com/go-gitea/gitea/pulls"
-    },
-    {
-      "id": "repo-pull",
-      "gitea": "{{pull.theme-playground}}",
-      "github": "https://github.com/go-gitea/gitea/pull/1"
-    },
-    {
-      "id": "repo-pull-files",
-      "gitea": "{{pull.theme-playground}}/files",
-      "github": "https://github.com/go-gitea/gitea/pull/1/files"
-    },
-    {
-      "id": "repo-commits",
-      "gitea": "{{repo.theme-playground}}/commits/branch/{{branch.theme-playground}}",
-      "github": "https://github.com/go-gitea/gitea/commits/main"
-    },
-    {
-      "id": "org-home",
-      "gitea": "{{org.octo-org}}",
-      "github": "https://github.com/go-gitea"
+     "name": "mobile-menu-open",
+     "action": "click",
+     "viewports": [
+      390
+     ],
+     "selectors": {
+      "gitea": "#navbar-expand-toggle"
+     },
+     "clip": "#navbar",
+     "pad": 0
     }
-  ]
+   ]
+  },
+  {
+   "id": "explore-repos",
+   "gitea": "/explore/repos",
+   "github": "https://github.com/explore",
+   "states": [
+    {
+     "name": "search-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".page-content input[name=q]",
+      "github": "header input, header button[aria-label*=Search i], .header-search-button"
+     }
+    },
+    {
+     "name": "sort-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".page-content form .item.ui.small.dropdown:has-text('Sort')"
+     },
+     "clip": ".page-content form .ui.dropdown .menu.visible",
+     "pad": 16
+    }
+   ]
+  },
+  {
+   "id": "explore-users",
+   "gitea": "/explore/users",
+   "github": null
+  },
+  {
+   "id": "explore-orgs",
+   "gitea": "/explore/organizations",
+   "github": null
+  },
+  {
+   "id": "login",
+   "gitea": "/user/login",
+   "github": "https://github.com/login",
+   "auth": false,
+   "states": [
+    {
+     "name": "input-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": "#user_name",
+      "github": "#login_field"
+     }
+    },
+    {
+     "name": "primary-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "form button.ui.primary.button",
+      "github": "input[type=submit][name=commit]"
+     }
+    },
+    {
+     "name": "primary-press",
+     "action": "press",
+     "selectors": {
+      "gitea": "form button.ui.primary.button",
+      "github": "input[type=submit][name=commit]"
+     }
+    },
+    {
+     "name": "primary-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": "form button.ui.primary.button",
+      "github": "input[type=submit][name=commit]"
+     }
+    },
+    {
+     "name": "primary-disabled",
+     "action": "disable",
+     "selectors": {
+      "gitea": "form button.ui.primary.button",
+      "github": "input[type=submit][name=commit]"
+     }
+    },
+    {
+     "name": "validation-error",
+     "action": "submitEmpty",
+     "selectors": {
+      "gitea": "form[action*='/user/login']"
+     },
+     "clip": "main, .page-content, [role=main]"
+    }
+   ]
+  },
+  {
+   "id": "signup",
+   "gitea": "/user/sign_up",
+   "github": "https://github.com/signup",
+   "auth": false,
+   "states": [
+    {
+     "name": "validation-error",
+     "action": "submitEmpty",
+     "selectors": {
+      "gitea": "form[action*='/user/sign_up']"
+     },
+     "clip": ".page-content"
+    }
+   ]
+  },
+  {
+   "id": "user-profile",
+   "gitea": "/alice-dev",
+   "github": "https://github.com/pemistahl"
+  },
+  {
+   "id": "site-admin",
+   "gitea": "/-/admin",
+   "github": null
+  },
+  {
+   "id": "site-admin-users",
+   "gitea": "/-/admin/users",
+   "github": null
+  },
+  {
+   "id": "site-admin-config",
+   "gitea": "/-/admin/config",
+   "github": null
+  },
+  {
+   "id": "user-settings",
+   "gitea": "/user/settings",
+   "github": null
+  },
+  {
+   "id": "user-settings-appearance",
+   "gitea": "/user/settings/appearance",
+   "github": null,
+   "states": [
+    {
+     "name": "theme-dropdown-open",
+     "action": "click",
+     "selectors": {
+      "gitea": "form[action$='/theme'] .ui.selection.dropdown"
+     },
+     "clip": "form[action$='/theme']",
+     "pad": 16
+    }
+   ]
+  },
+  {
+   "id": "user-settings-keys",
+   "gitea": "/user/settings/keys",
+   "github": null,
+   "states": [
+    {
+     "name": "add-key-panel",
+     "action": "click",
+     "selectors": {
+      "gitea": "button.show-panel.toggle[data-panel='#add-ssh-key-panel'], .user-setting-content button.show-panel"
+     },
+     "clip": ".user-setting-content",
+     "pad": 0
+    }
+   ]
+  },
+  {
+   "id": "notifications",
+   "gitea": "/notifications",
+   "github": null
+  },
+  {
+   "id": "repo-home",
+   "gitea": "/octo-org/grex",
+   "github": "https://github.com/pemistahl/grex",
+   "states": [
+    {
+     "name": "branch-menu-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".branch-dropdown-button",
+      "github": "button[data-testid='anchor-button']:has(.octicon-git-branch), #branch-picker-repos-header-ref-selector, button:has(svg.octicon-git-branch)"
+     },
+     "pad": 16,
+     "clips": {
+      "gitea": ".branch-selector-dropdown .menu",
+      "github": "[class*='prc-Overlay-Overlay'], [class*='AnchoredOverlay'], [role=dialog]"
+     }
+    },
+    {
+     "name": "code-menu-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".repo-button-row .ui.primary.button:has(.octicon-code), .repo-home-sidebar-top .clone-panel-button, #repo-clone-panel-btn, .clone-panel-button, button:has-text('Code')",
+      "github": "button:has-text('Code')"
+     },
+     "pad": 16,
+     "clips": {
+      "gitea": ".tippy-box",
+      "github": "[class*='prc-Overlay-Overlay'], [class*='AnchoredOverlay'], [role=dialog]"
+     }
+    },
+    {
+     "name": "file-row-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#repo-files-table .repo-file-item, #repo-files-table .repo-file-line",
+      "github": "table[aria-labelledby=folders-and-files] tbody tr.react-directory-row"
+     }
+    }
+   ]
+  },
+  {
+   "id": "repo-issues",
+   "gitea": "/octo-org/grex/issues",
+   "github": "https://github.com/pemistahl/grex/issues",
+   "states": [
+    {
+     "name": "filter-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".ui.secondary.filter.menu.labels .item.ui.dropdown.jump:has-text('Sort')"
+     },
+     "clip": ".ui.secondary.filter.menu .menu.visible",
+     "pad": 16
+    }
+   ]
+  },
+  {
+   "id": "repo-settings",
+   "gitea": "/octo-org/grex/settings",
+   "github": null,
+   "states": [
+    {
+     "name": "modal-open",
+     "action": "click",
+     "selectors": {
+      "gitea": "button.show-modal[data-modal='#transfer-repo-modal']"
+     },
+     "clip": ".ui.modal.visible, .ui.modal.active",
+     "pad": 16
+    }
+   ]
+  },
+  {
+   "id": "not-found",
+   "gitea": "/this-page-does-not-exist-theme-seed",
+   "github": "https://github.com/this-page-does-not-exist-theme-seed",
+   "expectStatus": 404
+  },
+  {
+   "id": "repo-code-file",
+   "gitea": "/octo-org/grex/src/branch/main/src/main.rs",
+   "github": "https://github.com/pemistahl/grex/blob/main/src/main.rs",
+   "giteaTemplate": "{{repo.theme-playground}}/src/branch/{{branch.theme-playground}}/README.md"
+  },
+  {
+   "id": "repo-issue",
+   "gitea": "/octo-org/grex/issues/35",
+   "github": "https://github.com/pemistahl/grex/issues/35",
+   "giteaTemplate": "{{issue.theme-playground}}"
+  },
+  {
+   "id": "repo-pulls",
+   "gitea": "/octo-org/grex/pulls",
+   "github": "https://github.com/pemistahl/grex/pulls",
+   "giteaTemplate": "{{repo.theme-playground}}/pulls"
+  },
+  {
+   "id": "repo-pull",
+   "gitea": "/octo-org/grex/pulls/42",
+   "github": "https://github.com/pemistahl/grex/pull/42",
+   "giteaTemplate": "{{pull.theme-playground}}"
+  },
+  {
+   "id": "repo-pull-files",
+   "gitea": "/octo-org/grex/pulls/42/files?style=split",
+   "github": "https://github.com/pemistahl/grex/pull/42/files?diff=split",
+   "giteaTemplate": "{{pull.theme-playground}}/files"
+  },
+  {
+   "id": "repo-commits",
+   "gitea": "/octo-org/grex/commits/branch/main",
+   "github": "https://github.com/pemistahl/grex/commits/main",
+   "giteaTemplate": "{{repo.theme-playground}}/commits/branch/{{branch.theme-playground}}"
+  },
+  {
+   "id": "org-home",
+   "gitea": "/octo-org",
+   "github": "https://github.com/go-gitea",
+   "giteaTemplate": "{{org.octo-org}}"
+  },
+  {
+   "id": "repo-home-markdown-showcase-playground",
+   "gitea": "/octo-org/theme-playground",
+   "github": null
+  },
+  {
+   "id": "file-view-markdown",
+   "gitea": "/octo-org/grex/src/branch/main/README.md",
+   "github": "https://github.com/pemistahl/grex/blob/main/README.md"
+  },
+  {
+   "id": "file-view-large-file-playground",
+   "gitea": "/octo-org/theme-playground/src/branch/main/internal/palette/generated.go",
+   "github": null
+  },
+  {
+   "id": "file-view-image-playground",
+   "gitea": "/octo-org/theme-playground/src/branch/main/assets/images/logo.png",
+   "github": null
+  },
+  {
+   "id": "directory-tree",
+   "gitea": "/octo-org/grex/src/branch/main/src",
+   "github": "https://github.com/pemistahl/grex/tree/main/src"
+  },
+  {
+   "id": "blame",
+   "gitea": "/octo-org/grex/blame/branch/main/README.md",
+   "github": "https://github.com/pemistahl/grex/blame/main/README.md"
+  },
+  {
+   "id": "blame-playground-multiple-authors",
+   "gitea": "/octo-org/theme-playground/blame/branch/main/internal/render/render.go",
+   "github": null
+  },
+  {
+   "id": "commit-detail",
+   "gitea": "/octo-org/grex/commit/99cc347707375e00514f938b76d885a201dfc110",
+   "github": "https://github.com/pemistahl/grex/commit/99cc347707375e00514f938b76d885a201dfc110"
+  },
+  {
+   "id": "branches",
+   "gitea": "/octo-org/grex/branches",
+   "github": "https://github.com/pemistahl/grex/branches"
+  },
+  {
+   "id": "tags",
+   "gitea": "/octo-org/grex/tags",
+   "github": "https://github.com/pemistahl/grex/tags"
+  },
+  {
+   "id": "releases",
+   "gitea": "/octo-org/grex/releases",
+   "github": "https://github.com/pemistahl/grex/releases"
+  },
+  {
+   "id": "release-detail",
+   "gitea": "/octo-org/grex/releases/tag/v1.4.6",
+   "github": "https://github.com/pemistahl/grex/releases/tag/v1.4.6"
+  },
+  {
+   "id": "releases-playground-with-assets-prerelease-draft",
+   "gitea": "/octo-org/theme-playground/releases",
+   "github": null
+  },
+  {
+   "id": "wiki-home",
+   "gitea": "/octo-org/folderify/wiki",
+   "github": "https://github.com/lgarron/folderify/wiki"
+  },
+  {
+   "id": "wiki-page-list",
+   "gitea": "/octo-org/folderify/wiki/?action=_pages",
+   "github": "https://github.com/lgarron/folderify/wiki/_pages"
+  },
+  {
+   "id": "wiki-page",
+   "gitea": "/octo-org/folderify/wiki/Home",
+   "github": "https://github.com/lgarron/folderify/wiki/Home"
+  },
+  {
+   "id": "repo-home-readme-with-images-and-tables",
+   "gitea": "/octo-org/prom_ex",
+   "github": "https://github.com/akoutmos/prom_ex"
+  },
+  {
+   "id": "wiki-page-playground",
+   "gitea": "/octo-org/theme-playground/wiki/Architecture",
+   "github": null
+  },
+  {
+   "id": "issues-list-closed",
+   "gitea": "/octo-org/grex/issues?state=closed",
+   "github": "https://github.com/pemistahl/grex/issues?q=is%3Aissue%20state%3Aclosed"
+  },
+  {
+   "id": "issue-detail-playground-reactions-alerts-tables",
+   "gitea": "/octo-org/theme-playground/issues/2",
+   "github": null
+  },
+  {
+   "id": "labels",
+   "gitea": "/octo-org/grex/labels",
+   "github": "https://github.com/pemistahl/grex/labels"
+  },
+  {
+   "id": "milestones",
+   "gitea": "/octo-org/grex/milestones",
+   "github": "https://github.com/pemistahl/grex/milestones"
+  },
+  {
+   "id": "pr-conversation-open",
+   "gitea": "/octo-org/grex/pulls/358",
+   "github": "https://github.com/pemistahl/grex/pull/358"
+  },
+  {
+   "id": "pr-commits-tab",
+   "gitea": "/octo-org/grex/pulls/42/commits",
+   "github": "https://github.com/pemistahl/grex/pull/42/commits"
+  },
+  {
+   "id": "pr-conversation-closed-unmerged",
+   "gitea": "/octo-org/grex/pulls/348",
+   "github": "https://github.com/pemistahl/grex/pull/348"
+  },
+  {
+   "id": "pr-files-changed-unified",
+   "gitea": "/octo-org/grex/pulls/42/files?style=unified",
+   "github": "https://github.com/pemistahl/grex/pull/42/files?diff=unified"
+  },
+  {
+   "id": "pr-conversation-playground-large-diff-reviews",
+   "gitea": "/octo-org/theme-playground/pulls/16",
+   "github": null
+  },
+  {
+   "id": "pr-files-changed-split-playground-large-diff",
+   "gitea": "/octo-org/theme-playground/pulls/16/files?style=split",
+   "github": null
+  },
+  {
+   "id": "pr-files-changed-unified-playground-large-diff",
+   "gitea": "/octo-org/theme-playground/pulls/16/files?style=unified",
+   "github": null
+  },
+  {
+   "id": "pr-commits-tab-playground",
+   "gitea": "/octo-org/theme-playground/pulls/16/commits",
+   "github": null
+  },
+  {
+   "id": "pr-draft-wip-playground",
+   "gitea": "/octo-org/theme-playground/pulls/19",
+   "github": null
+  },
+  {
+   "id": "compare-two-tags",
+   "gitea": "/octo-org/grex/compare/v1.4.5...v1.4.6",
+   "github": "https://github.com/pemistahl/grex/compare/v1.4.5...v1.4.6"
+  },
+  {
+   "id": "actions-list",
+   "gitea": "/octo-org/theme-playground/actions",
+   "github": "https://github.com/pemistahl/grex/actions"
+  },
+  {
+   "id": "action-run",
+   "gitea": "/octo-org/theme-playground/actions/runs/19",
+   "github": "https://github.com/pemistahl/grex/actions/runs/36326137924"
+  },
+  {
+   "id": "packages-org",
+   "gitea": "/octo-org/-/packages",
+   "github": null
+  },
+  {
+   "id": "package-detail-npm",
+   "gitea": "/octo-org/-/packages/npm/%40octo-org%2Ftheme-tokens/1.0.0",
+   "github": null
+  },
+  {
+   "id": "projects-list",
+   "gitea": "/octo-org/theme-playground/projects",
+   "github": null
+  },
+  {
+   "id": "project-board",
+   "gitea": "/octo-org/theme-playground/projects/2",
+   "github": null
+  },
+  {
+   "id": "user-profile-stars-tab",
+   "gitea": "/alice-dev?tab=stars",
+   "github": "https://github.com/pemistahl?tab=stars"
+  },
+  {
+   "id": "user-profile-repositories-tab",
+   "gitea": "/alice-dev?tab=repositories",
+   "github": "https://github.com/pemistahl?tab=repositories"
+  },
+  {
+   "id": "org-members",
+   "gitea": "/org/octo-org/members",
+   "github": "https://github.com/orgs/go-gitea/people"
+  },
+  {
+   "id": "org-teams",
+   "gitea": "/org/octo-org/teams",
+   "github": null
+  },
+  {
+   "id": "admin-repos",
+   "gitea": "/-/admin/repos",
+   "github": null
+  }
+ ]
 }

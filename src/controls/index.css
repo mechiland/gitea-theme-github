@@ -1,1 +1,16 @@
-/* src/controls — see ARCHITECTURE.md for ownership. Entry file: @import this folder's files here. */
+/*
+ * src/controls — Primer controls for Gitea (layer gh.controls).
+ * Owns: .ui.button*, .ui.buttons, .ui.labeled.button, inputs, textareas, selects,
+ * .ui.selection.dropdown (closed control), checkboxes, radios, toggles, .ui.form fields.
+ * Specs: Primer React Button / IconButton / ButtonGroup / SegmentedControl / TextInput /
+ * Textarea / Select / Checkbox / Radio / ToggleSwitch / FormControl (primer.style storybook CSS,
+ * captured 2026-09-30) + @primer/css buttons/, forms/.
+ * Every rule here overrides Gitea's layer "gitea" by layer order, so whenever a base selector
+ * overrides a property that Gitea varies in a more specific selector, the variant is restated here.
+ */
+@import "./buttons.css";
+@import "./button-groups.css";
+@import "./inputs.css";
+@import "./select.css";
+@import "./checkbox.css";
+@import "./form.css";
