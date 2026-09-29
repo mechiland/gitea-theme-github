@@ -1,0 +1,25 @@
+{
+  "name": "gitea-theme-github",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "GitHub (Primer) theme for Gitea 1.27.3",
+  "scripts": {
+    "tokens": "node build/gen-tokens.mjs",
+    "lint": "node build/lint.mjs",
+    "build": "node build/build.mjs",
+    "deploy": "node build/build.mjs --deploy",
+    "seed": "node tools/seed/seed.mjs",
+    "shoot": "node tools/shoot/shoot.mjs",
+    "smoke": "node tools/shoot/smoke.mjs"
+  },
+  "devDependencies": {
+    "@primer/css": "22.3.2",
+    "@primer/octicons": "19.38.0",
+    "@primer/primitives": "11.10.0",
+    "lightningcss": "1.33.0",
+    "playwright": "1.63.0",
+    "postcss": "8.5.28",
+    "postcss-import": "17.0.0"
+  }
+}

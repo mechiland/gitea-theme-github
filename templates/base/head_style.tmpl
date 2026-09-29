@@ -1,0 +1,12 @@
+{{$theme := ctx.CurrentWebTheme.InternalName}}
+{{if StringUtils.HasPrefix $theme "github-"}}
+{{/* GitHub theme (gitea-theme-github, see ARCHITECTURE.md §Cascade): Gitea's own stylesheet is imported into the
+     low-priority cascade layer "gitea" so the theme's per-folder layers win without specificity wars.
+     Order: gh-important (only for beating Gitea !important), gitea, gh.* (theme folders). */}}
+{{range StringUtils.Split (StringUtils.ToString (AssetCSSLinks "web_src/js/index.ts" "web_src/css/index.css")) "\""}}{{if StringUtils.Contains . ".css"}}<link rel="preload" as="style" href="{{.}}">{{end}}{{end}}
+<style>@layer gh-important, gitea, gh;{{range StringUtils.Split (StringUtils.ToString (AssetCSSLinks "web_src/js/index.ts" "web_src/css/index.css")) "\""}}{{if StringUtils.Contains . ".css"}}@import url("{{.}}") layer(gitea);{{end}}{{end}}</style>
+<link rel="stylesheet" href="{{ctx.CurrentWebTheme.PublicAssetURI}}?github_revision=0000000000">
+{{else}}
+{{AssetCSSLinks "web_src/js/index.ts" "web_src/css/index.css"}}
+<link rel="stylesheet" href="{{ctx.CurrentWebTheme.PublicAssetURI}}{{if or (eq $theme "modern") (eq $theme "modern-light") (eq $theme "modern-dark")}}?modern_revision=a5295649eb{{end}}">
+{{end}}

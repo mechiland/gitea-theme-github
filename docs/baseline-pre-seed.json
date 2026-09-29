@@ -1,0 +1,25 @@
+{
+  "captured": "2026-09-29",
+  "gitea_version": "1.27.3",
+  "users": [
+    "admin"
+  ],
+  "orgs": [
+    "ai"
+  ],
+  "repos": [
+    "admin/jiri",
+    "ai/jiri"
+  ],
+  "admin_settings": {
+    "full_name": "",
+    "website": "",
+    "description": "",
+    "location": "",
+    "language": "en-US",
+    "theme": "gitea-auto-tritanopia",
+    "diff_view_style": "unified",
+    "hide_email": false,
+    "hide_activity": false
+  }
+}

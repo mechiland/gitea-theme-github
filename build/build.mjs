@@ -1,0 +1,231 @@
+// Builds dist/theme-github-{light,dark,auto}.css from src/ and (with --deploy) syncs them into Gitea's CUSTOM_PATH.
+//
+//   node build/build.mjs [--deploy] [--exclude a,b] [--no-lint] [--no-prune]
+//
+// Per folder: postcss-import resolves the folder's index.css; *.important.css files go to @layer gh-important.
+// A folder that fails to parse/compile or lint is EXCLUDED (reported in dist/build-report.json) — the rest
+// of the theme is still produced (failure isolation). A folder can also be disabled with src/<folder>/.disabled.
+// Primer tokens not transitively referenced by the mapping or any folder are pruned to respect the size budget.
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import postcss from 'postcss';
+import postcssImport from 'postcss-import';
+import {transform} from 'lightningcss';
+import {FOLDERS, THEMES, SRC, DIST, ROOT, CUSTOM_PATH, GITEA_URL, GITEA_CONTAINER, BUDGET_BYTES, layerName} from './folders.mjs';
+import {lintAll} from './lint.mjs';
+
+const argv = process.argv.slice(2);
+const flag = (n) => argv.includes(`--${n}`);
+const opt = (n) => { const i = argv.indexOf(`--${n}`); return i >= 0 ? argv[i + 1] : undefined; };
+const excluded = new Set((opt('exclude') || '').split(',').filter(Boolean));
+const report = {startedAt: new Date().toISOString(), folders: {}, themes: {}, deploy: null};
+const read = (p) => fs.readFileSync(p, 'utf8');
+const TARGETS = {chrome: 111 << 16, firefox: 113 << 16, safari: (16 << 16) | (5 << 8)};
+
+function validate(css, filename) {
+  // throws on syntax errors; returns nothing. Keeps modern syntax (targets are recent evergreen browsers).
+  transform({filename, code: Buffer.from(css), minify: false, targets: TARGETS, errorRecovery: false});
+}
+
+async function compileFolder(folder) {
+  const dir = path.join(SRC, folder);
+  if (!fs.existsSync(path.join(dir, 'index.css'))) return {css: '', important: '', files: 0};
+  const res = await postcss([postcssImport({root: dir})]).process(read(path.join(dir, 'index.css')), {from: path.join(dir, 'index.css')});
+  const importantFiles = fs.readdirSync(dir, {recursive: true}).filter((f) => f.endsWith('.important.css')).sort();
+  let important = '';
+  for (const f of importantFiles) important += `/* ${folder}/${f} */\n${read(path.join(dir, f))}\n`;
+  validate(res.css, `${folder}/index.css`);
+  if (important) validate(important, `${folder}/*.important.css`);
+  return {css: res.css, important, files: res.messages.filter((m) => m.type === 'dependency').length + 1 + importantFiles.length};
+}
+
+// ---- 1. lint + compile folders -------------------------------------------------------------------------
+const lint = flag('no-lint') ? [] : await lintAll(FOLDERS);
+const compiled = {};
+for (const folder of FOLDERS) {
+  const entry = report.folders[folder] = {status: 'ok'};
+  if (excluded.has(folder) || fs.existsSync(path.join(SRC, folder, '.disabled'))) { entry.status = 'excluded (disabled)'; continue; }
+  const l = lint.find((r) => r.folder === folder);
+  if (l) { entry.lintErrors = l.errors.length; entry.lintWarnings = l.warnings.length; }
+  if (l?.errors.length) { entry.status = 'excluded (lint errors)'; entry.errors = l.errors.slice(0, 30); continue; }
+  try {
+    compiled[folder] = await compileFolder(folder);
+    entry.files = compiled[folder].files;
+    entry.bytes = compiled[folder].css.length + compiled[folder].important.length;
+  } catch (e) {
+    entry.status = 'excluded (compile error)';
+    entry.errors = [String(e.message || e) + (e.loc ? ` @${e.fileName}:${e.loc.line}` : '')];
+  }
+}
+
+// ---- 2. tokens -----------------------------------------------------------------------------------------
+const tok = (f) => read(path.join(SRC, 'tokens', f));
+const colorTokens = {light: tok('generated/primer-color-light.css'), dark: tok('generated/primer-color-dark.css')};
+const scaleTokens = tok('generated/primer-scale.css');
+const giteaMap = tok('gitea-map.css');
+const schemeCss = {light: tok('scheme-light.css'), dark: tok('scheme-dark.css')};
+
+function prune(allComponentCss) {
+  const defs = new Map(); // name -> value (union of both schemes + scale)
+  for (const css of [colorTokens.light, colorTokens.dark, scaleTokens]) {
+    for (const m of css.matchAll(/(--[\w-]+)\s*:\s*([^;]*);/g)) defs.set(m[1], `${defs.get(m[1]) || ''} ${m[2]}`);
+  }
+  const used = new Set();
+  const queue = [...(giteaMap + schemeCss.light + schemeCss.dark + allComponentCss).matchAll(/var\(\s*(--[\w-]+)/g)].map((m) => m[1]);
+  while (queue.length) {
+    const n = queue.pop();
+    if (used.has(n)) continue;
+    used.add(n);
+    for (const m of (defs.get(n) || '').matchAll(/var\(\s*(--[\w-]+)/g)) queue.push(m[1]);
+  }
+  const keep = (css) => css.split('\n').filter((line) => {
+    const m = line.match(/^\s*(--[\w-]+)\s*:/);
+    return !m || used.has(m[1]);
+  }).join('\n');
+  return {light: keep(colorTokens.light), dark: keep(colorTokens.dark), scale: keep(scaleTokens), used: used.size, total: defs.size};
+}
+
+// ---- 3. assemble per theme -----------------------------------------------------------------------------
+const layerOrder = `@layer gh-important, gitea, gh;\n@layer ${['tokens', ...FOLDERS].map((f) => layerName(f).replace(/^gh\./, 'gh.')).join(', ')};\n`;
+const wrap = (layer, css) => (css.trim() ? `@layer ${layer} {\n${css}\n}\n` : '');
+
+function componentCss(scheme) {
+  let out = '';
+  let imp = '';
+  for (const folder of FOLDERS) {
+    const c = compiled[folder];
+    if (!c) continue;
+    if (folder === 'dark') {
+      if (scheme === 'light') continue;
+      const body = scheme === 'auto' ? `@media (prefers-color-scheme: dark) {\n${c.css}\n}` : c.css;
+      out += wrap(layerName(folder), body);
+      if (c.important) imp += scheme === 'auto' ? `@media (prefers-color-scheme: dark) {\n${c.important}\n}\n` : c.important;
+      continue;
+    }
+    out += wrap(layerName(folder), c.css);
+    imp += c.important;
+  }
+  return {out, imp};
+}
+
+const allComponent = Object.values(compiled).map((c) => c.css + c.important).join('\n');
+const tokens = flag('no-prune') ? {light: colorTokens.light, dark: colorTokens.dark, scale: scaleTokens, used: 'all', total: 'all'} : prune(allComponent);
+report.tokens = {used: tokens.used, total: tokens.total};
+
+fs.mkdirSync(DIST, {recursive: true});
+const version = JSON.parse(read(path.join(ROOT, 'package.json'))).version;
+const primerVersion = read(path.join(SRC, 'tokens/generated/VERSION')).trim();
+for (const [name, meta] of Object.entries(THEMES)) {
+  const {scheme} = meta;
+  let tokenCss;
+  if (scheme === 'auto') {
+    tokenCss = `${tokens.scale}\n@media (prefers-color-scheme: light) {\n${tokens.light}\n${schemeCss.light}\n}\n@media (prefers-color-scheme: dark) {\n${tokens.dark}\n${schemeCss.dark}\n}\n${giteaMap}`;
+  } else {
+    tokenCss = `${tokens.scale}\n${tokens[scheme]}\n${schemeCss[scheme]}\n${giteaMap}`;
+  }
+  const {out, imp} = componentCss(scheme);
+  const source = `${layerOrder}${wrap('gh.tokens', tokenCss)}${out}${wrap('gh-important', imp)}`;
+  let min;
+  try {
+    min = transform({filename: `${name}.css`, code: Buffer.from(source), minify: true, targets: TARGETS}).code.toString();
+  } catch (e) {
+    console.error(`✗ ${name}: minify failed: ${e.message}`);
+    fs.writeFileSync(path.join(DIST, `${name}.debug.css`), source);
+    process.exit(1);
+  }
+  const banner = `/* GitHub theme for Gitea 1.27.3 · gitea-theme-github ${version} · ${primerVersion} · Octicons/Primer (MIT) */\n`;
+  const metaBlock = `\ngitea-theme-meta-info{--theme-display-name:"${meta.display}";--theme-color-scheme:"${scheme}"}\n`;
+  const file = banner + min + metaBlock;
+  fs.writeFileSync(path.join(DIST, `theme-${name}.css`), file);
+  fs.writeFileSync(path.join(DIST, `theme-${name}.src.css`), source); // unminified, for debugging
+  const bytes = Buffer.byteLength(file);
+  report.themes[name] = {bytes, kb: +(bytes / 1024).toFixed(1), overBudget: bytes > BUDGET_BYTES};
+}
+
+const rev = crypto.createHash('sha256').update(Object.keys(THEMES).map((n) => read(path.join(DIST, `theme-${n}.css`))).join('')).digest('hex').slice(0, 10);
+report.revision = rev;
+
+// ---- 4. deploy -----------------------------------------------------------------------------------------
+async function deploy() {
+  const cssDir = path.join(CUSTOM_PATH, 'public/assets/css');
+  const d = {revision: rev, files: [], templateReloaded: false, verified: {}, restartRequired: false};
+  for (const name of Object.keys(THEMES)) {
+    const src = path.join(DIST, `theme-${name}.css`);
+    const dst = path.join(cssDir, `theme-${name}.css`);
+    const isNew = !fs.existsSync(dst);
+    fs.copyFileSync(src, `${dst}.tmp`);
+    fs.renameSync(`${dst}.tmp`, dst); // atomic swap: a concurrent request never sees a half-written file
+    d.files.push(dst);
+    if (isNew) d.restartRequired = true; // Gitea (prod) caches the theme list; new theme files need one restart
+  }
+  // icons: src/icons/svg/*.svg → CUSTOM_PATH/public/assets/img/svg (read once at startup → restart required on change)
+  const iconSrc = path.join(SRC, 'icons/svg');
+  if (fs.existsSync(iconSrc)) {
+    const iconDst = path.join(CUSTOM_PATH, 'public/assets/img/svg');
+    fs.mkdirSync(iconDst, {recursive: true});
+    let changed = 0;
+    for (const f of fs.readdirSync(iconSrc).filter((x) => x.endsWith('.svg'))) {
+      const a = read(path.join(iconSrc, f));
+      const dst = path.join(iconDst, f);
+      if (!fs.existsSync(dst) || read(dst) !== a) { fs.writeFileSync(dst, a); changed++; }
+    }
+    d.iconsChanged = changed;
+    if (changed) d.restartRequired = true;
+  }
+  // cache-busting: bump github_revision in the (shared) head_style.tmpl, then hot-reload templates
+  const tmpl = path.join(CUSTOM_PATH, 'templates/base/head_style.tmpl');
+  if (fs.existsSync(tmpl) && read(tmpl).includes('github_revision=')) {
+    const before = read(tmpl);
+    const after = before.replace(/github_revision=[0-9a-f]+/, `github_revision=${rev}`);
+    if (after !== before) {
+      fs.writeFileSync(`${tmpl}.tmp`, after);
+      fs.renameSync(`${tmpl}.tmp`, tmpl);
+      try {
+        execFileSync('docker', ['exec', '-u', 'git', GITEA_CONTAINER, 'gitea', 'manager', 'reload-templates', '--config', '/data/gitea/conf/app.ini'], {stdio: 'pipe'});
+        d.templateReloaded = true;
+      } catch (e) {
+        d.templateReloadError = String(e.stderr || e.message).slice(0, 500);
+      }
+    }
+  } else {
+    d.templateWarning = 'head_style.tmpl has no github branch — cascade layering and cache-busting inactive (integrator: install templates/base/head_style.tmpl)';
+  }
+  // verify Gitea serves the new bytes
+  for (const name of Object.keys(THEMES)) {
+    const want = crypto.createHash('sha256').update(fs.readFileSync(path.join(DIST, `theme-${name}.css`))).digest('hex');
+    try {
+      const r = await fetch(`${GITEA_URL}/assets/css/theme-${name}.css?github_revision=${rev}`, {cache: 'no-store'});
+      const got = crypto.createHash('sha256').update(Buffer.from(await r.arrayBuffer())).digest('hex');
+      d.verified[name] = r.ok && got === want ? 'ok' : `MISMATCH (status ${r.status})`;
+    } catch (e) {
+      d.verified[name] = `fetch failed: ${e.message}`;
+    }
+  }
+  return d;
+}
+
+if (flag('deploy')) report.deploy = await deploy();
+report.finishedAt = new Date().toISOString();
+fs.writeFileSync(path.join(DIST, 'build-report.json'), JSON.stringify(report, null, 1));
+
+// ---- 5. summary ----------------------------------------------------------------------------------------
+let failed = false;
+for (const [f, e] of Object.entries(report.folders)) {
+  const bad = e.status !== 'ok';
+  console.log(`${bad ? '✗' : '✓'} ${f.padEnd(34)} ${e.status}${e.bytes != null ? ` · ${(e.bytes / 1024).toFixed(1)} KB src` : ''}${e.lintWarnings ? ` · ${e.lintWarnings} warn` : ''}`);
+  if (bad && e.errors) for (const x of e.errors.slice(0, 8)) console.log(`     ${typeof x === 'string' ? x : `${x.file}${x.line ? ':' + x.line : ''} ${x.msg}`}`);
+}
+console.log(`tokens kept ${tokens.used}/${tokens.total}`);
+for (const [n, t] of Object.entries(report.themes)) {
+  console.log(`${t.overBudget ? '✗ OVER BUDGET' : '✓'} theme-${n}.css ${t.kb} KB`);
+  if (t.overBudget) failed = true;
+}
+console.log(`revision ${rev}`);
+if (report.deploy) {
+  console.log('deploy:', JSON.stringify(report.deploy, null, 1));
+  if (Object.values(report.deploy.verified).some((v) => v !== 'ok')) failed = true;
+}
+if (flag('strict') && Object.values(report.folders).some((e) => e.status.startsWith('excluded (') && !e.status.includes('disabled'))) failed = true;
+process.exit(failed ? 1 : 0);
