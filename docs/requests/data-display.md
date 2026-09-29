@@ -37,3 +37,23 @@ signature can't be verified; Gitea adds `commit-is-signed sign-warning` there). 
 Verified by injection on /octo-org/theme-playground/commit/3f8fcd62 (unsigned): badge hidden, the rest of the header
 unchanged (`shots/icons-r2/sim/sign-badge-*-proposals.png`, report tag `sign-badge-*-proposals`: `w: 0, visible: false`).
 Commit lists are unaffected (the template already omits the badge there when unsigned).
+
+# Round 3 (icons)
+## D-4 correction (critic r2 finding 5)
+The D-4 text said Gitea adds `commit-is-signed sign-warning` for signed-but-unverifiable commits. That is only true when
+`Warning=true` (bad signature etc.). For a signed commit whose key is unknown (`NoKeyFound`,
+`services/asymkey/commit.go:185`, `Warning=false`) `commit_sign_badge.tmpl:37-41` resets the class to `""`, so
+`.commit-sign-badge:not(.commit-is-signed)` hides that badge too; github.com would show "Unverified" there. The DOM has no
+locale-independent marker for this case (only the translated `data-tooltip-content`), and Gitea's own commit lists
+already drop the badge in exactly this case, so the proposal stays as is — it makes the commit page consistent with
+Gitea's lists. Accepted limitation, documented in docs/icons-audit.md §2.
+
+# Integrator (between wave 1 and wave 2, 2026-09-30)
+- **From controls #2:** exclude the Watch/Star/Fork counter (`.ui.labeled.button > .label`) from generic `.ui.label` rules,
+  e.g. `.ui.label:where(:not(.ui.labeled.button > .label))` — gh.data-display is a later layer than gh.controls.
+- **Blankslate headings:** foundation's plain-heading margin rule no longer reaches `.empty-placeholder` (integrator seam fix);
+  the icon→heading gap is entirely yours (D-1: icon mb 8px).
+- **Octicon masks available (icons I-4 DONE):** `var(--gh-octicon-<name>)` from `src/icons/octicon-masks.css` is now
+  bundled into `gh.tokens`; referencing it is enough (unreferenced masks are pruned). Available: alert, stop, x-circle,
+  info, check-circle, file, file-submodule, file-symlink-file, file-directory-fill, arrow-left, arrow-right,
+  move-to-start, move-to-end (see the file for the exact list). If you need another Octicon, ask icons/integrator.

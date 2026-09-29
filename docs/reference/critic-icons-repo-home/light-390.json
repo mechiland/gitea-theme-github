@@ -11,19 +11,23 @@
  "failedRequests": [],
  "expectedFailures": [],
  "ignoredRequests": [],
- "cssBytes": 300970,
+ "cssBytes": 301261,
  "cssFiles": [
   {
    "url": "https://github.githubassets.com/assets/app-runtime.bc6140f37acc15cb.module.css",
-   "bytes": 1259
+   "bytes": 1561
   },
   {
    "url": "https://github.githubassets.com/assets/react-core.cbbd4117122d27f9.module.css",
-   "bytes": 697
+   "bytes": 434
+  },
+  {
+   "url": "https://github.githubassets.com/assets/repository-11ee8a031c040c1a.css",
+   "bytes": 5547
   },
   {
    "url": "https://github.githubassets.com/assets/code-2d56bdb0166c0238.css",
-   "bytes": 5067
+   "bytes": 4805
   },
   {
    "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
@@ -31,67 +35,67 @@
   },
   {
    "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
-   "bytes": 7270
+   "bytes": 7510
   },
   {
    "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
-   "bytes": 7365
+   "bytes": 7389
   },
   {
-   "url": "https://github.githubassets.com/assets/primer-1d2c7f7b52a6068b.css",
-   "bytes": 43629
+   "url": "https://github.githubassets.com/assets/primer-4136ede8b2650a2d.css",
+   "bytes": 43337
+  },
+  {
+   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
+   "bytes": 40848
   },
   {
    "url": "https://github.githubassets.com/assets/github-7338c07b3a07b8be.css",
-   "bytes": 21827
-  },
-  {
-   "url": "https://github.githubassets.com/assets/repository-11ee8a031c040c1a.css",
-   "bytes": 5284
+   "bytes": 22091
   },
   {
    "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
-   "bytes": 7534
+   "bytes": 7273
   },
   {
    "url": "https://github.githubassets.com/assets/light_high_contrast-48fdd0811afbab3c.css",
    "bytes": 7362
   },
   {
-   "url": "https://github.githubassets.com/assets/ql0.bdd6be015c087bbc.module.css",
-   "bytes": 4163
-  },
-  {
-   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
-   "bytes": 40847
-  },
-  {
-   "url": "https://github.githubassets.com/assets/primer-react-css.76a197f9dce25e3c.module.css",
-   "bytes": 35271
+   "url": "https://github.githubassets.com/assets/xc.877a51df9233c9c4.module.css",
+   "bytes": 7873
   },
   {
    "url": "https://github.githubassets.com/assets/0s.c6dc5760e000e4a0.module.css",
    "bytes": 3306
   },
   {
-   "url": "https://github.githubassets.com/assets/xc.877a51df9233c9c4.module.css",
-   "bytes": 7617
+   "url": "https://github.githubassets.com/assets/ql0.bdd6be015c087bbc.module.css",
+   "bytes": 3899
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-react-css.76a197f9dce25e3c.module.css",
+   "bytes": 35271
   },
   {
    "url": "https://github.githubassets.com/assets/w.3d2f3175ef457334.module.css",
-   "bytes": 4039
+   "bytes": 3777
   },
   {
-   "url": "https://github.githubassets.com/assets/notifications-subscriptions-menu.9502c4eec834e07d.module.css",
-   "bytes": 1260
+   "url": "https://github.githubassets.com/assets/notifications-subscriptions-menu.4c655ecdb259af1e.module.css",
+   "bytes": 1523
   },
   {
-   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.4b2ed0d2afa88710.module.css",
-   "bytes": 403
+   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.a1523bc43e1d725b.module.css",
+   "bytes": 395
   },
   {
-   "url": "https://github.githubassets.com/assets/app-install-banner-partial.b9efee58ee1e9a5c.module.css",
-   "bytes": 417
+   "url": "https://github.githubassets.com/assets/app-install-banner-partial.9b99004c798b710f.module.css",
+   "bytes": 412
+  },
+  {
+   "url": "https://github.githubassets.com/assets/code-view.815e3ea529284afe.module.css",
+   "bytes": 16939
   },
   {
    "url": "https://github.githubassets.com/assets/t.d7f0479eca0d90af.module.css",
@@ -99,19 +103,15 @@
   },
   {
    "url": "https://github.githubassets.com/assets/primer-react-brand-css.6a01c236ff527e7e.module.css",
-   "bytes": 71988
-  },
-  {
-   "url": "https://github.githubassets.com/assets/code-view.cf53542a360ac5b8.module.css",
-   "bytes": 16683
-  },
-  {
-   "url": "https://github.githubassets.com/assets/kq9.8ad2074125dec7f9.module.css",
-   "bytes": 629
+   "bytes": 71996
   },
   {
    "url": "https://github.githubassets.com/assets/u2l.54b6ba2af351ee33.module.css",
-   "bytes": 388
+   "bytes": 614
+  },
+  {
+   "url": "https://github.githubassets.com/assets/kq9.8ad2074125dec7f9.module.css",
+   "bytes": 434
   },
   {
    "url": "https://github.githubassets.com/assets/fg.2616179aabbabe22.module.css",
@@ -1628,28 +1628,28 @@
   "shifts": [
    {
     "value": 0.0015,
-    "t": 1727,
+    "t": 1968,
     "sources": [
      "li.prc-UnderlineNav-UnderlineNavItem-syRjR"
     ]
    },
    {
     "value": 0.0015,
-    "t": 1942,
+    "t": 2200,
     "sources": [
      "li.prc-UnderlineNav-UnderlineNavItem-syRjR"
     ]
    },
    {
     "value": 0.0015,
-    "t": 2125,
+    "t": 2272,
     "sources": [
      "li.prc-UnderlineNav-UnderlineNavItem-syRjR"
     ]
    },
    {
     "value": 0.2095,
-    "t": 2396,
+    "t": 2432,
     "sources": [
      "table.Table-module__Box__HZKiQ.DirectoryContent-module__OverviewTable__fe0iH",
      "div.OverviewRepoFiles-module__Box_1__OXeac",
@@ -1658,7 +1658,7 @@
    },
    {
     "value": 0.0015,
-    "t": 4071,
+    "t": 5996,
     "sources": [
      "li.prc-UnderlineNav-UnderlineNavItem-syRjR"
     ]
@@ -1666,12 +1666,12 @@
   ]
  },
  "timing": {
-  "domContentLoaded": 1881,
-  "load": 3478,
-  "transferSize": 63338,
+  "domContentLoaded": 2068,
+  "load": 5396,
+  "transferSize": 63324,
   "resources": 230,
   "cssResources": 27,
-  "cssTransferBytesPerfApi": 302339
+  "cssTransferBytesPerfApi": 302351
  },
  "document": {
   "width": 390,
@@ -1679,5 +1679,5 @@
   "horizontalOverflow": false
  },
  "measureJson": "critic-icons-repo-home/light-390.measure.json",
- "ms": 5167
+ "ms": 7149
 }

@@ -22,7 +22,8 @@ h2:where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.attach
 
 h3:where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.attached.header, .release-list-title, .tag-list-row-title, .user-cards .name, .header.name)) {
   font-size: var(--text-title-size-medium);
-  line-height: var(--text-title-lineHeight-medium);
+  /* github.com h3 (20px) inherits the 1.5 body line-height = 30px; title-lineHeight-medium (1.625) would give 32.5 */
+  line-height: var(--base-text-lineHeight-normal);
 }
 
 h4:where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.attached.header, .release-list-title, .tag-list-row-title, .user-cards .name, .header.name)) {
@@ -38,6 +39,23 @@ h5:where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.attach
 h6:where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.attached.header, .release-list-title, .tag-list-row-title, .user-cards .name, .header.name)) {
   font-size: var(--text-body-size-small);
   line-height: var(--text-body-lineHeight-medium);
+}
+
+/* Heading margins. Primer base/typography-base.scss sets h1-h6 to margin 0 and puts spacing on each heading with
+ * utilities (typically mb-2, 8px). Gitea base.css:130-176 uses Fomantic calc(2rem - .1428em) 0 1rem instead
+ * (h2 24.6/14, h3 25.1/14; h6 got the UA 2.33em). Gitea templates have no Primer utilities on plain headings,
+ * so a heading followed by content gets GitHub's mb-2 default and a trailing heading gets 0.
+ * Not touched: .ui.header (component margins, modules/header.css), headings that carry a Gitea margin utility
+ * (tw-m*, tw-mt-*, tw-mb-*, tw-my-*: our layer would otherwise beat them), the project board header (Gitea sets
+ * margin 0 on a flex row), blankslates (.empty-placeholder → data-display, integrator seam fix wave 1) and the
+ * component headings excluded above. */
+:where(h1, h2, h3, h4, h5, h6):where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.header, .release-list-title, .tag-list-row-title, .user-cards .name, .header.name, .project-header *, .empty-placeholder *, [class*="tw-m-"], [class*="tw-mt-"], [class*="tw-mb-"], [class*="tw-my-"])) {
+  margin-top: 0;
+  margin-bottom: var(--base-size-8);
+}
+
+:where(h1, h2, h3, h4, h5, h6):where(:last-child):where(:not(.markup *, .hero *, .issue-title *, .ui.menu, .divider, .ui.header, .release-list-title, .tag-list-row-title, .user-cards .name, .header.name, .project-header *, .empty-placeholder *, [class*="tw-m-"], [class*="tw-mt-"], [class*="tw-mb-"], [class*="tw-my-"])) {
+  margin-bottom: 0;
 }
 
 /* Gitea's generic heading component (modules/header.css). Box headers (.ui.attached.header) belong to

@@ -100,3 +100,102 @@ keep `src/icons/manifest.json` as the source of truth — on deploy, delete `CUS
 for any `<n>` listed in the previously deployed manifest (store a copy next to the icons, e.g.
 `CUSTOM_PATH/public/assets/img/svg/.gh-icons-manifest.json`) that is no longer in `src/icons/svg`. Never delete
 files not in that manifest (other themes may own overrides).
+
+# Round 3 (icons, wave 1)
+
+## I-1 (still open) Restart Gitea
+At 01:05 CST `gitea-server` still runs since 2026-09-29T15:31:18Z (23:31 CST); `curl /` serves the original icons and
+`theme-gitea-auto`. Round 3 deploy rewrote `gitea-double-chevron-left/right` (now `move-to-start` / `move-to-end`); all 17
+files in `CUSTOM_PATH/public/assets/img/svg/` are byte-identical to `src/icons/svg/` (cmp). Restart required.
+Order: I-6 should land with or before the restart, since without it repo home / file view keep Gitea's unlayered CSS.
+
+## I-6 (still open) — re-verified in the round-3 simulation
+`shots/icons-r3-sim.mjs` (waits 1.8 s after load): repo home without the fix → 1 unlayered `link[href*=/css/index.]`,
+directories rgb(9,105,218) / rgb(68,147,248); with the `media="not all"` link → 0 unlayered, directories
+rgb(84,174,255) / rgb(145,152,161) with C-1 applied (`shots/icons-r3/cmp-c.png`, `sim/report.json` tags
+`filelist-*`). Diff unchanged from round 2 above.
+
+## P-1 → pages/issues-prs: PR-list "base ← head" glyph (12px)
+`shared/issuelist.tmpl:68` renders `{{svg "gitea-double-chevron-left" 12}}` between base and head branch in every PR
+list row (`#issue-list .item .branches`). The server file is now `octicon-move-to-start` (right for pagination, its
+other two uses). After the restart the PR list reads `main ⇤ head`; github.com's compare view uses `arrow-left`.
+Proposed (needs `--gh-octicon-arrow-left` from `src/icons/octicon-masks.css`, I-4):
+```css
+#issue-list .branches > .svg.gitea-double-chevron-left { background-color: currentColor; mask: var(--gh-octicon-arrow-left) center / contain no-repeat; }
+#issue-list .branches > .svg.gitea-double-chevron-left > * { visibility: hidden; }
+```
+Verified by injection on /octo-org/theme-playground/pulls?state=all, light/dark × 1440/390: `mask: true`, 12×12,
+background = currentColor rgb(89,99,110) light / rgb(145,152,161) dark, reads `main ← head`
+(`shots/icons-r3/cmp-a.png`, `cmp-b.png`, report `shots/icons-r3/sim/report-pulls-branches.json`).
+(github.com's PR list shows no branches at all; hiding `.branches` would be the stricter parity option — owner's call.)
+
+## I-4 (update) mask users
+Still 15 masks. Consumers: P-1 (`arrow-left`), pages/people dashboard pagination (`move-to-start/end`), overlays toasts
+(`alert`, `x-circle`, `info`, `check-circle`, `stop`), code C-2 (`file*`). navigation N-3 no longer needs them.
+
+# Round 4 (icons, wave 1)
+
+## I-1 (still open) Restart Gitea
+At 01:25 CST (2026-09-29T17:24Z) `gitea-server` still runs since 2026-09-29T15:31:18Z; `curl /` serves `gitea-eclipse`.
+Round 4 deploy: `iconsChanged: 2`, `restartRequired: true`. The two changed files are `gitea-double-chevron-left/right`,
+now **byte-identical to Gitea's originals** (see below). All 17 files in `CUSTOM_PATH/public/assets/img/svg/` = `src/icons/svg/` (cmp).
+Land I-6 with or before the restart.
+
+## I-7 (update, now load-bearing) deploy must delete retired icon files
+Round 4 withdraws the `gitea-double-chevron-left/right` overrides (critic r3 issue A: the round-3 `move-to-start`
+file rendered `main ⇤ head` in every PR row of Gitea's own themes). Because deploy never deletes, simply removing the
+files from `src/icons/svg` would have left the round-3 drawing in `CUSTOM_PATH` for the restart. Interim workaround in
+my folder: `gen-icons.mjs` `RESTORED` list re-emits Gitea's **original** bytes for these two names, so the deployed
+copies are the originals (verified `cmp` against gitea-src). When I-7 lands, I drop the names from `RESTORED` and the
+deploy deletes the two files. Alternative if you prefer to clean up now (after that change):
+`rm CUSTOM_PATH/public/assets/img/svg/gitea-double-chevron-{left,right}.svg` (Gitea then serves its bundled copy,
+same bytes).
+Also still open from the critic: `restartRequired` should stay `true` while the running server predates the newest
+icon/theme file in CUSTOM_PATH (compare `docker inspect … StartedAt` with the files' mtimes), not only when the current
+deploy changed something.
+
+## I-5 (update) audit: masked glyphs
+Masked icons keep their Gitea class (e.g. `svg.gitea-double-chevron-left` masked to `move-to-start`), so
+`icons.nonOcticon` keeps counting them. Proposed: treat an `svg.svg` whose computed `mask-image` is a
+`data:image/svg+xml` URL as Octicon (name `mask:<original>`), and report those separately as `icons.masked`.
+
+## P-1 (update) → pages/issues-prs: now an improvement, not a repair
+The server file `gitea-double-chevron-left` is Gitea's original `«` again. After the restart the PR list reads
+`main « head` in every theme, exactly as today. P-1's CSS is unchanged and still recommended for GitHub themes
+(github.com's compare view uses `arrow-left`): sim r4 `proposals` = `main ← head`, mask applied, 12×12,
+rgb(89,99,110) light / rgb(145,152,161) dark (`shots/icons-r4/cmp-pag-branches.png`,
+`shots/icons-r4/sim/report-pulls-branches+pagination+footer-theme.json`).
+
+## I-4 (update) mask users
+Consumers: navigation N-3 (reinstated: `move-to-start`, `move-to-end`), P-1 (`arrow-left`), pages/people dashboard
+pagination (`move-to-start/end`), overlays toasts (`alert`, `x-circle`, `info`, `check-circle`, `stop`), code C-2 (`file*`).
+
+# Integrator (between wave 1 and wave 2, 2026-09-30)
+
+- **I-1 — DONE.** Gitea restarted 2026-09-29T18:30:06Z (no migration task running). `curl /` now serves
+  `svg gitea-eclipse octicon-device-desktop`. Logged-out spot check with cookie `gitea_theme=gitea-auto` and
+  `github-auto` on 8 routes (`shots/integrate-icons-spot.mjs`, `shots/integrate-w1/icons-spot/report.json`): 0 broken
+  icons (every visible svg.svg has a box and a drawing) in either theme; graph Mono/Color render circle/paintbrush in
+  gitea-auto; the PR list keeps Gitea's original `«` in both (RESTORED copies).
+- **I-2 — ACCEPTED, install PENDING.** Adding `svgo@4.0.1` needs a network `npm install` (package download), which
+  this pass did not perform; the orchestrator/user should run `npm i -D -E svgo@4.0.1`. Until then keep SVGO_PATH.
+- **I-3 — REJECTED.** `FILE_ICON_THEME = basic` is global: it removes material file icons from the Gitea, Modern and
+  Studio themes, which other sessions own (CONTEXT.md). The theme-scoped route exists: code C-1 (colours) + C-2 (masks)
+  now that I-4 ships the masks. Code gets this in its wave-2 brief.
+- **I-4 — DONE.** `build/build.mjs` reads `src/icons/octicon-masks.css` and emits it once inside `gh.tokens` (all three
+  themes). Only `--gh-octicon-*` properties that some folder references via `var(--gh-octicon-…)` are kept
+  (`--no-prune` keeps all); `dist/build-report.json → octiconMasks {used, defined}`; a referenced but undefined mask
+  prints a warning. Today 0 are referenced, so 0 bytes are added.
+- **I-5 — DONE.** `tools/shoot/lib/audit.mjs`: `svg` with `<use href="#svg-mfi-…">` counts as non-Octicon
+  `material-file:<name>`; an svg whose computed mask-image is an SVG data URI counts as Octicon and is listed under
+  `icons.masked` (`mask:<original>`). `summary.json` has `totals.nonOcticonIcons`, `totals.maskedIcons`,
+  `maskedIcons[]`, and a new per-page `unlayeredGiteaCss` (I-6 regression check, also added to `problems`).
+- **I-6 — see foundation #1: PARTIAL** (project template + preview.mjs done; live template install pending approval).
+- **I-7 — DONE.** Deploy writes `CUSTOM_PATH/public/assets/img/svg/.gh-icons-manifest.json` (the files it placed) and,
+  on the next deploy, deletes only files listed there that are no longer in `src/icons/svg` (never anything else);
+  reported as `deploy.iconsRemoved`, and it sets `restartRequired`. The manifest was written by today's deploy, so you can
+  drop the RESTORED names now: the next deploy deletes the two chevron files (Gitea then serves its bundled copies).
+- **restartRequired (critic r3/r4) — DONE.** Deploy also sets `restartRequired` (+ `restartReason`) when any deployed
+  icon file is newer than `docker inspect gitea-server .State.StartedAt`, not only when this deploy changed something.
+- **P-1 pointer:** created docs/requests/pages-issues-prs.md. **C-3 ID collision** in code.md: the round-4 "Diff
+  toolbar icon buttons" item is renamed C-4 there.

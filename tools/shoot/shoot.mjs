@@ -287,6 +287,7 @@ async function capture(browser, route, scheme, vw, storageState, palette) {
       Object.assign(log, await page.evaluate(pageAudit, { palette: pal, otherPalette: otherPal, target }));
       if (target === 'gitea' && route.auth !== false && log.signedIn === false) log.problems.push('navbar shows no signed-in avatar');
       if (target === 'gitea' && log.htmlTheme && theme && log.htmlTheme !== theme && route.auth !== false) log.problems.push(`html[data-theme]=${log.htmlTheme}, expected ${theme}`);
+      if (target === 'gitea' && /^github-/.test(log.htmlTheme || '') && log.unlayeredGiteaCss && log.unlayeredGiteaCss.length) log.problems.push(`unlayered Gitea index.css link (beats every gh layer): ${log.unlayeredGiteaCss.join(', ')}`);
     }
     if (measure) {
       const items = measureItems(route, target);
@@ -329,6 +330,8 @@ function summarize(logs, meta) {
     unresolvedVarsLive: l.cssVars ? l.cssVars.unresolved.filter((v) => v.matchedElements > 0).length : null,
     offPaletteDistinct: l.colors ? l.colors.offPaletteDistinct : null, offPaletteTotal: l.colors ? l.colors.offPaletteTotal : null,
     nonOcticonIcons: l.icons ? l.icons.nonOcticon.reduce((s, i) => s + i.count, 0) : null, cls: l.cls ? l.cls.total : null,
+    maskedIcons: l.icons && l.icons.masked ? l.icons.masked.reduce((s, i) => s + i.count, 0) : null,
+    unlayeredGiteaCss: l.unlayeredGiteaCss ? l.unlayeredGiteaCss.length : null,
     cssBytes: l.cssBytes, htmlTheme: l.htmlTheme, prefersDark: l.env && l.env.prefersDark, bodyBg: l.env && l.env.bodyBg,
     states: l.states ? l.states.map((s) => ({ name: s.name, ok: s.ok, error: s.error })) : undefined,
   }));
@@ -338,11 +341,14 @@ function summarize(logs, meta) {
       pages: logs.length, pagesWithProblems: pages.filter((p) => p.problems.length).length,
       consoleErrors: logs.reduce((s, l) => s + l.consoleErrors.length, 0), failedRequests: logs.reduce((s, l) => s + l.failedRequests.length, 0),
       maxCLS: Math.max(0, ...pages.map((p) => p.cls || 0)),
+      nonOcticonIcons: pages.reduce((s, p) => s + (p.nonOcticonIcons || 0), 0), maskedIcons: pages.reduce((s, p) => s + (p.maskedIcons || 0), 0),
+      pagesWithUnlayeredGiteaCss: pages.filter((p) => p.unlayeredGiteaCss).length,
     },
     pages,
     offPalette: agg((l) => l.colors && l.colors.offPalette.map((e) => ({ ...e, key: `${l.scheme}|${e.color}`, scheme: l.scheme })), (e) => e.key).slice(0, 100),
     unresolvedVars: agg((l) => l.cssVars && l.cssVars.unresolved, (e) => e.name),
     nonOcticonIcons: agg((l) => l.icons && l.icons.nonOcticon, (e) => e.name),
+    maskedIcons: agg((l) => l.icons && l.icons.masked, (e) => e.name),
     consoleErrors: agg((l) => l.consoleErrors.map((e) => ({ text: e.text })), (e) => e.text),
     failedRequests: agg((l) => l.failedRequests.map((e) => ({ url: e.url, status: e.status, failure: e.failure })), (e) => e.url + (e.status || e.failure)),
     skipped,

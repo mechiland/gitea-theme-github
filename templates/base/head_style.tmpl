@@ -2,8 +2,10 @@
 {{if StringUtils.HasPrefix $theme "github-"}}
 {{/* GitHub theme (gitea-theme-github, see ARCHITECTURE.md §Cascade): Gitea's own stylesheet is imported into the
      low-priority cascade layer "gitea" so the theme's per-folder layers win without specificity wars.
-     Order: gh-important (only for beating Gitea !important), gitea, gh.* (theme folders). */}}
-{{range StringUtils.Split (StringUtils.ToString (AssetCSSLinks "web_src/js/index.ts" "web_src/css/index.css")) "\""}}{{if StringUtils.Contains . ".css"}}<link rel="preload" as="style" href="{{.}}">{{end}}{{end}}
+     Order: gh-important (only for beating Gitea !important), gitea, gh.* (theme folders).
+     The inert media="not all" stylesheet link exists only so Vite's preload-helper finds index.css as already loaded
+     (it dedupes lazy-chunk CSS against link[rel=stylesheet][href]); without it the helper re-adds index.css unlayered. */}}
+{{range StringUtils.Split (StringUtils.ToString (AssetCSSLinks "web_src/js/index.ts" "web_src/css/index.css")) "\""}}{{if StringUtils.Contains . ".css"}}<link rel="preload" as="style" href="{{.}}"><link rel="stylesheet" href="{{.}}" media="not all">{{end}}{{end}}
 <style>@layer gh-important, gitea, gh;{{range StringUtils.Split (StringUtils.ToString (AssetCSSLinks "web_src/js/index.ts" "web_src/css/index.css")) "\""}}{{if StringUtils.Contains . ".css"}}@import url("{{.}}") layer(gitea);{{end}}{{end}}</style>
 <link rel="stylesheet" href="{{ctx.CurrentWebTheme.PublicAssetURI}}?github_revision=0000000000">
 {{else}}

@@ -46,3 +46,79 @@ Verify afterwards on `/octo-org/theme-playground`:
 → `["not all"]` only.
 
 (Exactly this HTML rewrite is what `shots/foundation-probe.mjs fixed` does; all numbers above come from it.)
+
+### Status (wave 1, round 3): request 1 is STILL NOT APPLIED
+
+Re-checked at round 3: `templates/base/head_style.tmpl` line 6 and `tools/shoot/lib/preview.mjs` line 22 still emit only
+the preload + `@import … layer(gitea)`. The diff above is unchanged and still the whole fix. It remains the
+single blocker for foundation (repo home + file views render Gitea's unlayered index.css over every gh layer).
+Nothing in `src/foundation` can compensate: unlayered CSS beats every layer, and restating all of foundation in
+`*.important.css` is exactly what ARCHITECTURE forbids.
+
+## 2. [ownership, ARCHITECTURE §5 table] `.help` moves from foundation to controls (wave 1, round 3)
+
+**What.** Round 3 removed `.help` from `src/foundation/helpers.css`. The critic found form captions defined twice
+(foundation `.help` + controls `.ui.form .help, .form .help`). Every `.help` in the Gitea 1.27.3 templates sits inside a
+form (the 10 template files without a form class are partials included in forms), and Gitea itself only styles
+`.form .help`, so controls is the natural single owner.
+
+**Proposed diff** (ARCHITECTURE.md, ownership table, `foundation` row): drop `` `.help`, `` from the owned-selector list
+and add it to the `controls` row.
+
+## 3. [FYI, pages/repo + integrator] Repo home @390 CLS is a Gitea progressive-render shift (wave 1, round 3)
+
+Measured with `shots/foundation-cls.mjs` (fixed = inert-link fix applied; 10 runs each, light, 390):
+fixed mean 0.242, fixed without the gh.foundation layer 0.222, built-in gitea-auto 0.218. It is a single shift on
+every mode: `.repo-home-filelist` moves down by the height of `.repo-home-sidebar-top` (~300px) because the
+file list precedes the sidebar in the DOM and the mobile grid (repo/home.css:31-47) puts the sidebar in row 1
+after it has been parsed. Foundation adds ~0.02 only by scaling that shift (github.com-correct 21px line-height and
+16px gutter make the sidebar taller). A real fix belongs to pages/repo (e.g. reserve the sidebar row, or move
+`home_sidebar_top` before the file list in the template) — not something foundation should undo.
+
+### Status (wave 1, round 4): request 1 is STILL NOT APPLIED
+
+Re-checked at round 4: `templates/base/head_style.tmpl` line 6 and `tools/shoot/lib/preview.mjs` line 22 are unchanged
+(preload + `@import … layer(gitea)` only). The diff under #1 is still the complete fix. Round-4 preview captures still
+show the injected unlayered index.css on repo home (CLS 0.553 light/dark @390, container 80/1280 @1440).
+
+## 4. [FYI, pages/repo] Repo home toolbar wraps at 390 once the 16px gutter applies (wave 1, round 4)
+
+With the inert-link fix, the container gutter at 390 becomes github.com's 16px (built-in: 8px). "Go to file" +
+"Add File" then fill row 1 of the repo-home toolbar and "Code" drops to row 2 (critic r3,
+`shots/critic-foundation-r3/fixed/repo-home-fixed-dark-390.png`). github.com collapses that toolbar to icon buttons
+below 544px; the toolbar layout belongs to pages/repo. Foundation's gutter should stay 16px.
+
+## 5. [FYI, pages/auth] Login / sign-up card at 390 is still inset by the page grid (wave 1, round 4)
+
+Card measures x=34 w=322 @390 (github.com 16/358). The remaining 18px per side is Gitea's
+`.ui.page.grid` / very-relaxed column padding on the auth pages, which pages/auth owns. Foundation deliberately does
+not restyle `.ui.grid` gutters (see src/foundation/layout.css).
+
+## 6. [FYI, all page folders] Plain heading margins are now Primer-based (wave 1, round 4)
+
+`src/foundation/typography.css` now gives plain h1–h6 (outside .markup, not `.ui.header`, no `tw-m*` utility)
+`margin: 0 0 8px` (Primer typography-base 0 + GitHub's usual `mb-2`), and 0 bottom when the heading is the last child.
+This replaces Fomantic `calc(2rem - .1428em) 0 1rem` (h2 24.6/14, h3 25.1/14, h6 UA 28/28). Visible plain headings
+checked: webhook "Trigger On:", admin auth "GMail Settings:", editor "Commit Changes" (gap to next element 14 → 8).
+If a page needs a different gap, set it in the page folder (later layer wins).
+
+# Integrator (between wave 1 and wave 2, 2026-09-30)
+
+- **#1 — PARTIAL (source DONE, live install PENDING).** The inert link is in the project's
+  `templates/base/head_style.tmpl` (github branch, next to the preload, with a comment) and in
+  `tools/shoot/lib/preview.mjs` line 22, exactly as proposed. Installing it into
+  `CUSTOM_PATH/templates/base/head_style.tmpl` and running `gitea manager reload-templates` was **blocked by this
+  session's permission policy** (the classifier refused the write to the live template plus the docker exec), so the
+  running server still serves the old github branch. The user must approve or perform that step: copy the github
+  branch line from `templates/base/head_style.tmpl` into the live file (keep the else-branch and its
+  `modern_revision` byte-for-byte), then reload templates. Until then the shoot audit flags every page with an
+  unlayered index.css (`problems: unlayered Gitea index.css link`, `totals.pagesWithUnlayeredGiteaCss`).
+- **#2 — DONE.** ARCHITECTURE §5: `.help` moved from the foundation row to the controls row.
+- **#3, #4, #5 — FORWARDED** to pages/repo and pages/auth (wave 3 briefs; recorded in docs/STATUS.json openIssues).
+- **#6 — noted.**
+- **Seam fix by the integrator in `src/foundation/typography.css` (ownership conflict with data-display):** the two
+  heading-margin rules reached into `.empty-placeholder` (data-display owns blankslates, D-1) and set h2 margin-top 0
+  after the 48px icon (critic r4 major: gap 25 → 0 on projects/packages/wiki/worktime/actions empty states).
+  Added `.empty-placeholder *` to both `:not()` lists, and tightened the utility exclusion from `[class*="tw-m"]`
+  (which also matched tw-mx-/tw-max-/tw-min-/tw-mono) to `[class*="tw-m-"], [class*="tw-mt-"], [class*="tw-mb-"],
+  [class*="tw-my-"]` (critic r4 nit). No other change in the folder. Lint clean.

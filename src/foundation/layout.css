@@ -22,6 +22,16 @@
   width: 100%;
 }
 
+/* A container nested in a grid column (sign-in / sign-up / link-account: .ui.page.grid > .column > .ui.container)
+ * already sits inside the column's gutter; on phones Gitea's max-width subtracts the page gutter a second time
+ * (390px: card at x=50 instead of github.com's single 16px page gutter). From 768px up the card keeps Gitea's
+ * desktop width (456px at 1440; the auth page layout itself belongs to pages/auth). */
+@media (max-width: 767.98px) {
+  .ui.grid .ui.container {
+    max-width: 100%;
+  }
+}
+
 /* Primer container-md (768px) for narrow form pages (new repo, new org, migrate…) */
 .ui.container.medium-width {
   width: var(--breakpoint-medium);

@@ -1,9 +1,130 @@
 {
-  "updated": "2026-09-29T23:59:00+08:00",
-  "phase": "wave-0 (architecture, tokens, build, seed, tooling)",
-  "pinned": {"gitea": "1.27.3", "@primer/primitives": "11.10.0", "@primer/octicons": "19.38.0", "@primer/css": "22.3.2", "playwright": "1.63.0"},
-  "templateOverrides": [{"path": "templates/base/head_style.tmpl", "reason": "cascade layering + cache-busting", "scope": "github-* themes only"}],
-  "folders": {},
-  "openIssues": [],
-  "finalGate": null
+ "updated": "2026-09-30T02:40:00+08:00",
+ "phase": "wave-1 integrated (foundation, controls, icons); ready for wave 2 (overlays, navigation, data-display, code, markdown)",
+ "pinned": {
+  "gitea": "1.27.3",
+  "@primer/primitives": "11.10.0",
+  "@primer/octicons": "19.38.0",
+  "@primer/css": "22.3.2",
+  "playwright": "1.63.0"
+ },
+ "templateOverrides": [
+  {
+   "path": "templates/base/head_style.tmpl",
+   "reason": "cascade layering + cache-busting; inert media=\"not all\" index.css link against Vite preload-helper re-injection (added in source 2026-09-30)",
+   "scope": "github-* themes only",
+   "liveInstall": "PENDING \u2014 the inert-link line is in the project copy but not in CUSTOM_PATH (live write + reload-templates blocked by session permission policy; needs user approval)"
+  }
+ ],
+ "folders": {
+  "foundation": {
+   "score": 7.9,
+   "rounds": 4,
+   "passed": false,
+   "openIssues": [
+    "BLOCKER (integrator, live install pending): unlayered index.css on repo home/file view/wiki with lazy chunks (container 80/1280, lh 20, Gitea kbd, CLS 0.55 @390)",
+    "Empty-state heading/icon gap regression \u2014 FIXED by integrator seam fix (.empty-placeholder excluded), not yet re-critiqued",
+    "Repo home CLS @390 above built-in (~0.03 from foundation; root cause Gitea DOM order \u2192 pages/repo)",
+    "Login card @390 inset x=34 w=322 vs github 16/358 \u2192 pages/auth"
+   ]
+  },
+  "controls": {
+   "score": 8.7,
+   "rounds": 4,
+   "passed": false,
+   "openIssues": [
+    "Input-group search button taller than 28px input on milestones/projects (align-self)",
+    "Text-only .ui.icon buttons get 5px icon gutter (resolve-conversation)",
+    "Validation caption: template override rejected \u2192 documented exception",
+    "Failed pass only on smoke (now green 12/12 after registration) and the index.css blocker"
+   ]
+  },
+  "icons": {
+   "score": 7.5,
+   "rounds": 4,
+   "passed": false,
+   "openIssues": [
+    "Overrides now LIVE after restart (non-Octicon count on the critic's 28 routes 312 \u2192 176, excluding newly counted material-file)",
+    "Material file icons remain (FILE_ICON_THEME=basic rejected as global) \u2192 code C-1/C-2 in wave 2 with masks now bundled",
+    "Pagination/PR-list double chevrons need navigation N-3 + pages/issues-prs P-1 masks",
+    "svgo devDependency (I-2) install pending"
+   ]
+  }
+ },
+ "openIssues": [
+  "Live template install of the inert index.css link (foundation #1 / icons I-6) \u2014 pending user approval",
+  "svgo@4.0.1 devDependency install (icons I-2) \u2014 pending",
+  "Forwarded to wave 2: data-display (controls #2 counter exclusion, D-1..D-4), code (C-1, C-2, C-3, C-4, controls #3), navigation (N-1, N-3, N-4), overlays (O-1, takeover of controls' .ui.selection.dropdown.tw-flex-1 > .menu)",
+  "Forwarded to wave 3: pages/repo (repo-home CLS @390 DOM order, toolbar wrap @390, releases attachment overflow @320, compare picker bold), pages/auth (login card inset/40px controls), pages/issues-prs (P-1, toolbar 32px), pages/people (P-1 dashboard masks)"
+ ],
+ "finalGate": null,
+ "exceptions": [
+  {
+   "what": "Inline FormControl validation caption on sign-up",
+   "why": "needs a template override of user/auth/signup_inner.tmpl; github.com login already uses flash only; rejected per ARCHITECTURE \u00a77",
+   "decided": "integrator wave 1"
+  },
+  {
+   "what": "FILE_ICON_THEME stays material",
+   "why": "global setting would change Gitea/Modern/Studio themes owned by other sessions; theme-scoped masks (code C-1/C-2) instead",
+   "decided": "integrator wave 1"
+  }
+ ],
+ "restart": {
+  "status": "done",
+  "at": "2026-09-29T18:30:06Z",
+  "reason": "register github-auto/light/dark (app.ini [ui] THEMES explicit list, DEFAULT_THEME unchanged gitea-auto) + load 17 icon overrides",
+  "migrationCheck": "no task rows with status 0/1",
+  "themesOffered": 17,
+  "previouslyOfferedStillOffered": true,
+  "adminTheme": "github-auto (set by shoot tool; baseline gitea-auto-tritanopia to restore at the end)"
+ },
+ "themeSizes": {
+  "github-light": {
+   "bytes": 72543,
+   "kb": 70.8
+  },
+  "github-dark": {
+   "bytes": 72481,
+   "kb": 70.8
+  },
+  "github-auto": {
+   "bytes": 80772,
+   "kb": 78.9
+  }
+ },
+ "revision": "b565e3c2d5",
+ "audit": {
+  "run": "shots/integrate-w1 (68 routes x light/dark x 1440/390 = 272 pages, github-auto registered, not preview)",
+  "consoleErrors": 4,
+  "consoleErrorsNote": "all 4 are the intentional 404 on route not-found",
+  "failedRequests": 0,
+  "unresolvedVars": 0,
+  "offPaletteTotal": 1872,
+  "offPaletteNote": "1756 = rgba(0,0,0,1) fills of material file icons (svg#svg-mfi-*, code wave 2); 112 = dropzone rgba(0,0,0,.8); 4 = markdown <mark> yellow",
+  "nonOcticonIcons": 1120,
+  "nonOcticonNote": "audit now counts material file icons (984 of them); rest: gitea-double-chevron-left/right 88, colorblind markers 28, openid 8, gitea-npm 8, gitea-running 4",
+  "maskedIcons": 88,
+  "pagesWithUnlayeredGiteaCss": 8,
+  "unlayeredRoutes": [
+   "repo-home-markdown-showcase-playground",
+   "wiki-page-playground"
+  ],
+  "maxCLS": 0.5543,
+  "maxCLSNote": "repo-home-markdown-showcase-playground @390 (unlayered index.css) and action-run 0.54 @390 / 0.42 @1440 \u2014 not investigated vs built-in yet",
+  "iconsBeforeAfterRestart": {
+   "routes": "shots/critic-icons-r4-routes.json",
+   "before": 312,
+   "afterExclMaterialFile": 176,
+   "afterMaterialFile": 104,
+   "run": "shots/integrate-w1-icons"
+  },
+  "otherThemesIconSpotCheck": "gitea-auto logged-out on 8 routes: 0 broken icons (shots/integrate-w1/icons-spot/report.json)"
+ },
+ "smoke": {
+  "result": "green",
+  "steps": "12/12",
+  "consoleErrors": 0,
+  "log": "shots/integrate-w1-smoke.log"
+ }
 }

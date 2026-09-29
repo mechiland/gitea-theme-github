@@ -1,16 +1,5 @@
-/* Help / caption text. GitHub FormControl caption & .note: 12px, --fgColor-muted, 4px above.
- * Gitea .form .help (modules/form.css:414): --color-secondary-dark-5 at body size. */
-.help {
-  margin-top: var(--base-size-4);
-  font-size: var(--text-body-size-small);
-  line-height: var(--text-body-lineHeight-medium);
-  color: var(--fgColor-muted);
-}
-
-.help code {
-  color: var(--fgColor-muted);
-}
-
+/* .help (form captions) is owned by controls (src/controls/form.css .ui.form .help / .form .help): every .help in
+ * Gitea 1.27.3 templates sits inside a form, and Gitea itself only styles it as .form .help. */
 /* Gitea's "text-light" helpers, used for secondary metadata: Primer color-fg-muted. */
 .ui .text.grey,
 .text.grey {

@@ -250,15 +250,29 @@ export function pageAudit({ palette, otherPalette, target }) {
   const sortTop = (m) => [...m.values()].sort((a, b) => b.count - a.count);
 
   // ---------- 3. icons ----------
-  const icons = new Map(); let octicons = 0;
+  // Material file icons carry an octicon-* class but draw a <use href="#svg-mfi-…"> symbol → non-Octicon
+  // (name material-file:<symbol>). An svg whose computed mask-image is an SVG data URI is an Octicon drawn by a
+  // theme CSS mask (see src/icons/octicon-masks.css) → counted as Octicon and listed separately in icons.masked.
+  const icons = new Map(); const masked = new Map(); let octicons = 0;
+  const bump = (m, name, svg) => {
+    let e = m.get(name);
+    if (!e) m.set(name, (e = { name, count: 0, samples: [] }));
+    e.count++; if (e.samples.length < 3) e.samples.push(cssPath(svg));
+  };
   for (const svg of document.querySelectorAll('svg.svg')) {
     const cls = [...svg.classList];
+    const mfi = svg.querySelector(':scope > use[href^="#svg-mfi-"], :scope > use[*|href^="#svg-mfi-"]');
+    const mask = getComputedStyle(svg).maskImage || getComputedStyle(svg).webkitMaskImage || '';
+    const baseName = cls.find((c) => /^(gitea|material|fontawesome|fa|octicon|svg-)-?/.test(c) && c !== 'svg') || cls.filter((c) => c !== 'svg').join('.') || '(unnamed)';
+    if (mask.includes('data:image/svg+xml')) { octicons++; bump(masked, `mask:${mfi ? 'material-file' : baseName}`, svg); continue; }
+    if (mfi) { bump(icons, `material-file:${(mfi.getAttribute('href') || mfi.getAttribute('xlink:href') || '').replace('#svg-mfi-', '')}`, svg); continue; }
     if (cls.some((c) => c.startsWith('octicon-'))) { octicons++; continue; }
-    const name = cls.find((c) => /^(gitea|material|fontawesome|fa|octicon|svg-)-?/.test(c) && c !== 'svg') || cls.filter((c) => c !== 'svg').join('.') || '(unnamed)';
-    let e = icons.get(name);
-    if (!e) icons.set(name, (e = { name, count: 0, samples: [] }));
-    e.count++; if (e.samples.length < 3) e.samples.push(cssPath(svg));
+    bump(icons, baseName, svg);
   }
+  // Gitea's index CSS must only exist inside @layer gitea on github-* pages; an extra unlayered
+  // <link rel=stylesheet> (Vite preload-helper re-inserting a lazy chunk's CSS dependency) beats every gh layer.
+  const unlayeredGiteaCss = [...document.querySelectorAll('link[rel="stylesheet"][href*="/assets/css/index."]')]
+    .filter((l) => l.media !== 'not all').map((l) => l.getAttribute('href'));
 
   // ---------- 4. timing ----------
   const nav = performance.getEntriesByType('navigation')[0];
@@ -278,7 +292,8 @@ export function pageAudit({ palette, otherPalette, target }) {
       otherSchemeOnly: sortTop(otherScheme).slice(0, 20),
       exempt: sortTop(exempt).slice(0, 40),
     },
-    icons: { octicons, nonOcticon: [...icons.values()].sort((a, b) => b.count - a.count) },
+    icons: { octicons, nonOcticon: [...icons.values()].sort((a, b) => b.count - a.count), masked: [...masked.values()].sort((a, b) => b.count - a.count) },
+    unlayeredGiteaCss,
     cls: { total: +(window.__shootCLS || 0).toFixed(4), shifts: window.__shootShifts || [] },
     timing: nav ? {
       domContentLoaded: Math.round(nav.domContentLoadedEventEnd), load: Math.round(nav.loadEventEnd),

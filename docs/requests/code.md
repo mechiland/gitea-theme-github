@@ -40,3 +40,22 @@ github.com code tree: `octicon-chevron-right` / `chevron-down` render at 12px (1
   rgb(84,174,255) / rgb(145,152,161) (`shots/icons-r2/unlayered-index-css.json`).
 - C-2 re-verified with the token and masks defined: every material file icon renders a muted octicon-file mask,
   light rgb(89,99,110) / dark rgb(145,152,161), 16px (`shots/icons-r2/cmp-d.png`, `sim/report-filelist.json`).
+
+# Round 4 (icons)
+## C-4 Diff toolbar icon buttons (critic r3 measurement, cc controls) — renamed from a duplicate C-3 by the integrator
+After the icon restart the diff toolbar shows `gear` (whitespace), `split-view`/`rows` and the kebab. Critic r3 measured
+the button box at **34×28, bg rgb(246,248,250), 1px rgb(209,217,224) border, radius 6** vs github.com's diff settings
+button **32×32, transparent, radius 6** (Primer invisible IconButton: `--control-medium-size`,
+`--button-invisible-bgColor-rest`, no border). Selector: `.diff-detail-actions .ui.button` / whitespace dropdown
+(`repo/diff/whitespace_dropdown.tmpl`). Owner: code (diff chrome) or controls (IconButton variant).
+
+# Integrator (between wave 1 and wave 2, 2026-09-30)
+- **Octicon masks available (icons I-4 DONE):** `var(--gh-octicon-<name>)` from `src/icons/octicon-masks.css` is now
+  bundled into `gh.tokens`; referencing it is enough (unreferenced masks are pruned). Available: alert, stop, x-circle,
+  info, check-circle, file, file-submodule, file-symlink-file, file-directory-fill, arrow-left, arrow-right,
+  move-to-start, move-to-end (see the file for the exact list). If you need another Octicon, ask icons/integrator.
+- **FILE_ICON_THEME stays `material`** (icons I-3 rejected: global, would change the Gitea/Modern/Studio themes). So C-1
+  **and** C-2 are yours in wave 2. Verify directory colours after the build (token must be referenced to survive pruning).
+- controls #3 (restate diff/code-line/add-comment button geometry) is part of your wave-2 brief.
+- Until the inert-link template fix is installed live (foundation #1, pending approval), repo home / file view measurements
+  show Gitea's unlayered CSS; the shoot audit flags those pages (`unlayeredGiteaCss`).

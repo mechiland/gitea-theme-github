@@ -23,6 +23,20 @@
   box-shadow: var(--shadow-inset);
 }
 
+/* a select that fills a flex row (Gitea tw-flex-1, e.g. settings/branches "default branch" + Update button)
+   yields to the button on narrow screens instead of holding Gitea's 14em minimum (Primer Select has none) */
+.ui.selection.dropdown.tw-flex-1 {
+  min-width: 0;
+}
+
+/* …but its open menu keeps an overlay minimum (Primer ActionMenu/SelectPanel: --overlay-width-xsmall)
+   and grows to its longest item instead of wrapping a branch name onto two lines; capped to the screen */
+.ui.selection.dropdown.tw-flex-1 > .menu {
+  width: max-content;
+  min-width: max(100% + 2 * var(--borderWidth-thin), var(--overlay-width-xsmall));
+  max-width: calc(100vw - 2 * var(--base-size-16));
+}
+
 .ui.selection.dropdown:focus,
 .ui.selection.dropdown:focus-within,
 .ui.selection.active.dropdown,
@@ -195,12 +209,18 @@ select.ui.dropdown {
   opacity: 1;
 }
 
-/* avatar inside the closed control (e.g. repo owner picker, 28px "mini" avatar): Primer keeps the
-   control at 32px → 20px avatar centred on the 20px text line */
+/* avatar inside the closed control (e.g. repo owner picker, 28px "mini" avatar with Gitea's
+   tw-align-middle): Primer keeps the control at 32px → a 20px avatar on the 20px text line */
+.ui.selection.dropdown > .text:has(> .avatar) {
+  display: flex;
+  align-items: center;
+  gap: var(--base-size-8);
+}
+
 .ui.selection.dropdown > .text > img.ui.avatar,
 .ui.selection.dropdown > .text > .avatar {
+  flex-shrink: 0;
   width: var(--base-size-20);
   height: var(--base-size-20);
-  margin-block: 0;
-  vertical-align: top;
+  margin: 0;
 }

@@ -11,143 +11,143 @@
  "failedRequests": [],
  "expectedFailures": [],
  "ignoredRequests": [],
- "cssBytes": 333724,
+ "cssBytes": 333703,
  "cssFiles": [
   {
+   "url": "https://github.githubassets.com/assets/qt.2959c2f57d8ef379.module.css",
+   "bytes": 4013
+  },
+  {
    "url": "https://github.githubassets.com/assets/repository-11ee8a031c040c1a.css",
-   "bytes": 5285
+   "bytes": 5283
   },
   {
-   "url": "https://github.githubassets.com/assets/repo.2d7abf58063fcccc.module.css",
-   "bytes": 304
-  },
-  {
-   "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
-   "bytes": 2288
-  },
-  {
-   "url": "https://github.githubassets.com/assets/github-7338c07b3a07b8be.css",
-   "bytes": 22130
-  },
-  {
-   "url": "https://github.githubassets.com/assets/app-runtime.bc6140f37acc15cb.module.css",
-   "bytes": 1257
-  },
-  {
-   "url": "https://github.githubassets.com/assets/light_high_contrast-48fdd0811afbab3c.css",
-   "bytes": 7648
-  },
-  {
-   "url": "https://github.githubassets.com/assets/react-core.cbbd4117122d27f9.module.css",
-   "bytes": 435
-  },
-  {
-   "url": "https://github.githubassets.com/assets/notifications-subscriptions-menu.9502c4eec834e07d.module.css",
-   "bytes": 1523
-  },
-  {
-   "url": "https://github.githubassets.com/assets/29.a191c3d47e65d47b.module.css",
-   "bytes": 6256
-  },
-  {
-   "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
-   "bytes": 7250
-  },
-  {
-   "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
-   "bytes": 7270
-  },
-  {
-   "url": "https://github.githubassets.com/assets/primer-1d2c7f7b52a6068b.css",
-   "bytes": 43592
+   "url": "https://github.githubassets.com/assets/notifications-subscriptions-menu.4c655ecdb259af1e.module.css",
+   "bytes": 1259
   },
   {
    "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
-   "bytes": 7389
+   "bytes": 7651
   },
   {
-   "url": "https://github.githubassets.com/assets/primer-react-css.76a197f9dce25e3c.module.css",
-   "bytes": 35535
+   "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
+   "bytes": 7246
   },
   {
-   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
-   "bytes": 40848
+   "url": "https://github.githubassets.com/assets/app-runtime.bc6140f37acc15cb.module.css",
+   "bytes": 1259
   },
   {
-   "url": "https://github.githubassets.com/assets/u.d7bdfb98b5635c5f.module.css",
-   "bytes": 3135
+   "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
+   "bytes": 2573
   },
   {
-   "url": "https://github.githubassets.com/assets/70.c1fd266a5a040048.module.css",
-   "bytes": 5325
-  },
-  {
-   "url": "https://github.githubassets.com/assets/e.88a428c24819b7bd.module.css",
-   "bytes": 5836
-  },
-  {
-   "url": "https://github.githubassets.com/assets/app-install-banner-partial.b9efee58ee1e9a5c.module.css",
-   "bytes": 411
-  },
-  {
-   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.4b2ed0d2afa88710.module.css",
-   "bytes": 396
+   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.a1523bc43e1d725b.module.css",
+   "bytes": 395
   },
   {
    "url": "https://github.githubassets.com/assets/t.d7f0479eca0d90af.module.css",
-   "bytes": 3705
+   "bytes": 3456
   },
   {
-   "url": "https://github.githubassets.com/assets/m4.0ba3500f7e615e53.module.css",
-   "bytes": 4162
+   "url": "https://github.githubassets.com/assets/app-install-banner-partial.9b99004c798b710f.module.css",
+   "bytes": 668
   },
   {
-   "url": "https://github.githubassets.com/assets/e8.c547e0fadd5a085d.module.css",
-   "bytes": 3736
+   "url": "https://github.githubassets.com/assets/70.c1fd266a5a040048.module.css",
+   "bytes": 5581
   },
   {
-   "url": "https://github.githubassets.com/assets/p.646fe3f73ac050c0.module.css",
-   "bytes": 5063
+   "url": "https://github.githubassets.com/assets/e.88a428c24819b7bd.module.css",
+   "bytes": 5572
   },
   {
    "url": "https://github.githubassets.com/assets/44.9be6cfa7a8972e09.module.css",
-   "bytes": 3216
+   "bytes": 3479
   },
   {
    "url": "https://github.githubassets.com/assets/2f.5a9239c71645efa7.module.css",
-   "bytes": 5471
-  },
-  {
-   "url": "https://github.githubassets.com/assets/qt.2959c2f57d8ef379.module.css",
-   "bytes": 3732
+   "bytes": 5705
   },
   {
    "url": "https://github.githubassets.com/assets/0s.c6dc5760e000e4a0.module.css",
-   "bytes": 3328
+   "bytes": 3306
+  },
+  {
+   "url": "https://github.githubassets.com/assets/react-core.cbbd4117122d27f9.module.css",
+   "bytes": 440
   },
   {
    "url": "https://github.githubassets.com/assets/z.260e341563560664.module.css",
-   "bytes": 6417
+   "bytes": 6176
   },
   {
-   "url": "https://github.githubassets.com/assets/x8.9091d92d9e9e4062.module.css",
-   "bytes": 17056
+   "url": "https://github.githubassets.com/assets/m4.0ba3500f7e615e53.module.css",
+   "bytes": 3921
+  },
+  {
+   "url": "https://github.githubassets.com/assets/29.98bb7c1b1004d01f.module.css",
+   "bytes": 6510
+  },
+  {
+   "url": "https://github.githubassets.com/assets/u.d7bdfb98b5635c5f.module.css",
+   "bytes": 2878
+  },
+  {
+   "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
+   "bytes": 7511
+  },
+  {
+   "url": "https://github.githubassets.com/assets/e8.c547e0fadd5a085d.module.css",
+   "bytes": 3743
+  },
+  {
+   "url": "https://github.githubassets.com/assets/p.646fe3f73ac050c0.module.css",
+   "bytes": 4823
+  },
+  {
+   "url": "https://github.githubassets.com/assets/light_high_contrast-48fdd0811afbab3c.css",
+   "bytes": 7384
+  },
+  {
+   "url": "https://github.githubassets.com/assets/github-7338c07b3a07b8be.css",
+   "bytes": 21836
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-react-css.76a197f9dce25e3c.module.css",
+   "bytes": 35272
   },
   {
    "url": "https://github.githubassets.com/assets/primer-react-brand-css.6a01c236ff527e7e.module.css",
-   "bytes": 72003
+   "bytes": 71994
   },
   {
-   "url": "https://github.githubassets.com/assets/kq9.8ad2074125dec7f9.module.css",
-   "bytes": 411
+   "url": "https://github.githubassets.com/assets/repo.849bbc4aceabc969.module.css",
+   "bytes": 568
+  },
+  {
+   "url": "https://github.githubassets.com/assets/x8.9091d92d9e9e4062.module.css",
+   "bytes": 17055
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-4136ede8b2650a2d.css",
+   "bytes": 43600
+  },
+  {
+   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
+   "bytes": 40857
   },
   {
    "url": "https://github.githubassets.com/assets/u2l.54b6ba2af351ee33.module.css",
-   "bytes": 396
+   "bytes": 395
+  },
+  {
+   "url": "https://github.githubassets.com/assets/kq9.8ad2074125dec7f9.module.css",
+   "bytes": 622
   },
   {
    "url": "https://github.githubassets.com/assets/fg.2616179aabbabe22.module.css",
-   "bytes": 915
+   "bytes": 672
   }
  ],
  "problems": [],
@@ -2318,27 +2318,20 @@
   "nonOcticon": []
  },
  "cls": {
-  "total": 0.0034,
+  "total": 0.0052,
   "shifts": [
    {
-    "value": 0.0007,
-    "t": 2140,
+    "value": 0.0042,
+    "t": 1973,
     "sources": [
-     "#repository-details-container"
-    ]
-   },
-   {
-    "value": 0.0017,
-    "t": 2430,
-    "sources": [
-     null,
+     "#repository-details-container",
      null,
      null
     ]
    },
    {
     "value": 0.0005,
-    "t": 4418,
+    "t": 3141,
     "sources": [
      "div.ActionBar-module__container__Sx4bH.SharedListContainer-module__primerActionBar__Tixik",
      "div.prc-ActionBar-List-9uz46"
@@ -2346,7 +2339,7 @@
    },
    {
     "value": 0.0005,
-    "t": 4680,
+    "t": 3402,
     "sources": [
      "div.ActionBar-module__container__Sx4bH.SharedListContainer-module__primerActionBar__Tixik",
      "div.prc-ActionBar-List-9uz46"
@@ -2355,12 +2348,12 @@
   ]
  },
  "timing": {
-  "domContentLoaded": 2227,
-  "load": 2339,
-  "transferSize": 53189,
+  "domContentLoaded": 1747,
+  "load": 1880,
+  "transferSize": 53178,
   "resources": 250,
   "cssResources": 34,
-  "cssTransferBytesPerfApi": 334759
+  "cssTransferBytesPerfApi": 334769
  },
  "document": {
   "width": 1440,
@@ -2368,5 +2361,5 @@
   "horizontalOverflow": false
  },
  "measureJson": "critic-icons-pagination/dark-1440.measure.json",
- "ms": 5208
+ "ms": 3895
 }
