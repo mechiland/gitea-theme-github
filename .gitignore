@@ -4,3 +4,4 @@ dist
 tools/seed/.token
 shots/
 *.log
+docs/reference/**/*.png
