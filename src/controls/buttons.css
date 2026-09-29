@@ -19,6 +19,10 @@
   gap: var(--control-medium-gap);
   height: var(--control-medium-size); /* Primer: fixed height, so flex rows cannot stretch it */
   min-height: var(--control-medium-size);
+  /* Gitea sets min-width: 0, so flex rows squeeze a nowrap label out of the box on narrow screens
+     ("pdate Default Bran"). Restore the flex content minimum: github.com buttons never shrink below
+     their label; a label that really cannot fit truncates in its .text child (below). */
+  min-width: auto;
   padding: 0 var(--control-medium-paddingInline-normal);
   border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
   border-radius: var(--borderRadius-medium);
@@ -89,8 +93,31 @@
   line-height: var(--base-size-20);
 }
 
-/* dropdown caret (octicon-triangle-down "dropdown icon"): Primer trailingAction — the button keeps
-   its normal padding, the caret is static and pulled 4px into it (margin-right: -4px) */
+/* Primer .prc-Button-Label truncation: a dropdown button's text part (e.g. compare "pull from: owner/repo:branch")
+   shrinks with an ellipsis when its container is narrower than the label, instead of spilling over the border */
+.ui.button:has(> .text, > .gt-ellipsis) {
+  min-width: 0;
+}
+
+.ui.button > .text {
+  min-width: 0;
+  overflow-x: clip;
+  text-overflow: ellipsis;
+}
+
+/* leading visual nested in a label wrapper (branch/tag picker: span.flex-text-block > svg + strong) is muted
+   like Primer's leadingVisual; Primer button labels are medium (500), never bold */
+.ui.button:not(.primary, .green, .red, .danger) > span > .svg:first-child {
+  flex-shrink: 0;
+  color: var(--fgColor-muted);
+}
+
+.ui.button > .flex-text-block > strong {
+  font-weight: inherit;
+}
+
+/* dropdown caret (octicon-triangle-down "dropdown icon"): trailing action as on github.com (Code / branch
+   buttons measured: normal 12px padding, 16px caret, no pull-in) — Gitea renders it at 14px */
 .ui.button.dropdown > .dropdown.icon,
 .ui.button.dropdown > .icon.icon {
   position: static;
@@ -99,7 +126,28 @@
 }
 
 .ui.button > .dropdown.icon:last-child {
-  margin-right: calc(var(--base-size-4) * -1);
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+}
+
+/* A row of standalone buttons never pushes the page sideways: github.com wraps its header rows
+   (e.g. releases "RSS / New release", org members "Manage teams and members") onto a second line on
+   narrow screens instead of overflowing. Gitea's .flex-text-block is nowrap, and since buttons keep
+   their label width (min-width: auto above) the row now wraps once its items no longer fit.
+   Only rows made of buttons plus an optional tw-flex-1 filler wrap: a tw-flex-1 item has a 0 basis,
+   so the row breaks only when the content really overflows (a free-text item with an auto basis
+   would wrap as soon as its text is longer than the row, e.g. the compare page merge-status box). */
+@media (max-width: 767.98px) {
+  .flex-text-block:has(> .ui.button, > .ui.buttons):not(:has(> :not(.ui.button, .ui.buttons, .tw-flex-1, input[type="hidden"]))) {
+    flex-wrap: wrap;
+  }
+
+  /* Gitea stretches issue comment-form buttons to width: 100% on mobile (repo.css), which in a
+     wrapping row stacks "Close issue" / "Comment" full width; Primer buttons keep their natural
+     width, right-aligned, and wrap only when both labels do not fit (320px) */
+  .ui.form .field > .flex-text-block > .ui.button:not(.fluid) {
+    width: auto;
+  }
 }
 
 /* ---------- sizes ---------- */
@@ -130,10 +178,14 @@
 }
 
 /* ---------- icon-only (Primer IconButton: square) ---------- */
+/* The inline padding centres a 16px octicon in the square (size - 16 - 2 borders) / 2, so an icon-only
+   button stays exactly 32 / 28px wide, while a Gitea "icon button" that also carries a text label
+   (commit graph Mono / Color: svg + bare text node, which CSS cannot detect) keeps a gutter instead of
+   the icon touching its left edge. */
 .ui.icon.button,
 .ui.icon.buttons .button {
   min-width: var(--control-medium-size);
-  padding: 0;
+  padding: 0 calc((var(--control-medium-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
 }
 
 .ui.small.icon.button,
@@ -143,7 +195,7 @@
 .ui.tiny.icon.buttons .button,
 .ui.mini.icon.buttons .button {
   min-width: var(--control-small-size);
-  padding: 0;
+  padding: 0 calc((var(--control-small-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
 }
 
 .ui.icon.button > .svg,

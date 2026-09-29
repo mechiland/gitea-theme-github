@@ -9,8 +9,6 @@
   ],
   "unchanged": 374,
   "replaced": {
-    "gitea-double-chevron-left": "octicon-arrow-left",
-    "gitea-double-chevron-right": "octicon-arrow-right",
     "gitea-exclamation": "octicon-alert",
     "gitea-eclipse": "octicon-device-desktop",
     "gitea-whitespace": "octicon-gear",
@@ -25,5 +23,9 @@
     "material-palette": "octicon-paintbrush",
     "material-folder-symlink": "octicon-file-directory-symlink"
   },
-  "missing": []
+  "missing": [],
+  "restored": [
+    "gitea-double-chevron-left",
+    "gitea-double-chevron-right"
+  ]
 }

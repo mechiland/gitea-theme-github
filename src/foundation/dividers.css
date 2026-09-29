@@ -1,8 +1,8 @@
-/* Primer base/base.scss hr: 1px --borderColor-muted bottom border, 16px (15px) vertical margin.
+/* Primer base/base.scss hr: 1px --borderColor-muted bottom border, margin 15px 0.
  * Gitea .divider (modules/divider.css) uses --color-secondary (= borderColor-default). */
 hr:where(:not(.markup *)) {
   height: 0;
-  margin: var(--base-size-16) 0;
+  margin: calc(var(--base-size-16) - var(--borderWidth-thin)) 0;
   overflow: hidden;
   background: transparent;
   border: 0;

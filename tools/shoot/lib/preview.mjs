@@ -19,7 +19,7 @@ export async function installThemePreview(ctx, themeName) {
     let html = await resp.text();
     const m = html.match(/<link rel="stylesheet" href="([^"]*\/assets\/css\/index\.[^"]*\.css)">/);
     if (m) {
-      html = html.replace(m[0], `<link rel="preload" as="style" href="${m[1]}"><style>@layer gh-important, gitea, gh;@import url("${m[1]}") layer(gitea);</style>`);
+      html = html.replace(m[0], `<link rel="preload" as="style" href="${m[1]}"><link rel="stylesheet" href="${m[1]}" media="not all"><style>@layer gh-important, gitea, gh;@import url("${m[1]}") layer(gitea);</style>`);
       html = html.replace(/<link rel="stylesheet" href="[^"]*\/assets\/css\/theme-[^"]*\.css[^"]*">/, `<link rel="stylesheet" href="/assets/css/theme-${themeName}.css?preview=${stamp}">`);
       html = html.replace(/(<html[^>]*\bdata-theme=")[^"]*"/, `$1${themeName}"`);
     }

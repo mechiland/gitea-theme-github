@@ -14,5 +14,5 @@
 /* Gitea: `.ui.labeled.button > .label { margin: 0 0 0 -1px !important }` — the counter sits inside
    the button in Primer, spaced like `.btn .Counter`. */
 .ui.labeled.button > .label {
-  margin: 0 var(--control-small-paddingInline-normal) 0 var(--base-size-8) !important;
+  margin: 0 var(--control-small-paddingInline-normal) 0 calc(var(--base-size-4) + var(--borderWidth-thin)) !important;
 }

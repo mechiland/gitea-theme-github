@@ -18,9 +18,24 @@
   line-height: var(--base-size-20);
 }
 
-.ui.form .field > label,
+/* stacked fields only: inline fields keep Gitea's inline-block label margins (left-right forms: 10px gap,
+   reset below 768px) */
+.ui.form .field:not(.inline, .inline.fields .field) > label,
 .ui.form .grouped.fields > label {
   margin: 0 0 var(--base-size-4);
+}
+
+/* a plain inline field ("Template  [ ] Make repository a template") separates its label from the control
+   by 8px (Primer: label and checkbox never touch, the 2px-offset focus ring needs the room) */
+.ui.form:not(.left-right-form) .inline.field > label {
+  margin-right: var(--base-size-8);
+}
+
+/* left-right forms stack below 768px (Gitea resets the label margin to 0): FormControl's 4px label gap */
+@media (max-width: 767.98px) {
+  .ui.form.left-right-form .inline.field > label {
+    margin-bottom: var(--base-size-4);
+  }
 }
 
 /* checkbox rows inside fields keep the normal label weight of their text line */

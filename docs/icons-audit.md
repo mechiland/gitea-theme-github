@@ -33,8 +33,8 @@ migrate, packages, settings, admin). Counts below are from that run (before rest
 
 | Name | Where used (source; live audit pages) | Depicts | Decision | Reason |
 |---|---|---|---|---|
-| `gitea-double-chevron-left` | `base/paginate.tmpl:11` ("First"), `shared/issuelist.tmpl:68` (12px, PR "base ← head"; live: icons-pulls ×2); JS `DashboardRepoList.vue:500` | « | **replace → `octicon-arrow-left`**; pagination: **mask → `move-to-start`** (navigation N-3); JS copy: **mask** (pages/people) | UI glyph. GitHub's compare view / PR header uses `arrow-left` between base and head, so the *file* stays `arrow-left` (the 12px PR-list use). In pagination the labels are hidden below 768px and `← ‹` is ambiguous (critic r1), so navigation masks it with `move-to-start` (verified by injection, `shots/icons-r2/cmp-b.png`). `move-to-start` was not used for the file because it is wrong for base ← head. github.com has no First/Last, but Gitea's page window has no first/last page numbers, so hiding them would drop "jump to last". |
-| `gitea-double-chevron-right` | `base/paginate.tmpl:38` ("Last"); JS `DashboardRepoList.vue:519` | » | **replace → `octicon-arrow-right`**; pagination: **mask → `move-to-end`** (navigation N-3); JS: **mask** (pages/people) | UI glyph, pair of the above. |
+| `gitea-double-chevron-left` | `base/paginate.tmpl:11` ("First"), `shared/issuelist.tmpl:68` (12px, PR "base « head" in every PR row; live: pulls lists ×56 on 12 pages); JS `DashboardRepoList.vue:500` | « | **keep the file (round 4; Gitea's original bytes re-emitted, see §2.2)**. GitHub themes only: pagination → **mask `move-to-start`** (navigation N-3), PR list → **mask `arrow-left`** (pages/issues-prs P-1), JS copy → **mask `move-to-start`** (pages/people) | Not purely presentational: the PR-list use carries direction (merge head into base), the pagination use means "first page". A file override is global, so one drawing cannot be right for both uses in every theme. Round 3's `move-to-start` file put `main ⇤ head` into Gitea's own themes (critic r3 issue A); round 1–2's `arrow-left` made pagination read `← ‹`. Masks are theme-scoped, so each use gets its own glyph in GitHub themes and Gitea/Modern/Studio keep `«`. Sim r4: gitea-auto after the restart is pixel-identical to today (`shots/icons-r4/cmp-pag-branches.png`, columns 1–2). |
+| `gitea-double-chevron-right` | `base/paginate.tmpl:38` ("Last"); JS `DashboardRepoList.vue:519` | » | **keep the file (round 4)**; GitHub themes: **mask `move-to-end`** (navigation N-3; JS copy pages/people) | Pair of the above; kept un-overridden with it so First/Last stay a matching pair in every theme. |
 | `gitea-exclamation` | `repo/icons/commit_status.tmpl:9,15` (18px, error=red / warning=yellow); JS `modules/toast.ts:27,32` (warning/error toasts), `DashboardRepoList.vue:38,40` | ! | **replace → `octicon-alert`**; JS: **mask** (overlays: toasts; pages/people: dashboard) | UI glyph. Primer uses `alert` for warnings; a distinct shape from failure's `x`. |
 | `gitea-eclipse` | theme selector icon for `--theme-color-scheme: auto` (`modules/templates/util_render.go:242`); live: footer theme menu on **all 36 pages**, settings/appearance | half-moon | **replace → `octicon-device-desktop`** | UI glyph. "Auto" = follow the system; device-desktop is the conventional "system" icon; GitHub has no eclipse glyph. |
 | `gitea-whitespace` | `repo/diff/whitespace_dropdown.tmpl:2` (live: icons-commit) | ¶-like whitespace | **replace → `octicon-gear`** | UI glyph. GitHub keeps diff whitespace options behind the diff-settings gear. (`octicon-space` was considered: in 19.38 it is the Copilot-Spaces folder glyph — wrong meaning.) |
@@ -42,7 +42,7 @@ migrate, packages, settings, admin). Counts below are from that run (before rest
 | `gitea-join` | same button when split view is active | join arrows | **replace → `octicon-rows`** | UI glyph; closest Octicon for a single stacked (unified) view. Weakest match of the set. |
 | `gitea-lock` | `repo/commit_sign_badge.tmpl:66` (signed, verified, known user) | padlock | **replace → `octicon-verified`** | GitHub marks verified signatures with the `verified` badge glyph. |
 | `gitea-lock-cog` | `repo/commit_sign_badge.tmpl:69` (verified by instance/trusted key) | padlock + cog | **replace → `octicon-shield-check`** | Keeps a distinct "trusted by system" meaning; the original's cog cut-out is a hard-coded white fill that disappears on dark backgrounds (contact sheet, dark). |
-| `gitea-unlock` | `repo/commit_sign_badge.tmpl:73` (signed but unverified; live: icons-commit) | open padlock | **replace → `octicon-unverified`**; unsigned commits: **hide badge** (data-display D-4) | GitHub's glyph for unverified signatures. The same icon is also used on the commit page for *unsigned* commits (`commit_page.tmpl:174` passes no Commit, class has no `commit-is-signed`); github.com shows no badge there, so D-4 hides `.commit-sign-badge:not(.commit-is-signed)` (verified by injection, `shots/icons-r2/sign-badge-cmp.png`). |
+| `gitea-unlock` | `repo/commit_sign_badge.tmpl:73` (signed but unverified; live: icons-commit) | open padlock | **replace → `octicon-unverified`**; unsigned commits: **hide badge** (data-display D-4) | GitHub's glyph for unverified signatures. The same icon is also used on the commit page for *unsigned* commits (`commit_page.tmpl:174` passes no Commit, class has no `commit-is-signed`); github.com shows no badge there, so D-4 hides `.commit-sign-badge:not(.commit-is-signed)` (verified by injection, `shots/icons-r2/sign-badge-cmp.png`, `shots/icons-r3/cmp-d.png`). Known limit (critic r2): a *signed* commit whose key is unknown (`NoKeyFound`, `services/asymkey/commit.go:185`, Warning=false) also renders without `commit-is-signed` (`commit_sign_badge.tmpl:37-41` resets the class), so D-4 hides it too, where github.com would show "Unverified". The DOM carries no locale-independent marker for that case (only the translated tooltip), and Gitea's own commit lists already drop the badge in exactly this case, so the theme stays consistent with Gitea. |
 | `gitea-running` | `repo/icons/action_status.tmpl:25`, `pull_merge_box.go:132` (live: icons-actions); JS: ActionRunJobView, RepoCodeFrequency, RepoContributors, RepoRecentCommits, ViewFileTreeItem, action-status-icon | spinning ring | **keep** | Already drawn in GitHub's style (ring at .5 opacity + dot + arc, currentColor); there is no Octicon spinner. Believed to match GitHub Actions' in-progress icon — **not verified live** (no in-progress run reachable logged-out). |
 | `gitea-empty-checkbox` | JS only: `ActionRunJobView.vue:440-457` (log options), `EasyMDEToolbarActions.ts:111` | empty rounded square | **keep** | It is the outline of `octicon-checkbox` (same 1.75 radius / 1.5 stroke geometry); Octicons has no unchecked variant (`square` is a tiny 8px box). JS-only → no file effect anyway. |
 | `gitea-favicon` | JS `modules/favicon-status.ts:6` | Gitea logo | **keep** | Brand. |
@@ -89,6 +89,37 @@ migrate, packages, settings, admin). Counts below are from that run (before rest
   `shots/icons-r1-mask-filelist-compare.png` (light before/after, dark before/after) — files render as muted
   `octicon-file` (computed background `rgb(89,99,110)` light, `rgb(145,152,161)` dark).
 
+### 2.2 Effect of the file overrides on other themes (Gitea, Modern, Studio)
+
+Server-side override files are global: they are read at startup and served for every theme and user
+(`modules/svg/svg.go`). `DEFAULT_THEME` is `gitea-auto`, so most users of this instance see them outside the GitHub
+theme. Rule (policy §6): a file override is allowed only if its drawing is correct under **every** theme, i.e. the
+icon is purely presentational and every call site means the same thing.
+
+Checks (round 4): no Gitea CSS (`web_src/css`) and no Modern/Studio CSS (`CUSTOM_PATH/public/assets/css/{theme-modern*,modern/,theme-studio*,studio/}`)
+selects any of the 17 overridden class names (grep, 0 hits each), so the new drawings inherit the same size and
+`currentColor` in every theme.
+
+| Override | Call sites | Effect in Gitea/Modern/Studio | OK? |
+|---|---|---|---|
+| `gitea-eclipse` → `device-desktop` | theme menu "Auto" entry + footer | Auto shows a monitor instead of a half-moon (sim r4 `shots/icons-r4/cmp-footer.png`, column 2) | yes: one meaning ("follow system") |
+| `gitea-exclamation` → `alert` | commit status error/warning | triangle instead of "!" in state colour | yes |
+| `gitea-whitespace` → `gear`, `gitea-split` → `split-view`, `gitea-join` → `rows` | diff toolbar buttons | Octicon glyphs in the same buttons | yes: single meaning each |
+| `gitea-lock` → `verified`, `gitea-lock-cog` → `shield-check`, `gitea-unlock` → `unverified` | commit signature badge | GitHub's signature glyphs; `shield-check` also fixes the white cog cut-out that vanished on dark themes | yes |
+| `fontawesome-save` → `check`, `fontawesome-send` → `key` | Save buttons in 2 modals; access-token list item | Octicon glyphs | yes |
+| `material-invert-colors` → `circle`, `material-palette` → `paintbrush` | commit graph Mono/Color buttons | Octicon glyphs | yes |
+| `material-folder-symlink` → `file-directory-symlink` | material file-icon theme, dir symlinks | muted Octicon instead of a blue folder | yes |
+| `octicon-project-template`, `octicon-repo-forked-locked` | 19.28.1 → 19.38.0 path refinements | same glyph, newer drawing | yes |
+| ~~`gitea-double-chevron-left/right`~~ | pagination First/Last **and** PR-list base/head arrow | round 3 gave `main ⇤ head` in every theme → **withdrawn in round 4** | no → kept as Gitea's original |
+
+Because `npm run deploy` never deletes a file that was removed from `src/icons/svg` (integrator I-7), withdrawing an
+override by deleting it would leave the round-3 `move-to-start` file in `CUSTOM_PATH` and it would still be served
+after the restart. `gen-icons.mjs` therefore has a `RESTORED` list: those names are emitted with **Gitea's original
+bytes** (`cmp` = identical to `gitea-src-1.27.3/public/assets/img/svg/<name>.svg`), which the deploy copies over the
+stale file. Serving the original from `CUSTOM_PATH` is the same as no override. Drop the names from `RESTORED` once I-7
+deletes retired files. Caveat: on a later Gitea upgrade these two copies would pin the 1.27.3 drawing; regenerate
+against the new source (the generator reads Gitea's files, so re-running it is enough).
+
 ## 3. Sizes (GitHub, measured logged-out with Playwright, `shots/icons-gh-sizes.json`)
 
 | Where on github.com | Size | Colour | Gitea today | Proposal (owner) |
@@ -107,16 +138,53 @@ folder resizing an icon must set `width`, `height`, `min-width`, `min-height` to
 
 ## 4. Deliverables in `src/icons/`
 
-- `svg/` — 17 files (2 upgrades + 15 replacements). Regenerate: `SVGO_PATH=<dir with node_modules/svgo@4.0.1> node src/icons/gen-icons.mjs`
+- `svg/` — 17 files (2 upgrades + 13 replacements + 2 restored to Gitea's original bytes, §2.2). Regenerate: `SVGO_PATH=<dir with node_modules/svgo@4.0.1> node src/icons/gen-icons.mjs`
   (or plain `node src/icons/gen-icons.mjs` once `svgo@4.0.1` is a devDependency); `--check` verifies freshness.
 - `octicon-masks.css` — `:root { --gh-octicon-<name>: url("data:image/svg+xml,…") }` for alert, stop, x-circle, info,
   check-circle, arrow-left, arrow-right, move-to-start, move-to-end, file, file-directory-fill, file-directory-open-fill, file-submodule,
   file-symlink-file, file-directory-symlink. Needs to be bundled into the token layer (integrator request).
 - `manifest.json` — what was generated and why.
 - Contact sheet: `shots/icons-sheet.html` / `shots/icons-sheet.png` (Gitea original vs ours, 16/32px, in a button,
-  light + dark; all 195 SVGs render with a non-empty bbox).
+  light + dark). Built by `shots/icons-sheet.mjs`; round 3 and round 4 (chevron rows now "restored: Gitea original", identical glyphs, looked at): **197/197** SVGs render with a non-empty bbox (17 rows × 2 schemes × 5 + 27 candidates; the count grew from 195 (r1) and 196 (r2) because candidates were added: `circle` in r2, `dot` in r3).
 
 ## 5. Open items
+
+### Round 4
+- **Chevron regression fixed (critic r3 issue A).** `gitea-double-chevron-left/right` are no longer overridden: the
+  generator re-emits Gitea's original bytes (`RESTORED`, §2.2), and `npm run deploy` wrote them to `CUSTOM_PATH`
+  (`iconsChanged: 2`, `restartRequired: true`; `cmp` with gitea-src: identical). Simulation `shots/icons-r4-sim.mjs`
+  (3 targets × light/dark × 1440/390 × 4 modes = 48 captures, 0 failed, 0 console errors), sheet
+  `shots/icons-r4/cmp-pag-branches.png`:
+  - `gitea-theme` (today) and `ours-gitea-theme` (icons after the restart, Gitea's `gitea-auto`) are identical:
+    PR list `main « head` 12×12, rgb(91,97,103) light / rgb(150,154,161) dark; pagination `« First … Last »`.
+    **No effect on non-GitHub themes.**
+  - `ours` (github-auto, restart only, before I-4): Gitea's `«`/`»` glyphs in our colours (rgb(89,99,110) /
+    rgb(145,152,161) in the PR list). Same as today, not a regression.
+  - `proposals` (github-auto + N-3 + P-1 masks): pagination `⇤ ‹ 1 › ⇥` (390) and `⇤ First ‹ Previous 1 … Next › Last ⇥`
+    (1440), masks applied, 16×16, currentColor rgb(31,35,40) / rgb(240,246,252); PR list `main ← head`, 12×12,
+    rgb(89,99,110) / rgb(145,152,161).
+  - Cost: the GitHub pagination glyphs depend on I-4 + N-3 again (reinstated in docs/requests/navigation.md), the same
+    prerequisites as round 2. Without them the GitHub themes show Gitea's `«`/`»`, which is today's state, not a
+    regression. P-1 is now an improvement (`«` → `←`) rather than a repair.
+  - All of the above is simulated (Gitea has not been restarted since 2026-09-29T15:31:18Z).
+- **Cross-theme table (§2.2)** for all 15 remaining overrides; Modern/Studio/Gitea CSS select none of them.
+- **Audit tool note:** masked icons keep their `gitea-double-chevron-*` class, so `icons.nonOcticon` in the shoot audit
+  will keep listing them on github-* pages even when they are drawn as Octicons. I-5 (tool) is extended with this case.
+
+### Round 3
+- **Pagination no longer depends on other folders.** `gitea-double-chevron-left/right` now carry `move-to-start` /
+  `move-to-end` (the file serves pagination twice and the PR list once). After the restart alone the bar reads
+  `⇤ ‹ 1 › ⇥` at 390 and `⇤ First ‹ Previous 1 2 … Next › Last ⇥` at 1440, light and dark (sim, `shots/icons-r3/cmp-a.png`,
+  `cmp-b.png`). N-3 is withdrawn. The PR-list 12px glyph becomes `arrow-left` via the P-1 mask (pages/issues-prs;
+  verified by injection: `mask: true`, 12×12, currentColor rgb(89,99,110) / rgb(145,152,161)).
+- **Simulation now includes I-6.** `shots/icons-r3-sim.mjs` (96 captures, 0 failed, 0 console errors; waits 1.8 s for
+  lazy chunks). "ours + I-6 + requested CSS" on repo home: 0 unlayered index.css, directories rgb(84,174,255) light /
+  rgb(145,152,161) dark, material icons → masked `octicon-file`. Without I-6 ("ours"): 1 unlayered index.css and
+  directories rgb(9,105,218) / rgb(68,147,248). Sheets `shots/icons-r3/cmp-{a,b,c,d}.png`, report
+  `shots/icons-r3/sim/report.json`.
+- **Graph Mono (nit, kept).** `octicon-circle` is a full 16px ring and reads heavier than `paintbrush`; `dot` (8px ring,
+  contact sheet) is too small to read as a button icon at 16px. The icon touching the segment border is button padding
+  (controls / pages/repo), unchanged from Gitea.
 
 ### Round 2 findings
 - **Unlayered Gitea CSS on repo home / file view (integrator I-6, major, all folders).** A lazily imported chunk

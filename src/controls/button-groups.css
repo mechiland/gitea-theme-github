@@ -100,7 +100,7 @@
 
 .ui.buttons:has(> .active.button) > .icon.button {
   min-width: var(--control-medium-size);
-  padding: 0;
+  padding: 0 calc((var(--control-medium-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
 }
 
 /* inner hover/press "pill" inset by 4px (Primer --segmented-control-button-bg-inset) */
@@ -144,10 +144,12 @@
   background: var(--borderColor-default);
 }
 
-/* icon-only items (group carries .icon) are square like Primer SegmentedControl.IconButton */
+/* icon-only items (group carries .icon) are square like Primer SegmentedControl.IconButton; the inline
+   padding centres a 16px icon in the square, so an item that also has a text label (commit graph
+   Mono / Color) keeps a gutter instead of the icon touching the item edge */
 .ui.icon.buttons:has(> .active.button) > .button {
   min-width: var(--control-medium-size);
-  padding: 0;
+  padding: 0 calc((var(--control-medium-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
 }
 
 /* Primer SegmentedControl size="small" (28px, 12px text): the group or its items are Gitea small/tiny/mini
@@ -177,7 +179,7 @@
 .ui.icon.buttons:has(> .active.button) > .tiny.button,
 .ui.icon.buttons:has(> .active.button) > .mini.button {
   min-width: var(--control-small-size);
-  padding: 0;
+  padding: 0 calc((var(--control-small-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
 }
 
 .ui.buttons:has(> .active.button):has(> .small.button, > .tiny.button, > .mini.button) > .button:not(.active, :last-child, :has(+ .active)):not(:hover)::after {
@@ -212,7 +214,8 @@
   background: var(--button-default-bgColor-active);
 }
 
-.ui.labeled.button:not(.icon):has(> .button:focus-visible) {
+.ui.labeled.button:not(.icon):has(> .button:focus-visible),
+.ui.labeled.button:not(.icon):has(> .label:focus-visible) {
   outline: var(--focus-outline-width) solid var(--focus-outlineColor);
   outline-offset: var(--focus-outline-offset);
 }
@@ -249,12 +252,13 @@
 .ui.labeled.button > .label:hover {
   display: inline-block;
   min-width: var(--base-size-20);
-  margin: 0 var(--control-small-paddingInline-normal) 0 var(--base-size-8); /* !important twin in buttons.important.css */
+  /* Primer .btn .Counter: margin-left 2px after a text space (~3.3px at 12px) → 5px measured on github.com */
+  margin: 0 var(--control-small-paddingInline-normal) 0 calc(var(--base-size-4) + var(--borderWidth-thin)); /* !important twin in buttons.important.css */
   padding: 0 var(--base-size-6);
   border: var(--borderWidth-thin) solid var(--counter-borderColor);
   border-radius: var(--borderRadius-full);
   background: var(--buttonCounter-default-bgColor-rest);
-  color: var(--fgColor-default);
+  color: var(--button-default-fgColor-rest); /* Primer: color inherit (button fg) */
   font-size: var(--text-body-size-small);
   font-weight: var(--base-text-weight-medium);
   line-height: calc(var(--base-size-20) - var(--borderWidth-thick));
@@ -262,15 +266,13 @@
   text-decoration: none;
 }
 
-/* the ring is drawn by the wrapper (above); the counter link keeps its own ring */
-.ui.labeled.button > .button:focus-visible {
+/* the ring is drawn by the wrapper (above), as on github.com where the Counter sits inside the one
+   focusable .btn-sm. Gitea's Watch / Star <a role=button> has no href, so the counter link is the only
+   keyboard stop: its focus rings the whole control too, not the counter alone. */
+.ui.labeled.button > .button:focus-visible,
+.ui.labeled.button > .label:focus-visible {
   outline: none;
   box-shadow: none;
-}
-
-.ui.labeled.button > .label:focus-visible {
-  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
-  outline-offset: var(--borderWidth-thin);
 }
 
 .ui.labeled.button > .button > .octicon-star-fill {
