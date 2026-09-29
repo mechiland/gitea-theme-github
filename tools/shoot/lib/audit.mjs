@@ -96,14 +96,36 @@ export function pageAudit({ palette, otherPalette, target }) {
   const defined = new Set();
   const refs = new Map(); // name -> {count, withFallback, selectors:Set}
   const unreadableSheets = [];
+  // var() parser: refs nested inside another var()'s fallback are only
+  // recorded as fallback refs (they matter only if the outer var is undefined).
+  const addRef = (name, hasFallback, selector, inFallback) => {
+    let r = refs.get(name);
+    if (!r) refs.set(name, (r = { count: 0, withFallback: 0, fallbackOnly: 0, selectors: new Set() }));
+    if (inFallback) { r.fallbackOnly++; return; }
+    r.count++; if (hasFallback) r.withFallback++;
+    if (selector && r.selectors.size < 8) r.selectors.add(selector);
+  };
+  const parseVars = (text, selector, inFallback) => {
+    let i = 0;
+    while ((i = text.indexOf('var(', i)) !== -1) {
+      let depth = 0, j = i + 3, comma = -1;
+      for (; j < text.length; j++) {
+        const ch = text[j];
+        if (ch === '(') depth++;
+        else if (ch === ')') { depth--; if (depth === 0) break; }
+        else if (ch === ',' && depth === 1 && comma < 0) comma = j;
+      }
+      const inner = text.slice(i + 4, j);
+      const name = (comma < 0 ? inner : text.slice(i + 4, comma)).trim();
+      const fallback = comma < 0 ? '' : text.slice(comma + 1, j).trim();
+      if (/^--[\w-]+$/.test(name)) addRef(name, fallback !== '', selector, inFallback);
+      if (fallback) parseVars(fallback, selector, true);
+      i = j + 1;
+    }
+  };
   const scanDecl = (text, selector) => {
     for (const m of text.matchAll(/(?:^|[;{\s])(--[\w-]+)\s*:/g)) defined.add(m[1]);
-    for (const m of text.matchAll(/var\(\s*(--[\w-]+)\s*(,)?/g)) {
-      let r = refs.get(m[1]);
-      if (!r) refs.set(m[1], (r = { count: 0, withFallback: 0, selectors: new Set() }));
-      r.count++; if (m[2]) r.withFallback++;
-      if (selector && r.selectors.size < 8) r.selectors.add(selector);
-    }
+    parseVars(text, selector, false);
   };
   const walk = (rules, parentSel) => {
     for (const rule of rules) {
@@ -132,7 +154,7 @@ export function pageAudit({ palette, otherPalette, target }) {
   const unresolved = [];
   const unresolvedWithFallback = [];
   for (const [name, r] of refs) {
-    if (defined.has(name)) continue;
+    if (defined.has(name) || r.count === 0) continue;
     if (rootCS.getPropertyValue(name).trim() !== '') continue;
     // sample elements matching referencing rules: maybe defined at runtime by JS on the element
     let resolvedSomewhere = false; let matched = 0;
@@ -142,20 +164,33 @@ export function pageAudit({ palette, otherPalette, target }) {
       for (const el of els) { matched++; if (getComputedStyle(el).getPropertyValue(name).trim() !== '') resolvedSomewhere = true; }
     }
     if (resolvedSomewhere) continue;
-    const entry = { name, refs: r.count, withFallback: r.withFallback, matchedElements: matched, selectors: [...r.selectors].slice(0, MAX_SAMPLES) };
+    const entry = { name, refs: r.count, withFallback: r.withFallback, fallbackRefs: r.fallbackOnly, matchedElements: matched, selectors: [...r.selectors].slice(0, MAX_SAMPLES) };
     (r.withFallback === r.count ? unresolvedWithFallback : unresolved).push(entry);
+    // note: refs whose only use is inside another var()'s fallback are ignored
   }
   unresolved.sort((a, b) => b.matchedElements - a.matchedElements || b.refs - a.refs);
 
   // ---------- 2. colors ----------
-  const exemptReason = (el) => {
+  const INLINE_PROPS = { color: ['color'], 'background-color': ['background-color', 'background'], 'border-color': ['border-color', 'border', 'border-top-color', 'border-bottom-color', 'border-left-color', 'border-right-color'],
+    'outline-color': ['outline-color', 'outline'], fill: ['fill', 'color'], stroke: ['stroke', 'color'], 'box-shadow': ['box-shadow'] };
+  // explicit inline color on the element itself (or, for inherited text color / currentColor fill, on an ancestor)
+  const inlineSets = (el, prop) => {
+    const names = INLINE_PROPS[prop] || [prop];
+    const inherits = prop === 'color' || prop === 'fill' || prop === 'stroke';
+    for (let n = el, d = 0; n && n.nodeType === 1 && d < (inherits ? 8 : 1); n = n.parentElement, d++) {
+      if (n.style && names.some((p) => n.style.getPropertyValue(p))) return true;
+      if (n.hasAttribute && (n.hasAttribute('fill') && prop === 'fill')) return true;
+    }
+    return false;
+  };
+  const exemptReason = (el, prop) => {
     if (el.closest('img, picture, video, canvas, .avatar, .Avatar, .avatar-user, .avatar-group-item')) return 'avatar/image';
     if (el.closest('.chroma, .code-inner, .lines-code, .code-diff .lines-code, .highlight, .blob-code, [class^="pl-"], [class*=" pl-"], .cm-editor, .monaco-editor')) return 'syntax';
     if (el.closest('.repo-language-color, .color-icon, .language-color, .language-stats, .repository-lang-color, [itemprop="programmingLanguage"] + .repo-language-color')) return 'language-color';
     if (el.closest('.ui.label[style], .labels-list .ui.label, .IssueLabel, .Label[style], .IssueLabel--big, .label-list .ui.label, a.label[style]')) return 'label';
     if (el.closest('.markup [style], .markdown-body [style], .render-content [style]')) return 'markdown-inline';
     if (el.closest('.emoji, g-emoji, .reaction .emoji')) return 'emoji';
-    if (el.closest('[style*="color"], [style*="background"]')) return 'inline-style';
+    if (inlineSets(el, prop)) return 'inline-style';
     if (el.closest('.ContributionCalendar, .heatmap, #user-heatmap, .activity-heatmap-container')) return 'heatmap';
     return null;
   };
@@ -172,7 +207,7 @@ export function pageAudit({ palette, otherPalette, target }) {
     const key = norm(raw);
     if (key.endsWith(',0)')) return; // fully transparent
     checked++;
-    const reason = exemptReason(el);
+    const reason = exemptReason(el, prop);
     if (reason) { add(exempt, reason + ' ' + key, prop, el, { reason }); return; }
     if (prop !== 'color' && cs && norm(cs.color) === key && prop !== 'background-color') {
       // currentColor-derived (border/outline/fill/stroke default to currentColor)

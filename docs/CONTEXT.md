@@ -19,3 +19,15 @@
 - Never restart Gitea yourself; ask the integrator. Never modify the Gitea source, binary or DB schema.
 - Never claim something you have not screenshotted and looked at.
 - Never inflate scores.
+- `admin/eveland` was created at 23:36 on 2026-09-29 by another session (not ours, not seeded). Never touch it.
+- Admin's theme was switched to `gitea-auto` by the screenshot tool setup (original: `gitea-auto-tritanopia`); to be restored at the end.
+
+## Verified source facts (details: docs/research/gitea-1.27.3.md)
+- New theme files appear only after a Gitea restart (prod caches the theme list). Editing an existing theme file needs no restart.
+- Templates: `docker exec -u git gitea-server gitea manager reload-templates --config /data/gitea/conf/app.ini` hot-reloads them (verified); a broken template is refused, the old one stays.
+- Server-rendered icons (`svg` helper) read CUSTOM_PATH/public/assets/img/svg first, at startup → restart needed; applies to all themes. Vue/JS icons are baked into the JS bundle (87 SVGs) → only CSS can restyle/mask them.
+- JS decides dark/light from `--is-dark-theme` (Mermaid, `data-gitea-theme-dark`, captcha).
+- Lazy-loaded chunk CSS (PullRequestMergeForm, RepoContributors, RepoCodeFrequency, RepoRecentCommits, RepoFileSearch, easymde, colorpicker, swagger) is unlayered → beats our layers; use `*.important.css`.
+- Label colors are inline `style` with `!important` → cannot be overridden; exempt.
+- Vue-only areas: dashboard repo list, branch/tag selector, file trees, diff commit selector, Actions run view, heatmap, PR merge form, go-to-file, issue hover card; charts are canvas (colors read from CSS vars at load); Mermaid renders in a same-origin iframe.
+- Playwright: networkidle never fires on signed-in pages (event stream) — tools/shoot handles it.

@@ -9,6 +9,7 @@ import { PROJECT_ROOT, GITEA_URL, ensureLogin, ensureAppearance, langCookies, gi
 import { loadPalette } from './lib/palette.mjs';
 import { INIT_SCRIPT, FREEZE_CSS, settle, pageAudit } from './lib/audit.mjs';
 import { measureItems, pageMeasure, MEASURE_PROPS } from './lib/measure.mjs';
+import { installThemePreview } from './lib/preview.mjs';
 
 const HELP = `usage: node tools/shoot/shoot.mjs --target gitea|github [options]
   --routes <file>        routes file (default tools/shoot/routes.json)
@@ -38,6 +39,7 @@ const measure = !!(args.measure || args['measure-only']);
 const measureOnly = !!args['measure-only'];
 const doStates = !!args.states;
 const doAudit = !args['no-audit'] && !measureOnly;
+let previewTheme = null;
 const concurrency = Number(args.concurrency) || (target === 'github' ? 2 : 3);
 const giteaBase = (cfg.giteaBase || GITEA_URL).replace(/\/$/, '');
 const outDir = path.resolve(PROJECT_ROOT, args.out && args.out !== true ? args.out
@@ -151,13 +153,16 @@ async function newContext(browser, route, scheme, vw, storageState) {
     ...(auth ? { storageState } : {}),
   });
   if (target === 'gitea') await ctx.addCookies(langCookies(giteaBase, auth ? undefined : theme));
+  if (target === 'gitea' && previewTheme) await installThemePreview(ctx, previewTheme);
   await ctx.addInitScript(INIT_SCRIPT);
   return ctx;
 }
 
 async function runStates(browser, route, scheme, vw, storageState, dir) {
   const states = (route.states || []).filter((s) => !s.target || s.target === target);
-  const statesDef = states.map((s) => ({ ...s, selector: (s.selectors && s.selectors[target]) || s.selector }));
+  // Never submit forms on github.com (external site): submitEmpty is gitea-only.
+  const statesDef = states.map((s) => ({ ...s, selector: (s.selectors ? s.selectors[target] : s.selector) }))
+    .filter((s) => s.selector && !(target === 'github' && s.action === 'submitEmpty') && (!s.viewports || s.viewports.map(Number).includes(vw)));
   const results = [];
   if (!statesDef.length) return results;
   fs.mkdirSync(path.join(dir, 'states'), { recursive: true });
@@ -218,7 +223,7 @@ async function runStates(browser, route, scheme, vw, storageState, dir) {
       const base = path.join(dir, 'states', `${scheme}-${vw}-${st.name}`);
       await page.screenshot({ path: base + '.png', animations: 'disabled', caret: 'hide' });
       res.viewportPng = path.relative(outDir, base + '.png');
-      const clipSel = st.clip || (st.action === 'submitEmpty' ? null : st.selector);
+      const clipSel = (st.clips && st.clips[target]) || st.clip || (st.action === 'submitEmpty' ? null : st.selector);
       if (clipSel) {
         const clipLoc = page.locator(clipSel).filter({ visible: true }).first();
         if (await clipLoc.count()) {
@@ -321,6 +326,7 @@ function summarize(logs, meta) {
     route: l.route, scheme: l.scheme, viewport: l.viewport, url: l.url, png: l.png, json: `${l.route}/${l.scheme}-${l.viewport}.json`,
     mainStatus: l.mainStatus, problems: l.problems, consoleErrors: l.consoleErrors.length, consoleWarnings: l.consoleWarnings.length,
     failedRequests: l.failedRequests.length, unresolvedVars: l.cssVars ? l.cssVars.unresolved.length : null,
+    unresolvedVarsLive: l.cssVars ? l.cssVars.unresolved.filter((v) => v.matchedElements > 0).length : null,
     offPaletteDistinct: l.colors ? l.colors.offPaletteDistinct : null, offPaletteTotal: l.colors ? l.colors.offPaletteTotal : null,
     nonOcticonIcons: l.icons ? l.icons.nonOcticon.reduce((s, i) => s + i.count, 0) : null, cls: l.cls ? l.cls.total : null,
     cssBytes: l.cssBytes, htmlTheme: l.htmlTheme, prefersDark: l.env && l.env.prefersDark, bodyBg: l.env && l.env.bodyBg,
@@ -358,6 +364,8 @@ async function main() {
   if (target === 'gitea') {
     storageState = await ensureLogin(browser, { force: !!args.relogin });
     appearance = await ensureAppearance(browser, storageState, { theme, lang: 'en-US' });
+    previewTheme = appearance.preview || null;
+    if (previewTheme) console.error(`[shoot] ${previewTheme} is deployed but not registered yet (needs a Gitea restart): PREVIEW mode — head rewritten like head_style.tmpl`);
     if (appearance.changes.length) console.error(`[shoot] appearance updated: ${JSON.stringify(appearance.changes)}`);
   }
   const palette = doAudit ? await loadPalette(browser) : null;
@@ -367,22 +375,26 @@ async function main() {
   const logs = await pool(jobs, concurrency, async ([r, s, v]) => {
     const l = await capture(browser, r, s, v, storageState, palette);
     const flag = l.problems.length ? `PROBLEMS: ${l.problems.join('; ')}` : 'ok';
-    console.error(`[shoot] ${r.id} ${s}-${v} ${l.mainStatus} ${l.ms}ms offPalette=${l.colors ? l.colors.offPaletteDistinct : '-'} vars=${l.cssVars ? l.cssVars.unresolved.length : '-'} icons=${l.icons ? l.icons.nonOcticon.length : '-'} errors=${l.consoleErrors.length} ${flag}`);
+    console.error(`[shoot] ${r.id} ${s}-${v} ${l.mainStatus} ${l.ms}ms offPalette=${l.colors ? l.colors.offPaletteDistinct : '-'} vars=${l.cssVars ? l.cssVars.unresolved.filter((v) => v.matchedElements > 0).length + '/' + l.cssVars.unresolved.length : '-'} icons=${l.icons ? l.icons.nonOcticon.length : '-'} errors=${l.consoleErrors.length} ${flag}`);
     return l;
   });
   const meta = { target, theme: target === 'gitea' ? theme : null, generated: new Date().toISOString(), outDir: path.relative(PROJECT_ROOT, outDir),
     giteaBase: target === 'gitea' ? giteaBase : null, giteaVersion: target === 'gitea' ? await giteaVersion() : null, browser: browser.version(),
     schemes, viewports, appearance, paletteVersion: palette && palette.version };
   await browser.close();
-  // github runs write into docs/reference: merge summary with previous runs rather than overwrite
+  // partial runs (--only) into an existing dir (e.g. docs/reference) merge page lists instead of overwriting
   const summaryFile = path.join(outDir, 'summary.json');
   const summary = summarize(logs, meta);
-  if (target === 'github' && fs.existsSync(summaryFile) && only) {
+  if (fs.existsSync(summaryFile) && only) { // partial re-run into an existing dir: keep other pages
     try {
       const prev = JSON.parse(fs.readFileSync(summaryFile, 'utf8'));
       const keep = (prev.pages || []).filter((p) => !summary.pages.find((q) => q.route === p.route && q.scheme === p.scheme && q.viewport === p.viewport));
       summary.pages = [...keep, ...summary.pages];
-      summary.totals.pages = summary.pages.length;
+      const P = summary.pages;
+      summary.totals = { pages: P.length, pagesWithProblems: P.filter((p) => p.problems && p.problems.length).length,
+        consoleErrors: P.reduce((a, p) => a + (p.consoleErrors || 0), 0), failedRequests: P.reduce((a, p) => a + (p.failedRequests || 0), 0),
+        maxCLS: Math.max(0, ...P.map((p) => p.cls || 0)), mergedWithPreviousRun: true };
+      summary.note = 'offPalette/unresolvedVars/nonOcticonIcons/consoleErrors aggregates cover only the latest partial run; per-page numbers are in pages[]';
     } catch {}
   }
   fs.writeFileSync(summaryFile, JSON.stringify(summary, null, 1));

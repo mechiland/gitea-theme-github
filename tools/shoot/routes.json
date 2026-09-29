@@ -8,30 +8,132 @@
       "gitea": "/",
       "github": null,
       "states": [
-        { "name": "create-menu-open", "action": "click", "selectors": { "gitea": "#navbar .navbar-right .ui.dropdown:has(.octicon-plus)" }, "clip": "#navbar .navbar-right .ui.dropdown .menu.visible, #navbar .navbar-right .ui.dropdown .menu", "pad": 16 },
-        { "name": "avatar-menu-open", "action": "click", "selectors": { "gitea": "#navbar .navbar-right .ui.dropdown:has(.navbar-avatar)" }, "clip": "#navbar .navbar-right .ui.dropdown .menu.visible, #navbar .navbar-right .ui.dropdown .menu", "pad": 16 }
+        {
+          "name": "create-menu-open",
+          "action": "click",
+          "selectors": {
+            "gitea": "#navbar .navbar-right .ui.dropdown:has(.octicon-plus)"
+          },
+          "clip": "#navbar .navbar-right .ui.dropdown .menu.visible, #navbar .navbar-right .ui.dropdown .menu",
+          "pad": 16,
+          "viewports": [
+            1440
+          ]
+        },
+        {
+          "name": "avatar-menu-open",
+          "action": "click",
+          "selectors": {
+            "gitea": "#navbar .navbar-right .ui.dropdown:has(.navbar-avatar)"
+          },
+          "clip": "#navbar .navbar-right .ui.dropdown .menu.visible, #navbar .navbar-right .ui.dropdown .menu",
+          "pad": 16,
+          "viewports": [
+            1440
+          ]
+        },
+        {
+          "name": "mobile-menu-open",
+          "action": "click",
+          "viewports": [
+            390
+          ],
+          "selectors": {
+            "gitea": "#navbar-expand-toggle"
+          },
+          "clip": "#navbar",
+          "pad": 0
+        }
       ]
     },
-    { "id": "explore-repos", "gitea": "/explore/repos", "github": "https://github.com/explore",
+    {
+      "id": "explore-repos",
+      "gitea": "/explore/repos",
+      "github": "https://github.com/explore",
       "states": [
-        { "name": "search-focus", "action": "focus", "selectors": { "gitea": ".page-content input[name=q]", "github": "header input, header button[aria-label*=Search i], .header-search-button" } },
-        { "name": "sort-open", "action": "click", "selectors": { "gitea": ".page-content .ui.dropdown:has(.menu a[href*='sort='])" }, "clip": ".page-content .ui.dropdown .menu.visible", "pad": 16 }
+        {
+          "name": "search-focus",
+          "action": "focus",
+          "selectors": {
+            "gitea": ".page-content input[name=q]",
+            "github": "header input, header button[aria-label*=Search i], .header-search-button"
+          }
+        },
+        {
+          "name": "sort-open",
+          "action": "click",
+          "selectors": {
+            "gitea": ".page-content form .item.ui.small.dropdown:has-text('Sort')"
+          },
+          "clip": ".page-content form .ui.dropdown .menu.visible",
+          "pad": 16
+        }
       ]
     },
-    { "id": "explore-users", "gitea": "/explore/users", "github": "https://github.com/search?q=gitea&type=users" },
-    { "id": "explore-orgs", "gitea": "/explore/organizations", "github": "https://github.com/search?q=gitea+type%3Aorg&type=users" },
+    {
+      "id": "explore-users",
+      "gitea": "/explore/users",
+      "github": "https://github.com/search?q=gitea&type=users"
+    },
+    {
+      "id": "explore-orgs",
+      "gitea": "/explore/organizations",
+      "github": "https://github.com/search?q=gitea+type%3Aorg&type=users"
+    },
     {
       "id": "login",
       "gitea": "/user/login",
       "github": "https://github.com/login",
       "auth": false,
       "states": [
-        { "name": "input-focus", "action": "focus", "selectors": { "gitea": "#user_name", "github": "#login_field" } },
-        { "name": "primary-hover", "action": "hover", "selectors": { "gitea": "form button.ui.primary.button", "github": "input[type=submit][name=commit]" } },
-        { "name": "primary-press", "action": "press", "selectors": { "gitea": "form button.ui.primary.button", "github": "input[type=submit][name=commit]" } },
-        { "name": "primary-focus", "action": "focus", "selectors": { "gitea": "form button.ui.primary.button", "github": "input[type=submit][name=commit]" } },
-        { "name": "primary-disabled", "action": "disable", "selectors": { "gitea": "form button.ui.primary.button", "github": "input[type=submit][name=commit]" } },
-        { "name": "validation-error", "action": "submitEmpty", "selectors": { "gitea": "form[action*='/user/login']", "github": "form[action='/session']" }, "clip": "main, .page-content, [role=main]" }
+        {
+          "name": "input-focus",
+          "action": "focus",
+          "selectors": {
+            "gitea": "#user_name",
+            "github": "#login_field"
+          }
+        },
+        {
+          "name": "primary-hover",
+          "action": "hover",
+          "selectors": {
+            "gitea": "form button.ui.primary.button",
+            "github": "input[type=submit][name=commit]"
+          }
+        },
+        {
+          "name": "primary-press",
+          "action": "press",
+          "selectors": {
+            "gitea": "form button.ui.primary.button",
+            "github": "input[type=submit][name=commit]"
+          }
+        },
+        {
+          "name": "primary-focus",
+          "action": "focus",
+          "selectors": {
+            "gitea": "form button.ui.primary.button",
+            "github": "input[type=submit][name=commit]"
+          }
+        },
+        {
+          "name": "primary-disabled",
+          "action": "disable",
+          "selectors": {
+            "gitea": "form button.ui.primary.button",
+            "github": "input[type=submit][name=commit]"
+          }
+        },
+        {
+          "name": "validation-error",
+          "action": "submitEmpty",
+          "selectors": {
+            "gitea": "form[action*='/user/login']"
+          },
+          "clip": "main, .page-content, [role=main]"
+        }
       ]
     },
     {
@@ -40,20 +142,55 @@
       "github": "https://github.com/signup",
       "auth": false,
       "states": [
-        { "name": "validation-error", "action": "submitEmpty", "selectors": { "gitea": "form[action*='/user/sign_up']" }, "clip": ".page-content" }
+        {
+          "name": "validation-error",
+          "action": "submitEmpty",
+          "selectors": {
+            "gitea": "form[action*='/user/sign_up']"
+          },
+          "clip": ".page-content"
+        }
       ]
     },
-    { "id": "user-profile", "gitea": "/admin", "github": "https://github.com/octocat" },
-    { "id": "site-admin", "gitea": "/-/admin", "github": null },
-    { "id": "site-admin-users", "gitea": "/-/admin/users", "github": null },
-    { "id": "site-admin-config", "gitea": "/-/admin/config", "github": null },
-    { "id": "user-settings", "gitea": "/user/settings", "github": null },
+    {
+      "id": "user-profile",
+      "gitea": "/admin",
+      "github": "https://github.com/octocat"
+    },
+    {
+      "id": "site-admin",
+      "gitea": "/-/admin",
+      "github": null
+    },
+    {
+      "id": "site-admin-users",
+      "gitea": "/-/admin/users",
+      "github": null
+    },
+    {
+      "id": "site-admin-config",
+      "gitea": "/-/admin/config",
+      "github": null
+    },
+    {
+      "id": "user-settings",
+      "gitea": "/user/settings",
+      "github": null
+    },
     {
       "id": "user-settings-appearance",
       "gitea": "/user/settings/appearance",
       "github": null,
       "states": [
-        { "name": "theme-dropdown-open", "action": "click", "selectors": { "gitea": "form[action$='/theme'] .ui.selection.dropdown" }, "clip": "form[action$='/theme']", "pad": 16 }
+        {
+          "name": "theme-dropdown-open",
+          "action": "click",
+          "selectors": {
+            "gitea": "form[action$='/theme'] .ui.selection.dropdown"
+          },
+          "clip": "form[action$='/theme']",
+          "pad": 16
+        }
       ]
     },
     {
@@ -61,18 +198,61 @@
       "gitea": "/user/settings/keys",
       "github": null,
       "states": [
-        { "name": "add-key-panel", "action": "click", "selectors": { "gitea": "button.show-panel.toggle[data-panel='#add-ssh-key-panel'], .user-setting-content button.show-panel" }, "clip": ".user-setting-content", "pad": 0 }
+        {
+          "name": "add-key-panel",
+          "action": "click",
+          "selectors": {
+            "gitea": "button.show-panel.toggle[data-panel='#add-ssh-key-panel'], .user-setting-content button.show-panel"
+          },
+          "clip": ".user-setting-content",
+          "pad": 0
+        }
       ]
     },
-    { "id": "notifications", "gitea": "/notifications", "github": null },
+    {
+      "id": "notifications",
+      "gitea": "/notifications",
+      "github": null
+    },
     {
       "id": "repo-home",
       "gitea": "/admin/jiri",
       "github": "https://github.com/go-gitea/gitea",
       "states": [
-        { "name": "branch-menu-open", "action": "click", "selectors": { "gitea": ".branch-dropdown-button", "github": "button[data-testid='anchor-button']:has(.octicon-git-branch), #branch-picker-repos-header-ref-selector, button:has(svg.octicon-git-branch)" }, "clip": ".branch-selector-dropdown .menu, [role=dialog], .Overlay", "pad": 16 },
-        { "name": "code-menu-open", "action": "click", "selectors": { "gitea": ".repo-button-row .ui.primary.button:has(.octicon-code), .repo-home-sidebar-top .clone-panel-button, #repo-clone-panel-btn, .clone-panel-button, button:has-text('Code')", "github": "button:has-text('Code')" }, "clip": ".tippy-box, [role=dialog], .Overlay", "pad": 16 },
-        { "name": "file-row-hover", "action": "hover", "selectors": { "gitea": "#repo-files-table .repo-file-item, #repo-files-table .repo-file-line", "github": "table[aria-labelledby=folders-and-files] tbody tr.react-directory-row" } }
+        {
+          "name": "branch-menu-open",
+          "action": "click",
+          "selectors": {
+            "gitea": ".branch-dropdown-button",
+            "github": "button[data-testid='anchor-button']:has(.octicon-git-branch), #branch-picker-repos-header-ref-selector, button:has(svg.octicon-git-branch)"
+          },
+          "pad": 16,
+          "clips": {
+            "gitea": ".branch-selector-dropdown .menu",
+            "github": "[class*='prc-Overlay-Overlay'], [class*='AnchoredOverlay'], [role=dialog]"
+          }
+        },
+        {
+          "name": "code-menu-open",
+          "action": "click",
+          "selectors": {
+            "gitea": ".repo-button-row .ui.primary.button:has(.octicon-code), .repo-home-sidebar-top .clone-panel-button, #repo-clone-panel-btn, .clone-panel-button, button:has-text('Code')",
+            "github": "button:has-text('Code')"
+          },
+          "pad": 16,
+          "clips": {
+            "gitea": ".tippy-box",
+            "github": "[class*='prc-Overlay-Overlay'], [class*='AnchoredOverlay'], [role=dialog]"
+          }
+        },
+        {
+          "name": "file-row-hover",
+          "action": "hover",
+          "selectors": {
+            "gitea": "#repo-files-table .repo-file-item, #repo-files-table .repo-file-line",
+            "github": "table[aria-labelledby=folders-and-files] tbody tr.react-directory-row"
+          }
+        }
       ]
     },
     {
@@ -80,7 +260,15 @@
       "gitea": "/admin/jiri/issues",
       "github": "https://github.com/go-gitea/gitea/issues",
       "states": [
-        { "name": "filter-open", "action": "click", "selectors": { "gitea": ".list-header .ui.dropdown.jump.item:not(.disabled)" }, "clip": ".list-header .menu.visible, .list-header .ui.dropdown .menu", "pad": 16 }
+        {
+          "name": "filter-open",
+          "action": "click",
+          "selectors": {
+            "gitea": ".ui.secondary.filter.menu.labels .item.ui.dropdown.jump:has-text('Sort')"
+          },
+          "clip": ".ui.secondary.filter.menu .menu.visible",
+          "pad": 16
+        }
       ]
     },
     {
@@ -88,16 +276,57 @@
       "gitea": "/admin/jiri/settings",
       "github": null,
       "states": [
-        { "name": "modal-open", "action": "click", "selectors": { "gitea": "button.show-modal[data-modal='#transfer-repo-modal']" }, "clip": ".ui.modal.visible, .ui.modal.active", "pad": 16 }
+        {
+          "name": "modal-open",
+          "action": "click",
+          "selectors": {
+            "gitea": "button.show-modal[data-modal='#transfer-repo-modal']"
+          },
+          "clip": ".ui.modal.visible, .ui.modal.active",
+          "pad": 16
+        }
       ]
     },
-    { "id": "not-found", "gitea": "/this-page-does-not-exist-404", "github": "https://github.com/this-page-does-not-exist-404/nope", "expectStatus": 404 },
-    { "id": "repo-code-file", "gitea": "{{repo.theme-playground}}/src/branch/main/README.md", "github": "https://github.com/go-gitea/gitea/blob/main/README.md" },
-    { "id": "repo-issue", "gitea": "{{issue.theme-playground}}", "github": "https://github.com/go-gitea/gitea/issues/1" },
-    { "id": "repo-pulls", "gitea": "{{repo.theme-playground}}/pulls", "github": "https://github.com/go-gitea/gitea/pulls" },
-    { "id": "repo-pull", "gitea": "{{pull.theme-playground}}", "github": "https://github.com/go-gitea/gitea/pull/1" },
-    { "id": "repo-pull-files", "gitea": "{{pull.theme-playground}}/files", "github": "https://github.com/go-gitea/gitea/pull/1/files" },
-    { "id": "repo-commits", "gitea": "{{repo.theme-playground}}/commits/branch/main", "github": "https://github.com/go-gitea/gitea/commits/main" },
-    { "id": "org-home", "gitea": "{{org.octo-org}}", "github": "https://github.com/go-gitea" }
+    {
+      "id": "not-found",
+      "gitea": "/this-page-does-not-exist-404",
+      "github": "https://github.com/this-page-does-not-exist-404/nope",
+      "expectStatus": 404
+    },
+    {
+      "id": "repo-code-file",
+      "gitea": "{{repo.theme-playground}}/src/branch/{{branch.theme-playground}}/README.md",
+      "github": "https://github.com/go-gitea/gitea/blob/main/README.md"
+    },
+    {
+      "id": "repo-issue",
+      "gitea": "{{issue.theme-playground}}",
+      "github": "https://github.com/go-gitea/gitea/issues/1"
+    },
+    {
+      "id": "repo-pulls",
+      "gitea": "{{repo.theme-playground}}/pulls",
+      "github": "https://github.com/go-gitea/gitea/pulls"
+    },
+    {
+      "id": "repo-pull",
+      "gitea": "{{pull.theme-playground}}",
+      "github": "https://github.com/go-gitea/gitea/pull/1"
+    },
+    {
+      "id": "repo-pull-files",
+      "gitea": "{{pull.theme-playground}}/files",
+      "github": "https://github.com/go-gitea/gitea/pull/1/files"
+    },
+    {
+      "id": "repo-commits",
+      "gitea": "{{repo.theme-playground}}/commits/branch/{{branch.theme-playground}}",
+      "github": "https://github.com/go-gitea/gitea/commits/main"
+    },
+    {
+      "id": "org-home",
+      "gitea": "{{org.octo-org}}",
+      "github": "https://github.com/go-gitea"
+    }
   ]
 }
