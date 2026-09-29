@@ -1,0 +1,9 @@
+{
+  "updated": "2026-09-29T23:59:00+08:00",
+  "phase": "wave-0 (architecture, tokens, build, seed, tooling)",
+  "pinned": {"gitea": "1.27.3", "@primer/primitives": "11.10.0", "@primer/octicons": "19.38.0", "@primer/css": "22.3.2", "playwright": "1.63.0"},
+  "templateOverrides": [{"path": "templates/base/head_style.tmpl", "reason": "cascade layering + cache-busting", "scope": "github-* themes only"}],
+  "folders": {},
+  "openIssues": [],
+  "finalGate": null
+}

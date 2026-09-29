@@ -1,0 +1,388 @@
+# Gitea 1.27.3 CSS custom properties a theme may define/override.
+# Format: <name>\t<light value (theme-gitea-light.css)>\t<dark value (theme-gitea-dark.css) or base value>\t<source:line>
+# Section A: web_src/css/themes/theme-gitea-light.css / theme-gitea-dark.css (identical name sets, 297 decls incl. 2 meta; verified by diff).
+# Both files also set on :root:  accent-color: var(--color-accent);  color-scheme: light|dark;  (light.css:311-312, dark.css:311-312)
+
+## A. meta (gitea-theme-meta-info block, parsed by Go, not :root)
+--theme-display-name	"Light"	"Dark"	web_src/css/themes/theme-gitea-light.css:2
+--theme-color-scheme	"light"	"dark"	web_src/css/themes/theme-gitea-light.css:3
+
+## A. dark flag (read by JS)
+--is-dark-theme	false	true	web_src/css/themes/theme-gitea-light.css:7
+
+## A. primary
+--color-primary	#4183c4	#4183c4	web_src/css/themes/theme-gitea-light.css:8
+--color-primary-contrast	#ffffff	#ffffff	web_src/css/themes/theme-gitea-light.css:9
+--color-primary-dark-1	#3876b3	#548fca	web_src/css/themes/theme-gitea-light.css:10
+--color-primary-dark-2	#31699f	#679cd0	web_src/css/themes/theme-gitea-light.css:11
+--color-primary-dark-3	#2b5c8b	#7aa8d6	web_src/css/themes/theme-gitea-light.css:12
+--color-primary-dark-4	#254f77	#8db5dc	web_src/css/themes/theme-gitea-light.css:13
+--color-primary-dark-5	#193450	#b3cde7	web_src/css/themes/theme-gitea-light.css:14
+--color-primary-dark-6	#0c1a28	#d9e6f3	web_src/css/themes/theme-gitea-light.css:15
+--color-primary-dark-7	#04080c	#f4f8fb	web_src/css/themes/theme-gitea-light.css:16
+--color-primary-light-1	#548fca	#3876b3	web_src/css/themes/theme-gitea-light.css:17
+--color-primary-light-2	#679cd0	#31699f	web_src/css/themes/theme-gitea-light.css:18
+--color-primary-light-3	#7aa8d6	#2b5c8b	web_src/css/themes/theme-gitea-light.css:19
+--color-primary-light-4	#8db5dc	#254f77	web_src/css/themes/theme-gitea-light.css:20
+--color-primary-light-5	#b3cde7	#193450	web_src/css/themes/theme-gitea-light.css:21
+--color-primary-light-6	#d9e6f3	#0c1a28	web_src/css/themes/theme-gitea-light.css:22
+--color-primary-light-7	#f4f8fb	#04080c	web_src/css/themes/theme-gitea-light.css:23
+--color-primary-alpha-10	#4183c419	#4183c419	web_src/css/themes/theme-gitea-light.css:24
+--color-primary-alpha-20	#4183c433	#4183c433	web_src/css/themes/theme-gitea-light.css:25
+--color-primary-alpha-30	#4183c44b	#4183c44b	web_src/css/themes/theme-gitea-light.css:26
+--color-primary-alpha-40	#4183c466	#4183c466	web_src/css/themes/theme-gitea-light.css:27
+--color-primary-alpha-50	#4183c480	#4183c480	web_src/css/themes/theme-gitea-light.css:28
+--color-primary-alpha-60	#4183c499	#4183c499	web_src/css/themes/theme-gitea-light.css:29
+--color-primary-alpha-70	#4183c4b3	#4183c4b3	web_src/css/themes/theme-gitea-light.css:30
+--color-primary-alpha-80	#4183c4cc	#4183c4cc	web_src/css/themes/theme-gitea-light.css:31
+--color-primary-alpha-90	#4183c4e1	#4183c4e1	web_src/css/themes/theme-gitea-light.css:32
+--color-primary-hover	var(--color-primary-dark-1)	var(--color-primary-light-1)	web_src/css/themes/theme-gitea-light.css:33
+--color-primary-active	var(--color-primary-dark-2)	var(--color-primary-light-2)	web_src/css/themes/theme-gitea-light.css:34
+
+## A. secondary
+--color-secondary	#d0d7de	#3f4248	web_src/css/themes/theme-gitea-light.css:35
+--color-secondary-dark-1	#c7ced5	#46494f	web_src/css/themes/theme-gitea-light.css:36
+--color-secondary-dark-2	#b9c0c7	#4f5259	web_src/css/themes/theme-gitea-light.css:37
+--color-secondary-dark-3	#99a0a7	#5e626a	web_src/css/themes/theme-gitea-light.css:38
+--color-secondary-dark-4	#899097	#6f747d	web_src/css/themes/theme-gitea-light.css:39
+--color-secondary-dark-5	#7a8188	#7d828c	web_src/css/themes/theme-gitea-light.css:40
+--color-secondary-dark-6	#6a7178	#8b8f98	web_src/css/themes/theme-gitea-light.css:41
+--color-secondary-dark-7	#5b6269	#999da4	web_src/css/themes/theme-gitea-light.css:42
+--color-secondary-dark-8	#4b5259	#a8abb1	web_src/css/themes/theme-gitea-light.css:43
+--color-secondary-dark-9	#3c434a	#aeb1b8	web_src/css/themes/theme-gitea-light.css:44
+--color-secondary-dark-10	#2c333a	#bbbec3	web_src/css/themes/theme-gitea-light.css:45
+--color-secondary-dark-11	#1d242b	#c8cacf	web_src/css/themes/theme-gitea-light.css:46
+--color-secondary-dark-12	#0d141b	#d2d4d7	web_src/css/themes/theme-gitea-light.css:47
+--color-secondary-dark-13	#00040b	#d5d6d9	web_src/css/themes/theme-gitea-light.css:48
+--color-secondary-light-1	#dee5ec	#35373c	web_src/css/themes/theme-gitea-light.css:49
+--color-secondary-light-2	#e4ebf2	#2c2e32	web_src/css/themes/theme-gitea-light.css:50
+--color-secondary-light-3	#ebf2f9	#1f2124	web_src/css/themes/theme-gitea-light.css:51
+--color-secondary-light-4	#f1f8ff	#191a1c	web_src/css/themes/theme-gitea-light.css:52
+--color-secondary-alpha-10	#d0d7de19	#3f424819	web_src/css/themes/theme-gitea-light.css:53
+--color-secondary-alpha-20	#d0d7de33	#3f424833	web_src/css/themes/theme-gitea-light.css:54
+--color-secondary-alpha-30	#d0d7de4b	#3f42484b	web_src/css/themes/theme-gitea-light.css:55
+--color-secondary-alpha-40	#d0d7de66	#3f424866	web_src/css/themes/theme-gitea-light.css:56
+--color-secondary-alpha-50	#d0d7de80	#3f424880	web_src/css/themes/theme-gitea-light.css:57
+--color-secondary-alpha-60	#d0d7de99	#3f424899	web_src/css/themes/theme-gitea-light.css:58
+--color-secondary-alpha-70	#d0d7deb3	#3f4248b3	web_src/css/themes/theme-gitea-light.css:59
+--color-secondary-alpha-80	#d0d7decc	#3f4248cc	web_src/css/themes/theme-gitea-light.css:60
+--color-secondary-alpha-90	#d0d7dee1	#3f4248e1	web_src/css/themes/theme-gitea-light.css:61
+--color-secondary-button	var(--color-secondary-dark-4)	var(--color-secondary-dark-4)	web_src/css/themes/theme-gitea-light.css:62
+--color-secondary-hover	var(--color-secondary-dark-5)	var(--color-secondary-dark-3)	web_src/css/themes/theme-gitea-light.css:63
+--color-secondary-active	var(--color-secondary-dark-6)	var(--color-secondary-dark-2)	web_src/css/themes/theme-gitea-light.css:64
+--color-secondary-bg	#f2f5f8	#2e3033	web_src/css/themes/theme-gitea-light.css:241
+--color-secondary-nav-bg	#f9fafb	#1a1b1e	web_src/css/themes/theme-gitea-light.css:256
+
+## A. console
+--color-console-fg	#0d1117	#f8f8f8	web_src/css/themes/theme-gitea-light.css:66
+--color-console-fg-subtle	#40474d	#c1c3c8	web_src/css/themes/theme-gitea-light.css:67
+--color-console-bg	#ffffff	#191a1c	web_src/css/themes/theme-gitea-light.css:68
+--color-console-border	#d0d7de	#313338	web_src/css/themes/theme-gitea-light.css:69
+--color-console-hover-bg	#f1f3f5	#2a2c30	web_src/css/themes/theme-gitea-light.css:70
+--color-console-active-bg	#d0d7de	#313338	web_src/css/themes/theme-gitea-light.css:71
+--color-console-menu-bg	#f8f9fb	#292b2e	web_src/css/themes/theme-gitea-light.css:72
+--color-console-menu-border	#d0d7de	#46494f	web_src/css/themes/theme-gitea-light.css:73
+--color-console-link	#5c656d	#969aa1	web_src/css/themes/theme-gitea-light.css:74
+
+## A. named colors (+light/dark-1/dark-2 variants)
+--color-red	#db2828	#cc4848	web_src/css/themes/theme-gitea-light.css:76
+--color-orange	#f2711c	#cc580c	web_src/css/themes/theme-gitea-light.css:77
+--color-yellow	#fbbd08	#cc9903	web_src/css/themes/theme-gitea-light.css:78
+--color-olive	#b5cc18	#91a313	web_src/css/themes/theme-gitea-light.css:79
+--color-green	#21ba45	#87ab63	web_src/css/themes/theme-gitea-light.css:80
+--color-teal	#00b5ad	#00918a	web_src/css/themes/theme-gitea-light.css:81
+--color-blue	#2185d0	#3a8ac6	web_src/css/themes/theme-gitea-light.css:82
+--color-violet	#6435c9	#906ae1	web_src/css/themes/theme-gitea-light.css:83
+--color-purple	#a333c8	#b259d0	web_src/css/themes/theme-gitea-light.css:84
+--color-pink	#e03997	#d22e8b	web_src/css/themes/theme-gitea-light.css:85
+--color-brown	#a5673f	#a47252	web_src/css/themes/theme-gitea-light.css:86
+--color-black	#1d2328	#202225	web_src/css/themes/theme-gitea-light.css:87
+--color-red-light	#e45e5e	#d15a5a	web_src/css/themes/theme-gitea-light.css:89
+--color-orange-light	#f59555	#f6a066	web_src/css/themes/theme-gitea-light.css:90
+--color-yellow-light	#fcce46	#eaaf03	web_src/css/themes/theme-gitea-light.css:91
+--color-olive-light	#d3e942	#abc016	web_src/css/themes/theme-gitea-light.css:92
+--color-green-light	#46de6a	#93b373	web_src/css/themes/theme-gitea-light.css:93
+--color-teal-light	#08fff4	#00b6ad	web_src/css/themes/theme-gitea-light.css:94
+--color-blue-light	#51a5e3	#4e96cc	web_src/css/themes/theme-gitea-light.css:95
+--color-violet-light	#8b67d7	#9b79e4	web_src/css/themes/theme-gitea-light.css:96
+--color-purple-light	#bb64d8	#ba6ad5	web_src/css/themes/theme-gitea-light.css:97
+--color-pink-light	#e86bb1	#d74397	web_src/css/themes/theme-gitea-light.css:98
+--color-brown-light	#c58b66	#b08061	web_src/css/themes/theme-gitea-light.css:99
+--color-black-light	#4b5b68	#45484e	web_src/css/themes/theme-gitea-light.css:100
+--color-red-dark-1	#c82121	#c23636	web_src/css/themes/theme-gitea-light.css:102
+--color-orange-dark-1	#e6630d	#f38236	web_src/css/themes/theme-gitea-light.css:103
+--color-yellow-dark-1	#e5ac04	#b88a03	web_src/css/themes/theme-gitea-light.css:104
+--color-olive-dark-1	#a3b816	#839311	web_src/css/themes/theme-gitea-light.css:105
+--color-green-dark-1	#1ea73e	#7a9e55	web_src/css/themes/theme-gitea-light.css:106
+--color-teal-dark-1	#00a39c	#00837c	web_src/css/themes/theme-gitea-light.css:107
+--color-blue-dark-1	#1e78bb	#347cb3	web_src/css/themes/theme-gitea-light.css:108
+--color-violet-dark-1	#5a30b5	#7b4edb	web_src/css/themes/theme-gitea-light.css:109
+--color-purple-dark-1	#932eb4	#a742c9	web_src/css/themes/theme-gitea-light.css:110
+--color-pink-dark-1	#db228a	#be297d	web_src/css/themes/theme-gitea-light.css:111
+--color-brown-dark-1	#955d39	#94674a	web_src/css/themes/theme-gitea-light.css:112
+--color-black-dark-1	#2c3339	#2e3033	web_src/css/themes/theme-gitea-light.css:113
+--color-red-dark-2	#b11e1e	#ad3030	web_src/css/themes/theme-gitea-light.css:115
+--color-orange-dark-2	#cc580c	#f16e17	web_src/css/themes/theme-gitea-light.css:116
+--color-yellow-dark-2	#cc9903	#a37a02	web_src/css/themes/theme-gitea-light.css:117
+--color-olive-dark-2	#91a313	#74820f	web_src/css/themes/theme-gitea-light.css:118
+--color-green-dark-2	#1a9537	#6c8c4c	web_src/css/themes/theme-gitea-light.css:119
+--color-teal-dark-2	#00918a	#00746e	web_src/css/themes/theme-gitea-light.css:120
+--color-blue-dark-2	#1a6aa6	#2e6e9f	web_src/css/themes/theme-gitea-light.css:121
+--color-violet-dark-2	#502aa1	#6733d6	web_src/css/themes/theme-gitea-light.css:122
+--color-purple-dark-2	#8229a0	#9834b9	web_src/css/themes/theme-gitea-light.css:123
+--color-pink-dark-2	#c21e7b	#a9246f	web_src/css/themes/theme-gitea-light.css:124
+--color-brown-dark-2	#845232	#835b42	web_src/css/themes/theme-gitea-light.css:125
+--color-black-dark-2	#131619	#292b2e	web_src/css/themes/theme-gitea-light.css:126
+
+## A. ansi
+--color-ansi-black	#1e2327	#202225	web_src/css/themes/theme-gitea-light.css:128
+--color-ansi-red	#cc4848	#cc4848	web_src/css/themes/theme-gitea-light.css:129
+--color-ansi-green	#87ab63	#87ab63	web_src/css/themes/theme-gitea-light.css:130
+--color-ansi-yellow	#cc9903	#cc9903	web_src/css/themes/theme-gitea-light.css:131
+--color-ansi-blue	#3a8ac6	#3a8ac6	web_src/css/themes/theme-gitea-light.css:132
+--color-ansi-magenta	#d22e8b	#d22e8b	web_src/css/themes/theme-gitea-light.css:133
+--color-ansi-cyan	#00918a	#00918a	web_src/css/themes/theme-gitea-light.css:134
+--color-ansi-white	var(--color-console-fg-subtle)	var(--color-console-fg-subtle)	web_src/css/themes/theme-gitea-light.css:135
+--color-ansi-bright-black	#46494d	#45484e	web_src/css/themes/theme-gitea-light.css:136
+--color-ansi-bright-red	#d15a5a	#d15a5a	web_src/css/themes/theme-gitea-light.css:137
+--color-ansi-bright-green	#93b373	#93b373	web_src/css/themes/theme-gitea-light.css:138
+--color-ansi-bright-yellow	#eaaf03	#eaaf03	web_src/css/themes/theme-gitea-light.css:139
+--color-ansi-bright-blue	#4e96cc	#4e96cc	web_src/css/themes/theme-gitea-light.css:140
+--color-ansi-bright-magenta	#d74397	#d74397	web_src/css/themes/theme-gitea-light.css:141
+--color-ansi-bright-cyan	#00b6ad	#00b6ad	web_src/css/themes/theme-gitea-light.css:142
+--color-ansi-bright-white	var(--color-console-fg)	var(--color-console-fg)	web_src/css/themes/theme-gitea-light.css:143
+
+## A. series-16 (charts/labels)
+--color-series-16-0	#7db233	#7db233	web_src/css/themes/theme-gitea-light.css:145
+--color-series-16-1	#499a37	#499a37	web_src/css/themes/theme-gitea-light.css:146
+--color-series-16-2	#ce4751	#ce4751	web_src/css/themes/theme-gitea-light.css:147
+--color-series-16-3	#8f9121	#8f9121	web_src/css/themes/theme-gitea-light.css:148
+--color-series-16-4	#ac32a6	#ac32a6	web_src/css/themes/theme-gitea-light.css:149
+--color-series-16-5	#7445e9	#7445e9	web_src/css/themes/theme-gitea-light.css:150
+--color-series-16-6	#c67d28	#c67d28	web_src/css/themes/theme-gitea-light.css:151
+--color-series-16-7	#4db392	#4db392	web_src/css/themes/theme-gitea-light.css:152
+--color-series-16-8	#aa4d30	#aa4d30	web_src/css/themes/theme-gitea-light.css:153
+--color-series-16-9	#2a6f84	#2a6f84	web_src/css/themes/theme-gitea-light.css:154
+--color-series-16-10	#c45327	#c45327	web_src/css/themes/theme-gitea-light.css:155
+--color-series-16-11	#3d965c	#3d965c	web_src/css/themes/theme-gitea-light.css:156
+--color-series-16-12	#792a93	#792a93	web_src/css/themes/theme-gitea-light.css:157
+--color-series-16-13	#439d73	#439d73	web_src/css/themes/theme-gitea-light.css:158
+--color-series-16-14	#103aad	#103aad	web_src/css/themes/theme-gitea-light.css:159
+--color-series-16-15	#982e85	#982e85	web_src/css/themes/theme-gitea-light.css:160
+
+## A. other / target-based colors
+--color-grey	#697077	#3d3f44	web_src/css/themes/theme-gitea-light.css:162
+--color-grey-light	#7c838a	#898d96	web_src/css/themes/theme-gitea-light.css:163
+--color-gold	#a1882b	#b1983b	web_src/css/themes/theme-gitea-light.css:164
+--color-white	#ffffff	#ffffff	web_src/css/themes/theme-gitea-light.css:165
+--color-git	#f05133	#f05133	web_src/css/themes/theme-gitea-light.css:208
+--color-logo	#609926	#609926	web_src/css/themes/theme-gitea-light.css:209
+--color-body	#ffffff	#1e1f20	web_src/css/themes/theme-gitea-light.css:211
+--color-box-header	#f1f3f5	#1b1c1e	web_src/css/themes/theme-gitea-light.css:212
+--color-box-body	#ffffff	#161718	web_src/css/themes/theme-gitea-light.css:213
+--color-box-body-highlight	#ecf5fd	#202124	web_src/css/themes/theme-gitea-light.css:214
+--color-text-dark	#01050a	#f8f8f8	web_src/css/themes/theme-gitea-light.css:215
+--color-text	#181c21	#d2d4d8	web_src/css/themes/theme-gitea-light.css:216
+--color-text-light	#30363b	#c0c2c7	web_src/css/themes/theme-gitea-light.css:217
+--color-text-light-1	#40474d	#aaadb4	web_src/css/themes/theme-gitea-light.css:218
+--color-text-light-2	#5b6167	#969aa1	web_src/css/themes/theme-gitea-light.css:219
+--color-text-light-3	#747c84	#80858f	web_src/css/themes/theme-gitea-light.css:220
+--color-footer	var(--color-nav-bg)	var(--color-nav-bg)	web_src/css/themes/theme-gitea-light.css:221
+--color-timeline	#d0d7de	#383b40	web_src/css/themes/theme-gitea-light.css:222
+--color-input-text	var(--color-text-dark)	var(--color-text-dark)	web_src/css/themes/theme-gitea-light.css:223
+--color-input-background	#fff	#191a1c	web_src/css/themes/theme-gitea-light.css:224
+--color-input-toggle-background	#d0d7de	#323438	web_src/css/themes/theme-gitea-light.css:225
+--color-input-border	var(--color-secondary-dark-1)	var(--color-secondary-dark-1)	web_src/css/themes/theme-gitea-light.css:226
+--color-light	#00001706	#0b0b0c28	web_src/css/themes/theme-gitea-light.css:227
+--color-light-border	#0000171d	#f3f3f428	web_src/css/themes/theme-gitea-light.css:228
+--color-hover	#00001708	#f3f3f419	web_src/css/themes/theme-gitea-light.css:229
+--color-hover-opaque	#f1f3f5	#232528	web_src/css/themes/theme-gitea-light.css:230
+--color-active	#00001714	#f3f3f424	web_src/css/themes/theme-gitea-light.css:231
+--color-menu	#f8f9fb	#191a1c	web_src/css/themes/theme-gitea-light.css:232
+--color-card	#f8f9fb	#191a1c	web_src/css/themes/theme-gitea-light.css:233
+--color-markup-table-row	#0030600a	#f3f3f40f	web_src/css/themes/theme-gitea-light.css:234
+--color-markup-code-block	#00306010	#f3f3f412	web_src/css/themes/theme-gitea-light.css:235
+--color-markup-code-inline	#00306012	#f3f3f428	web_src/css/themes/theme-gitea-light.css:236
+--color-button	#f8f9fb	#191a1c	web_src/css/themes/theme-gitea-light.css:237
+--color-code-bg	#fafdff	#161718	web_src/css/themes/theme-gitea-light.css:238
+--color-shadow	#00001726	#0b0b0c58	web_src/css/themes/theme-gitea-light.css:239
+--color-shadow-opaque	#c7ced5	#0b0b0c	web_src/css/themes/theme-gitea-light.css:240
+--color-expand-button	#cfe8fa	#333539	web_src/css/themes/theme-gitea-light.css:242
+--color-placeholder-text	var(--color-text-light-3)	var(--color-text-light-3)	web_src/css/themes/theme-gitea-light.css:243
+--color-editor-line-highlight	var(--color-secondary-alpha-30)	var(--color-secondary-alpha-40)	web_src/css/themes/theme-gitea-light.css:244
+--color-editor-selection	var(--color-primary-alpha-30)	var(--color-primary-alpha-50)	web_src/css/themes/theme-gitea-light.css:245
+--color-project-column-bg	var(--color-secondary-light-4)	var(--color-secondary-light-2)	web_src/css/themes/theme-gitea-light.css:246
+--color-caret	var(--color-text-dark)	var(--color-text)	web_src/css/themes/theme-gitea-light.css:247
+--color-reaction-bg	#0000170a	#f3f3f412	web_src/css/themes/theme-gitea-light.css:248
+--color-reaction-hover-bg	var(--color-primary-light-5)	var(--color-primary-light-4)	web_src/css/themes/theme-gitea-light.css:249
+--color-reaction-active-bg	var(--color-primary-light-6)	var(--color-primary-light-5)	web_src/css/themes/theme-gitea-light.css:250
+--color-tooltip-text	#fbfdff	#fafafa	web_src/css/themes/theme-gitea-light.css:251
+--color-tooltip-bg	#000017f0	#0b0b0cf0	web_src/css/themes/theme-gitea-light.css:252
+--color-nav-bg	#f6f7fa	#18191b	web_src/css/themes/theme-gitea-light.css:253
+--color-nav-hover-bg	var(--color-secondary-light-1)	var(--color-secondary-light-1)	web_src/css/themes/theme-gitea-light.css:254
+--color-nav-text	var(--color-text)	var(--color-text)	web_src/css/themes/theme-gitea-light.css:255
+--color-label-text	var(--color-text)	var(--color-text)	web_src/css/themes/theme-gitea-light.css:257
+--color-label-bg	#949da64b	#7a7f8a4b	web_src/css/themes/theme-gitea-light.css:258
+--color-label-hover-bg	#949da6a0	#7a7f8aa0	web_src/css/themes/theme-gitea-light.css:259
+--color-label-active-bg	#949da6ff	#7a7f8aff	web_src/css/themes/theme-gitea-light.css:260
+--color-accent	var(--color-primary-light-1)	var(--color-primary-light-1)	web_src/css/themes/theme-gitea-light.css:261
+--color-small-accent	var(--color-primary-light-6)	var(--color-primary-light-5)	web_src/css/themes/theme-gitea-light.css:262
+--color-highlight-fg	#eed200	#87651e	web_src/css/themes/theme-gitea-light.css:263
+--color-highlight-bg	#f5efc5	#443a27	web_src/css/themes/theme-gitea-light.css:264
+--color-overlay-backdrop	#080808c0	#080808c0	web_src/css/themes/theme-gitea-light.css:265
+--color-danger	var(--color-red)	var(--color-red)	web_src/css/themes/theme-gitea-light.css:266
+--color-transparency-grid-light	#fafafa	#2a2a2a	web_src/css/themes/theme-gitea-light.css:267
+--color-transparency-grid-dark	#e2e2e2	#1a1a1a	web_src/css/themes/theme-gitea-light.css:268
+--color-workflow-edge-hover	#b1b7bd	#666a73	web_src/css/themes/theme-gitea-light.css:269
+
+## A. diff
+--color-diff-added-fg	#177231	#93b373	web_src/css/themes/theme-gitea-light.css:166
+--color-diff-added-linenum-bg	#d1f8d9	#274227	web_src/css/themes/theme-gitea-light.css:167
+--color-diff-added-row-bg	#e6ffed	#203224	web_src/css/themes/theme-gitea-light.css:168
+--color-diff-added-row-border	#e6ffed	#314a37	web_src/css/themes/theme-gitea-light.css:169
+--color-diff-added-word-bg	#acf2bd	#3c653c	web_src/css/themes/theme-gitea-light.css:170
+--color-diff-moved-row-bg	#f1f8d1	#818044	web_src/css/themes/theme-gitea-light.css:171
+--color-diff-moved-row-border	#d0e27f	#bcca6f	web_src/css/themes/theme-gitea-light.css:172
+--color-diff-removed-fg	#c61f2b	#fb5f5b	web_src/css/themes/theme-gitea-light.css:173
+--color-diff-removed-linenum-bg	#ffcecb	#482121	web_src/css/themes/theme-gitea-light.css:174
+--color-diff-removed-row-bg	#ffeef0	#301e1e	web_src/css/themes/theme-gitea-light.css:175
+--color-diff-removed-row-border	#f1c0c0	#634343	web_src/css/themes/theme-gitea-light.css:176
+--color-diff-removed-word-bg	#fdb8c0	#6f3333	web_src/css/themes/theme-gitea-light.css:177
+--color-diff-inactive	#f0f2f4	#25272a	web_src/css/themes/theme-gitea-light.css:178
+
+## A. status: error
+--color-error-border	#ff818266	#763232	web_src/css/themes/theme-gitea-light.css:179
+--color-error-bg	#ffebe9	#322226	web_src/css/themes/theme-gitea-light.css:180
+--color-error-bg-active	#ffcecb	#49262a	web_src/css/themes/theme-gitea-light.css:181
+--color-error-bg-hover	#ffdcd7	#3c2427	web_src/css/themes/theme-gitea-light.css:182
+--color-error-text	#d1242f	#f85149	web_src/css/themes/theme-gitea-light.css:183
+
+## A. status: success
+--color-success-border	#4ac26b66	#225633	web_src/css/themes/theme-gitea-light.css:184
+--color-success-bg	#dafbe1	#1c3329	web_src/css/themes/theme-gitea-light.css:185
+--color-success-text	#1a7f37	#3fb950	web_src/css/themes/theme-gitea-light.css:186
+
+## A. status: warning
+--color-warning-border	#d4a72c66	#5f481a	web_src/css/themes/theme-gitea-light.css:187
+--color-warning-bg	#fff8c5	#342e1f	web_src/css/themes/theme-gitea-light.css:188
+--color-warning-text	#9a6700	#d29922	web_src/css/themes/theme-gitea-light.css:189
+
+## A. status: info
+--color-info-border	#54aeff66	#254a7e	web_src/css/themes/theme-gitea-light.css:190
+--color-info-bg	#ddf4ff	#1b283a	web_src/css/themes/theme-gitea-light.css:191
+--color-info-text	#0969da	#2f81f7	web_src/css/themes/theme-gitea-light.css:192
+
+## A. status: priority
+--color-priority-border	#b9a1ff66	#4a268d	web_src/css/themes/theme-gitea-light.css:193
+--color-priority-bg	#f3e7ff	#251c39	web_src/css/themes/theme-gitea-light.css:194
+--color-priority-text	#8250df	#a371f7	web_src/css/themes/theme-gitea-light.css:195
+
+## A. badges
+--color-red-badge	#db2828	#db2828	web_src/css/themes/theme-gitea-light.css:196
+--color-red-badge-bg	#db28281a	#db28281a	web_src/css/themes/theme-gitea-light.css:197
+--color-red-badge-hover-bg	#db28284d	#db28284d	web_src/css/themes/theme-gitea-light.css:198
+--color-green-badge	#21ba45	#21ba45	web_src/css/themes/theme-gitea-light.css:199
+--color-green-badge-bg	#21ba451a	#21ba451a	web_src/css/themes/theme-gitea-light.css:200
+--color-green-badge-hover-bg	#21ba454d	#21ba454d	web_src/css/themes/theme-gitea-light.css:201
+--color-yellow-badge	#fbbd08	#fbbd08	web_src/css/themes/theme-gitea-light.css:202
+--color-yellow-badge-bg	#fbbd081a	#fbbd081a	web_src/css/themes/theme-gitea-light.css:203
+--color-yellow-badge-hover-bg	#fbbd084d	#fbbd084d	web_src/css/themes/theme-gitea-light.css:204
+--color-orange-badge	#f2711c	#f2711c	web_src/css/themes/theme-gitea-light.css:205
+--color-orange-badge-bg	#f2711c1a	#f2711c1a	web_src/css/themes/theme-gitea-light.css:206
+--color-orange-badge-hover-bg	#f2711c4d	#f2711c4d	web_src/css/themes/theme-gitea-light.css:207
+
+## A. syntax highlighting
+--color-syntax-keyword	#a73a00	#ff8854	web_src/css/themes/theme-gitea-light.css:270
+--color-syntax-bool	#076872	#25bbc9	web_src/css/themes/theme-gitea-light.css:271
+--color-syntax-control	#7d5700	#dd9e17	web_src/css/themes/theme-gitea-light.css:272
+--color-syntax-name	#785900	#fabd2f	web_src/css/themes/theme-gitea-light.css:273
+--color-syntax-type	#ae2368	#eb8cb3	web_src/css/themes/theme-gitea-light.css:274
+--color-syntax-number	#105ead	#63b2dd	web_src/css/themes/theme-gitea-light.css:275
+--color-syntax-operator	#a73a00	#ff8854	web_src/css/themes/theme-gitea-light.css:276
+--color-syntax-regexp	#773dc5	#b89de4	web_src/css/themes/theme-gitea-light.css:277
+--color-syntax-string	#456800	#95b62a	web_src/css/themes/theme-gitea-light.css:278
+--color-syntax-comment	#506070	#8898b0	web_src/css/themes/theme-gitea-light.css:279
+--color-syntax-invalid	#c00000	#ff8686	web_src/css/themes/theme-gitea-light.css:280
+--color-syntax-link	var(--color-primary)	var(--color-primary)	web_src/css/themes/theme-gitea-light.css:281
+--color-syntax-tag	#a73a00	#ff8854	web_src/css/themes/theme-gitea-light.css:282
+--color-syntax-attribute	#6f41c5	#c792ff	web_src/css/themes/theme-gitea-light.css:283
+--color-syntax-property	#2060a0	#55afff	web_src/css/themes/theme-gitea-light.css:284
+--color-syntax-variable	#944a00	#e29b33	web_src/css/themes/theme-gitea-light.css:285
+--color-syntax-string-special	#7d5700	#dd9e17	web_src/css/themes/theme-gitea-light.css:286
+--color-syntax-escape	#785900	#c7a618	web_src/css/themes/theme-gitea-light.css:287
+--color-syntax-entity	#6f41c5	#c792ff	web_src/css/themes/theme-gitea-light.css:288
+--color-syntax-preproc	#2d6a4b	#4cbe7a	web_src/css/themes/theme-gitea-light.css:289
+--color-syntax-preproc-file	#105ead	#63b2dd	web_src/css/themes/theme-gitea-light.css:290
+--color-syntax-decorator	#2d6a4b	#4cbe7a	web_src/css/themes/theme-gitea-light.css:291
+--color-syntax-namespace	#555555	#c9d1d9	web_src/css/themes/theme-gitea-light.css:292
+--color-syntax-name-pseudo	#6f41c5	#c792ff	web_src/css/themes/theme-gitea-light.css:293
+--color-syntax-comment-special	#773dc5	#b89de4	web_src/css/themes/theme-gitea-light.css:294
+--color-syntax-text	inherit	#c9d1d9	web_src/css/themes/theme-gitea-light.css:295
+--color-syntax-text-alt	#47525b	#b9bcc7	web_src/css/themes/theme-gitea-light.css:296
+--color-syntax-punctuation	inherit	#d2d4db	web_src/css/themes/theme-gitea-light.css:297
+--color-syntax-whitespace	#bbbbbb	#7f8699	web_src/css/themes/theme-gitea-light.css:298
+--color-syntax-diff-fg	#000000	#ffffff	web_src/css/themes/theme-gitea-light.css:299
+--color-syntax-deleted-bg	#ffdddd	#5f3737	web_src/css/themes/theme-gitea-light.css:300
+--color-syntax-inserted-bg	#ddffdd	#3a523a	web_src/css/themes/theme-gitea-light.css:301
+--color-syntax-emph	#8b5000	#d1a242	web_src/css/themes/theme-gitea-light.css:302
+--color-syntax-strong	inherit	#e29b33	web_src/css/themes/theme-gitea-light.css:303
+--color-syntax-heading	#7d5700	#dd9e17	web_src/css/themes/theme-gitea-light.css:304
+--color-syntax-subheading	#456800	#95b62a	web_src/css/themes/theme-gitea-light.css:305
+--color-syntax-output	#506070	#8898b0	web_src/css/themes/theme-gitea-light.css:306
+--color-syntax-prompt	#944a00	#e29b33	web_src/css/themes/theme-gitea-light.css:307
+--color-syntax-traceback	#c00000	#ff8686	web_src/css/themes/theme-gitea-light.css:308
+--color-syntax-matching-bracket-bg	#00b5ad38	#00918a48	web_src/css/themes/theme-gitea-light.css:309
+--color-syntax-nonmatching-bracket-bg	#db282838	#cc484848	web_src/css/themes/theme-gitea-light.css:310
+
+# Section B: web_src/css/base.css :root (theme-independent; a theme may override). Value shown is the only value.
+--fonts-proportional	-apple-system, "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial	(same)	web_src/css/base.css:3
+--fonts-monospace	ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace, var(--fonts-emoji)	(same)	web_src/css/base.css:4
+--fonts-emoji	-emoji-fallback	(same)	web_src/css/base.css:8
+--font-weight-light	300	(same)	web_src/css/base.css:10
+--font-weight-normal	400	(same)	web_src/css/base.css:11
+--font-weight-medium	500	(same)	web_src/css/base.css:12
+--font-weight-semibold	600	(same)	web_src/css/base.css:13
+--font-weight-bold	700	(same)	web_src/css/base.css:14
+--line-height-default	normal	(same)	web_src/css/base.css:15
+--line-height-code	20px	(same)	web_src/css/base.css:16
+--checkbox-mask-checked	url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9"><path fill-rule="evenodd" d="M11.78.22a.75.75 0 0 1 0 1.061L4.52 8.541a.75.75 0 0 1-1.062 0L.202 5.285a.75.75 0 0 1 1.061-1.061l2.725 2.723L10.718.22a.75.75 0 0 1 1.062 0"/></svg>')	(same)	web_src/css/base.css:18
+--checkbox-mask-indeterminate	url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="2" viewBox="0 0 10 2"><path fill-rule="evenodd" d="M0 1a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1" clip-rule="evenodd"/></svg>')	(same)	web_src/css/base.css:19
+--octicon-alert-fill	url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575ZM8 5a.75.75 0 0 0-.75.75v2.5a.75.75 0 0 0 1.5 0v-2.5A.75.75 0 0 0 8 5Zm1 6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Z"/></svg>')	(same)	web_src/css/base.css:20
+--octicon-chevron-right	url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"></path></svg>')	(same)	web_src/css/base.css:21
+--octicon-x	url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.75.75 0 0 1-.734-.215L8 9.06l-3.22 3.22a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06"/></svg>')	(same)	web_src/css/base.css:22
+--select-arrows	url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="m4.074 9.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.043 9H4.251a.25.25 0 0 0-.177.427m0-1.957L7.47 4.073a.25.25 0 0 1 .354 0L11.22 7.47a.25.25 0 0 1-.177.426H4.251a.25.25 0 0 1-.177-.426"/></svg>')	(same)	web_src/css/base.css:23
+--border-radius	4px	(same)	web_src/css/base.css:25
+--border-radius-medium	6px	(same)	web_src/css/base.css:26
+--border-radius-full	99999px	(same)	web_src/css/base.css:27
+--opacity-disabled	0.55	(same)	web_src/css/base.css:28
+--height-loading	16rem	(same)	web_src/css/base.css:29
+--min-height-textarea	132px	(same)	web_src/css/base.css:30
+--tab-size	4	(same)	web_src/css/base.css:31
+--checkbox-size	14px	(same)	web_src/css/base.css:32
+--page-spacing	16px	(same)	web_src/css/base.css:33
+--page-margin-x	32px	(same)	web_src/css/base.css:34
+--page-space-bottom	64px	(same)	web_src/css/base.css:35
+--transition-hover-fade	opacity 0.2s ease	(same)	web_src/css/base.css:36
+--z-index-modal	1001	(same)	web_src/css/base.css:39
+--z-index-toast	1002	(same)	web_src/css/base.css:40
+--font-size-label	12px	(same)	web_src/css/base.css:42
+--gap-inline	0.25rem	(same)	web_src/css/base.css:44
+--gap-block	0.5rem	(same)	web_src/css/base.css:45
+--background-view-image	repeating-conic-gradient(var(--color-transparency-grid-dark) 0 25%, var(--color-transparency-grid-light) 0 50%) 0 0 / 18px 18px	(same)	web_src/css/base.css:47
+--box-shadow-kbd	inset 0 -1px 0 var(--color-secondary)	(same)	web_src/css/base.css:48
+--page-margin-x	16px (768..1200px viewport) / 8px (<768px)	(same)	web_src/css/base.css:51-61 (@media overrides)
+
+# Section C: defined on ":root *" (EVERY element), so overriding it on :root alone has NO effect -- override --fonts-proportional instead, or redefine on ":root *"
+--fonts-regular	var(--fonts-override, var(--fonts-proportional)), "Noto Sans", "Liberation Sans", sans-serif, var(--fonts-emoji)	(same)	web_src/css/base.css:64
+
+# Section D: web_src/css/font_i18n.css (CJK font overrides, set per :lang())
+--fonts-override	(unset by default; set to var(--fonts-default-override-<lang>) only under :root :lang(ja|zh-CN|zh-TW|zh-HK|ko))	(same)	web_src/css/font_i18n.css:1-19
+--fonts-default-override-ja	system-ui-ja, var(--fonts-proportional)	(same)	web_src/css/font_i18n.css:26
+--fonts-default-override-zh-cn	system-ui-zh-cn, var(--fonts-proportional)	(same)	web_src/css/font_i18n.css:27
+--fonts-default-override-zh-tw	system-ui-zh-tw, var(--fonts-proportional)	(same)	web_src/css/font_i18n.css:28
+--fonts-default-override-zh-hk	system-ui-zh-hk, var(--fonts-proportional)	(same)	web_src/css/font_i18n.css:29
+--fonts-default-override-ko	system-ui-ko, var(--fonts-proportional)	(same)	web_src/css/font_i18n.css:30
+
+# Section E: variables consumed but set elsewhere
+--loading-size	(fallback min(4em, 66.6%))	-	web_src/css/modules/animations.css:27, set inline by web_src/js/modules/clipboard.ts:29
+--gitea-iframe-bgcolor	(computed body bg)	-	set by web_src/js/external-render-helper.ts:44 inside external-render iframes

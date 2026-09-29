@@ -1,0 +1,9 @@
+gitea-theme-github — a Primer-based theme for Gitea.
+
+Includes or derives from (all MIT License):
+- @primer/primitives 11.10.0 — Copyright (c) 2018 GitHub Inc.  https://github.com/primer/primitives
+- @primer/octicons 19.38.0   — Copyright (c) 2023 GitHub Inc.  https://github.com/primer/octicons
+- @primer/css 22.3.2 (reference only, not shipped) — Copyright (c) 2019 GitHub Inc.
+
+No GitHub logos, Invertocat, Mona, Hubot or other GitHub trademarks are included.
+"GitHub" in the theme's display name describes the visual style; this project is not affiliated with GitHub.

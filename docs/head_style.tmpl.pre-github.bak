@@ -1,0 +1,3 @@
+{{AssetCSSLinks "web_src/js/index.ts" "web_src/css/index.css"}}
+{{$theme := ctx.CurrentWebTheme.InternalName}}
+<link rel="stylesheet" href="{{ctx.CurrentWebTheme.PublicAssetURI}}{{if or (eq $theme "modern") (eq $theme "modern-light") (eq $theme "modern-dark")}}?modern_revision=a5295649eb{{end}}">

@@ -1,0 +1,6 @@
+/* Per-scheme values that cannot be expressed as a shared token reference. OWNER: integrator. */
+:root {
+  --is-dark-theme: true;
+  color-scheme: dark;
+  accent-color: var(--fgColor-accent);
+}
