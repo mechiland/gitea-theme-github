@@ -26,11 +26,11 @@
  "cssFiles": [
   {
    "url": "https://static.captcha-delivery.com/captcha/assets/tpl/6dc485c0c428c35b53577b146dc6f9179f55ef9ad41b327a2a179998839364bf/index.css",
-   "bytes": 1836
+   "bytes": 1837
   },
   {
    "url": "https://static.captcha-delivery.com/common/fonts/roboto/font-face.css",
-   "bytes": 910
+   "bytes": 909
   }
  ],
  "problems": [
@@ -75,8 +75,8 @@
   "shifts": []
  },
  "timing": {
-  "domContentLoaded": 1128,
-  "load": 3013,
+  "domContentLoaded": 1047,
+  "load": 2820,
   "transferSize": 1070,
   "resources": 2,
   "cssResources": 0,
@@ -88,5 +88,5 @@
   "horizontalOverflow": false
  },
  "measureJson": "signup/light-1440.measure.json",
- "ms": 3940
+ "ms": 3704
 }

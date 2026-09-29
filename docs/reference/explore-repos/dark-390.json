@@ -20,95 +20,95 @@
  "failedRequests": [],
  "expectedFailures": [],
  "ignoredRequests": [],
- "cssBytes": 440863,
+ "cssBytes": 438342,
  "cssFiles": [
   {
-   "url": "https://github.githubassets.com/assets/react-core.cbbd4117122d27f9.module.css",
-   "bytes": 433
+   "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
+   "bytes": 7576
   },
   {
    "url": "https://github.githubassets.com/assets/light_high_contrast-48fdd0811afbab3c.css",
-   "bytes": 7386
-  },
-  {
-   "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
-   "bytes": 7533
-  },
-  {
-   "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
-   "bytes": 7367
-  },
-  {
-   "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
-   "bytes": 7272
+   "bytes": 7363
   },
   {
    "url": "https://github.githubassets.com/assets/explore-da57df0ff364b609.css",
-   "bytes": 1224
+   "bytes": 961
   },
   {
-   "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
-   "bytes": 2289
+   "url": "https://github.githubassets.com/assets/react-core.cbbd4117122d27f9.module.css",
+   "bytes": 434
   },
   {
    "url": "https://github.githubassets.com/assets/app-runtime.bc6140f37acc15cb.module.css",
-   "bytes": 1258
+   "bytes": 1521
   },
   {
    "url": "https://github.githubassets.com/assets/github-7338c07b3a07b8be.css",
-   "bytes": 22130
+   "bytes": 21828
   },
   {
-   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
-   "bytes": 40849
+   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.a1523bc43e1d725b.module.css",
+   "bytes": 396
   },
   {
    "url": "https://github.githubassets.com/assets/t.d7f0479eca0d90af.module.css",
    "bytes": 3706
   },
   {
-   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.01c9f9ba2b2bcb3b.module.css",
-   "bytes": 644
+   "url": "https://github.githubassets.com/assets/primer-react-css.76a197f9dce25e3c.module.css",
+   "bytes": 35535
   },
   {
-   "url": "https://github.githubassets.com/assets/app-install-banner-partial.558c3871ab9ad431.module.css",
-   "bytes": 409
-  },
-  {
-   "url": "https://github.githubassets.com/assets/primer-1d2c7f7b52a6068b.css",
-   "bytes": 43327
-  },
-  {
-   "url": "https://github.githubassets.com/assets/site-8f158ce48c8ca251.css",
-   "bytes": 93788
+   "url": "https://github.githubassets.com/assets/app-install-banner-partial.9b99004c798b710f.module.css",
+   "bytes": 413
   },
   {
    "url": "https://github.githubassets.com/assets/primer-react-brand-css.6a01c236ff527e7e.module.css",
-   "bytes": 72261
+   "bytes": 71989
   },
   {
-   "url": "https://github.githubassets.com/assets/primer-react-css.76a197f9dce25e3c.module.css",
-   "bytes": 35271
+   "url": "https://github.githubassets.com/assets/primer-4136ede8b2650a2d.css",
+   "bytes": 43351
+  },
+  {
+   "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
+   "bytes": 7411
+  },
+  {
+   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
+   "bytes": 41098
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
+   "bytes": 2554
+  },
+  {
+   "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
+   "bytes": 7292
+  },
+  {
+   "url": "https://github.githubassets.com/assets/site-8f158ce48c8ca251.css",
+   "bytes": 93767
   },
   {
    "url": "https://github.githubassets.com/assets/kq9.8ad2074125dec7f9.module.css",
-   "bytes": 463
+   "bytes": 439
   },
   {
    "url": "https://github.githubassets.com/assets/u2l.54b6ba2af351ee33.module.css",
-   "bytes": 592
+   "bytes": 420
   },
   {
    "url": "https://github.githubassets.com/assets/fg.2616179aabbabe22.module.css",
-   "bytes": 875
+   "bytes": 690
   },
   {
-   "url": "https://www.youtube.com/s/_/ytembeds/_/ss/k=ytembeds.base.RBEnri6m5iM.L.W.O/am=AAAAAADGAAAE/d=1/br=1/rs=AGKMywFPphnJ674U79iDb-_8V82IO21gyw/m=root,base",
-   "bytes": 33075
+   "url": "https://www.youtube.com/s/player/fb50cd46/www-player.css",
+   "bytes": 58739
   },
   {
-   "url": "https://www.youtube.com/s/player/57bae81f/www-player.css",
-   "bytes": 58711
+   "url": "https://www.youtube.com/s/_/ytembeds/_/ss/k=ytembeds.base.RBEnri6m5iM.L.W.O/am=AAAAAAAAAAAE/d=1/br=1/rs=AGKMywF7wMOMs6vQTzeMzdv2029mgZjWxg/m=root,base",
+   "bytes": 30859
   }
  ],
  "problems": [],
@@ -1458,9 +1458,9 @@
   "unreadableSheets": []
  },
  "colors": {
-  "visibleElements": 1073,
-  "checked": 1295,
-  "inPalette": 1172,
+  "visibleElements": 1076,
+  "checked": 1300,
+  "inPalette": 1177,
   "offPaletteDistinct": 4,
   "offPaletteTotal": 11,
   "offPalette": [
@@ -1603,6 +1603,17 @@
     "reason": "language-color"
    },
    {
+    "color": "inline-style rgba(19,20,20,1)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.tmp-p-3 > div.d-flex > div.tmp-mr-4.ml-2 > a.CircleBadge.CircleBadge--small.Link"
+    ],
+    "reason": "inline-style"
+   },
+   {
     "color": "language-color rgba(227,76,38,1)",
     "count": 1,
     "props": {
@@ -1645,17 +1656,6 @@
      "ul.d-flex.f6.list-style-none > li.tmp-mr-4 > span.f6.my-1.tmp-my-1 > span.repo-language-color"
     ],
     "reason": "language-color"
-   },
-   {
-    "color": "inline-style rgba(0,0,0,1)",
-    "count": 1,
-    "props": {
-     "background-color": 1
-    },
-    "samples": [
-     "div.tmp-p-3 > div.d-flex > div.tmp-mr-4.ml-2 > a.CircleBadge.CircleBadge--small.Link"
-    ],
-    "reason": "inline-style"
    }
   ]
  },
@@ -1668,14 +1668,14 @@
   "shifts": [
    {
     "value": 0,
-    "t": 1348,
+    "t": 2790,
     "sources": [
      null
     ]
    },
    {
     "value": 0.0391,
-    "t": 1648,
+    "t": 3364,
     "sources": [
      "div.tmp-px-3",
      "div.color-bg-default.rounded-bottom-2",
@@ -1685,18 +1685,18 @@
   ]
  },
  "timing": {
-  "domContentLoaded": 1209,
-  "load": 3588,
-  "transferSize": 51481,
+  "domContentLoaded": 2695,
+  "load": 6426,
+  "transferSize": 51798,
   "resources": 112,
   "cssResources": 21,
-  "cssTransferBytesPerfApi": 349531
+  "cssTransferBytesPerfApi": 349545
  },
  "document": {
   "width": 390,
-  "height": 9531,
+  "height": 9545,
   "horizontalOverflow": false
  },
  "measureJson": "explore-repos/dark-390.measure.json",
- "ms": 5590
+ "ms": 8262
 }

@@ -1,0 +1,2307 @@
+{
+ "route": "labels",
+ "target": "github",
+ "url": "https://github.com/pemistahl/grex/labels",
+ "scheme": "dark",
+ "viewport": 1440,
+ "theme": null,
+ "auth": false,
+ "consoleErrors": [],
+ "consoleWarnings": [],
+ "failedRequests": [],
+ "expectedFailures": [],
+ "ignoredRequests": [],
+ "cssBytes": 337655,
+ "cssFiles": [
+  {
+   "url": "https://github.githubassets.com/assets/light_high_contrast-48fdd0811afbab3c.css",
+   "bytes": 7687
+  },
+  {
+   "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
+   "bytes": 7388
+  },
+  {
+   "url": "https://github.githubassets.com/assets/app-runtime.bc6140f37acc15cb.module.css",
+   "bytes": 1259
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
+   "bytes": 2573
+  },
+  {
+   "url": "https://github.githubassets.com/assets/app-install-banner-partial.9b99004c798b710f.module.css",
+   "bytes": 412
+  },
+  {
+   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.a1523bc43e1d725b.module.css",
+   "bytes": 395
+  },
+  {
+   "url": "https://github.githubassets.com/assets/t.d7f0479eca0d90af.module.css",
+   "bytes": 3457
+  },
+  {
+   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
+   "bytes": 40848
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-4136ede8b2650a2d.css",
+   "bytes": 43599
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-react-brand-css.6a01c236ff527e7e.module.css",
+   "bytes": 72251
+  },
+  {
+   "url": "https://github.githubassets.com/assets/github-7338c07b3a07b8be.css",
+   "bytes": 21828
+  },
+  {
+   "url": "https://github.githubassets.com/assets/29.98bb7c1b1004d01f.module.css",
+   "bytes": 6254
+  },
+  {
+   "url": "https://github.githubassets.com/assets/m4.0ba3500f7e615e53.module.css",
+   "bytes": 4184
+  },
+  {
+   "url": "https://github.githubassets.com/assets/v.4d13aaf00716d504.module.css",
+   "bytes": 7270
+  },
+  {
+   "url": "https://github.githubassets.com/assets/gq.7919fe36e832754d.module.css",
+   "bytes": 4739
+  },
+  {
+   "url": "https://github.githubassets.com/assets/repository-11ee8a031c040c1a.css",
+   "bytes": 5283
+  },
+  {
+   "url": "https://github.githubassets.com/assets/react-core.cbbd4117122d27f9.module.css",
+   "bytes": 435
+  },
+  {
+   "url": "https://github.githubassets.com/assets/e8.c547e0fadd5a085d.module.css",
+   "bytes": 4000
+  },
+  {
+   "url": "https://github.githubassets.com/assets/repo.849bbc4aceabc969.module.css",
+   "bytes": 305
+  },
+  {
+   "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
+   "bytes": 7535
+  },
+  {
+   "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
+   "bytes": 7269
+  },
+  {
+   "url": "https://github.githubassets.com/assets/44.9be6cfa7a8972e09.module.css",
+   "bytes": 3480
+  },
+  {
+   "url": "https://github.githubassets.com/assets/kw.389601026ca7ce4f.module.css",
+   "bytes": 17734
+  },
+  {
+   "url": "https://github.githubassets.com/assets/9x.359ee68aace8c47b.module.css",
+   "bytes": 4148
+  },
+  {
+   "url": "https://github.githubassets.com/assets/qt.2959c2f57d8ef379.module.css",
+   "bytes": 3711
+  },
+  {
+   "url": "https://github.githubassets.com/assets/9ec.1ab73a072f65d875.module.css",
+   "bytes": 3790
+  },
+  {
+   "url": "https://github.githubassets.com/assets/jq.25da34698f1aeab3.module.css",
+   "bytes": 3237
+  },
+  {
+   "url": "https://github.githubassets.com/assets/g.31d82d04a74d9d4e.module.css",
+   "bytes": 3994
+  },
+  {
+   "url": "https://github.githubassets.com/assets/l.d83fa367f6b5707f.module.css",
+   "bytes": 6031
+  },
+  {
+   "url": "https://github.githubassets.com/assets/mg.36e381fd3fec8dd7.module.css",
+   "bytes": 6124
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-react-css.76a197f9dce25e3c.module.css",
+   "bytes": 35271
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-react-css.76a197f9dce25e3c.module.css",
+   "bytes": -777
+  },
+  {
+   "url": "https://github.githubassets.com/assets/kq9.8ad2074125dec7f9.module.css",
+   "bytes": 434
+  },
+  {
+   "url": "https://github.githubassets.com/assets/u2l.54b6ba2af351ee33.module.css",
+   "bytes": 616
+  },
+  {
+   "url": "https://github.githubassets.com/assets/fg.2616179aabbabe22.module.css",
+   "bytes": 891
+  }
+ ],
+ "problems": [],
+ "mainStatus": 200,
+ "finalUrl": "https://github.com/pemistahl/grex/labels",
+ "cookieBanner": null,
+ "env": {
+  "prefersDark": true,
+  "bodyBg": "rgb(13, 17, 23)",
+  "bodyColor": "rgb(240, 246, 252)",
+  "fontFamily": "\"Mona Sans VF\", -apple-system, \"system-ui\", \"Segoe UI\", \"Noto Sans Backtick Fix\", \"Noto Sans\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\""
+ },
+ "png": "labels/dark-1440.png",
+ "htmlTheme": "auto",
+ "title": "Labels · pemistahl/grex · GitHub",
+ "signedIn": null,
+ "cssVars": {
+  "referenced": 1900,
+  "defined": 2268,
+  "unresolved": [
+   {
+    "name": "--color-canvas-subtle",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 46,
+    "matchedElements": 1,
+    "selectors": [
+     ".SearchBar-module__searchInput__t30yK"
+    ]
+   },
+   {
+    "name": "--avatarSize-narrow",
+    "refs": 20,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
+     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--avatarSize-wide",
+    "refs": 20,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
+     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-dark-rest",
+    "refs": 15,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-dark-hover",
+    "refs": 15,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-dark-active",
+    "refs": 15,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-dark",
+    "refs": 15,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-dark-hover",
+    "refs": 15,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-dark-active",
+    "refs": 15,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-light-rest",
+    "refs": 15,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-light-hover",
+    "refs": 15,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-light-active",
+    "refs": 15,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-light",
+    "refs": 15,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-light-hover",
+    "refs": 15,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-light-active",
+    "refs": 15,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--anchored-overlay-anchor-offset-right",
+    "refs": 10,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-bottom\"]",
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-top\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-top\"]"
+    ]
+   },
+   {
+    "name": "--anchored-overlay-anchor-offset-left",
+    "refs": 5,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"outside-bottom\"]"
+    ]
+   },
+   {
+    "name": "--inputValidation-iconSize",
+    "refs": 5,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-components-ValidationIcon-sv29w"
+    ]
+   },
+   {
+    "name": "--inputValidation-lineHeight",
+    "refs": 5,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-components-ValidationText-JEfut"
+    ]
+   },
+   {
+    "name": "--grid-template-columns",
+    "refs": 5,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-DataTable-Table-7ux1n"
+    ]
+   },
+   {
+    "name": "--stackSize-narrow",
+    "refs": 5,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--stackSize-regular",
+    "refs": 5,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--stackSize-wide",
+    "refs": 5,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--button-default-shadow-inset",
+    "refs": 3,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".btn",
+     ".Button--secondary",
+     ".Button--danger"
+    ]
+   },
+   {
+    "name": "--bg",
+    "refs": 3,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".DefaultIssueTypePickerAnchor-module__issueTypeDot__tFF3h",
+     ".MetadataFooter-module__SingleSelectFieldDot__Y1QVg",
+     ".IssueTypePickerItemLeadingVisual-module__issueTypeColorIndicator__W1kQd"
+    ]
+   },
+   {
+    "name": "--top-offset",
+    "refs": 3,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".SidePanel-module__Backdrop__y9iyE",
+     ".SidePanel-module__sidePanel__Ceqal",
+     ".ArtifactsPanelLayout-module__SidePanelLayout__SgShM"
+    ]
+   },
+   {
+    "name": "--color-mktg-btn-shadow-hover-muted",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".btn-muted-mktg:hover",
+     ".btn-subtle-mktg:hover"
+    ]
+   },
+   {
+    "name": "--token-bg",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".SingleSelectToken-module__Token__f1S1H",
+     ".SingleSelectToken-module__Token__f1S1H:hover"
+    ]
+   },
+   {
+    "name": "--token-fg",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".SingleSelectToken-module__Token__f1S1H",
+     ".SingleSelectToken-module__Token__f1S1H:hover"
+    ]
+   },
+   {
+    "name": "--token-border",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".SingleSelectToken-module__Token__f1S1H",
+     ".SingleSelectToken-module__Token__f1S1H:hover"
+    ]
+   },
+   {
+    "name": "--transition-duration",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".SidePanel-module__Backdrop__y9iyE",
+     ".SidePanel-module__sidePanel__Ceqal"
+    ]
+   },
+   {
+    "name": "--checks-icon-color",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".ChecksStatusBadge-module__ChecksStatusBadgeButton__vTwYt svg",
+     ".ChecksStatusBadge-module__ChecksStatusBadgeIconButton__rcQQ1 svg"
+    ]
+   },
+   {
+    "name": "--color-text-primary",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".RepositoryLabel-module__heading__yp3oj",
+     ".RepositoryMilestone-module__heading__RdaHD"
+    ]
+   },
+   {
+    "name": "--brand-heading-letterSpacing-200",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__AnchorNav-module__AnchorNav-link-label___8TkI7",
+     ".Primer_Brand__Prose-module__Prose___8WnSE h5, .Primer_Brand__Prose-module__Prose___8WnSE h6"
+    ]
+   },
+   {
+    "name": "--color-attention-subtle",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 17,
+    "matchedElements": 0,
+    "selectors": [
+     ".form-group.warn .warning"
+    ]
+   },
+   {
+    "name": "--color-fg-subtle",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 13,
+    "matchedElements": 0,
+    "selectors": [
+     ".MilestoneDescription-module__subtle__PRcar"
+    ]
+   },
+   {
+    "name": "--color-fg-muted",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 114,
+    "matchedElements": 0,
+    "selectors": [
+     ".ipm-nudge-content p"
+    ]
+   },
+   {
+    "name": "--color-success-subtle",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 9,
+    "matchedElements": 0,
+    "selectors": [
+     ".form-group.successed .success"
+    ]
+   },
+   {
+    "name": "--color-danger-subtle",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 7,
+    "matchedElements": 0,
+    "selectors": [
+     ".form-group.errored .error"
+    ]
+   },
+   {
+    "name": "--color-mktg-btn-bg",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".btn-mktg"
+    ]
+   },
+   {
+    "name": "--color-mktg-btn-shadow-hover",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".btn-mktg:hover"
+    ]
+   },
+   {
+    "name": "--fgColor-muted-hover",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".footer-session-authentication-links a:hover"
+    ]
+   },
+   {
+    "name": "--nested-level",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".ControlGroup-item"
+    ]
+   },
+   {
+    "name": "--MarkdownRenderer_streaming-fade-duration",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".MarkdownRenderer-module__fadeInContent__Z6XDA :not(.MarkdownRenderer-module__noFade__koxjj, .MarkdownRenderer-module__noFade__koxjj *, li:first-child > p:first-child, li:first-child > p:first-child *)"
+    ]
+   },
+   {
+    "name": "--zIndex-tooltip",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".ModelInfoPopover-module__modelInfoPopover__m111U"
+    ]
+   },
+   {
+    "name": "--tool-preview-height-threshold",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Tool-module__toolContentPreview__D2_Nq"
+    ]
+   },
+   {
+    "name": "--fontFamily-mono",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".RefSelectorV1-module__RefActionText__PX9V2"
+    ]
+   },
+   {
+    "name": "--slash-menu-top",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
+    ]
+   },
+   {
+    "name": "--slash-menu-left",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
+    ]
+   },
+   {
+    "name": "--accent",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".IssueTypePickerItemLeadingVisual-module__issueTypeColorIndicator__W1kQd"
+    ]
+   },
+   {
+    "name": "--indicator-bg",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".SingleSelectToken-module__colorIndicator__krSWU"
+    ]
+   },
+   {
+    "name": "--indicator-border",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".SingleSelectToken-module__colorIndicator__krSWU"
+    ]
+   },
+   {
+    "name": "--leadingVisual-size-default",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".LeadingVisual-module__outer__SRqB8"
+    ]
+   },
+   {
+    "name": "--leadingVisual-marginTop-default",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".LeadingVisual-module__outer__SRqB8"
+    ]
+   },
+   {
+    "name": "--leadingVisual-size-narrow",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".LeadingVisual-module__outer__SRqB8"
+    ]
+   },
+   {
+    "name": "--leadingVisual-marginTop-narrow",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".LeadingVisual-module__outer__SRqB8"
+    ]
+   },
+   {
+    "name": "--leadingVisual-size-regular",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".LeadingVisual-module__outer__SRqB8"
+    ]
+   },
+   {
+    "name": "--leadingVisual-marginTop-regular",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".LeadingVisual-module__outer__SRqB8"
+    ]
+   },
+   {
+    "name": "--leadingVisual-size-wide",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".LeadingVisual-module__outer__SRqB8"
+    ]
+   },
+   {
+    "name": "--leadingVisual-marginTop-wide",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".LeadingVisual-module__outer__SRqB8"
+    ]
+   },
+   {
+    "name": "--base-size-14",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".RelationshipsAlertDialog-module__footer__gTIMF button"
+    ]
+   },
+   {
+    "name": "--base-duration-150",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".IssueBody-module__modernUxEditButton__ixYeZ"
+    ]
+   },
+   {
+    "name": "--state-icon-color",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".PinnedIssueCard-module__Octicon__ZtzXr"
+    ]
+   },
+   {
+    "name": "--brand-image-aspectRatio",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Image-module__Image--aspect-ratio-custom___38Uyb"
+    ]
+   },
+   {
+    "name": "--brand-Hero-bgColor-gridlineGridInner",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Hero-module__Hero-grid--contained___vfiGA"
+    ]
+   },
+   {
+    "name": "--brand-River-spacing-outerInline",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__river-shared-module__River___PCP5W"
+    ]
+   },
+   {
+    "name": "--brand-fontWeight-300",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Testimonial-module__Testimonial--variant-expressive___J1PIY .Primer_Brand__Testimonial-module__Testimonial__quoteMark___sC3I2"
+    ]
+   },
+   {
+    "name": "--brand-heading-letterSpacing-300",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Prose-module__Prose___8WnSE h4"
+    ]
+   },
+   {
+    "name": "--base-size-54",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__PricingOptions-module__PricingOptions__label-cell___gs_vJ"
+    ]
+   },
+   {
+    "name": "--padding-block-start",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-bgColor",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner-container--background___Uex_J"
+    ]
+   },
+   {
+    "name": "--brand-color-canvas-backdrop",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Tabs-module__Tabs___zia5x"
+    ]
+   },
+   {
+    "name": "--brand-Tabs-slider-width",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Tabs-module__Tabs__slider___tkaHu"
+    ]
+   }
+  ],
+  "unresolvedWithFallback": [
+   {
+    "name": "--shadow-highlight",
+    "refs": 4,
+    "withFallback": 4,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".btn-primary",
+     ".btn-outline:hover, [open] > .btn-outline",
+     ".btn-danger:hover, [open] > .btn-danger",
+     ".social-count"
+    ]
+   },
+   {
+    "name": "--shadow-floating-legacy",
+    "refs": 8,
+    "withFallback": 8,
+    "fallbackRefs": 0,
+    "matchedElements": 1,
+    "selectors": [
+     ".SelectMenu-modal",
+     ".Toast",
+     ".Toast--loading",
+     ".Toast--error",
+     ".Toast--warning"
+    ]
+   },
+   {
+    "name": "--stack-gap-none",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Stack[data-gap-narrow=\"none\"], .Stack[data-gap=\"none\"]",
+     ".Stack[data-gap-regular=\"none\"]",
+     ".Stack[data-gap-wide=\"none\"]"
+    ]
+   },
+   {
+    "name": "--custom-line-height",
+    "refs": 104,
+    "withFallback": 104,
+    "fallbackRefs": 0,
+    "matchedElements": 1,
+    "selectors": [
+     ".TreeViewRootUlStyles .TreeViewItemContent",
+     ".TreeViewRootUlStyles .TreeViewItemVisual",
+     ".prc-TreeView-TreeViewRootUlStyles-Mzrmj .prc-TreeView-TreeViewItemContent-RKsCI",
+     ".prc-TreeView-TreeViewRootUlStyles-Mzrmj .prc-TreeView-TreeViewItemVisual-naWzj",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"large\"]"
+    ]
+   },
+   {
+    "name": "--turbo-progress-bar-scale",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ":root > .turbo-progress-bar[data-render-mode=\"transform\"]"
+    ]
+   },
+   {
+    "name": "--observed-header-height",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 1,
+    "selectors": [
+     ":root"
+    ]
+   },
+   {
+    "name": "--bottom",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Overlay-Overlay-jfs-T:not([data-anchor-position]):not([data-variant=\"modal\"]), .prc-Overlay-Overlay-jfs-T[data-anchor-position=\"false\"]"
+    ]
+   },
+   {
+    "name": "--right",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Overlay-Overlay-jfs-T:not([data-anchor-position]):not([data-variant=\"modal\"]), .prc-Overlay-Overlay-jfs-T[data-anchor-position=\"false\"]"
+    ]
+   },
+   {
+    "name": "--left",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Overlay-Overlay-jfs-T:not([data-anchor-position]):not([data-variant=\"modal\"]):not([data-variant]), .prc-Overlay-Overlay-jfs-T[data-anchor-position=\"false\"]:not(.prc-Overlay-does-not-exist-pxAm4):not([data-variant])"
+    ]
+   },
+   {
+    "name": "--top",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Overlay-Overlay-jfs-T:not([data-anchor-position]):not([data-variant=\"modal\"]):not([data-variant]), .prc-Overlay-Overlay-jfs-T[data-anchor-position=\"false\"]:not(.prc-Overlay-does-not-exist-pxAm4):not([data-variant])"
+    ]
+   },
+   {
+    "name": "--anchored-overlay-top-override",
+    "refs": 10,
+    "withFallback": 10,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-side=\"inside-left\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-side=\"outside-left\"]",
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-side=\"inside-right\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-side=\"outside-right\"]"
+    ]
+   },
+   {
+    "name": "--control-bgColor-contrast",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-components-TextInputBaseWrapper-wY-n0:where([data-contrast])"
+    ]
+   },
+   {
+    "name": "--dialog-width",
+    "refs": 10,
+    "withFallback": 10,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Dialog-Dialog-G8cDF",
+     ".prc-Dialog-Dialog-G8cDF[data-position-narrow=\"center\"]"
+    ]
+   },
+   {
+    "name": "--BaseStyles-fgColor",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-src-BaseStyles-aopSS"
+    ]
+   },
+   {
+    "name": "--BaseStyles-fontFamily",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-src-BaseStyles-aopSS"
+    ]
+   },
+   {
+    "name": "--BaseStyles-lineHeight",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-src-BaseStyles-aopSS"
+    ]
+   },
+   {
+    "name": "--draggable-handle--drag-opacity",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-PageLayout-DraggableHandle-9s6B4::before"
+    ]
+   },
+   {
+    "name": "--draggable-handle--transition",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-PageLayout-DraggableHandle-9s6B4::before"
+    ]
+   },
+   {
+    "name": "--hiddenDisplay-narrow",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Hidden-Hidden-cwE-I"
+    ]
+   },
+   {
+    "name": "--hiddenDisplay-regular",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Hidden-Hidden-cwE-I"
+    ]
+   },
+   {
+    "name": "--hiddenDisplay-wide",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Hidden-Hidden-cwE-I"
+    ]
+   },
+   {
+    "name": "--custom-font-size",
+    "refs": 40,
+    "withFallback": 40,
+    "fallbackRefs": 0,
+    "matchedElements": 1,
+    "selectors": [
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"large\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"medium\"], .prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"subtitle\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"large\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"medium\"], .prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"subtitle\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-regular=\"large\"]"
+    ]
+   },
+   {
+    "name": "--custom-font-weight",
+    "refs": 60,
+    "withFallback": 60,
+    "fallbackRefs": 0,
+    "matchedElements": 1,
+    "selectors": [
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"large\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"medium\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"subtitle\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"large\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"medium\"]"
+    ]
+   },
+   {
+    "name": "--max-overlay-height",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".ModelPicker-module__actionMenuOverlay__qGVdr"
+    ]
+   },
+   {
+    "name": "--MarkdownEditor-contain",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".MarkdownEditor-module__writeWrapper__xOkzT"
+    ]
+   },
+   {
+    "name": "--markdown-input-bottom-padding",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".MarkdownInput-module__textArea__BRDa8 textarea",
+     ".HybridMarkdownEditor-module__container__o7k5a"
+    ]
+   },
+   {
+    "name": "--markdown-editor-min-height",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".HybridMarkdownEditor-module__container__o7k5a"
+    ]
+   },
+   {
+    "name": "--disclosure-panel-height",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".CollapsibleRegion-module__Panel__a8mYl"
+    ]
+   },
+   {
+    "name": "--_disclosure-chevron-rotation-closed",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".DisclosureChevron-module__chevron__E8Xb8"
+    ]
+   },
+   {
+    "name": "--_disclosure-chevron-duration",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".DisclosureChevron-module__chevron__E8Xb8"
+    ]
+   },
+   {
+    "name": "--_disclosure-chevron-rotation-open",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".DisclosureChevron-module__chevron__E8Xb8[data-open=\"true\"]"
+    ]
+   },
+   {
+    "name": "--side-panel-width",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".SidePanel-module__sidePanel__Ceqal"
+    ]
+   },
+   {
+    "name": "--sidebar-width",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".CollapsibleSidebar-module__resizable__q2UcE"
+    ]
+   },
+   {
+    "name": "--artifacts-panel-top",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".ArtifactsSidePanelEmbedded-module__Panel__wlyfx",
+     ".ArtifactsSidePanelEmbedded-module__closed__VF3mj"
+    ]
+   },
+   {
+    "name": "--board-scrollbar-block-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Board-module__Board__Au6yp"
+    ]
+   },
+   {
+    "name": "--board-scrollbar-inline-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Board-module__Board__Au6yp"
+    ]
+   },
+   {
+    "name": "--board-surface-top",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".BoardSurface-module__boardSurface__SP1um"
+    ]
+   },
+   {
+    "name": "--button-default-shadow-resting-offsetX",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".MilestoneForm-module__primaryButton__kkqPI"
+    ]
+   },
+   {
+    "name": "--button-default-shadow-resting-offsetY",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".MilestoneForm-module__primaryButton__kkqPI"
+    ]
+   },
+   {
+    "name": "--button-default-shadow-resting-blur",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".MilestoneForm-module__primaryButton__kkqPI"
+    ]
+   },
+   {
+    "name": "--button-default-shadow-resting-spread",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".MilestoneForm-module__primaryButton__kkqPI"
+    ]
+   },
+   {
+    "name": "--button-default-shadow-resting-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".MilestoneForm-module__primaryButton__kkqPI"
+    ]
+   },
+   {
+    "name": "--brand-RiverAccordion-visual-background",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__RiverAccordion-module__RiverAccordion--variant-gridline___1SmA4 .Primer_Brand__RiverAccordion-module__RiverAccordion__visualsWrapper___Z8Yr6 > .Primer_Brand__RiverAccordion-module__RiverAccordion__visual--has-background___JQ9GB"
+    ]
+   },
+   {
+    "name": "--brand-RiverBreakout-gridline-trailing-width",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__river-shared-module__RiverBreakout--variant-gridline___2_O5H .Primer_Brand__river-shared-module__River__content___udxiD"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-narrow-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-narrow-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-narrow-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-regular-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-regular-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-regular-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-regular-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-wide-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-wide-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-wide-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-wide-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--subnav-available-height",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__SubNav-module__SubNav--open___uMKHN .Primer_Brand__SubNav-module__SubNav--header-container-outer___TODOB"
+    ]
+   },
+   {
+    "name": "--brand-Section-narrow-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-narrow-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-narrow-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-narrow-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-regular-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-regular-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-regular-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-regular-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-wide-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-wide-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-wide-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-wide-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-narrow-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-narrow-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-narrow-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-narrow-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-regular-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-regular-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-regular-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-regular-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-wide-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-wide-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-wide-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-wide-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--has-overflow",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Tabs-module__Tablist__wrapper___MDIB8::after"
+    ]
+   },
+   {
+    "name": "--can-scroll-right",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Tabs-module__Tablist__wrapper___MDIB8::after"
+    ]
+   },
+   {
+    "name": "--brand-Tabs-slider-x",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Tabs-module__Tabs__slider___tkaHu"
+    ]
+   },
+   {
+    "name": "--marketing-header-fixed-top",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".MarketingHeader-module__root__Tk7n3[data-marketing-header].MarketingHeader-module__fixed__OvI_y"
+    ]
+   }
+  ],
+  "unreadableSheets": []
+ },
+ "colors": {
+  "visibleElements": 455,
+  "checked": 321,
+  "inPalette": 165,
+  "offPaletteDistinct": 40,
+  "offPaletteTotal": 100,
+  "offPalette": [
+   {
+    "color": "rgba(38,44,40,1)",
+    "count": 12,
+    "props": {
+     "border-color": 12
+    },
+    "samples": [
+     "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.HeaderSearch-module__searchSlot__oVOUS > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+     "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.AuthCTAs-module__signInWrap__q2P60 > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+     "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw"
+    ]
+   },
+   {
+    "color": "rgba(153,153,153,0.3)",
+    "count": 8,
+    "props": {
+     "border-color": 8
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(53,61,55,1)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "span.Primer_Brand__Button-module__Button__text___ED0bX > span.Primer_Brand__Text-module__Text___XeGJJ.Primer_Brand__Text-module__Text-font--mona-sans___a8XJD.Primer_Brand__Text-module__Text--default___GhPh_ > span.HeaderSearch-module__content__kMpxU > kbd.HeaderSearch-module__kbd__HNG0o"
+    ]
+   },
+   {
+    "color": "rgba(255,255,255,0.06)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--secondary___gHnw_.Primer_Brand__Button-module__Button--size-small___zQrEw"
+    ]
+   },
+   {
+    "color": "rgba(236,161,168,0.3)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(95,168,253,0.3)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(58,173,255,0.3)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(208,212,216,0.3)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(163,238,239,0.3)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(194,184,255,0.3)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(0,230,196,0.3)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(228,230,107,0.3)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(105,216,122,0.3)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(219,130,229,0.3)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(255,255,255,0.3)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(25,31,27,1)",
+    "count": 2,
+    "props": {
+     "box-shadow": 1,
+     "border-color": 1
+    },
+    "samples": [
+     "span.Primer_Brand__Button-module__Button__text___ED0bX > span.Primer_Brand__Text-module__Text___XeGJJ.Primer_Brand__Text-module__Text-font--mona-sans___a8XJD.Primer_Brand__Text-module__Text--default___GhPh_ > span.HeaderSearch-module__content__kMpxU > kbd.HeaderSearch-module__kbd__HNG0o",
+     "div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out > div.MarketingHeader-module__bottomBorder__uZT38"
+    ]
+   },
+   {
+    "color": "rgba(0,0,0,0.18)",
+    "count": 2,
+    "props": {
+     "background-color": 2
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(153,153,153,1)",
+    "count": 2,
+    "props": {
+     "color": 2
+    },
+    "samples": [
+     "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
+    ]
+   },
+   {
+    "color": "rgba(0,0,0,1)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "react-partial.loaded > div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out"
+    ]
+   },
+   {
+    "color": "rgba(215,58,74,0.18)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(236,161,168,1)",
+    "count": 1,
+    "props": {
+     "color": 1
+    },
+    "samples": [
+     "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
+    ]
+   },
+   {
+    "color": "rgba(3,102,214,0.18)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(95,168,253,1)",
+    "count": 1,
+    "props": {
+     "color": 1
+    },
+    "samples": [
+     "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
+    ]
+   },
+   {
+    "color": "rgba(0,117,202,0.18)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(58,173,255,1)",
+    "count": 1,
+    "props": {
+     "color": 1
+    },
+    "samples": [
+     "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
+    ]
+   },
+   {
+    "color": "rgba(207,211,215,0.18)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(208,212,216,1)",
+    "count": 1,
+    "props": {
+     "color": 1
+    },
+    "samples": [
+     "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
+    ]
+   },
+   {
+    "color": "rgba(162,238,239,0.18)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(163,238,239,1)",
+    "count": 1,
+    "props": {
+     "color": 1
+    },
+    "samples": [
+     "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
+    ]
+   },
+   {
+    "color": "rgba(112,87,255,0.18)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(194,184,255,1)",
+    "count": 1,
+    "props": {
+     "color": 1
+    },
+    "samples": [
+     "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
+    ]
+   },
+   {
+    "color": "rgba(0,134,114,0.18)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(0,230,196,1)",
+    "count": 1,
+    "props": {
+     "color": 1
+    },
+    "samples": [
+     "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
+    ]
+   },
+   {
+    "color": "rgba(228,230,105,0.18)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(228,230,107,1)",
+    "count": 1,
+    "props": {
+     "color": 1
+    },
+    "samples": [
+     "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
+    ]
+   },
+   {
+    "color": "rgba(104,216,120,0.18)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(105,216,122,1)",
+    "count": 1,
+    "props": {
+     "color": 1
+    },
+    "samples": [
+     "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
+    ]
+   },
+   {
+    "color": "rgba(216,118,227,0.18)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   },
+   {
+    "color": "rgba(219,130,229,1)",
+    "count": 1,
+    "props": {
+     "color": 1
+    },
+    "samples": [
+     "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
+    ]
+   },
+   {
+    "color": "rgba(255,255,255,0.18)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    ]
+   }
+  ],
+  "otherSchemeOnly": [],
+  "exempt": [
+   {
+    "color": "inline-style rgba(145,152,161,1)",
+    "count": 38,
+    "props": {
+     "fill": 38
+    },
+    "samples": [
+     "a#_R_r9bao5_ > span.prc-ActionList-LeadingVisual-NBr28.prc-ActionList-VisualWrap-bdCsS > div.SidebarLinkIcon-module__icon__wnHFw.color-fg-muted > svg.octicon.octicon-issue-opened",
+     "span.prc-ActionList-LeadingVisual-NBr28.prc-ActionList-VisualWrap-bdCsS > div.SidebarLinkIcon-module__icon__wnHFw.color-fg-muted > svg.octicon.octicon-issue-opened > path",
+     "a#_R_1b9bao5_ > span.prc-ActionList-LeadingVisual-NBr28.prc-ActionList-VisualWrap-bdCsS > div.SidebarLinkIcon-module__icon__wnHFw.color-fg-muted > svg.octicon.octicon-people",
+     "span.prc-ActionList-LeadingVisual-NBr28.prc-ActionList-VisualWrap-bdCsS > div.SidebarLinkIcon-module__icon__wnHFw.color-fg-muted > svg.octicon.octicon-people > path",
+     "a#_R_1r9bao5_ > span.prc-ActionList-LeadingVisual-NBr28.prc-ActionList-VisualWrap-bdCsS > div.SidebarLinkIcon-module__icon__wnHFw.color-fg-muted > svg.octicon.octicon-smiley"
+    ],
+    "reason": "inline-style"
+   },
+   {
+    "color": "inline-style rgba(255,255,255,1)",
+    "count": 14,
+    "props": {
+     "fill": 14
+    },
+    "samples": [
+     "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > a.HeaderLogo-module__logo__UFyHI > svg.octicon.octicon-mark-github",
+     "div.MarketingHeader-module__topRow__yeury > a.HeaderLogo-module__logo__UFyHI > svg.octicon.octicon-mark-github > path",
+     "li > div.NavDropdown-module__container__l2YeI > button.NavDropdown-module__button__PEHWX > svg.octicon.octicon-triangle-right.NavDropdown-module__buttonIcon__Tkl8_",
+     "div.NavDropdown-module__container__l2YeI > button.NavDropdown-module__button__PEHWX > svg.octicon.octicon-triangle-right.NavDropdown-module__buttonIcon__Tkl8_ > path",
+     "div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw > span.Primer_Brand__Button-module__Button__leading-visual___jjtTe > svg.octicon.octicon-sliders.Primer_Brand__Button-module__Button__icon-visual____qybb"
+    ],
+    "reason": "inline-style"
+   },
+   {
+    "color": "inline-style rgba(101,108,118,1)",
+    "count": 4,
+    "props": {
+     "fill": 4
+    },
+    "samples": [
+     "nav.prc-Pagination-PaginationContainer-HEhGo > div.prc-Pagination-TablePaginationSteps-cAXs3 > a.prc-Pagination-Page-Etgqf > svg.octicon.octicon-chevron-left",
+     "div.prc-Pagination-TablePaginationSteps-cAXs3 > a.prc-Pagination-Page-Etgqf > svg.octicon.octicon-chevron-left > path",
+     "nav.prc-Pagination-PaginationContainer-HEhGo > div.prc-Pagination-TablePaginationSteps-cAXs3 > a.prc-Pagination-Page-Etgqf > svg.octicon.octicon-chevron-right",
+     "div.prc-Pagination-TablePaginationSteps-cAXs3 > a.prc-Pagination-Page-Etgqf > svg.octicon.octicon-chevron-right > path"
+    ],
+    "reason": "inline-style"
+   }
+  ]
+ },
+ "icons": {
+  "octicons": 0,
+  "nonOcticon": []
+ },
+ "cls": {
+  "total": 0.0001,
+  "shifts": [
+   {
+    "value": 0.0001,
+    "t": 1899,
+    "sources": [
+     "::after"
+    ]
+   }
+  ]
+ },
+ "timing": {
+  "domContentLoaded": 1715,
+  "load": 1915,
+  "transferSize": 38725,
+  "resources": 250,
+  "cssResources": 45,
+  "cssTransferBytesPerfApi": 338050
+ },
+ "document": {
+  "width": 1440,
+  "height": 1141,
+  "horizontalOverflow": false
+ },
+ "measureJson": "labels/dark-1440.measure.json",
+ "ms": 3179
+}

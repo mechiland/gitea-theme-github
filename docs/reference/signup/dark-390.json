@@ -1,0 +1,92 @@
+{
+ "route": "signup",
+ "target": "github",
+ "url": "https://github.com/signup",
+ "scheme": "dark",
+ "viewport": 390,
+ "theme": null,
+ "auth": false,
+ "consoleErrors": [
+  {
+   "text": "Failed to load resource: the server responded with a status of 403 ()",
+   "url": "https://github.com/signup:0"
+  }
+ ],
+ "consoleWarnings": [],
+ "failedRequests": [
+  {
+   "url": "https://github.com/signup",
+   "status": 403,
+   "type": "document"
+  }
+ ],
+ "expectedFailures": [],
+ "ignoredRequests": [],
+ "cssBytes": 2747,
+ "cssFiles": [
+  {
+   "url": "https://static.captcha-delivery.com/captcha/assets/tpl/6dc485c0c428c35b53577b146dc6f9179f55ef9ad41b327a2a179998839364bf/index.css",
+   "bytes": 1838
+  },
+  {
+   "url": "https://static.captcha-delivery.com/common/fonts/roboto/font-face.css",
+   "bytes": 909
+  }
+ ],
+ "problems": [
+  "main document status 403 (expected 200)"
+ ],
+ "mainStatus": 403,
+ "finalUrl": "https://github.com/signup",
+ "cookieBanner": null,
+ "env": {
+  "prefersDark": true,
+  "bodyBg": "rgba(0, 0, 0, 0)",
+  "bodyColor": "rgb(0, 0, 0)",
+  "fontFamily": "Times"
+ },
+ "png": "signup/dark-390.png",
+ "htmlTheme": null,
+ "title": "github.com",
+ "signedIn": null,
+ "cssVars": {
+  "referenced": 0,
+  "defined": 0,
+  "unresolved": [],
+  "unresolvedWithFallback": [],
+  "unreadableSheets": []
+ },
+ "colors": {
+  "visibleElements": 1,
+  "checked": 0,
+  "inPalette": 0,
+  "offPaletteDistinct": 0,
+  "offPaletteTotal": 0,
+  "offPalette": [],
+  "otherSchemeOnly": [],
+  "exempt": []
+ },
+ "icons": {
+  "octicons": 0,
+  "nonOcticon": []
+ },
+ "cls": {
+  "total": 0,
+  "shifts": []
+ },
+ "timing": {
+  "domContentLoaded": 992,
+  "load": 2596,
+  "transferSize": 1070,
+  "resources": 2,
+  "cssResources": 0,
+  "cssTransferBytesPerfApi": 0
+ },
+ "document": {
+  "width": 390,
+  "height": 844,
+  "horizontalOverflow": false
+ },
+ "measureJson": "signup/dark-390.measure.json",
+ "ms": 3473
+}
