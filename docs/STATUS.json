@@ -1,6 +1,6 @@
 {
  "updated": "2026-09-30T15:10:00+08:00",
- "phase": "loop iteration 1 — wave L1 done (14 folders: 12 passed; not passed: icons 8.0 (scored before IC-1 was built), pages/auth 8.7 (its 4 console errors are the intentional 404 of not-found-anon)); integration pass done (requests, seams, budget via lossless nesting, audit, smoke); next: final gate #2",
+ "phase": "loop iteration 2 (final gate #2: critic mean light/dark 8.44, mobile 8.09; 37/101 routes pass; blind 100%)",
  "pinned": {
   "gitea": "1.27.3",
   "@primer/primitives": "11.10.0",
@@ -17,7 +17,7 @@
   },
   {
    "path": "templates/custom/footer.tmpl",
-   "reason": "Primer Dialog close button (overlays OV-4): inline script prepends button.close.inside to every .ui.modal; the one listed JS exception (ARCHITECTURE §7/§10)",
+   "reason": "Primer Dialog close button (overlays OV-4): inline script prepends button.close.inside to every .ui.modal; the one listed JS exception (ARCHITECTURE \u00a77/\u00a710)",
    "scope": "github-* themes only (renders nothing otherwise; Gitea's hook file is empty)",
    "liveInstall": "DONE (orchestrator ORC-1)"
   },
@@ -25,11 +25,11 @@
    "path": "templates/user/settings/layout_head.tmpl",
    "reason": "github.com settings page header (avatar, name, subtitle, profile button), request SA-4; needs signed-in user data",
    "scope": "github-* themes only, pageClass containing \"settings\"; other themes render upstream bytes",
-   "liveInstall": "DONE (ORC-3); L1 edit SA-5b (header also when pageClass is empty) PENDING — ORCHESTRATOR.md ORC-11"
+   "liveInstall": "DONE (ORC-3); L1 edit SA-5b (header also when pageClass is empty) PENDING \u2014 ORCHESTRATOR.md ORC-11"
   },
   {
    "path": "templates/base/head_navbar.tmpl",
-   "reason": "FG-007 AppHeader: github-* branch → custom/gh_head_navbar, else upstream 1.27.3 verbatim",
+   "reason": "FG-007 AppHeader: github-* branch \u2192 custom/gh_head_navbar, else upstream 1.27.3 verbatim",
    "scope": "github-* themes only",
    "liveInstall": "DONE (orchestrator ORC-5)"
   },
@@ -37,7 +37,7 @@
    "path": "templates/custom/gh_head_navbar.tmpl",
    "reason": "FG-007 AppHeader markup + FG-063 slim auth header",
    "scope": "github-* themes only",
-   "liveInstall": "DONE (ORC-5); L1 edit (PA-L1-1, PA-L1-2 nil-safe, NAV-I4) PENDING — ORCHESTRATOR.md ORC-11 (integrator copy/reload refused by permission policy)"
+   "liveInstall": "DONE (ORC-5); L1 edit (PA-L1-1, PA-L1-2 nil-safe, NAV-I4) PENDING \u2014 ORCHESTRATOR.md ORC-11 (integrator copy/reload refused by permission policy)"
   },
   {
    "path": "templates/repo/commits_list.tmpl",
@@ -76,7 +76,7 @@
    "rounds": 1,
    "passed": true,
    "openIssues": [
-    "Tablet gutter 16px vs github.com 24px at 768–1011px (minor)",
+    "Tablet gutter 16px vs github.com 24px at 768\u20131011px (minor)",
     "Stale layout.css header comment (nit)"
    ],
    "wave": "L1 (loop 1)",
@@ -109,7 +109,7 @@
    "rounds": 2,
    "passed": false,
    "openIssues": [
-    "Critic score was capped because IC-1 (gh.icons layer) was not built — IC-1, IC-2, IC-4 are DONE in this pass: colorblind markers hidden, Files changed → file-diff, Projects → table are live after this deploy (not re-critiqued)",
+    "Critic score was capped because IC-1 (gh.icons layer) was not built \u2014 IC-1, IC-2, IC-4 are DONE in this pass: colorblind markers hidden, Files changed \u2192 file-diff, Projects \u2192 table are live after this deploy (not re-critiqued)",
     "Active UnderlineNav icon uses fgColor-default; github.com keeps it muted (navigation / people)"
    ],
    "wave": "L1 (loop 1)",
@@ -144,7 +144,7 @@
     "Org / profile tabs not in the AppHeader local bar (NAV-P1, pages/people)",
     "Crumb reads \"Dashboard\" on /-/admin and \"Profile\" on /user/settings until ORC-11 (NAV-I4) is installed",
     "FG-050 NavList leading Octicons not done (NAV-I3 rejected for budget)",
-    "Org/profile tab icons stay visible 768–~1100px while tabs overflow into \"…\"",
+    "Org/profile tab icons stay visible 768\u2013~1100px while tabs overflow into \"\u2026\"",
     "Drawer close X has no hover/focus of its own (nit)"
    ],
    "wave": "L1 (loop 1)",
@@ -160,7 +160,7 @@
    "passed": true,
    "openIssues": [
     "FG-111 table scroll shadows: DD-SA-1 applied by the integrator in this pass (verify in next critic)",
-    "Mobile comment header author→verb gap differs (opening post vs replies)",
+    "Mobile comment header author\u2192verb gap differs (opening post vs replies)",
     "Review headers at 390 orphan \"ago\"",
     "Raw px spacing values in labels.css / timeline.css (nits)"
    ],
@@ -221,8 +221,8 @@
     "passed": true
    },
    "notes": [
-    "integrator w3 seam fix: .repository.commits → .repository.commits:not(.pull) (leaked into the PR Commits tab)",
-    "w3b: 2 critic rounds (8.1 → 8.5); Compare menu off-screen at 390 and page scroll at >=768 fixed"
+    "integrator w3 seam fix: .repository.commits \u2192 .repository.commits:not(.pull) (leaked into the PR Commits tab)",
+    "w3b: 2 critic rounds (8.1 \u2192 8.5); Compare menu off-screen at 390 and page scroll at >=768 fixed"
    ]
   },
   "pages/issues-prs": {
@@ -264,7 +264,7 @@
    "rounds": 2,
    "passed": true,
    "openIssues": [
-    "Phone dashboard reservation fits 8 rows: CLS ≈ 0.11 for 2 or 15 repos (probe), blank block for 0",
+    "Phone dashboard reservation fits 8 rows: CLS \u2248 0.11 for 2 or 15 repos (probe), blank block for 0",
     "Follower counts not bold (PPL-T1 template REJECTED)",
     "Org / profile tabs not in the AppHeader local bar (NAV-P1 proposal)",
     "Profile tab bar first item 16px left of github.com (nit)"
@@ -281,7 +281,7 @@
    "rounds": 1,
    "passed": true,
    "openIssues": [
-    "DD-SA-1 now applied by the integrator (scroll shadows on admin tables at 390) — not yet re-critiqued",
+    "DD-SA-1 now applied by the integrator (scroll shadows on admin tables at 390) \u2014 not yet re-critiqued",
     "Deploy-keys Blankslate falls back to bare text while the add form is open",
     "Subhead nowrap makes 3-line 24px headings at 390",
     "Two green primaries on /user/settings/account",
@@ -331,109 +331,44 @@
  },
  "openIssues": [
   "ORC-11 pending: forgot-password full header + double logo, admin/settings crumbs, Actions > General settings header (templates edited, install blocked for the integrator)",
-  "Anonymous AppHeader overflows at 390 on long crumbs (not-found-anon 396, forgot-password 399) → navigation",
+  "Anonymous AppHeader overflows at 390 on long crumbs (not-found-anon 396, forgot-password 399) \u2192 navigation",
   "code has the lint allow-list for mobile blame age / diff summary but has not used it yet (FG-028 / FG-100 partial)",
-  "pages/people phone dashboard reservation: CLS ≈ 0.11 for users with 2 or 15 repos (people critic r2 probe)",
+  "pages/people phone dashboard reservation: CLS \u2248 0.11 for users with 2 or 15 repos (people critic r2 probe)",
   "overlays: archive-repo and project-board destructive confirms still green",
   "icons folder critic score 8.0 was taken before IC-1 landed; re-critique needed",
   "Browser floor is now CSS nesting (ORC-12)",
   "Restore at the very end: admin theme (baseline gitea-auto-tritanopia) and diff-style preference (unified)"
  ],
  "finalGate": {
-  "run": "shots/final-gate (2026-09-30, 101 routes x light/dark x 1440/390, --stable)",
+  "n": 2,
+  "run": "shots/final-gate-2",
   "passed": false,
   "wholeSiteCritic": {
-   "meanLight": 8.21,
-   "meanDark": 8.18,
-   "meanMobile": 7.78,
-   "routesAllAtLeast8_5": 22,
+   "meanLight": 8.44,
+   "meanDark": 8.44,
+   "meanMobile": 8.09,
+   "routesAllAtLeast8_5": 37,
    "routes": 101,
-   "worst": [
-    [
-     5,
-     "blame"
-    ],
-    [
-     5,
-     "blame-playground-multiple-authors"
-    ],
-    [
-     5,
-     "pr-files-changed-unified-playground-large-diff"
-    ],
-    [
-     5.5,
-     "directory-tree"
-    ],
-    [
-     6,
-     "commit-detail"
-    ],
-    [
-     6.5,
-     "project-board"
-    ],
-    [
-     6.8,
-     "pr-files-changed-split-playground-large-diff"
-    ],
-    [
-     7,
-     "admin-emails"
-    ],
-    [
-     7,
-     "admin-repos"
-    ],
-    [
-     7,
-     "branches"
-    ],
-    [
-     7,
-     "home"
-    ],
-    [
-     7,
-     "not-found"
-    ],
-    [
-     7,
-     "notifications"
-    ],
-    [
-     7,
-     "org-settings-labels"
-    ],
-    [
-     7,
-     "pr-conversation-playground-large-diff-reviews"
-    ]
-   ]
+   "issues": {
+    "blocker": 0,
+    "major": 15,
+    "minor": 91,
+    "nit": 92
+   }
   },
   "blindJudges": {
    "pairs": 152,
    "judgments": 304,
-   "identificationRatePage": 1,
-   "identificationRateContentOnly": 0.993,
-   "meanConfidence": 0.97,
-   "perRoute": "docs/final-gate/scores.json → identification",
-   "reasons": "docs/final-gate/judge-reasons.txt (1264 reasons)",
-   "dominantTells": {
-    "gitea branding (logo must stay; footer)": 423,
-    "header/nav structure (text links, Gitea-only tabs)": 396,
-    "content/data (counts, migrated avatars, Gitea-only sidebar fields)": 305,
-    "layout/structure": 175,
-    "color": 62,
-    "typography/spacing": 24
-   },
-   "honestNote": "Identification is dominated by things a theme cannot or must not change (Gitea logo per asset policy, Gitea-only features and strings, seeded data differences, logged-out github.com references). Theme-fixable tells (header structure, footer, several page structures) are queued for loop iterations."
+   "identificationRate": 1.0,
+   "meanConfidence": 0.975,
+   "reasons": "docs/final-gate-2/judge-reasons.txt (1213)",
+   "note": "Reasons are dominated by Gitea wording/grammar, Gitea-only features, seeded-data differences and the Gitea logo (kept by policy); typography 15 and color 67 mentions. The blind criterion as specified cannot be met by a theme that must keep Gitea features, strings and logo; tracked, not gamed."
   }
  },
  "exceptions": [
   {
    "what": "Inline FormControl validation caption on sign-up",
-   "why": "needs a template override of user/auth/signup_inner.tmpl; github.com login already uses flash only; rejected per ARCHITECTURE §7",
+   "why": "needs a template override of user/auth/signup_inner.tmpl; github.com login already uses flash only; rejected per ARCHITECTURE \u00a77",
    "decided": "integrator wave 1"
   },
   {
@@ -443,7 +378,7 @@
   },
   {
    "what": "SelectPanel title rows (\"Filter by label\", \"Switch branches/tags\")",
-   "why": "needs overrides of ≥5 Fomantic filter/sidebar templates that change upstream often; Vue branch picker would need JS (OV-5 rejected)",
+   "why": "needs overrides of \u22655 Fomantic filter/sidebar templates that change upstream often; Vue branch picker would need JS (OV-5 rejected)",
    "decided": "integrator wave 2"
   },
   {
@@ -465,13 +400,13 @@
  "restart": {
   "status": "done",
   "at": "2026-09-29T20:11:56Z",
-  "reason": "load icon change gitea-unlock → octicon-unlock (icons II-1; deployed 18:58Z after the previous 18:30Z restart)",
+  "reason": "load icon change gitea-unlock \u2192 octicon-unlock (icons II-1; deployed 18:58Z after the previous 18:30Z restart)",
   "migrationCheck": "no task rows with status 0/1",
   "builderCriticRunning": false,
   "themesOffered": 17,
   "previouslyOfferedStillOffered": true,
   "themesIni": "unchanged: 14 previous + github-auto/light/dark; DEFAULT_THEME gitea-auto",
-  "verify": "gitea-auto /octo-org/grex/commit/99cc3477… renders 'svg gitea-unlock octicon-unlock'",
+  "verify": "gitea-auto /octo-org/grex/commit/99cc3477\u2026 renders 'svg gitea-unlock octicon-unlock'",
   "adminTheme": "github-auto (shoot/smoke); baseline gitea-auto-tritanopia to restore at the end",
   "wave3": {
    "status": "not needed",
@@ -540,7 +475,7 @@
   "unresolvedVars": 0,
   "offPaletteTotal": 0,
   "nonOcticonIcons": 52,
-  "nonOcticonNote": "fontawesome-openid 16, gitea-npm 12, gitea-gitea/feishu/matrix 24 (webhook types) — brand exceptions; colorblind markers now hidden (IC-1, IC-4) and gitea-running counted as githubNative (IC-2): 88 → 52",
+  "nonOcticonNote": "fontawesome-openid 16, gitea-npm 12, gitea-gitea/feishu/matrix 24 (webhook types) \u2014 brand exceptions; colorblind markers now hidden (IC-1, IC-4) and gitea-running counted as githubNative (IC-2): 88 \u2192 52",
   "hiddenIconsNote": "icons.hidden (IC-4) lists theme-hidden svgs, incl. 28 colorblind markers",
   "githubNativeIcons": 8,
   "maskedIcons": 2246,
@@ -552,7 +487,7 @@
   "maxCLS": 0.2188,
   "maxCLSNote": "file-view-markdown light-390 (README badge images; 0.1949 in w3b, content-driven), next wiki-page-playground 390 0.05",
   "lightDarkSanity": {
-   "script": "scratchpad lightdark.py → shots/integrate-wL1/light-dark-sanity.json",
+   "script": "scratchpad lightdark.py \u2192 shots/integrate-wL1/light-dark-sanity.json",
    "pairs": 202,
    "flagged": 0,
    "minDelta": 178.6,
@@ -576,7 +511,7 @@
  },
  "budget": {
   "baseline": "shots/baseline-gitea-auto-w2 (gitea-auto, same 272 pages, with audit, same concurrency 3, same server start)",
-  "compare": "tools/shoot/budget-compare.mjs → shots/integrate-w2/budget-compare.json; re-runs x2 of suspect routes: shots/integrate-w2-budget/compare-{1,2}.json",
+  "compare": "tools/shoot/budget-compare.mjs \u2192 shots/integrate-w2/budget-compare.json; re-runs x2 of suspect routes: shots/integrate-w2-budget/compare-{1,2}.json",
   "noise": "CLS +0.02, DCL max(150ms, 25%)",
   "medianDclMs": {
    "github-auto": 113,
@@ -598,23 +533,23 @@
   "clsRegressions": [
    {
     "route": "action-run",
-    "pages": "390 light/dark 0.4861→0.5973; 1440 light/dark 0.3443→0.4245",
+    "pages": "390 light/dark 0.4861\u21920.5973; 1440 light/dark 0.3443\u21920.4245",
     "reproduced": "3/3 runs",
-    "cause": "Vue RepoActionView mounts its summary after first paint (same single shift in both themes); the theme makes header/summary taller (390: summary 85→160px, body y 297→418), so the moved distance is larger",
+    "cause": "Vue RepoActionView mounts its summary after first paint (same single shift in both themes); the theme makes header/summary taller (390: summary 85\u2192160px, body y 297\u2192418), so the moved distance is larger",
     "owner": "pages/actions-packages-projects A-1 (wave 3)"
    },
    {
     "route": "file-view-markdown",
     "pages": "+0.025 on 2 of 4 pages in 1 of 3 runs",
     "reproduced": "not consistent",
-    "cause": "README badge images without size load late (content-driven; markdown critic measured 0.05–0.19 run to run)",
+    "cause": "README badge images without size load late (content-driven; markdown critic measured 0.05\u20130.19 run to run)",
     "owner": "none (noise/content)"
    }
   ],
   "notRegressions": [
-   "home light-1440 0.065→0.168 in the full run only; baseline dark itself 0.189 and 2 re-runs show no regression (activity feed mount, noise)"
+   "home light-1440 0.065\u21920.168 in the full run only; baseline dark itself 0.189 and 2 re-runs show no regression (activity feed mount, noise)"
   ],
-  "dclRegressions": "none reproduced: repo-issues 390 (133→708ms) and repo-settings 390 (99→276ms) were one-offs; compare-two-tags 390 is server-bound and varies 660–2147ms in both themes",
+  "dclRegressions": "none reproduced: repo-issues 390 (133\u2192708ms) and repo-settings 390 (99\u2192276ms) were one-offs; compare-two-tags 390 is server-bound and varies 660\u20132147ms in both themes",
   "sizeKb": {
    "github-auto": 288.9,
    "github-light": 283.9,
@@ -645,18 +580,18 @@
    },
    "clsRegressions": [],
    "clsImprovements": 16,
-   "A1": "RESOLVED — action-run 390 0.0740/0.0745 (built-in 0.4861), 1440 ≤0.021 (built-in 0.3443)",
+   "A1": "RESOLVED \u2014 action-run 390 0.0740/0.0745 (built-in 0.4861), 1440 \u22640.021 (built-in 0.3443)",
    "dclRegressions": [
     {
      "route": "blame",
-     "pages": "all 4 variants 278–329 → 446–483 ms, 3/3 runs",
-     "cause": "code folder ≈110 ms (bisect), pages/* ≈50 ms; suspect relative :has on every blame row",
+     "pages": "all 4 variants 278\u2013329 \u2192 446\u2013483 ms, 3/3 runs",
+     "cause": "code folder \u2248110 ms (bisect), pages/* \u224850 ms; suspect relative :has on every blame row",
      "owner": "code PERF-1"
     }
    ],
    "dclNoise": [
     "pr-files-changed-* one-offs (1083/1098 ms) not reproduced in 2 re-runs",
-    "compare-two-tags server-bound (660–1430 ms in both themes)",
+    "compare-two-tags server-bound (660\u20131430 ms in both themes)",
     "repo-settings 390 one-off"
    ],
    "newRoutesNoBaseline": "33 routes added in w3 have no gitea-auto baseline (admin theme stays github-auto)"
@@ -936,7 +871,7 @@
      "nestedBytes": 1085
     }
    },
-   "decision": "no rules deleted; lossless prefix nesting in the build (build/nest.mjs, ARCHITECTURE §9) — browser floor Chrome/Edge 112+, Safari 16.5+, Firefox 117+ (ORCHESTRATOR.md ORC-12)",
+   "decision": "no rules deleted; lossless prefix nesting in the build (build/nest.mjs, ARCHITECTURE \u00a79) \u2014 browser floor Chrome/Edge 112+, Safari 16.5+, Firefox 117+ (ORCHESTRATOR.md ORC-12)",
    "coverage": {
     "run": "shots/coverage-integrate-L1 (+ rerun of 5 routes whose loads failed while another agent had switched the admin theme: shots/coverage-integrate-L1-rerun)",
     "styleRules": 2769,
@@ -947,7 +882,7 @@
     "note": "deleting all of it would not reach 295 KB and would strip real but unseeded features (toasts, text-expander, delete modals, footnotes, code previews); not done"
    },
    "selfCheck": "every build lowers flat and nested text with Lightning CSS (chrome 100) and compares selector members in order: auto 3,393 / light 3,382 / dark 3,390 members identical",
-   "computedStyleCheck": "12 pages x (1440 light, 390 dark), 30,790 elements: flat vs nested differ on 130 elements, all on the two file-list pages where flat vs flat also differs on 128 (file-icon DOM order changes per load) → 0 CSS-caused differences",
+   "computedStyleCheck": "12 pages x (1440 light, 390 dark), 30,790 elements: flat vs nested differ on 130 elements, all on the two file-list pages where flat vs flat also differs on 128 (file-icon DOM order changes per load) \u2192 0 CSS-caused differences",
    "pixeldiff": {
     "a": "shots/integrate-L1-nest-before (flat CSS via --theme-css, --states --stable)",
     "b": "shots/integrate-L1-nest-after (nested CSS, same flags)",
@@ -962,8 +897,8 @@
     "missing": 0,
     "explained": {
      "site-admin-config (4)": "logger-config JSON key order is random per load (Go map), same as the trim round",
-     "user-profile-repositories-tab/states/light-1440-filter-hover (3,637 px)": "flaky capture in the flat run: re-shot with both CSS files (shots/integrate-L1-flat-recheck, shots/integrate-L1-nest-recheck) → identical to each other at tolerance 0 for that state",
-     "minor (14)": "1–2 px anti-aliasing"
+     "user-profile-repositories-tab/states/light-1440-filter-hover (3,637 px)": "flaky capture in the flat run: re-shot with both CSS files (shots/integrate-L1-flat-recheck, shots/integrate-L1-nest-recheck) \u2192 identical to each other at tolerance 0 for that state",
+     "minor (14)": "1\u20132 px anti-aliasing"
     }
    }
   }
@@ -986,14 +921,14 @@
     "CR-3"
    ],
    "deferred": [
-    "DD-I1/DD-D1 → wave-3 dark"
+    "DD-I1/DD-D1 \u2192 wave-3 dark"
    ],
    "forwarded": [
-    "OV-6, CR-1, CR-2 → pages/repo",
-    "A-1 → pages/actions-packages-projects",
-    "C-5 → code",
-    "MD-1 → markdown",
-    "seam notes → pages/issues-prs"
+    "OV-6, CR-1, CR-2 \u2192 pages/repo",
+    "A-1 \u2192 pages/actions-packages-projects",
+    "C-5 \u2192 code",
+    "MD-1 \u2192 markdown",
+    "seam notes \u2192 pages/issues-prs"
    ]
   },
   "wave3Integrator": {
@@ -1001,7 +936,7 @@
     "SA-1 (routes)",
     "APP-1 (routes)",
     "PPL-1 addendum (short custom-property names in build)",
-    "page folders routes/states merged (68→101 routes)"
+    "page folders routes/states merged (68\u2192101 routes)"
    ],
    "accepted_pending_orchestrator": [
     "SA-4 (ORC-3)"
@@ -1010,10 +945,10 @@
     "PPL-1 budget (ORC-4)"
    ],
    "rejected": [
-    "pages/repo template hooks 1–4"
+    "pages/repo template hooks 1\u20134"
    ],
    "seamsFixed": [
-    "pages/repo .repository.commits leaked into PR Commits tab → :not(.pull)"
+    "pages/repo .repository.commits leaked into PR Commits tab \u2192 :not(.pull)"
    ],
    "forwardedOpen": [
     "controls SA-C1, IP-C3",
@@ -1059,7 +994,7 @@
     "PA-L1-1",
     "PA-L1-2 (nil-safe)",
     "NAV-I4",
-    "SA-5b → ORC-11"
+    "SA-5b \u2192 ORC-11"
    ],
    "rejected": [
     "PPL-T1 (8th override for a small part of FG-052; changes other themes HTML)",
@@ -1075,8 +1010,8 @@
     "budget notes"
    ],
    "forwarded": [
-    "FG-018 generic SHA → data-display / pages-issues-prs",
-    "anonymous header overflow at 390 → navigation"
+    "FG-018 generic SHA \u2192 data-display / pages-issues-prs",
+    "anonymous header overflow at 390 \u2192 navigation"
    ],
    "orchestrator": [
     "ORC-11 (template install, pending)",
@@ -1095,7 +1030,7 @@
    "differentKnownNoisy": 9,
    "sizeMismatch": 0,
    "missing": 0,
-   "explained": "different = site-admin-config light 390/1440 (logger JSON key order random per load, looked at); minor ≤16 px AA (packages-org, package-versions, merge-form, follow-focus); noisy = site-admin live stats, reviewers order, project-board ≤22 px",
+   "explained": "different = site-admin-config light 390/1440 (logger JSON key order random per load, looked at); minor \u226416 px AA (packages-org, package-versions, merge-form, follow-focus); noisy = site-admin live stats, reviewers order, project-board \u226422 px",
    "unexplained": 0,
    "lightFile": "theme-github-light.src.css byte-identical with and without src/dark (gh.dark not emitted in light)"
   },
@@ -1286,5 +1221,98 @@
   ],
   "inherent": 19,
   "note": "compiled from the owners request files (DONE lines) and the wave L1 critic reports; not re-verified issue by issue in this pass"
- }
+ },
+ "finalGateHistory": [
+  {
+   "run": "shots/final-gate (2026-09-30, 101 routes x light/dark x 1440/390, --stable)",
+   "passed": false,
+   "wholeSiteCritic": {
+    "meanLight": 8.21,
+    "meanDark": 8.18,
+    "meanMobile": 7.78,
+    "routesAllAtLeast8_5": 22,
+    "routes": 101,
+    "worst": [
+     [
+      5,
+      "blame"
+     ],
+     [
+      5,
+      "blame-playground-multiple-authors"
+     ],
+     [
+      5,
+      "pr-files-changed-unified-playground-large-diff"
+     ],
+     [
+      5.5,
+      "directory-tree"
+     ],
+     [
+      6,
+      "commit-detail"
+     ],
+     [
+      6.5,
+      "project-board"
+     ],
+     [
+      6.8,
+      "pr-files-changed-split-playground-large-diff"
+     ],
+     [
+      7,
+      "admin-emails"
+     ],
+     [
+      7,
+      "admin-repos"
+     ],
+     [
+      7,
+      "branches"
+     ],
+     [
+      7,
+      "home"
+     ],
+     [
+      7,
+      "not-found"
+     ],
+     [
+      7,
+      "notifications"
+     ],
+     [
+      7,
+      "org-settings-labels"
+     ],
+     [
+      7,
+      "pr-conversation-playground-large-diff-reviews"
+     ]
+    ]
+   },
+   "blindJudges": {
+    "pairs": 152,
+    "judgments": 304,
+    "identificationRatePage": 1,
+    "identificationRateContentOnly": 0.993,
+    "meanConfidence": 0.97,
+    "perRoute": "docs/final-gate/scores.json \u2192 identification",
+    "reasons": "docs/final-gate/judge-reasons.txt (1264 reasons)",
+    "dominantTells": {
+     "gitea branding (logo must stay; footer)": 423,
+     "header/nav structure (text links, Gitea-only tabs)": 396,
+     "content/data (counts, migrated avatars, Gitea-only sidebar fields)": 305,
+     "layout/structure": 175,
+     "color": 62,
+     "typography/spacing": 24
+    },
+    "honestNote": "Identification is dominated by things a theme cannot or must not change (Gitea logo per asset policy, Gitea-only features and strings, seeded data differences, logged-out github.com references). Theme-fixable tells (header structure, footer, several page structures) are queued for loop iterations."
+   }
+  }
+ ]
 }

@@ -1,148 +1,153 @@
-# Final gate — group 7 (critic 7)
+# Final gate: group 7 critique
 
-Scope: site-admin, repo-issues, repo-commits, blame-playground-multiple-authors, wiki-page-list, pr-conversation-open,
-pr-draft-wip-playground, user-profile-stars-tab, org-settings, org-settings-labels, package-versions, pr-compare-form-playground.
+Reviewer: whole-site gate, group 7 (12 routes). Theme `github-auto`. Source shots: `shots/final-gate-2/<route>/`.
+Crops used for review: `shots/final-gate-critic-7/` (`<route>_{light,dark}1440_N.png` are 1000px bands, `<route>_m_N.png` show light-390 and dark-390 side by side with a red divider, `ref_*` are reference crops, `*_zoom*.png` are detail zooms).
 
-Inputs: `shots/final-gate/<route>/{light,dark}-{1440,390}.png` + `.json`; references in `docs/reference/<route>/` (5 of the 12
-routes have one). Crops: `shots/final-gate-critic-7/<route>/`. Live measure run (theme github-auto, 1440, light+dark):
-`shots/final-gate-critic-7/live/` (24 pages, 0 problems). A few extra DOM probes were run through the shoot tool's
-`launchBrowser()` with the cached admin session. The probes were read-only; the admin theme was not changed.
+## Audit logs (all 48 JSON files)
 
-## Audit logs (all 48 captures)
-- Every capture returned HTTP 200. None had console errors or warnings, failed requests, unresolved CSS vars,
-  off-palette colours, non-Octicon icons, unlayered Gitea CSS or horizontal document overflow.
-- CLS: max 0.0031 (pr-compare-form 1440) and 0.0024 (org-settings-labels 390). Both are negligible.
-- Masked icons are all expected: `octicon-filter`, `octicon-triangle-down`, `gitea-double-chevron-*`, plus the
-  `material-file` / `octicon-file` pairs in the Vue file tree.
+The logs are clean on every route, scheme and width:
+- mainStatus 200
+- 0 console errors or warnings
+- 0 failed requests
+- 0 unresolved CSS vars
+- 0 off-palette colours and 0 colours from the other scheme
+- 0 non-Octicon icons
+- 0 unlayered Gitea CSS
+- no horizontal overflow
+
+The largest CLS is 0.004 (`pr-compare-form-playground` 1440). No state captures exist for these routes in final-gate-2.
 
 ## Scores
 
-| route | light | dark | 390 |
-|---|---|---|---|
-| site-admin | 8.5 | 8.5 | 8 |
-| repo-issues | 8.5 | 8.5 | 8 |
-| repo-commits | 7.5 | 7.5 | 7.5 |
-| blame-playground-multiple-authors | 8 | 8 | **5** |
-| wiki-page-list | 7.5 | 7.5 | 7.5 |
-| pr-conversation-open | 8.5 | 8.5 | 8 |
-| pr-draft-wip-playground | 8.5 | 8.5 | 8 |
-| user-profile-stars-tab | 8.5 | 8.5 | 8.5 |
-| org-settings | 8 | 7.5 | 8 |
-| org-settings-labels | 7 | 7 | 7 |
-| package-versions | 8 | 7.5 | 8 |
-| pr-compare-form-playground | 8 | 7.5 | 7.5 |
+| Route | Light 1440 | Dark 1440 | Mobile 390 | Reference |
+|---|---|---|---|---|
+| site-admin | 8.5 | 8.5 | 8 | none (Gitea-only) |
+| repo-issues | 8.5 | 8.5 | 7.5 | yes |
+| repo-commits | 8.5 | 8.5 | 8.5 | yes |
+| blame-playground-multiple-authors | 7.5 | 7.5 | 7 | none |
+| wiki-page-list | 9 | 9 | 8.5 | yes |
+| pr-conversation-open | 8.5 | 8.5 | 8 | yes |
+| pr-draft-wip-playground | 8 | 8 | 7.5 | none |
+| user-profile-stars-tab | 8.5 | 8.5 | 8 | yes |
+| org-settings | 8.5 | 8.5 | 8 | none |
+| org-settings-labels | 7.5 | 7.5 | 7.5 | none |
+| package-versions | 7.5 | 7.5 | 7.5 | none |
+| pr-compare-form-playground | 8 | 8 | 7.5 | none |
 
-## Issues (most severe first)
+In dark mode, the sampled pixels match github.com exactly on `pr-conversation-open`:
+- page background #0d1117
+- comment header #151b23
+- comment border #3d444d
 
-### BLOCKER (mobile) — blame at 390: the code is off-screen, and only the blame column shows
-- Where: `shots/final-gate/blame-playground-multiple-authors/{light,dark}-390.png`; crop
-  `shots/final-gate-critic-7/blame-playground-multiple-authors/light-390-0.png`.
-- Measured live at 390 px: `.file-view.code-view` is 358 px wide with `overflow-x:auto`, and its table is 1038 px
-  wide. `td.lines-num` starts at x=360 and `td.lines-code` at x=432, so both begin outside the 390 px viewport. The
-  first screen, and the whole page height, shows only commit summaries and empty hunk space.
-- Expected: GitHub's blame on a narrow screen keeps the code visible. It collapses or narrows the blame gutter
-  (avatar + short message, about 100–150 px). Here the blame column should shrink (or wrap under) below 768 px so
-  that line numbers and code sit in the viewport.
-- Owner: **code** (`.blame*`, `.code-view`, `.lines-commit`).
+The dark scores therefore equal the light scores throughout.
 
-### MAJOR (dark) — diff line backgrounds are painted twice (on the `tr` and on the `td`)
-- Where: `shots/final-gate/pr-compare-form-playground/dark-1440.png` (and dark-390); crop
-  `shots/final-gate-critic-7/pr-compare-form-playground/zoom-dark-diff.png`.
-- Measured live: `TR.add-code` has `rgba(46,160,67,0.15)` and `TD.chroma.lines-code` also has
-  `rgba(46,160,67,0.15)`. The composited pixel is rgb(22,56,34), which is an effective alpha of about 0.28.
-  - The number cell is rgb(31,82,44), where it should be about rgb(28,67,40).
-  - The hunk row is rgb(21,40,67), where it should be about rgb(17,29,46).
-- Expected: GitHub's single layer, `#2ea04326` over `#0d1117`, which gives rgb(18,38,30).
-- Light mode is unaffected because the light tokens are opaque (#dafbe1 / #aceebb, both correct). The same rule
-  almost certainly affects every dark diff (files-changed routes), not only this one.
-- Owner: **code** (`src/code/diff.css` around l.279: set the background on either the row or the cells, not both).
+## Cross-route issues
 
-### MAJOR — commits list: SHA in sans-serif, title too light, inline code has a chip background
-- Where: `shots/final-gate/repo-commits/light-1440.png`. Crops `shots/final-gate-critic-7/repo-commits/zoom-row-ours.png`
-  and `zoom-row-ref.png`.
-- `#commits-table td.sha a` is computed as `-apple-system…` at 12px/500. GitHub renders the SHA ("99cc347") in
-  `ui-monospace`. The 10-character SHA versus GitHub's 7 characters comes from Gitea, but the font can be fixed.
-- `.commit-summary` is font-weight 500. The reference title is visibly heavier (semibold 600).
-- `Command::cargo_bin` in the title is drawn as a grey code chip. GitHub commit titles show inline code as plain mono
-  text with no background (see the ref crop).
-- The browse button uses `octicon-file-code`; GitHub uses `code` (`<>`). That icon change needs a template, so it is
-  noted only.
-- Owner: **pages/repo** (`#commits-table`).
+1. **minor · navigation**: the mobile UnderlineNav drops its leading icons.
+   - `src/navigation/underline-nav.css` L111-123 hides `.overflow-menu-items > .item > .svg`:
+     - below 1200px on the repo bar
+     - below 768px on the profile and org bars
+   - At 390 ours shows "Code / Issues 8 / Pull Requests 12 / …" with no icons (`shots/final-gate-critic-7/repo-issues_m_0.png`).
+   - github.com at 390 keeps the icons and shows fewer tabs: "<> Code  ⊙ Issues 8  …" (`docs/reference/repo-issues/light-390.png`). The profile does the same: "Overview / Repositories 15 / Projects" with icons (`docs/reference/user-profile-stars-tab/light-390.png`).
+   - The CSS comment says Primer hides icons first, but the reference contradicts that.
+   - Also, when the active tab sits in the overflow (Wiki, Settings, Packages, Starred), the "…" button gets the orange active underline (`wiki-page-list_m_0.png`, `org-settings_m_0.png`). GitHub never underlines the overflow button.
+   - Seen on: repo-issues, repo-commits, blame, wiki-page-list, both PR routes, pr-compare, user-profile-stars-tab, org-settings, org-settings-labels, package-versions.
+2. **nit · navigation (`.page-footer`)**: our footer is Gitea's.
+   - It has no border-top. It shows the Gitea logo, "Powered by Gitea", "GitHub" (the theme name), "English", "Licenses", "API" and "Version".
+   - github.com uses a footer with a top border and a copyright line.
+   - At 390 it wraps to two rows.
+   - Probably an accepted Gitea-only difference. Listed so it is a conscious decision.
+3. **minor · navigation (NavList, `.ui.vertical.menu`)**: settings sidebars have no leading Octicons.
+   - github.com settings NavLists (org, user and repo settings) put a 16px icon in front of every item.
+   - Ours shows text only: Organization, Webhooks, Labels, … (`org-settings_light1440_0.png`, `site-admin_light1440_0.png`).
+   - Gitea's markup has no icons, so this needs an href-keyed `mask-image` or a template change.
 
-### MINOR — org header / org underline nav has no bottom border (the dark nav floats)
-- Where: `shots/final-gate/org-settings/dark-1440.png`, `package-versions/dark-1440.png`, `org-settings-labels/*`.
-  Crop `shots/final-gate-critic-7/org-settings/zoom-dark-orgnav.png`.
-- Measured: the org header `.ui.container` (bg #f6f8fa light / #0d1117 dark) with
-  `overflow-menu.ui.secondary.pointing.tabular.borderless.menu` has border-bottom 0 in both schemes. Pixel rows
-  158–175 at x=700 show no divider. The repo header has a 1px `#d1d9e0` / `#3d444d` rule at y=173. In dark, the org
-  tabs therefore have no separator from the page at all.
-- Expected: GitHub's UnderlineNav has a full-width 1px `borderColor-muted` bottom border.
-- Owner: **navigation** (`.overflow-menu*`, org header).
+## Per-route findings
 
-### MINOR — wiki page list rows too dense and link too heavy; extra Subhead rule
-- Where: `shots/final-gate/wiki-page-list/light-1440.png` compared with `docs/reference/wiki-page-list/light-1440.png`;
-  crop `shots/final-gate-critic-7/wiki-page-list/zoom-row.png`.
-- Measured: the row is 36px with 8px 16px padding (GitHub: 54px, 16px padding). The "Home" link is 600 (GitHub: 400).
-  The "Pages" header has `border-bottom:1px` plus `padding-bottom:16px` (GitHub has no rule).
-- At 390, "Last updated" is right-aligned on its own line. GitHub left-aligns it under the title
-  (`ref-dark-390-0.png`).
-- Owner: **pages/repo** (`.wiki-*`).
+### site-admin (Gitea-only admin dashboard)
+Reads as a native Primer settings page:
+- Subhead "Maintenance Operations" at 24px with a bottom border
+- Box rows with "Run" buttons
+- NavList with the 4px accent bar
+- a key/value Box that stacks correctly at 390 (`site-admin_m_2.png`)
 
-### MINOR — compare page: branch refs rendered as green-outlined labels
-- Where: `shots/final-gate/pr-compare-form-playground/{light,dark}-1440.png`, the "1 Commits" header; crop
-  `shots/final-gate-critic-7/pr-compare-form-playground/zoom-refs-light.png`.
-- Measured: `a.ui.green.sha.label` has a `1px solid rgb(26,127,55)` border, a transparent background and fg default.
-- Expected: GitHub's `commit-ref` style: `bgColor-accent-muted` (#ddf4ff / rgba(56,139,253,.1)) with accent fg,
-  mono, radius 6px and no border.
-- Owner: **data-display** (`.ui.label*` colour variants), or pages/issues-prs if scoped to compare.
+Only the cross-route nav-icon gap applies (item 3). No other defects found.
 
-### MINOR — org settings labels: empty state is not a Blankslate; mixed button sizes
-- Where: `shots/final-gate/org-settings-labels/{light,dark}-1440.png`.
-- The empty state is centred plain text, then a 3-line italic select, then a button, all between two hr rules. GitHub
-  shows a Blankslate (icon, heading, description, primary action).
-- "New Label" is 28px (y 190–217) but "Use Label Set" is 32px (y 441–472) on the same page. GitHub's labels page uses
-  a 32px default-size "New label".
-- The "0 labels" heading is 24px with a border, which reads as a second Subhead under the intro row.
-- Owner: **pages/issues-prs** (labels page chrome); the Blankslate treatment belongs to **data-display**
-  (`.empty-placeholder`).
+### repo-issues
+Very close to github.com (`repo-issues_light1440_0.png` vs `docs/reference/repo-issues/light-1440.png`): row height 65, label pills, comment counts, left NavList.
+- **minor · pages/issues-prs**: the state toggle is the classic "⊙ 8 Open  ✓ 51 Closed" with icons and bold text. Current github.com uses "Open [8]  Closed [51]" with CounterLabels and no icons.
+- **minor · pages/issues-prs**: at 390, the left NavList becomes a horizontally scrolling strip clipped at the viewport edge ("Created by y…" cut at x=390, `repo-issues_m_0.png`). github.com hides the sidebar behind a collapse button next to "All issues" (`docs/reference/repo-issues/light-390.png`).
+- **minor · pages/issues-prs**: at 390 all 7 filters wrap to two rows inside the Box header (Label, Milestone, Project, Author, Assignee, Type, Sort). github.com shows 3 and collapses the rest into a "…" overflow.
+- **nit · pages/issues-prs**: the author in the row meta ("opened 3 years ago by hellishvictor") is plain muted text. GitHub underlines it as a muted link. Word order is Gitea's locale.
 
-### MINOR — site-admin mobile: every "Run" button wraps onto its own line
-- Where: `shots/final-gate/site-admin/light-390.png` (crop `site-admin/light-390-0.png`, `dark-390-1.png`).
-- Each maintenance row is about 80px tall at 390 because the button drops below the text. GitHub settings rows keep
-  the action right-aligned (the text wraps, the button stays on the first line). The page is 7232px tall at 2x.
-- Owner: **pages/settings-admin**.
+### repo-commits
+Commit timeline, Box rows and day groups match the reference (`repo-commits_light1440_0.png` vs `ref_repo-commits_light_0.png`). The timeline stubs at 390 match github.com's mobile layout (`ref_repo-commits_m0.png`).
+- **minor · icons**: the "browse files" button uses `octicon-file-code` (a page with `<>`). github.com uses `octicon-code` (`<>` alone). Zooms: `commits_icons_zoom.png` vs `commits_icons_zoom_ref.png`. Every commit row is affected, and pr-compare shares it.
+- **nit · pages/repo**: the SHA ("99cc347") is set in the monospace stack. github.com renders it in the UI sans at 12px (same zooms).
+- **nit · pages/repo**: the day label reads "Jan 14, 2026" instead of "Commits on Jan 14, 2026". This is accepted in ARCHITECTURE §7, since there is no locale key.
 
-### NIT — PR timeline details
-- `pr-draft-wip-playground/light-1440.png`, crop `zoom-timeline.png`: in "added the enhancement area/theme labels" the
-  label pills sit about 4px above the text baseline.
-  - Label centre y≈172 in the 2x crop, text y≈177.
-  - Owner: **pages/issues-prs** (timeline event label alignment).
-- The commit SHA in the timeline ("7728b5f95d") is drawn as a bordered chip. GitHub shows a plain mono, underlined
-  link ("22955d1" in `docs/reference/pr-conversation-open/light-1440.png`). Owner: **pages/issues-prs**.
-- "Remove  WIP:  prefix" has visibly doubled spaces around the `<strong>`. Owner: **pages/issues-prs**.
+### blame-playground-multiple-authors (no reference)
+File tree, breadcrumb, Code|Blame SegmentedControl and hunk rows are all Primer.
+- **major · code**: there is no blame age heat strip and no "Older ▮▮▮▮▮ Newer" legend (`blame-playground-multiple-authors_light1440_0.png`).
+  - On github.com, every hunk has a 2px coloured age stripe between the blame column and the line numbers, and the file header shows the legend. It is the strongest visual signature of a GitHub blame view.
+  - Gitea emits no age data per hunk, so this is not reachable with CSS. It needs a template/data decision or an explicit exemption.
+- **minor · pages/repo**: at 390 the file toolbar wraps into three rows. "Go to file" and "Add File" take row two, and the "…" kebab sits alone on row three (y≈295 css px, `blame-playground-multiple-authors_m_0.png`). github.com hides "Go to file" on narrow screens and keeps the kebab inline.
+- **nit · code**: at 390 the file box is edge-to-edge (x=0..390) while everything above it keeps the 16px gutter.
 
-### NIT — blame hunk row heights are irregular
-- Measured row heights at 1440 are 25, 20…20, 26, **31**, 26, 20. A single-line hunk (line 15) is 31px, so the code
-  rhythm jumps between lines 14, 15 and 16 (`blame-playground-multiple-authors/light-1440-0.png`, y 574→605→636).
-- GitHub keeps a 20px line pitch.
-- Owner: **code**.
+### wiki-page-list
+Near-identical to github.com (`shots/final-gate-2/wiki-page-list/light-1440.png` vs the reference): the "Pages" title, green "New page" button and single Box row all match.
+- **nit · pages/repo**: the extra "Default Branch: master" line (Gitea data). The "New Page" casing comes from the locale.
+- Mobile only has the cross-route nav-icon issue.
 
-### NIT — other
-- Profile topic tags are 24px tall with 12px padding. GitHub's `topic-tag` is about 22px with 10px padding
-  (`user-profile-stars-tab/light-1440.png`). Owner: **pages/people**.
-- The org settings Description textarea spans the full 936px column while every other input is 440px
-  (`org-settings/light-1440.png`). Owner: **pages/settings-admin**.
-- The org settings sidebar has no leading Octicons and no org avatar/name context block, unlike GitHub.
-  Owner: **navigation** (`.ui.vertical.menu`).
-- Global header: logged-in GitHub has a search field, context breadcrumb and icon buttons. Ours shows text links
-  (Issues / Pull Requests / Milestones / Explore) and a 1px rule at y=63 between the global bar and the repo header.
-  GitHub's AppHeader is one block. Cross-route, owner **navigation**.
-- On mobile, the compare page's "1 changed files with 9 additions…" stats line is hidden, leaving only the icon row
-  (`pr-compare-form-playground/dark-390-1.png`). Owner: **code** (`.diff-detail-box`).
+### pr-conversation-open
+- Header, StateLabel, branch pills, tabs with counters, diffstat, comment Box, sidebar with gear icons and comment composer all match the reference geometry.
+- Dark pixels match exactly.
+- The missing "pushed commit" timeline row is migration data, not theme.
+- **nit · pages/issues-prs**: at 390 the "Edit" button sits on its own row above the title (`pr-conversation-open_m_0.png`, y≈150 css px). github.com's mobile reference starts with the title (`ref_prconv_m0.png`).
+- **nit · pages/issues-prs**: at 390 the comment header wraps as "…commented 4 / months ago (Migrated…)". GitHub puts the timestamp on its own line.
 
-## What is good
-- Light and dark palettes are exact on every route: page #fff / #0d1117, header #f6f8fa / #010409, borders #d1d9e0 /
-  #3d444d.
-- Buttons, counters, the underline nav (active #fd8c73 bar), Box rows, the issue list, the PR header, the merge box,
-  the comment composer and the settings NavList all read as Primer.
-- The PR conversation page is within nits of the reference in both schemes.
+### pr-draft-wip-playground (no reference)
+The Draft StateLabel, checks list and merge box read as GitHub.
+- **minor · pages/issues-prs**: the timeline commit SHA "7728b5f95d" is drawn as a bordered, button-like box (`draft_sha_zoom.png`). github.com shows a plain muted monospace link with no border (see `pr-conversation-open` reference, "22955d1").
+- **nit · pages/issues-prs**: "Remove  WIP:  prefix" has visibly doubled gaps around the `<strong>` (`pr-draft-wip-playground_light1440_1.png`, y≈125).
+- **nit · pages/issues-prs**: at 390 the merge-box status rows put two icons (lock and check) against three wrapped text lines. The check floats between the lines instead of aligning with its line (`pr-draft-wip-playground_m_1.png`).
+- Behaviour note (not theme): with a failing required check and WIP, Gitea still shows a green primary "Create merge commit" for admin. GitHub would show "Ready for review" and a disabled merge button.
+
+### user-profile-stars-tab
+Profile vcard, UnderlineNav, repo rows (owner / **repo** in blue, description, topics, language dot, stats) and the 390 ordering (vcard, then tabs, then list) match github.com.
+- **nit · pages/people**: there is no "Starred" or "Star" button on each row. github.com always has one, but Gitea's markup has none.
+- Mobile has the nav-icon and overflow-underline issues (`user-profile-stars-tab_m_0.png`).
+
+### org-settings (no reference)
+Org header, NavList, form fields, help text, primary button and the Danger Zone Box with red border and danger buttons are native Primer. They stack correctly at 390 (`org-settings_m_1.png`).
+- **minor · pages/settings-admin**: the avatar upload is a native `<input type=file>` ("Choose File / No file chosen") plus two buttons below the form. GitHub's org profile page puts "Profile picture" in a right column with a large avatar and an "Edit" menu.
+- Also affected by the cross-route nav-icon issue (item 3).
+
+### org-settings-labels (no reference)
+This page is still visibly Gitea (`shots/final-gate-2/org-settings-labels/light-1440.png`).
+- **major · pages/issues-prs (labels list; blankslate via data-display)**: the empty state is not a Primer Blankslate.
+  - It is centred muted text over a 440px-wide `<select>` whose option spans 3 lines in *italics* ("Default (bug, duplicate, …)"), with a "Use Label Set" button under it.
+  - There is no Box border, no 24px Octicon and no heading.
+  - A GitHub page would show a bordered Box with a `tag` icon, the heading "No labels", and the action. It would use a single-line Select with no italics.
+- **minor · pages/issues-prs**: "0 labels" is a 24px Subhead with a separate "Sort" link. github.com's labels page puts "N labels" and "Sort" in a muted Box header.
+
+### package-versions (no reference)
+- **minor · pages/actions-packages-projects**: there is no page title. The only heading is a 14px breadcrumb "@octo-org/theme-tokens / Versions" (y=201). GitHub's versions page has a 24px Subhead "Versions", Active/Deleted tabs and a Box of rows.
+- **minor · pages/actions-packages-projects**: the version name "1.0.0" is bold `fgColor-default`, not a link. GitHub renders it as a bold accent link, #0969da in light.
+- The rest is fine: search input with Select and button, Box row, muted meta.
+
+### pr-compare-form-playground (no reference)
+The composer, sidebar, commit timeline and diff (hunk header #ddf4ff, add rows #dafbe1 and #aceebb) are all GitHub.
+- **minor · pages/issues-prs**: the page is fluid. Content runs x=32..1408 (1376px) at 1440. The other repo pages use 80..1360 (1280, repo-commits) or 112..1328 (1216, PR and wiki). github.com's compare page uses container-xl, 1280px centred.
+- **minor · code**: at 390 the "± 1 changed files with 9 additions and 0 deletions" summary disappears. Only the gear, split and kebab icons stay, right-aligned (`pr-compare-form-playground_m_1.png`, y≈585 css px).
+- The commit rows share the `file-code` icon issue from repo-commits.
+
+## Summary
+No route in this group has a technical defect: logs, palette, icons and overflow are all clean. The strongest routes are 8.5-9 (wiki page list, issues, commits, PR conversation, stars, org settings, site admin).
+
+Three routes pull the group down:
+- **blame**: the missing age heat strip and legend, a GitHub signature that is not CSS-reachable
+- **org-settings-labels**: a non-Primer empty state
+- **package-versions**: no title, and the version is not a link
+
+The most visible systemic issue is on mobile: the UnderlineNav drops its icons and underlines "…", contradicting the github.com 390 references. Settings NavLists also lack leading icons.

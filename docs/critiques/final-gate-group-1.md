@@ -1,162 +1,143 @@
-# Final gate, group 1 (critic 1)
+# Final gate — group 1 (whole-site critic, theme github-auto)
 
-Theme `github-auto`, Gitea 1.27.3. Inputs: `shots/final-gate/<route>/` (4 captures and JSON logs per route), `docs/reference/<route>/` where present, plus my own live run with `--states --measure` in `shots/final-gate-critic-1/live/` (theme left at github-auto). Crops and composites I looked at are in `shots/final-gate-critic-1/`. The logged-out marketing header on github.com is an expected difference. Our signed-in header is compared with github.com's signed-in AppHeader.
+Sources: `shots/final-gate-2/<route>/{light,dark}-{1440,390}.png` + `.json`. References: `docs/reference/<route>/`.
+Extra live capture with states and measurements: `shots/final-gate-critic-1/live/` (`--measure --states`, theme github-auto, admin theme not changed).
+Crops that back each finding: `shots/final-gate-critic-1/*.png`.
 
-Scale: 10 means indistinguishable, 8.5 means it matches with nits, 7 means recognisably GitHub-inspired, 5 means recoloured Gitea.
+Scale: 10 = can't tell it apart from github.com, 8.5 = matches with nits, 7 = recognisably GitHub-inspired, 5 = recoloured Gitea.
+The logged-out marketing header on the references is expected. Our logged-in header is judged against github.com's signed-in AppHeader.
 
-## Audit logs (all 13 routes × 4 captures)
+## Audit logs (all 52 captures)
 
-- There are no unresolved CSS vars, no off-palette colours, no other-scheme-only colours, no unlayered Gitea CSS and no horizontal overflow. CLS is at most 0.0004 on every capture.
-- Console errors fall into three groups, and none of them is a theme defect:
-  - `not-found`: a 404 on the main document, which is expected.
-  - `repo-home-readme-with-images-and-tables`: 5 shields.io badges fail with `ERR_BLOCKED_BY_CLIENT` because the shooter blocks third-party requests.
-  - `pr-conversation-closed-unmerged`: 1 dependabot badge, also blocked by the shooter.
-- Non-Octicon icons: `gitea-running` (1×) in the Actions status-filter menu (`actions-list`).
-- Masked Vue icons: 2–3 per repo page. These are known and listed.
+- **Clean on every route:** 0 unresolved vars, 0 off-palette colours, 0 non-Octicon icons, 0 unlayered Gitea CSS, no horizontal overflow at 390, max CLS 0.0029.
+- **Console errors: all expected or caused by the test environment.**
+  - not-found: the expected 404 document.
+  - repo-home-readme-with-images-and-tables: 5 × `img.shields.io` `ERR_BLOCKED_BY_CLIENT`. The shoot tool blocks third-party requests, so the badges show their alt text.
+  - pr-conversation-closed-unmerged: 1 × `dependabot-badges.githubapp.com`, same cause.
+- **Token spot checks (pixels):**
+  - header: `#f6f8fa` / `#010409`, with a 1px `#d1d9e0` / `#3d444d` bottom border
+  - canvas: `#ffffff` / `#0d1117`
+  - Box header: `#f6f8fa` / `#151b23`
+  - primary button: `#1f883d` / `#238636`
+  - danger flash: `#ffebe9` / `#25171c`
+  - All of these match Primer.
 
 ## Scores
 
-| Route | Light 1440 | Dark 1440 | Mobile 390 |
+| route | light | dark | 390 |
 |---|---|---|---|
-| explore-repos | 8 | 8 | 8 |
-| site-admin-config | 8.5 | 8.5 | 8.5 |
+| explore-repos | 8.5 | 8.5 | 8 |
+| site-admin-config | 9 | 9 | 8.5 |
 | not-found | 7 | 7 | 7 |
-| repo-home-markdown-showcase-playground | 9 | 9 | 8.5 |
-| branches | 7.5 | 7.5 | 7 |
-| repo-home-readme-with-images-and-tables | 9 | 9 | 8.5 |
-| pr-conversation-closed-unmerged | 8.5 | 8.5 | 7.5 |
-| actions-list | 7.5 | 7.5 | 8 |
-| org-members | 8 | 8 | 7.5 |
-| user-settings-account | 8.5 | 8.5 | 8.5 |
-| user-settings-orgs | 8.5 | 8.5 | 8 |
-| org-projects | 8 | 8 | 7.5 |
+| repo-home-markdown-showcase-playground | 9 | 9 | 8 |
+| branches | 8 | 8 | 8 |
+| repo-home-readme-with-images-and-tables | 9 | 9 | 8 |
+| pr-conversation-closed-unmerged | 8.5 | 8.5 | 8.5 |
+| actions-list | 8.5 | 8.5 | 8.5 |
+| org-members | 8.5 | 8.5 | 8.5 |
+| user-settings-account | 9 | 9 | 8.5 |
+| user-settings-orgs | 9 | 9 | 8.5 |
+| org-projects | 8.5 | 8.5 | 8.5 |
 | forgot-password | 8 | 8 | 8 |
 
-## Issues per route
+## Findings (most severe first)
 
-### explore-repos (ref: github.com/explore; the page type differs, so the comparison is with GitHub search results and trending cards)
-- **minor, pages/people.** When you hover a meta link, its underline runs on under the "·" separator (`live/explore-repos/states/light-1440-meta-hover-clip.png`, zoom `er-meta.png`).
-  - Cause: `src/pages/people/repo-list.css:127` puts the separator in `a::after`, so it is part of the link's text decoration.
-  - github.com never underlines the separators.
-  - Fix: make the pseudo-element `display:inline-block` (inline-block pseudos don't inherit the underline), or move the dot outside the link.
-- **nit, navigation.** The header link "Explore" gets a grey active pill (`er-l-a.png`). github.com's signed-in header has no text nav links and no active pill.
-- **nit, pages/people.** Repo cards have no trailing Star button, unlike GitHub's repo cards. This is a template limit.
+### M1 (major, `code`): the README box header wraps to two rows on mobile
+- **Where:** repo home at 390, both schemes, on every repo.
+- **What happens:** "README.md" takes a full row and the pencil edit button drops to a second row at the left. That makes a 2-row, about 66px header, where github.com's is a single row about 46px tall.
+- **Cause:** `src/code/file-view.css` about line 284, inside the mobile media query: `.file-header .file-header-left { flex: 1 0 100%; }`. It was written for the blob-view header (info row above actions). It also matches the README header on repo home (`h4.file-header.flex-left-right` with only a pencil on the right).
+- **Fix:** scope the rule to the file view (`.non-diff-file-content .file-header`, or `:not(#readme …)`).
+- **Evidence:** `shots/final-gate-critic-1/rdm-01.png` (y≈520–560) and `mdm-01.png` (y≈500–545).
 
-### site-admin-config (Gitea-only; judged as a native Primer settings page)
-- **minor, pages/settings-admin.** The admin NavList items have no leading 16px Octicons (`sac-light-a.png`). Every github.com settings NavList item has one (person, gear, paintbrush…). The same applies to the user settings sidebar.
-- **nit, pages/settings-admin.** Config `<dl>` rows are 26px tall with no Box-row separators; only Gitea's group dividers show. GitHub key/value boxes use full Box rows. Reads fine otherwise, in both schemes and on mobile.
+### M2 (major, `pages/repo`, template): the branches page lacks GitHub's structure
+- **Missing compared with github.com:**
+  - the "Branches" 24px page title
+  - the Overview / Active / Stale / All UnderlineNav
+  - the table header row (Branch · Updated · Check status · Behind|Ahead · Pull request) on a `#f6f8fa` / `#151b23` background
+- **Action icons:** each row shows 5 inline icon buttons (branch, rss, download, pencil, trash). github.com shows trash plus a kebab menu.
+- **What does match:** rows at 48px + 1px (GitHub 49), the BranchName pill (`#ddf4ff` / `#0969da`, mono 12px), and the ahead/behind bars.
+- **Evidence:** `br-light.png` vs `br-ref-light.png`; `br-dark.png` vs `br-ref-dark.png`.
+- **Fix:** the thead and title need a template or integrator change. The extra icons could fold into a kebab on the page.
 
-### not-found (ref: github.com's illustrated 404)
-- **minor, pages/people (or foundation, the 404 page scope).**
-  - github.com's 404 is a bespoke illustrated hero ("This is not the web page you are looking for") with a search box underneath.
-  - Ours is a Primer Blankslate (alert icon, 32px "404 Not Found").
-  - It is clean and native-looking, but a GitHub user would not mistake it for GitHub's 404. The score reflects that.
-- **minor, navigation.** The signed-in header at 390 shows only the hamburger, logo and bell (`not-found-mob.png`). github.com's mobile AppHeader keeps the user avatar (and the create/search affordances) on the right.
-- **minor, navigation (cross-cutting, seen on every signed-in route).** The desktop header has text links (Issues / Pull Requests / Milestones / Explore). github.com's signed-in header has a context breadcrumb, a "Type / to search" input and icon buttons (issues, PRs, notifications). The metrics match: 64px tall, #f6f8fa / #010409 background, 32px bordered icon buttons, round 32px avatar. The information architecture does not.
+### m1 (minor, `pages/repo`): section order on mobile repo home
+- At 390 the whole sidebar sits between the file list and the README: Description, topics, Readme/MIT/size, the gitea-only "Search code" box, Releases, Languages.
+- github.com mobile shows description, link and counts under the repo title, then files, then README, then Releases/Languages at the end.
+- On our page the README starts around 1.5 screens further down than on github.com.
+- **Evidence:** `rdm-01.png` vs the reference column in the same crop; `mdm-01.png`.
 
-### repo-home-markdown-showcase-playground (Gitea-only data; markdown judged against github-markdown-css)
-- The markdown is at parity in both schemes: headings, lists, task lists, tables, alerts, prettylights code including the diff fences (`pg-diff*.png`), footnotes, math, details and definition lists.
-- **minor, tools/shoot (integrator).**
-  - The "Media" section renders empty in the captures: "Local PNG image:" and "Local SVG…" have no picture (`pg-l-4.png`). The same happens on prom_ex, where stagira.png, dashboards_preview.png and apache_bench_stress_test.png are missing.
-  - I checked with `shots/final-gate-critic-1/imgcheck.mjs`. The images serve with HTTP 200 and load once scrolled: `naturalWidth` goes from 0 to 96/320. They are `loading="lazy"` and the full-page capture never scrolls, so this is a capture artifact, not a theme defect.
-  - Fix: the shooter should scroll through the page before capturing, otherwise every README review underreports.
-- **nit, markdown.** At 390 the mermaid iframe stays 172px tall while its SVG is 72px, which leaves 100px of blank space under the diagram (`pg-mob-l3.png`, measured by `mermcheck.mjs`). This may be upstream Gitea iframe sizing.
+### m2 (minor, `data-display`): emoji-led descriptions wrap onto their own line in list rows
+- `.items-with-main > .item .item-body` is `display:flex; flex-wrap:wrap` (Gitea `shared/flex-list.css`; the theme only changes gap and colour).
+- A description such as `<span class="emoji">📁</span> Generate…` becomes two flex items. At 390 the text wraps under the lone emoji: octo-org/folderify on explore-repos, both schemes.
+- github.com renders the emoji inline.
+- **Fix:** make `.item-body` display:block (or add a `:has(> .emoji)` exception) when it holds a plain text description.
+- **Evidence:** `shots/final-gate-critic-1/explore-m-00.png` (third card).
 
-### branches (ref: github.com/pemistahl/grex/branches)
-- Measured parity:
-  - repo header #f6f8fa / #0d1117
-  - UnderlineNav items 30px / 14px / 600
-  - counters 20px
-  - branch-name pill 12px mono on #ddf4ff
-  - search 32px
-- **major, pages/repo.** The branch table has no column-header row. github.com has Branch / Updated / Check status / Behind|Ahead / Pull request on a #f6f8fa / #151b23 header (`br-l.png` vs `br-ref-l.png`). Gitea's template has no header row, so fixing it needs a template or `::before` construction.
-- **minor, pages/repo.** github.com has a "Branches" 24px h1 with an Overview/Active/Stale/All UnderlineNav. Ours puts Gitea's "445 Commits · 14 Branches · 16 Tags" summary bar and a 14px "Default Branch" heading in that place. This is a template limit.
-- **minor, pages/repo.** Each row has 5 invisible icon buttons (create branch, RSS, download, rename, delete). github.com has delete plus a kebab. The rows read busier than GitHub's.
-- **nit, navigation.** Repo header action order is RSS, Watch, Star, Fork. github.com's order is Watch/Notifications, Fork, Star.
-- **minor, pages/repo (mobile).** At 390 each branch becomes a stacked card (`br-mob-l.png`). github.com keeps a horizontally scrolling table. The cards are tidy but not GitHub.
+### m3 (minor, `data-display` / integrator): the 404 page is a generic blankslate
+- **Ours:** a 24px alert Octicon, "404 Not Found" at 24px bold, and a muted sentence, centred in a mostly empty page.
+- **github.com:** a full-width illustrated hero plus a "Find code, projects, and people" search box.
+- The illustration is not licensable, but a Primer-native version would add the search field and use the Blankslate spacious variant.
+- **Evidence:** `nf-00.png`, `nfd-00.png`, `nfm-00.png`.
 
-### repo-home-readme-with-images-and-tables (ref: github.com/akoutmos/prom_ex)
-- This is near-identical to github.com: the file table, latest-commit bar, sidebar, topics, Releases/Latest label, language bar, README rendering and both tables. Dark folder icons are grey #9198a1, as on github.com (`rp-d-z.png` vs `rp-ref-d-z.png`).
-- **minor, tools/shoot.** Lazy images are missing from the capture (see the playground entry), so the page looks emptier than it is.
-- **nit, pages/repo.** The sidebar heading says "Description" where github.com says "About". It also has an extra "Search code…" input and a "Manage Topics" link (Gitea features).
-- **nit, pages/repo (mobile).** At 390 we show the full 17-entry file list and a Watch/Star/Fork counter row. github.com truncates to ~10 rows with "View all files" and hides the counters.
+### m4 (minor, `pages/actions-packages-projects`, template): Actions list is missing the page chrome
+- **Missing compared with github.com:**
+  - the sidebar "Actions" heading
+  - the "All workflows / Showing runs from all workflows" title and subtitle
+  - the "Filter workflow runs" input
+- **What does match:** the run rows (79px vs 80px), the row kebab menu, the status SelectPanel and the pagination.
+- **Evidence:** `act-light-0.png` vs `act-ref-light.png`; `act-dark.png`; states in `live/actions-list/states/`.
 
-### pr-conversation-closed-unmerged (ref: github.com/pemistahl/grex/pull/348)
-- Matches github.com: title and #348, the Closed StateLabel, tabs with counters, diffstat blocks, comment Box headers, sidebar sections and label rendering. The dark `github_actions` label matches github.com's outline treatment exactly (`pr-d-lab.png` vs `pr-ref-d-lab.png`).
-- **minor, pages/issues-prs (mobile).**
-  - At 390 the deleted head-branch pill `dependabot/github_actions/actions/upload-artifact-6` wraps mid-token across 3 lines (`pr-mob-l.png`).
-  - github.com truncates it to one line ("dependabot/gith…") with a copy button.
-  - Fix: `white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:…` on the head-branch pill.
-- **nit, pages/issues-prs (mobile).** The PR tab bar clips "Files Changed" to "Fil" at the right edge, with no visible scroll affordance.
-- **note (data, not theme).** The timeline has no commit, label, closed or branch-deleted events because the migration didn't import them. Instead there is Gitea's "Pull request closed" box.
+### m5 (minor, `navigation` / `pages/auth`): stray hamburger on logged-out pages
+- Logged-out auth pages (forgot-password, and login too) keep a lone hamburger icon at top-left (x≈16, y≈16) at both widths.
+- github.com auth pages have no header chrome at all.
+- **Evidence:** `forgot-password-d-00.png`, `forgot-password-m-00.png`, `login-cmp-00.png`.
 
-### actions-list (ref: github.com/pemistahl/grex/actions)
-- Measured parity:
-  - box header 66px on #f6f8fa, 16px padding
-  - rows about 80px
-  - UnderlineNav active item 90.9px
-  - status icons, branch pills and the "…" kebab
-- **major, pages/actions-packages-projects.**
-  - github.com uses a full-bleed PageLayout:
-    - the sidebar is pinned to the left edge with a right border and an "Actions" title
-    - the main pane has an "All workflows" title, a "Showing runs from all workflows" subtitle and a 300px "Filter workflow runs" input
-    - the runs Box is 1056px wide
-  - Ours is the centred 1280px container with a borderless NavList and a 962px Box, with no page title or filter input (`al-l-a.png` vs `al-ref.png`).
-- **minor, pages/actions-packages-projects.** Hovering the row kebab turns the "…" icon accent blue with no background (`live/actions-list/states/light-1440-row-kebab-hover-clip.png`). github.com's invisible IconButton keeps the muted icon and adds a neutral-muted background.
-- **minor, icons (integrator).** `svg.gitea-running` is a non-Octicon in the status-filter menu, flagged by the audit. It should be masked with an Octicon (`dot-fill` / `sync` spinner) like the other Vue icons.
-- **nit, navigation.** Pagination has First/Last items, which github.com doesn't have. The current page chip (#0969da) matches.
+### m6 (minor, `pages/auth`): forgot-password message is unstyled
+- With mail disabled, the message is plain centred text with no container.
+- github.com's "Reset your password" puts its content in a bordered `#f6f8fa` Box, 340px wide.
+- The validation-error state cannot trigger here because there is no form (`live/forgot-password/states/light-1440-validation-error-clip.png`).
 
-### org-members (ref: github.com/orgs/go-gitea/people)
-- Matches: org header (32px avatar, 20px name, UnderlineNav with coral indicator), 48px round avatars, 16px name links, outline "Hidden" labels, 28px small buttons, and correct dark danger buttons.
-- **minor, pages/people.** github.com's People page has a left column with a "People" h2 and an "Organization permissions / Members" menu. Ours is single-column, with Gitea's info text and a green "Manage teams and members" button. This is a template limit.
-- **minor, pages/people (mobile).** At 390 the rows are cramped (`om-mob.png`):
-  - "alice-dev (Alice Anders)" wraps to 2 lines
-  - the Hidden label drops to its own line
-  - "Member Role:" and the role split across lines
-  - the two buttons stack vertically
+### n1 (nit, `overlays`): flash icon wraps under the text on mobile
+- In the danger flash at 390, the second text line wraps under the icon instead of aligning to the text column.
+- github.com's Flash uses a grid/flex layout with a separate icon column.
+- **Evidence:** `usam-01.png` ("Delete Your Account" flash).
 
-  The rows grow to about 170px. github.com's rows stay 1–2 lines with a single trailing button.
-- **nit, pages/people.** The "2FA: ×" line has no GitHub equivalent. It is Gitea data, but a muted Label would read as more native than a bare × glyph.
+### n2 (nit, `markdown`): Mermaid output
+- **Light:** nodes use Gitea's neutral grey theme, where github.com uses its default lavender nodes.
+- **Dark:** edge labels sit on grey chips.
+- **Mobile:** the iframe keeps extra empty height under the scaled-down diagram, about 60 CSS px.
+- These are iframe-rendered and need an integrator/JS change.
+- **Evidence:** `md-06.png`, `mdm-08.png`.
 
-### user-settings-account (Gitea-only)
-- **minor, overlays.** In the "Delete Your Account" danger flash, the alert icon is fgColor-default with a 4px gap (`usa-flash-l.png`). Primer `.flash-error .octicon` is fgColor-danger with a 12px right margin.
-- **nit, pages/settings-admin.** The email address and its Primary/Activated labels sit as bare text. github.com lists emails in a Box with rows.
-- Otherwise native: 24px Subheads with border, a semibold red danger Subhead (as in Primer), 32px inputs and buttons, the btn-danger "Confirm Deletion" button, and correct focus rings. Dark is equally clean.
+### n3 (nit, `navigation`): header search and nav wording
+- The header search placeholder reads "Search repos…" / "Search code…", where github.com reads "Type / to search" with a `/` hint.
+- Nav labels use Gitea title-case, e.g. "Pull Requests", "Files Changed", "All Workflows". github.com uses sentence case ("Pull requests").
+- These are locale strings, fixable only with a custom locale.
 
-### user-settings-orgs (Gitea-only)
-- The settings header override (48px avatar, name, "Settings" subtitle, Profile button) and the NavList active indicator (4×24px bar at −8px, `uso-nav-l.png`) are Primer-exact.
-- **nit, pages/settings-admin.** "Leave" buttons measure 32px (medium). github.com's organisation rows use `btn-sm` (28px).
-- **nit, pages/settings-admin (mobile).** "New Organization" wraps onto its own right-aligned line under "Manage Organizations" (`user-settings-orgs-mob.png`), leaving an awkward gap above the Subhead border.
+### n4 (nit, `pages/people`): nameless row alignment in user-settings-orgs
+- In the "ai" row, which has no description, the name is top-aligned (text centre y≈191) while the 32px avatar is centred at y≈195.
+- **Evidence:** `uso-light.png`.
 
-### org-projects (Gitea-only; empty state)
-- **minor, pages/actions-packages-projects.** The search input on this page measures differently from the site's other search fields:
+### n5 (nit, `code` / template): README box header content
+- The README box header shows "README.md" plus a pencil.
+- github.com shows README | MIT license tabs and an outline (TOC) button.
+- **Evidence:** `rd-00.png`.
 
-  | | This page | explore / org-members / github.com |
-  |---|---|---|
-  | Height | 28px | 32px |
-  | Font size | 12px | 14px |
-  | Search button | trailing, attached | leading icon inside the input |
+## Per-route notes
 
-  Measured in `live/org-projects/light-1440.measure.json`; see `org-projects` light-1440 vs `explore-repos`. github.com's projects list search ("Search all projects") is a 32px input with a leading icon.
-- **nit, pages/actions-packages-projects.** "New Project" is 28px (small). github.com's "New project" is a 32px medium primary button, and this site's own "Manage teams and members" is 32px.
-- **nit, pages/actions-packages-projects (mobile).** At 390 "New Project" jumps to the left, above the Open/Closed counts (`org-projects-mob.png`), which reverses the desktop order.
-- The Blankslate (24px icon, 20px semibold title, muted body) and the org header are good in both schemes.
-
-### forgot-password (Gitea-only)
-- **minor, pages/auth.** The global anonymous navbar (Explore, Help, Sign In, Register) is shown. github.com's auth pages (login, password_reset) have no global header, only the centred mark above the title (`docs/reference/login/light-1440.png`).
-- **minor, tools/shoot and seed (integrator).** Mail is not configured, so the page only shows "Account recovery is disabled…" and the `validation-error` state captures the same text. The actual email form, input and button are never exercised by the gate.
-- The title is 20px/600, the same as github.com's login title (per `docs/reference/login/*.measure.json`), and it is consistent with our sign-in page.
-
-## Overall
-
-- Repo home, README/markdown and the PR conversation are effectively at parity with github.com in light and dark.
-- Settings and admin pages read as native Primer.
-- The remaining gaps are structural:
-  - the branches table has no column header row
-  - Actions is not a full-bleed PageLayout
-  - the signed-in header's information architecture differs
-  - mobile row density on members and branches
-  - one real CSS bug: the underlined "·" on the explore meta row
-- Two tooling gaps skew the review:
-  - lazy README images are never captured
-  - forgot-password never shows its form
+- **explore-repos:** github.com /explore is a marketing feed with no equivalent page, so this is judged as a native Primer page.
+  - Correct: the NavList with active bar and focus ring, bordered repo cards, topic pills, the Filter/Sort ActionMenus with single-select checks (`live/explore-repos/states/*sort-open*`), and the orange UnderlineNav on mobile.
+  - Only real defect: m2.
+- **site-admin-config:** reads like a Primer settings page.
+  - Correct: the NavList with group headings and nested active item, 24px Subheads, key/value Boxes, and full stacking at 390.
+- **repo-home-markdown-showcase-playground:** the GFM feature coverage matches github-markdown-css: headings, alerts, tables, task lists, kbd, footnotes, math, prettylights. The hr is 1px (`src/markdown/base.css` says this is deliberate).
+  - Defects: mobile M1 and m1.
+- **repo-home-readme-with-images-and-tables:** nearly identical to github.com at 1440. Page height is 10829 vs 10886, and the README column matches the reference to the pixel.
+  - The broken badges come from the test environment.
+  - Defects: mobile M1 and m1.
+- **pr-conversation-closed-unmerged:** title, Closed StateLabel (91px wide on both), tabs with counters, diffstat, comment headers, timeline rail, editor toolbar and sidebar all match.
+  - Differences: the extra "Pull request closed" box and missing timeline events come from Gitea's data and template, not the theme.
+  - Dark: label contrast handling matches github.com.
+- **org-members:** matches GitHub's People rows (48px avatars, 81px rows, 320px search). It lacks the "People" title and the Organization permissions box (template).
+- **user-settings-account / user-settings-orgs:** a strong Primer settings match.
+  - Correct: the avatar+name header with Profile button, NavList, Subheads, the 440px inputs, the red danger Subhead and the error flash.
+- **org-projects:** the Box header with Open/Closed counts and the Blankslate read as native Primer.

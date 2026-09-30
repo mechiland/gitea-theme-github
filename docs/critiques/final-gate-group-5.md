@@ -1,99 +1,89 @@
-# Final gate — group 5 (critic 5)
+# Final gate 2: group 5 (critic 5)
 
-Theme `github-auto`, Gitea 1.27.3. Sources: `shots/final-gate/<route>/*` (full run), live re-capture with `--states --measure` into
-`shots/final-gate-critic-5/live/`, crops in `shots/final-gate-critic-5/`, DOM probes via `shots/final-gate-critic-5/probe.mjs`.
-References: `docs/reference/{signup (blocked by github "Access restricted" page — unusable), repo-pull, directory-tree, labels, crit-app-projects-list, crit-app-action-job}`.
+Theme `github-auto`, Gitea 1.27.3. Sources: `shots/final-gate-2/<route>/*` (fresh full run), with crops in `shots/final-gate-critic-5/<route>/`. Live re-capture with `--states --measure`, used only for the interaction states, is in `shots/final-gate-critic-5/live/` (48 pages; 0 problems, 0 console errors, 0 failed requests).
+References used: `docs/reference/{repo-pull, directory-tree, labels, apx1-projects-list, crit-app-action-job}`. `docs/reference/signup/*` is GitHub's "Access is temporarily restricted" bot page, so it cannot be used. Signup was judged against github.com/login instead.
 
-Audit logs (all 48 page captures, both runs): 0 console errors, 0 failed requests, 0 unresolved vars, 0 off-palette colors, 0 unlayered Gitea CSS.
-Only non-Octicon: `fontawesome-openid` on signup (brand icon, allowed exception). Horizontal overflow on 2 routes at 390 (see blockers). CLS: action-job-ok 0.0599 @390 (Vue mount), 0.0012 @1440; all others 0.
+## Audit logs (48 captures in final-gate-2)
+- 0 console errors, 0 failed requests, 0 unresolved CSS vars (only `--loading-size` with fallback, 0 matched elements), 0 off-palette colors, 0 other-scheme-only colors, 0 unlayered Gitea CSS.
+- `document.horizontalOverflow=false` on every capture. This fixes both prior blockers: directory-tree @390 and pr-files-changed @390.
+- The only non-Octicon icon is `fontawesome-openid` on signup, which is an allowed brand exception.
+- CLS is 0 everywhere, except releases @390 at 0.0007 (`a.muted.tw-font-mono`). action-job-ok was 0.0599 in the last gate and is now 0.
 
-## Scores (1440 light / 1440 dark / 390)
+## Scores (1440 light / 1440 dark / 390 both schemes)
 
 | route | light | dark | 390 |
 |---|---|---|---|
-| signup | 8.0 | 8.0 | 8.0 |
-| notifications | 7.5 | 7.5 | 7.0 |
-| repo-pull | 8.5 | 8.5 | 7.5 |
-| directory-tree | 8.0 | 8.0 | 5.5 |
-| releases-playground-with-assets-prerelease-draft | 8.0 | 8.0 | 7.0 |
-| labels | 8.5 | 8.5 | 8.0 |
-| pr-files-changed-unified-playground-large-diff | 8.5 | 8.5 | 5.0 |
-| projects-list | 7.5 | 7.5 | 7.0 |
-| repo-settings-branches | 8.0 | 8.0 | 7.5 |
-| admin-emails | 7.5 | 7.5 | 7.0 |
-| action-job-ok | 8.5 | 8.5 | 7.5 |
-| pr-compare-new-playground | 8.5 | 8.5 | 7.5 |
+| signup | 8.5 | 8.5 | 8.5 |
+| notifications | 8.0 | 8.0 | 8.0 |
+| repo-pull | 9.0 | 9.0 | 8.7 |
+| directory-tree | 8.5 | 8.5 | 7.5 |
+| releases-playground-with-assets-prerelease-draft | 8.5 | 8.5 | 7.8 |
+| labels | 8.5 | 8.5 | 8.5 |
+| pr-files-changed-unified-playground-large-diff | 8.8 | 8.8 | 8.2 |
+| projects-list | 8.5 | 8.5 | 8.5 |
+| repo-settings-branches | 8.3 | 8.3 | 8.3 |
+| admin-emails | 8.7 | 8.7 | 8.0 |
+| action-job-ok | 8.8 | 8.8 | 8.3 |
+| pr-compare-new-playground | 8.2 | 8.2 | 7.8 |
 
-## Blockers / majors
+Verified fixed since final-gate 1:
+- Both @390 overflows.
+- Dependency select and "+" are now aligned (`repo-pull/z-dep.png`).
+- The delete-label Confirm button is now danger-styled (`live/labels/states/dark-1440-confirm-modal-open-clip.png`).
+- The Labels/Milestones segmented control now shows a selected state.
+- Projects: Open/Closed moved into the Box header; New Project is 32px.
+- Admin email checks are now success green.
+- "Add New Rule" is now a default button.
+- Inline review author is now bold.
+- The job view no longer has CLS.
+- The file-tree pane now has a divider.
 
-1. **pr-files-changed-unified-playground-large-diff @390 — page is 754px wide** (`document.horizontalOverflow=true`, final-gate and live).
-   Root: `table.chroma` of `web/src/tokens.ts` is 736px wide inside `.file-body.code-diff.code-diff-unified` (overflow-x: visible); the inline
-   review comment in that file contains a `<pre>` (`export function cssVariables(...)`) that does not wrap/scroll and forces the table width, which also
-   turns off soft-wrap for every line of that file. See `shots/final-gate-critic-5/prf-l390-tail.png`, `prf-l390-0.png` (blank right half).
-   Gitea baseline also overflows (666px) but ours is worse (754px). Owner: **code** (`.code-diff*` table layout / `table-layout`, overflow on `.file-body`),
-   with **markdown** for `pre` inside `.comment-code-cloud .markup` (needs `overflow:auto; max-width:100%`).
-2. **directory-tree @390 — page is 404–421px wide (regression; baseline 390px)**. `a.m-commit-count` (history icon + count in the latest-commit
-   header row of `#repo-files-table`) ends at x=421 with viewport 390. `shots/final-gate/directory-tree/light-390.png` (history icon outside the box, right edge).
-   Owner: **code** (`#repo-files-table` latest-commit row must wrap like GitHub's 2-line mobile commit box).
+No blockers remain. Dark mode matches Primer tokens on every route checked, including GitHub's dark label formula and the dark diff/hunk colors.
 
-## Per-route findings
+## Major
+1. **directory-tree @390: the toolbar takes 3 rows and the latest-commit bar truncates badly.**
+   - The toolbar wraps: branch, compare and breadcrumb on row 1; Go to file and Add File on row 2; … and History on row 3. It spans about 111 CSS px (y 144–255). GitHub fits "← Files · main · grex / src / · …" into one 32px row.
+   - The commit header shows "Joel Nati… a… Peter M. …". The "and" is cut to "a…", and both names are ellipsized. GitHub shows "jqnatividad and pemistahl 10 months ago" on one line and puts the actions on a second line.
+   - Evidence: `shots/final-gate-2/directory-tree/light-390.png`, `shots/final-gate-critic-5/directory-tree/z-mobile-toolbar.png`, ref `docs/reference/directory-tree/light-390.png`.
+   - Owners: pages/repo (toolbar), code (`#repo-files-table` latest-commit row).
 
-### signup (Gitea-only form; github.com reference blocked → judged vs github.com/login)
-- minor: controls are 40px (large) and the column 352px; GitHub login uses 32px inputs/button in a 340px column (measure: button h=40, w=352). pages/auth.
-- nit: error flash (`states/dark-1440-validation-error.png`) has no leading octicon / close button as Primer Flash does. overlays.
+## Minor
+2. **releases @390: the header row is inset 15px more than the cards.**
+   - "4 Releases | 3 Tags", RSS, New Release and the divider start at x=31 and end at x=359 CSS px. The release cards span x=16 to x=374.
+   - Measured on `light-390.png` rows 304/384/464 vs 600/1100. Evidence: `releases-playground-with-assets-prerelease-draft/z-mobile-header-inset.png`.
+   - Owner: pages/repo.
+3. **releases @390: the title row still wraps awkwardly.** The red commit-status "×" sits alone on a line and "Stable" is pushed to a separate right-aligned line (`releases-…/light-390-1.png` top). Owner: pages/repo.
+4. **releases (all sizes): the "Downloads" summary doesn't match GitHub's "Assets" row.**
+   - It uses the browser's native ▸ marker, has no counter, and is collapsed on every release.
+   - GitHub's "Assets" row uses an octicon triangle and a Counter, and is expanded for the latest release.
+   - With the row collapsed, the route never shows its assets (`light-1440.png` y≈655).
+   - Owner: pages/repo.
+5. **pr-files-changed @390 (also pr-compare @390): the diff stats summary is hidden.**
+   - The "20 changed files with 106 additions and 57 deletions" summary and the file-tree toggle are hidden. The toolbar shows only gear, split, …, commit and Review.
+   - GitHub keeps a file count or selector on mobile. Evidence: `pr-files-…/light-390-0.png` y≈857.
+   - Owner: code (`.diff-detail-box`).
+6. **pr-compare: "1 Commits" is a bare Box header with no body**, a 54px muted bar that reads as empty. GitHub shows "Commits on <date>" directly with a commit Box (`pr-compare-new-playground/light-1440-0.png` y 364–417, `z-mobile-commits.png`). @390 the timeline rail under "Sep 26, 2026" is an 8px stub. Owner: pages/issues-prs.
+7. **admin-emails @390: the table scroll affordance is heavy.**
+   - It is a 12px radial shadow in `--borderColor-emphasis` that reaches #a6adb6 at the edge (dark: #4a515a).
+   - The shadow skips the header row, and the email cells are ellipsized even though the table scrolls.
+   - Primer DataTable scrolls without a shadow. Evidence: `admin-emails/z-scroll-light.png`, `src/data-display/tables.css:169-174`.
+   - Owner: data-display.
+8. **repo-settings-branches: settings NavList items have no leading octicons.** GitHub's repo settings nav gives every item a 16px icon (gear, people, webhook, git-branch, tag, key…). The empty state is plain centred text in a bordered box, not a Blankslate with an icon (`repo-settings-branches/light-1440-0.png`). Owner: pages/settings-admin, with navigation for `.ui.vertical.menu`.
+9. **notifications is Gitea's layout, not GitHub's inbox.**
+   - There is no filter bar (is:unread / Group by), no "Select all" list header, and no repo grouping.
+   - The left nav is Unread/Read with no icons, where GitHub has Inbox/Saved/Done with icons.
+   - On hover the title turns accent blue, and GitHub doesn't do that (`live/notifications/states/light-1440-row-hover-clip.png`).
+   - Owner: pages/people.
+10. **labels differs from the current github.com labels page.**
+    - There is no "Search all labels" input and no "Active 13 / Archived 0" counters; the header just reads "13 labels".
+    - Every row shows "N open issues/pull requests" text plus inline Edit/Delete. GitHub shows only non-zero counts as a PR or issue icon with a number, and puts actions in a kebab menu (`labels/light-1440-0.png` vs `ref-light-1440-0.png`).
+    - Owner: pages/issues-prs.
 
-### notifications (Gitea-only)
-- minor: unread counter `.notifications-unread-count` is transparent with 1px #d1d9e0 border; Primer CounterLabel is filled `bgColor-neutral-muted`, no border (repo tab counters already are). `notif-light-top.png`. pages/people.
-- minor: "Mark all as read" is an icon-only **green primary** 34×28 button (`notif-dark-right.png`); GitHub uses a default (grey) button for this action. pages/people.
-- minor @390: Unread/Read tabs have no selected indicator (only bold), `final-gate/notifications/light-390.png`. pages/people.
-
-### repo-pull
-- minor: sidebar "Add dependency…" select is 32px tall next to a 28px "+" button, bottoms misaligned by ~4px; also in dark-390. `pull-light-dep.png`. controls (`.ui.action.input` / selection dropdown height) — pages/issues-prs if scoped.
-- minor @390: comment header wraps to 3 lines (author / "(Migrated from github.com)" / reactions+kebab on their own line, ~85px tall). GitHub keeps the kebab on line 1. `pull-light-390-0.png`, `-1.png`. pages/issues-prs.
-- nit: code-block copy button is borderless icon; github.com shows a bordered 32px IconButton (`pull-light-a.png` vs `pull-ref-a.png`). markdown.
-- nit: "Files Changed" tab icon is `diff`, GitHub uses `file-diff`. icons/navigation.
-
-### directory-tree
-- major @390: overflow (above). Also the toolbar wraps into 3 rows (branch+compare+breadcrumb / Go to file+Add File / …+History); GitHub fits one row. pages/repo.
-- minor @1440: no vertical divider between file-tree pane and content; tree starts at x=32 instead of GitHub's full-height 320px pane with right border (ref `docs/reference/directory-tree/light-1440.png`). code.
-- nit: no "Name / Last commit message / Last commit date" header row (Gitea structure).
-
-### releases-playground-with-assets-prerelease-draft
-- minor: "Downloads" summary is 20px bold with the browser's native ▶ disclosure marker, not an Octicon triangle (GitHub "Assets" row: 16px semibold, octicon, counter). `final-gate/.../light-1440.png` y≈700. pages/repo.
-- minor @390: title row wraps awkwardly — status "×" alone on a line, "Stable"/"Pre-Release" label pushed to a second right-aligned line, "· 116 commits" starts a line with the dot. `rel-light-390-1.png`. pages/repo.
-- nit: bare red "×" commit-status glyph next to titles reads as stray (no hover target styling).
-
-### labels
-- minor: delete confirm modal uses a green primary "Confirm" for a destructive action (`states/dark-390-confirm-modal-open.png`); Primer uses danger. overlays.
-- nit: edit modal input heights differ (Name ≈28, Description ≈27, Color 32px) `states/light-1440-edit-modal-open.png`. controls.
-- nit: Labels/Milestones switch has no selected container (plain bold text). pages/issues-prs.
-- dark label rendering matches GitHub's HSL formula (`labels-dark-crop.png`).
-
-### pr-files-changed-unified-playground-large-diff
-- blocker @390: overflow (above).
-- minor: inline review-thread author ("carol-ops commented …") is muted regular weight, and the box has a speech caret; conversation-tab comments are bold/fg-default with no caret. `prf-inline-comment.png`. pages/issues-prs.
-- nit: bottom "expand down" cell is 72px wide, inset 8px each side vs the 88px line-number columns (also on compare page). `cmp-expander.png`. code.
-- diff colors light exact to Primer (`#ffebe9/#ffcecb/#dafbe1/#aceebb/#ddf4ff/#b6e3ff`).
-
-### projects-list (Gitea-only list; GitHub repo projects list as reference)
-- minor: Open/Closed toggles sit above the search, outside the Box; GitHub puts them in the Box header with counters. pages/actions-packages-projects.
-- minor: "New Project" is 28px (small); page-level primary buttons on GitHub are 32px. pages/actions-packages-projects.
-- minor: Edit/Close/Delete (red) always visible per row; GitHub hides them behind a kebab menu. pages/actions-packages-projects.
-- nit @390: order flips (New Project left, Open/Closed right).
-
-### repo-settings-branches
-- minor: "Add New Rule" is `tiny` primary (28px) next to a 32px "Update Default Branch"; both primary green where GitHub uses default buttons in settings. pages/settings-admin.
-- nit: current branch "main" rendered as `.default.text` in fgColor-muted (#59636e) so it reads as a placeholder. controls.
-
-### admin-emails
-- minor: "Activated" column checks are accent-blue (links) for 4 rows and green for one, trash icons accent blue; reads inconsistent — GitHub would render status icons in success/muted and destructive icon-buttons muted→danger on hover. `final-gate/admin-emails/light-1440.png`. pages/settings-admin.
-- nit @390: table scrolls inside the box (OK) but emails are ellipsized and Primary/Activated columns are off-screen without affordance.
-
-### action-job-ok
-- nit: "Re-run failed jobs" split button is 28px; GitHub's is 32px. pages/actions-packages-projects.
-- nit: CLS 0.0599 @390 from `div.action-view-body/left` at mount.
-- nit @390: job sidebar list bleeds to 8px from the viewport edge while content uses the 16px gutter.
-
-### pr-compare-new-playground
-- nit: "1 Commits" Box is ~2px wider than the neighbouring boxes (1409 vs 1407 right edge; visible @390). data-display.
-- nit: bottom expander inset (see pr-files).
+## Nits
+- signup: at 1440 a lone invisible 32px hamburger is pinned top-left (deliberate, FG-063). github.com/login has no control there. pages/auth.
+- repo-pull: when the author has no link, "innobead merged…" is muted regular weight; GitHub's author is semibold fg-default. The code block has no hover copy IconButton. The branch copy icon sits inside the `main` label instead of beside it (`repo-pull/z-meta-light.png` vs `z-meta-ref.png`). Owners: pages/issues-prs, markdown.
+- pr-files-changed @390: the active "Files Changed" tab is clipped at the right edge and its counter is hidden (GitHub clips too, but after the active tab). Owner: navigation.
+- releases: the compare SelectPanel has no "Choose a tag to compare" header (`live/releases…/states/light-1440-compare-open.png`). Owner: overlays.
+- action-job-ok: the right log panel has a 1px border; GitHub's log/CheckRun container has none (`action-job-ok/light-1440-0.png` vs `docs/reference/crit-app-action-job/light-1440.png`). Owner: pages/actions-packages-projects.
+- admin-emails: the sort indicator is a filled caret ▲; Primer DataTable uses the `arrow-up` / `sort-asc` octicon. Owner: data-display.
+- directory-tree @1440: the branch picker and Go to file sit in the content toolbar, not the tree pane. There is also no Name / Last commit message / Last commit date header row (Gitea structure). Owner: code.

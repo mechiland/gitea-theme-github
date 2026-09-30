@@ -1,60 +1,76 @@
-# Final gate: group 6 (whole-site review)
+# Final gate: group 6 (whole-site critic)
 
-Reviewer: final-gate critic 6 (design-systems review, no code written)
-Inputs: `shots/final-gate/<route>/{light,dark}-{1440,390}.png` + `.json`, references in `docs/reference/<route>/`.
-Crops and live captures: `shots/final-gate-critic-6/` (live states in `shots/final-gate-critic-6/live/`, run with `--theme github-auto --states --measure --viewports 1440`).
-DOM probes used the cached admin session against http://localhost:3000 and changed no settings.
+Theme `github-auto`. Sources: `shots/final-gate-2/<route>/` (baseline run), plus a fresh live pass with `--measure --states` in `shots/final-gate-critic-6/live/` (48 pages: 0 problems, 0 console errors, 0 failed requests, max CLS 0.0108). The crops I read are in `shots/final-gate-critic-6/`.
 
-## Audit logs (all 48 captures)
-- Main status 200 everywhere. There is no horizontal document overflow, CLS is 0, and there are no unresolved vars, no off-palette colours and no unlayered Gitea CSS.
-- **repo-home**: 20 console errors and 20 failed requests, all `net::ERR_BLOCKED_BY_CLIENT` for external README images (raw.githubusercontent.com, shields.io, docs.rs …). The stable-capture mode aborts these, so this is an environment effect and not a theme fault. The README therefore shows alt-text links where GitHub shows badges.
-- Non-Octicon icons: `gitea-gitea`, `gitea-feishu` and `gitea-matrix` (repo-settings-hooks, Add Webhook menu) and `gitea-npm` (packages-repo). All are brand logos, so they are allowed exceptions under ARCHITECTURE §6.
-- Masked icons (material-file → octicon-file, filter and triangle-down) render correctly.
+## Audit logs (all 12 routes, both schemes, both widths)
+- Unresolved CSS vars: 0 everywhere. `--loading-size` is unresolved but has a fallback, so it doesn't matter. Off-palette colours: 0. Horizontal overflow: none. Unlayered Gitea CSS: 0. CLS never goes above 0.0085.
+- repo-home in `final-gate-2` logs 21 console errors and 21 failed requests. They are all `net::ERR_BLOCKED_BY_CLIENT` on third-party README images (raw.githubusercontent.com, shields.io, GitHub badges). The shoot tool blocks those requests, so they are not a theme defect. The fresh live run logs 0.
+- Non-Octicon icons: repo-settings-hooks has `gitea-gitea`, `gitea-feishu` and `gitea-matrix` in the Add Webhook menu, and packages-repo has `gitea-npm`. These are brand marks, which is acceptable.
 
 ## Scores
-
-| Route | Light 1440 | Dark 1440 | 390 (both) |
+| route | light 1440 | dark 1440 | 390 |
 |---|---|---|---|
-| user-profile | 8.5 | 8.5 | 8.5 |
-| repo-home | 8.5 | 8.5 | 8.0 |
-| repo-pull-files | 8.0 | 8.0 | 7.5 |
-| blame | 8.0 | 8.0 | **5.0** |
-| wiki-home | 7.5 | 7.5 | 7.5 |
-| milestones | 8.0 | 8.0 | 7.5 |
-| pr-commits-tab-playground | 8.0 | 8.0 | 8.0 |
-| project-board | 8.0 | 8.0 | 6.5 |
-| repo-settings-hooks | 8.5 | 8.5 | 8.5 |
+| user-profile | 8.5 | 8.5 | 8.0 |
+| repo-home | 9.0 | 9.0 | 8.5 |
+| repo-pull-files | 9.0 | 9.0 | 8.5 |
+| blame | 8.5 | 8.5 | 7.5 |
+| wiki-home | 9.0 | 9.0 | 8.5 |
+| milestones | 8.5 | 8.5 | 8.5 |
+| pr-commits-tab-playground | 9.0 | 9.0 | 8.5 |
+| project-board | 8.0 | 8.0 | 7.5 |
+| repo-settings-hooks | 8.5 | 8.5 | 8.0 |
 | admin-user-edit | 8.5 | 8.5 | 8.5 |
-| packages-repo | 8.0 | 8.0 | 8.0 |
-| issue-playground-1 | 8.5 | 8.5 | 8.5 |
+| packages-repo | 8.5 | 8.5 | 8.5 |
+| issue-playground-1 | 8.5 | 8.5 | 8.0 |
 
-Token accuracy is excellent. Sampled pixels match Primer exactly: header #f6f8fa/#010409, borders #d1d9e0/#3d444d, underline-nav #fd8c73/#f78166, table zebra #f6f8fa/#151b23, and disabled primary #94d3a2/#105823. What keeps the scores down is layout and responsive behaviour, not colour.
+## Issues by route
 
-## Issues by severity
+### user-profile
+- **minor**, owner `pages/people`. In the follower line "3 Followers · 2 Following", the numbers are not bold. GitHub renders `<b>297</b> followers · <b>18</b> following`: the count is bold and in fg-default, and the label is lowercase in fg-muted. Ours renders the whole line in fg-muted at regular weight. See `final-gate-2/user-profile/light-1440.png` y≈608 and the crop `up-l-left.png`.
+- **nit**, owner `pages/people`. "Block user" renders at about 12px; GitHub's "Block or report user" is 14px (`up-l-left.png` compared with `up-ref-l-left.png`). The vcard rows (location, mail, link, joined) sit 25px apart; GitHub uses about 29px.
+- **nit**, owner `pages/people`. The org avatar has no "Organizations" heading above it. This may be a DOM limitation.
+- **nit**, owner `navigation`. At 390 the tab icons are dropped and the rest collapses into "…". GitHub keeps the icons and scrolls the tabs (`up-390-a.png`).
 
-### Major
-1. **blame, 390: the code is not visible at all** (owner `code`). `.code-view` is 358px wide with `overflow:auto`, but its table is 2031px wide. `.blame-info` takes about 312px and `.lines-num` starts at x=360 (off-screen), so the first viewport shows only commit messages. Long hunks leave huge blank areas, and the page is about 15,000 CSS px of mostly empty rows. GitHub stacks each commit header above its code lines. Evidence: `shots/final-gate/blame/light-390.png`, `shots/final-gate-critic-6/bl-m0.png`, `bl-m-bands.png`.
-2. **repo-pull-files, split view: the addition-side line-number cell is neutral grey instead of green** (owner `code`). Right-hand cells for lines 107, 108 and 117 measure #f6f8fa (light) and #151b23 (dark). GitHub uses #aceebb and #1c4428. The deletion side is correct (#ffcecb / #542326). The bug also shows at 390. Evidence: `shots/final-gate-critic-6/prf-num.png`, `shots/final-gate/repo-pull-files/{light,dark}-1440.png`, `prf-m0.png`.
-3. **project-board, 390: the toolbar button group is truncated** (owner `pages/actions-packages-projects`). `.project-header .ui.compact.menu` is a 358px `overflow:auto` strip. "Delete" is clipped (right edge 386.6 > 374) and "New Column" sits entirely off-screen (x=385–519), with nothing to show it can be scrolled. The group should wrap or collapse into an overflow menu. Evidence: `shots/final-gate/project-board/light-390.png`, `shots/final-gate-critic-6/pb-m.png`.
+### repo-home
+- **minor**, owner `pages/repo` (README box header). The `#readme .ui.top.attached.header` measures 46px tall with 8px left padding and a `#f6f8fa` background. GitHub's README header is white, has a 16px inset, and shows "README" as an underline tab with an accent bar. Compare `rh-l-readmehdr.png` with `rh-ref-readmehdr.png`.
+- **nit**, owner `markdown`. The copy button on code blocks is always visible (`rh-l-scan0.png`). On GitHub it only appears on hover or focus.
+- **nit**, owner `overlays`. In the branch picker, long branch names break mid-word ("…actions/uploa / d-artifact-7"). GitHub truncates them with an ellipsis (`live/repo-home/states/light-1440-branch-menu-open-clip.png`).
 
-### Minor
-4. **repo-home, 390: the README box header wraps** (owner `code`). `#readme .file-header` is 75px tall, against 46px at 1440. `.file-header-left` stretches to 342px, which pushes the pencil button onto its own line at the left. GitHub keeps a single 48px row. Evidence: `shots/final-gate-critic-6/rh-m1.png`.
-5. **blame, 1440: blame metadata sits about 5px above the code baseline.** "4 years ago" is at y≈310 while line "1" is at y≈315. GitHub aligns them on one baseline. Owner `code`. Evidence: `shots/final-gate-critic-6/bl-zoom.png`.
-6. **blame, 1440: there is no vertical divider between the file tree and the content column.** GitHub draws a full-height 1px border at the edge of the tree pane. Owner `code`. Evidence: `bl-light-0.png` vs `bl-ref-light-0.png`.
-7. **repo-pull-files, dark: the hunk header row is too blue.** Ours is #152843; GitHub is #111d2e. The hunk number cell (#0c2d6b) is correct. Owner `code`. Evidence: `shots/final-gate/repo-pull-files/dark-1440.png` vs the reference.
-8. **repo-pull-files, 390: the PR tab strip clips the active "Files Changed" tab** at the right edge ("± Fi…"), with no sign that the strip scrolls. Owner `navigation`. Evidence: `prf-m0.png`.
-9. **wiki-home: the sidebar is not GitHub's.** It uses a "Page: Home" select plus a green "Code" clone button. GitHub shows a bordered "Pages" box with a filter field and a "Clone this wiki locally" URL input, and "Delete Page" is not a header button. At 390 the selector also sits above the content. Owner `pages/repo`. Evidence: `shots/final-gate-critic-6/wiki-d.png`, `wiki-m.png`.
-10. **pr-commits-tab-playground: the commit list differs from GitHub.** It renders as a Box with a bold "2 Commits" header row, where GitHub uses a "Commits on <date>" timeline group. SHAs are 10 characters in proportional sans at fg-default; GitHub uses 7 characters in 12px monospace at fg-muted. Owner `pages/repo`. Evidence: `shots/final-gate-critic-6/prc-sha.png`.
-11. **milestones, 390: the progress bar has a fixed width** of about 200px instead of the full row width, and the "0%" label sits before the bar. GitHub puts "0% complete · 2 open · 0 closed" under a full-width bar. Owner `pages/issues-prs`. Evidence: `ms-m.png`.
-12. **Mobile global header shows only hamburger, logo and bell.** GitHub's signed-in mobile header also shows the create (+) and avatar controls. This affects every route. Owner `navigation`. Evidence: `up-m.png`.
+### repo-pull-files
+- The diff colours match pixel-for-pixel in both schemes: hunk `#ddf4ff` / `#111d2e`, deletion number cell `#ffcecb` / `#542326`, addition `#dafbe1` / `#12261d`, file header `#f6f8fa` / `#151b23`. No theme defects.
+- **nit**, owner `pages/issues-prs`. At 390 the Files Changed tab is clipped at the right edge and its counter is cut off (`prf-390-a.png`). GitHub also scrolls here, so this is acceptable.
 
-### Nit
-13. **user-profile**: follower and following counts are not bold (GitHub bolds the numbers). The profile README box has no "user / README.md" caption, and the org avatars have no "Organizations" heading. Owner `pages/people`. Evidence: `shots/final-gate/user-profile/light-1440.png`.
-14. **milestones**: "Labels | Milestones" is plain text, where GitHub's classic subnav was a bordered segmented pair. Owner `pages/issues-prs`. The due date "Dec 31, 9998" is a Gitea/seed timezone artefact, not a theme issue.
-15. **packages-repo**: the meta links ("admin", "octo-org/theme-playground") are underlined and bold. GitHub uses non-underlined Link--muted, and the package name is a blue link with a leading package icon. Owner `pages/actions-packages-projects`.
-16. **repo-home**: sidebar says "Description" rather than "About", and there is no "Public" label. These are Gitea template strings, so no action.
-17. **blame / diff syntax colours**: HTML inside markdown and fenced code inside a markdown diff are not coloured the way GitHub colours them. This comes from the chroma lexer, not from tokens. Owner `code`.
-18. **repo-home README external images** are blocked by the shoot tool's stable mode, so the page cannot be compared on badges. Owner `tools/shoot`.
+### blame
+- **minor**, owner `code`. At 390 the blame group header shows only the commit message and drops the relative date. GitHub shows "3 years ago" right-aligned in the same header. The header background is also `bg-muted`, where GitHub uses bg-default (`bl-390-a.png`, `bl-390-b.png`).
+- **minor**, owner `pages/repo`. At 390 the file toolbar wraps into three rows, and the "…" button ends up alone on its own row (`bl-390-a.png`).
+- **nit**, owner `code`. The age heat strip in the left gutter of each blame row is missing (GitHub's Older→Newer ramp). The Gitea DOM has no age bucket, so this can only be accepted as a known gap.
 
-## States (live, 1440)
-The Follow button's hover, press and focus states, the milestone row hover, the board card hover, the column menu, filter focus and hover, and the repo-home branch, Code, Add-file, tooltip, topic-hover and goto-file focus states all read as Primer. Focus rings are 2px #0969da / #1f6feb, overlays in dark use #010409 as the generated token says, and topic hover is solid accent. Evidence: `shots/final-gate-critic-6/states-A.png`, `states-B.png`.
+### wiki-home
+- The layout matches at 1440 in both schemes. **nit**, owner `navigation`: at 390 the active "Wiki" tab lives inside the overflow, so the orange underline sits under the "…" button (`wiki-home-390.png`). Primer's UnderlineNav moves the selected item into the visible set instead.
+
+### milestones
+- There is no defect against GitHub's classic milestones layout. GitHub has since moved to a new issues-sidebar shell, which Gitea's DOM can't reproduce. In our row, "0%" sits alone under the progress bar, where GitHub shows "0% complete · 2 open · 0 closed" (`milestones/light-1440.png`). Nit, owner `pages/issues-prs`.
+
+### pr-commits-tab-playground
+- This matches GitHub's commits tab closely (`prc-l-rows.png` compared with `prc-ref-rows.png`). **nit**, owner `icons`: the browse-files button uses `file-code`. GitHub uses the `code` (`<>`) Octicon.
+
+### project-board
+- **minor**, owner `pages/actions-packages-projects`. At 1440, four 350px columns overflow the 1376px content box. The Done column and its "…" menu are clipped at x=1440 with no scroll affordance (`project-board/light-1440.png`).
+- **minor**, same owner. The columns stop at a fixed height (bottom at y≈763), leaving large empty column wells. GitHub Projects columns stretch to the viewport.
+- **nit**, same owner. At 390 the Fullscreen/Edit/Close/Delete/New Column button group breaks into separate buttons across two rows (`project-board-390.png`).
+
+### repo-settings-hooks
+- **minor**, owner `pages/settings-admin`. The empty state is a bordered box of centred muted text with no icon and no heading. That doesn't read as a Primer Blankslate or as GitHub's plain description paragraph (`repo-settings-hooks/light-1440.png` y 197–283).
+- **nit**, same owner. The settings nav has no item icons and no group headings ("Access" and "Code and automation" on GitHub).
+
+### admin-user-edit
+- **nit**, owner `controls`. The label of the disabled "Disable Sign-In" checkbox stays in fg-default; Primer mutes disabled labels (`aue-dark-lower.png`, `admin-user-edit-390b.png`).
+
+### packages-repo
+- This reads as a native Primer list. There are no findings beyond the brand-icon note above.
+
+### issue-playground-1
+- **minor**, owner `pages/issues-prs`. The issue page container runs from x=104 to 1336 (1232px), while every other repo page runs from 112 to 1328. The title and body shift 8px against the rest of the site (`issue-playground-1/light-1440.png` compared with `pr-commits-tab-playground/light-1440.png`).
+- **minor**, owner `data-display` (comment header). At 390 the comment header wraps "commented 4 months / ago", leaving an orphan "ago" on its own line (`ip-390-0.png`, `ip-390-1.png`).
+- **nit**, owner `pages/issues-prs`. The sidebar "Delete" is fg-default, but GitHub's delete action is fg-danger. Gaps between sidebar headings and their text are inconsistent: 8px under Due Date, 0 under Dependencies (`ip-l-sidebar.png`).
+- **nit**, owner `controls`. The due date uses the native `yyyy/mm/dd` date input with the browser's calendar glyph.

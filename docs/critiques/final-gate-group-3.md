@@ -1,96 +1,126 @@
-# Final gate, group 3 (whole-site critic)
+# Final gate — group 3 critique (theme github-auto)
 
-Theme: `github-auto`. Sources: `shots/final-gate/<route>/{light,dark}-{1440,390}.png` plus JSON audits. References are in `docs/reference/<route>/` where they exist. I took live captures with `--states --measure` into `shots/final-gate-critic-3/live/`. All crops and zooms are in `shots/final-gate-critic-3/`.
+Reviewer: final-gate critic 3. Evidence: `shots/final-gate-2/<route>/{light,dark}-{1440,390}.png` + `.json`,
+references in `docs/reference/<route>/` (repo-issue, releases, issues-list-closed; login used as the auth yardstick),
+and a fresh live run with states and measurements at `shots/final-gate-critic-3/live/` (52 pages, 0 problems, 0 console errors,
+0 failed requests, max CLS 0.0025). Crops are in `shots/final-gate-critic-3/`.
 
-## Audit logs (all 13 routes, 52 captures)
-- Console errors, failed requests, unresolved vars, off-palette colours and horizontal document overflow: **0 across all 52 captures**.
-- CLS is 0 everywhere except admin-repos (0.0011 at 1440, 0.002 at 390; source td/th). That value is negligible.
-- Non-Octicon icons: `gitea-colorblind-blueyellow` ×4 appears inside the closed theme menu on user-settings-appearance. `gitea-npm` ×1 is the package-type label on packages-org. Masked icons are Octicon masks, so they are fine.
-- Capture artefacts (not theme defects):
-  - At 390 the full-page PNG of file-view-large-file-playground is blank from line 410 downward. A live probe renders lines 740–797 correctly (`live-file-bottom-390.png`), so this is Chromium's full-page limit.
-  - Some lazy avatars show as empty circles in full-page shots. Examples: the Participants avatar on repo-issue at 390, dave-qa on the PR at 390, and the composer avatar on the PR at 1440.
+## Audit logs (all 13 routes × 4 captures)
 
-## Scores (10 = indistinguishable; 8.5 = matches with nits; 7 = GitHub-inspired; 5 = recoloured Gitea)
+- Console errors 0, failed requests 0, unresolved CSS vars 0 (only `--loading-size` with fallback, 0 matched elements),
+  off-palette colors 0, horizontal overflow none, unlayered Gitea CSS none.
+- Non-Octicon icons: `gitea-npm` on packages-org (brand logo, allowed exception per ARCHITECTURE §6).
+- CLS: packages-org dark-390 0.0132 (`footer.page-footer`); admin-repos 0.0003–0.0025 (table cells); PR-16 light-390 0.0001. All below 0.05.
+- Measured against github.com (live measure vs reference): heading 32/400/40, underline-nav items 75.4×30, primary button
+  93×32 14/500, markdown paragraph 14/21 and inline code 13.6px, auth heading 20/600, auth input and button 352×40.
+  All match. Diff colors on PR-16 sampled: hunk number cell #b6e3ff / #0c2d6b, added number cell #aceebb / #1c4328, added line
+  #dafbe1 / #12261d. These are Primer values.
 
-| route | light | dark | 390 |
+## Scores
+
+| Route | Light 1440 | Dark 1440 | 390 |
 |---|---|---|---|
-| explore-orgs | 8 | 8 | 8 |
+| explore-orgs | 8.5 | 8.5 | 8.5 |
 | user-settings-appearance | 8.5 | 8.5 | 8.5 |
-| repo-issue | 8.5 | 8.5 | 7 |
-| file-view-large-file-playground | 9 | 9 | 8 |
-| releases | 8.5 | 8.5 | 8 |
-| issues-list-closed | 9 | 9 | 8 |
-| pr-conversation-playground-large-diff-reviews | 8 | 8.5 | 7 |
-| packages-org | 8 | 7.5 | 8 |
-| admin-repos | 7 | 7 | 7.5 |
+| repo-issue | 8.5 | 8.5 | 8 |
+| file-view-large-file-playground | 8.5 | 8.5 | 8 |
+| releases | 7.5 | 7.5 | 8.5 |
+| issues-list-closed | 9 | 9 | 8.5 |
+| pr-conversation-playground-large-diff-reviews | 8.5 | 8.5 | 8 |
+| packages-org | 8 | 8 | 8 |
+| admin-repos | 8.5 | 8.5 | 7.5 |
 | user-settings-applications | 8.5 | 8.5 | 8.5 |
-| admin-dashboard-config-settings | 8.5 | 8.5 | 8 |
+| admin-dashboard-config-settings | 8 | 8 | 7.5 |
 | repo-create | 7.5 | 7.5 | 7.5 |
-| reset-password-badcode | 9 | 9 | 8.5 |
+| reset-password-badcode | 8.5 | 8.5 | 8.5 |
 
-## Issues, by severity
+## Issues (most severe first)
 
-### Major
-1. **admin-repos: the table is clipped at 1440** (owner: pages/settings-admin).
-   - `.ui.attached.table.segment` has clientWidth 934 but scrollWidth 1052 (measured live).
-   - The "Created" column is cut to "Sep 2…" and the operations column is off-screen behind a scroll container with no visible scrollbar.
-   - GitHub never scrolls a data table at desktop width. Tighten the cell padding (Primer DataTable uses 8px 16px) and/or let the long columns wrap.
-   - Evidence: `shots/final-gate/admin-repos/light-1440.png` x=1290–1328.
-2. **Mobile comment header wraps to 3 rows** (owner: data-display `.comment` header shell; pages/issues-prs if the fix is issue-scoped).
-   - At 390, `.timeline-item.comment .comment-header` is 85.3px tall (measured). The layout is name + "commented 6 years ago", then "(Migrated from github.com)", then the reaction/kebab icons on a third row.
-   - GitHub keeps one ~40px row, with the timestamp truncating and the actions on the right.
-   - Evidence: `shots/final-gate/repo-issue/light-390.png` y=850–1025; the same problem on the PR at y=1010–1090.
-3. **PR review conversation box breaks the 16px mobile gutter** (owner: pages/issues-prs, review.css).
-   - `.code-comments-list .conversation-holder` has left=4px, while comment boxes have left=16px (measured at 390).
-   - Evidence: `pr-conversation-playground-large-diff-reviews/light-390.png` y≈5820.
-4. **Invisible Reply icon (light)** (owner: pages/issues-prs, review.css).
-   - The `.comment-form-reply` button is restyled to the default variant, but its svg keeps the primary icon colour. Computed svg colour is `rgba(255,255,255,0.8)` on a `#f6f8fa` button, so the icon is invisible and leaves a 16px hole before "Reply".
-   - In dark the icon is pure white instead of `fgColor-muted`.
-   - Evidence: `zoom-pr-reply.png`.
+### MAJOR — releases: desktop uses the pre-2025 release layout, while current github.com has a different one (pages/repo)
+- Ours (`final-gate-2/releases/light-1440.png`, crop `final-gate-critic-3/rel-l-a.png`): a 162px left column holds tag `v1.4.6`,
+  commit `db9275ace1` and the Compare button (x 230–325, y 260–340). The card byline has no tag or commit.
+- github.com (`docs/reference/releases/light-1440.png`): the left column is a "Release list" NavList. Tag and commit sit
+  inline in the card's meta row (y≈403). Compare is a small button at the card's top right (x 1170–1260, y 330).
+- Our own 390 layout already moves Compare, tag and commit into the card (`rel390a.png`), matching github.com @390. So the same reorder
+  can be done in CSS at ≥768. The "Release list" nav has no data on the page, so drop the column or leave it empty.
+  (tags-releases.css:11 notes this was a deliberate choice of the "classic" column.)
 
-### Minor
-5. **Org header has no bottom divider** (owner: navigation).
-   - On packages-org, the header background stops at y=166 with no 1px line. In dark the header is the same colour as the page, so the tabs float with no separation.
-   - The repo header has a `borderColor-muted` line at y=173.
-   - Evidence: `shots/final-gate/packages-org/dark-1440.png`.
-6. **Dependency select and + button heights differ** (owner: pages/issues-prs).
-   - In the issue sidebar the "Add dependency…" select is 32px tall (y 1077–1108) but the attached + button is 28px (y 1077–1104), which leaves a notch.
-   - Evidence: `zoom-issue-dep-light.png`; the same control appears on the PR.
-7. **Timeline commit rows use monospace for the summary** (owner: pages/issues-prs).
-   - `a.muted.title-full-link` uses ui-monospace at 13.3px. GitHub uses the sans UI font for the commit message and mono only for the SHA.
-   - Evidence: PR 1440, y=1055/1087/2254.
-8. **File info bar is monospace** (owner: code).
-   - The line/size/language strip reads "798 lines · 39 KiB · Go" and has `.file-info.tw-font-mono`. GitHub uses 12px sans.
-   - Evidence: `file-view-large-file-playground/light-1440.png` y=328.
-9. **Mobile pagination shows only the current page** (owner: navigation).
-   - Releases (2 pages) and issues-list-closed (3 pages) show only `|< < [1] > >|` at 390, with the other page numbers hidden. GitHub's mobile pagination shows Previous/Next with labels.
-10. **Mobile PR tab row is clipped** (owner: pages/issues-prs).
-    - The third tab shows as "± Fi" at the right edge with no fade or scroll affordance.
-    - Evidence: `pr-conversation…/light-390.png` y=940.
-11. **Mobile inline review comment header stacks its icons** (owner: pages/issues-prs).
-    - The reaction and kebab icons sit one above the other on the right (y≈975/1035 at 2x).
-12. **Mobile issue list shows per-row checkboxes** (owner: pages/issues-prs).
-    - They cost about 50px of title width. GitHub hides bulk-select on narrow screens.
-13. **repo-create is a boxed Gitea form** (owner: pages/repo).
-    - The layout is an attached "New Repository" header box. GitHub's /new is unboxed, with a 24px "Create a new repository" heading, a subtitle and a divider.
-    - The help text is capped at about 550px, which gives ragged double-line captions ("…named \".profile\" / or …") even at 1440.
-14. **Release meta wraps badly on mobile** (owner: pages/repo).
-    - The line breaks as "released this / 2 years ago / · 3 commits…", starting a line with an orphan "·".
-    - Evidence: `releases/light-390.png` y≈965–1065.
-15. **Banner editor toolbar on admin config (mobile)** (owner: pages/settings-admin).
-    - The toolbar wraps to two rows, and its group separators leave dangling vertical rules.
-    - Evidence: `admin-dashboard-config-settings` 390, y≈2970–3060.
+### MAJOR — repo-create: the form is inside a boxed card; github.com/new is an unboxed page (pages/repo, new-repo.css)
+- Ours (`final-gate-2/repo-create/light-1440.png`): a 768px Box (x 336–1104) with a gray 55px Box-header "New Repository"
+  (14px semibold, y 88–143) wraps every field.
+- github.com/new has no Box. It has a 24px "Create a new repository" heading, a muted subtitle, a Subhead rule, then fields on
+  the page background. Owner and name sit side by side with a "/" separator, and "Create repository" is at the end.
+- CSS can reach most of this: remove the attached-segment border and background, restyle the attached header as a 24px Subhead,
+  and put the owner and name fields in a grid row. The "Visibility" checkbox instead of Public/Private radio cards is template-level (nit).
 
-### Nits
-- explore-orgs: each org is a separate bordered card with 16px gaps, where GitHub uses list rows with 1px dividers. The left sidebar's vertical rule ends at y=788 instead of reaching the footer (pages/people).
-- packages-org: package names use `fgColor-default` where GitHub uses a Link colour. Metadata links are bold and underlined. The npm label uses a brand svg, not an Octicon (pages/actions-packages-projects; icons).
-- user-settings-appearance: the theme menu has no scroll affordance past "Modern Light". There are 4 `gitea-colorblind-*` non-Octicon icons (icons).
-- repo-issue: the labels SelectPanel has no title row. The markdown toolbar has H1/H2/H3 glyphs where GitHub has a single heading icon (pages/issues-prs).
-- file view (390): the line-number gutter is about 88px wide, and the latest-commit bar drops the commit message (code; pages/repo).
-- admin config: the ToggleSwitch sits mid-row (x=723), where GitHub puts it at the row end (pages/settings-admin).
-- reset-password: the heading "Account Recovery" is 20px semibold versus GitHub's auth heading. There is no visible "Sign in" button in the 390 header (pages/auth; navigation).
+### MINOR — admin-dashboard-config-settings: the markdown editor outside issue forms gets no composer styling (controls; today scoped in pages/issues-prs/composer.css)
+- Ours (`admin-dashboard-config-settings/light-1440.png`, crop `adm-zoom2.png`): Write/Preview tabs and the toolbar sit loose on the page.
+  The toolbar is a separate full-width row with group divider rules and "Aa" at the far right (x 1315, y 948). The textarea is a
+  separate bordered box.
+- repo-issue shows the same editor as one bordered composer (`ri-l-b.png` y 845–1067). Every rule in composer.css
+  is scoped to `:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .combo-markdown-editor`. Release, wiki
+  and admin-banner editors fall back to stock styling. Make the composer chrome generic (controls) and keep only
+  page-specific deltas in pages/issues-prs.
 
-## What is already at GitHub level
-- Every colour sampled matches Primer, including the Box header (`#f6f8fa` / `#151b23`) and the diff hunk, addition and num backgrounds.
-- The UnderlineNav selected bar (`#fd8c73`), NavList, overlays and label chips in dark are all correct.
-- reset-password closely mirrors github.com/login. The file view and issue list are close matches too.
+### MINOR — admin-dashboard-config-settings @390: toggle switches wrap under their labels (pages/settings-admin)
+- `final-gate-critic-3/adm390.png` y≈135–220: the "Enable Gravatar" and "Enable Federated Avatars" ToggleSwitches drop to a second
+  right-aligned line, so each row doubles in height (≈62px vs 41px at 1440). github.com keeps the ToggleSwitch on the label row.
+- Nit: Primer ToggleSwitch shows an "On/Off" status text left of the track. Ours has none (`adm-zoom.png`).
+
+### MINOR — PR-16 merge-style menu items are 54px tall with titles only (pages/issues-prs, merge-box.css / lazy PullRequestMergeForm chunk)
+- `live/pr-conversation-playground-large-diff-reviews/states/light-1440-merge-style-open.png`: 4 items from y 477 to 695 (≈54px each,
+  28px side padding) with a single 14px line each.
+- A Primer ActionList single-line item is 32px. github.com's merge menu uses title plus description rows. The menu reads as empty.
+
+### MINOR — file view @390: full-bleed boxes keep rounded corners and side borders (code, file-view.css:303)
+- `final-gate-critic-3/fv390zoom.png`: `#repo-file-commit-box` and the file Box are stretched to x=0…390 (FG-054) but keep 6px radii and
+  left and right borders, clipped at the viewport edge. The breadcrumb and buttons above keep the 16px gutter.
+- A responsive full-bleed Box drops side borders and radius. Otherwise keep the 16px gutter.
+
+### MINOR — admin-repos @390: page heading squeezed to 3 lines (pages/settings-admin)
+- `final-gate-critic-3/ar390.png` y≈415–500: "Repository Management (Total: 11)" at 24px wraps to three lines beside the
+  "Unadopted Repositories" button. Stack the action under the heading or wrap the button below it at narrow widths.
+
+### MINOR — issues-list-closed @390 and PR-16 @390: overflowing nav rows get cut off with no affordance (pages/issues-prs, navigation/tabnav.css)
+- `il390a.png` y≈150: the NavList becomes a pill row cut off at "Created by y…" with no fade or overflow button.
+- `pr390a.png` y≈370: the PR tabnav cuts off "Files Changed" and drops its count at the right edge.
+- The issues filter bar wraps to two rows (Label/Milestone/Project, then Author/Assignee/Type/Sort). github.com @390 shows 3 filters plus "…".
+
+### MINOR — reset-password-badcode: a lone hamburger floats top-left on the auth page (pages/auth, app-header.css)
+- `reset-password-badcode/light-1440.png` x 20–44, y 20–44 (also at 390). github.com auth pages have no chrome above the logo
+  (`docs/reference/login/light-1440.png`). Heading, input and button metrics match exactly (20/600, 352×40, 352×40).
+
+### MINOR — packages-org: list and filter structure is Gitea's (pages/actions-packages-projects)
+- `packages-org/light-1440.png`: rows have no leading package icon column. The search, native "Type" select and search button are fused
+  into one 1216px input group (y 190–222). github.com org packages has a "Find a package" input with separate Type / Visibility / Sort
+  ActionMenu buttons and 16px package octicons on each row.
+
+### NIT — repo-issue
+- @390 the comment header wraps "(Migrated from github.com)" onto a second line (`ri390a.png` y 370–410). The composer toolbar wraps
+  to 2 rows (`ri390b.png` y 255–295). The sidebar comes after the composer. github.com @390 surfaces Labels above the first comment (template-level).
+- Labels select panel shows full pill labels (`live/repo-issue/states/light-1440-labels-panel-open-clip.png`). github.com SelectPanel rows use
+  a colour dot + name + description.
+
+### NIT — PR-16
+- Timeline commit SHAs are bordered chips ("2d51c41304", x 897–983, y 983–1005 in `pr-l-0.png`). github.com uses plain monospace
+  Link--secondary text.
+- The review-thread footer is a gray bar with "Resolve conversation" and "Reply" buttons. github.com shows a collapsed "Reply…" input.
+
+### NIT — issues-list-closed
+- The state toggle is "⊙ 8 Open ✓ 51 Closed" (classic). Current github.com uses "Open 8 | Closed 51" with CounterLabels (reference y 307).
+
+### NIT — releases
+- "Downloads" disclosure has no CounterLabel (github.com: "Assets 8"). @390 "New Release" is a full-width green button (y≈190).
+
+### NIT — user-settings-applications
+- An empty "Authorized OAuth2 Applications" section shows only a paragraph. github.com shows an empty-state Box.
+
+### NIT — global (every route)
+- The footer is the centered Gitea row (logo, Powered by Gitea, GitHub, English, Licenses, API, Version). It reads close to github.com's
+  centered © footer. No change needed.
+
+## Not issues (checked)
+- Hidden UnderlineNav icons @390 on repo/org tabs are Primer behaviour (icons go first on overflow, navigation/underline-nav.css:110).
+- Gray folder icons in dark file tree match github.com dark TreeView.
+- Full-page captures cannot show the sticky file-tree pane. Not judged.
+- Label colours are inline `!important` (exempt).
