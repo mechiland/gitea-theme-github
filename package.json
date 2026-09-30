@@ -11,7 +11,8 @@
     "deploy": "node build/build.mjs --deploy",
     "seed": "node tools/seed/seed.mjs",
     "shoot": "node tools/shoot/shoot.mjs",
-    "smoke": "node tools/shoot/smoke.mjs"
+    "smoke": "node tools/shoot/smoke.mjs",
+    "package": "node build/package.mjs"
   },
   "devDependencies": {
     "@primer/css": "22.3.2",
@@ -22,5 +23,7 @@
     "postcss": "8.5.28",
     "postcss-import": "17.0.0",
     "svgo": "4.0.1"
-  }
+  },
+  "license": "MIT",
+  "repository": "github:mechiland/gitea-theme-github"
 }

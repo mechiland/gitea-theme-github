@@ -330,3 +330,22 @@ Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids o
    - **DONE (controls wL2 r1)** — new `src/controls/markdown-editor.css`: generic CommentBox for every editor outside the
      composer scope (admin banner, releases, milestones, projects, wiki, comment edit, review box); toolbar look generic.
      pages/issues-prs told they may drop their duplicate toolbar rules (docs/requests/pages-issues-prs.md). `shots/controls-r1`.
+
+# Controls (wave L2b r1, 2026-09-30) — critique controls-wL2-r1 handled
+- **#1 split-diff toolbar over the tabs — DONE.** The toolbar moves into the header strip on the editor's own width
+  (`container-type: inline-size` on the Box, `@container (min-width: 720px)`), not the viewport. Narrower Boxes (split diff
+  506px at 1440 / 442px at 1280, all at 390, admin banner at 1012) keep it as one sideways-scrolling row in the body,
+  groups left-aligned (#6). Measured: split 1440 tabs hit-test = tab for Write and Preview, toolbar x 891–1381 inside the
+  Box 883–1389; unified 818px Box → toolbar in the strip 628–1152, 137px right of Preview (`shots/controls-wL2b-r1/probe/final-*`).
+  EasyMDE (F11 fullscreen is position: fixed) drops the containment.
+- **#2 double border — DONE.** New inline diff comment form (`.comment-code-cloud > form:not(.comment-form)`): the editor is the
+  cloud's flush header + body (border 0, top radius 5px), attachments + action row on an 8px inset. 2x pixel check: one 1px
+  rgb(209,217,224) edge. Reply forms (`form.comment-form`) unchanged.
+- **#4 wiki preview shorter than the writer — DONE.** The Box is a 1-column grid; while previewing, the writer stays in the
+  cell (visibility hidden), so Preview = writer height everywhere (wiki 366 = 366, release/milestone/admin 204 = 204, comment
+  edit 404 = 404). The generic 6-line previewer min-height is gone.
+- **#5 focused leading search icon — DONE:** icon turns --fgColor-accent while the button has keyboard focus.
+- **#7 disabled checkbox label — DONE:** `cursor: not-allowed`.
+- **#3 `--gh-octicon-calendar` — still blocked** on CT-IC-1 (icons is integrator-owned; reminder in docs/requests/integrator.md).
+- Out-of-folder findings sent to pages/issues-prs (CT-L2b-1 cloud `overflow: hidden` clips the @-mention list; CT-L2b-2 composer
+  toolbar covers the tabs at 1012–~1100px viewports, same viewport-vs-width bug).

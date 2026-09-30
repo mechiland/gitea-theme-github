@@ -36,16 +36,16 @@
   border-radius: calc(var(--borderRadius-medium) - var(--borderWidth-thin));
 }
 
-/* Preview: the hidden writer keeps its place, so the Box is as tall as the writer (wiki 300px editor too) */
-.combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)):has(> .ui.tab.active[data-tab-panel="markdown-previewer"]) > .ui.tab[data-tab-panel="markdown-writer"] {
-  display: block;
-  visibility: hidden;
-}
-
 /* Gitea: `.ui.tab.markup[data-tab-panel="markdown-previewer"] { border-bottom: 1px; padding-bottom: 1rem }` */
 .combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)) > .ui.tab[data-tab-panel="markdown-previewer"] {
   padding: var(--base-size-8) var(--base-size-16);
   border-bottom: 0;
+}
+
+/* Preview: the hidden writer keeps its place, so the Box is as tall as the writer (wiki 300px editor too) */
+.combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)):has(> .ui.tab.active[data-tab-panel="markdown-previewer"]) > .ui.tab[data-tab-panel="markdown-writer"] {
+  display: block;
+  visibility: hidden;
 }
 
 /* EasyMDE's F11 fullscreen is position: fixed — no containment while EasyMDE is on */
@@ -142,6 +142,5 @@
     top: calc(var(--base-size-8) + (var(--base-size-40) - var(--control-small-size)) / 2);
     right: var(--base-size-8);
     padding: 0;
-    overflow: visible;
   }
 }
