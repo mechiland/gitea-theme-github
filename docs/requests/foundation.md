@@ -184,3 +184,17 @@ the bottom. No change needed in foundation; if FG2-097's `:where(:not(:has(...))
   `.full.height` padding-bottom 64 → 16 (github.com releases/tags/profile: last row → footer box 16px).
   Login keeps its bottom footer via pages/auth (same as github.com/login). Measured (`shots/foundation-l2/footer-gap.mjs`):
   wiki list footer box 16px under the table @1440/390, 404 and milestones likewise; actions/explore still grow=1.
+
+### Critic foundation-wL2-r1 — foundation (wave L2b, round 1)
+- **#1 (issue-list meta underline) — DONE.** `links.css`: author + milestone links `text-decoration: underline dotted`,
+  offset 2px; `:hover` → `text-decoration-line: none` (colour = Gitea's a:hover accent). Measured identical to github.com
+  (`shots/foundation-l2b/gh-hover.mjs` vs `hover.mjs`): light rest rgb(89,99,110) dotted 2px, hover rgb(9,105,218) none;
+  dark rest rgb(145,152,161), hover rgb(68,147,248); milestone octicon follows (currentColor). Sheet:
+  `shots/foundation-l2b/ours-hover-sheet.png` vs `shots/critic-foundation-r1/probe/gh-hover-sheet.png`.
+- **#2 (FG2-097 on React issue pages) — DONE (foundation part).** `layout.css`: `.full.height` grows again on
+  `.page-content.issue-list` (issues + pulls lists), `.repository.milestones:not(.projects, .dashboard)`, `.labels` and
+  the issue view (`.view.issue:not(.files, .commits)` without `.pull.tabs`); PR conversation/commits/files, projects,
+  dashboard milestones, wiki, settings, releases keep the footer-follows-content flow. Measured @1440×900: milestones /
+  issues / empty issue search footer 843 (viewport bottom), wiki _pages 365, projects 420, PR commits 516.
+  The NavList stretch is pages/issues-prs' (request with a verified diff in docs/requests/pages-issues-prs.md).
+- #3 (15px footer gap) / #4 — not in this round's brief; left open.

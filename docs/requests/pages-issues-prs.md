@@ -364,3 +364,98 @@ still the generic dashed dropzone below the Box (github.com attaches the file ba
 - data-display FG2-052 part 2 → DONE: < 768 composer toolbar one sideways-scrolling row.
 - Leak fix: new labels/milestones page rules exclude the dashboard milestones page (`page-content dashboard issues
   repository milestones` also matched `.repository.milestones:not(.projects)`).
+
+# From foundation (wave L2b r1, 2026-09-30): let the issue-family NavList run down to the footer (critic foundation-wL2-r1 #2)
+**What / why.** github.com's issues list, pulls list, milestones and labels are a full-height React PageLayout: the
+footer sits at/below the fold on short pages and the sidebar's right border runs down to it (docs/reference/milestones
+light-1440: sidebar edge to y=900, footer box 908). foundation now lets `.full.height` grow again on
+`.page-content.issue-list`, `.repository.milestones:not(.projects, .dashboard)`, `.labels` and the issue view
+(src/foundation/layout.css, deployed), so the footer is back at the viewport bottom there. But the NavList stops where
+the content stops: milestones nav bottom 393 vs footer 843 @1440×900; empty issue search (folderify
+`?state=closed&q=zzzznomatch`) 442 vs 843. Only this folder can stretch its layout.
+**Proposed diff** (e.g. end of `src/pages/issues-prs/issues-nav.css` or `layout.css`). Verified by injection
+(`shots/foundation-l2b/inject.mjs`, screenshots `shots/foundation-l2b/inject-*.png`): nav bottom → 827 (= footer 843
+minus foundation's 16px `.full.height` padding) on milestones, empty issue list and issues @1440 and @1100; labels
+1026 → 1050; no horizontal overflow at 1440/1100/390 (scrollWidth = viewport); < 1012 unchanged (NavList row).
+```css
+@media (min-width: 1012px) {
+  .full.height:has(> .page-content:is(.issue-list, .repository.labels, .repository.milestones:not(.projects, .dashboard))) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .full.height > .page-content:is(.issue-list, .repository.labels, .repository.milestones:not(.projects, .dashboard)) {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+  }
+
+  .page-content:is(.issue-list, .repository.labels, .repository.milestones:not(.projects, .dashboard)) > .ui.container:has(> .gh-issues-layout, > .issue-navbar, > .list-header > .issue-list-navbar) {
+    flex: 1 0 auto;
+  }
+
+  .page-content.issue-list > .ui.container:has(> .gh-issues-layout) {
+    display: flex;
+  }
+
+  /* flex-basis 0 + min-width 0, or the row sizes to its max-content width (1100px viewport → 1150px page) */
+  .page-content.issue-list > .ui.container > .gh-issues-layout {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  /* the NavList spans rows 1-8 (labels-milestones.css); the last track takes the free height, keeping the 24px bottom */
+  .repository:is(.labels, .milestones:not(.projects, .dashboard)) > .ui.container {
+    grid-template-rows: repeat(7, auto) minmax(var(--base-size-24), 1fr);
+    padding-bottom: 0;
+  }
+}
+```
+(github.com also makes its sidebar `position: sticky` at viewport height on long lists; not proposed here.)
+
+# From controls (wave L2b r1, 2026-09-30)
+## CT-L2b-1 inline diff comment cloud clips the @-mention list (`overflow: hidden`)
+`review.css`: `.repository.view.issue .code-diff .conversation-holder > .comment-code-cloud { overflow: hidden }` cuts the
+text-expander suggestions of the inline comment editor at the cloud's bottom edge: typing "@" in a new inline comment on
+/octo-org/theme-playground/pulls/16/files shows 3 of 6 users (`shots/controls-wL2b-r1/probe/c-mention-light.png`); with
+the cloud's overflow set to visible all 6 show above the diff (`c-mention-ovvis-dark.png`). The same clip hits the Reply
+form at the bottom of every thread. controls now rounds the inline editor's top corners itself (radius 6 − 1px, the
+editor is the cloud's flush header, one border), so the new-thread cloud no longer needs the clip. Proposed:
+```diff
+-.repository.view.issue .code-diff .conversation-holder > .comment-code-cloud {
+-  overflow: hidden;
+-}
++/* round the muted footer strip / reply form instead of clipping (the @-mention list must escape the cloud) */
++.repository.view.issue .code-diff .conversation-holder .comment-code-cloud > :is(.flex-text-block, form.comment-form):last-child {
++  border-radius: 0 0 calc(var(--borderRadius-medium) - var(--borderWidth-thin)) calc(var(--borderRadius-medium) - var(--borderWidth-thin));
++}
+```
+(check the first comment row's top corners on a thread after the change; the comment rows are transparent, so nothing
+should poke out.)
+
+## CT-L2b-2 composer toolbar covers the Write / Preview tabs at 1012–~1100px viewports
+`composer.css` lifts the toolbar into the header strip on `@media (min-width: 1012px)`; the composer is narrower than
+tabs + toolbar there (toolbar 524px): at a 1012px viewport the new-issue editor is 548px wide → toolbar overlaps the tabs
+by 134px ("Write"/"Preview" under H1–B, `shots/controls-wL2b-r1/probe/b-issue-new-light-1012.png`), the issue comment
+composer (618px) by 64px. Same bug controls had in the split diff (critique controls-wL2-r1 #1); controls now switches on
+the editor's own width. Proposed (composer.css):
+```diff
+ :is(#comment-form, #new-issue, .code-comments-list form.comment-form) .combo-markdown-editor {
+   position: relative;
++  container-type: inline-size;
+ }
+-@media (min-width: 1012px) {
++@container (min-width: 720px) {
+   … markdown-toolbar { position: absolute; … }
+   #new-issue … markdown-toolbar { top: … }
+ }
+-@media (max-width: 1011.98px) {
++@container (max-width: 719.98px) {
+   … markdown-toolbar { padding-bottom: var(--base-size-8); }
+ }
+```
+Below 720px controls' generic toolbar is already one sideways-scrolling row with left-aligned groups (`flex-wrap: nowrap;
+overflow-x: auto; scrollbar-width: none`, groups `flex: none`), so your `< 768px` nowrap block and
+`.markdown-toolbar-group:last-child { flex: 0 0 auto }` can go. (EasyMDE's F11 fullscreen is `position: fixed`; controls
+drops the containment while EasyMDE is on: `.combo-markdown-editor:has(.EasyMDEContainer) { container-type: normal }` —
+generic, it covers your editors too.)

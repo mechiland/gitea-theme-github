@@ -662,3 +662,9 @@ unanswered; the critic flags it as a nit (breaks only if the theme CSS is ever i
 Navigation layer in the minified auto file this round: 22,745 B (+~950 B: scroll-driven PR tab fades, pagination and
 UnderlineNav breakpoints). FYI outside navigation, seen at 320 only: /octo-org/grex/pulls scrollWidth 331
 (`.user-remote-search` / `.dropdown.jump` filter menus), /octo-org/grex/releases 350 (`.attachment-right-info`).
+
+# From controls (wave L2b r1, 2026-09-30) — reminder: CT-IC-1 (mask `calendar`) still open
+docs/requests/icons.md CT-IC-1 (one line in `src/icons/gen-icons.mjs` MASKS: `'calendar'`, then regenerate
+octicon-masks.css). icons is integrator-owned now. Until it lands every page's audit lists `--gh-octicon-calendar` as
+unresolved (critique controls-wL2-r1 #3; `shots/controls-wL2b-r1/*/*.json cssVars.unresolved`) and date inputs keep
+Chrome's glyph (guarded fallback, nothing breaks).
