@@ -1,0 +1,1163 @@
+A '1 changed files with 2 additions and 2 deletions' and split view default
+A '1 changed files with 3 additions and 3 deletions', '0/1 files viewed', green 'Review' button; GitHub has 'Changes from all commits / File filter / Conversations / Jump to'
+A '596 lines · 22 KiB · Markdown' vs GitHub '595 lines (435 loc) · 21.8 KB'
+A 'Browse Source' + 'Operations' buttons
+A 'Downloads' section with MiB and relative dates, no sha256; no Contributors or reactions
+A 'Last updated 4 years ago' relative vs GitHub 'Last updated on May 17, 2023'
+A 'New Page' Title Case vs GitHub 'New page'
+A 'Powered by Gitea' footer
+A 'Powered by Gitea' footer and Gitea header
+A 'Powered by Gitea' footer and octo-org header with Unwatch/RSS/Settings
+A 'Powered by Gitea' footer; octo-org header with Unwatch/RSS/Settings
+A 'edited this page 4 years ago'; footer 'Powered by Gitea'
+A 'innobead merged 1 commits from main into main 6 years ago' + 'Edit' button vs GitHub 'New issue' and 'merged 1 commit into pemistahl:main from innobead:main'
+A 'merged 1 commits from main into main 6 years ago' with Edit button
+A (go-gitea org on GitHub) has the People page layout: an 'Organization permissions' side menu with Members, 'Find a member...' search and Follow buttons. A shows the Gitea logo only as the org's avatar, not as site chrome
+A 404 is a plain warning triangle with '404 Not Found' text and 'Powered by Gitea' footer and Gitea header
+A Follow button has person icon; no Achievements
+A Gitea header and 'Powered by Gitea' footer
+A Gitea logo and nav (Issues/Pull Requests/Milestones/Explore)
+A Gitea logo/nav with 'Explore' page listing octo-org seed repos
+A PR 'merged 1 commits from main into main 6 years ago' with 'Edit' button, Gitea avatars and '(Migrated from github.com)'
+A PR list with checkboxes, '12 Open / 280 Closed', Labels/Milestones buttons and 'Search...' input, branch chips per row, no CI status
+A README badge images all show as broken alt-text links (e.g. 'rust build status', 'Linux 64-bit Download') instead of rendered shields, and the grex logo and demo gif are missing
+A README badges are broken
+A README box has no 'user / README.md' label header
+A README broken image alt-text links; 'README.md' header with pencil
+A README card lacks the 'pemistahl / README.md' header line
+A README header is a single 'README.md' bar. GitHub has 'README | MIT license' tabs
+A README images broken as alt-text links
+A README renders images as broken alt-text links
+A actions run page: 'Back to workflow ci', 'Re-run failed jobs', job graph labelled 'Matrix: Test 3 jobs completed', header stats '6 jobs • 1 dependency • 83% success' — GitHub layout differs
+A author 'Peter M. Stahl last year' with Gitea avatar
+A author is 'github-actions[bot]'
+A author line reads 'Peter M. Stahl last year' rather than 'pemistahl committed on Jan 14'
+A avatar is a Gitea identicon
+A banner 'Members are managed through teams...' + 'Manage teams and members' green button
+A blame avatars are Gitea teacup placeholders; A branch selector sits above content not in file tree
+A blame rows use Gitea teacup avatars; no commit bar/file tree branch selector
+A blame view has 'Normal View' and 'Unescape' buttons, Gitea-logo avatars and '596 lines · 22 KiB · Markdown'
+A blame view lacks Preview/Code/Blame toggle, 'Older ▪▪▪ Newer' age legend and Contributors row
+A blame view toolbar 'Raw / Permalink / Normal View / History / Unescape' and '596 lines · 22 KiB · Markdown' vs GitHub Preview/Code/Blame segmented control and Older-Newer age legend with Contributors
+A byline 'github-actions[bot] released this 2 years ago · 3 commits to main since this release'
+A card counts include PR count icon; GitHub shows Star counts only
+A cards show the star, PR and fork counts separated by '·' dots in Gitea's format
+A closed issue list has checkboxes, '8 Open 51 Closed' toolbar with Label/Milestone/Project/Author/Assignee/Type/Sort
+A comment header reads 'dependabot[bot] commented 2 years ago (Migrated from github.com)'. GitHub reads 'dependabot Bot commented on behalf of github on Dec 15, 2025' with Contributor/Author badges
+A commit bar shows 'Alex Koutmos' with a Gitea avatar and '7 months ago'. It has no Sponsor button and no 'Public' badge
+A commit bar shows 'Peter M. Stahl' with a Gitea icon and '2 years ago'. GitHub shows 'pemistahl' with a check and '10 months ago'
+A commit bar with Gitea avatar, no branch selector in file tree sidebar
+A commit page puts the title in a box with 'Browse Source' and 'Operations' buttons and 'parent fa3e8ed71c commit 99cc347707'. GitHub has a 'Commit 99cc347' heading and a 'Browse files' button
+A commit row shows 'David Ko 6 years ago', a 10-char SHA and a different trailing icon
+A commits are not grouped under 'Commits on <date>' headers with the timeline line
+A defaults to a split diff with no line gutter per side. GitHub shows a unified diff in this capture
+A dependabot compatibility badge renders as a broken 'Dependabot compatibility score' link
+A diff header has 'Viewed' checkbox; GitHub has '6 ▪▪▪ README.md' with code/file view toggle
+A diff toolbar reads '1 changed files with 3 additions and 3 deletions' (bad pluralization) with a '0 / 1 files viewed' progress bar and a green 'Review' button. GitHub has 'Changes from all commits / File filter / Conversations / Jump to'
+A dir listing has no Name/Last commit message/Last commit date header row
+A directory view has no 'Name / Last commit message / Last commit date' table header
+A downloads section titled 'Downloads' with KiB sizes and info icons and 'Source Code (ZIP)' uppercase; GitHub 'Assets 8' with sha256 digests, MB sizes, dates, reactions and Contributors
+A explore sidebar 'Repositories / Users / Organizations' is Gitea-only
+A file header has 'Viewed' checkbox; GitHub has code/rich-diff toggle icons
+A file header has a 'Viewed' checkbox. GitHub has a line count '6' and colored blocks before the filename
+A file list order differs: LICENSE and README.md sit at the end with coveralls.json
+A file view toolbar has 'Raw / Permalink / Blame / History' button group and '22 KiB' instead of GitHub Preview/Code/Blame segmented control with '595 lines (435 loc) · 21.8 KB'
+A footer 'Powered by Gitea Version: 1.27.3 Page: 47ms'
+A footer 'Powered by Gitea Version: 1.27.3'
+A footer 'Powered by Gitea'
+A footer 'Powered by Gitea'; tabs lack Checks, 'Files Changed' capitalized
+A footer reads 'Powered by Gitea Version: 1.27.3 Page: 9ms Template: 4ms' with the Gitea teacup logo; B has the GitHub octocat footer ('© 2026 GitHub, Inc. Terms Privacy...')
+A footer reads 'Powered by Gitea'
+A footer reads 'Powered by Gitea'. The Releases tab is active in the repo nav, with RSS Feed and New Release buttons
+A footer shows 'Powered by Gitea' and the header has the Gitea logo
+A footer: 'Powered by Gitea Version 1.27.3'
+A footer: 'Powered by Gitea'. The timeline avatars are Gitea teacup icons for dependabot
+A has '1 changed files with 3 additions and 3 deletions' bar, '0 / 1 files viewed', Review button, Viewed checkbox
+A has '16 Releases / 16 Tags' tabs with RSS Feed and New Release buttons, and no 'Release list' sidebar or 'Find a release' search
+A has 'Browse Source' / 'Operations' buttons and uses the commit message as its title
+A has 'Delete Page', a 'Page: Home' dropdown and a green Code dropdown
+A has 'Downloads' with 'Source Code (ZIP)/(TAR.GZ)', MiB sizes and '2 years ago'. GitHub has 'Assets 8' with sha256 hashes, MB sizes and 'Nov 14, 2025'
+A has 'Edit' button top right; GitHub shows 'New issue'; A no Checks tab
+A has 'Go to file', 'Add File', '...' and 'History' above the list, with a '445 Commits' count in the commit bar
+A has 'Labels' / 'Milestones' / Title Case 'New Pull Request' buttons and Project/Type filters
+A has 'New Page' in title case and '4 years ago' where GitHub shows 'on May 17, 2023 · 1 revision'
+A has 'Raw / Permalink / Normal View / History / Unescape' buttons and teacup blame avatars
+A has 'Raw / Permalink / Normal View / History / Unescape' buttons; GitHub has Preview/Code/Blame segmented tabs
+A has 'Sign in with OpenID' and 'Register now.'
+A has 'merged 1 commits from main into main', no Checks tab, and 'Files Changed' in title case
+A has 10-char SHAs, Gitea teacup avatars and 'Peter M. Stahl last year'. It has no Verified badges or CI check counts ('✓ 14 / 14')
+A has First/1/2/Last numbered pagination where GitHub has Previous/Next only
+A has First/Previous/1/2/Next/Last pagination where GitHub shows Previous/Next
+A has GitHub 'Tags' box header with tag icon, 'Notes'/'Downloads' links and '...' buttons
+A has GitHub Overview/Active/Stale/All tabs and Branch/Updated/Check status/Behind|Ahead/Pull request table
+A has GitHub issues left sidebar (Assigned to me, Created by me, Feedback Preview, Collapse sidebar)
+A has GitHub's Explore/Topics/Trending/Collections tabs, trending developers, and the Open Source Friday card
+A has Gitea buttons 'New Page' and a red 'Delete Page', plus a '1 ⟲' revision counter; GitHub shows 'New page' and a '1 revision' link
+A has Gitea repo tabs
+A has Gitea teacup logo and 'Powered by Gitea' footer
+A has Gitea's repo list controls (Search repos..., Filter, Sort); GitHub has Find a repository.../Type/Language/Sort
+A has Gitea's repo tabs (Packages, Releases 53, Activity, Settings)
+A has KiB sizes, relative dates ('2 years ago'), no sha256, no Contributors, and no reactions
+A has Teams and Worktime tabs
+A has Time Tracker and Due Date in the sidebar
+A has a '1 Commits' header box with no date grouping
+A has a '1 changed files with 3 additions and 3 deletions' summary bar with '0 / 1 files viewed' and a Review button
+A has a '1 changed files' summary, '0 / 1 files viewed', a Review button and Title Case 'Files Changed'
+A has a '16 Releases | 16 Tags' toggle with RSS Feed/New Release buttons, instead of GitHub's 'Releases / v1.4.6' breadcrumb
+A has a 'Back to workflow ci' link and a 'Re-run failed jobs' button
+A has a 'Delete Page' button, a 'Page: Home' dropdown and a green Code dropdown in place of GitHub's Pages sidebar and clone URL
+A has a 'Delete Page' red button, a revision count with a clock icon, a 'Page: Home' dropdown and a green 'Code' clone dropdown. GitHub has a Pages sidebar with a filter, 'Add a custom footer/sidebar' placeholders and 'Clone this wiki locally'
+A has a 'Downloads' section with KiB/MiB sizes and info icons, with no sha256 digests
+A has a 'Downloads' section with MiB sizes, info icons and 'Source Code (ZIP)' in caps; GitHub has 'Assets 8' with sha256 digests, KB sizes and 'Source code (zip)'
+A has a 'Page: Home' dropdown, a Code clone button, 'New Page' and 'Delete Page' buttons, and a revision counter
+A has a 'Page: Home' dropdown, a green Code clone button, and a red 'Delete Page'
+A has a 'Powered by Gitea Version: 1.27.3 Page: 9ms Template: 4ms' footer with the teacup logo; B has the '© 2026 GitHub, Inc.' footer
+A has a 'Powered by Gitea' footer
+A has a 'Pull request closed … branch was deleted' block and a comment editor
+A has a 'Remember This Device' checkbox and a 'Sign in with OpenID' button
+A has a 'Remember This Device' checkbox and a 'Sign in with OpenID' button. GitHub offers Continue with Google/Apple
+A has a 'Remember This Device' checkbox, a 'Sign in with OpenID' button and 'Need an account? Register now.'
+A has a 'Review' green button, a '0 / 1 files viewed' progress bar and 'Viewed' checkboxes, but no 'Changes from all commits / File filter / Conversations / Jump to' toolbar
+A has a 'Search tags…' input and a '16 Tags' header inside the box
+A has a 'Search tags…' input and a '16 Tags' header instead of 'Tags' with a tag icon
+A has a 'Sign in with OpenID' button instead of Continue with Google/Apple
+A has a 'Stable' badge where GitHub has 'Latest', and a pencil edit icon
+A has a Commit Graph button, a branch and tag count, and a 'Search commits…' box with a 'This Branch' select. GitHub has 'All users' and 'All time' filters
+A has a Filter/Sort repo search where GitHub has Type/Language/Sort by dropdowns
+A has a Gitea comment editor (Write/Preview with a toolbar) and a Time Tracker/Due Date/Dependencies sidebar with gear icons
+A has a Gitea comment editor and a Time Tracker/Due Date/Dependencies sidebar
+A has a Gitea header
+A has a Gitea header and footer
+A has a Gitea header with Explore/Help/Sign In/Register and the teacup logo above a 'Sign In' heading; GitHub shows the Octocat and 'Sign in to GitHub' with no nav bar
+A has a Gitea header, row checkboxes, and Gitea filters
+A has a Gitea teacup header and a 'Powered by Gitea' footer
+A has a History button with a '445 Commits' count in the last-commit bar
+A has a Labels/Milestones sub-tab switcher, a full-width search bar and a 'New Milestone' button in Title Case. GitHub has no search and no New button here
+A has a full comment editor (Write/Preview toolbar, 'Comment' button) and a sidebar with gear icons, Time Tracker, Due Date, Dependencies, Pin/Lock/Delete. GitHub (logged-out) shows 'Sign up for free to join this conversation'
+A has a plain 'Search...' box plus Labels/Milestones/'New Issue'. GitHub has an 'All issues' heading, an 'is:issue state:closed' query and a grey 'New issue' button
+A has a plain dark '404 Not Found' with a warning icon and no Octocat illustration
+A has a plain search, 'Labels', 'Milestones' and a green 'New Issue' (Title Case)
+A has a red 'Delete Page' button and Title Case 'New Page'
+A has a simple repo list with Filter/Sort. GitHub has Lists (32), 'Search starred repositories', Type/Language/Sort by and 'Starred topics'
+A has a split diff but with Gitea's toolbar ('1 changed files with 3 additions and 3 deletions', 'Viewed' checkbox, green 'Review' button)
+A has an 'Edit' button instead of 'New issue', and merge text 'innobead merged 1 commits from main into main 6 years ago'
+A has an 'Older ... Newer' heat legend and no Contributors count
+A has an Add File button, Gitea tabs and an RSS button
+A has an identicon avatar, 'Joined on', email and RSS icons, an org icon block, and 'Block user'; B has Achievements, 'Block or report user', and sparkline activity graphs
+A has an identicon, 'Block user', no Achievements, and no sparklines
+A has blue folder icons in tree, branch dropdown in main column, 'Add File' button, '445 Commits' in commit bar with Gitea avatar
+A has comment editor with toolbar rather than 'Sign up for free' banner; no merged-commit timeline event; tabs lack Checks
+A has no 'All pull requests' title and no is:pr query box
+A has no 'Changes from all commits / File filter / Conversations / Jump to' toolbar
+A has no 'Checks 0' tab and 'Files Changed' is Title Case. It shows an 'Edit' button where GitHub shows 'New issue'
+A has no 'Commits on <date>' grouping and no All users/All time filters
+A has no 'Commits on <date>' grouping or timeline line
+A has no 'Commits on <date>' grouping, uses 10-char SHAs (99cc347707) against GitHub's 7-char ones, and puts Gitea teacup avatars next to author names
+A has no 'Organization permissions' sidebar and no Follow buttons
+A has no 'Preview | Code | Blame' toggle. Its header reads '22 KiB' with separate Raw/Permalink/Blame/History buttons
+A has no 'Public' badges and no sparkline activity graphs
+A has no 'Usage' entry under Run details
+A has no 'Verified' badges or check-status counts (14 / 14)
+A has no Achievements section
+A has no Checks tab
+A has no Checks tab and its Files Changed tab is title-cased
+A has no Checks tab and no timeline commit or merge events
+A has no Checks tab and no timeline events, uses 'Files Changed', and has 'wants to merge 1 commits'
+A has no Checks tab, and 'Files Changed' is Title Case. It also has an 'Edit' button and no timeline events (commit, labels added, closed, branch deleted)
+A has no Checks tab, reads 'Files Changed' in Title Case, and has an 'Edit' button
+A has no Checks tab, uses 'Files Changed' and 'wants to merge 1 commits', lacks the 'Public' badge, and is missing the timeline events (commit, label added, closed, branch deleted)
+A has no Contributors block and no reactions
+A has no Contributors or reactions section
+A has no Contributors section or reactions. '@jqnatividad' is not bolded or underlined as a mention
+A has no GitHub diff toolbar ('Changes from all commits · File filter · Conversations · Jump to')
+A has no Lists section, no starred-topics column, no Achievements and no 'Block or report user'. It shows 'Block user'
+A has no Pages sidebar or 'Clone this wiki locally' box
+A has no Pages sidebar, custom footer or sidebar placeholders, or clone URL
+A has no Preview/Code/Blame tabs and no Contributors widget
+A has no Preview/Code/Blame toggle, no Older/Newer heat legend and no Contributors count
+A has no Preview/Code/Blame toggle; it has Raw/Permalink/Blame/History instead
+A has no Sponsor or Contributors sections and no stars/watch/fork stats
+A has no Used by or Contributors sections
+A has no Verified badges or check counts (14 / 14), and shows the tag pill 'v1.4.6' inline
+A has no Workflow or Event filters
+A has no date-group timeline
+A has no file tree and no Comments section
+A has no file tree sidebar or 'Search within code', and no Comments section
+A has no file-tree sidebar ('Filter files...', 'Search within code') and no 'Comments 0' section
+A has no left issues sidebar (Issues, Assigned to me, Views, Milestones, Labels, Feedback)
+A has no left sidebar (Issues / Assigned to me / Created by me / Views) and no 'is:issue state:open' query bar
+A has no left sidebar and no 'All issues' query bar, has row checkboxes, and uses Label/Milestone/Project/Type filters
+A has no left sidebar or 'All issues' query bar, and uses relative closed times
+A has no linked-PR icons in rows, and its owner is octo-org
+A has no search box, no Contact Support links and no GitHub footer. It shows 'Powered by Gitea'
+A has no sha256 digests, KiB sizes with info icons, no Contributors section, no reactions, and 'github-actions[bot]' where GitHub has 'github-actions'
+A has no sidebar and no query bar; it has a 'Search...' input with Labels/Milestones/New Issue buttons
+A has no timeline events and no 'Bot' badges
+A has none of GitHub's Explore tabs (Topics, Trending, Collections, Events, GitHub Sponsors) and no trending developers panel
+A has octo-org repo with Unwatch/RSS/Settings/Wiki/Packages tabs and 'Releases 16' tab — Gitea layout
+A has teacup avatars, '(Migrated from github.com)' comments, and a broken 'Dependabot compatibility score' image
+A has the '445 Commits' title, a Commit Graph button and a search with a 'This Branch' select
+A has the 'Powered by Gitea' footer
+A has the 'Powered by Gitea' footer and no Google/Apple buttons
+A has the 'Powered by Gitea' footer; GitHub's login footer has Terms/Privacy/Docs/Contact GitHub Support
+A has the Gitea footer
+A has the Gitea header
+A has the Gitea header and 'Powered by Gitea' footer
+A has the Gitea header and a 'Powered by Gitea' footer
+A has the Gitea header and broken README badge images
+A has the Gitea header and footer
+A has the Gitea header nav
+A has the Gitea header with teacup logo, Issues/Pull Requests/Milestones/Explore
+A has the Gitea header, Gitea-logo avatars and '(Migrated from github.com)'
+A has the Gitea header, Gitea-logo comment avatars and '(Migrated from github.com)'
+A has the Gitea logo header and a 'Powered by Gitea' footer
+A has the Gitea logo in its header and the 'Powered by Gitea' footer
+A has the Gitea logo nav and no left issues sidebar
+A has the Gitea logo, 'Sign In' Title Case and 'Remember This Device'
+A has the Gitea logo, Gitea global nav and a 'Powered by Gitea' footer
+A has the Gitea nav and 'Powered by Gitea' footer
+A has the Gitea nav and a '445 Commits' title with 'Commit Graph', '14 Branches', '16 Tags', a 'Search commits...' input and a 'This Branch' select. GitHub has a 'Commits' title with 'All users' and 'All time' filters
+A has the Gitea nav and footer
+A has the Gitea nav and the 'Powered by Gitea' footer
+A has the Gitea nav bar and the 'Powered by Gitea' footer
+A has the Gitea nav, the octo-org header with Unwatch/Settings, and an 'Add File' button
+A has the Gitea repo nav
+A has the Gitea repo nav (RSS, Unwatch, Pull Requests, Packages, Settings) and a Gitea avatar on the last commit
+A has the Gitea tea-cup logo and a 'Sign In' title where GitHub reads 'Sign in to GitHub'
+A has the Gitea teacup header and a 'Powered by Gitea' footer
+A has the Gitea teacup header nav (Issues/Pull Requests/Milestones/Explore) with a notification bell and '+' menu
+A has the Gitea teacup header nav and a 'Powered by Gitea' footer
+A has the Gitea teacup logo and the title 'Sign In', where GitHub says 'Sign in to GitHub' with the Octocat
+A has the Gitea teacup logo, 'Sign In' and 'Remember This Device'
+A has the Releases/Tags toggle, a Stable badge, the Downloads section and uppercase 'Source Code (ZIP)'
+A has the branch picker, compare icon and 'Add File' above the table, not in the file-tree header
+A has the seeded 'Alice Anders' account with '(seeded test account)' in the bio
+A has title-case 'New Page' where GitHub uses 'New page', a revision counter icon '1 ⟲', and relative time '4 years ago' where GitHub shows 'on May 17, 2023 · 1 revision'
+A header Gitea teacup nav
+A header has the Gitea logo
+A header is Gitea (teacup logo, Issues/Pull Requests/Milestones/Explore, notification bell/+ avatar)
+A header is octo-org with RSS/Unwatch/Packages/Releases/Wiki/Activity/Settings. GitHub shows the 'Public' badge, Notifications and Discussions/Security and quality/Insights
+A header row '8 Open 51 Closed' with icons vs GitHub 'Open 8 Closed 51' pills
+A inlines a tag chip 'v1.4.6' in the commit title. The trailing icon is a browse-files icon rather than GitHub's '<>' code icon
+A is GitHub Explore, with Explore/Topics/Trending/Collections/Events/GitHub Sponsors tabs, 'Here's what's popular on GitHub today...', an Open Source Friday video and Trending developers
+A is Gitea's minimal dark '404 Not Found' page with a warning icon and 'Powered by Gitea' footer
+A is Gitea's plain '404 Not Found' with a warning triangle and 'Powered by Gitea' footer
+A is a Gitea explore page with a left menu of Repositories/Users/Organizations and Filter/Sort buttons
+A is a Gitea explore page: left nav 'Repositories / Users / Organizations', 'Search repos...' with Filter/Sort buttons
+A is a Gitea org page: the Gitea header, New Repository / New Migration buttons, Members/Teams sidebar, New Team button and Worktime tab
+A is a flat list with no 'Commits on <date>' timeline groups
+A is a plain Gitea '404 Not Found' with a warning icon and a 'Powered by Gitea' footer
+A is headed '445 Commits' and has Gitea's 'Commit Graph' button, '14 Branches 16 Tags' and a 'This Branch' search dropdown
+A is the Gitea releases list: '16 Releases / 16 Tags' toggle, RSS Feed and New Release buttons
+A is titled '445 Commits' and has a 'Commit Graph' button, a 'Search commits… This Branch' bar, and '14 Branches 16 Tags'
+A issue list has checkboxes on every row and 'Label/Milestone/Project/Author/Assignee/Type/Sort' filters; GitHub has left sidebar (Issues, Assigned to me, Views, Milestones, Labels) and 'is:issue state:open' query bar
+A keeps the Gitea repo header (RSS icon, Unwatch/Star/Fork, tabs Packages/Releases/Wiki/Activity/Settings). GitHub's new issues UI in B uses a left sidebar (Issues, Assigned to me, Created by me, Mentioned, Recent activity, Milestones, Labels, Feedback Preview, Collapse sidebar)
+A label colors (bright cyan 'enhancement', solid green 'new feature') differ from GitHub's muted pills; A missing linked-PR icon on #16
+A labels its tabs '16 Releases / 16 Tags' with RSS Feed, where GitHub has plain 'Releases/Tags'
+A lacks 'Commit 99cc347' title, file tree, Search within code, Comments
+A lacks GitHub left sidebar and 'is:issue state:closed' query field with clear button
+A lacks Pages box, custom footer/sidebar placeholders, 'Clone this wiki locally'
+A lacks Pinned/People/Sponsors/sparklines
+A lacks stars/watching/forks, Used by, Contributors; 'README.md' header with pencil
+A login has Gitea teacup logo, 'Sign In' title, 'Remember This Device' checkbox, 'Sign in with OpenID', 'Register now.' link
+A matches GitHub Branches page with Check status 14/14 and Default badge
+A matches the GitHub org People layout more closely (left 'Organization permissions/Members' box, 'Find a member...' field, Follow buttons), but its org name is 'Gitea' with the teacup avatar
+A member rows show 'Hidden' badges, 'Member Role: Owner', '2FA: ×', 'Make visible'/'Remove' red buttons
+A merged line 'innobead merged 1 commits from main into main 6 years ago' vs GitHub 'pemistahl merged 1 commit into pemistahl:main from innobead:main on May 31, 2021'
+A merged line reads 'innobead merged 1 commits from main into main 6 years ago'
+A metadata 'by epage was closed last year' relative vs GitHub 'by epage was closed on Jan 14'
+A metadata 'opened 3 years ago by hellishvictor' vs GitHub '#272 · hellishvictor opened on Sep 14, 2024' with underlined usernames
+A milestone row shows '0%' left of a thin bar, plus inline Edit/Close/Delete links and a far-future 'Dec 31, 9998' date. GitHub shows '0% complete 2 open 0 closed' with 'No due date · 0/2 issues closed'
+A missing Used by/Contributors/stars/watching/forks; has 'Add File' and compare-icon buttons
+A missing linked-PR icons on #331/#172; A 'New Issue' green button vs GitHub grey 'New issue'
+A nav Packages/Projects/Releases/Wiki/Activity/Settings
+A nav has Packages/Releases/Activity/Settings, 'New Page' capitalized
+A nav includes Packages/Releases/Wiki/Activity/Settings, Unwatch/RSS
+A no 'Checks' tab and 'Files Changed' Title Case
+A org tabs Members/Teams/Worktime/Settings, seed Note 'tools/seed/seed.mjs', New Repository/New Migration/New Team buttons
+A org tabs include 'Members 5', 'Teams 3', 'Worktime', 'Settings' — Worktime is Gitea-only; GitHub shows 'People' and 'Sponsoring'
+A profile tabs 'Public Activity' and 'Starred Repositories 2' vs GitHub 'Stars 643'
+A profile tabs are 'Public Activity' and 'Starred Repositories 2' with an info-circle icon on Overview. GitHub uses a book icon for Overview and a 'Stars 643' tab
+A profile tabs are Gitea's (Public Activity, Starred Repositories)
+A puts the branch selector and 'Go to file'/'Add File' above the content. GitHub puts them in the tree sidebar
+A reads '1 changed files with 2 additions and 2 deletions' and shows a Gitea avatar with 'Peter M. Stahl last year'
+A reads '1 changed files with 3 additions and 3 deletions', has a 'Review' green button and a 'Viewed' checkbox, and has no 'Checks' tab
+A reads '4 years ago' and 'New Page'
+A reads 'edited this page 4 years ago' and 'New Page'
+A reads 'edited this page 4 years ago'. GitHub reads 'edited this page on May 17, 2023 · 1 revision'
+A reads 'innobead merged 1 commits from main into main', has an 'Edit' button, no Checks tab, and a 'Files Changed' tab
+A reads 'merged 1 commits from main into main 6 years ago' and has an Edit button
+A reads 'merged 1 commits from main into main'
+A release cards have left-gutter tag/commit/Compare column and 'Stable' badge; GitHub shows 'Latest' badge, Release list sidebar, Compare dropdown top-right
+A release: '16 Releases/16 Tags' toggle, RSS Feed, New Release, 'Stable' label, 'github-actions[bot] released this 2 years ago'
+A repo cards show '[seed]' descriptions and 'Filter/Sort' dropdowns
+A repo cards show '[seed]' descriptions and octo-org/alice-dev/bob-dev owners
+A repo cards show '[seed]' descriptions, 'theme-seed' and 'migrated-from-github' topics, octo-org owner
+A repo header has RSS/Unwatch/Settings/Releases 53/Packages tabs
+A repo header octo-org with Unwatch/RSS/Settings and Packages/Releases/Wiki tabs
+A repo list has Filter/Sort instead of Type/Language/Sort
+A repo nav has Packages/Releases/Wiki/Activity/Settings
+A repo nav includes Packages/Projects/Releases/Wiki/Activity/Settings and Unwatch/RSS buttons
+A repo row shows '.profile' with a '[seed]' description, stats '☆0 ⇅0 ⑂0' and no 'Public' badge or activity sparkline
+A repo search has 'Filter'/'Sort' buttons. GitHub has 'Find a repository...' with Type/Language/Sort
+A right sidebar is headed 'Description' with a '[seed] ... (migrated from github.com/akoutmos/prom_ex)' text, 'Manage Topics', a '5.4 MiB' size and a 'Search code...' box. GitHub's has 'About', stars/watching/forks, 'Sponsor this project', 'Contributors' and '+ 15 releases'
+A rows have checkboxes and '8 Open / 51 Closed' with icons, plus Label/Milestone/Project/Author/Assignee/Type/Sort filters
+A rows have checkboxes and an '8 Open / 51 Closed' header
+A run was triggered by 'admin' on octo-org/theme-playground
+A says 'Need an account? Register now.'
+A says 'Need an account? Register now.' where GitHub says 'New to GitHub? Create an account'
+A shows '130 workflow runs', relative '4 months ago' dates, and no Workflow/Event filters or Filter search
+A shows 'Default Branch: master' line under Pages heading; GitHub does not
+A shows 'Default Branch: master', which GitHub never displays on the wiki pages list
+A shows 'Dependabot compatibility score' as a broken image link, where GitHub renders the badge
+A shows 'Joel Natividad and Peter M. Stahl'
+A shows 'Joel Natividad and Peter M. Stahl' with Gitea avatars, a 10-char SHA and relative '2 years ago'
+A shows 'Source Code (ZIP)' in uppercase
+A shows 'Username or Email Address' in title case
+A shows Gitea avatars with full names and has no Verified badges or check counts
+A shows a '1 Commits' box header. GitHub has a 'Commits on May 31, 2021' timeline
+A shows a Gitea avatar with 'David Ko 6 years ago' and a 10-character SHA
+A shows a Gitea avatar with 'Peter M. Stahl last year'
+A shows a Gitea avatar with full names
+A shows a Gitea avatar with the full name and relative time, and has no Verified badges or check counts
+A shows a broken image link 'Dependabot compatibility score' where GitHub renders the compatibility badge
+A shows a comment editor with Write/Preview and a markdown toolbar
+A shows a history icon with '1' and '4 years ago' where GitHub shows '1 revision'
+A shows an email, 'Joined on Sep 29, 2026', 'Block user' and an RSS icon next to followers
+A shows an extra 'Default Branch: master' line above the page list, and its button is title-case 'New Page'
+A shows checkboxes on rows, a greyed 'Project' filter and a 'Type' filter
+A shows long SHAs (e.g. 99cc347707) and a Gitea logo for the author avatars
+A shows no CI check counts (14/14) or Verified badges, and uses a different browse icon
+A shows relative '4 months ago' times
+A shows relative dates ('was closed last year'), with no underlined author links or PR link icons
+A shows row checkboxes, 'Labels' and 'Milestones' buttons, a greyed-out 'Project' filter and a 'Type' filter
+A shows seed data ('Octo Org', 'test data')
+A shows the '596 lines · 22 KiB · Markdown' format
+A shows the email and 'Joined on' in the profile sidebar
+A shows the milestones page without GitHub's left Issues sidebar (Issues/Assigned to me/Created by me/Mentioned/Recent activity/Feedback Preview/Collapse sidebar), and puts Labels/Milestones tabs next to a full-width search bar
+A sidebar 'Description' with '[seed]', 'Manage Topics', '2.3 MiB', 'Search code...'
+A sidebar Time Tracker/Due Date/Dependencies/Reference/Pin
+A sidebar has 'Run Details' with only 'Workflow file' (no Usage), job list shows durations
+A sidebar has Time Tracker, Due Date and Dependencies
+A sidebar has an email, 'Joined on', 'Block user' and an identicon avatar
+A sidebar has an identicon, email, 'Joined on' and 'Block user'
+A sidebar is headed 'Description' and shows '[seed]', Manage Topics and a Search code box
+A sidebar shows a gear next to the username, 'Follow' with a person icon, an RSS icon beside followers, email and 'Joined on' lines, a lone org avatar and 'Block user'. GitHub uses 'Block or report user' and shows Achievements
+A sidebar shows email, 'Joined on Sep 29, 2026', RSS icon, 'Block user' vs 'Block or report user'
+A single-release page lacks the 'Releases / v1.4.6' breadcrumb
+A tabs have 'Public Activity' and 'Starred Repositories'. GitHub has 'Stars 643'
+A tabs read 'Public Activity' and 'Starred Repositories 2'
+A toolbar '1 changed files with 3 additions and 3 deletions', '0 / 1 files viewed', 'Review' green button; GitHub has 'Changes from all commits / File filter / Conversations / Jump to' bar
+A toolbar 'Raw / Permalink / Normal View / History / Unescape' — Gitea-only 'Unescape' and 'Normal View'
+A uses '16 Releases | 16 Tags' segmented buttons plus 'RSS Feed' and 'New Release'; GitHub shows Releases/Tags toggle + 'Find a release' search
+A uses 10-character SHAs
+A uses 10-character SHAs and a tag pill (v1.4.6) inline
+A uses Gitea's release layout: a left metadata column (tag, sha, Compare), a 'Stable' badge where GitHub uses 'Latest', and 'github-actions[bot] released this 2 years ago · 3 commits to main since this release'
+A uses a '16 Releases/16 Tags' toggle with RSS Feed/New Release buttons
+A uses a 'Stable' badge (GitHub: 'Latest'), with the tag and SHA placed outside above the card and a pencil edit icon
+A uses a 'Stable' badge where GitHub uses 'Latest', a 'Downloads' section where GitHub has 'Assets 8', and 'Source Code (ZIP)' in caps
+A uses a 'Stable' label where GitHub uses 'Latest', a 'Downloads' section where GitHub has 'Assets', and 'Source Code (ZIP)' in caps
+A uses a split diff by default with 10-character parent/commit SHAs
+A uses an Open/Closed toggle with icons ('1 Open', '6 Closed'). GitHub uses 'Open 1' / 'Closed 6' tabs with count pills
+A uses relative 'opened 3 years ago by X' where GitHub shows '#272 · user opened on Sep 14, 2024'
+A uses relative dates ('was closed 2 years ago') with no underlined usernames. It has no linked-PR icons ('⇅ 1')
+A uses tab labels 'Public Activity' and 'Starred Repositories', and a Search repos.../Filter/Sort bar
+A uses tab labels 'Public Activity' and 'Starred Repositories', shows an identicon, a gear next to the username, and 'Block user'
+A uses tab labels 'Public Activity' and 'Starred Repositories'; GitHub uses 'Stars'
+A uses title-case 'Username or Email Address' and 'Sign In'
+A uses title-case labels ('Username or Email Address', 'Sign In') and 'Need an account? Register now.'; GitHub reads 'New to GitHub? Create an account'
+A wiki has a 'Page: Home' dropdown, a Code clone button and 'Delete Page'
+A wiki has a 'Page: Home' select, a green Code button and a 'Delete Page' button
+A wiki page shows a revision count and clock icon, 'New Page' and a red 'Delete Page', a 'Page: Home' dropdown and a green 'Code' clone dropdown. GitHub has a 'Pages 1' sidebar with 'Find a page or section...', 'Add a custom footer/sidebar' and 'Clone this wiki locally'
+A wiki pages list shows 'Default Branch: master' line and 'Last updated 4 years ago' relative
+A wiki: 'Delete Page', revision clock icon, 'Page: Home' dropdown and green Code button
+A workflow graph zoom buttons use a different icon set
+A's 'New Page' button is Title Case where GitHub writes 'New page'
+A's 404 is a plain warning icon with text, not the Octocat desert illustration
+A's Members page has Hidden badges, 'Make visible' and red Leave/Remove buttons, 'Member Role: Owner' and '2FA: ✗'
+A's Members page has Hidden badges, Make visible, Leave/Remove, Member Role and 2FA
+A's README badges and images render as broken alt-text links ('rust build status', 'grex demo')
+A's README badges render as broken alt-text links
+A's README card has no 'user / README.md' header label
+A's avatars are Gitea teacups, and its comments say 'commented 2 years ago (Migrated from github.com)'
+A's avatars are the Gitea logo; it shows 'Peter M. Stahl 2 years ago', and its hashes are 10 characters long
+A's blame rows show teacup avatars and truncated messages
+A's blame rows use teacup avatars and have no Older/Newer heat legend or Contributors count
+A's blame toolbar has Raw/Permalink/Normal View/History/Unescape and a '596 lines · 22 KiB · Markdown' label
+A's button reads 'New Page' in title case
+A's commit page has the title in a box with 'Browse Source' and 'Operations' buttons. GitHub has 'Commit 99cc347' with 'Browse files'
+A's commit row shows a teacup avatar and '445 Commits' in the directory view
+A's directory table has no column headers (Name / Last commit message / Last commit date)
+A's explore page is a plain repo list with a Filter/Sort bar
+A's file header has a 'Viewed' checkbox and puts the diffstat on the right
+A's file table has no 'Name / Last commit message / Last commit date' header row
+A's file tree and branch/search layout differ: the branch picker sits above the content, not in the tree header
+A's footer reads '1 changed files with 2 additions and 2 deletions'
+A's footer reads 'Powered by Gitea Version 1.27.3'
+A's footer reads 'Powered by Gitea Version: 1.27.3'
+A's footer reads 'Powered by Gitea'
+A's header has an 'Add File' button and a '596 lines · 22 KiB · Markdown' line where GitHub shows '595 lines (435 loc) · 21.8 KB'
+A's header uses the Gitea logo, and its left sidebar lists Repositories/Users/Organizations
+A's merge line reads 'merged 1 commits from main into main', it has no Checks tab, and it uses 'Files Changed'
+A's meta reads 'by epage was closed last year' with relative times
+A's meta reads 'merged 1 commits from main into main 6 years ago'
+A's metadata reads 'edited this page 4 years ago' where GitHub has 'on May 17, 2023 · 1 revision'
+A's milestone row has Gitea meta (2 Open · 0 Closed · Updated 4 months ago · Dec 31, 9998) and inline Edit/Close/Delete links; GitHub shows 'No due date · 0/2 issues closed' and '0% complete 2 open 0 closed'
+A's org members page shows 'Hidden' badges, 'Member Role: Owner/Member', '2FA: ✕', 'Make visible' and 'Leave/Remove' buttons, and 'Manage teams and members'
+A's org tabs include Teams and Worktime; A has the banner 'Members are managed through teams' and a 'Manage teams and members' button
+A's org tabs include Teams, Worktime and Settings, and are labelled 'Members' where GitHub uses 'People'
+A's page list box is narrower (container width) with the date right-aligned; GitHub's is full width with the date in a middle column
+A's profile README card starts straight at the heading, with no 'user / README.md' path header
+A's profile shows the email, a 'Joined on' date, an org avatar tile and an RSS icon beside the follower count
+A's profile tabs are 'Public Activity' and 'Starred Repositories'
+A's repo header has RSS/Unwatch and Title Case tabs
+A's repo header has an RSS icon button and Unwatch/Star/Fork order, title-case 'Pull Requests', and extra Packages/Releases/Wiki/Activity tabs
+A's repo nav has Packages, Releases, Wiki, Activity and Settings, and Unwatch plus an RSS icon
+A's repo nav has Title Case 'Pull Requests' plus Packages/Projects/Releases/Wiki/Activity/Settings, and the header has an RSS icon and 'Unwatch' button
+A's repo nav includes Packages/Releases/Activity/Settings and an RSS/Unwatch header
+A's repo nav is the Gitea set (Packages, Wiki, Activity, Settings, Unwatch)
+A's repo nav is the Gitea set with Settings and Unwatch
+A's row says 'Last updated 4 years ago', where GitHub says 'Last updated on May 17, 2023'
+A's rows have checkboxes and 'main ←' branch chips, but no Bot badges or CI check counts
+A's rows show relative ages ('2 years ago') and 'Release details'; GitHub shows 'on Nov 14, 2025', 'Notes' and 'Downloads'
+A's rows show relative ages ('2 years ago'), 10-character SHAs and 'Release details'. GitHub has 'on Nov 14, 2025', 7-character SHAs, Notes and Downloads, plus an ellipsis button beside the tag name
+A's rows use relative times ('was closed 2 years ago') and plain, non-underlined usernames
+A's sidebar has 'All Workflows' and 'CI' only, with no Actions heading, Management/Caches section or filter search
+A's sidebar has a 'Description' heading with [seed]/migrated text, 'Manage Topics', '5.4 MiB' and a 'Search code…' box
+A's sidebar says 'Description' where GitHub says 'About', and it has 'Manage Topics', '2.3 MiB' and 'Search code...'
+A's summary reads '1 changed files'
+A's tab is Title Case 'Files Changed', it has no Checks tab, and it shows an 'Edit' button where GitHub has 'New issue'
+A's tab reads 'Starred Repositories 2' and includes a 'Public Activity' tab. GitHub says 'Stars 643'
+A's tabs read '16 Releases / 16 Tags' with an RSS Feed button
+A's timestamp reads '4 years ago'; GitHub shows 'on May 17, 2023'
+A's title reads '445 Commits' and has a 'Commit Graph' button, '14 Branches 16 Tags', and a 'Search commits...' bar with a 'This Branch' select; GitHub shows 'Commits' with All users/All time filters
+A's title reads '445 Commits' where GitHub just says 'Commits'
+A's toolbar has '1 changed files with 3 additions and 3 deletions', '0 / 1 files viewed', and a green 'Review' button; GitHub has Changes from all commits/File filter/Conversations/Jump to
+A's toolbar has a source/preview toggle icon, '22 KiB' and Raw/Permalink/Blame/History buttons, where GitHub has Preview/Code/Blame tabs and '595 lines (435 loc) · 21.8 KB'
+A's toolbar has an 'Add File' dropdown, a 'History' button and a compare icon; GitHub has a sticky branch picker above the tree and no table header
+A's wiki has a 'Page: Home' dropdown and a green 'Code' clone button; GitHub has a Pages sidebar and 'Clone this wiki locally'
+A's wiki page has 'Page: Home' dropdown and green 'Code' clone button in the right column and a red 'Delete Page' button, with no Pages sidebar or 'Clone this wiki locally' box
+A's wiki page has a 'Page: Home' dropdown and a green 'Code' clone button instead of GitHub's Pages sidebar box with 'Find a page or section...', 'Add a custom sidebar/footer', and 'Clone this wiki locally'
+A's workflow sidebar lists only 'All Workflows' and 'CI', with no Actions heading or Caches
+B '(Migrated from github.com)' on every comment and Gitea teacup avatars
+B '1 Commits' boxed header instead of 'Commits on May 31, 2021' timeline
+B '1 changed files with 2 additions and 2 deletions'; split diff with Gitea layout
+B '1 changed files with 3 additions and 3 deletions', '0/1 files viewed', 'Review' button, 'Viewed' checkbox
+B 'Add File' button and branch dropdown in content header; GitHub has branch selector and search in file tree
+B 'Back to workflow ci' link and 'Re-run failed jobs' button; red X header for run title with '#14'
+B 'Browse Source' + 'Operations' dropdown vs GitHub 'Browse files'
+B 'Dependabot compatibility score' rendered as broken image alt link instead of badge
+B 'Edit' + 'New Issue' buttons; 'opened 6 years ago by sarkiroka · 9 comments' subline
+B 'Edit' button vs GitHub 'New issue'; B 'innobead merged 1 commits from main into main 6 years ago'
+B 'Edit' button; 'innobead merged 1 commits from main into main 6 years ago'
+B 'Need an account? Register now.' vs GitHub 'New to GitHub? Create an account'
+B 'New Issue' green button with Labels/Milestones buttons vs GitHub grey 'New issue'
+B 'New Page' Title Case; 'edited this page 4 years ago' vs 'on May 17, 2023 · 1 revision'
+B 'Powered by Gitea' footer and Gitea header
+B 'Powered by Gitea' footer and Unwatch/RSS/Settings header
+B 'Powered by Gitea' footer and repo header with Unwatch/RSS/Settings
+B 'Powered by Gitea' footer; octo-org/theme-playground header with Unwatch/RSS/Settings
+B 'Run Details' Title Case; no 'Usage' entry
+B 'Starred Repositories' and 'Public Activity' tabs
+B 'Triggered via workflow_dispatch Sep 29, 2026' with admin avatar
+B 'Username or Email Address' Title Case, 'Remember This Device' checkbox, 'Sign in with OpenID'
+B 'innobead merged 1 commits from main into main 6 years ago' and 'Edit' button
+B 'opened 3 years ago by hellishvictor' vs GitHub '#272 · hellishvictor opened on Sep 14, 2024'
+B Follow button has person icon; GitHub has plain 'Follow'
+B Gitea footer
+B Gitea header
+B Gitea header/footer
+B Gitea header/logo and 'Powered by Gitea' footer
+B Gitea header/logo; comments tagged '(Migrated from github.com)' with Gitea teacup avatar
+B Gitea logo and footer
+B Gitea logo, octo-org header with Unwatch/RSS/Settings
+B Gitea logo/footer
+B Gitea logo/nav and 'Migrated from github.com' on every comment with green Gitea teacup avatars
+B PR 'innobead merged 1 commits from main into main 6 years ago', 'Edit' button
+B PR header 'innobead merged 1 commits from main into main 6 years ago' (grammar '1 commits', relative time) with 'Edit' button instead of 'New issue'
+B PR list has checkboxes per row, '12 Open / 280 Closed' header, Labels/Milestones buttons and 'Search...' instead of 'is:pr state:open' filter bar
+B PR shows merge box 'There is no key available to sign this commit', 'Create merge commit', 'View command line instructions' and a full comment editor with H1/H2/H3 toolbar and 'Close Pull Request'
+B README badges and the logo render as broken alt-text links (images blocked)
+B README badges render as broken alt-text links
+B README box lacks 'user / README.md' label
+B README header 'README.md' with pencil rather than README / MIT license tabs
+B README header reads 'README.md' with a pencil icon instead of README / MIT license tabs
+B README renders every badge and image as broken alt-text links, with no grex logo or demo gif
+B README renders images as broken alt-text links ('rust build status', 'python build status'), header titled 'README.md' with pencil instead of README/license tabs
+B README tab shows 'README.md' with pencil; GitHub has README | MIT license tabs
+B actions run page reads 'Back to workflow ci' and 'Re-run failed jobs'. It has a 'Run Details' heading in Title Case with no 'Usage' entry
+B actions sidebar has only 'All Workflows / CI', with no Management/Caches
+B actions sidebar only has 'All Workflows / CI'
+B author row 'Peter M. Stahl last year' with Gitea avatar vs GitHub 'pemistahl committed on Jan 14 · ✓ 14/14'
+B base/compare pickers read 'base: octo-org/grex:v1.4.5'. GitHub reads 'base: v1.4.5'
+B base/compare selectors 'base: octo-org/grex:v1.4.5' fully qualified
+B blame avatars are Gitea teacup icons, commit messages truncated 'Update docs and release no...'
+B blame toolbar 'Raw/Permalink/Normal View/History/Unescape' and '596 lines · 22 KiB · Markdown'
+B branch selector not in file tree; 'Add File' button
+B branch selector sits above the content, not in the file-tree sidebar
+B branch text 'wants to merge 1 commits from X into main' (grammar 'commits', reversed order) vs GitHub 'wants to merge 1 commit into pemistahl:main from ...'
+B branches page shows '445 Commits / 14 Branches / 16 Tags' bar, 'Default Branch' box, and rows with RSS/download/edit/delete icon strips, 'New Pull Request' button
+B branches page shows '445 Commits 14 Branches 16 Tags' bar, 'Default Branch' box and full list of 14 branches with RSS/download/edit/delete icons per row
+B branches page with '445 Commits 14 Branches 16 Tags' summary, Default Branch box, per-row RSS/download/edit/delete icons
+B code block not syntax-highlighted (plain grey) vs GitHub blue-colored console output
+B comment '(Migrated from github.com)' and Gitea teacup avatar; mergebox 'There is no key available to sign this commit'
+B comment header 'commented 4 months ago (Migrated from github.com)' with Gitea avatar; tabs lack 'Checks'
+B comment header says '4 months ago (Migrated from github.com)' with Gitea teacup avatar placeholder
+B comments with Gitea teacup avatars and '(Migrated from github.com)'
+B commit author 'David Ko 6 years ago' with Gitea avatar
+B commit author 'Peter M. Stahl' with Gitea teacup avatar, '3 years ago'
+B commit bar shows 'Peter M. Stahl' with a Gitea icon and '2 years ago'
+B commit bar shows green Gitea avatar and full name 'Alex Koutmos'
+B commit bar shows green Gitea avatar and full names 'Joel Natividad and Peter M. Stahl' plus '445 Commits' instead of history link
+B commit bar shows the full name 'Peter M. Stahl' with a Gitea avatar
+B commit bar shows the full name 'Peter M. Stahl' with a Gitea avatar and has no History link
+B commit bar shows the full names 'Joel Nativdad and Peter M. Stahl' where GitHub shows logins and stacked avatars
+B commit bar with Gitea avatar, full names, '445 Commits'; branch picker in main column with 'Add File'
+B commit list is flat '74 Commits' box with tag pills 'v1.4.5 ... v1.4.6'; GitHub groups 'Commits on <date>' and has 'Files changed 25' tab and '3 contributors'
+B commit metadata 'parent fa3e8ed71c commit 99cc347707' boxes vs GitHub '1 parent fa3e8ed commit 99cc347'
+B commit page has no 'Commit 99cc347' title, no file tree sidebar, no 'Search within code', no Comments section
+B commit page lacks 'Commit 99cc347' title, file tree, Comments section
+B commit row author 'David Ko 6 years ago' with Gitea teacup avatar vs GitHub 'innobead committed on May 31, 2021'
+B commit rows lack Verified badges and dependabot bot avatars; show 'Peter M. Stahl 2 years ago' with Gitea teacup avatar
+B commits tab shows boxed header '1 Commits' (bad pluralization) instead of GitHub 'Commits on May 31, 2021' timeline with vertical line
+B dates are relative ('Last updated 4 years ago'), right-aligned in a thin row. GitHub reads 'Last updated on May 17, 2023', centered in a taller row
+B dates are relative ('opened 4 months ago by GhostCoder6969'). GitHub reads 'GhostCoder6969 opened 2 days ago'
+B diff is split view with 'parent fa3e8ed71c commit 99cc347707' pills and '1 changed files with 2 additions and 2 deletions' (bad plural)
+B dir listing lacks Name/Last commit message/Last commit date header row
+B file header uses 'Viewed' checkbox instead of GitHub's code/rich-diff toggle
+B file table has no 'Name / Last commit message / Last commit date' header row
+B file toolbar 'Raw/Permalink/Blame/History' + '448 lines · 16 KiB · Rust' vs GitHub Code|Blame toggle and '447 lines (399 loc) · 16 KB'
+B file tree has Gitea's layout, with the branch selector outside the tree
+B file tree shows .github/benches/src expanded unicode_tables; no code folding chevrons in gutter
+B file tree sidebar has no branch selector + search button stacked at top; branch picker sits in the main column with a separate compare icon and 'Add File' button
+B file view has no 'Code | Blame' segmented toggle before the '447 lines (399 loc) · 16 KB' line. It shows '448 lines · 16 KiB · Rust' and separate Raw/Permalink/Blame/History buttons
+B file view has no Preview/Code/Blame segmented control; it shows Gitea's Raw/Permalink/Blame/History buttons and '22 KiB'
+B file view header reads '448 lines · 16 KiB · Rust' with Raw/Permalink/Blame/History buttons instead of GitHub's Code/Blame toggle and '447 lines (399 loc) · 16 KB'
+B file view toolbar 'Raw / Permalink / Blame / History' buttons and '448 lines · 16 KiB · Rust'; GitHub has Code/Blame segmented toggle and '447 lines (399 loc) · 16 KB'
+B folder icons are grey outlined, not the GitHub filled folder style; no 'Public' badge beside repo name
+B footer 'Powered by Gitea Version 1.27.3 Page: 27ms Template: 3ms'
+B footer 'Powered by Gitea Version 1.27.3' and repo header with RSS/Unwatch/Settings/Packages/Wiki/Releases
+B footer 'Powered by Gitea Version: 1.27.3'
+B footer 'Powered by Gitea'
+B footer 'Powered by Gitea'; 'New Pull Request' capitalized
+B footer 'Powered by Gitea'; octo-org repo with Unwatch/RSS/Settings
+B footer reads 'Powered by Gitea Version: 1.27.3 Page: 18ms Template: 11ms'
+B footer reads 'Powered by Gitea Version: 1.27.3 Page: 27ms Template: 3ms'
+B footer reads 'Powered by Gitea Version: 1.27.3 Page: 6ms Template: 3ms'
+B footer reads 'Powered by Gitea Version: 1.27.3 Page: 6ms Template: 3ms' with green Gitea teacup logo in footer and global header
+B footer reads 'Powered by Gitea Version: 1.27.3'
+B footer reads 'Powered by Gitea'
+B footer reads 'Powered by Gitea'. B has no pagination
+B gives every comment a Gitea-logo avatar with '(Migrated from github.com)'
+B gives every comment a large Gitea-logo avatar in the left gutter, with '(Migrated from github.com)' after the author
+B global header has the Gitea teacup logo and Issues/Pull Requests/Milestones/Explore nav
+B global header is Gitea (green teacup logo, Issues/Pull Requests/Milestones/Explore) not GitHub octocat/Platform/Solutions
+B global nav is 'Issues / Pull Requests / Milestones / Explore' plus bell/+/avatar instead of GitHub marketing nav
+B graph cards lack GitHub matrix styling; zoom icons top right instead of bottom-right fullscreen/-/+
+B graph shows '6 jobs • 1 dependency • 83% success' with zoom controls at the top right. GitHub puts the zoom controls at the bottom right
+B green 'Open' PR pills and 'New Pull Request' button
+B has '(Migrated from github.com)' comments
+B has '0 open issues/pull requests' plus Edit/Delete on every row
+B has '1 changed files with 3 additions and 3 deletions' summary bar, '0 / 1 files viewed', 'Review' green button and 'Viewed' checkbox instead of GitHub 'Changes from all commits / File filter / Conversations / Jump to' bar
+B has '16 Releases / 16 Tags' tabs plus RSS Feed and New Release, a left metadata column, and a 'Stable' badge where GitHub uses 'Latest'
+B has '16 Releases / 16 Tags' tabs with RSS Feed and New Release buttons, where GitHub has Releases/Tags plus a 'Find a release' search
+B has '16 Releases / 16 Tags' toggles and 'RSS Feed' + 'New Release' buttons. GitHub has 'Releases / Tags' plus a 'Find a release' search and a 'Release list' left sidebar
+B has '16 Releases/16 Tags', RSS Feed and New Release
+B has 'Add File', a teacup avatar, '14 Branches', and a '[seed]' description
+B has 'Back to workflow ci' and 'Re-run failed jobs'
+B has 'Back to workflow ci', 'Re-run failed jobs', a 'Run Details' heading, and graph controls at the top right
+B has 'Downloads' with MiB sizes and 'Source Code (ZIP)', where GitHub has 'Assets' with sha256 digests
+B has 'New Repository', 'New Migration' and 'New Team' buttons and a Teams sidebar
+B has 'New Repository'/'New Migration'/'New Team' green buttons in sidebar; no Pinned, People, Top languages, Most used topics sections
+B has 'Public Activity' / 'Starred Repositories' tabs, a Filter dropdown and a 'Search repos...' input
+B has 'Pull request closed – This pull request cannot be reopened because the branch was deleted'
+B has 'Search tags...' input and 'Release details' link instead of 'Notes' and 'Downloads'
+B has 'Sign in to GitHub', Continue with Google/Apple and GitHub footer links
+B has 'Smoke edit' runs by admin
+B has 'Smoke edit' runs pushed by admin and relative times
+B has '[seed]' descriptions and octo-org repos
+B has 'migrated-from-github' and 'theme-seed' topics, 'Manage Topics', '5.4 MiB' and a Search code input
+B has 10-char SHAs, Gitea avatars and relative times, with no Verified badges or CI counts
+B has 16 Releases/16 Tags tabs and a New Release button, a 'Stable' badge and a 'Downloads' section with KiB sizes and relative dates
+B has Achievements badges and 'Block or report user'
+B has Filter/Sort buttons
+B has GitHub 'People' layout with 'Organization permissions' sidebar and Follow buttons (it is the real Gitea org on github.com)
+B has GitHub Explore subnav (Topics, Trending, Collections, Events, GitHub Sponsors), 'Trending developers' panel and Rubber Duck Thursdays card
+B has GitHub footer '© 2026 GitHub, Inc.' and 'Last updated on May 17, 2023'
+B has GitHub's Explore/Topics/Trending/Collections subnav and a Trending developers panel
+B has GitHub's Star Wars Octocat 404 illustration and a search box
+B has Gitea repo tabs and an RSS button
+B has Gitea repo tabs and no 'Usage' item
+B has Gitea teacup logo and 'Powered by Gitea' footer
+B has RSS + Follow and no Sponsor, and its repo rows have no sparklines
+B has RSS + Follow instead of Sponsor
+B has Raw/Permalink/Blame/History buttons, a '22 KiB' size, and no Preview/Code/Blame toggle
+B has Unwatch/Settings in the header and no Public badge
+B has a '1 changed files with 3 additions and 3 deletions' summary bar, a '0 / 1 files viewed' progress bar and a green 'Review' dropdown
+B has a '1 changed files…' summary bar with a Review dropdown and 'Viewed' checkbox, and no 'Changes from all commits / File filter' toolbar
+B has a '13 labels' header. GitHub has 'Active 13 / Archived 0' and a 'Search all labels' input
+B has a '16 Tags' header and a 'Search tags...' input inside the box. GitHub has a 'Tags' header with a tag icon and no search
+B has a '445 Commits' heading, 'Commit Graph', '14 Branches/16 Tags', 'Search commits...' and 'This Branch'. GitHub has 'Commits' with All users/All time
+B has a '596 lines · 22 KiB · Markdown' header and no Preview/Code/Blame segmented control
+B has a 'Delete Page' red button and a revision-count clock icon
+B has a 'Downloads' section with 'Source Code (ZIP)', MiB sizes, info icons and relative '2 years ago' dates. GitHub has 'Assets 8' with sha256 digests, MB sizes and absolute dates
+B has a 'Downloads' section with MiB sizes and relative dates. GitHub has 'Assets 8' with sha256 digests and absolute dates
+B has a 'New Label' button and no search, Active/Archived tabs or pagination
+B has a 'No Branch/Tag Specified' dropdown in the sidebar, and its sidebar has Time Tracker, Due Date and Dependencies
+B has a 'Powered by Gitea' footer
+B has a 'Powered by Gitea' footer and a 'Starred Repositories' tab
+B has a 'Powered by Gitea' footer and no left Issues sidebar (Assigned to me, Views, Feedback)
+B has a 'Remember This Device' checkbox and a 'Sign in with OpenID' button, but no Google or Apple buttons
+B has a 'Search tags...' box and a '16 Tags' heading
+B has a 'Search tags...' input inside the box
+B has a Default Branch box and a long branch list with action icons and divergence bars
+B has a Gitea 'Pull request closed' box and a Gitea editor, and its sidebar has Time Tracker, Due Date and Dependencies
+B has a Gitea editor with H1/H2/H3, a 'Close Pull Request' button, and sidebar sections Time Tracker, Due Date, Dependencies and Reference
+B has a Gitea header
+B has a Gitea header and a 'Powered by Gitea' footer
+B has a Gitea header and footer
+B has a Gitea header, and its Explore page lists only local repos with Repositories/Users/Organizations tabs
+B has a Gitea header, no Actions heading, no workflow list, and no Filter workflow runs box
+B has a Gitea logo in the global header with Issues/Pull Requests/Milestones/Explore, a notification bell and an avatar
+B has a Gitea merge-comment editor with a disabled pale-green Comment button, and Time Tracker, Due Date, Dependencies and Reference in the sidebar
+B has a Title Case 'New Issue' green button next to Labels/Milestones
+B has a checkbox on every row and Project/Type/Sort filter dropdowns
+B has a checkbox on every row and relative 'opened X ago by' metadata
+B has a colorful Octo Org avatar and a 'Settings' tab, a 'Members 5' tab instead of 'People', 'Teams 3' and 'Worktime' tabs, and a 'Manage teams and members' green button
+B has a comment editor with a toolbar, and a sidebar with Time Tracker, Due Date, Dependencies, Reference and Pin/Lock/Delete
+B has a flat '74 Commits' list with no date grouping, Gitea-logo avatars, and no Verified badges
+B has a flat '74 Commits' list with tag pills and no 'Commits on <date>' grouping, no Files changed tab and no contributors count
+B has a full top nav (Explore/Help, Sign In/Register); GitHub login has no nav
+B has a green 'Manage teams and members' button and a 'Search users...' input; GitHub has a 'People' title with an Organization permissions sidebar
+B has a greyed-out 'Project' filter and a 'Type' filter, and is missing the Reviews filter and the list/compact view toggles
+B has a merge box ('There is no key available to sign this commit', 'Create merge commit', 'View command line instructions') and a Close Pull Request button
+B has a plain 'Search...' box with 'Labels', 'Milestones' and 'New Pull Request' (Title Case). GitHub has an 'All pull requests' heading and an 'is:pr state:open' query input
+B has a plain search, a Labels/Milestones/'New Issue' green button and checkboxes on rows
+B has a search bar and a 'New Milestone' button. The milestone row has inline Edit/Close/Delete, a 'Dec 31, 9998' date and '0%' left of the bar. GitHub shows '0% complete 2 open 0 closed'
+B has a teacup avatar, 'Add File', a Gitea header, and octo-org as owner
+B has an '8 Open / 51 Closed' header with icons and Gitea filter names (Label, Milestone, Project, Type, Sort)
+B has an 'Add File' button and a PR-compare icon
+B has an 'Add File' button, a compare icon, and '17 Branches'
+B has an 'Edit' button and 'opened 6 years ago by sarkiroka · 9 comments' under the title
+B has an 'Edit' button and a Title Case 'Files Changed' tab with no Checks tab
+B has an 'Edit' button and a Title Case 'New Issue' button, and its header uses the Gitea logo nav
+B has an 'Edit' button instead of 'New issue'
+B has an 'Edit' button next to 'New Issue' (title case)
+B has an Edit button next to the title and a markdown editor instead of the sign-up banner
+B has an RSS Feed button, a '16 Tags' header and a search input
+B has an RSS icon plus 'Follow' where GitHub has 'Sponsor'
+B has an identicon avatar, 'Joined on', and 'Block user'
+B has branch dropdown + compare icon + breadcrumb + 'Go to file' + 'Add File' in one row; GitHub puts branch selector and Go to file inside left file tree
+B has checkboxes on each row, an '8 Open / 51 Closed' header with Label/Milestone/Project/Type/Sort filters, and separate Labels/Milestones buttons
+B has comment editor with H1/H2/H3 toolbar and 'Close Pull Request' button; GitHub shows yellow sign-up banner
+B has extra compare icon button next to Tags and 'Add File' dropdown; 'Pull Requests' capitalized
+B has no 'Add a custom footer/sidebar' placeholders
+B has no 'All issues' heading and no 'is:issue state:open' query bar
+B has no 'All jobs' filter icon
+B has no 'All pull requests' title and no 'is:pr state:open' query input; it has a plain 'Search...' box with Labels/Milestones buttons
+B has no 'All pull requests' title or 'is:pr state:open' filter query bar. It shows a plain 'Search…' input with Labels and Milestones buttons
+B has no 'Bot' or 'Contributor' badges, and its avatars are the Gitea logo with '(Migrated from github.com)'
+B has no 'Branches' title and no Overview/Active/Stale/All tabs
+B has no 'Branches' title and no Overview/Active/Stale/All tabs. It has a '445 Commits 14 Branches 16 Tags' strip and a 'Default Branch' box
+B has no 'Changes from all commits / File filter / Conversations / Jump to' toolbar
+B has no 'Checks 0' tab, and 'Files Changed' is Title Case. B shows 'David Ko 6 years ago' with a Gitea green avatar and a 10-char SHA '7f97b4aac7'. GitHub uses a 7-char SHA and 'innobead committed on May 31, 2021'
+B has no 'Checks' tab
+B has no 'Checks' tab and uses a Title Case 'Files Changed' tab
+B has no 'Commits 74 / Files changed 25' tabs and no '3 contributors'. It shows a '74 Commits' box with tag chips
+B has no 'Filter workflow runs' search box
+B has no 'Older…Newer' heat legend or Contributors avatars
+B has no 'Preview | Code | Blame' segmented control. It shows '22 KiB' and separate Raw/Permalink/Blame/History buttons
+B has no 'Public' badge beside the repo name
+B has no 'Release list' sidebar
+B has no 'Usage' entry and no 'Sign in to view logs'
+B has no Activity/stars/watching/forks stats, no Sponsor section and no Contributors section
+B has no Bot badges or CI counts
+B has no Check status or Behind/Ahead column headers
+B has no Checks tab and a Title Case 'Files Changed' tab
+B has no Checks tab, and its tab reads 'Files Changed' (capital C) where GitHub uses 'Files changed'
+B has no Checks tab, no 'Sign up for free' banner and no timeline commit row
+B has no Checks tab, no commit or merge timeline items, and Gitea-logo avatars
+B has no Checks tab, uses 'Files Changed' in title case, and its author avatar is a teacup ('David Ko 6 years ago')
+B has no Contributors or reactions. It reads 'github-actions[bot]' where GitHub reads 'github-actions'
+B has no Contributors section and no reactions row. It reads 'github-actions[bot] released this 2 years ago · 3 commits' with an octocat icon
+B has no Contributors section or reactions row. Its tag and commit sit in a left gutter with a Compare button
+B has no Explore/Topics/Trending subnav and no trending developers
+B has no Explore/Topics/Trending/Collections tabs, no Trending developers or trending repository cards and no 'Here's what's popular on GitHub today'
+B has no Files changed tab or contributors count
+B has no GitHub issues left sidebar
+B has no GitHub issues left sidebar (Issues / Assigned to me / Created by me / Milestones / Labels / Feedback). It shows a 'Labels | Milestones' text switch and a 'New Label' button
+B has no Issues left sidebar (Assigned to me, Created by me, Views…) and no 'is:issue state:open' query box
+B has no Lists or Starred topics, plus an identicon and 'Block user'
+B has no Overview/Active/Stale/All tabs and no Branches title
+B has no Overview/Active/Stale/All tabs or table headers
+B has no Owner badges and no timeline events
+B has no Pages sidebar, custom footer/sidebar placeholders or clone URL
+B has no Previous/Next pagination
+B has no Release list sidebar, Contributors or reactions
+B has no Sponsor button, Contributors, 'Sponsor this project' or stars/watching/forks list
+B has no Sponsor, Contributors or 'Report repository'; its README header reads 'README.md' with no MIT license tab, and its commit avatar is the Gitea logo
+B has no Sponsor, Contributors or Report repository, and has an 'Add File' button
+B has no Updated, Check status or Behind/Ahead table header
+B has no Used by, Contributors, or stars/watching/forks list
+B has no Used by, Contributors, watching/forks stats, or 'Report repository'
+B has no Verified badges
+B has no achievements; it shows the email, 'Joined on Sep 29, 2026' and 'Block user'
+B has no code-fold chevrons in the gutter, and its tree includes 'demo.gif' partially cut off
+B has no code-folding chevrons in the gutter
+B has no commit and merge timeline events
+B has no commit event row in the timeline
+B has no commit or merge events and no Checks tab, and its Files Changed tab is title-cased
+B has no commit or merge events in the timeline, and a full markdown editor toolbar replaces the 'Sign up for free' banner
+B has no date grouping or Verified badges, 10-char SHAs, and teacup avatars
+B has no date grouping, 10-char SHAs, teacup avatars, and no Verified or CI check counts
+B has no date-grouped timeline ('Commits on Jan 14, 2026')
+B has no file tree sidebar, no 'Search within code' box and no Comments section; its diff is split view
+B has no filter query bar
+B has no filter search box and no Workflow/Event filters
+B has no fold chevrons on code lines
+B has no label search, no Active/Archived tabs and no left sidebar
+B has no labeled, closed or branch-deleted timeline events
+B has no left Issues sidebar, has row checkboxes, and uses Gitea filters (Label/Milestone/Project/Type/Sort) with Labels/Milestones buttons
+B has no left issues sidebar
+B has no left issues sidebar and no query bar
+B has no left issues sidebar, and it has a Labels/Milestones sub-nav with a 'New Label' button
+B has no left sidebar (Issues/Assigned to me/.../Milestones/Labels/Feedback/Collapse sidebar), which GitHub's new Labels page has
+B has no left sidebar and no 'All issues' heading or 'is:issue state:open' filter
+B has no newsletter or multi-column GitHub footer. Its footer is 'Powered by Gitea'
+B has no pagination ('< Previous 1 Next >'), which GitHub shows at the bottom of the list
+B has no pinned repos, achievements or contribution graph; its README card is a small box
+B has no release list sidebar and no Contributors section
+B has no search box, no Active/Archived tabs and no pagination
+B has no sha256 digests or reactions
+B has no sha256 digests, Contributors or reactions
+B has no sparklines in its repo list and uses a Filter dropdown
+B has no timeline events (label added, title changed, commit referenced)
+B has no timeline events (label added, title changed, commit referenced) or Owner/Contributor badges
+B has no timeline events for label or commit references
+B has octo-org owner, the RSS/Unwatch button, and extra tabs
+B has per-row '0 open issues/pull requests' and Edit/Delete
+B has per-row icon rows (RSS, download, edit, trash) and a 'New Pull Request' button
+B has repo tabs Packages/Projects/Releases/Wiki/Activity/Settings instead of Discussions/Security and quality/Insights; Unwatch + RSS icon buttons instead of Notifications/Fork/Star order
+B has row checkboxes and 'opened 3 years ago by X' relative dates
+B has row checkboxes and a Label/Milestone/Project/Author/Assignee/Type/Sort filter bar
+B has row checkboxes and greyed Project and Type filters
+B has row checkboxes, '8 Open / 51 Closed' header, Label/Milestone/Project/Author/Assignee/Type/Sort filters
+B has the '1 changed files with 3 additions…' bar and a Review button, and no File filter or Jump to toolbar
+B has the 'Powered by Gitea' footer
+B has the GitHub header with Sponsor/Verified badges, Pinned, sparkline activity graphs and Top languages / Most used topics
+B has the Gitea footer
+B has the Gitea global header
+B has the Gitea global header and 'Powered by Gitea' footer
+B has the Gitea global header and footer
+B has the Gitea global header and repo nav (RSS, Unwatch, Packages/Releases/Wiki/Settings)
+B has the Gitea header
+B has the Gitea header and '(Migrated from github.com)' comments with Gitea avatars
+B has the Gitea header and a 'Powered by Gitea' footer
+B has the Gitea header and footer
+B has the Gitea header and no issues sidebar
+B has the Gitea header and repo nav
+B has the Gitea header nav
+B has the Gitea header nav and org tabs Members/Teams/Worktime/Settings
+B has the Gitea logo and 'Powered by Gitea' footer and none of GitHub's large marketing footer
+B has the Gitea logo nav (Issues/Pull Requests/Milestones/Explore) with bell, + and avatar
+B has the Gitea logo nav and the 'Powered by Gitea' footer
+B has the Gitea logo nav bar and the footer 'Powered by Gitea Version: 1.27.3'
+B has the Gitea merge box ('There is no key available to sign this commit', Create merge commit)
+B has the Gitea merge box, a Gitea markdown editor toolbar, and a pale disabled-green 'Comment' button
+B has the Gitea nav and 'Powered by Gitea' footer
+B has the Gitea nav, and the branch selector, 'Go to file' and 'Add File' sit above the content
+B has the Gitea nav, the Releases tab active, '16 Releases/16 Tags' toggles and an 'RSS Feed' button
+B has the Gitea repo nav (RSS, Unwatch, Releases tab, Settings)
+B has the Gitea tea-cup logo in the global header and a 'Powered by Gitea Version: 1.27.3 Page: 6ms Template: 3ms' footer
+B has the Gitea teacup header and a 'Powered by Gitea' footer
+B has the Gitea teacup nav and a 'Powered by Gitea' footer
+B has the Gitea top nav, and its Releases tab is a top-level tab. GitHub highlights the 'Code' tab on the releases page
+B has the branch selector and 'Go to file' / 'Add File' above the code rather than in the file tree panel
+B has title-case 'New Issue' and an 'Edit' button, '1 Participants', and no Relationships/Development sections
+B header Gitea teacup nav
+B header has 'Edit' button and 'opened 6 years ago by sarkiroka · 9 comments' subtitle
+B header has RSS icon + 'Follow' instead of 'Sponsor'; no follower count/Verified badge row
+B header has the Gitea logo
+B header is Gitea (teacup logo, Issues/Pull Requests/Milestones/Explore)
+B header is Gitea teacup nav
+B header is Gitea teacup/Issues/Pull Requests/Milestones/Explore
+B header reads '13 labels' with a 'New Label' button (Title Case). GitHub has an 'Active 13 / Archived 0' tab strip and a 'Search all labels' input
+B header reads 'innobead merged 1 commits from main into main 6 years ago' — plural error, and it lacks the fork owner prefix
+B identicon avatars; 'Search users...' vs GitHub 'Find a member...' with Organization permissions side menu
+B includes an inline merge box ('There is no key available to sign this commit', 'Create merge commit', 'View command line instructions') plus a Write/Preview comment editor
+B inline green 'Open' PR pills and 'New Pull Request' button per branch
+B inlines a tag chip on a commit title
+B is GitHub Explore with Topics/Trending/Collections/Events/GitHub Sponsors tabs and Trending developers
+B is GitHub's Star Wars-style Octocat 404 illustration ('This is not the web page you are looking for') with a search box and the full marketing footer
+B is GitHub's illustrated Octocat desert 404 with a search box and the marketing footer
+B is Gitea's explore page: a left menu (Repositories/Users/Organizations), a 'Search repos...' input with Filter/Sort, and octo-org '[seed]' repo cards
+B is Gitea's explore repos list with the Gitea header and '[seed]' repos
+B is a Gitea explore page: a Repositories/Users/Organizations left nav and a 'Search repos…' box with Filter/Sort
+B is a flat list with no 'Commits on <date>' groups, no Verified badges, Gitea avatars and 10-char SHAs
+B is a plain '404 Not Found' with a warning triangle and Gitea wording ('does not exist or you are not authorized'), where GitHub shows its Star Wars Octocat 404 illustration
+B is the seeded Alice Anders account
+B is titled 'Compare commits' where GitHub uses 'Comparing changes'; B has no explanatory subtitle with the 'compare across forks' links
+B is titled 'Compare commits' with pickers showing 'octo-org/grex:v1.4.5'
+B issue comments all show Gitea teacup avatars and '(Migrated from github.com)', relative '6 years ago'
+B issue list has checkboxes and '8 Open 51 Closed' header with Label/Milestone/Project/Author/Assignee/Type/Sort
+B issue list lacks GitHub left sidebar (Assigned to me, Created by me, Views, etc.) and 'All issues' heading with 'is:issue state:open' query
+B label 'Stable' instead of 'Latest'; 'github-actions[bot] released this 2 years ago'
+B labels page has Labels/Milestones sub-tabs and a New Label button
+B labels page under repo nav with 'Labels / Milestones' switcher, '13 labels' header and per-row 'N open issues/pull requests', Edit, Delete actions
+B lacks 'Add a custom footer/sidebar' placeholders and 'Clone this wiki locally' URL box
+B lacks Achievements section
+B lacks Achievements; README box lacks 'username / README.md' header
+B lacks Contributors section and reactions
+B lacks GitHub issues left sidebar, 'Search all labels', 'Active 13 / Archived 0' tabs and pagination
+B lacks GitHub's 'Changes from all commits / File filter / Conversations / Jump to' toolbar
+B lacks GitHub's new issues left sidebar (Issues, Assigned to me, Created by me, Mentioned, Recent activity, Milestones, Labels, Feedback Preview, Collapse sidebar)
+B lacks Google/Apple SSO buttons and GitHub footer on grey band
+B lacks Overview/Active/Stale/All tabs and table headers
+B lacks Pinned, People, Sponsors, Top languages, sparklines
+B lacks Pinned, People, Sponsors, sparklines, Type/Language filter
+B lacks Preview/Code/Blame toggle, age legend 'Older ▪▪ Newer', Contributors 4
+B lacks Sponsor button, 'Sponsor this project', Contributors section
+B lacks commit timeline item and 'merged commit b4ae0b8' event; 'Files Changed' capitalized, no Checks tab
+B lacks left sidebar (Issues/Assigned to me/Views/Milestones/Labels) and 'is:issue state:open' search
+B lacks stars/watching/forks list, 'Used by', 'Contributors' sections
+B lacks timeline events (commit, label added, closed, branch deleted) and Bot/Contributor/Author badges
+B lacks timeline events (label added, title changed, commit referenced) and 'Owner' badges
+B latest commit shows 'Peter M. Stahl' with Gitea avatar and '3 years ago' vs GitHub 'pemistahl' '2 years ago' + History
+B lists '74 Commits' flat, not grouped by date, and has no Commits/Files changed tabs
+B lists commits flat under a '74 Commits' header with tag pills. It has no 'Commits on <date>' timeline grouping, no Files changed tab and no contributors count
+B lists every branch with 5 icon actions (RSS, download, edit, delete) and green 'Open' PR pills
+B member rows show Gitea-specific content: 'Member Role: Owner', '2FA: x', 'Hidden' badges, and 'Make visible'/'Leave'/'Remove' buttons
+B merged line 'innobead merged 1 commits from main into main 6 years ago' vs GitHub 'pemistahl merged 1 commit into pemistahl:main from innobead:main on May 31, 2021'
+B merged line reads 'innobead merged 1 commits from main into main 6 years ago'. GitHub reads 'pemistahl merged 1 commit into pemistahl:main from innobead:main on May 31, 2021'
+B meta reads 'opened 3 years ago by X' rather than 'X opened on <date>'
+B milestone page lives under repo nav with 'Labels / Milestones' switcher, 'Search...' and 'New Milestone'
+B milestone row has Edit/Close/Delete actions and a 'Dec 31, 9998' due date
+B milestone row shows 'Dec 31, 9998' due date, 'Updated 4 months ago', Edit/Close/Delete actions
+B milestone row shows 'Updated 4 months ago', 'Dec 31, 9998' due date, and inline Edit/Close/Delete (red) links; GitHub shows 'No due date · 0/2 issues closed' and '0% complete 2 open 0 closed'
+B milestones page has no left sidebar (Issues/Assigned to me/Created by me/Milestones/Labels); uses Labels|Milestones tabs + full-width search + 'New Milestone' button
+B milestones sit under the repo Issues tab with Labels/Milestones sub-tabs and a search bar, not in GitHub's Issues sidebar layout
+B missing timeline events (label added, title changed, commit reference) and Owner badges
+B no 'Branches' page title
+B no 'Checks' tab; 'Files Changed' Title Case; 'Edit' button top right
+B no 'Overview/Active/Stale/All' tabs and no table header (Branch/Updated/Check status/Behind|Ahead/Pull request)
+B no Achievements
+B no Achievements section
+B no Checks tab; 'Files Changed' Title Case
+B no Checks tab; 'Files Changed' Title Case; '1 commits from X into main'
+B no Checks tab; missing 'Changes from all commits / File filter / Conversations / Jump to' bar
+B no fold chevrons in gutter; file tree auto-expands src/unicode_tables
+B omits timeline events (label added, title changed, commit referenced) and 'Owner' badges
+B open/closed toggle is '1 Open  6 Closed' with icons vs GitHub 'Open 1 Closed 6' counter pills
+B org 'Members' tab with 'Manage teams and members' button, rows showing 'Hidden' badges, 'Member Role: Owner', '2FA: x', 'Make visible'/'Remove'/'Leave' buttons
+B org page has 'Members', 'Teams', 'Worktime' tabs and 'Settings' — GitHub uses 'People' and 'Sponsoring'
+B org page tabs Members/Teams/Worktime/Settings, seed Note 'tools/seed/seed.mjs', New Repository/New Migration/New Team buttons
+B org tabs Members/Teams/Worktime/Settings, seed Note, New Repository/New Migration/New Team buttons
+B pagination 'First / Previous / 1 2 / Next / Last' vs GitHub 'Previous Next'; no '...' ellipsis buttons beside tags
+B profile shows email, Joined date, RSS icon, 'Block user'
+B profile tabs 'Public Activity' and 'Starred Repositories' (GitHub uses 'Stars'), no Repositories count-matching
+B profile tabs 'Public Activity', 'Starred Repositories' instead of Stars; identicon avatar
+B puts a Gitea teacup avatar before the author
+B puts the branch selector, a 'Go to file' input and an 'Add File' button above the file. GitHub puts the branch and search in the file-tree sidebar and a '...' menu at the top right
+B reads 'Last updated 4 years ago' where GitHub has an absolute date
+B reads 'New Page' (Title Case) where GitHub reads 'New page'
+B reads 'innobead merged 1 commits from main into main 6 years ago'
+B reads 'merged 1 commits from main into main', has an Edit button, and has no Checks tab
+B reads 'merged 1 commits from main into main', has an Edit button, no Checks tab, and 'Files Changed'
+B relative 'opened 3 years ago by' and footer 'Powered by Gitea'
+B release page has '16 Releases / 16 Tags' toggle, RSS Feed and New Release buttons instead of 'Releases / v1.4.6' breadcrumb
+B repeats '0 open issues/pull requests' + Edit/Delete on every row
+B repo cards carry the '[seed]' prefix and long runs of topic pills
+B repo header has RSS button, 'Unwatch', and Star/Fork order swapped (Star before Fork) and tabs 'Packages, Projects, Releases 16, Wiki, Activity, Settings' vs GitHub 'Discussions, Security and quality, Insights'
+B repo header has RSS/Unwatch/Packages/Releases/Wiki/Activity/Settings, with Title Case 'Pull Requests'
+B repo header has Unwatch/Packages/Releases 53/Activity/Settings and no Public badge
+B repo header octo-org with Unwatch/RSS/Settings/Packages/Releases/Wiki
+B repo header octo-org with Unwatch/RSS/Settings/Packages/Wiki
+B repo header octo-org with Unwatch/RSS/Settings/Packages/Wiki/Releases
+B repo header with Unwatch/RSS/Settings/Releases 53
+B repo items show '[seed]' descriptions and a long run of topic chips
+B repo list lacks 'Public' badge, activity sparkline, license; search placeholder 'Search repos...' with Filter/Sort vs GitHub 'Find a repository...' with Type/Language/Sort
+B repo list lacks Public badge, sparkline, license, language colours; 'Search repos...' with Filter/Sort
+B repo list lacks sparkline activity graphs and 'Public' badges; uses 'Search repos...' + Filter instead of Type/Language/Sort
+B repo nav has Unwatch/RSS/Packages/Releases/Wiki/Settings
+B repo tabs include Packages/Projects/Releases/Wiki/Activity/Settings, Unwatch and RSS buttons
+B row is a thin, short bar. GitHub's row is taller with the date centered
+B rows have Edit/Delete actions and '0 open issues/pull requests' text
+B rows have checkboxes and a '12 Open / 280 Closed' header with icons, plus Label/Milestone/Project/Author/Assignee/Type/Sort filters. GitHub has 'Open 12 Closed 280' tabs, Reviews/Projects filters and list-view toggles
+B rows show branch chips 'main ← dependabot/...' and relative 'opened 4 months ago by', no CI check '14/14' status or 'Bot' badge
+B rows show branch chips ('main ← dependabot/github_actions...'). GitHub shows 'Bot' badges and CI status '✓ 14/14'
+B run titles are 'Smoke edit 2026...' by 'admin'
+B says 'Need an account? Register now.' and has a 'Powered by Gitea' footer
+B says 'edited this page 4 years ago' (relative) vs GitHub absolute date with '1 revision' link
+B says 'edited this page 4 years ago' without a '1 revision' link
+B section called 'Downloads' with MiB sizes and relative dates, no sha256 digests; 'Source Code (ZIP)' capitalized
+B shows '130 workflow runs' with only Actor/Status/Branch filters
+B shows '16 Releases / 16 Tags' and an RSS Feed button
+B shows '16 Releases / 16 Tags', RSS Feed, New Release, a 'Stable' badge and a Downloads section with MiB sizes
+B shows '448 lines · 16 KiB · Rust' where GitHub shows '447 lines (399 loc) · 16 KB'
+B shows 'Back to workflow ci' and 'Re-run failed jobs'
+B shows 'Block user' and 'Joined on' and has no Achievements
+B shows 'Browse Source' + 'Operations' buttons and '...' expander; GitHub has 'Browse files'
+B shows 'Default Branch: master' and a 'New Page' button in title case
+B shows 'Default Branch: master' text above the list and a divider under the title. GitHub shows no branch text
+B shows 'Default Branch: master' text and a divider under the 'Pages' heading
+B shows 'New Repository' / 'New Migration' / 'New Team' green buttons and a Teams list in the right column
+B shows 'Pull request closed — This pull request cannot be reopened because the branch was deleted.' and a full comment editor; GitHub shows yellow 'Sign up for free' banner
+B shows 10-char SHAs and teacup avatars with 'Peter M. Stahl 2 years ago'
+B shows GitHub's Star Wars octocat 404 illustration 'This is not the web page you are looking for' and full marketing footer
+B shows Gitea merge box ('There is no key available to sign this commit', 'Create merge commit'), markdown toolbar with H1/H2/H3, 'Drop files or click here to upload'
+B shows Gitea teacup logo above 'Sign In' and in header, 'Powered by Gitea' footer
+B shows Gitea's members page ('Make visible/Remove/Leave', 'Member Role: Owner', '2FA: ✕', a Worktime tab), so it is clearly the clone
+B shows a '1 Commits' box header (bad pluralization). GitHub uses a 'Commits on May 31, 2021' timeline with a vertical line
+B shows a '1 Commits' boxed header (wrong pluralisation) where GitHub shows a 'Commits on May 31, 2021' timeline
+B shows a '1 Commits' boxed header where GitHub shows a 'Commits on May 31, 2021' timeline
+B shows a '445 Commits · 14 Branches · 16 Tags' bar and a 'Default Branch' box
+B shows a 'Default Branch: master' line, and its button reads 'New Page' in title case
+B shows a 'Filter' dropdown and a 'Search repos...' placeholder where GitHub shows Type/Language/Sort and 'Find a repository...'
+B shows a 'Joined on' date, an email and a 'Block user' link, and has no Achievements
+B shows a 'Manage Topics' link, '5.4 MiB' repo size and a 'Search code…' box
+B shows a 'parent fa3e8ed71c' / 'commit 99cc347707' label layout where GitHub shows '1 parent ... commit ...'
+B shows a 10-char SHA and relative time '3 years ago'. It has a Gitea avatar icon next to 'Peter M. Stahl' where GitHub shows 'pemistahl'
+B shows a Gitea merge box ('There is no key available to sign this commit', 'Create merge commit', 'View command line instructions')
+B shows a Gitea teacup avatar next to 'Peter M. Stahl' where GitHub shows the user's photo and the pemistahl login. B also shows the relative time '3 years ago'
+B shows a commits/branches/tags summary strip and a 'Default Branch' block
+B shows a teacup avatar on comments with '(Migrated from github.com)'
+B shows an org README box with 'Note' callout 'All data here is test data created by tools/seed/seed.mjs'
+B shows email and 'Joined on Sep 29, 2026' in sidebar, RSS icon next to followers, 'Block user' vs 'Block or report user'
+B shows email, Joined date, RSS icon, 'Block user'
+B shows email/Joined date/RSS; 'Block user'
+B shows long SHAs and Gitea avatars
+B shows relative dates ('2 years ago') and 10-char SHAs (db9275ace1) instead of 'on Nov 14, 2025' and 7-char
+B shows relative dates ('2 years ago') where GitHub shows 'on Nov 14, 2025'
+B shows row checkboxes plus 'main ← branch' labels on every row, and has no Bot badge or CI check '14/14' status
+B shows the branch selector and breadcrumb above the file table, not in the sidebar with the file tree the way GitHub does
+B shows the email, 'Joined on Sep 29, 2026', an org icon and 'Block user'
+B shows the milestones list inside the repo Issues tab with a Labels/Milestones sub-switch and a full-width search, where GitHub's global milestones page uses a left sidebar (Issues, Assigned to me, Milestones, Labels)
+B sidebar 'Description' with '[seed]' text, 'Manage Topics', '5.4 MiB', 'Search code...' input; missing Sponsor this project, Contributors, stars/watching/forks
+B sidebar Time Tracker, Due Date yyyy/mm/dd, Dependencies, Notifications Unsubscribe — Gitea-only
+B sidebar contains Notifications 'Unsubscribe', Time Tracker 'Start timer', Due Date, Dependencies, 'Reference: octo-org/grex#358'
+B sidebar has Time Tracker, Due Date, Dependencies and gear icons
+B sidebar has Time Tracker/Due Date/Dependencies/Reference; B branch name struck-through and 'merge 1 commits from ... into main'
+B sidebar has an email, 'Joined on', 'Block user' and an identicon avatar
+B sidebar has gear icons, 'No Reviewers', Time Tracker/Start timer, Due Date yyyy/mm/dd, Dependencies, Reference: octo-org/grex#358 — not on GitHub
+B sidebar has gear icons, Notifications Unsubscribe, Time Tracker, Due Date, Dependencies, Pin/Lock/Delete
+B sidebar heading 'Description' instead of 'About', shows '[seed]' text, 'Manage Topics', repo size '2.3 MiB', and a 'Search code...' box
+B sidebar is Gitea's: Time Tracker, Due Date, Dependencies, Reference, gear icons, 'No Branch/Tag Specified'
+B sidebar is a 'Page: Home' dropdown and green 'Code' clone button instead of GitHub's collapsible 'Pages' box with search, 'Add a custom sidebar/footer' and 'Clone this wiki locally'
+B sidebar is headed 'Description' and shows '[seed]', 'Manage Topics', a size and a code search box
+B sidebar is headed 'Description', not 'About', and shows '[seed]' text, 'Manage Topics', a '5.4 MiB' size and a 'Search code...' box
+B sidebar shows email, 'Joined on Sep 29, 2026', org icon and 'Block user' (GitHub: 'Block or report user'), '3 Followers · 2 Following' with RSS icon
+B sidebar titled 'Description' with '[seed] ... (migrated from github.com/...)' and 'Manage Topics', '5.4 MiB' size, 'Search code...' box; GitHub 'About' with stars/watching/forks
+B sidebar: 'No Branch/Tag Specified' dropdown, Time Tracker, Due Date, Dependencies, Pin/Lock conversation/Delete
+B sidebar: 'No Branch/Tag Specified' dropdown, gear icons, Time Tracker, Due Date, Dependencies, Pin/Lock/Delete; GitHub has Relationships, Development, Participants avatars, 'Open in GitHub Copilot app'
+B sidebar: 'No Branch/Tag Specified', gear icons, Time Tracker, Due Date, Dependencies, Reference, Pin/Lock/Delete
+B sorts files differently: coveralls.json and mix.* come before README
+B starred list shows '[seed]' repos with fork/PR counts and Filter/Sort, vs GitHub search + Type/Language/'Sort by: Recently starred'
+B starred page is a flat repo list with Filter/Sort. GitHub shows 'Lists (32)', 'Search starred repositories' with Type/Language/Sort by dropdowns, and 'Starred topics'
+B subtitle 'opened 6 years ago by sarkiroka · 9 comments'; GitHub shows no such subline
+B tab 'Starred Repositories' vs GitHub 'Stars 643'; B has no Lists section, no Starred topics
+B tab bar has Gitea-only tabs (Packages, Releases 16, Wiki, Activity, Settings) and an RSS icon button; the button order is 'Unwatch/Star/Fork' instead of GitHub's 'Notifications/Fork/Star'
+B tab is labelled 'Starred Repositories' with no Lists section
+B tab labels are Title Case ('Pull Requests', 'Files Changed'); GitHub uses sentence case and has a 'Checks' tab
+B tabs 'Files Changed' capitalized and no 'Checks' tab
+B tabs 'Public Activity' and 'Starred Repositories 2'
+B tabs read 'Public Activity' and 'Starred Repositories 2'. GitHub uses 'Stars 643'
+B tag rows show 'Release details' and long SHAs; GitHub shows 'Notes' and 'Downloads' plus short SHAs and absolute dates
+B tag rows show relative dates ('2 years ago'), 10-char SHAs and 'Release details'. GitHub shows 'on Nov 14, 2025', 7-char SHAs, 'Notes' and 'Downloads', plus a '...' ellipsis button after the tag name
+B tags page shows '16 Releases / 16 Tags' toggle with counts and 'RSS Feed' button
+B tags page: '16 Releases/16 Tags' toggle, RSS Feed, 'Search tags...' box, 'Release details' links, relative dates, 10-char SHAs
+B title 'Compare commits' vs GitHub 'Comparing changes' with explanatory text and links
+B title reads 'Compare commits', not 'Comparing changes'
+B title reads 'Compare commits'. GitHub reads 'Comparing changes' with the explanatory sentence 'Choose two branches to see what's changed...'
+B title row has 'Edit' + 'New Issue' (Title Case) vs GitHub 'New issue' + copy icon
+B toolbar '1 changed files with 3 additions and 3 deletions', '0/1 files viewed', 'Review' green button
+B toolbar has compare icon + 'Add File' + Code; latest commit 'Alex Koutmos' with Gitea teacup avatar
+B top bar has the Gitea teacup logo with Issues/Pull Requests/Milestones/Explore. GitHub's logged-out header has Platform/Solutions/Resources/Open Source/Enterprise/Pricing
+B tree dir page lacks GitHub's 'Name / Last commit message / Last commit date' table header row
+B uses '1 Open 6 Closed' with icons instead of GitHub's Open/Closed counters
+B uses 'New Page' in Title Case and relative 'Last updated 4 years ago'. GitHub reads 'New page' and 'Last updated on May 17, 2023'
+B uses 'Public Activity' / 'Starred Repositories' tabs
+B uses 'base: octo-org/grex:v1.4.5' refs
+B uses 'wants to merge 1 commits from X into main', where GitHub says 'wants to merge 1 commit into base from head'
+B uses First/Previous/1/2/Next/Last pagination where GitHub has a simple Previous/Next
+B uses Title Case 'Files Changed' and 'Pull Requests'
+B uses Title Case 'New Page'
+B uses Title Case ('Pull Requests', 'No Milestone', 'No Assignees')
+B uses a 'Members' tab and has Teams/Worktime tabs
+B uses a 'Stable' badge and a 'Downloads' section with KiB sizes, and has no Release list sidebar or Contributors section
+B uses a 'Stable' badge where GitHub uses 'Latest'
+B uses a 'Stable' badge where GitHub uses 'Latest'. B puts the tag and SHA in a left gutter outside the card
+B uses a 'Stable' label instead of 'Latest', with tag and commit in the left gutter
+B uses a flat '74 Commits' table with tag pills, with no 'Commits on <date>' grouping, no Commits/Files changed tabs, and no Verified badges
+B uses a split diff with no file tree sidebar and no 'Comments 0 / sign in to comment' block
+B uses a teacup author avatar, 'Peter M. Stahl' and '2 years ago', 'Add File' and a 'Go to file' search in the header, and octo-org as owner
+B uses a teacup avatar next to 'Peter M. Stahl' and '3 years ago', with 'Add File' and a 'Go to file T' box in the breadcrumb row
+B uses relative '4 months ago' timestamps, where GitHub uses 'Sep 27, 2:30 PM UTC'
+B uses relative close dates and has no linked-PR indicators
+B uses the tab label 'Starred Repositories' and shows a plain repo list with Filter/Sort; GitHub has Lists (32), 'Search starred repositories', and 'Starred topics'
+B wiki has 'Delete Page' red button and a revision count clock icon, 'New Page' capitalized
+B wiki has a 'Page: Home' dropdown and a green 'Code' clone button instead of GitHub's 'Pages 1' box and 'Clone this wiki locally'
+B wiki page has revision count clock '1', 'Delete Page' red button, 'Page: Home' dropdown and green 'Code' clone dropdown instead of GitHub 'Pages 1' sidebar with search
+B's 'New Pull Request' button is title-cased
+B's 404 is a plain warning icon with '404 Not Found' text. GitHub shows the Star Wars Octocat desert illustration and the 'This is not the web page you are looking for' speech bubble
+B's Actions page has no 'Actions' heading, no workflow list (Dependabot Updates/Python Build...), and no Management/Caches section
+B's Actions sidebar lists only 'All Workflows' (title case) and 'CI', with no 'Actions' heading, Management or Caches section
+B's Branches page shows a '445 Commits · 14 Branches · 16 Tags' strip and a 'Default Branch' box, with no Overview/Active/Stale/All tabs or 'Branches' title
+B's PR list has checkboxes on every row, a separate Labels/Milestones button group, and 'New Pull Request' in title case
+B's README badges and logo render as broken image alt-text links ('grex', 'rust build status' and so on); GitHub renders the images
+B's README badges are broken alt-text links
+B's README badges are broken image alt-text links ('rust build status', '[grex]') instead of rendered images
+B's README box has no 'alice-dev / README.md' breadcrumb
+B's README header shows only 'README.md' with an edit pencil, and its commit avatar is the Gitea logo
+B's README images render as broken alt-text links
+B's README tab reads 'README.md' with a pencil icon, with no separate 'MIT license' tab
+B's asset section is titled 'Downloads' with KiB/MiB sizes, info icons, relative dates and 'Source Code (ZIP)'. GitHub has 'Assets 8' with sha256 digests and absolute dates
+B's author has a teacup avatar, and it shows 'parent fa3e8ed71c commit 99cc347707' with 10-character SHAs
+B's avatars are Gitea logos, with '(Migrated from github.com)'
+B's base/compare pickers read 'base: octo-org/grex:v1.4.5' with the full owner prefix
+B's base/compare pickers read 'base: octo-org/grex:v1.4.5', where GitHub shows 'base: v1.4.5'
+B's blame avatars are Gitea logos with ages like '8 years ago', and it has an 'Add File' button next to Go to file
+B's blame view has Gitea toolbar buttons 'Raw | Permalink | Normal View | History | Unescape'
+B's blob header is Gitea's: branch dropdown, compare icon, 'Go to file' and an 'Add File' button inline, with a separate row '448 lines · 16 KiB · Rust'
+B's branch name is struck through, and B has no timeline events or Bot/Contributor badges
+B's code block has no syntax colouring and the long line is cut off
+B's code block is plain monochrome, while A's is syntax-highlighted in blue
+B's code block is unhighlighted
+B's comment avatar is the Gitea logo and the header reads '(Migrated from github.com)'
+B's comment avatar is the Gitea logo, the header reads '(Migrated from github.com)', and B says '4 months ago' where A says '2 days ago'
+B's comment avatar is the Gitea logo, the header reads '(Migrated from github.com)', and its time is '4 months ago'
+B's comment avatars are Gitea teacup placeholders, and the headers read 'commented 6 years ago (Migrated from github.com)'
+B's comment avatars are the Gitea logo, and headers read '(Migrated from github.com)' with 'commented 6 years ago'
+B's comment avatars are the Gitea logo, with '(Migrated from github.com)' on every comment
+B's comment headers say 'commented 6 years ago (Migrated from github.com)' and use a Gitea teacup avatar instead of the real user avatars
+B's comments have teacup avatars and '(Migrated from github.com)'
+B's commit author avatars are the Gitea logo, and it has no Verified badges or dependabot icons
+B's commit author has a teacup avatar and a full 10-character SHA (7f97b4aac7)
+B's commit author shows a Gitea avatar and full name 'Alex Koutmos', and it reports 17 branches
+B's commit author shows a Gitea teacup avatar; its right-hand header uses an RSS icon plus Unwatch/Star/Fork where GitHub has Notifications/Fork/Star
+B's commit author shows a teacup avatar
+B's commit line has a teacup avatar, and its tree sidebar has no branch selector or search
+B's commit page has no 'Commit 99cc347' title; it shows the commit message as the title with 'Browse Source' and 'Operations' buttons
+B's commit rows show a Gitea avatar with 'Peter M. Stahl 2 years ago', 10-character SHAs and no Verified badges
+B's commit title is the message itself, with 'Browse Source' / 'Operations' buttons and a '...' expander
+B's commits tab uses a gray '1 Commits' table header (a grammar error) instead of GitHub's 'Commits on May 31, 2021' timeline grouping
+B's compatibility score badge image is broken (shows as a link)
+B's content mentions '[seed]' and 'Gitea theme'
+B's count row reads '130 workflow runs' and it has no Workflow/Event filters or 'Filter workflow runs' search
+B's dependabot compatibility badge image is broken and shows as the link text 'Dependabot compatibility score'
+B's dependabot compatibility badge renders as a broken image link
+B's file table has no Name / Last commit message / Last commit date header row
+B's file toolbar has 'Raw / Permalink / Blame / History' as separate buttons plus an RSS icon where GitHub has Code/Blame tabs
+B's file tree has the branch picker moved to the breadcrumb row, and no code-fold chevrons in the gutter
+B's file tree keeps the branch selector outside the tree panel, and it has extra tabs (Packages/Releases/Wiki/Activity/Settings)
+B's file tree shows .github and benches folders with a different icon style, and it has no search icon next to the branch picker in the tree
+B's file-view toolbar has Raw/Permalink/Blame/History as separate buttons plus delete and RSS icons. GitHub has Code/Blame segmented tabs and '447 lines (399 loc) · 16 KB'
+B's follower line reads '3 Followers · 2 Following' plus an RSS icon
+B's footer reads 'Powered by Gitea Version: 1.27.3 Page: 18ms Template: 11ms'
+B's footer reads 'Powered by Gitea Version: 1.27.3 Page: 24ms Template: 4ms'
+B's footer reads 'Powered by Gitea Version: 1.27.3'; A has the GitHub footer
+B's footer reads 'Powered by Gitea'
+B's global header has the green Gitea teacup logo with Issues/Pull Requests/Milestones/Explore, not GitHub's black header with Platform/Solutions/Resources
+B's global header shows the Gitea logo, and the comment says '(Migrated from github.com)' with a Gitea avatar
+B's global header uses the Gitea logo with Issues/Pull Requests/Milestones/Explore, not GitHub's Platform/Solutions/Resources menus
+B's global header uses the green Gitea teacup logo and Issues/Pull Requests/Milestones/Explore links instead of the GitHub Platform/Solutions/Resources nav
+B's global nav is Gitea's Issues/Pull Requests/Milestones/Explore
+B's graph box reads '6 jobs · 1 dependency · 83% success' with zoom icons, and uses 'Run Details' title case
+B's graph controls sit at the top right with a '6 jobs · 1 dependency · 83% success' summary; GitHub's zoom controls sit at the bottom right
+B's head branch is struck through and has no timeline events (labels added, closed, branch deleted); B shows a Gitea 'Pull request closed … cannot be reopened because the branch was deleted' box
+B's header reads 'innobead merged 1 commits from main into main'. The count isn't pluralised correctly and the branch pills lack the owner: prefix. GitHub says 'merged 1 commit into pemistahl:main from innobead:main on May 31, 2021'
+B's header reads 'merged 1 commits from main into main 6 years ago'
+B's header reads 'merged 1 commits from main into main' (plural error, reversed order), and B has an 'Edit' button top right
+B's header text reads 'wants to merge 1 commits from … into main'. There is no Checks tab and the Files Changed tab is title-cased
+B's header uses the Gitea logo and its footer reads 'Powered by Gitea'
+B's header uses the Gitea logo, and it has no 'Sign up for free to join this conversation' banner
+B's header uses the Gitea teacup logo with Issues/Pull Requests/Milestones/Explore
+B's heading is 'Compare commits' and uses a flat '74 Commits' table with tag pills
+B's heading reads '445 Commits' and has a Commit Graph button, a 'This Branch' select, and a search bar
+B's heading reads 'Compare commits' with base 'octo-org/grex:v1.4.5' selectors
+B's labels page sits under the repo Issues tab with a Labels/Milestones switch and 'New Label'
+B's latest-commit row has a Gitea-logo avatar, shows 'Peter M. Stahl', and says '3 years ago'
+B's left sidebar only has 'All Workflows' (title case) and 'CI'. It has no 'Actions' heading, no Management/Caches section and no 'Filter workflow runs' search
+B's list has only Actor/Status/Branch filters and lacks 'Filter workflow runs'
+B's list header has only Actor/Status/Branch filters, with no Workflow or Event filters
+B's logo is the Gitea teacup, and it has a top nav with Explore/Help/Sign In/Register
+B's member rows show 'Member Role: Owner', '2FA: ×', a 'Hidden' badge, and 'Make visible' / 'Leave' / 'Remove' buttons, which are Gitea admin UI
+B's merge line reads 'innobead merged 1 commits from main into main 6 years ago', without owner-prefixed branch labels or a copy button
+B's meta line reads 'innobead merged 1 commits from main into main 6 years ago', with a grammar error and relative time
+B's meta reads 'merged 1 commits from main into main', and its author has a teacup avatar with a 10-character SHA
+B's metadata reads '448 lines · 16 KiB · Rust', with KiB units and a different line count
+B's metadata reads 'opened 3 years ago by X', where GitHub has 'X opened on <date>' with underlined usernames
+B's milestone row shows 'Dec 31, 9998' as the due date plus '2 Open / 0 Closed / Updated 4 months ago' and Edit/Close/Delete links. GitHub shows 'No due date · 0/2 issues closed' and '0% complete 2 open 0 closed'
+B's milestone row shows Gitea-style meta ('2 Open', '0 Closed', 'Updated 4 months ago', 'Dec 31, 9998') plus inline Edit/Close/Delete text links
+B's nav has Packages, Releases, Wiki, Activity and Settings
+B's nav has Packages, Releases, Wiki, Activity and Settings in place of Discussions, Security and quality, Insights
+B's open/closed toggles are '12 Open / 280 Closed' with icons, and its filters are Label/Milestone/Project/Author/Assignee/Type/Sort
+B's org header has an RSS icon and a 'Follow' button where GitHub shows a Sponsor button
+B's org tabs are Members/Teams/Worktime/Settings
+B's org tabs include 'Members', 'Teams' and 'Worktime', plus a Settings tab on the right; GitHub uses a 'People' tab
+B's owner is octo-org, with no Public badge and extra Packages/Releases/Activity/Settings tabs
+B's profile tabs are 'Public Activity' and 'Starred Repositories'
+B's profile tabs read 'Public Activity' and 'Starred Repositories' where GitHub uses 'Stars'
+B's profile tabs read 'Public Activity' and 'Starred Repositories' where GitHub uses 'Stars'; B has no Lists or Starred topics
+B's repo descriptions begin with '[seed]' and include 'migrated from github.com'
+B's repo header has an RSS icon, Unwatch, and Packages/Releases/Wiki/Activity/Settings tabs
+B's repo list has no sparklines and shows a PR count icon
+B's repo list has no sparklines and uses 'Filter' with a 'Search repos...' input
+B's repo nav has an RSS button, 'Unwatch 5', 'Pull Requests' (capital R), Packages/Projects/Releases/Wiki/Activity/Settings and no Public badge
+B's repo nav is Gitea's
+B's repo nav is the Gitea set (Packages, Releases, Wiki, Activity, Settings)
+B's repo rows have no sparkline graphs, and it shows a 'Block user' link and 'Joined on' where GitHub has Achievements
+B's repo tabs use Title Case ('Pull Requests') and include Packages/Projects/Releases/Wiki/Activity/Settings; GitHub has Discussions, 'Security and quality' and Insights
+B's right column has green 'New Repository', 'New Migration' and 'New Team' buttons plus a Teams list, which are Gitea features
+B's row metadata reads 'opened 4 months ago by X' with 'main ← branch' pills. There are no Bot badges, no CI check counts (✓ 14/14) and no comment counts
+B's row reads 'Last updated 4 years ago' where GitHub has 'Last updated on May 17, 2023'
+B's rows have Gitea icon clusters (branch, RSS, download, edit, delete), a divergence bar, and a 'New Pull Request' button
+B's rows have many action icons (RSS, download, edit, delete), divergence bars and 'New Pull Request' buttons
+B's rows show '4 months ago' where GitHub shows an absolute timestamp like 'Sep 27, 2:30 PM UTC'
+B's rows show 'N open issues/pull requests' text plus Edit/Delete links, where GitHub shows only icon counts
+B's rows show 'main ← branch' pills and no check status or Bot badges; there is no 'is:pr state:open' query bar
+B's rows show relative dates, long SHAs and 'Release details' where GitHub has Notes and Downloads
+B's rows use relative closed times and non-underlined usernames, and it has octo-org as owner
+B's run page reads 'Back to workflow ci' and 'Re-run failed jobs', and has a 'Run Details' heading in title case
+B's runs are 'Smoke edit' entries with red X icons, 'CI #130: Commit ... pushed by admin', and relative times
+B's seed content literally says 'GitHub-lookalike Gitea theme'
+B's sidebar has Gitea widgets: a 'No Branch/Tag Specified' dropdown, Time Tracker 'Start timer', a Due Date 'yyyy/mm/dd' picker, Dependencies, and a Pin/Lock/Delete list
+B's sidebar has Gitea-only sections (Time Tracker / Start timer, Due Date yyyy/mm/dd, Dependencies, Notifications Unsubscribe, Reference octo-org/grex#42, Pin/Lock/Delete) plus gear icons on every section
+B's sidebar has Gitea-only sections: 'Still in progress? Add WIP: prefix', Time Tracker, Due Date, Dependencies, Reference
+B's sidebar has Gitea-only widgets: 'No Branch/Tag Specified' dropdown, Time Tracker 'Start timer', Due Date yyyy/mm/dd input, Dependencies 'Add dependency...', and gear icons on each section
+B's sidebar has Time Tracker, Due Date and Dependencies
+B's sidebar has Time Tracker, Due Date and Dependencies widgets, and 'Still in progress? Add WIP: prefix'
+B's sidebar has Time Tracker, Due Date and Dependencies; B has no Checks tab, and its tab reads 'Files Changed'
+B's sidebar heading is 'Description' where GitHub says 'About'. It includes '[seed]' and '(migrated from github.com/…)' text plus topics 'migrated-from-github' and 'theme-seed'
+B's sidebar heading is 'Description' with '[seed]…(migrated from github.com…)' text
+B's sidebar heading reads 'Description' where GitHub says 'About'; it also shows a 'Manage Topics' link, a '2.3 MiB' size row and a 'Search code...' input, and has no Used by or Contributors
+B's sidebar includes Time Tracker, Due Date, Dependencies and 'Still in progress? Add WIP: prefix'
+B's sidebar is Gitea's: gear icons per section, Notifications/Unsubscribe, Time Tracker 'Start timer', Due Date yyyy/mm/dd input, Dependencies, 'Reference: octo-org/grex#42', Pin/Lock/Delete
+B's sidebar is headed 'Description' where GitHub uses 'About', and the text is prefixed '[seed]' and suffixed '(migrated from github.com/…)'
+B's sidebar lists '1 Participants' (plural error) plus Time Tracker, Due Date and Dependencies
+B's sidebar uses the heading 'Description' where GitHub uses 'About', and has a 'Manage Topics' link, a '2.3 MiB' size, and a 'Search code...' box
+B's source branch pill is struck through, and its header reads 'wants to merge 1 commits from … into main'
+B's starred list has a search with Filter/Sort, and its topic chips are dense
+B's sub-header reads 'opened 6 years ago by sarkiroka · 9 comments'
+B's summary reads '1 changed files with 2 additions and 2 deletions', with a pluralisation error
+B's tab nav has Packages, Wiki, Activity and a right-aligned Settings, and the Watch button reads 'Unwatch' with an RSS icon button
+B's tabs read 'Files Changed' in title case and there is no Checks tab
+B's tag rows show 10-character SHAs and 'Release details' where GitHub shows 7-character SHAs with Notes/Downloads
+B's timeline avatars are Gitea teacup placeholders, and every comment says 'commented 6 years ago (Migrated from github.com)'
+B's title is 'Compare commits' where GitHub says 'Comparing changes' with explanatory helper text
+B's title reads 'Sign In' (Title Case) where GitHub says 'Sign in to GitHub'
+B's toggles read '16 Releases' and '16 Tags' and it has an 'RSS Feed' button, which GitHub doesn't have
+B's toolbar has Add File / History / '445 Commits' in the dir view, and its sidebar tree has no branch picker
+B's toolbar has Raw/Permalink/Blame/History buttons and a '22 KiB' size, with no Preview/Code/Blame segmented control or '595 lines (435 loc)'
+B's toolbar has text buttons 'Raw | Permalink | Blame | History' plus RSS and trash icons; GitHub has 'Code | Blame' toggle tabs and '447 lines (399 loc) · 16 KB'
+B's toolbar is a Gitea markdown editor with H1/H2/H3 buttons; B has no timeline commit and merge events
+B's toolbar reads '448 lines · 16 KiB · Rust' with Raw/Permalink/Blame/History buttons; GitHub has a Code/Blame toggle and '447 lines (399 loc) · 16 KB'
+B's top bar has 'Add File' and a compare icon, and there is no Sponsor button
+B's topics include 'migrated-from-github' and 'theme-seed', and it shows 'Manage Topics', '5.4 MiB' and a 'Search code…' input
+B's wiki has a 'Page: Home' dropdown, a Code button and 'Delete Page'
+B: '16 Releases/16 Tags' toggles, 'RSS Feed' and 'New Release' buttons, and the Releases tab in the repo nav. GitHub has no New Release for visitors and has a 'Find a release' search plus a 'Release list' sidebar
+Both sides look like Gitea: B has a 'Powered by Gitea Version: 1.27.3' footer, and A has the Gitea teacup org logo named 'Gitea' with a Sponsoring tab
+Every B row repeats '0 open issues/pull requests' plus Edit/Delete links. GitHub shows only a compact PR or issue icon with a count, and only when it is non-zero
+Every row in B has '0 open issues/pull requests' text plus Edit and Delete links. GitHub shows only compact PR/issue count icons where there are some
+GitHub (B) has a 'People' page with an Organization permissions sidebar and Follow buttons
+I picked B only because A looks more like real github.com; this is close to a guess
+In B the percentage sits to the left of the progress bar. It has a separate search box, a 'New Milestone' button and '1 Open / 6 Closed' with icons

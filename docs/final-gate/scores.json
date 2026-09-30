@@ -1,0 +1,2228 @@
+{
+ "routes": [
+  {
+   "id": "home",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 7,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Mobile CLS 0.365 on dashboard",
+     "detail": "shots/final-gate/home/light-390.json and dark-390.json: cls.total 0.3648 from 4 shifts of div.flex-container-main (t=93..182ms) as the Vue repo list loads. Every other route is at or below 0.003. Reserve the repo-list height or give it a min-height placeholder.",
+     "owner": "pages/people"
+    },
+    {
+     "severity": "minor",
+     "title": "Dashboard context bar has no bottom border in light",
+     "detail": "shots/final-gate/home/light-1440.png: the context bar (y=64..114) is rgb(246,248,250) and ends at y=114 straight onto white, with no 1px #d1d9e0 separator (repo pages have one at y=173). In dark the bar is page bg #0d1117, so the two schemes treat the bar differently. Crop shots/final-gate-critic-0/home-l-a.png.",
+     "owner": "navigation"
+    },
+    {
+     "severity": "minor",
+     "title": "Heatmap does not fill its Box",
+     "detail": "light-1440: heatmap cells end at x\u22481195 inside a Box that ends at x=1363, leaving ~165px empty. At 390 only Jul\u2013Dec shows and the 'Jul' label touches the edge (crop home-l-m1.png).",
+     "owner": "pages/people"
+    },
+    {
+     "severity": "nit",
+     "title": "Mobile pagination shows chevrons only; feed boxes short of the right edge",
+     "detail": "home-m-end.png: pagination is '\u2039 \u203a' with no Previous/Next labels. The commit and comment boxes stop ~30px before the row edge.",
+     "owner": "navigation"
+    },
+    {
+     "severity": "nit",
+     "title": "Repo search input autofocused with accent ring",
+     "detail": "The 2px rgb(9,105,218) ring is present in every capture (the live measure input-text border is also rgb(9,105,218)), so the field always draws the eye.",
+     "owner": "pages/people"
+    }
+   ]
+  },
+  {
+   "id": "site-admin-users",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Search input is 28px/12px with a Semantic-style attached button",
+     "detail": "Live measure shots/final-gate-critic-0/live/site-admin-users/light-1440.measure.json input-text h=28, font 12px. The Primer medium TextInput is 32px/14px with a leading icon. The attached square search button at x=1140 reads as Semantic UI.",
+     "owner": "controls"
+    },
+    {
+     "severity": "nit",
+     "title": "NavList group chevrons",
+     "detail": "Collapsed groups use chevron-right and expanded groups chevron-down. Primer NavList uses chevron-down that rotates to up.",
+     "owner": "navigation"
+    },
+    {
+     "severity": "nit",
+     "title": "Mobile table clipped without scroll affordance",
+     "detail": "shots/final-gate-critic-0/sau-l-m.png: the 'Activated' column is cut off at the Box's right edge.",
+     "owner": "data-display"
+    }
+   ]
+  },
+  {
+   "id": "repo-settings",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Settings tab right-aligned in repo nav",
+     "detail": "shots/final-gate/repo-settings/light-1440.png: Settings sits at the far right (x\u22481340). On GitHub it follows the other tabs in the UnderlineNav.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "org-home",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "No Public label or sparkline on repo rows",
+     "detail": "oh-l.png vs ref-oh-l.png: repo names have no 'Public' Label (Gitea template) and no activity sparkline. Everything else matches.",
+     "owner": "pages/people"
+    }
+   ]
+  },
+  {
+   "id": "commit-detail",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 6,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Rendered as split diff because the capture order leaks the preference",
+     "detail": "repo-pull-files (?style=split, captured 10:56:43) saved split. commit-detail (10:57:08) renders split (shots/final-gate/commit-detail/light-1440.png) while the reference is unified. At 390 the split diff wraps code into ~60px columns (shots/final-gate-critic-0/cd-l-m.png vs ref-cd-l-m.png). pr-files-changed-unified (10:57:38) resets it, which is why compare-two-tags is unified. Pin ?style=unified or restore the preference after split routes.",
+     "owner": "tools/shoot (integrator)"
+    },
+    {
+     "severity": "minor",
+     "title": "Commit header structure differs from GitHub",
+     "detail": "Ours puts the title inside a Box (20px) with author, parent and commit SHAs in the footer. GitHub has an H1 'Commit 99cc347', a message Box, a branch row and a '1 file changed' row. The Code tab is not marked active (template).",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "nit",
+     "title": "Diff row height 20px vs 24px",
+     "detail": "Our unified/split rows are 20px. GitHub's new commit view uses ~24px rows (ref-cd-z2.png vs ct-l-z2.png).",
+     "owner": "code"
+    }
+   ]
+  },
+  {
+   "id": "wiki-page",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Wiki sidebar is a dropdown plus a green Code button, not a Pages Box",
+     "detail": "shots/final-gate/wiki-page/light-1440.png has a full-width 'Page: Home' dropdown (x=1032..1328) and a green Code clone button. GitHub (ref-wp-l.png) has a 'Pages' Box with a filter field and a 'Clone this wiki locally' input group. Title 32px/400 and content width match exactly.",
+     "owner": "pages/repo"
+    }
+   ]
+  },
+  {
+   "id": "pr-commits-tab",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Commits shown in a '1 Commits' Box instead of a date-grouped timeline",
+     "detail": "shots/final-gate/pr-commits-tab/light-1440.png: Box header '1 Commits' (54px, #f6f8fa), with the SHA as plain text. GitHub (ref-pc-l.png) shows a 'Commits on May 31, 2021' timeline marker, a bordered card and a mono SHA with a copy button group.",
+     "owner": "pages/issues-prs"
+    },
+    {
+     "severity": "nit",
+     "title": "Mobile tabnav clips 'Files Changed'",
+     "detail": "pc-m.png: the tab strip is cut at the viewport edge with no fade or scroll cue.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "compare-two-tags",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Commit list typography and SHA treatment differ",
+     "detail": "Commit titles are 16px/400 against GitHub's 14px/600 (shots/final-gate-critic-0/ct-l-z.png vs ref-ct-z.png). The author is muted regular; GitHub shows it bold in fg-default plus 'committed on'. The SHA is bare muted text with no bordered copy/SHA button group, and there is no 'Commits on <date>' grouping.",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "nit",
+     "title": "Range editor box is white",
+     "detail": "ct-l-a.png: the base/compare box is white. GitHub's range-editor is #f6f8fa.",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "nit",
+     "title": "Mobile hides the diff summary text",
+     "detail": "ct-l-m2.png: at 390 only the settings, split and more icons remain, and the '25 changed files with 808 additions\u2026' text is gone.",
+     "owner": "code"
+    }
+   ]
+  },
+  {
+   "id": "user-profile-repositories-tab",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Follower counts not bold; Follow button has an icon; no Public label",
+     "detail": "shots/final-gate/user-profile-repositories-tab/light-1440.png vs ref-up-l.png: '3 Followers \u00b7 2 Following' counts are regular weight (GitHub bolds them). Follow has a person icon (GitHub has none). There is no 'Public' Label on repo names.",
+     "owner": "pages/people"
+    }
+   ]
+  },
+  {
+   "id": "admin-monitor-stats",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.5,
+   "issues": []
+  },
+  {
+   "id": "org-settings-hooks",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "No Blankslate or Box for empty webhooks; subhead says 'Settings'",
+     "detail": "shots/final-gate/org-settings-hooks/light-1440.png shows only one sentence under the Subhead. A native GitHub Webhooks page shows a Box or Blankslate. The subhead text is 'Settings' rather than 'Webhooks' (template).",
+     "owner": "pages/settings-admin"
+    },
+    {
+     "severity": "nit",
+     "title": "Overflow '\u00b7\u00b7\u00b7' carries the active underline on mobile",
+     "detail": "org-settings-hooks-m.png: the Settings tab is in the overflow, so the coral underline sits under the \u00b7\u00b7\u00b7 button.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "packages-generic",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "'View all' not baseline-aligned with 'Versions (2)'",
+     "detail": "shots/final-gate/packages-generic/light-1440.png: 'View all' at y\u2248579 against the heading at y\u2248583 (top-aligned).",
+     "owner": "pages/actions-packages-projects"
+    }
+   ]
+  },
+  {
+   "id": "milestone-issues",
+   "light": 8,
+   "dark": 8,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Milestone progress bar touches the viewport edge on mobile",
+     "detail": "shots/final-gate/milestone-issues/light-390.png: progress.milestone-progress-big spans device px 32..779 (css 16..390), with no right gutter and a clipped rounded end. The cause is Gitea's width:min(420px,96vw), which src/data-display/progress.css does not neutralise; use width:100%/max-width:420px.",
+     "owner": "data-display"
+    },
+    {
+     "severity": "nit",
+     "title": "Issues tab not active on milestone page",
+     "detail": "The repo header marks Issues active only for PageIsIssueList (template). GitHub highlights Issues here.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "explore-repos",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Meta-row link hover underlines the '\u00b7' separator",
+     "detail": "Hovering the language link underlines both 'Go' and the following dot (shots/final-gate-critic-1/live/explore-repos/states/light-1440-meta-hover-clip.png, zoom shots/final-gate-critic-1/er-meta.png). src/pages/people/repo-list.css:127 puts the separator in `.explore .item-trailing > a:not(:last-child)::after`, so it inherits the link's text decoration. github.com never underlines separators. Fix: make the pseudo-element display:inline-block, or put the dot outside the link.",
+     "owner": "pages/people"
+    },
+    {
+     "severity": "nit",
+     "title": "Header 'Explore' link shows a grey active pill",
+     "detail": "shots/final-gate-critic-1/er-l-a.png: the navbar 'Explore' item gets a neutral background. github.com's signed-in AppHeader has no text nav links and no active state.",
+     "owner": "navigation"
+    },
+    {
+     "severity": "nit",
+     "title": "Repo cards lack a trailing Star button",
+     "detail": "github.com explore and search repo cards carry a Star button with a counter. Ours shows only meta stars. This is a template limit.",
+     "owner": "pages/people"
+    }
+   ]
+  },
+  {
+   "id": "site-admin-config",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Settings/admin NavList items have no leading Octicons",
+     "detail": "shots/final-gate-critic-1/sac-light-a.png: Maintenance, Identity & Access and the other items are text-only. Every github.com settings NavList item has a 16px leading icon. The same applies to the user settings sidebar (user-settings-account and user-settings-orgs).",
+     "owner": "pages/settings-admin"
+    },
+    {
+     "severity": "nit",
+     "title": "Config dl rows are 26px with no Box-row separators",
+     "detail": "shots/final-gate-critic-1/sac-light-b.png: key/value rows are separated only by Gitea's group dividers. The closest Primer pattern would be Box rows with borders.",
+     "owner": "pages/settings-admin"
+    }
+   ]
+  },
+  {
+   "id": "not-found",
+   "light": 7,
+   "dark": 7,
+   "mobile": 7,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "404 is a Blankslate, github.com's is an illustrated hero",
+     "detail": "shots/final-gate/not-found/light-1440.png vs docs/reference/not-found/light-1440.png. github.com shows the illustrated 'This is not the web page you are looking for' hero with a search box. Ours shows an alert icon and a 32px '404 Not Found' Blankslate. It is clean Primer, but not mistakable for GitHub's 404.",
+     "owner": "pages/people"
+    },
+    {
+     "severity": "minor",
+     "title": "Mobile signed-in header shows only hamburger, logo and bell",
+     "detail": "shots/final-gate-critic-1/not-found-mob.png (same on every signed-in route): the avatar and create menu are missing at 390. github.com's mobile AppHeader keeps the avatar on the right.",
+     "owner": "navigation"
+    },
+    {
+     "severity": "minor",
+     "title": "Signed-in header information architecture differs from github.com (cross-cutting)",
+     "detail": "The desktop header has text links Issues / Pull Requests / Milestones / Explore. github.com has a context breadcrumb, a 'Type / to search' input and icon buttons for issues, PRs and notifications. Height (64px), background (#f6f8fa / #010409), 32px bordered icon buttons and avatar all match.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "repo-home-markdown-showcase-playground",
+   "light": 9,
+   "dark": 9,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Lazy README images never captured (tooling)",
+     "detail": "The Media section is empty in shots/final-gate-critic-1/pg-l-4.png. shots/final-gate-critic-1/imgcheck.mjs shows logo.png and diagram.svg return HTTP 200 and load after scrolling (naturalWidth goes from 0 to 96/320). They are loading=lazy and the full-page capture never scrolls, so this is a capture artifact, not a theme defect.",
+     "owner": "tools/shoot (integrator)"
+    },
+    {
+     "severity": "nit",
+     "title": "Mermaid iframe leaves 100px of blank space at 390",
+     "detail": "shots/final-gate-critic-1/mermcheck.mjs: at 390 the .markup-content-iframe is 310\u00d7172 but its SVG is 310\u00d772 (at 1440, 172 fits). See shots/final-gate-critic-1/pg-mob-l3.png. This may be upstream Gitea iframe sizing.",
+     "owner": "markdown"
+    }
+   ]
+  },
+  {
+   "id": "branches",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 7,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Branch table has no column-header row",
+     "detail": "shots/final-gate-critic-1/br-l.png vs br-ref-l.png. github.com shows a Box header row (Branch / Updated / Check status / Behind|Ahead / Pull request) on #f6f8fa (#151b23 dark). Ours starts directly with rows, so the table reads as a list. Gitea's template has no header row, so this needs a template or pseudo-element construction.",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "minor",
+     "title": "No 'Branches' page title or Overview/Active/Stale/All UnderlineNav",
+     "detail": "github.com has a 24px 'Branches' h1 and a tab UnderlineNav above the search. Ours shows Gitea's '445 Commits \u00b7 14 Branches \u00b7 16 Tags' bar and a 14px 'Default Branch' heading.",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "minor",
+     "title": "5 icon buttons per row vs GitHub's delete plus kebab",
+     "detail": "Each row has create-branch, RSS, download, rename and delete icon buttons (28px each). github.com shows a trash icon and a '\u2026' kebab, so our rows read noticeably busier.",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "minor",
+     "title": "Mobile rows become stacked cards",
+     "detail": "shots/final-gate-critic-1/br-mob-l.png: each branch is a 3-line card at 390. github.com keeps a horizontally scrolling table (br-mob-ref.png).",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "nit",
+     "title": "Repo header action order differs",
+     "detail": "Ours: RSS, Unwatch, Star, Fork. github.com: Notifications, Fork, Star.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "repo-home-readme-with-images-and-tables",
+   "light": 9,
+   "dark": 9,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Lazy README images missing from capture (tooling)",
+     "detail": "stagira.png, dashboards_preview.png and apache_bench_stress_test.png are blank in shots/final-gate-critic-1/rp-cmp3.png and rp-cmp5.png. They serve with HTTP 200 and load after scrolling (imgcheck.mjs), so this is a capture artifact. The 5 shields.io badges are blocked by the shooter (ERR_BLOCKED_BY_CLIENT).",
+     "owner": "tools/shoot (integrator)"
+    },
+    {
+     "severity": "nit",
+     "title": "Sidebar says 'Description' plus extra Search code and Manage Topics",
+     "detail": "github.com says 'About' and has no code search box in the sidebar. These are locale and Gitea features.",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "nit",
+     "title": "Mobile shows the full file list and a counter row",
+     "detail": "shots/final-gate-critic-1/rp-mob.png: all 17 entries plus a Watch/Star/Fork counter row. github.com truncates to about 10 rows with 'View all files' and hides the counters.",
+     "owner": "pages/repo"
+    }
+   ]
+  },
+  {
+   "id": "pr-conversation-closed-unmerged",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Mobile head-branch pill wraps across 3 lines",
+     "detail": "shots/final-gate-critic-1/pr-mob-l.png: the deleted branch 'dependabot/github_actions/actions/upload-artifact-6' breaks mid-token into a 3-line pill. github.com truncates to one line ('dependabot/gith\u2026') with a copy button (pr-mob-ref.png). Fix: nowrap plus ellipsis with a max-width.",
+     "owner": "pages/issues-prs"
+    },
+    {
+     "severity": "nit",
+     "title": "Mobile PR tabs clip 'Files Changed' to 'Fil'",
+     "detail": "At 390 the tab bar cuts the third tab at the viewport edge with no scroll affordance.",
+     "owner": "pages/issues-prs"
+    }
+   ]
+  },
+  {
+   "id": "actions-list",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Not a full-bleed PageLayout; no page title or filter input",
+     "detail": "shots/final-gate-critic-1/al-l-a.png vs al-ref.png. github.com: the sidebar is pinned to the left viewport edge with a right border and an 'Actions' title. The main pane has an 'All workflows' title, a subtitle and a 300px 'Filter workflow runs' input, and the runs Box is 1056px wide. Ours: a centred 1280 container, a borderless NavList, a 962px Box, no title and no filter.",
+     "owner": "pages/actions-packages-projects"
+    },
+    {
+     "severity": "minor",
+     "title": "Row kebab hover turns accent-blue with no background",
+     "detail": "shots/final-gate-critic-1/live/actions-list/states/light-1440-row-kebab-hover-clip.png: the '\u2026' becomes #0969da. github.com's invisible IconButton keeps the muted icon and adds a neutral-muted background.",
+     "owner": "pages/actions-packages-projects"
+    },
+    {
+     "severity": "minor",
+     "title": "Non-Octicon gitea-running icon in status filter",
+     "detail": "The audit flags svg.gitea-running in the status-filter dropdown (shots/final-gate/actions-list/*.json). It should be masked with an Octicon like the other Vue icons.",
+     "owner": "icons (integrator)"
+    },
+    {
+     "severity": "nit",
+     "title": "Pagination has First/Last items",
+     "detail": "shots/final-gate-critic-1/al-l-b.png. github.com pagination is Previous 1 2 3 \u2026 Next only.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "org-members",
+   "light": 8,
+   "dark": 8,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "No 'People' left column",
+     "detail": "docs/reference/org-members/light-1440.png has a 'People' h2 and an 'Organization permissions / Members' side menu. Ours is single-column with info text and a green 'Manage teams and members' button. This is a template limit.",
+     "owner": "pages/people"
+    },
+    {
+     "severity": "minor",
+     "title": "Mobile member rows are cramped (about 170px each)",
+     "detail": "shots/final-gate-critic-1/om-mob.png: names wrap to 2 lines, the Hidden label drops to its own line, 'Member Role:' splits, and Make visible and Remove stack vertically. github.com rows stay 1\u20132 lines with a single trailing button.",
+     "owner": "pages/people"
+    },
+    {
+     "severity": "nit",
+     "title": "'2FA: \u00d7' bare glyph line",
+     "detail": "This is Gitea data with no GitHub equivalent. A muted Label would read as more native.",
+     "owner": "pages/people"
+    }
+   ]
+  },
+  {
+   "id": "user-settings-account",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Danger flash icon has the wrong colour and gap",
+     "detail": "shots/final-gate-critic-1/usa-flash-l.png: the alert icon is fgColor-default with about a 4px gap before the text. Primer .flash-error .octicon is fgColor-danger with a 12px right margin.",
+     "owner": "overlays"
+    },
+    {
+     "severity": "nit",
+     "title": "Email list not in a Box",
+     "detail": "The address and its Primary/Activated labels are bare text. github.com's emails settings list each address in a Box row.",
+     "owner": "pages/settings-admin"
+    }
+   ]
+  },
+  {
+   "id": "user-settings-orgs",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Leave buttons are medium (32px)",
+     "detail": "The live measurement gives red-btn 64\u00d732. github.com organisation rows use btn-sm (28px).",
+     "owner": "pages/settings-admin"
+    },
+    {
+     "severity": "nit",
+     "title": "Mobile 'New Organization' wraps onto its own line",
+     "detail": "shots/final-gate-critic-1/user-settings-orgs-mob.png: the button sits right-aligned on a separate line under the heading, which leaves a gap above the Subhead border.",
+     "owner": "pages/settings-admin"
+    }
+   ]
+  },
+  {
+   "id": "org-projects",
+   "light": 8,
+   "dark": 8,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Search input is 28px/12px with a trailing attached button",
+     "detail": "shots/final-gate-critic-1/live/org-projects/light-1440.measure.json: input h28, 12px, with a trailing search button. explore-repos and org-members use 32px/14px with a leading icon, and github.com's 'Search all projects' is 32px with a leading icon, so this page is inconsistent.",
+     "owner": "pages/actions-packages-projects"
+    },
+    {
+     "severity": "nit",
+     "title": "'New Project' is a small (28px) button",
+     "detail": "github.com's 'New project' is a 32px medium primary button, and this site's own 'Manage teams and members' is 32px.",
+     "owner": "pages/actions-packages-projects"
+    },
+    {
+     "severity": "nit",
+     "title": "Mobile toolbar order reversed",
+     "detail": "shots/final-gate-critic-1/org-projects-mob.png: 'New Project' moves to the left, above the Open/Closed counts.",
+     "owner": "pages/actions-packages-projects"
+    }
+   ]
+  },
+  {
+   "id": "forgot-password",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Global navbar shown on the auth page",
+     "detail": "shots/final-gate/forgot-password/light-1440.png shows the anonymous header (Explore, Help, Sign In, Register). github.com auth pages have no global header, only the centred mark (docs/reference/login/light-1440.png).",
+     "owner": "pages/auth"
+    },
+    {
+     "severity": "minor",
+     "title": "Form never exercised (mailer disabled)",
+     "detail": "The page only shows 'Account recovery is disabled\u2026', and the validation-error state (live/forgot-password/states/light-1440-validation-error-clip.png) captures the same text. The input, button and error styles are never gated.",
+     "owner": "tools/shoot + seed (integrator)"
+    }
+   ]
+  },
+  {
+   "id": "explore-users",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Users listed as separate cards with 16px gaps, not a Primer Box with rows",
+     "detail": "Each user is its own bordered card with a 16px gap between cards (shots/final-gate/explore-users/light-1440.png, dark-1440.png, and the 390 captures). A native Primer list, such as github.com user search, is one Box with divided rows. The data is clean: 0 console errors, 0 off-palette colours, 0 overflow. The sidebar rule reaches the footer (nav bottom 788 = footer top 788).",
+     "owner": "pages/people"
+    }
+   ]
+  },
+  {
+   "id": "user-settings",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Settings NavList has no leading Octicons and no group headings",
+     "detail": "github.com settings sidebars put a 16px Octicon before every item and group items under headings (Access, Code/planning/automation, Security). Ours is text-only with a single 'User Settings' label (shots/final-gate/user-settings/light-1440.png, x=104-368, y=185-570). This is the main remaining sign the page is not github.com. The same applies to user-settings-security and repo-settings-deploykeys.",
+     "owner": "navigation"
+    },
+    {
+     "severity": "minor",
+     "title": "Profile tab settings header is 8px lower than on other settings tabs",
+     "detail": ".gh-settings-header has margin-top 32px on /user/settings but 24px on /user/settings/security and /account. The avatar sits at y=98 vs y=90 (live probe), so the whole page jumps 8px when switching tabs. Cause: src/pages/people/profile.css:24 `.user.profile > :first-child { margin-top: 32px }` also matches `.page-content.user.settings.profile`. Fix: add :not(.settings). Compare shots/final-gate/user-settings/light-1440.png with user-settings-security/light-1440.png.",
+     "owner": "pages/people"
+    }
+   ]
+  },
+  {
+   "id": "repo-code-file",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "File tree column is inset; at 390 the file box is not full-bleed",
+     "detail": "github.com's tree sidebar is flush-left (x=0-320) with a border-right (docs/reference/repo-code-file/light-1440.png). Ours is inset at x=32-335 with no divider. At 390, github.com's file box is full-bleed. Ours keeps 16px gutters, a border and a 64px line-number gutter (shots/final-gate-critic-2/rcf-l390.png vs rcf-ref-l390.png). The Rust syntax colours and the Raw/Blame/History toolbar match.",
+     "owner": "code"
+    },
+    {
+     "severity": "nit",
+     "title": "Tooling artefact: 390 full-page capture blank after line 409",
+     "detail": "shots/final-gate/repo-code-file/{light,dark}-390.png are blank from device y=17273, so lines 410-447 are missing. A live DOM probe shows all 447 rows, and a live viewport shot renders them (shots/final-gate-critic-2/live-rcf-390-bottom.png). Not a theme defect. Tall mobile pages should be captured in segments.",
+     "owner": "integrator (tools/shoot)"
+    }
+   ]
+  },
+  {
+   "id": "file-view-markdown",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Markdown-source syntax rules leak into rendered .md preview code blocks",
+     "detail": "In a rendered README.md, the fenced `<script type=\"module\">` block shows `type` (.na) as rgb(10,48,105) with underline and `script` (.nt) as plain fgColor-default. github.com shows the tag in the entity-tag green and the attribute without underline (shots/final-gate-critic-2/fvm-light-script.png). Cause: selectors keyed on `.page-content:has(.breadcrumb > .active.section[title$=\".md\"]) .file-view` also match the rendered .markup preview: src/code/syntax.css:95 (`.nt,.o,.m,.nb {color:inherit}`) and src/code/editor.css:107 (`.na` string colour + underline). Fix: exclude .markup descendants.",
+     "owner": "code"
+    },
+    {
+     "severity": "nit",
+     "title": "External README images and badges blocked by the shooter",
+     "detail": "20 failed requests and 20 console errors, all ERR_BLOCKED_BY_CLIENT for raw.githubusercontent.com, shields.io and similar, so the top of the README shows alt text (shots/final-gate/file-view-markdown/light-1440.png y=380-700). Test artefact, not a theme defect. CLS is 0.053 at 390.",
+     "owner": "integrator (tools/shoot)"
+    }
+   ]
+  },
+  {
+   "id": "tags",
+   "light": 9,
+   "dark": 9,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Box header lacks the tag Octicon",
+     "detail": "github.com's header reads 'Tags' with a tag Octicon (docs/reference/tags/light-1440.png y=307). Ours reads '16 Tags' with no icon (shots/final-gate/tags/light-1440.png y=299). Rows, metadata, SHA, segmented Releases/Tags control and dark colours otherwise match. Live states (row hover, search focus, button hover and focus) are fine: shots/final-gate-critic-2/live/tags/states.",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "nit",
+     "title": "At 390 the coral active underline sits under the overflow button",
+     "detail": "Releases is in the overflow, so the selected underline is drawn under the '\u2026' button (shots/final-gate-critic-2/tags-l390.png). Primer's UnderlineNav moves the selected item into view. Also seen on org-teams and the wiki.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "wiki-page-playground",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Wiki 'Pages' sidebar renders as a bulleted, underlined markdown list",
+     "detail": "The Pages box (shots/final-gate/wiki-page-playground/light-1440.png x=1032-1328, y=498-663) is a bulleted list of underlined links. github.com's wiki sidebar lists page titles without bullets or underlines. The Edit / New Page / Delete Page header buttons are 28px (small), not the 32px default.",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "nit",
+     "title": "Mermaid light theme is neutral grey, not GitHub's default lavender",
+     "detail": "Nodes are grey (#eee-ish) boxes (light-1440 y=375-740). github.com's light Mermaid uses the default theme. Mermaid renders in an iframe that CSS cannot reach, so this is nearly exempt. Dark looks consistent.",
+     "owner": "markdown"
+    }
+   ]
+  },
+  {
+   "id": "pr-files-changed-unified",
+   "light": 9,
+   "dark": 7.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Dark diff backgrounds stacked twice (tr and td both painted)",
+     "detail": "Pixel samples, ours vs github.com (shots/final-gate/pr-files-changed-unified/dark-1440.png vs docs/reference/.../dark-1440.png): deletion code rgb(57,28,31) vs (36,23,27); addition code (22,56,34) vs (18,38,29); deletion number (100,40,40) vs (84,35,38); hunk (21,40,67) vs (17,29,46). Light matches exactly. Live probe: tr.del-code has rgba(248,81,73,.1) and every td (lines-code, lines-type-marker, lines-escape) has another .1; lines-num has .3 on top of the row's .1. The result reads visibly more saturated on every dark diff. Fix: paint only the cells or only the row (src/code/diff.css ~224-280, tokens in src/tokens/gitea-map.css:175-183).",
+     "owner": "code"
+    },
+    {
+     "severity": "minor",
+     "title": "At 390 the selected 'Files Changed' tab is clipped off-screen",
+     "detail": "The tab row scrolls, and the active tab shows only 'Fil' at the right edge (shots/final-gate-critic-2/prf-l390.png, prf-d390.png), so the page loads with the selected tab not visible. It should be scrolled into view.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "action-run",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "390: graph node off-canvas, full job sidebar stacked, CLS 0.074",
+     "detail": "At 390 the 'Build' node is outside the graph viewport, and Lint's connector dot points at nothing (shots/final-gate-critic-2/ar-l390.png). The full job list is stacked above the summary, where github.com collapses it to a 'Summary \u25be' menu (docs/reference/action-run/light-390.png). CLS is 0.074, from action-view-body, action-view-left and action-run-summary-stat.",
+     "owner": "pages/actions-packages-projects"
+    },
+    {
+     "severity": "nit",
+     "title": "Dark graph nodes and matrix box use the default background, not the overlay",
+     "detail": "Ours rgb(13,17,23) vs github.com rgb(21,27,35) for the matrix card (dark-1440, x\u2248500-600, y\u2248560-620). The graph canvas (1,4,9) and the summary card match. Live states (job hover, back hover) are fine: shots/final-gate-critic-2/live/action-run/states.",
+     "owner": "pages/actions-packages-projects"
+    }
+   ]
+  },
+  {
+   "id": "org-teams",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Team cards in a staggered two-column grid with unequal header heights",
+     "detail": "Live measurement: the Owners header is 62px (the Leave button inflates it) vs 55px for core and triage. The cards form a staggered grid with a 48px hole under Owners (tops 282/282/456; shots/final-gate/org-teams/light-1440.png). At 390, the Owners header wraps its metadata onto a second line while the others do not (shots/final-gate-critic-2/ot-l390.png). A native Primer version would be a single Box with one row per team.",
+     "owner": "pages/people"
+    }
+   ]
+  },
+  {
+   "id": "user-settings-security",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Three primary green buttons on one page",
+     "detail": "'Enroll in Two-Factor Authentication', 'Add Security Key' and 'Add OpenID URI' are all primary (shots/final-gate/user-settings-security/light-1440.png y=360/646/880). GitHub uses one primary action per view, so the secondary adds should be default buttons. The NavList icon gap (see user-settings) also applies.",
+     "owner": "pages/settings-admin"
+    }
+   ]
+  },
+  {
+   "id": "repo-settings-deploykeys",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Empty state is bare text, not a bordered Blankslate",
+     "detail": "'There are no deploy keys yet.' sits as plain text under the subhead (shots/final-gate/repo-settings-deploykeys/light-1440.png y=270). github.com shows a bordered Box/Blankslate. The 'Add Deploy Key' subhead button measures 28px tall with 12px text. The NavList icon gap (see user-settings) also applies.",
+     "owner": "pages/settings-admin"
+    }
+   ]
+  },
+  {
+   "id": "actions-empty-filter",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Actions list layout is not GitHub's full-width split layout",
+     "detail": "github.com (docs/reference/actions-list/light-1440.png): a full-bleed sidebar at x=0-335 with border-right and an 'Actions' heading; the main column from x=360 has an 'All workflows' h2, a 'Showing runs from all workflows' subtitle and a 'Filter workflow runs' input. Ours (shots/final-gate/actions-empty-filter/light-1440.png): a centred container at x=104-1328, no sidebar border, no page heading, and the Box directly under the repo nav. The Box header, the blankslate and the 390 layout are fine. gitea-running in the Status menu is a documented exemption.",
+     "owner": "pages/actions-packages-projects"
+    }
+   ]
+  },
+  {
+   "id": "openid-signin",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Double space before the required asterisk in the label",
+     "detail": "The label reads 'OpenID URI  *' (shots/final-gate/openid-signin/light-1440.png y=300). Otherwise it matches the current github.com sign-in form: 40px input, full-width 40px primary button, centred logo and heading. fontawesome-openid is a documented brand exemption.",
+     "owner": "pages/auth"
+    }
+   ]
+  },
+  {
+   "id": "explore-orgs",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Orgs rendered as separate bordered cards",
+     "detail": "Each org is its own bordered box with a 16px gap (y 136-216, 232-312, 328-408 in shots/final-gate/explore-orgs/light-1440.png). GitHub lists use rows separated by 1px dividers.",
+     "owner": "pages/people"
+    },
+    {
+     "severity": "nit",
+     "title": "Sidebar vertical rule ends mid-page",
+     "detail": "The left nav's divider at x=256 stops at y=788 instead of running to the footer (light-1440.png and dark-1440.png).",
+     "owner": "pages/people"
+    }
+   ]
+  },
+  {
+   "id": "user-settings-appearance",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Non-Octicon colorblind icons in theme menu",
+     "detail": "The audit reports gitea-colorblind-blueyellow x4 inside #_aria_dropdown_item_38..41 (json icons.nonOcticon).",
+     "owner": "icons"
+    },
+    {
+     "severity": "nit",
+     "title": "Theme menu has no scroll affordance",
+     "detail": "The open menu ends at 'Modern Light' with no fade or scrollbar, although more themes follow (live/user-settings-appearance/states/light-1440-theme-dropdown-open.png).",
+     "owner": "overlays"
+    }
+   ]
+  },
+  {
+   "id": "repo-issue",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 7,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Mobile comment header wraps to 3 rows (85px)",
+     "detail": "At 390, .timeline-item.comment .comment-header measures 85.3px tall (live). Name and time sit on row 1, '(Migrated from github.com)' on row 2, and the reaction/kebab icons on row 3. GitHub uses one row of about 40px. See shots/final-gate/repo-issue/light-390.png y 850-1025 (2x).",
+     "owner": "data-display"
+    },
+    {
+     "severity": "minor",
+     "title": "Dependency select taller than attached + button",
+     "detail": "In the sidebar, the 'Add dependency\u2026' select spans y 1077-1108 (32px) but the + button spans y 1077-1104 (28px), which leaves a notch (zoom-issue-dep-light.png; light-1440 x 1008-1328).",
+     "owner": "pages/issues-prs"
+    },
+    {
+     "severity": "nit",
+     "title": "Labels SelectPanel lacks title row; H1/H2/H3 toolbar glyphs",
+     "detail": "The labels panel opens straight into the filter input with no 'Apply labels' header (live states labels-panel-open). The composer toolbar shows H1 H2 H3 where GitHub has a single heading icon.",
+     "owner": "pages/issues-prs"
+    }
+   ]
+  },
+  {
+   "id": "file-view-large-file-playground",
+   "light": 9,
+   "dark": 9,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "File info bar in monospace",
+     "detail": "'798 lines \u00b7 39 KiB \u00b7 Go' uses .file-info.tw-font-mono (computed ui-monospace 12px) at light-1440 y=328. GitHub uses 12px sans here.",
+     "owner": "code"
+    },
+    {
+     "severity": "nit",
+     "title": "Wide mobile line-number gutter; commit message dropped",
+     "detail": "At 390 the code starts at x=108 CSS px, so the gutter is about 88px. The latest-commit bar shows only the author, time and a red X, with no message. The blank area below line 409 in the full-page PNG is a Chromium capture limit; a live render is correct.",
+     "owner": "code"
+    }
+   ]
+  },
+  {
+   "id": "releases",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Mobile pagination shows only current page",
+     "detail": "At 390 the pagination shows only '|< < [1] > >|' although a page 2 exists (the 1440 view shows '1 2'). GitHub mobile shows labelled Previous/Next (releases/light-390.png y\u224818330).",
+     "owner": "navigation"
+    },
+    {
+     "severity": "minor",
+     "title": "Release meta wraps with orphan separator on mobile",
+     "detail": "The meta line breaks into 'released this / 2 years ago / \u00b7 3 commits to main\u2026', starting a line with '\u00b7' (releases/light-390.png y 950-1080).",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "nit",
+     "title": "Active tab indicator under overflow kebab",
+     "detail": "On mobile, the Releases tab is in overflow and the orange underline sits under the '\u2026' button. GitHub keeps the selected item visible.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "issues-list-closed",
+   "light": 9,
+   "dark": 9,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Per-row checkboxes on mobile",
+     "detail": "At 390 every row keeps a bulk-select checkbox, which costs about 50 CSS px of title width (issues-list-closed/light-390.png). GitHub hides these on narrow screens.",
+     "owner": "pages/issues-prs"
+    },
+    {
+     "severity": "minor",
+     "title": "Mobile pagination hides page numbers",
+     "detail": "At 390 only '[1]' shows with the chevrons, although there are 3 pages (the 1440 view shows 1 2 3).",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "pr-conversation-playground-large-diff-reviews",
+   "light": 8,
+   "dark": 8.5,
+   "mobile": 7,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Reply button icon invisible in light",
+     "detail": ".code-comments-list .comment-form-reply is restyled to the default button, but its svg keeps the primary icon colour. Computed svg colour is rgba(255,255,255,0.8) on #f6f8fa (light) and pure white in dark, where it should be fgColor-muted. This leaves a blank gap before 'Reply' (zoom-pr-reply.png; light-1440 x\u2248915 y\u22481777).",
+     "owner": "pages/issues-prs"
+    },
+    {
+     "severity": "major",
+     "title": "Review conversation box breaks the mobile gutter",
+     "detail": "At 390, .conversation-holder has left=4px while comment boxes have left=16px (measured live). The review diff boxes jut out to the edge (light-390.png y\u22485820-6510).",
+     "owner": "pages/issues-prs"
+    },
+    {
+     "severity": "minor",
+     "title": "Timeline commit summary uses monospace",
+     "detail": "a.muted.title-full-link in the commit rows uses ui-monospace at 13.3px (light-1440 y=1055, 1087, 2254). GitHub uses the sans font for commit messages and mono only for SHAs.",
+     "owner": "pages/issues-prs"
+    },
+    {
+     "severity": "minor",
+     "title": "Mobile PR tabs clipped, header actions stacked",
+     "detail": "At 390 the tab row ends in '\u00b1 Fi' with no scroll affordance (y\u2248940 at 2x). The inline code-comment header stacks the reaction and kebab icons vertically, and the top-level comment headers wrap as on repo-issue.",
+     "owner": "pages/issues-prs"
+    }
+   ]
+  },
+  {
+   "id": "packages-org",
+   "light": 8,
+   "dark": 7.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Org header has no bottom border",
+     "detail": "Light: the #f6f8fa header ends at y=166 with no line. Dark: the header matches the page (#0d1117) and has no divider. The repo header has a 1px line at y=173 (borderColor-muted), so this is inconsistent with it and with GitHub's org page.",
+     "owner": "navigation"
+    },
+    {
+     "severity": "nit",
+     "title": "Package list styling",
+     "detail": "Package names use fgColor-default rather than Link blue. Metadata links are bold and underlined. The npm type label uses the gitea-npm brand svg (non-Octicon).",
+     "owner": "pages/actions-packages-projects"
+    }
+   ]
+  },
+  {
+   "id": "admin-repos",
+   "light": 7,
+   "dark": 7,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Table clipped at 1440",
+     "detail": ".ui.attached.table.segment has clientWidth 934 but scrollWidth 1052 (measured live). The Created column is cut to 'Sep 2' at x\u22481290-1328 and the operations column is hidden behind a scroll container with no visible scrollbar (admin-repos/light-1440.png). GitHub never scrolls a data table at desktop width; tighten the cell padding or let the columns wrap.",
+     "owner": "pages/settings-admin"
+    },
+    {
+     "severity": "nit",
+     "title": "Minor CLS on table",
+     "detail": "CLS 0.0011 (1440) and 0.002 (390), from td/th at t\u224865ms.",
+     "owner": "pages/settings-admin"
+    }
+   ]
+  },
+  {
+   "id": "user-settings-applications",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Disclosure summaries instead of buttons",
+     "detail": "'Generate New Token' and 'Create a new OAuth2 Application' are bold <summary> triangles (light-1440 y=530, 833). GitHub uses a 'Generate new token' button; the token list box and danger Delete buttons already match.",
+     "owner": "pages/settings-admin"
+    }
+   ]
+  },
+  {
+   "id": "admin-dashboard-config-settings",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Banner editor toolbar wraps with dangling separators on mobile",
+     "detail": "At 390 the Write/Preview toolbar wraps to two rows, and its group separator rules hang between the rows (admin-dashboard-config-settings/light-390.png y\u22482970-3060 at 2x).",
+     "owner": "pages/settings-admin"
+    },
+    {
+     "severity": "nit",
+     "title": "ToggleSwitch placed mid-row",
+     "detail": "The Enable Gravatar/Federated Avatars toggles sit at x=723 in the middle of the Box row. GitHub puts ToggleSwitch at the row end.",
+     "owner": "pages/settings-admin"
+    }
+   ]
+  },
+  {
+   "id": "repo-create",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Boxed Gitea form rather than GitHub /new layout",
+     "detail": "The form sits in an attached box with a grey 'New Repository' header (x 336-1104). GitHub's /new is unboxed, with a 24px 'Create a new repository' heading, a subtitle and a divider. Owner and name are not side by side, and visibility is a checkbox rather than radio cards.",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "nit",
+     "title": "Help text capped narrow, ragged wraps",
+     "detail": "Captions wrap at about 550px even at 1440 ('\u2026named \".profile\"' / 'or \".profile-private\"\u2026' y 400-415). At 390 they wrap at about 285px inside a 325px column.",
+     "owner": "controls"
+    }
+   ]
+  },
+  {
+   "id": "reset-password-badcode",
+   "light": 9,
+   "dark": 9,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Auth heading and mobile header",
+     "detail": "'Account Recovery' is about 20px semibold while GitHub's auth heading is lighter and larger. At 390 the logged-out header has no visible Sign in button. The page otherwise mirrors the github.com/login layout.",
+     "owner": "pages/auth"
+    }
+   ]
+  },
+  {
+   "id": "login",
+   "light": 8.8,
+   "dark": 8.8,
+   "mobile": 8.7,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Font stack differs from github.com (Mona Sans VF) by policy",
+     "detail": "Measured heading 20px/600 and primary button 14px/500 are identical to github.com/login; only font-family differs (system vs Mona Sans VF), making ours look slightly heavier. ARCHITECTURE \u00a711 excludes Mona; not a defect. shots/final-gate-critic-4/login-cmp.png",
+     "owner": "foundation"
+    }
+   ]
+  },
+  {
+   "id": "user-settings-keys",
+   "light": 8.8,
+   "dark": 8.8,
+   "mobile": 8.6,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Settings sidebar items have no leading octicons",
+     "detail": "GitHub settings NavList shows an octicon per item; ours is text-only (template-limited). shots/final-gate/user-settings-keys/light-1440.png x=120 y=200-560",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "repo-pulls",
+   "light": 8.6,
+   "dark": 8.6,
+   "mobile": 8.3,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "PR list titles read heavier than github.com",
+     "detail": "Ours 16px/600 system font vs reference title visibly lighter (Mona Sans VF). With system stack, 500 would match. shots/final-gate-critic-4/pulls-rows.png",
+     "owner": "pages/issues-prs"
+    },
+    {
+     "severity": "minor",
+     "title": "Mobile repo header keeps RSS/Watch/Star/Fork row",
+     "detail": "At 390 an extra ~40px button row under the repo title; github.com shows only title + Public on narrow repo sub-pages. shots/final-gate-critic-4/pulls-390-top.png",
+     "owner": "navigation"
+    },
+    {
+     "severity": "nit",
+     "title": "Container 1216px vs 1232px",
+     "detail": "Box spans x=112-1328 vs github.com 104-1336 at 1440. shots/final-gate-critic-4/pulls-repohead.png",
+     "owner": "foundation"
+    }
+   ]
+  },
+  {
+   "id": "file-view-image-playground",
+   "light": 8.7,
+   "dark": 8.7,
+   "mobile": 8.3,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "File meta in monospace",
+     "detail": "'676 B \u00b7 96x96px' uses mono; GitHub uses 12px sans muted. shots/final-gate/file-view-image-playground/light-1440.png at 360,328",
+     "owner": "code"
+    },
+    {
+     "severity": "nit",
+     "title": "Copy-path button orphaned on its own line at 390",
+     "detail": "Breadcrumb copy icon wraps under 'logo.png'. shots/final-gate-critic-4/file-view-image-playground-390-0.png",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "nit",
+     "title": "CLS 0.0223 from footer at 1440",
+     "detail": "footer.page-footer shifts at t=124ms (shots/final-gate/file-view-image-playground/light-1440.json)",
+     "owner": "pages/repo"
+    }
+   ]
+  },
+  {
+   "id": "release-detail",
+   "light": 8.8,
+   "dark": 8.8,
+   "mobile": 8.8,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Downloads disclosure triangle oversized",
+     "detail": "Large filled triangle before 'Downloads'; GitHub 'Assets' uses small caret + counter. shots/final-gate/release-detail/light-1440.png at 135,720",
+     "owner": "pages/repo"
+    }
+   ]
+  },
+  {
+   "id": "issue-detail-playground-reactions-alerts-tables",
+   "light": 8.6,
+   "dark": 8.6,
+   "mobile": 8.4,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Code-block copy button always visible, overlaps code",
+     "detail": "GitHub reveals the clipboard button on hover only; ours overlays code ('fill: cu' truncated at 390). shots/final-gate-critic-4/issue-detail-playground-reactions-alerts-tables-390-0.png",
+     "owner": "markdown"
+    },
+    {
+     "severity": "nit",
+     "title": "Native double-arrow on 'Add dependency\u2026' select",
+     "detail": "Primer Select uses a single chevron. shots/final-gate-critic-4/issue-light-1.png at 1283,180",
+     "owner": "controls"
+    },
+    {
+     "severity": "nit",
+     "title": "Comment editor double border",
+     "detail": "Outer box plus inset bordered textarea; GitHub textarea is borderless inside the editor box. shots/final-gate-critic-4/issue-dark-editor.png",
+     "owner": "controls"
+    }
+   ]
+  },
+  {
+   "id": "pr-files-changed-split-playground-large-diff",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 6.8,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Mobile: inline review thread crushed into ~110px split column",
+     "detail": "At 390 the conversation holder occupies only the new-side cell; header wraps per word and the comment code block shows only 'ex|' \u2014 unreadable. Should span full diff width at narrow viewports. shots/final-gate-critic-4/pr-files-changed-split-playground-large-diff-390-44230.png",
+     "owner": "code"
+    },
+    {
+     "severity": "minor",
+     "title": "Mobile PR tab bar clips active 'Files Changed' tab",
+     "detail": "Tabs cut at viewport edge ('\u00b1 Fi'), active tab invisible, no scroll affordance. shots/final-gate-critic-4/pr-files-changed-split-playground-large-diff-390-0.png",
+     "owner": "navigation"
+    },
+    {
+     "severity": "minor",
+     "title": "Review thread header author not emphasised; avatar+caret outside box",
+     "detail": "'carol-ops commented\u2026' uniformly muted (GitHub: author fg-default semibold); timeline-style avatar with pointer outside the thread box. shots/final-gate-critic-4/prsplit-thread.png",
+     "owner": "code"
+    },
+    {
+     "severity": "nit",
+     "title": "Blank avatar in last review thread",
+     "detail": "bob-dev avatar is an empty circle in both final-gate and live runs; likely lazy img not loaded during full-page capture. shots/final-gate-critic-4/prsplit-live-thread2.png",
+     "owner": "integrator"
+    }
+   ]
+  },
+  {
+   "id": "package-detail-npm",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.1,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Install snippet <pre> overflows and is clipped at 390",
+     "detail": "'@octo-org:registry=http://localhost:3000/api/pac\u2026' runs past the block padding and under the copy button. shots/final-gate-critic-4/package-detail-npm-390-0.png",
+     "owner": "pages/actions-packages-projects"
+    },
+    {
+     "severity": "nit",
+     "title": "Keywords rendered as plain text",
+     "detail": "GitHub shows topics as accent pill labels; ours 'theme-seed tokens' plain. shots/final-gate/package-detail-npm/light-1440.png y=1053",
+     "owner": "pages/actions-packages-projects"
+    }
+   ]
+  },
+  {
+   "id": "repo-settings-collab",
+   "light": 8.6,
+   "dark": 8.6,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "No empty state for collaborators",
+     "detail": "GitHub shows a Blankslate when there are no collaborators; ours shows just the search row (template-limited). shots/final-gate/repo-settings-collab/light-1440.png",
+     "owner": "pages/settings-admin"
+    }
+   ]
+  },
+  {
+   "id": "admin-orgs",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.3,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Search input 28px with small text",
+     "detail": "'Search orgs\u2026' measures 28px tall (y155-182) next to 32px Sort; Primer default is 32px. shots/final-gate/admin-orgs/light-1440.png",
+     "owner": "pages/settings-admin"
+    },
+    {
+     "severity": "nit",
+     "title": "Accent-blue edit pencils",
+     "detail": "GitHub row actions are muted icon buttons. shots/final-gate/admin-orgs/light-1440.png x=1278",
+     "owner": "pages/settings-admin"
+    }
+   ]
+  },
+  {
+   "id": "action-job",
+   "light": 8.6,
+   "dark": 8.6,
+   "mobile": 8.3,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "CLS 0.0599 at 390",
+     "detail": ".action-view-body/.action-view-left reflow after mount (shots/final-gate/action-job/light-390.json); must not exceed built-in theme per \u00a710",
+     "owner": "pages/actions-packages-projects"
+    },
+    {
+     "severity": "nit",
+     "title": "Gear menu uses checkbox squares",
+     "detail": "GitHub ActionMenu shows checkmarks only on selected items. shots/final-gate-critic-4/actionjob-states.png",
+     "owner": "pages/actions-packages-projects"
+    }
+   ]
+  },
+  {
+   "id": "issue-new-playground",
+   "light": 8.4,
+   "dark": 8.4,
+   "mobile": 8.3,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Preview tab collapses to 0 height; upload bar still shown",
+     "detail": "GitHub shows a min-height 'Nothing to preview' area and hides the attachment footer in preview. shots/final-gate-critic-4/issuenew-preview.png",
+     "owner": "pages/issues-prs"
+    }
+   ]
+  },
+  {
+   "id": "not-found-anon",
+   "light": 8.7,
+   "dark": 8.7,
+   "mobile": 8.7,
+   "issues": []
+  },
+  {
+   "id": "signup",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Auth form uses 40px large controls in a 352px column",
+     "detail": "Measured button/input h=40, w=352 (live/signup/light-1440.measure.json). github.com/login uses 32px inputs and a 32px Sign-in button in a 340px column. The github signup reference is unusable because github.com returned 'Access restricted'.",
+     "owner": "pages/auth"
+    },
+    {
+     "severity": "nit",
+     "title": "Validation flash has no Octicon or close button",
+     "detail": "live/signup/states/dark-1440-validation-error.png: 'Username cannot be empty.' shows as plain text in a danger box. Primer Flash has a leading alert icon and a dismiss button.",
+     "owner": "overlays"
+    }
+   ]
+  },
+  {
+   "id": "notifications",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 7,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Unread counter drawn as an outlined circle, not a Primer CounterLabel",
+     "detail": ".notifications-unread-count: bg transparent, border 1px #d1d9e0, 20x21. Expected: filled bgColor-neutral-muted (#818b981f) with a transparent border, as the repo-tab counters already have. shots/final-gate-critic-5/notif-light-top.png",
+     "owner": "pages/people"
+    },
+    {
+     "severity": "minor",
+     "title": "'Mark all as read' is an icon-only green primary button",
+     "detail": ".ui.mini.button.primary is 34x28, #1f883d, icon only (notif-dark-right.png). GitHub uses a default (neutral) button for mark-as-done actions. Green primary with no label is off-pattern.",
+     "owner": "pages/people"
+    },
+    {
+     "severity": "minor",
+     "title": "Mobile Unread/Read switch has no selected indicator",
+     "detail": "shots/final-gate/notifications/light-390.png: 'Unread 7' differs from 'Read' only by weight. There is no underline and no selected background.",
+     "owner": "pages/people"
+    }
+   ]
+  },
+  {
+   "id": "repo-pull",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Dependency select and '+' button heights mismatch",
+     "detail": "Sidebar 'Add dependency\u2026' select is ~32px next to a ~28px '+' button, so their bottoms are misaligned by ~4px. Visible at 1440 and in dark-390. shots/final-gate-critic-5/pull-light-dep.png",
+     "owner": "controls"
+    },
+    {
+     "severity": "minor",
+     "title": "Mobile comment header wraps to 3 lines",
+     "detail": "At 390 the header stacks author, '(Migrated from github.com)', then reaction and kebab on a separate line (~85px tall). GitHub keeps the kebab on line 1 in a 2-line header. shots/final-gate-critic-5/pull-light-390-0.png",
+     "owner": "pages/issues-prs"
+    },
+    {
+     "severity": "nit",
+     "title": "Markdown code-block copy button is borderless",
+     "detail": "github.com shows a bordered 32px IconButton at the top-right of the pre (pull-ref-a.png). Ours is a bare icon (pull-light-a.png).",
+     "owner": "markdown"
+    },
+    {
+     "severity": "nit",
+     "title": "'Files Changed' tab uses the diff icon",
+     "detail": "GitHub uses octicon file-diff (a boxed \u00b1). Ours shows a bare \u00b1 (diff).",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "directory-tree",
+   "light": 8,
+   "dark": 8,
+   "mobile": 5.5,
+   "issues": [
+    {
+     "severity": "blocker",
+     "title": "Horizontal page overflow at 390 (regression)",
+     "detail": "document width 404 (final-gate) / 421 (live) vs viewport 390, horizontalOverflow=true. Gitea baseline is 390. Culprit: a.m-commit-count (history icon + count) in the #repo-files-table latest-commit row, right edge 421. shots/final-gate/directory-tree/light-390.png. GitHub wraps this into a 2-line commit box.",
+     "owner": "code"
+    },
+    {
+     "severity": "minor",
+     "title": "Mobile toolbar wraps into three rows",
+     "detail": "Rows at 390: branch + compare + breadcrumb / Go to file + Add File / ... + History. The github reference (docs/reference/directory-tree/light-390.png) fits Files, branch, breadcrumb and kebab in one row.",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "minor",
+     "title": "File-tree pane has no full-height divider",
+     "detail": "At 1440 our tree starts at x=32 with no right border. GitHub's 320px pane runs from x=0 with a full-height border-right, and content starts at x=337.",
+     "owner": "code"
+    }
+   ]
+  },
+  {
+   "id": "releases-playground-with-assets-prerelease-draft",
+   "light": 8,
+   "dark": 8,
+   "mobile": 7,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Downloads summary uses the native disclosure marker at 20px bold",
+     "detail": "'\u25b6 Downloads' (y\u2248700 in final-gate light-1440.png) uses the browser's triangle, not an Octicon. GitHub's 'Assets' row is 16px semibold with an octicon triangle and a counter.",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "minor",
+     "title": "Mobile release title row wraps awkwardly",
+     "detail": "At 390 the red status \u00d7 sits alone on a line, Stable/Pre-Release labels drop to a right-aligned second line, and '\u00b7 116 commits' starts a line with the separator dot. shots/final-gate-critic-5/rel-light-390-1.png",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "nit",
+     "title": "Bare red \u00d7 commit-status glyph beside titles",
+     "detail": "The CI-status \u00d7 next to each release title reads as a stray glyph. It has no button chrome or tooltip affordance.",
+     "owner": "pages/repo"
+    }
+   ]
+  },
+  {
+   "id": "labels",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Destructive confirm uses a green primary button",
+     "detail": "The Delete Label modal's confirm is a green 'Confirm' (live/labels/states/dark-390-confirm-modal-open.png). Primer dialogs use a danger button for destructive actions.",
+     "owner": "overlays"
+    },
+    {
+     "severity": "nit",
+     "title": "Edit modal input heights are inconsistent",
+     "detail": "Name \u224828px, Description \u224827px, Color 32px (live/labels/states/light-1440-edit-modal-open.png).",
+     "owner": "controls"
+    },
+    {
+     "severity": "nit",
+     "title": "Labels/Milestones switch has no selected container",
+     "detail": "The active item is plain bold text. GitHub's classic page used a bordered subnav with a selected fill.",
+     "owner": "pages/issues-prs"
+    }
+   ]
+  },
+  {
+   "id": "pr-files-changed-unified-playground-large-diff",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 5,
+   "issues": [
+    {
+     "severity": "blocker",
+     "title": "Page renders 754px wide at 390",
+     "detail": "horizontalOverflow=true, scrollWidth 754. table.chroma of web/src/tokens.ts is 736px inside .file-body.code-diff-unified (overflow-x: visible), forced by the non-wrapping pre in the inline review comment. That file's lines also stop soft-wrapping. Baseline gitea-auto overflows to 666. shots/final-gate-critic-5/prf-l390-tail.png, prf-l390-0.png",
+     "owner": "code"
+    },
+    {
+     "severity": "minor",
+     "title": "Inline review comment header is muted, with a speech caret",
+     "detail": "'carol-ops commented 4 months ago' is fgColor-muted at regular weight, and the box has a caret toward the avatar. Conversation-tab comments are bold fg-default with no caret. shots/final-gate-critic-5/prf-inline-comment.png",
+     "owner": "pages/issues-prs"
+    },
+    {
+     "severity": "nit",
+     "title": "Bottom expand cell is inset relative to the line-number columns",
+     "detail": "The bottom expander is ~72px wide, starting 8px in, vs the 88px line-number gutter used by hunk headers (cmp-expander.png). Same on every file.",
+     "owner": "code"
+    }
+   ]
+  },
+  {
+   "id": "projects-list",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 7,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Open/Closed state switch sits outside the list Box",
+     "detail": "'2 Open / 0 Closed' is above the search with a project icon. GitHub puts Open N / Closed N counters in the Box header next to Sort (docs/reference/crit-app-projects-list/light-1440.png).",
+     "owner": "pages/actions-packages-projects"
+    },
+    {
+     "severity": "minor",
+     "title": "Page primary button is 28px",
+     "detail": "'New Project' spans y=199-227 (28px). GitHub page-level primary buttons are 32px.",
+     "owner": "pages/actions-packages-projects"
+    },
+    {
+     "severity": "minor",
+     "title": "Row actions always visible, including a red Delete",
+     "detail": "Each row shows Edit / Close / red Delete inline. GitHub puts these in a kebab ActionMenu, with danger styling only inside the menu.",
+     "owner": "pages/actions-packages-projects"
+    },
+    {
+     "severity": "nit",
+     "title": "Mobile header order flips",
+     "detail": "At 390, New Project is on the left and Open/Closed on the right, the reverse of desktop.",
+     "owner": "pages/actions-packages-projects"
+    }
+   ]
+  },
+  {
+   "id": "repo-settings-branches",
+   "light": 8,
+   "dark": 8,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Mixed button sizes and primary overuse",
+     "detail": "'Update Default Branch' is ui primary button, h=32. 'Add New Rule' is ui primary tiny button, h=28. GitHub settings use 32px default buttons for these actions.",
+     "owner": "pages/settings-admin"
+    },
+    {
+     "severity": "nit",
+     "title": "Current default branch value renders in placeholder color",
+     "detail": "'main' is .default.text with color #59636e (fgColor-muted), so it reads as a placeholder.",
+     "owner": "controls"
+    }
+   ]
+  },
+  {
+   "id": "admin-emails",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 7,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Status and action icons use inconsistent colors",
+     "detail": "Activated column: 4 accent-blue checks (links) and 1 green. Trash icons are accent blue. A Primer table would show status icons in success/muted and destructive icon-buttons muted, going danger on hover. shots/final-gate/admin-emails/light-1440.png",
+     "owner": "pages/settings-admin"
+    },
+    {
+     "severity": "nit",
+     "title": "Mobile table hides columns without affordance",
+     "detail": "At 390 the table scrolls inside .ui.attached.table.segment (overflow auto, 591px content). Emails are ellipsized, and Primary/Activated/delete are off-screen with no scroll hint.",
+     "owner": "pages/settings-admin"
+    }
+   ]
+  },
+  {
+   "id": "action-job-ok",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Re-run split button is 28px",
+     "detail": "'Re-run failed jobs' plus caret is 28px tall. GitHub's re-run button is 32px.",
+     "owner": "pages/actions-packages-projects"
+    },
+    {
+     "severity": "nit",
+     "title": "Layout shift on mount at 390",
+     "detail": "CLS 0.0599 at t=109ms, sources div.action-view-body and div.action-view-left. At 1440 it is 0.0012.",
+     "owner": "pages/actions-packages-projects"
+    },
+    {
+     "severity": "nit",
+     "title": "Mobile job list ignores the 16px gutter",
+     "detail": "The sidebar list, dividers and active bar start ~8px from the viewport edge, while the content uses 16px (final-gate/action-job-ok/light-390.png).",
+     "owner": "pages/actions-packages-projects"
+    }
+   ]
+  },
+  {
+   "id": "pr-compare-new-playground",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Commits Box is ~2px wider than sibling boxes",
+     "detail": "'1 Commits' box right edge is 1409 vs 1407 for the range and PR boxes. The difference is also visible at 390.",
+     "owner": "data-display"
+    },
+    {
+     "severity": "nit",
+     "title": "Bottom diff expander inset",
+     "detail": "Same 72px vs 88px expander cell as on the files-changed page (shots/final-gate-critic-5/cmp-expander.png).",
+     "owner": "code"
+    }
+   ]
+  },
+  {
+   "id": "user-profile",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Follower counts not bold; README box lacks 'user / README.md' caption; no 'Organizations' heading",
+     "detail": "'3 Followers \u00b7 2 Following' is all muted with no bold numbers (GitHub: bold fg-default counts). The profile README Box has no mono caption header, and the org avatar row has no h2. Evidence: shots/final-gate/user-profile/light-1440.png. Tokens are exact: header #f6f8fa/#010409, tab underline #fd8c73/#f78166, zebra #f6f8fa/#151b23.",
+     "owner": "pages/people"
+    },
+    {
+     "severity": "minor",
+     "title": "Mobile global header shows only hamburger, logo and bell",
+     "detail": "At 390 the signed-in header drops the create (+) and avatar controls that GitHub's mobile AppHeader keeps. This affects every route. Evidence: shots/final-gate-critic-6/up-m.png.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "repo-home",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "README box header wraps to two lines at 390",
+     "detail": "#readme .file-header measures 75px tall at 390, against 46px at 1440. .file-header-left grows to 342px and pushes the edit (pencil) button onto a second line at the left. GitHub keeps one ~48px row. Evidence: shots/final-gate-critic-6/rh-m1.png.",
+     "owner": "code"
+    },
+    {
+     "severity": "nit",
+     "title": "External README badges and images blocked in the capture",
+     "detail": "20 console errors and failed requests, all net::ERR_BLOCKED_BY_CLIENT (stable mode aborts third-party requests), so the README shows alt-text links where GitHub shows badges and the logo. This is environment, not theme. Evidence: shots/final-gate/repo-home/light-1440.json.",
+     "owner": "tools/shoot"
+    },
+    {
+     "severity": "nit",
+     "title": "'Description' heading instead of 'About'; no Public label",
+     "detail": "Gitea template strings; the rest of the sidebar and file table match the reference within 1-2px (shots/final-gate-critic-6/rh-l-00.png vs rh-ref-l-00.png).",
+     "owner": "pages/repo"
+    }
+   ]
+  },
+  {
+   "id": "repo-pull-files",
+   "light": 8,
+   "dark": 8,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Split diff: addition-side line-number cell is neutral grey instead of green",
+     "detail": "Right-hand number cells for added lines 107/108/117 measure #f6f8fa (light) and #151b23 (dark). GitHub uses #aceebb and #1c4428. The deletion side is correct (#ffcecb/#542326). Also visible at 390. Evidence: shots/final-gate-critic-6/prf-num.png, shots/final-gate/repo-pull-files/{light,dark}-1440.png, prf-m0.png.",
+     "owner": "code"
+    },
+    {
+     "severity": "minor",
+     "title": "Dark hunk header row too blue",
+     "detail": "Hunk line background is #152843; GitHub is #111d2e. The hunk number cell #0c2d6b matches. Evidence: shots/final-gate/repo-pull-files/dark-1440.png vs docs/reference/repo-pull-files/dark-1440.png.",
+     "owner": "code"
+    },
+    {
+     "severity": "minor",
+     "title": "PR tab strip clips the active 'Files Changed' tab at 390",
+     "detail": "The tab strip cuts off at the right edge ('\u00b1 Fi\u2026') with no sign that it scrolls. Evidence: shots/final-gate-critic-6/prf-m0.png.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "blame",
+   "light": 8,
+   "dark": 8,
+   "mobile": 5,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Mobile blame shows no code at all",
+     "detail": "At 390, .code-view is 358px wide with overflow:auto, but its table is 2031px. .blame-info takes ~312px and .lines-num starts at x=360, off-screen. Only commit messages are visible, and long hunks leave thousands of px of blank rows (page ~15,000 CSS px). GitHub stacks each commit header above its code lines. Evidence: shots/final-gate/blame/light-390.png, shots/final-gate-critic-6/bl-m0.png, bl-m-bands.png.",
+     "owner": "code"
+    },
+    {
+     "severity": "minor",
+     "title": "Blame metadata sits ~5px above the code baseline",
+     "detail": "'4 years ago' and the commit message are at y\u2248310 while line number '1' and the code are at y\u2248315. GitHub aligns them. Evidence: shots/final-gate-critic-6/bl-zoom.png.",
+     "owner": "code"
+    },
+    {
+     "severity": "minor",
+     "title": "No vertical divider between file tree and content",
+     "detail": "GitHub draws a full-height 1px border-default line at the right edge of the tree pane; ours has none. Evidence: shots/final-gate-critic-6/bl-light-0.png vs bl-ref-light-0.png.",
+     "owner": "code"
+    },
+    {
+     "severity": "nit",
+     "title": "HTML inside markdown not syntax-coloured; no age heat bar",
+     "detail": "<div align=...> renders plain, where GitHub colours tags and attributes (chroma lexer). GitHub's per-hunk age colour bar and legend have no Gitea data behind them. Evidence: bl-light-0.png.",
+     "owner": "code"
+    }
+   ]
+  },
+  {
+   "id": "wiki-home",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Wiki sidebar is Gitea's select plus Code button, not GitHub's Pages box and clone input",
+     "detail": "Right column shows a 'Page: Home' selection dropdown and a green 'Code' clone button. GitHub shows a bordered 'Pages (1)' Box with a filter input and a 'Clone this wiki locally' URL field. 'Delete Page' is a red header button, and at 390 the selector sits above the content instead of after it. Evidence: shots/final-gate-critic-6/wiki-d.png, wiki-m.png.",
+     "owner": "pages/repo"
+    }
+   ]
+  },
+  {
+   "id": "milestones",
+   "light": 8,
+   "dark": 8,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Progress bar has fixed width and '0%' leads it",
+     "detail": "At 390 the bar stops at ~200px, not full row width. At 1440, '0%' sits left of the bar, where GitHub puts '0% complete \u00b7 2 open \u00b7 0 closed' under a full-width bar. Evidence: shots/final-gate-critic-6/ms-m.png, ms-d.png.",
+     "owner": "pages/issues-prs"
+    },
+    {
+     "severity": "nit",
+     "title": "Labels/Milestones subnav is plain text",
+     "detail": "Two plain links; GitHub's classic subnav is a bordered segmented pair. The 'Dec 31, 9998' due date is a Gitea/seed timezone artefact, not a theme issue. Evidence: shots/final-gate/milestones/light-1440.png.",
+     "owner": "pages/issues-prs"
+    }
+   ]
+  },
+  {
+   "id": "pr-commits-tab-playground",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Commit list is a Box with a '2 Commits' header, and SHAs are in sans",
+     "detail": "GitHub groups commits under a 'Commits on <date>' timeline row with no Box header. Our SHAs are 10 characters in proportional sans at fg-default; GitHub uses 7 characters in 12px monospace at fg-muted. The browse icon is file-code where GitHub uses code (<>). Evidence: shots/final-gate-critic-6/prc-sha.png, shots/final-gate/pr-commits-tab-playground/light-1440.png vs docs/reference/pr-commits-tab/light-1440.png.",
+     "owner": "pages/repo"
+    }
+   ]
+  },
+  {
+   "id": "project-board",
+   "light": 8,
+   "dark": 8,
+   "mobile": 6.5,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Toolbar button group truncated at 390",
+     "detail": ".project-header .ui.compact.menu is a 358px overflow:auto strip. 'Delete' is clipped (right edge 386.6px > 374) and 'New Column' is entirely off-screen (x 385-519) with nothing to show it scrolls. It should wrap or collapse into an overflow menu. Evidence: shots/final-gate/project-board/light-390.png, shots/final-gate-critic-6/pb-m.png.",
+     "owner": "pages/actions-packages-projects"
+    },
+    {
+     "severity": "nit",
+     "title": "Fourth column cut at the container edge at 1440",
+     "detail": "The 'Done' column runs into the right edge (x=1408) with no border or padding, so it looks clipped rather than scrollable. Evidence: shots/final-gate/project-board/light-1440.png.",
+     "owner": "pages/actions-packages-projects"
+    }
+   ]
+  },
+  {
+   "id": "repo-settings-hooks",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Brand logos in the Add Webhook menu reported as non-Octicon",
+     "detail": "gitea-gitea, gitea-feishu and gitea-matrix in the dropdown; these are brand logos, allowed under ARCHITECTURE \u00a76. Layout otherwise matches GitHub settings (Subhead 24px with divider, NavList with blue active bar). Evidence: shots/final-gate/repo-settings-hooks/light-1440.json.",
+     "owner": "src/icons"
+    }
+   ]
+  },
+  {
+   "id": "admin-user-edit",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.5,
+   "issues": []
+  },
+  {
+   "id": "packages-repo",
+   "light": 8,
+   "dark": 8,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Meta links underlined and bold; package name not a link colour",
+     "detail": "'admin' and 'octo-org/theme-playground' in 'Published \u2026 by \u2026 in \u2026' are underlined and bold. GitHub uses non-underlined Link--muted, and shows the package name as a blue link with a leading package icon. The gitea-npm label icon is an allowed brand exception. Evidence: shots/final-gate/packages-repo/light-1440.png.",
+     "owner": "pages/actions-packages-projects"
+    }
+   ]
+  },
+  {
+   "id": "issue-playground-1",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.5,
+   "issues": []
+  },
+  {
+   "id": "site-admin",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Every 'Run' button wraps under its text at 390",
+     "detail": "shots/final-gate/site-admin/light-390.png (crop shots/final-gate-critic-7/site-admin/light-390-0.png, dark-390-1.png): each maintenance row is about 80px tall because the button drops to its own line, and the page is 7232px tall at 2x. GitHub settings rows keep the action right-aligned on the first line and let the text wrap.",
+     "owner": "pages/settings-admin"
+    },
+    {
+     "severity": "nit",
+     "title": "Global header differs from GitHub's signed-in AppHeader",
+     "detail": "The header has text links (Issues/Pull Requests/Milestones/Explore) and no search field, context breadcrumb or icon buttons. This applies to every route.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "repo-issues",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Divider between global bar and repo header",
+     "detail": "shots/final-gate/repo-issues/light-1440.png: a 1px #d1d9e0 rule at y=63 separates the global bar from the #f6f8fa repo header. GitHub's signed-in AppHeader (global bar plus local nav) is one block with only a bottom border (ours has that border at y=173). Otherwise the page matches classic GitHub: Box header 8 Open / 51 Closed, 16px/600 titles, labels, 32px New issue button.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "repo-commits",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Commit SHA is sans-serif and titles are too light",
+     "detail": "Live measure shots/final-gate-critic-7/live/repo-commits/light-1440.measure.json: #commits-table td.sha a is -apple-system 12px/500, but GitHub uses ui-monospace ('99cc347' in docs/reference/repo-commits/light-1440.png). .commit-summary is font-weight 500, and the reference title is visibly semibold 600 (compare crops shots/final-gate-critic-7/repo-commits/zoom-row-ours.png and zoom-row-ref.png).",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "minor",
+     "title": "Inline code in commit titles drawn as a grey chip",
+     "detail": "'Command::cargo_bin' and 'generate-import-lib' have a grey code background (repo-commits/light-1440.png y\u2248378, 571). GitHub's commit list shows plain mono text with no background.",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "nit",
+     "title": "Browse button icon is file-code, not code",
+     "detail": "The right-hand icon is octicon-file-code; GitHub uses the <> code icon. Changing it needs a template, so it is noted only.",
+     "owner": "pages/repo"
+    }
+   ]
+  },
+  {
+   "id": "blame-playground-multiple-authors",
+   "light": 8,
+   "dark": 8,
+   "mobile": 5,
+   "issues": [
+    {
+     "severity": "blocker",
+     "title": "At 390 the code is entirely off-screen; only the blame column shows",
+     "detail": "shots/final-gate/blame-playground-multiple-authors/{light,dark}-390.png (crop shots/final-gate-critic-7/blame-playground-multiple-authors/light-390-0.png). Live probe: .file-view.code-view is 358px wide (overflow-x:auto) and its table is 1038px. td.lines-num starts at x=360 and td.lines-code at x=432, so no code is visible anywhere on the page without an inner horizontal scroll. The blame gutter needs to collapse or narrow below 768px so code stays in view.",
+     "owner": "code"
+    },
+    {
+     "severity": "nit",
+     "title": "Irregular blame hunk row heights",
+     "detail": "Measured row heights at 1440: 25, 20\u202620, 26, 31, 26, 20. The single-line hunk at line 15 is 31px, so the code pitch jumps (light-1440.png y 574\u2192605\u2192636). GitHub keeps a 20px pitch.",
+     "owner": "code"
+    }
+   ]
+  },
+  {
+   "id": "wiki-page-list",
+   "light": 7.5,
+   "dark": 7.5,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Page rows too dense, link too heavy, extra Subhead rule",
+     "detail": "Live probe: row is 36px with 8px 16px padding, where GitHub's box-row is 54px with 16px padding (docs/reference/wiki-page-list/light-1440.measure.json). The 'Home' link is 600, GitHub 400. The 'Pages' header has border-bottom 1px plus padding-bottom 16px, GitHub has no rule. Crop shots/final-gate-critic-7/wiki-page-list/zoom-row.png.",
+     "owner": "pages/repo"
+    },
+    {
+     "severity": "minor",
+     "title": "Mobile 'Last updated' right-aligned on a separate line",
+     "detail": "shots/final-gate/wiki-page-list/dark-390.png: 'Last updated 4 years ago' is right-aligned with a tall row. GitHub (docs/reference/wiki-page-list/dark-390.png) left-aligns it directly under the title.",
+     "owner": "pages/repo"
+    }
+   ]
+  },
+  {
+   "id": "pr-conversation-open",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Minor chrome differences only",
+     "detail": "Title (32px/400), Open state label, tabs, comment box, merge box, composer and sidebar all match the reference in both schemes. The only differences are Gitea strings ('Files Changed', '1 commits') and Gitea-only sidebar blocks (time tracker, due date).",
+     "owner": "pages/issues-prs"
+    }
+   ]
+  },
+  {
+   "id": "pr-draft-wip-playground",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Timeline label pills sit above the text baseline",
+     "detail": "shots/final-gate-critic-7/pr-draft-wip-playground/zoom-timeline.png: in 'added the enhancement area/theme labels' the pills are centred about 4px above the surrounding text.",
+     "owner": "pages/issues-prs"
+    },
+    {
+     "severity": "nit",
+     "title": "Timeline commit SHA drawn as a bordered chip",
+     "detail": "'7728b5f95d' has a 1px border box (light-1440.png y\u2248684). GitHub shows a plain mono underlined link ('22955d1' in docs/reference/pr-conversation-open/light-1440.png). 'Remove  WIP:  prefix' also shows doubled spaces.",
+     "owner": "pages/issues-prs"
+    }
+   ]
+  },
+  {
+   "id": "user-profile-stars-tab",
+   "light": 8.5,
+   "dark": 8.5,
+   "mobile": 8.5,
+   "issues": [
+    {
+     "severity": "nit",
+     "title": "Topic tags slightly oversized",
+     "detail": "Live measure: label height 24px with padding-left 12px. GitHub's topic-tag is about 22px with 10px padding (user-profile-stars-tab/light-1440.png y\u2248315).",
+     "owner": "pages/people"
+    }
+   ]
+  },
+  {
+   "id": "org-settings",
+   "light": 8,
+   "dark": 7.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Org header underline nav has no bottom border",
+     "detail": "Live probe: overflow-menu.ui.secondary.pointing.tabular.borderless.menu and the header .ui.container have border-bottom 0 in both schemes (pixel rows 158\u2013175 at x=700 have no divider). In dark the tabs float on #0d1117 with no separator. Crop shots/final-gate-critic-7/org-settings/zoom-dark-orgnav.png. GitHub's UnderlineNav has a full-width 1px border (#d1d9e0 / #3d444d), as our own repo header does at y=173.",
+     "owner": "navigation"
+    },
+    {
+     "severity": "nit",
+     "title": "Description textarea full width while inputs are 440px",
+     "detail": "org-settings/light-1440.png: the textarea spans 936px (x 392\u20131328) and every other field is 440px wide.",
+     "owner": "pages/settings-admin"
+    },
+    {
+     "severity": "nit",
+     "title": "Settings NavList lacks leading icons and org context block",
+     "detail": "GitHub org settings nav shows an octicon per item and an avatar/name header above the list.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "org-settings-labels",
+   "light": 7,
+   "dark": 7,
+   "mobile": 7,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Empty state is not a Blankslate",
+     "detail": "org-settings-labels/light-1440.png: centred plain text, a 3-line italic select and a button, all between two hr rules. GitHub uses a Blankslate (icon, heading, description, primary action). The '0 labels' 24px heading with a border reads as a second Subhead.",
+     "owner": "data-display"
+    },
+    {
+     "severity": "minor",
+     "title": "Mixed button sizes on one page",
+     "detail": "'New Label' is 28px (y 190\u2013217) and 'Use Label Set' is 32px (y 441\u2013472). GitHub's labels page 'New label' is 32px default size.",
+     "owner": "pages/issues-prs"
+    },
+    {
+     "severity": "minor",
+     "title": "Org header nav has no bottom border (same as org-settings)",
+     "detail": "No separator under the org tabs, most visible in dark (org-settings-labels/dark-1440.png).",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "package-versions",
+   "light": 8,
+   "dark": 7.5,
+   "mobile": 8,
+   "issues": [
+    {
+     "severity": "minor",
+     "title": "Org header nav has no bottom border",
+     "detail": "package-versions/dark-1440.png: the Packages tab underline floats with no full-width rule under the org nav. Probe: .ui.container / overflow-menu border-bottom 0.",
+     "owner": "navigation"
+    }
+   ]
+  },
+  {
+   "id": "pr-compare-form-playground",
+   "light": 8,
+   "dark": 7.5,
+   "mobile": 7.5,
+   "issues": [
+    {
+     "severity": "major",
+     "title": "Dark diff backgrounds painted twice (tr and td)",
+     "detail": "Live probe: TR.add-code and TD.chroma.lines-code both have rgba(46,160,67,0.15), so the composited pixel is rgb(22,56,34) (effective alpha about 0.28). GitHub renders rgb(18,38,30). The number cell is rgb(31,82,44), expected about rgb(28,67,40). The hunk row is rgb(21,40,67), expected about rgb(17,29,46). Crop shots/final-gate-critic-7/pr-compare-form-playground/zoom-dark-diff.png. src/code/diff.css around l.279. Light is unaffected because its tokens are opaque. This likely affects every dark diff.",
+     "owner": "code"
+    },
+    {
+     "severity": "minor",
+     "title": "Branch refs rendered as green-outlined labels",
+     "detail": "a.ui.green.sha.label has a 1px solid rgb(26,127,55) border, a transparent background and fg default (crop zoom-refs-light.png). GitHub's commit-ref uses the accent-muted background with accent fg, mono, and no border.",
+     "owner": "data-display"
+    },
+    {
+     "severity": "nit",
+     "title": "Mobile hides the diff stats line",
+     "detail": "dark-390-1.png: '1 changed files with 9 additions and 0 deletions' is missing at 390, leaving only the icon row.",
+     "owner": "code"
+    }
+   ]
+  }
+ ],
+ "identification": {
+  "directory-tree": {
+   "content": 100,
+   "page": 100
+  },
+  "repo-issue": {
+   "page": 100,
+   "content": 100
+  },
+  "explore-repos": {
+   "content": 100,
+   "page": 100
+  },
+  "repo-commits": {
+   "page": 100,
+   "content": 100
+  },
+  "wiki-home": {
+   "content": 100,
+   "page": 100
+  },
+  "action-run": {
+   "page": 100,
+   "content": 100
+  },
+  "release-detail": {
+   "page": 100,
+   "content": 100
+  },
+  "pr-files-changed-unified": {
+   "content": 100,
+   "page": 100
+  },
+  "user-profile-repositories-tab": {
+   "content": 100,
+   "page": 100
+  },
+  "repo-home-readme-with-images-and-tables": {
+   "page": 100,
+   "content": 100
+  },
+  "file-view-markdown": {
+   "content": 100,
+   "page": 100
+  },
+  "milestones": {
+   "page": 100,
+   "content": 100
+  },
+  "repo-code-file": {
+   "content": 100,
+   "page": 100
+  },
+  "tags": {
+   "page": 100,
+   "content": 100
+  },
+  "login": {
+   "page": 100,
+   "content": 100
+  },
+  "compare-two-tags": {
+   "page": 100,
+   "content": 100
+  },
+  "repo-pull": {
+   "page": 100,
+   "content": 100
+  },
+  "actions-list": {
+   "page": 100,
+   "content": 100
+  },
+  "not-found": {
+   "page": 100,
+   "content": 100
+  },
+  "repo-home": {
+   "page": 100,
+   "content": 100
+  },
+  "repo-issues": {
+   "content": 100,
+   "page": 100
+  },
+  "repo-pull-files": {
+   "content": 100,
+   "page": 100
+  },
+  "pr-conversation-closed-unmerged": {
+   "page": 100,
+   "content": 100
+  },
+  "wiki-page": {
+   "content": 100,
+   "page": 100
+  },
+  "user-profile-stars-tab": {
+   "content": 100,
+   "page": 100
+  },
+  "blame": {
+   "page": 100,
+   "content": 100
+  },
+  "org-home": {
+   "page": 100,
+   "content": 100
+  },
+  "labels": {
+   "page": 100,
+   "content": 100
+  },
+  "pr-conversation-open": {
+   "content": 100,
+   "page": 100
+  },
+  "releases": {
+   "content": 100,
+   "page": 100
+  },
+  "pr-commits-tab": {
+   "content": 100,
+   "page": 100
+  },
+  "wiki-page-list": {
+   "page": 100,
+   "content": 100
+  },
+  "commit-detail": {
+   "content": 100,
+   "page": 100
+  },
+  "issues-list-closed": {
+   "page": 100,
+   "content": 100
+  },
+  "branches": {
+   "page": 100,
+   "content": 100
+  },
+  "user-profile": {
+   "content": 100,
+   "page": 100
+  },
+  "org-members": {
+   "content": 75,
+   "page": 100
+  },
+  "repo-pulls": {
+   "content": 100,
+   "page": 100
+  }
+ }
+}

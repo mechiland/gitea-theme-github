@@ -1,6 +1,6 @@
 {
  "updated": "2026-09-30T10:58:00+08:00",
- "phase": "wave-3b integrated (dark pass 8.6 passed; pages/repo 8.5 and pages/settings-admin 8.6 now passed after re-rounds); all 14 folders passed; next: final gate / restore admin theme + diff-style",
+ "phase": "loop iteration 1 (final gate failed: critic mean 8.06, 22/101 routes pass; blind identification 99.7%)",
  "pinned": {
   "gitea": "1.27.3",
   "@primer/primitives": "11.10.0",
@@ -17,7 +17,7 @@
   },
   {
    "path": "templates/custom/footer.tmpl",
-   "reason": "Primer Dialog close button (overlays OV-4): inline script prepends button.close.inside to every .ui.modal; the one listed JS exception (ARCHITECTURE §7/§10)",
+   "reason": "Primer Dialog close button (overlays OV-4): inline script prepends button.close.inside to every .ui.modal; the one listed JS exception (ARCHITECTURE \u00a77/\u00a710)",
    "scope": "github-* themes only (renders nothing otherwise; Gitea's hook file is empty)",
    "liveInstall": "DONE (orchestrator ORC-1)"
   },
@@ -57,7 +57,7 @@
    "rounds": 6,
    "passed": true,
    "openIssues": [
-    "PR-list branch-chip « (48 on 4 pages) → pages/issues-prs P-1/P-2 in wave 3",
+    "PR-list branch-chip \u00ab (48 on 4 pages) \u2192 pages/issues-prs P-1/P-2 in wave 3",
     "svgo devDependency install pending (ORC-2)",
     "gitea-npm / gitea-running keep decisions not verified against github.com"
    ]
@@ -99,8 +99,8 @@
    "rounds": 2,
    "passed": true,
    "openIssues": [
-    "C-5 directory-tree 390 overflow 421px (regression vs built-in) — still open",
-    "PERF-1 blame DCL +150ms vs built-in (bisect: code ≈110ms, suspect tr:has(+ tr.top-line-blame))",
+    "C-5 directory-tree 390 overflow 421px (regression vs built-in) \u2014 still open",
+    "PERF-1 blame DCL +150ms vs built-in (bisect: code \u2248110ms, suspect tr:has(+ tr.top-line-blame))",
     "Rust position-based syntax rules inconsistent (struct fields, ::{ module segments)",
     "Markdown source view syntax 27.5% chars differ",
     "History/Delete unreachable from file view <768px"
@@ -121,15 +121,15 @@
    "rounds": 6,
    "passed": true,
    "openIssues": [
-    "Template-bound structural gaps (commits day groups, branches h1/tabs, releases nav, wiki Pages box, commit h1) — accepted exceptions",
+    "Template-bound structural gaps (commits day groups, branches h1/tabs, releases nav, wiki Pages box, commit h1) \u2014 accepted exceptions",
     "/compare range editor 1216x62 bgColor-default vs github.com 46px bgColor-muted (minor)",
     "Default-branch Updated time not in the Updated column; muted vs default fg (minor)",
     "Size cap nearly used: gh.pages-repo 30,577 B of 30,720 B",
     "directory-tree 390 overflow belongs to code C-5"
    ],
    "notes": [
-    "integrator w3 seam fix: .repository.commits → .repository.commits:not(.pull) (leaked into the PR Commits tab)",
-    "w3b: 2 critic rounds (8.1 → 8.5); Compare menu off-screen at 390 and page scroll at >=768 fixed"
+    "integrator w3 seam fix: .repository.commits \u2192 .repository.commits:not(.pull) (leaked into the PR Commits tab)",
+    "w3b: 2 critic rounds (8.1 \u2192 8.5); Compare menu off-screen at 390 and page scroll at >=768 fixed"
    ]
   },
   "pages/issues-prs": {
@@ -160,7 +160,7 @@
    "openIssues": [
     "Explore NavList active item square bottom corners (Gitea !important; navigation PPL-N1)",
     "Org-home sidebar headings 600 vs 400",
-    "Home CLS @390 0.365 (inside gitea-auto baseline 0.345–0.39)"
+    "Home CLS @390 0.365 (inside gitea-auto baseline 0.345\u20130.39)"
    ]
   },
   "pages/settings-admin": {
@@ -206,11 +206,101 @@
   "Open component requests with no round scheduled: data-display DD-W3B-1 + PR-DD-1 + comment header 390, controls SA-C1/IP-C3, navigation PPL-N1, settings-admin SA-5, dark nits",
   "pages/repo layer at its 30 KiB cap (143 B left)"
  ],
- "finalGate": null,
+ "finalGate": {
+  "run": "shots/final-gate (2026-09-30, 101 routes x light/dark x 1440/390, --stable)",
+  "passed": false,
+  "wholeSiteCritic": {
+   "meanLight": 8.21,
+   "meanDark": 8.18,
+   "meanMobile": 7.78,
+   "routesAllAtLeast8_5": 22,
+   "routes": 101,
+   "worst": [
+    [
+     5,
+     "blame"
+    ],
+    [
+     5,
+     "blame-playground-multiple-authors"
+    ],
+    [
+     5,
+     "pr-files-changed-unified-playground-large-diff"
+    ],
+    [
+     5.5,
+     "directory-tree"
+    ],
+    [
+     6,
+     "commit-detail"
+    ],
+    [
+     6.5,
+     "project-board"
+    ],
+    [
+     6.8,
+     "pr-files-changed-split-playground-large-diff"
+    ],
+    [
+     7,
+     "admin-emails"
+    ],
+    [
+     7,
+     "admin-repos"
+    ],
+    [
+     7,
+     "branches"
+    ],
+    [
+     7,
+     "home"
+    ],
+    [
+     7,
+     "not-found"
+    ],
+    [
+     7,
+     "notifications"
+    ],
+    [
+     7,
+     "org-settings-labels"
+    ],
+    [
+     7,
+     "pr-conversation-playground-large-diff-reviews"
+    ]
+   ]
+  },
+  "blindJudges": {
+   "pairs": 152,
+   "judgments": 304,
+   "identificationRatePage": 1.0,
+   "identificationRateContentOnly": 0.993,
+   "meanConfidence": 0.97,
+   "perRoute": "docs/final-gate/scores.json \u2192 identification",
+   "reasons": "docs/final-gate/judge-reasons.txt (1264 reasons)",
+   "dominantTells": {
+    "gitea branding (logo must stay; footer)": 423,
+    "header/nav structure (text links, Gitea-only tabs)": 396,
+    "content/data (counts, migrated avatars, Gitea-only sidebar fields)": 305,
+    "layout/structure": 175,
+    "color": 62,
+    "typography/spacing": 24
+   },
+   "honestNote": "Identification is dominated by things a theme cannot or must not change (Gitea logo per asset policy, Gitea-only features and strings, seeded data differences, logged-out github.com references). Theme-fixable tells (header structure, footer, several page structures) are queued for loop iterations."
+  }
+ },
  "exceptions": [
   {
    "what": "Inline FormControl validation caption on sign-up",
-   "why": "needs a template override of user/auth/signup_inner.tmpl; github.com login already uses flash only; rejected per ARCHITECTURE §7",
+   "why": "needs a template override of user/auth/signup_inner.tmpl; github.com login already uses flash only; rejected per ARCHITECTURE \u00a77",
    "decided": "integrator wave 1"
   },
   {
@@ -220,7 +310,7 @@
   },
   {
    "what": "SelectPanel title rows (\"Filter by label\", \"Switch branches/tags\")",
-   "why": "needs overrides of ≥5 Fomantic filter/sidebar templates that change upstream often; Vue branch picker would need JS (OV-5 rejected)",
+   "why": "needs overrides of \u22655 Fomantic filter/sidebar templates that change upstream often; Vue branch picker would need JS (OV-5 rejected)",
    "decided": "integrator wave 2"
   },
   {
@@ -242,13 +332,13 @@
  "restart": {
   "status": "done",
   "at": "2026-09-29T20:11:56Z",
-  "reason": "load icon change gitea-unlock → octicon-unlock (icons II-1; deployed 18:58Z after the previous 18:30Z restart)",
+  "reason": "load icon change gitea-unlock \u2192 octicon-unlock (icons II-1; deployed 18:58Z after the previous 18:30Z restart)",
   "migrationCheck": "no task rows with status 0/1",
   "builderCriticRunning": false,
   "themesOffered": 17,
   "previouslyOfferedStillOffered": true,
   "themesIni": "unchanged: 14 previous + github-auto/light/dark; DEFAULT_THEME gitea-auto",
-  "verify": "gitea-auto /octo-org/grex/commit/99cc3477… renders 'svg gitea-unlock octicon-unlock'",
+  "verify": "gitea-auto /octo-org/grex/commit/99cc3477\u2026 renders 'svg gitea-unlock octicon-unlock'",
   "adminTheme": "github-auto (shoot/smoke); baseline gitea-auto-tritanopia to restore at the end",
   "wave3": {
    "status": "not needed",
@@ -317,7 +407,7 @@
   "unresolvedVars": 0,
   "offPaletteTotal": 0,
   "nonOcticonIcons": 88,
-  "nonOcticonNote": "colorblind markers 28, fontawesome-openid 16, gitea-npm 12, gitea-gitea/feishu/matrix 24 (webhook types), gitea-running 8 — unchanged",
+  "nonOcticonNote": "colorblind markers 28, fontawesome-openid 16, gitea-npm 12, gitea-gitea/feishu/matrix 24 (webhook types), gitea-running 8 \u2014 unchanged",
   "maskedIcons": 1936,
   "pagesWithUnlayeredGiteaCss": 0,
   "pagesWithProblems": 0,
@@ -348,7 +438,7 @@
  },
  "budget": {
   "baseline": "shots/baseline-gitea-auto-w2 (gitea-auto, same 272 pages, with audit, same concurrency 3, same server start)",
-  "compare": "tools/shoot/budget-compare.mjs → shots/integrate-w2/budget-compare.json; re-runs x2 of suspect routes: shots/integrate-w2-budget/compare-{1,2}.json",
+  "compare": "tools/shoot/budget-compare.mjs \u2192 shots/integrate-w2/budget-compare.json; re-runs x2 of suspect routes: shots/integrate-w2-budget/compare-{1,2}.json",
   "noise": "CLS +0.02, DCL max(150ms, 25%)",
   "medianDclMs": {
    "github-auto": 113,
@@ -370,23 +460,23 @@
   "clsRegressions": [
    {
     "route": "action-run",
-    "pages": "390 light/dark 0.4861→0.5973; 1440 light/dark 0.3443→0.4245",
+    "pages": "390 light/dark 0.4861\u21920.5973; 1440 light/dark 0.3443\u21920.4245",
     "reproduced": "3/3 runs",
-    "cause": "Vue RepoActionView mounts its summary after first paint (same single shift in both themes); the theme makes header/summary taller (390: summary 85→160px, body y 297→418), so the moved distance is larger",
+    "cause": "Vue RepoActionView mounts its summary after first paint (same single shift in both themes); the theme makes header/summary taller (390: summary 85\u2192160px, body y 297\u2192418), so the moved distance is larger",
     "owner": "pages/actions-packages-projects A-1 (wave 3)"
    },
    {
     "route": "file-view-markdown",
     "pages": "+0.025 on 2 of 4 pages in 1 of 3 runs",
     "reproduced": "not consistent",
-    "cause": "README badge images without size load late (content-driven; markdown critic measured 0.05–0.19 run to run)",
+    "cause": "README badge images without size load late (content-driven; markdown critic measured 0.05\u20130.19 run to run)",
     "owner": "none (noise/content)"
    }
   ],
   "notRegressions": [
-   "home light-1440 0.065→0.168 in the full run only; baseline dark itself 0.189 and 2 re-runs show no regression (activity feed mount, noise)"
+   "home light-1440 0.065\u21920.168 in the full run only; baseline dark itself 0.189 and 2 re-runs show no regression (activity feed mount, noise)"
   ],
-  "dclRegressions": "none reproduced: repo-issues 390 (133→708ms) and repo-settings 390 (99→276ms) were one-offs; compare-two-tags 390 is server-bound and varies 660–2147ms in both themes",
+  "dclRegressions": "none reproduced: repo-issues 390 (133\u2192708ms) and repo-settings 390 (99\u2192276ms) were one-offs; compare-two-tags 390 is server-bound and varies 660\u20132147ms in both themes",
   "sizeKb": {
    "github-auto": 276.2,
    "github-light": 272.2,
@@ -410,18 +500,18 @@
    },
    "clsRegressions": [],
    "clsImprovements": 16,
-   "A1": "RESOLVED — action-run 390 0.0740/0.0745 (built-in 0.4861), 1440 ≤0.021 (built-in 0.3443)",
+   "A1": "RESOLVED \u2014 action-run 390 0.0740/0.0745 (built-in 0.4861), 1440 \u22640.021 (built-in 0.3443)",
    "dclRegressions": [
     {
      "route": "blame",
-     "pages": "all 4 variants 278–329 → 446–483 ms, 3/3 runs",
-     "cause": "code folder ≈110 ms (bisect), pages/* ≈50 ms; suspect relative :has on every blame row",
+     "pages": "all 4 variants 278\u2013329 \u2192 446\u2013483 ms, 3/3 runs",
+     "cause": "code folder \u2248110 ms (bisect), pages/* \u224850 ms; suspect relative :has on every blame row",
      "owner": "code PERF-1"
     }
    ],
    "dclNoise": [
     "pr-files-changed-* one-offs (1083/1098 ms) not reproduced in 2 re-runs",
-    "compare-two-tags server-bound (660–1430 ms in both themes)",
+    "compare-two-tags server-bound (660\u20131430 ms in both themes)",
     "repo-settings 390 one-off"
    ],
    "newRoutesNoBaseline": "33 routes added in w3 have no gitea-auto baseline (admin theme stays github-auto)"
@@ -602,14 +692,14 @@
     "CR-3"
    ],
    "deferred": [
-    "DD-I1/DD-D1 → wave-3 dark"
+    "DD-I1/DD-D1 \u2192 wave-3 dark"
    ],
    "forwarded": [
-    "OV-6, CR-1, CR-2 → pages/repo",
-    "A-1 → pages/actions-packages-projects",
-    "C-5 → code",
-    "MD-1 → markdown",
-    "seam notes → pages/issues-prs"
+    "OV-6, CR-1, CR-2 \u2192 pages/repo",
+    "A-1 \u2192 pages/actions-packages-projects",
+    "C-5 \u2192 code",
+    "MD-1 \u2192 markdown",
+    "seam notes \u2192 pages/issues-prs"
    ]
   },
   "wave3Integrator": {
@@ -617,7 +707,7 @@
     "SA-1 (routes)",
     "APP-1 (routes)",
     "PPL-1 addendum (short custom-property names in build)",
-    "page folders routes/states merged (68→101 routes)"
+    "page folders routes/states merged (68\u2192101 routes)"
    ],
    "accepted_pending_orchestrator": [
     "SA-4 (ORC-3)"
@@ -626,10 +716,10 @@
     "PPL-1 budget (ORC-4)"
    ],
    "rejected": [
-    "pages/repo template hooks 1–4"
+    "pages/repo template hooks 1\u20134"
    ],
    "seamsFixed": [
-    "pages/repo .repository.commits leaked into PR Commits tab → :not(.pull)"
+    "pages/repo .repository.commits leaked into PR Commits tab \u2192 :not(.pull)"
    ],
    "forwardedOpen": [
     "controls SA-C1, IP-C3",
@@ -673,7 +763,7 @@
    "differentKnownNoisy": 9,
    "sizeMismatch": 0,
    "missing": 0,
-   "explained": "different = site-admin-config light 390/1440 (logger JSON key order random per load, looked at); minor ≤16 px AA (packages-org, package-versions, merge-form, follow-focus); noisy = site-admin live stats, reviewers order, project-board ≤22 px",
+   "explained": "different = site-admin-config light 390/1440 (logger JSON key order random per load, looked at); minor \u226416 px AA (packages-org, package-versions, merge-form, follow-focus); noisy = site-admin live stats, reviewers order, project-board \u226422 px",
    "unexplained": 0,
    "lightFile": "theme-github-light.src.css byte-identical with and without src/dark (gh.dark not emitted in light)"
   },
