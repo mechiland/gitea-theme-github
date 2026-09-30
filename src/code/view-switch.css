@@ -91,3 +91,8 @@
 .page-content.blame .file-header:has(.gh-file-view-switch) .file-actions > .ui.buttons > a.button[href*="/src/"]:not([href*="/src/commit/"]) {
   display: none;
 }
+
+/* a lone "Code" segment (image / binary files: no Preview, no Blame) is not a choice: github.com shows no switch */
+.gh-file-view-switch:not(:has(> :nth-child(2))) {
+  display: none;
+}

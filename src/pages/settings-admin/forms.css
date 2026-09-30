@@ -242,3 +242,43 @@
     border-left: 0;
   }
 }
+
+/* side-by-side `.fields` (admin maintenance / banner "Start time" + "End time"): the row's height comes from its
+   fields, so the 16px field margin would add a gap above the caption; Gitea's tw-mb-1 on the row leaves the
+   FormControl.Caption 4px under the controls; wrapped (below 768px) the fields stack 16px apart */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .fields {
+  row-gap: var(--base-size-16);
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .fields > .field {
+  margin-bottom: 0;
+}
+
+/*
+ * Disclosures inside settings rows and fields (access-token names, applications.tmpl; the admin "Open with" editors
+ * help, config_settings/repository.tmpl): Primer draws a 16px chevron-right Octicon (--fgColor-muted) that turns
+ * down when open, not the browser's ▸ marker.
+ */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main :is(.ui.form .field, .items-with-main > .item .item-main) > details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main :is(.ui.form .field, .items-with-main > .item .item-main) > details > summary::-webkit-details-marker {
+  display: none;
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main :is(.ui.form .field, .items-with-main > .item .item-main) > details > summary::before {
+  content: "";
+  display: inline-block;
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  margin-right: var(--base-size-4);
+  background-color: var(--fgColor-muted);
+  vertical-align: text-bottom;
+  mask: var(--gh-octicon-chevron-right) center / contain no-repeat;
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main :is(.ui.form .field, .items-with-main > .item .item-main) > details[open] > summary::before {
+  transform: rotate(90deg);
+}

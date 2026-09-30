@@ -235,3 +235,15 @@
   background: var(--button-danger-bgColor-active);
   color: var(--button-danger-fgColor-active);
 }
+
+/* FG2-072: "Remove WIP: prefix" — the button is a flex box, so its three text runs were 8px apart; a 4px gap reads as
+   the word spaces */
+.repository.view.issue .pull-merge-box .ui.compact.button[data-global-init="initPullRequestWipToggle"] {
+  gap: var(--base-size-4);
+}
+
+/* FG2-072: status octicons stay on the first line of a wrapped message (Gitea centres them on the block) */
+.repository.view.issue .merge-section .flex-text-block > .svg {
+  align-self: flex-start;
+  margin-top: var(--base-size-2);
+}

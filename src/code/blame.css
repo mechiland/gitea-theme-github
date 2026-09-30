@@ -179,6 +179,14 @@ tr.top-line-blame:first-child .blame-info {
     margin: 0;
   }
 
+  /* [avatar  message ……  age] like github.com (FG2-080); Gitea's message (flex-grow, ellipsis) gives way */
+  .blame .lines-commit .blame-data .blame-time {
+    order: 1;
+    min-width: 0;
+    margin-left: auto;
+    font-size: var(--text-body-size-small);
+  }
+
   /* lines: 10px above the segment's first and below its last line */
   .blame tr.top-line-blame > td:is(.lines-num, .lines-escape, .lines-code) {
     padding-top: calc(2 * var(--base-size-4) + var(--base-size-2));

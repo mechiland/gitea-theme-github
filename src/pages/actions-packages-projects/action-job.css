@@ -14,9 +14,11 @@
  *                        (number --fgColor-attention); debug --fgColor-done; section/group 600 --fgColor-success
  */
 
+/* github.com's CheckRun module is borderless (FG2-095): --bgColor-inset with a 3px radius */
 .action-view-right-panel:has(> .job-info-header) {
   overflow: clip;
-  border-color: var(--borderColor-muted);
+  border: 0;
+  border-radius: var(--borderRadius-small);
   background: var(--bgColor-inset);
 }
 
@@ -197,7 +199,6 @@
 @media (max-width: 767.98px) {
   .action-view-right-panel:has(> .job-info-header) {
     margin-inline: calc(var(--page-margin-x) * -1);
-    border-inline: 0;
     border-radius: 0;
   }
 

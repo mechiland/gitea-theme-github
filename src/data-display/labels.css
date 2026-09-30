@@ -34,6 +34,12 @@
   font-weight: var(--base-text-weight-semibold); /* DD-W3B-1: github.com prc-Token-IssueLabel computes 600 */
 }
 
+/* FG2-091: github.com's issues index renders its IssueLabel tokens 500 (probed 2026-09-30: pemistahl/grex/issues,
+   go-gitea/gitea/issues); the pulls index, the labels page and the issue sidebar stay 600 */
+#issue-list > .item:has(.octicon-issue-opened, .octicon-issue-closed) .ui.label[style] {
+  font-weight: var(--base-text-weight-medium);
+}
+
 /* labels in the issue sidebar / list title rows keep a 20px pill even though Gitea sets min-height only there */
 .ui.label > .gt-ellipsis {
   line-height: var(--text-body-lineHeight-medium);

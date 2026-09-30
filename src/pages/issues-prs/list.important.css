@@ -1,0 +1,8 @@
+/* gh-important: Gitea repo/issue-list.css (< 768px) `.issue-list-toolbar-right .dropdown .menu { left: auto !important;
+   right: auto !important }` — the FG2-031 bottom sheet spans the viewport width. */
+@media (max-width: 767.98px) {
+  .issue-list-toolbar-right .ui.secondary.filter.menu > .ui.dropdown > .menu {
+    left: 0 !important;
+    right: 0 !important;
+  }
+}

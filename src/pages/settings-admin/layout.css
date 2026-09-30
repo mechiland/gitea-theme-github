@@ -50,6 +50,15 @@
   :is(.settings, .admin, [class="page-content "]) .flex-container-nav {
     width: auto;
   }
+
+  /* site admin (FG2-040): the admin NavList is ~460px tall at 390px (Gitea-only, 11 groups); the page's own content
+     comes first and the NavList follows it (user / repo / org settings keep github.com's sidebar-first flow) */
+  .admin .flex-container-nav {
+    order: 1;
+    margin-top: var(--base-size-16);
+    padding-top: var(--base-size-16);
+    border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+  }
 }
 
 /* flash banners above the first section keep the Subhead rhythm */

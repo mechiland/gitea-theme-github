@@ -230,3 +230,29 @@
 .issue-content-right .ui.action.input > .ui.search.selection.dropdown > input.search {
   padding-left: var(--control-small-paddingInline-condensed);
 }
+
+/* FG2-072: "Delete" is a danger link button (github.com "Delete issue": --fgColor-danger, octicon too) */
+.issue-content-right > .fluid.ui.show-modal.button[data-modal="#sidebar-delete-issue"],
+.issue-content-right > .fluid.ui.show-modal.button[data-modal="#sidebar-delete-issue"] .svg,
+.issue-content-right > .fluid.ui.show-modal.button[data-modal="#sidebar-delete-issue"]:hover .svg {
+  color: var(--fgColor-danger);
+}
+
+.issue-content-right > .fluid.ui.show-modal.button[data-modal="#sidebar-delete-issue"]:hover {
+  color: var(--fgColor-danger);
+  text-decoration: underline;
+}
+
+/* FG2-072: every sidebar heading sits 8px above its content (Dependencies: Gitea's <br> + <p> gave 2px) */
+.issue-content-right .ui.depending > br {
+  display: none;
+}
+
+.issue-content-right .ui.depending > .text {
+  display: block;
+  margin-bottom: var(--base-size-8);
+}
+
+.issue-content-right .ui.depending > p {
+  margin: 0;
+}

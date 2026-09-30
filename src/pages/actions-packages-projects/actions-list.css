@@ -112,6 +112,65 @@
   }
 }
 
+/* ---------- page headings (FG2-022) ----------
+   github.com: the pane opens with an "Actions" h2 (20px/30px 600, 4px above, 8px to the NavList; md and up only) and
+   the NavList separates "All workflows" from the workflow names with a --borderColor-muted rule (7px 0 8px, spanning
+   the list's 8px insets); the content column opens with a PageHeader: "All workflows" 20px/400 on a 32px row, then
+   "Showing runs from all workflows" 14px/21px --fgColor-muted, 24px to the runs Box. Gitea has neither text (the
+   template was rejected, FG-049) → English-only generated text; a selected workflow's name is not reachable from
+   CSS, so the PageHeader shows only while "All workflows" is the current item. */
+@media (min-width: 768px) {
+  html:lang(en) .flex-container:has(.run-list) > .flex-container-nav > .menu::before {
+    content: "Actions";
+    margin: var(--base-size-4) 0 var(--base-size-8);
+    font-size: var(--text-title-size-medium);
+    font-weight: var(--base-text-weight-semibold);
+    line-height: var(--base-text-lineHeight-normal);
+  }
+
+  /* the rule is the second item's ::before (Gitea hides `.ui.vertical.menu .item:first-child::before` !important) */
+  .flex-container:has(.run-list) > .flex-container-nav > .menu > .item:first-child + .item {
+    margin-top: var(--base-size-16);
+  }
+
+  .flex-container:has(.run-list) > .flex-container-nav > .menu > .item:first-child + .item::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: calc(var(--base-size-8) * -1 - var(--borderWidth-thin));
+    right: calc(var(--base-size-8) * -1);
+    left: calc(var(--base-size-8) * -1);
+    width: auto;
+    height: var(--borderWidth-thin);
+    background: var(--borderColor-muted);
+    mask: none;
+  }
+}
+
+html:lang(en) .flex-container:has(> .flex-container-nav > .menu > .item.active:first-child) > .flex-container-main:has(.run-list) {
+  display: flex;
+  flex-direction: column;
+}
+
+/* < md the NavList sits right above and already starts with the current "All Workflows" (github.com has no NavList
+   there: its heading is the workflow picker) → md and up only; below md only the subtitle follows the list */
+@media (min-width: 768px) {
+  html:lang(en) .flex-container:has(> .flex-container-nav > .menu > .item.active:first-child) > .flex-container-main:has(.run-list)::before {
+    content: "All workflows";
+    order: -2;
+    font-size: var(--text-title-size-medium);
+    line-height: var(--base-size-32);
+  }
+}
+
+html:lang(en) .flex-container:has(> .flex-container-nav > .menu > .item.active:first-child) > .flex-container-main:has(.run-list)::after {
+  content: "Showing runs from all workflows";
+  order: -1;
+  margin-bottom: var(--base-size-24);
+  color: var(--fgColor-muted);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
 /* ---------- Box header ---------- */
 
 .repository.actions .filter.menu {
@@ -154,6 +213,18 @@
   justify-content: center;
   border-radius: var(--borderRadius-medium);
   color: var(--fgColor-muted);
+}
+
+/* workflow_dispatch notice (a workflow is selected, workflow_dispatch.tmpl `.ui.blue.info.attached.message` between
+   the Box header and the runs segment): github.com renders it as a blue Box-row inside the runs Box, not a free
+   Flash → no margins, the Box's side borders, a --borderColor-muted rule to the first run, Box-row padding. */
+.flex-container-main:has(> .segment > .run-list) > .ui.attached.message {
+  margin: 0;
+  padding: var(--base-size-16);
+  border-width: 0 var(--borderWidth-thin) var(--borderWidth-thin);
+  border-color: var(--borderColor-default);
+  border-bottom-color: var(--borderColor-muted);
+  border-radius: 0;
 }
 
 /* ---------- Box body: the segment is only a wrapper; the run list is the Box body ---------- */
@@ -241,6 +312,17 @@
 
 .run-list .item-body a:hover {
   color: var(--fgColor-accent);
+}
+
+/* commit link (FG2-071): github.com shows the 7-character short SHA; Gitea's ShortSha is 10 → clipped to 7
+   monospace cells (the full SHA stays the link text, the underline follows the clipped box) */
+.run-list .item-body > a[href*="/commit/"] {
+  display: inline-block;
+  max-width: 7ch;
+  overflow: hidden;
+  font-family: var(--fontStack-monospace);
+  vertical-align: bottom;
+  white-space: nowrap;
 }
 
 .run-list .item-body > .flex-text-inline {
@@ -387,14 +469,14 @@ a.run-list-ref:hover {
   }
 
   /* Box--responsive: the runs Box goes edge to edge (no side borders, no radius) like github.com below md */
-  .repository.actions .flex-container-main > .ui.top.attached.header,
+  .repository.actions .flex-container-main > :is(.ui.top.attached.header, .ui.attached.message),
   .segment:has(> .run-list) {
     width: calc(100% + var(--page-margin-x) * 2);
     max-width: none;
     margin-inline: calc(var(--page-margin-x) * -1);
   }
 
-  .repository.actions .flex-container-main > .ui.top.attached.header,
+  .repository.actions .flex-container-main > :is(.ui.top.attached.header, .ui.attached.message),
   .run-list {
     border-inline: 0;
     border-radius: 0;

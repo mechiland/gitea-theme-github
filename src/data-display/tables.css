@@ -160,16 +160,3 @@
 .ui.striped.table > tbody > tr:nth-child(2n) {
   background: var(--bgColor-muted);
 }
-
-/* FG-111: scroll affordance for tables that overflow their Box (Gitea sets overflow-x: auto on
-   .ui.attached.table.segment; admin users / emails clip columns at 390 with no hint). Scroll shadows: the two
-   `local` covers scroll with the content and hide the fixed edge shadows once the start / end is reached, so a
-   table that fits shows nothing and an overflowing one shows a soft shade on the side that has more columns. */
-.ui.attached.table.segment {
-  background:
-    linear-gradient(to right, var(--bgColor-default) 40%, transparent) left center / var(--base-size-32) 100% no-repeat local,
-    linear-gradient(to left, var(--bgColor-default) 40%, transparent) right center / var(--base-size-32) 100% no-repeat local,
-    radial-gradient(farthest-side at 0 50%, var(--borderColor-emphasis), transparent) left center / var(--base-size-12) 100% no-repeat scroll,
-    radial-gradient(farthest-side at 100% 50%, var(--borderColor-emphasis), transparent) right center / var(--base-size-12) 100% no-repeat scroll,
-    var(--bgColor-default);
-}

@@ -14,7 +14,9 @@
  *   keys.css        SSH / GPG / deploy key and token rows (key octicon, semibold title, monospace fingerprint)
  *   admin.css       admin panel: definition-list Box rows, DataTable lists, maintenance table
  *   buttons.css     one primary per view (demoted primaries), Subhead actions 32px, Box-row actions 28px
- *   blankslate.css  empty lists as a Blankslate Box (webhooks, deploy keys, collaborators), email / target lists as Boxes
+ *   blankslate.css  empty lists as a Primer Blankslate (Octicon visual; webhooks, deploy keys, branch protection, keys,
+ *                   tokens, OAuth2 apps), add-people rows as Box header / footer, email / target lists as Boxes
+ *   sections.css    two-factor methods as Box rows, org profile-picture column, body-less list rows centred
  */
 @import "./layout.css";
 @import "./header.css";
@@ -25,3 +27,4 @@
 @import "./admin.css";
 @import "./buttons.css";
 @import "./blankslate.css";
+@import "./sections.css";

@@ -122,9 +122,10 @@
   margin-bottom: var(--base-size-8);
 }
 
-/* Gitea focuses the empty filter input on load (Vue, when nothing else has focus): while it is still empty the focus
-   shows as the accent border only, without the 2px ring (github.com never autofocuses this field) */
+/* Gitea focuses the empty filter input on load (Vue, when nothing else has focus): while it is still empty it keeps
+   the resting look (github.com never autofocuses this field); the ring and accent border return with the first key */
 .repos-search input:focus:placeholder-shown {
+  border-color: var(--borderColor-default);
   outline: 0;
 }
 

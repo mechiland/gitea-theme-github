@@ -1,0 +1,9 @@
+/* gh-important (FG2-075): below 768px a Box table scrolls sideways (Gitea: overflow-x auto on
+   .ui.attached.table.segment), but the admin lists' `gt-ellipsis tw-max-w-48` cells (Tailwind, !important) still cap
+   the value and cut it with an ellipsis. Inside the scrolling Box the cell keeps its full text on one line (nowrap
+   stays from gt-ellipsis), like Primer's DataTable, which scrolls and never truncates. */
+@media (max-width: 767.98px) {
+  .ui.attached.table.segment td.gt-ellipsis.tw-max-w-48 {
+    max-width: none !important;
+  }
+}

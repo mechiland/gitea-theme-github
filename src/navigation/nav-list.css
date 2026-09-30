@@ -45,16 +45,7 @@
   display: none;
 }
 
-.ui.vertical.menu > .item:first-child,
-.ui.vertical.menu > .item:last-child,
-.ui.vertical.menu > .active.item:first-child,
-.ui.vertical.menu > .active.item:last-child,
-.ui.vertical.menu > .active.item:only-child {
-  border-radius: var(--borderRadius-medium);
-}
-
-.ui.vertical.menu a.item:hover,
-.ui.vertical.menu .item .menu a.item:hover {
+.ui.vertical.menu a.item:hover {
   background: var(--control-transparent-bgColor-hover);
   color: var(--fgColor-default);
   text-decoration: none;
@@ -64,15 +55,13 @@
   background: var(--control-transparent-bgColor-active);
 }
 
-.ui.vertical.menu .active.item,
-.ui.vertical.menu .item .menu .active.item {
+.ui.vertical.menu .active.item {
   background: var(--control-transparent-bgColor-selected);
   color: var(--fgColor-default);
   font-weight: var(--base-text-weight-semibold);
 }
 
-.ui.vertical.menu .active.item:hover,
-.ui.vertical.menu .item .menu .active.item:hover {
+.ui.vertical.menu .active.item:hover {
   background: var(--control-transparent-bgColor-hover);
 }
 
@@ -114,7 +103,7 @@
 .ui.vertical.menu > details.item > summary {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: var(--control-medium-gap);
   min-height: var(--control-medium-size);
   padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
@@ -130,6 +119,7 @@
 /* Primer NavList: trailing chevron-down that turns up when expanded (Gitea: chevron-right turning down; FG-117).
    Gitea only ships the chevron-right mask, so it is rotated. */
 .ui.vertical.menu > details.item > summary::after {
+  margin-left: auto;
   width: var(--base-size-16);
   height: var(--base-size-16);
   border: 0;
@@ -142,34 +132,33 @@
   transform: rotate(-90deg);
 }
 
-/* a closed group that contains the current page: selected look on the summary (NavList collapsed parent) */
+/* a closed group that contains the current page: selected look on the summary (NavList collapsed parent); the 4px
+   bar is the group's ::before (the summary's ::before is the leading icon, its ::after the chevron) */
 .ui.vertical.menu > details.item:not([open]):has(.active.item) > summary {
-  position: relative;
   background: var(--control-transparent-bgColor-selected);
   font-weight: var(--base-text-weight-semibold);
 }
 
-.ui.vertical.menu > details.item:not([open]):has(.active.item) > summary::before {
+.ui.vertical.menu > details.item:not([open]):has(.active.item)::before {
   content: "";
+  display: block;
   position: absolute;
   top: var(--base-size-4);
   left: calc(var(--base-size-8) * -1);
   width: var(--base-size-4);
-  height: calc(100% - var(--base-size-8));
+  height: calc(var(--control-medium-size) - var(--base-size-8));
   border-radius: var(--borderRadius-medium);
   background: var(--borderColor-accent-emphasis);
 }
 
-.ui.vertical.menu > details.item > .menu,
-.ui.vertical.menu > details.item > .menu.items-full-width {
+.ui.vertical.menu > details.item > .menu {
   display: flex;
   flex-direction: column;
   gap: 0;
   margin: 0;
 }
 
-.ui.vertical.menu .item .menu .item,
-.ui.vertical.menu > details.item > .menu.items-full-width > .item {
+.ui.vertical.menu .item .menu .item {
   padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed)
     var(--control-medium-paddingBlock) calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16));
   color: var(--fgColor-default);
@@ -214,4 +203,128 @@
   font-size: var(--text-body-size-small);
   font-weight: var(--base-text-weight-semibold);
   color: var(--fgColor-muted);
+}
+
+/* ---------- settings / admin sidebars (user, repo, org settings, site admin: the only menus whose first child is a
+   `.header.item`) = github.com settings NavList (FG2-014) ----------
+   - no top "User Settings" / "Settings" / "Admin Settings" heading (github.com starts with the first item)
+   - 16px leading Octicon, --fgColor-muted, 8px before the label, on every top-level item and group summary; sub-items
+     line up with the parent label (8 + 16 + 8)
+   The glyphs are Gitea's own Octicon files (/assets/img/svg/octicon-*.svg, same origin, cached) used as masks: ~20
+   icons as data URIs would cost ~15 KB per theme file; a url() costs ~40 B. Items without a mapping keep the 16px
+   slot empty (transparent default mask), never a filled square. */
+.flex-container-nav > .menu > .header:first-child {
+  display: none;
+}
+
+.flex-container-nav :is(.menu:has(> .header:first-child) > a.item, .menu:has(> .header:first-child) > details > summary)::before {
+  content: "";
+  display: block;
+  position: static;
+  flex: none;
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  background: var(--fgColor-muted);
+  mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+}
+
+:where(.flex-container-nav a.item, .flex-container-nav summary)::before {
+  mask-image: linear-gradient(transparent, transparent);
+}
+
+.flex-container-nav > .menu:has(> .header:first-child) > details > .menu > .item {
+  padding-left: calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16) + var(--control-medium-gap));
+}
+
+/* href suffix → Octicon (github.com's settings sidebars where an equivalent exists; docs/icons-audit.md §5). One rule
+   per glyph, alternatives inside :is() (the build splits plain selector lists into one rule each). */
+.flex-container-nav :is([href$="/settings"], [href$="/account"], details:has([href$="/admin/config"]) > summary)::before {
+  mask-image: url("../img/svg/octicon-gear.svg");
+}
+
+/* [href] twice: beats the gear rule, whose :is() carries the details:has() specificity */
+.flex-container-nav [href][href$="/user/settings"]::before {
+  mask-image: url("../img/svg/octicon-person.svg");
+}
+
+.flex-container-nav :is([href$="/notifications"], [href$="/notices"])::before {
+  mask-image: url("../img/svg/octicon-bell.svg");
+}
+
+.flex-container-nav [href$="/appearance"]::before {
+  mask-image: url("../img/svg/octicon-paintbrush.svg");
+}
+
+.flex-container-nav [href$="/security"]::before {
+  mask-image: url("../img/svg/octicon-shield-lock.svg");
+}
+
+.flex-container-nav [href$="/blocked_users"]::before {
+  mask-image: url("../img/svg/octicon-blocked.svg");
+}
+
+.flex-container-nav [href$="/applications"]::before {
+  mask-image: url("../img/svg/octicon-apps.svg");
+}
+
+.flex-container-nav [href$="/keys"]::before {
+  mask-image: url("../img/svg/octicon-key.svg");
+}
+
+.flex-container-nav [href$="/packages"]::before {
+  mask-image: url("../img/svg/octicon-package.svg");
+}
+
+.flex-container-nav [href$="hooks"]::before {
+  mask-image: url("../img/svg/octicon-webhook.svg");
+}
+
+.flex-container-nav [href$="/organization"]::before {
+  mask-image: url("../img/svg/octicon-organization.svg");
+}
+
+.flex-container-nav :is([href$="/repos"], details:has([href$="/admin/repos"]) > summary)::before {
+  mask-image: url("../img/svg/octicon-repo.svg");
+}
+
+.flex-container-nav [href$="/public_access"]::before {
+  mask-image: url("../img/svg/octicon-globe.svg");
+}
+
+.flex-container-nav :is([href$="/collaboration"], details:has([href$="/admin/users"]) > summary)::before {
+  mask-image: url("../img/svg/octicon-people.svg");
+}
+
+.flex-container-nav [href$="/branches"]::before {
+  mask-image: url("../img/svg/octicon-git-branch.svg");
+}
+
+.flex-container-nav :is([href$="/tags"], [href$="/labels"])::before {
+  mask-image: url("../img/svg/octicon-tag.svg");
+}
+
+.flex-container-nav [href$="/hooks/git"]::before {
+  mask-image: url("../img/svg/octicon-terminal.svg");
+}
+
+.flex-container-nav [href$="/lfs"]::before {
+  mask-image: url("../img/svg/octicon-file-binary.svg");
+}
+
+.flex-container-nav details:has([href*="/actions/"]) > summary::before {
+  mask-image: url("../img/svg/octicon-play.svg");
+}
+
+.flex-container-nav details:has([href$="/-/admin"]) > summary::before {
+  mask-image: url("../img/svg/octicon-tools.svg");
+}
+
+.flex-container-nav details:has([href$="/admin/hooks"]) > summary::before {
+  mask-image: url("../img/svg/octicon-plug.svg");
+}
+
+.flex-container-nav details:has([href$="/monitor/stats"]) > summary::before {
+  mask-image: url("../img/svg/octicon-pulse.svg");
 }

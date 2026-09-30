@@ -43,8 +43,87 @@
 /* create_helper.tmpl intro ("A repository contains all project files … Migrate repository"): Gitea centres it
    (p.ui.center); github.com's /new intro text is left-aligned with the stacked fields, 14px muted */
 .repository.new-repo .ui.attached.segment > p.ui.center {
-  margin: 0 0 var(--base-size-16);
+  order: -1; /* before a flash message (error state), so heading + subtitle + rule stay one block */
+  margin: 0 0 var(--base-size-24);
+  padding-bottom: var(--base-size-16);
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
   color: var(--fgColor-muted);
   line-height: var(--text-body-lineHeight-medium);
   text-align: left;
+}
+
+/* FG2-063: github.com /new is an unboxed page — 24px semibold heading, the intro as its subtitle, one
+   --borderColor-muted rule under both (Subhead), then the fields on the page background. */
+.repository.new-repo .ui.top.attached.header {
+  margin: 0 0 var(--base-size-8);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: var(--base-size-24); /* Primer $h2-size; no text token between 20 and 32 */
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--base-text-lineHeight-normal);
+}
+
+.repository.new-repo .ui.attached.segment {
+  display: grid;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+/* Owner / Repository name on one row (github.com): the two fields become `display: contents` in a 3-column grid
+   (owner | "/" | name); labels row 1, controls row 2, help texts full width below; every other form child spans
+   the grid and auto-places after them. */
+.new-repo-form {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) auto minmax(0, 3fr);
+  column-gap: var(--base-size-8);
+  max-width: calc(var(--base-size-128) * 3 + var(--base-size-48) + var(--base-size-8));
+}
+
+.new-repo-form > * {
+  grid-column: 1 / -1;
+}
+
+.new-repo-form > .field:is(:has(> #repo_owner_dropdown), :has(> #repo_name)) {
+  display: contents;
+}
+
+.new-repo-form > .field > :is(label, #repo_owner_dropdown, #repo_name) {
+  grid-row: 1;
+  grid-column: 1;
+  margin: 0 0 var(--base-size-8);
+}
+
+.new-repo-form > .field > :is(#repo_owner_dropdown, #repo_name) {
+  grid-row: 2;
+  width: 100%;
+  min-width: 0; /* Fomantic selection dropdown: 14em */
+  margin: 0;
+}
+
+.new-repo-form > .field > :is([for="repo_name"], #repo_name) {
+  grid-column: 3;
+}
+
+.new-repo-form > .field:has(> #repo_name)::before {
+  content: "/";
+  grid-row: 2;
+  grid-column: 2;
+  align-self: center;
+  font-size: var(--text-title-size-medium);
+}
+
+.new-repo-form > .field > .help {
+  grid-column: 1 / -1;
+}
+
+.new-repo-form > .field:has(> #repo_owner_dropdown) > .help {
+  grid-row: 3;
+  margin-top: var(--base-size-8);
+}
+
+.new-repo-form > .field:has(> #repo_name) > .help {
+  grid-row: 4;
+  margin: var(--base-size-8) 0 var(--base-size-16);
 }

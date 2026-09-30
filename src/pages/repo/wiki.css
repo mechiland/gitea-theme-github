@@ -37,6 +37,7 @@
 
 .wiki-content-toc {
   grid-area: 2 / 2;
+  margin-bottom: var(--base-size-24);
 }
 
 .wiki-content-main {
@@ -131,8 +132,18 @@
 /* clone URL: github.com input-sm (28px, 12px mono muted) + joined 28px copy button */
 .gh-wiki-clone {
   grid-area: 4 / 2;
+  flex-wrap: wrap;
   width: 100%;
 }
+
+/* "Clone this wiki locally" heading above the input (github.com, 14/600; FG2-026): English only, no locale key */
+html:lang(en) .gh-wiki-clone::before {
+  content: "Clone this wiki locally";
+  flex-basis: 100%;
+  margin-bottom: var(--base-size-8);
+  font-weight: var(--base-text-weight-semibold);
+}
+
 
 .gh-wiki-clone > input {
   min-width: 0;
@@ -162,7 +173,26 @@
 }
 
 .wiki.view .dividing.header > .flex-text-block > .flex-text-block {
-  align-items: flex-start;
+  flex-wrap: wrap;
+  align-items: baseline;
+  row-gap: 0;
+}
+
+/* revision count after the meta line (github.com "… on May 17, 2023 · 1 revision", FG2-026): the title wrapper is
+   flattened so title text, meta line and history link are items of one wrapping row; a full-width ::before (order 1)
+   breaks after the title. */
+.wiki.view .dividing.header > .flex-text-block > .flex-text-block > div {
+  display: contents;
+}
+
+.wiki.view .dividing.header > .flex-text-block > .flex-text-block::before {
+  content: "";
+  flex-basis: 100%;
+  order: 1;
+}
+
+.wiki.view .dividing.header .ui.sub.header {
+  order: 2;
 }
 
 .wiki.view .dividing.header .ui.sub.header {
@@ -171,13 +201,12 @@
   line-height: var(--text-body-lineHeight-medium);
 }
 
-/* history "N ⟲" → small invisible button after the title (github.com: "· N revisions" link in the meta) */
+/* history "N ⟲" → small invisible button after the meta line (github.com: "· N revisions" link in the meta) */
 .wiki.view .dividing.header a.ui.basic.button {
-  order: 2;
-  height: var(--control-small-size);
+  order: 3;
+  height: var(--base-size-20);
   min-height: 0;
-  margin-top: var(--base-size-4);
-  padding: 0 var(--control-small-paddingInline-condensed);
+  padding: 0 var(--base-size-4);
   border-color: transparent;
   background: transparent;
   box-shadow: none;
@@ -222,6 +251,10 @@
 
   .wiki-content-main {
     margin-bottom: var(--base-size-24);
+  }
+
+  .gh-wiki-clone { /* github.com @390: Pages, TOC, custom sidebar, then the clone box */
+    order: 1;
   }
 }
 

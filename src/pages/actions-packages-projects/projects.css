@@ -198,6 +198,14 @@
   text-decoration: underline;
 }
 
+/* row actions (FG2-051): github.com keeps a list row quiet and shows its actions on demand → with a hover-capable
+   pointer the Edit / Close / Delete group is shown while the row is hovered or holds focus (touch: always shown) */
+@media (hover: hover) {
+  .projects .milestone-list > .item:not(:hover, :focus-within) .list-item-secondary-bar > .flex-text-block:has(> a[href$="/edit"]) {
+    opacity: 0;
+  }
+}
+
 .projects .milestone-list > .center.page.buttons {
   padding: var(--base-size-16);
   border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
@@ -348,22 +356,31 @@
   font-size: var(--text-title-size-medium);
 }
 
-/* < md (FG-055): the 5-button group (~500px) was cut off at 390 → the group wraps into separate default buttons,
-   8px apart, each with its own radius and shadow (Primer ButtonGroup has no wrapping form) */
+/* < md (FG2-051): github.com keeps a board's header actions in one row; the 5 text buttons (~500px) do not fit a
+   phone, and wrapped apart they no longer read as one group → below md the group stays joined as IconButtons
+   (32x32, the label text stays in the DOM as the accessible name, font-size 0) */
 @media (max-width: 767.98px) {
   .project-header > .compact {
-    flex-wrap: wrap;
-    gap: var(--base-size-8);
-    height: auto;
     overflow: visible;
-    box-shadow: none;
   }
 
-  .project-header > .compact > .item,
-  .project-header > .compact > :is(.item:first-child, .item.tw-hidden:first-child + .item, .item:last-child) {
-    margin: 0;
-    border-radius: var(--borderRadius-medium);
-    box-shadow: var(--button-default-shadow-resting);
+  .project-header > .compact > .item {
+    justify-content: center;
+    width: var(--control-medium-size);
+    padding: 0;
+    font-size: 0;
+  }
+
+  /* Close / Reopen and Delete keep their text (no icon): circle-slash vs trash alone did not tell them apart and
+     both act at once (link-action) — Fullscreen, Edit (pencil) and New column (+) stay IconButtons */
+  .project-header > .compact > .link-action {
+    width: auto;
+    padding: 0 var(--control-medium-paddingInline-normal);
+    font-size: var(--text-body-size-medium);
+  }
+
+  .project-header > .compact > .link-action > .svg {
+    display: none;
   }
 }
 
@@ -380,6 +397,34 @@
   gap: var(--base-size-8);
   margin: 0 calc(var(--page-margin-x) * -1);
   padding: var(--base-size-8) var(--page-margin-x);
+}
+
+/* scroll cue (FG2-051): the columns fade out over the board's end padding while more board lies to the right; at
+   the scroll end only the empty padding is under the fade. (mask-image uses alpha only: any opaque token works) */
+#project-board {
+  mask-image: linear-gradient(to right, var(--fgColor-default) calc(100% - var(--page-margin-x)), transparent);
+}
+
+/* column height (FG2-051): github.com's columns run to the bottom of the view whatever their content; Gitea's board
+   is min(100vh - 400px) tall, so the wells stopped mid-page above an empty band. The page chain grows to the footer
+   (the page's bottom space moves into the board's own 8px) and the board fills it; tall columns still scroll inside
+   (Gitea: cards `overflow: clip auto`, board max-height 100vh - 120px). */
+.full.height:has(> .page-content #project-board) {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+
+.page-content.view-project:has(> .projects-view #project-board),
+.page-content.view-project > .projects-view:not(.fullscreen) {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.projects-view:not(.fullscreen) > #project-board {
+  flex-grow: 1;
+  margin-bottom: var(--base-size-8);
 }
 
 .fullscreen.projects-view #project-board {

@@ -149,3 +149,27 @@
     display: none;
   }
 }
+
+/* FG2-030 — directory / file / blame view < 768: Gitea wraps the right group into Go to file + Add File, then a
+   lone "…" + History row (3 rows, 111px). Pack it into one row: Go to file takes the free width, History becomes a
+   32px icon button (its text stays the accessible name), so the toolbar is 2 rows: branch + compare + breadcrumb,
+   then Go to file + Add File + … + History. github.com hides Go to file here; ours is kept (feature). */
+@media (max-width: 767.98px) {
+  .repo-view-content > .repo-button-row > .repo-button-row-right {
+    flex: 1 1 100%;
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+
+  .repo-view-content .repo-button-row-right > .repo-file-search-container {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .repo-view-content .repo-button-row-right > a.ui.button[href*="/commits/"] {
+    justify-content: center;
+    width: var(--control-medium-size);
+    padding: 0;
+    font-size: 0;
+  }
+}

@@ -95,3 +95,24 @@
 .code-editor-container .cm-editor .cm-cursor {
   border-left-color: var(--codeMirror-cursor-fgColor) !important;
 }
+
+/* helpers.css hides `.not-mobile.not-mobile` (display: none !important) below 768px; github.com's mobile blame group
+   header keeps the relative date at the right (FG2-080). Exact selector allow-listed in build/lint.mjs. */
+@media (max-width: 767.98px) {
+  .blame .lines-commit .blame-time.not-mobile {
+    display: block !important;
+  }
+}
+
+/* repo.css hides the diff summary below 800px (`display: none !important`); the compact diffstat stays (FG2-045,
+   styles in diff.css). Exact selector allow-listed in build/lint.mjs. */
+@media (max-width: 800px) {
+  .repository .diff-detail-box .diff-detail-stats {
+    display: flex !important;
+  }
+}
+
+/* README header tab: Tailwind `tw-pr-4` (16px !important) → the tab's 8px inline padding (file-view.css) */
+#readme > .file-header .file-header-left {
+  padding-right: var(--base-size-8) !important;
+}

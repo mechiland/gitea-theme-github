@@ -1,0 +1,112 @@
+/*
+ * Markdown editor chrome (templates/shared/combomarkdowneditor.tmpl, FG2-079) — github.com CommentBox for every
+ * editor that is not an issue / PR composer: release notes, milestone / project descriptions, wiki page, admin
+ * web banner, comment edit form, review box. The composers (`#comment-form`, `#new-issue`, diff comment forms)
+ * sit in a timeline Box of their own and keep pages/issues-prs' chrome (composer.css); they are left out here.
+ *   Box: 1px --borderColor-default, radius 6px; header strip --bgColor-muted, padding 8px 8px 0, holding the
+ *        Write / Preview TabNav tabs (navigation: tabs + 1px bar rule, transparent bar, selected tab on
+ *        --bgColor-default) and, from 1280px, the toolbar on the right (vertically centred on the 40px tabs);
+ *   body: --bgColor-default, padding 8px: the TextInput-styled textarea (or the toolbar row first, below 1280px);
+ *   toolbar: 28px square invisible IconButtons, 16px --fgColor-muted Octicons (hover --fgColor-accent on
+ *        --control-transparent-bgColor-hover), no group rules;
+ *   preview: padding 8px 16px, as tall as the empty writer.
+ * The strip colour is the Box background (the tab bar itself is transparent: navigation's TabNav rule wins by
+ * layer), the body panels paint --bgColor-default over it.
+ */
+
+.combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)) {
+  position: relative;
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-muted);
+}
+
+.combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)) > .ui.tabular.menu {
+  padding: var(--base-size-8) var(--base-size-8) 0;
+}
+
+.combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)) > .ui.tab {
+  padding: var(--base-size-8);
+  border-radius: 0 0 calc(var(--borderRadius-medium) - var(--borderWidth-thin)) calc(var(--borderRadius-medium) - var(--borderWidth-thin));
+  background: var(--bgColor-default);
+}
+
+/* no Write / Preview tabs (preview mode "none"): the body is the whole Box */
+.combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)) > .ui.tab:first-child {
+  border-radius: calc(var(--borderRadius-medium) - var(--borderWidth-thin));
+}
+
+/* Gitea: `.ui.tab.markup[data-tab-panel="markdown-previewer"] { border-bottom: 1px; padding-bottom: 1rem }` */
+.combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)) > .ui.tab[data-tab-panel="markdown-previewer"] {
+  min-height: calc(6 * var(--base-size-20) + 4 * var(--base-size-8) + 2 * var(--borderWidth-thin));
+  padding: var(--base-size-8) var(--base-size-16);
+  border-bottom: 0;
+}
+
+/* ---- toolbar (every editor; the composers restate the same look in pages/issues-prs) ---- */
+.combo-markdown-editor markdown-toolbar {
+  gap: 0;
+  padding: 0 0 var(--base-size-8);
+}
+
+.combo-markdown-editor .markdown-toolbar-group {
+  gap: 0;
+  padding: 0 var(--base-size-4);
+  border-left: 0;
+}
+
+.combo-markdown-editor .markdown-toolbar-group:first-child {
+  padding-left: 0;
+}
+
+.combo-markdown-editor .markdown-toolbar-group:last-child {
+  padding-right: 0;
+}
+
+.combo-markdown-editor .markdown-toolbar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-small-size);
+  height: var(--control-small-size);
+  padding: 0;
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+.combo-markdown-editor .markdown-toolbar-button:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-accent);
+}
+
+.combo-markdown-editor .markdown-toolbar-button:active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+.combo-markdown-editor .markdown-toolbar-button:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: calc(var(--borderWidth-thick) * -1);
+}
+
+.combo-markdown-editor .markdown-toolbar-button[aria-checked="true"] {
+  color: var(--fgColor-accent);
+}
+
+/* H¹ H² H³ level digit */
+.combo-markdown-editor md-header::after {
+  top: var(--base-size-4);
+  right: var(--base-size-2);
+  font-size: var(--text-caption-size);
+  line-height: 1;
+}
+
+/* wide editors: the toolbar moves into the header strip, right of the tabs (tabs: 8px strip padding + 40px) */
+@media (min-width: 1280px) {
+  .combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)):has(> .ui.tabular.menu) markdown-toolbar {
+    position: absolute;
+    top: calc(var(--base-size-8) + (var(--base-size-40) - var(--control-small-size)) / 2);
+    right: var(--base-size-8);
+    flex-wrap: nowrap;
+    padding: 0;
+  }
+}

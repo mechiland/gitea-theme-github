@@ -4,14 +4,11 @@
  * github.com/login (measured 2026-09-30, 1440 and 390): no header bar at all; the 48px mark is centred at y=46 and the
  * 20px/600/30px title starts at y=108 (14px below the mark). So the bar is transparent with no bottom rule, the logo
  * is that 48px mark (Gitea's logo, no GitHub marks), and the page column starts 14px below it (the title's own
- * ::before logo in header.css is skipped under this header). The hamburger is the only path to Explore / Help /
- * Register from these pages, so it stays: a Primer invisible IconButton (32px, --button-invisible-*) pinned at the
- * top-left 16px gutter, out of the centred column. The drawer itself is navigation's (.gh-app-header-drawer). */
+ * ::before logo in header.css is skipped under this header). The hamburger is hidden (FG2-033, below). */
 
 .gh-app-header--auth {
   --gh-auth-mark-top: calc(var(--base-size-48) - var(--base-size-2));
 
-  position: relative;
   justify-content: center;
   min-height: 0;
   padding: var(--gh-auth-mark-top) var(--base-size-16) 0;
@@ -56,55 +53,11 @@
   height: var(--base-size-48);
 }
 
-/* hamburger: Primer IconButton, invisible variant, medium (32px), 16px from the top-left corner */
+/* no hamburger (FG2-033): github.com auth pages have no chrome above the mark. Nothing becomes unreachable: the mark
+   links home, sign-in <-> sign-up link each other, forgot / reset / OpenID link back to sign-in, and Explore / Help are
+   one click away from the home page. The drawer (navigation's) is simply never opened here. */
 .gh-app-header--auth .gh-app-header-menu {
-  position: absolute;
-  top: var(--base-size-16);
-  left: var(--base-size-16);
-}
-
-.gh-app-header--auth .gh-app-header-menu > summary {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  width: var(--control-medium-size);
-  height: var(--control-medium-size);
-  min-width: 0;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
-  border: var(--borderWidth-thin) solid var(--button-invisible-borderColor-rest);
-  border-radius: var(--borderRadius-medium);
-  background: var(--button-invisible-bgColor-rest);
-  color: var(--button-invisible-iconColor-rest);
-  list-style: none;
-  cursor: pointer;
-  transition: background-color var(--base-duration-100) var(--base-easing-easeInOut);
-}
-
-.gh-app-header--auth .gh-app-header-menu > summary::-webkit-details-marker {
   display: none;
-}
-
-.gh-app-header--auth .gh-app-header-menu > summary::marker {
-  content: none;
-}
-
-.gh-app-header--auth .gh-app-header-menu > summary > .svg {
-  width: var(--base-size-16);
-  height: var(--base-size-16);
-}
-
-.gh-app-header--auth .gh-app-header-menu > summary:hover {
-  border-color: var(--button-invisible-borderColor-hover);
-  background: var(--button-invisible-bgColor-hover);
-  color: var(--button-invisible-iconColor-hover);
-}
-
-.gh-app-header--auth .gh-app-header-menu > summary:active,
-.gh-app-header--auth .gh-app-header-menu[open] > summary {
-  background: var(--button-invisible-bgColor-active);
 }
 
 /* the page column: title 14px under the mark (github.com: mark bottom 94, title top 108) */

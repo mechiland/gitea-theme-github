@@ -46,3 +46,11 @@
     margin-top: var(--base-size-16);
   }
 }
+
+/* FG2-087: github.com's code view (directory / file / blame) ends 16px from the viewport edge at ≥ 1280; Gitea's
+   fluid container keeps --page-margin-x (32px) on the right */
+@media (min-width: 1280px) {
+  .file.list .repo-view-content {
+    margin-right: calc(var(--base-size-16) - var(--page-margin-x));
+  }
+}

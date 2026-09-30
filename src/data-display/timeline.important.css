@@ -34,3 +34,9 @@
 
 /* Gitea repo.css: `.comment-list .timeline-item:first-child:not(.commit) { padding-top: 0 !important }` keeps the
    first item flush; github.com's first comment also starts at the top, so only the event rows are restated. */
+
+/* the migrated author of a timeline comment carries `tw-mr-1` (Tailwind, !important) on top of the header gap, so its
+   name sits 8px from "commented" while the opening post's sits 4px away; one spacing for both */
+.comment-header-left > .tw-font-semibold.tw-mr-1 {
+  margin-right: 0 !important;
+}

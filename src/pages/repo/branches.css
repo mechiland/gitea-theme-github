@@ -275,4 +275,12 @@
   .repository.branches td.three.wide {
     width: 13%;
   }
+
+  /* FG2-016: github.com shows only trash + "…" per row. Gitea's other row actions (new branch, RSS, download,
+     rename) stay in place but are revealed on row hover / keyboard focus; trash stays visible. Phones: all visible. */
+  .repository.branches tr:not(:hover, :focus-within) td .tw-flex > .btn:not(.delete-branch-button) {
+    @media (hover: hover) { /* touch tablets: no hover to reveal them, keep them visible */
+      opacity: 0;
+    }
+  }
 }

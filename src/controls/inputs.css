@@ -35,6 +35,19 @@ textarea {
   line-height: var(--base-size-20);
 }
 
+/* FG2-076: textarea heights in whole 20px lines + 8px padding + 1px border, so no half line peeks out of the
+   bottom padding: a `rows` textarea shows at least 3 lines (repo description rows="2" showed 2.5 at 390), a
+   rowless form textarea 6 (Gitea: --min-height-textarea 132px = 5.7 lines). The combo editor's autosize grows from
+   this min-height. */
+textarea[rows] {
+  min-height: calc(3 * var(--base-size-20) + 2 * var(--base-size-8) + 2 * var(--borderWidth-thin));
+}
+
+.ui.form textarea:not([rows]) {
+  height: calc(6 * var(--base-size-20) + 2 * var(--base-size-8) + 2 * var(--borderWidth-thin));
+  min-height: calc(6 * var(--base-size-20) + 2 * var(--base-size-8) + 2 * var(--borderWidth-thin));
+}
+
 :is(input, textarea)::placeholder {
   color: var(--fgColor-muted);
   opacity: 1;
@@ -287,8 +300,15 @@ select:focus,
   background: transparent;
 }
 
+/* FG2-076: the leading-visual button is still the submit control and a tab stop; its keyboard focus ring is drawn
+   on the whole field (the input's TextInput focus look) instead of a 32px square flush with the input's left edge */
 .ui.action.input:not(:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search > *) > input:is([type="search"], [name="q"]) + .ui.icon.button:last-child:has(> .octicon-search):focus-visible {
-  outline: var(--focus-outline);
+  outline: none;
+}
+
+.ui.action.input:not(:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search > *) > input:is([type="search"], [name="q"]):has(+ .ui.icon.button:last-child:focus-visible > .octicon-search) {
+  border-color: var(--borderColor-accent-emphasis);
+  outline: var(--borderWidth-thick) solid var(--borderColor-accent-emphasis);
   outline-offset: calc(var(--borderWidth-thick) * -1);
 }
 
@@ -352,7 +372,35 @@ input::-webkit-datetime-edit-fields-wrapper {
   padding: 0;
 }
 
-/* the calendar glyph is Chrome's own (follows color-scheme); only the pointer is set */
+/* FG2-076: the picker indicator is the calendar Octicon (clock for time inputs), 16px --fgColor-muted, like a
+   Primer TextInput trailing visual. Chrome paints its own glyph as the indicator's background-image; ours is a
+   --fgColor-muted fill cut by the Octicon mask. --_gh-picker-fill is invalid while the mask token is missing
+   (it references it), and the indicator then falls back (revert-layer) to Chrome's glyph instead of a blank box. */
+input:is([type="date"], [type="datetime-local"], [type="month"], [type="week"]) {
+  --_gh-picker-color: var(--fgColor-muted);
+  --_gh-picker-mask: var(--gh-octicon-calendar);
+  --_gh-picker-fill: linear-gradient(var(--_gh-picker-color) 0 0), var(--gh-octicon-calendar);
+}
+
+input[type="time"] {
+  --_gh-picker-color: var(--fgColor-muted);
+  --_gh-picker-mask: var(--gh-octicon-clock);
+  --_gh-picker-fill: linear-gradient(var(--_gh-picker-color) 0 0), var(--gh-octicon-clock);
+}
+
+input:is([type="date"], [type="datetime-local"], [type="month"], [type="time"], [type="week"]):disabled {
+  --_gh-picker-color: var(--fgColor-disabled);
+}
+
 input:is([type="date"], [type="datetime-local"], [type="month"], [type="time"], [type="week"])::-webkit-calendar-picker-indicator {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  padding: 0;
+  background-image: var(--_gh-picker-fill, revert-layer);
+  mask: var(--_gh-picker-mask, none) center / var(--base-size-16) var(--base-size-16) no-repeat;
   cursor: pointer;
+}
+
+input:is([type="date"], [type="datetime-local"], [type="month"], [type="time"], [type="week"]):disabled::-webkit-calendar-picker-indicator {
+  cursor: not-allowed;
 }

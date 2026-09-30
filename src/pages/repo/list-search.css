@@ -20,18 +20,6 @@
   font-size: var(--text-body-size-medium);
 }
 
-/* commits: the scope dropdown stays joined at the right end of the field */
-.commits:not(.pull) > .ui.container > .segment > form > .input > input[name="q"] {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.commits:not(.pull) > .ui.container > .segment > form > .input > .ui.dropdown.selection {
-  min-height: 0;
-  border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
-  font-size: var(--text-body-size-medium);
-}
-
 /* the submit button → leading search octicon inside the field */
 :is(.branches, .tags, .commits:not(.pull)) > .ui.container > .segment > form > .input > .ui.icon.button:last-child {
   position: absolute;
@@ -53,4 +41,16 @@
 :is(.branches, .tags, .commits:not(.pull)) > .ui.container > .segment > form > .input > .ui.icon.button:last-child:is(:hover, :active) {
   background: transparent;
   color: var(--fgColor-default);
+}
+
+/* commits: the scope dropdown stays joined at the right end of the field */
+.commits:not(.pull) > .ui.container > .segment > form > .input > input[name="q"] {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.commits:not(.pull) > .ui.container > .segment > form > .input > .ui.dropdown.selection {
+  min-height: 0;
+  border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
+  font-size: var(--text-body-size-medium);
 }
