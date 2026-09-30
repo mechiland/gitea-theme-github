@@ -38,8 +38,16 @@
  * page background below it). Kept growing (Gitea's model) where a layout needs the full height:
  *  - the fullscreen Actions log (utils.ts toggleFullScreen appends .fullscreen into .full.height, height 100%),
  *  - the Actions run list and explore pages, whose page folders turn .full.height into a flex column so their
- *    sidebar pane runs down to the footer (pages/actions-packages-projects actions-list.css, pages/people media.css). */
-.full.height:where(:not(:has(> .fullscreen, > .page-content .run-list, > .explore))) {
+ *    sidebar pane runs down to the footer (pages/actions-packages-projects actions-list.css, pages/people media.css);
+ *  - github.com's React issue family (issues / pulls lists, milestones, labels, the issue view): a full-height
+ *    PageLayout, footer below the fold at 1440×900 (docs/reference milestones, labels, repo-issues). A PR
+ *    conversation (.pull.tabs) is a Rails page there and follows its content. */
+/* (:has() cannot nest, so a PR conversation — .pull.tabs — is matched by the second branch) */
+.full.height:where(:not(:has(
+  > .fullscreen, > .page-content .run-list, > .explore,
+  > .page-content.issue-list, > .page-content.repository.milestones:not(.projects, .dashboard), > .page-content.labels,
+  > .page-content.view.issue:not(.files, .commits)
+)), :has(> .page-content > .ui.container > .pull.tabs)) {
   flex-grow: 0;
 }
 

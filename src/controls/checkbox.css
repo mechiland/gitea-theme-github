@@ -102,6 +102,7 @@ input[type="radio"]:disabled:checked {
 .ui.checkbox:has(> input:disabled) > label {
   opacity: 1;
   color: var(--fgColor-disabled);
+  cursor: not-allowed;
 }
 
 label.gt-checkbox {

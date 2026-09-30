@@ -304,6 +304,7 @@ select:focus,
    on the whole field (the input's TextInput focus look) instead of a 32px square flush with the input's left edge */
 .ui.action.input:not(:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search > *) > input:is([type="search"], [name="q"]) + .ui.icon.button:last-child:has(> .octicon-search):focus-visible {
   outline: none;
+  color: var(--fgColor-accent); /* the focused control is the icon, not the text field */
 }
 
 .ui.action.input:not(:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search > *) > input:is([type="search"], [name="q"]):has(+ .ui.icon.button:last-child:focus-visible > .octicon-search) {

@@ -280,9 +280,14 @@ html:lang(en) .gh-commit-day-date::before {
   }
 
   .diff:not(.pull) #commits-table :is(.copy-commit-id, .view-commit-path, .commit-id-short) {
+    color: var(--button-default-fgColor-rest); /* Button--secondary icon + text */
+    background: var(--button-default-bgColor-rest);
+  }
+
+  /* the border is an outline: leave the shared :focus-visible ring alone */
+  .diff:not(.pull) #commits-table :is(.copy-commit-id, .view-commit-path, .commit-id-short):not(:focus-visible) {
     outline: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
     outline-offset: calc(var(--borderWidth-thin) * -1);
-    background: var(--button-default-bgColor-rest);
   }
 
   .diff:not(.pull) #commits-table td.sha {
@@ -477,22 +482,32 @@ html:lang(en) .gh-commit-day-date::before {
 }
 
 /* Activity pages (pulse / contributors / code frequency / recent commits, page class "repository commits"): the page
-   title is github.com's Insights Subhead — 24px normal, 8px padding + 1px --borderColor-muted rule, 16px below */
+   title is github.com's Insights heading — 24px normal, 24px above the chart Box, no rule */
 .commits .flex-container-main > .activity-header,
 .commits .flex-container-main > * > div > .ui.header:first-child {
-  margin: 0 0 var(--base-size-16);
-  padding: 0 0 var(--base-size-8);
-  border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+  margin: 0 0 var(--base-size-24);
   font-size: var(--base-size-24); /* Primer Subhead-heading = $h2-size, no text token between 20 and 32 */
   font-weight: var(--base-text-weight-normal);
   line-height: var(--base-text-lineHeight-normal);
 }
 
-/* github.com /pulse: 20px semibold date range; /graphs/contributors: 24px semibold (code frequency stays normal) */
+/* github.com /pulse: a Subhead — 20px semibold date range, 8px + 1px --borderColor-muted rule, 8px above Overview */
 .commits .flex-container-main > .activity-header {
+  margin-bottom: var(--base-size-8);
+  padding-bottom: var(--base-size-8);
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
   font-size: var(--text-title-size-medium);
   font-weight: var(--base-text-weight-semibold);
   line-height: var(--text-title-lineHeight-medium);
+}
+
+/* pulse stat cells: label muted, count default (github.com) */
+.commits .flex-container-main .horizontal.segments > .segment {
+  color: var(--fgColor-muted);
+}
+
+.commits .flex-container-main .horizontal.segments strong {
+  color: var(--fgColor-default);
 }
 
 /* pulse: the stat cells' dividers run the full row height (github.com); Gitea pads the wrapping segment */
@@ -566,5 +581,6 @@ html:lang(en) .gh-commit-day-date::before {
   .commits .flex-container-main .horizontal.segments > .segment + .segment {
     border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
     border-left: 0;
+    border-radius: 0;
   }
 }

@@ -1,21 +1,20 @@
 /*
  * Markdown editor chrome (templates/shared/combomarkdowneditor.tmpl, FG2-079) — github.com CommentBox for every
- * editor that is not an issue / PR composer: release notes, milestone / project descriptions, wiki page, admin
- * web banner, comment edit form, review box. The composers (`#comment-form`, `#new-issue`, diff comment forms)
- * sit in a timeline Box of their own and keep pages/issues-prs' chrome (composer.css); they are left out here.
- *   Box: 1px --borderColor-default, radius 6px; header strip --bgColor-muted, padding 8px 8px 0, holding the
- *        Write / Preview TabNav tabs (navigation: tabs + 1px bar rule, transparent bar, selected tab on
- *        --bgColor-default) and, from 1280px, the toolbar on the right (vertically centred on the 40px tabs);
- *   body: --bgColor-default, padding 8px: the TextInput-styled textarea (or the toolbar row first, below 1280px);
- *   toolbar: 28px square invisible IconButtons, 16px --fgColor-muted Octicons (hover --fgColor-accent on
- *        --control-transparent-bgColor-hover), no group rules;
- *   preview: padding 8px 16px, as tall as the empty writer.
- * The strip colour is the Box background (the tab bar itself is transparent: navigation's TabNav rule wins by
- * layer), the body panels paint --bgColor-default over it.
+ * editor that is not an issue / PR composer (release, milestone, project, wiki, admin banner, comment edit, review
+ * box, inline diff comment). The composers (`#comment-form`, `#new-issue`, conversation-tab reply forms) keep
+ * pages/issues-prs' chrome (composer.css) and are left out here.
+ *   Box: 1px --borderColor-default, radius 6px, --bgColor-muted header strip (padding 8px 8px 0) with the Write /
+ *        Preview TabNav tabs (navigation) and, when the Box is ≥ 720px wide (tabs + 17 toolbar buttons), the
+ *        toolbar on the right; narrower Boxes keep the toolbar as one sideways-scrolling row in the body;
+ *   body: --bgColor-default, padding 8px; Preview keeps the writer's height (the writer stays in the grid cell);
+ *   toolbar: 28px square invisible IconButtons, 16px --fgColor-muted Octicons, hover --fgColor-accent.
  */
 
 .combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)) {
+  display: grid;
   position: relative;
+  grid-template-columns: minmax(0, 1fr);
+  container-type: inline-size;
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-radius: var(--borderRadius-medium);
   background: var(--bgColor-muted);
@@ -26,6 +25,7 @@
 }
 
 .combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)) > .ui.tab {
+  grid-area: 2 / 1;
   padding: var(--base-size-8);
   border-radius: 0 0 calc(var(--borderRadius-medium) - var(--borderWidth-thin)) calc(var(--borderRadius-medium) - var(--borderWidth-thin));
   background: var(--bgColor-default);
@@ -36,20 +36,55 @@
   border-radius: calc(var(--borderRadius-medium) - var(--borderWidth-thin));
 }
 
+/* Preview: the hidden writer keeps its place, so the Box is as tall as the writer (wiki 300px editor too) */
+.combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)):has(> .ui.tab.active[data-tab-panel="markdown-previewer"]) > .ui.tab[data-tab-panel="markdown-writer"] {
+  display: block;
+  visibility: hidden;
+}
+
 /* Gitea: `.ui.tab.markup[data-tab-panel="markdown-previewer"] { border-bottom: 1px; padding-bottom: 1rem }` */
 .combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)) > .ui.tab[data-tab-panel="markdown-previewer"] {
-  min-height: calc(6 * var(--base-size-20) + 4 * var(--base-size-8) + 2 * var(--borderWidth-thin));
   padding: var(--base-size-8) var(--base-size-16);
   border-bottom: 0;
 }
 
-/* ---- toolbar (every editor; the composers restate the same look in pages/issues-prs) ---- */
-.combo-markdown-editor markdown-toolbar {
-  gap: 0;
-  padding: 0 0 var(--base-size-8);
+/* EasyMDE's F11 fullscreen is position: fixed — no containment while EasyMDE is on */
+.combo-markdown-editor:has(.EasyMDEContainer) {
+  container-type: normal;
 }
 
+/* inline diff comment (repo/diff/comment_form.tmpl in .comment-code-cloud): the cloud is the Box — the editor is
+   its flush header + body (one border), attachments and the action row sit on the cloud's 8px inset */
+.comment-code-cloud > form:not(.comment-form) .combo-markdown-editor {
+  border: 0;
+  border-radius: calc(var(--borderRadius-medium) - var(--borderWidth-thin)) calc(var(--borderRadius-medium) - var(--borderWidth-thin)) 0 0;
+}
+
+.comment-code-cloud > form:not(.comment-form) .combo-markdown-editor > .ui.tab {
+  border-radius: 0;
+}
+
+.comment-code-cloud > form:not(.comment-form) > .field {
+  margin: 0;
+  padding: 0 var(--base-size-8) var(--base-size-8);
+}
+
+.comment-code-cloud > form:not(.comment-form) > .field:first-of-type {
+  padding: 0;
+}
+
+/* ---- toolbar (every editor; the composers restate the same look in pages/issues-prs) ---- */
+.combo-markdown-editor markdown-toolbar {
+  flex-wrap: nowrap;
+  gap: 0;
+  padding: 0 0 var(--base-size-8);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+/* groups stay compact and left-aligned (Gitea: last group `flex: 1`, pushed to the far right) */
 .combo-markdown-editor .markdown-toolbar-group {
+  flex: none;
   gap: 0;
   padding: 0 var(--base-size-4);
   border-left: 0;
@@ -100,13 +135,13 @@
   line-height: 1;
 }
 
-/* wide editors: the toolbar moves into the header strip, right of the tabs (tabs: 8px strip padding + 40px) */
-@media (min-width: 1280px) {
+/* wide Boxes: the toolbar moves into the header strip, right of the tabs (8px strip padding + 40px tabs) */
+@container (min-width: 720px) {
   .combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)):has(> .ui.tabular.menu) markdown-toolbar {
     position: absolute;
     top: calc(var(--base-size-8) + (var(--base-size-40) - var(--control-small-size)) / 2);
     right: var(--base-size-8);
-    flex-wrap: nowrap;
     padding: 0;
+    overflow: visible;
   }
 }
