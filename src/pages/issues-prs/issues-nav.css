@@ -1,0 +1,207 @@
+/*
+ * Issues / PRs list page layout (FG-017): templates/repo/issue/list.tmpl github-* branch (ORC-9) renders
+ *   .ui.container > .gh-issues-layout > nav.gh-issues-nav (a.gh-issues-nav-item[.selected] > svg + span,
+ *   div.gh-issues-nav-divider) + div.gh-issues-main (h2.gh-issues-title, Gitea's alert / pins / .list-header /
+ *   #issue-filters / #issue-actions / #issue-list / pagination).
+ * github.com /issues (pemistahl/grex, measured 2026-09-30, 1440 wide):
+ *  - page is full width under the repo tabs; sidebar 256px, padding 8px, 1px --borderColor-default right edge;
+ *  - NavList: list padding 8px 0, items 32px (padding 6px 8px, margin 0 8px, radius 6px, gap 8px), 14px/20px
+ *    --control-fgColor-rest, 16px --fgColor-muted leading icon; selected item --control-transparent-bgColor-selected
+ *    + label 600 + a 4×24px --borderColor-accent-emphasis bar at left -8px; hover --control-transparent-bgColor-hover;
+ *    group divider = 1px --borderColor-muted rule across the list (20px above and below);
+ *  - main column padding 24px 24px; PageHeader title 20px / 600 / 32px with "New issue" (32px) at its right;
+ *    16px to the 32px query bar, 16px to the list Box.
+ * < 1012px github.com folds the sidebar behind a toggle (needs JS): here the NavList becomes a horizontally
+ * scrolling row above the title (no function hidden).
+ */
+
+/* full-width page body under the repo tabs (Gitea: centred 1280px container, 24px under the tabs) */
+.page-content.issue-list > .secondary-nav:has(~ .ui.container > .gh-issues-layout) {
+  margin-bottom: 0;
+}
+
+.page-content.issue-list > .ui.container:has(> .gh-issues-layout) {
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gh-issues-layout {
+  display: flex;
+  align-items: stretch;
+}
+
+/* ---------- NavList ---------- */
+.gh-issues-nav {
+  display: flex;
+  flex: 0 0 calc(var(--base-size-128) * 2);
+  flex-direction: column;
+  width: calc(var(--base-size-128) * 2);
+  padding: var(--base-size-16);
+  border-right: var(--borderWidth-thin) solid var(--borderColor-default);
+}
+
+.gh-issues-nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--base-size-8);
+  min-height: var(--control-medium-size);
+  padding: var(--base-size-6) var(--base-size-8);
+  border-radius: var(--borderRadius-medium);
+  color: var(--control-fgColor-rest);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--base-size-20);
+  text-decoration: none;
+}
+
+.gh-issues-nav-item > .svg {
+  flex: 0 0 auto;
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  color: var(--fgColor-muted);
+}
+
+.gh-issues-nav-item > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gh-issues-nav-item:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--control-fgColor-rest);
+  text-decoration: none;
+}
+
+.gh-issues-nav-item:active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+.gh-issues-nav-item:focus-visible {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: calc(var(--focus-outline-width) * -1);
+}
+
+.gh-issues-nav-item.selected {
+  background: var(--control-transparent-bgColor-selected);
+}
+
+.gh-issues-nav-item.selected > span {
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.gh-issues-nav-item.selected::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - var(--base-size-12));
+  left: var(--base-size-negative-8);
+  width: var(--base-size-4);
+  height: var(--base-size-24);
+  border-radius: var(--borderRadius-medium);
+  background: var(--borderColor-accent-emphasis);
+}
+
+.gh-issues-nav-divider {
+  height: 0;
+  margin: var(--base-size-20) var(--base-size-negative-8);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+/* ---------- main column: PageHeader + query bar + list ---------- */
+.gh-issues-main {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: start;
+  min-width: 0;
+  padding: var(--base-size-24);
+}
+
+.gh-issues-main > *,
+.gh-issues-main > .list-header > * {
+  grid-column: 1 / -1;
+  order: 0; /* Gitea's mobile list-header reorders its flex items (search order 2); here they are grid rows */
+  min-width: 0;
+}
+
+/* the top bar's items join the page grid: the New button moves up next to the title, the search input spans
+   the row below it (github.com's query bar) */
+.gh-issues-main > .list-header {
+  display: contents;
+}
+
+.gh-issues-title {
+  grid-row: 1;
+  grid-column: 1;
+  margin: 0 0 var(--base-size-16);
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-medium);
+  font-weight: var(--text-title-weight-medium);
+  line-height: var(--text-title-lineHeight-medium);
+}
+
+.gh-issues-main > .list-header > .issue-list-new {
+  grid-row: 1;
+  grid-column: 2;
+  align-self: start;
+  margin: 0 0 0 var(--base-size-16);
+}
+
+/* Labels / Milestones buttons duplicate the NavList's Milestones and Labels links */
+.gh-issues-main > .list-header > .ui.button:not(.issue-list-new) {
+  display: none;
+}
+
+.gh-issues-main > .list-header > .list-header-search {
+  margin: 0;
+}
+
+.gh-issues-main > #issue-pins {
+  margin-bottom: var(--base-size-16);
+}
+
+/* ---------- < 1012px: one column, NavList as a scrolling row ---------- */
+@media (max-width: 1011.98px) {
+  .gh-issues-layout {
+    flex-direction: column;
+  }
+
+  .gh-issues-nav {
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--base-size-4);
+    width: auto;
+    padding: var(--base-size-8) var(--base-size-32) var(--base-size-8) var(--base-size-16);
+    overflow-x: auto;
+    border-right: 0;
+    border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+    scrollbar-width: none;
+    /* overflow hint: the row fades out over its last 32px (the trailing padding, so the last item scrolls clear) */
+    mask-image: linear-gradient(to right, var(--fgColor-default) calc(100% - var(--base-size-32)), transparent);
+  }
+
+  .gh-issues-nav-item {
+    flex: 0 0 auto;
+  }
+
+  .gh-issues-nav-item.selected::after {
+    display: none;
+  }
+
+  .gh-issues-nav-divider {
+    flex: 0 0 auto;
+    align-self: stretch;
+    height: auto;
+    margin: var(--base-size-4) var(--base-size-4);
+    border-top: 0;
+    border-left: var(--borderWidth-thin) solid var(--borderColor-muted);
+  }
+
+  .gh-issues-main {
+    padding: var(--base-size-16);
+  }
+}

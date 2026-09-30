@@ -21,6 +21,7 @@
  *   footer-line.css      "Need an account? Register now." / passkey line
  *   other-pages.css      forgot / reset password, activation, 2FA, OpenID specifics
  *   status.css           404 / 500 / 503 → Primer Blankslate (spacious, large)
+ *   app-header.css       slim auth header (.gh-app-header--auth): 48px centred mark, invisible hamburger (FG-063)
  */
 @import "./layout.css";
 @import "./header.css";
@@ -29,3 +30,4 @@
 @import "./footer-line.css";
 @import "./other-pages.css";
 @import "./status.css";
+@import "./app-header.css";

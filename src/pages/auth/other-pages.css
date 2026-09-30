@@ -65,6 +65,20 @@
   vertical-align: text-bottom;
 }
 
-.page-content.user.signin.openid .ui.form .field > label > .svg {
-  vertical-align: text-bottom;
+/* "OpenID URI *" label: the template leaves a newline between the text and </label>, which rendered as a space
+   before the 4px-margined required marker ("URI  *", FG-092 / C081). As a flex row the whitespace-only runs drop
+   out: icon 4px text 4px "*" (Primer InputLabel: 4px between the text and the marker). */
+.page-content.user.signin.openid .ui.form .required.field > label {
+  display: flex;
+  align-items: center;
+  gap: var(--base-size-4);
+}
+
+.page-content.user.signin.openid .ui.form .required.field > label::after {
+  margin: 0;
+}
+
+/* OpenID intro ("Sign in with an OpenID URI…"): centred under the centred title, like the other auth pages' copy */
+.page-content.user.signin.openid .ui.form > .inline.field:first-child {
+  text-align: center;
 }

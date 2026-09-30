@@ -9,8 +9,8 @@
 .ui.form .grouped.fields > label,
 .ui.form .inline.fields > label,
 .ui.form .inline.fields .field > label,
-.ui.form .inline.fields .field > p,
-.ui.form .inline.field > p {
+.ui.form .inline.fields .field > p:not(.help),
+.ui.form .inline.field > p:not(.help) {
   color: var(--fgColor-default);
   font-size: var(--text-body-size-medium);
   font-weight: var(--base-text-weight-semibold);
@@ -50,12 +50,22 @@
   vertical-align: baseline;
 }
 
-/* FormControl.Caption */
+/* FormControl.Caption: 12px / 18px (Primer React FormControl.Caption measured on primer.style, request SA-C1),
+   4px below the control, no bottom padding (Gitea modules/form.css adds 0.6em), normal wrapping — Gitea's
+   `text-wrap: balance` broke two-line captions in the middle of the field ("…named ".profile" / or …", FG-089) */
 .form .help {
   margin-top: var(--base-size-4);
+  padding-bottom: 0;
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
-  line-height: var(--text-caption-lineHeight);
+  line-height: var(--base-text-lineHeight-normal);
+  text-wrap: wrap;
+}
+
+/* a caption that introduces more controls below it (repo/migrate "Access Token is required…" above the item
+   checkboxes) keeps an 8px gap to them, like a CheckboxGroup caption above its first option */
+.form .help:has(+ .field) {
+  margin-bottom: var(--base-size-8);
 }
 
 .form .help code {

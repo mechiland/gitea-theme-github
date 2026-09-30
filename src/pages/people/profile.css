@@ -21,7 +21,7 @@
   margin: 0;
 }
 
-.user.profile > :first-child {
+.user.profile:not(.settings) > :first-child {
   margin-top: var(--base-size-32);
 }
 
@@ -73,7 +73,7 @@
 }
 
 /* no full name: the username stands where the name would be */
-/* followers · following (the counts share a text node with the words, so they cannot be bold on their own) */
+/* followers · following */
 .profile-avatar-name > div {
   display: flex;
   flex-wrap: wrap;
@@ -92,6 +92,17 @@
 
 .profile-avatar-name > div .svg {
   margin-right: var(--base-size-4);
+}
+
+/* the counts in their own span (integrator request PPL-T1): 600 --fgColor-default like github.com; inert until then.
+   `a > span` keeps the count's hover colour with the link. */
+.profile-avatar-name > div a > span {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.profile-avatar-name > div a:hover > span {
+  color: inherit;
 }
 
 .profile-avatar-name > div i {
@@ -186,4 +197,36 @@
   box-shadow: 0 0 0 100vmax var(--borderColor-muted);
   clip-path: inset(0 -100vmax);
   pointer-events: none;
+}
+
+/* Overview tab: github.com uses octicon-book (Gitea: info). CSS mask (icons folder's --gh-octicon-book); the path is
+   hidden through a paint fallback that exists only when the mask does (`fill: url(…) transparent`), so while the mask
+   is not defined every declaration here is invalid and Gitea's own icon stays. */
+.user.profile overflow-menu .item > .octicon-info {
+  background: var(--gh-octicon-book, inherit) 0 0 / 0 0 no-repeat, currentColor;
+  mask: var(--gh-octicon-book, inherit) center / contain no-repeat;
+}
+
+.user.profile overflow-menu .item > .octicon-info > path {
+  fill: var(--gh-octicon-book, inherit) transparent;
+}
+
+/* org Overview tab: octicon-home on github.com (same technique) */
+.organization overflow-menu .item > .octicon-info {
+  background: var(--gh-octicon-home, inherit) 0 0 / 0 0 no-repeat, currentColor;
+  mask: var(--gh-octicon-home, inherit) center / contain no-repeat;
+}
+
+.organization overflow-menu .item > .octicon-info > path {
+  fill: var(--gh-octicon-home, inherit) transparent;
+}
+
+/* Projects tab: octicon-table on github.com (Gitea: project-symlink); inert until the icons folder ships the mask */
+:is(.user.profile, .organization) overflow-menu .item > .octicon-project-symlink {
+  background: var(--gh-octicon-table, inherit) 0 0 / 0 0 no-repeat, currentColor;
+  mask: var(--gh-octicon-table, inherit) center / contain no-repeat;
+}
+
+:is(.user.profile, .organization) overflow-menu .item > .octicon-project-symlink > path {
+  fill: var(--gh-octicon-table, inherit) transparent;
 }

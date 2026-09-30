@@ -1,0 +1,75 @@
+/*
+ * Empty states and small lists on settings pages — github.com shows an empty settings list as a Primer Blankslate in
+ * a Box (1px --borderColor-default, radius 6px, padding 32px, centred 14px --fgColor-muted text; like the branch
+ * protection empty row in keys.css), and short lists (emails, Actions cross-repo targets) as a Box of Box-rows.
+ * Gitea renders these as bare text / an unboxed list:
+ *   webhooks (repo/settings/webhook/base_list.tmpl): the description <div> and an empty .flex-divided-list (the .divider between them is only rendered when hooks exist);
+ *   deploy keys (repo/settings/deploy_keys.tmpl): the "no deploy keys" text node beside the hidden add panel;
+ *   collaborators (repo/settings/collaboration.tmpl): no list at all, only the add form in a bottom attached segment;
+ *   account emails (user/settings/account.tmpl): .ui.list.flex-items-block of .item rows;
+ *   Actions > General target repositories (shared/actions/owner_general_settings.tmpl): a nested attached segment.
+ */
+
+/* ---------- Blankslate in a Box ---------- */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment:has(> .flex-divided-list):not(:has(> .divider)) > div:first-child:not([class]),
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment:has(> #add-deploy-key-panel.tw-hidden):not(:has(> .flex-divided-list)) {
+  padding: var(--base-size-32) var(--base-size-16);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+  text-align: center;
+}
+
+/* collaborators with none yet: the add form sits centred in the Blankslate Box ("Add people" on github.com) */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.top.attached.header + .ui.bottom.attached.segment:has(> #repo-collab-form) {
+  padding: var(--base-size-32) var(--base-size-16);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.top.attached.header + .ui.bottom.attached.segment > #repo-collab-form {
+  justify-content: center;
+}
+
+/* ---------- short lists as a Box of Box-rows ---------- */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment:not(.ui.form *) > .ui.list.flex-items-block:has(> .item),
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form .ui.attached.segment:has(> .ui.list) {
+  margin: 0;
+  padding: 0;
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > .ui.list.flex-items-block > .item,
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form .ui.attached.segment > .ui.list > .item {
+  align-items: center;
+  margin: 0;
+  padding: var(--base-size-16);
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > .ui.list.flex-items-block > .item + .item,
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form .ui.attached.segment > .ui.list > .item + .item {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+/* the Actions target list is a compact Box (Box-row--condensed, 8px 16px) with the 440px width of the form column */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form .ui.attached.segment > .ui.list > .item {
+  padding: var(--base-size-8) var(--base-size-16);
+}
+
+/* email row: address and its Labels on one line, 8px apart (Gitea: a space and .ui.label margins) */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > .ui.list.flex-items-block > .item > .content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--base-size-8);
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > .ui.list.flex-items-block > .item > .content > .ui.label {
+  margin: 0;
+}

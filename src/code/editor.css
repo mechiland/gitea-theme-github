@@ -89,22 +89,22 @@
 
 /* CodeMirror token classes (@lezer/highlight classHighlighter) → prettylights, sharing each declaration block with
    the Chroma rules of the same colour from syntax.css (see the notes there) */
-.chroma :is(.nx, .nn, .kt, .w),
+.chroma .nx, .chroma .nn, .chroma .kt, .chroma .w,
 .code-editor-container .tok-variableName { color: inherit; }
-.chroma :is(.no, .o, .ow),
+.chroma .no, .chroma .o, .chroma .ow,
 .code-editor-container .tok-propertyName { color: var(--prettylights-syntax-constant); }
-.chroma :is(.fm, .na),
+.chroma .fm, .chroma .na,
 .code-editor-container :is(.tok-typeName, .tok-className) { color: var(--prettylights-syntax-entity); }
 .code-editor-container .tok-namespace { color: inherit; }
 .code-editor-container :is(.tok-macroName, .tok-labelName) { color: var(--prettylights-syntax-entity); }
-:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.w+.kp+.nc:has(+.w+.bp)),
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.w+.kp+.nc:has(+.w+.bp)).nc,
 .code-editor-container .tok-operator { color: var(--prettylights-syntax-keyword); }
 .chroma .sd,
 .code-editor-container .tok-meta { color: var(--prettylights-syntax-comment); }
 .chroma .gh,
 .chroma .gu,
 .code-editor-container .tok-heading { color: var(--prettylights-syntax-markup-heading); font-weight: var(--base-text-weight-semibold); }
-:is(.page-content:has(.breadcrumb > .active.section:is([title$=".md" i], [title$=".markdown" i])) .file-view, table.chroma:is([data-path$=".md" i], [data-path$=".markdown" i])) .na,
+:is(.page-content:has(.breadcrumb > .active.section:is([title$=".md" i], [title$=".markdown" i])) .file-view.code-view, table.chroma:is([data-path$=".md" i], [data-path$=".markdown" i])) .na,
 .code-editor-container .tok-link { color: var(--prettylights-syntax-string); text-decoration: underline; }
 .code-editor-container .tok-inserted { color: var(--prettylights-syntax-markup-inserted-text); background-color: var(--prettylights-syntax-markup-inserted-bg); }
 .code-editor-container .tok-deleted { color: var(--prettylights-syntax-markup-deleted-text); background-color: var(--prettylights-syntax-markup-deleted-bg); }

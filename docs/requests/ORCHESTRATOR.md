@@ -158,3 +158,70 @@ theme's forgot-password page, harmless). Otherwise treat FG-105 as environment/i
 
 - ORC-5..9 DONE (orchestrator, 2026-09-30): 7 template files installed + reloaded; html-snapshot before/after diff: other themes (gitea-auto/modern/studio anon + gitea-auto signed-in, 21 pages) byte-identical; github-only markers present only for github-auto; smoke 12/12 green; 0 console errors except intentional 404.
 - ORC-10: FG-105 treated as environment/inherent (no mailer change).
+
+## ORC-11 (integrator, loop 1 after final gate #1, 2026-09-30) Install two edited github-only templates (PA-L1-1, PA-L1-2, NAV-I4, SA-5b)
+The integrator's live copy + reload was refused by the permission policy (not retried). Both files are already live
+overrides; only their github-* branch changes (else-branches untouched, so other themes stay byte-identical).
+Project copies are final; previous versions kept in `shots/gh_head_navbar.pre-L1.tmpl`, `shots/layout_head.pre-L1.tmpl`.
+
+1. `templates/custom/gh_head_navbar.tmpl` (only rendered for github-* themes):
+```diff
+-{{- $isAuth := and (not .IsSigned) (or .PageIsSignIn .PageIsSignUp .IsResetRequest .IsResetForm) -}}
++{{- $isAuth := and (not .IsSigned) (or .PageIsSignIn .PageIsSignUp .IsResetRequest .IsResetForm .IsResetDisable
++	(StringUtils.HasPrefix .Link (print AppSubUrl "/user/two_factor"))
++	(StringUtils.HasPrefix .Link (print AppSubUrl "/user/webauthn"))
++	(StringUtils.HasPrefix .Link (print AppSubUrl "/user/link_account"))) -}}
+ …
+ 			{{if .Repository}}
+ 				…
++			{{else if .PageIsAdmin}}
++				<a class="gh-context-item" href="{{AppSubUrl}}/-/admin">{{ctx.Locale.Tr "admin_panel"}}</a>
++			{{else if .PageIsUserSettings}}
++				<a class="gh-context-item" href="{{AppSubUrl}}/user/settings">{{ctx.Locale.Tr "your_settings"}}</a>
+ 			{{else if .PageIsDashboard}}
+```
+2. `templates/user/settings/layout_head.tmpl` (github-* branch condition only):
+```diff
+-{{- if and (StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-") (StringUtils.Contains (StringUtils.ToString .pageClass) "settings")}}
++{{- if and (StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-") (or (not .pageClass) (StringUtils.Contains (StringUtils.ToString .pageClass) "settings"))}}
+```
+(plus two comment lines inside the trimmed `{{- /* */ -}}` block, which emits nothing).
+
+Install:
+```sh
+cp /Users/michael/work/gitea/gitea-theme-github/templates/custom/gh_head_navbar.tmpl /Users/michael/work/gitea/gitea/gitea/templates/custom/gh_head_navbar.tmpl
+cp /Users/michael/work/gitea/gitea-theme-github/templates/user/settings/layout_head.tmpl /Users/michael/work/gitea/gitea/gitea/templates/user/settings/layout_head.tmpl
+docker exec -u git gitea-server gitea manager reload-templates --config /data/gitea/conf/app.ini
+```
+Verify (no restart needed):
+- `curl -s -b 'gitea_theme=github-auto; lang=en-US' http://localhost:3000/user/forgot_password | grep -c 'gh-app-header--auth'` → 1 (was 0).
+- `curl -s -b 'gitea_theme=github-auto; lang=en-US' http://localhost:3000/user/login | grep -c 'gh-app-header--auth'` → 1 (unchanged).
+- signed in as admin with github-auto: `/-/admin` crumb reads "Site Administration", `/user/settings` crumb reads "Settings";
+  `/user/settings/actions/general` shows `gh-settings-header`.
+- gitea-auto / modern / studio: `sh shots/orc5/html-snapshot.sh shots/orc5/after-L1` and compare with a fresh `before`
+  (else-branches unchanged, so expect identical output).
+Rollback: copy back `shots/gh_head_navbar.pre-L1.tmpl` / `shots/layout_head.pre-L1.tmpl`, reload.
+
+### ORC-11 update (integrator, loop 1 integration pass, 2026-09-30 14:30) — still pending, copy + reload refused again (not retried)
+- `templates/custom/gh_head_navbar.tmpl` changed once more since ORC-11 was written: the three `.Link` prefix checks now read
+  `(StringUtils.HasPrefix (StringUtils.ToString .Link) (print AppSubUrl "/user/…"))`. Reason: `HasPrefix(s, prefix string)`
+  errors at execution time if `.Link` is absent from the data map (nil interface → "invalid value; expected string"); every
+  page rendered through `base/head` has `Link` (services/context/context.go:168), but `ToString` makes the auth condition
+  nil-safe for any future caller. `and`/`or` short-circuit (Go ≥ 1.18), so signed-in pages never evaluate it.
+- Install commands and verification are unchanged (see ORC-11 above). Both project copies are final.
+- Live state checked 14:28: `custom/gh_head_navbar.tmpl` and `user/settings/layout_head.tmpl` differ from the project
+  copies (ORC-11 not installed); the other 7 github-only templates are byte-identical to the project copies.
+
+## ORC-12 (integrator, loop 1, FYI — decision taken, reversible) browser floor for the size budget
+Wave L1 put the flat build at 347 KB (auto). Instead of deleting ~33 KB of never-covered rules, the build now emits CSS
+nesting for shared selector prefixes (build/nest.mjs; lossless, self-checked every build, pixel-diffed): auto 288.9 KB.
+Consequence: the GitHub themes need CSS nesting support — Chrome/Edge 112+, Safari 16.5+, Firefox 117+ (all 2023).
+Older browsers would drop the nested rules (the page would look largely unstyled by our layers; Gitea's own CSS still
+applies). Rollback: `node build/build.mjs --deploy --no-nest` (flat, identical rendering, but 347 KB = over the 300 KB cap).
+Also observed: another agent deployed at 14:36:27 (revision 2b39b04cbf; src/navigation/nav-list.css restored to its HEAD
+content in the same second) while this pass was running; the integrator's deploy at 14:54:12 (85fbd66d9d) builds from the
+same tree, so nothing of theirs was lost, but the orchestrator should know that a builder was still active.
+
+- ORC-11 DONE (orchestrator): gh_head_navbar + layout_head installed + reloaded; other themes byte-identical (html-snapshot before-L1/after-L1); forgot-password auth header, admin/settings crumbs, actions/general settings header verified.
+- ORC-12 ACCEPTED (orchestrator): CSS nesting in the minified output. The theme already requires :has() (Firefox 121+, Chrome 105+, Safari 15.4+) and @layer; nesting raises the floor only to Chrome/Edge 112+ and Safari 16.5+ (2023). The 14:36:27 deploy was the orchestrator (user-requested NavList fix), not a builder.
+- Smoke hygiene: 83 leftover open "Smoke issue" issues (admin, octo-org/theme-playground) closed; smoke.mjs now closes its own issue (step close-issue).

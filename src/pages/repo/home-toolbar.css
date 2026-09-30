@@ -98,19 +98,19 @@
 
 /* "Go to file": github.com 204px medium TextInput with a leading octicon-search (Vue RepoFileSearch mount:
    .repo-file-search-container > div > .ui.small.input > input + kbd) */
-.repo-grid-filelist-sidebar .repo-button-row-right > .repo-file-search-container {
+.repo-grid-filelist-sidebar .repo-file-search-container {
   width: calc(var(--base-size-96) * 2 + var(--base-size-12));
 }
 
 /* the field itself: same 32px TextInput with the search octicon on repo home and in the directory / file view
    (view_content.tmpl renders the same .repo-button-row-right on every code view; Gitea: 30px, no icon) */
-.repository .repo-button-row-right > .repo-file-search-container .ui.small.input {
+.repo-file-search-container .input {
   width: 100%;
   height: var(--control-medium-size);
   font-size: var(--text-body-size-medium);
 }
 
-.repository .repo-button-row-right > .repo-file-search-container .ui.small.input::before {
+.repo-file-search-container .input::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -123,13 +123,13 @@
   pointer-events: none;
 }
 
-.repository .repo-button-row-right > .repo-file-search-container .ui.small.input > input {
+.repo-file-search-container .input > input {
   height: var(--control-medium-size);
   padding: 0 var(--base-size-32) 0 var(--base-size-32);
   font-size: var(--text-body-size-medium);
 }
 
-.repository .repo-button-row-right > .repo-file-search-container .ui.small.input > kbd {
+.repo-file-search-container .input > kbd {
   right: var(--base-size-8);
 }
 
@@ -145,7 +145,7 @@
     display: none;
   }
 
-  .repo-grid-filelist-sidebar .repo-button-row-right > .repo-file-search-container {
+  .repo-grid-filelist-sidebar .repo-file-search-container {
     display: none;
   }
 }

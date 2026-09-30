@@ -224,4 +224,37 @@
   .comment-list::before {
     left: var(--base-size-16);
   }
+
+  /* FG-046 (+ pages/issues-prs request): github.com keeps the reaction/kebab cluster top-right on the author line;
+     Gitea's `flex-wrap: wrap` pushes it onto a third row (85px header). The left part wraps inside its own column
+     (author · "commented …" on the first line, "(Migrated from …)" under it), the right cluster never wraps. */
+  .comment-header {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
+
+  /* inline flow instead of flex items: "author commented 6 years ago (Migrated from …)" wraps between words like
+     github.com's header text, so a long author name still gives two lines, not three */
+  .comment-header-left {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+    /* centres the 21px text line on the 26px action buttons of the right cluster */
+    padding-top: 2px;
+  }
+
+  .comment-header-left > .inline-timeline-avatar {
+    display: inline-flex;
+    margin-right: var(--base-size-4);
+    vertical-align: middle;
+  }
+
+  .comment-header-left > * > .svg {
+    vertical-align: text-bottom;
+  }
+
+  .comment-header-right {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+  }
 }

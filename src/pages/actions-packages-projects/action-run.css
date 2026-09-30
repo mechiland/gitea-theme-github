@@ -94,10 +94,25 @@
   align-self: center;
 }
 
+/* Re-run / Cancel / Approve / attempts: github.com's run header buttons are medium (32px, 14px/500, 12px inline
+   padding); Gitea marks them small compact (28px / 12px) — FG-072 */
+.action-info-summary > .flex-text-block .button {
+  min-height: var(--control-medium-size);
+  height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
+}
+
+.action-info-summary > .flex-text-block .buttons > .icon.button {
+  justify-content: center;
+  width: var(--control-medium-size);
+  padding: 0;
+}
+
 @media (max-width: 767.98px) {
-  /* loaded: back link + two title lines + 8px gap + the 28px button row */
+  /* loaded: back link + two title lines + 8px gap + the 32px button row */
   .action-view-header {
-    min-height: calc(var(--base-size-28) + var(--base-size-64) + var(--base-size-4) + var(--base-size-28));
+    min-height: calc(var(--base-size-28) + var(--base-size-64) + var(--base-size-4) + var(--control-medium-size));
   }
 
   .action-info-summary-title {
@@ -144,12 +159,38 @@
 
   /* narrow screens stack pane + main column, so the loaded page is always taller than the viewport: from the empty
      mount point until the run is loaded, keep the footer below the fold instead of letting it jump away */
-  #repo-action-view:not(:has(.action-view-back)) {
+  #repo-action-view:has(.action-info-summary-title > .action-info-summary-title-text:first-child) {
     min-height: 100vh;
   }
 
+  /* github.com < md shows the run/job content first (its job list collapses into a "Summary ▾" menu): Gitea has no
+     such menu, so the NavList moves below the main column instead of pushing it a screen down (FG-038), inside the
+     16px page gutter (FG-072: the 4px current bar no longer hangs into the gutter) */
   .action-view-left {
+    order: 1;
     width: auto;
+    margin-left: 0;
+  }
+
+}
+
+/* layout shift on mount (FG-085): the header grows to the loaded title's height (2–3 lines at 390) and the jobs list
+   fills after the first POST. Until the run is loaded the body and the footer are not painted, so their moves do not
+   count as shifts; they appear in their final place.
+   "Loaded" = the run status icon exists: ActionStatusIcon renders only `v-if="status"` and the empty run has status
+   '' (ActionRunView.ts), so before load the title <h2> is the first element child (the v-if leaves a comment). Every
+   loaded run has a status (the back link does not: old attempts without a PR have none, view.go:613). One :has()
+   level only, so the footer selector is valid. Fail-safe: if the POST never succeeds the hidden parts are revealed
+   after 2s, so an error can never blank the page. */
+#repo-action-view:has(.action-info-summary-title > .action-info-summary-title-text:first-child) .action-view-body,
+body:has(.action-info-summary-title > .action-info-summary-title-text:first-child) .page-footer {
+  visibility: hidden;
+  animation: gh-apx-reveal var(--base-duration-0) calc(var(--base-duration-1000) * 2) forwards;
+}
+
+@keyframes gh-apx-reveal {
+  to {
+    visibility: visible;
   }
 }
 
@@ -298,18 +339,28 @@
   border-bottom-color: var(--borderColor-muted);
 }
 
-@media (max-width: 767.98px) {
-  .action-run-summary-block {
-    padding: var(--base-size-16);
+/* md (768–1011px): the main column beside the 288px pane is ~500px, too narrow for the trigger + three stats in one
+   row, and Gitea's flex-wrap dropped only the last stats under the trigger. Use the stacked form there too: trigger
+   on its own row, divider, then the three stats together in one row. */
+@media (max-width: 1011.98px) {
+  .action-run-summary-trigger {
+    flex: 0 0 100%;
+    margin-right: 0;
   }
 
-  .action-run-summary-trigger {
-    margin-right: 0;
+  .action-run-summary-stat-divider {
+    display: block;
   }
 
   .action-run-summary-stat {
     margin-left: 0;
     margin-right: var(--base-size-24);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .action-run-summary-block {
+    padding: var(--base-size-16);
   }
 }
 
@@ -352,13 +403,97 @@ a.graph-workflow-name:hover {
 }
 
 .graph-container {
+  padding-bottom: var(--base-size-48);
   border-radius: 0;
   background: transparent;
 }
 
+/* node cards: github.com WorkflowCard = Box on the inset canvas: --card-bgColor (white in light, --bgColor-muted in
+   dark: FG-038 — they were --bgColor-default, i.e. darker than GitHub's cards in dark), 1px --borderColor-default */
+.job-rect {
+  fill: var(--card-bgColor);
+  stroke: var(--borderColor-default);
+}
+
 .job-node-group:is(:hover, .related-node) .job-rect {
-  fill: var(--bgColor-default);
+  fill: var(--card-bgColor);
   stroke: var(--borderColor-accent-emphasis);
+}
+
+/* zoom controls (FG-038): github.com puts them at the graph Box's bottom-right (20px in), as small (28px) secondary
+   IconButtons: [screen-full]  8px  [dash|plus] ButtonGroup. Gitea renders zoom-in · reset · zoom-out (12px octicons)
+   in the header → absolutely positioned, reordered (reset, zoom-out, zoom-in) and joined. Icons: Octicon masks
+   screen-full / dash / plus; `background` only resolves when the mask var exists, so without the mask the original
+   octicon stays visible (background invalid → transparent, mask invalid → none). */
+.workflow-graph {
+  position: relative;
+}
+
+.graph-controls {
+  position: absolute;
+  right: var(--base-size-20);
+  bottom: var(--base-size-20);
+  z-index: 1;
+  gap: 0;
+  /* the visual order (reset, zoom-out, zoom-in like github.com) comes from `order`: make Tab follow it */
+  reading-flow: flex-visual;
+}
+
+.graph-controls > .button {
+  justify-content: center;
+  width: var(--control-small-size);
+  min-width: var(--control-small-size);
+  height: var(--control-small-size);
+  margin: 0;
+  padding: 0;
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+.graph-controls > .button:disabled {
+  color: var(--fgColor-disabled);
+}
+
+.graph-controls > .button:nth-child(2) {
+  order: -1;
+  margin-right: var(--base-size-8);
+}
+
+.graph-controls > .button:nth-child(3) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.graph-controls > .button:first-child {
+  order: 1;
+  margin-left: calc(var(--borderWidth-thin) * -1);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.graph-controls > .button:is(:hover, :focus-visible) {
+  position: relative;
+  z-index: 1;
+}
+
+.graph-controls > .button > .svg {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+}
+
+.graph-controls > .button > .svg.octicon-sync {
+  background: var(--gh-octicon-screen-full) no-repeat 0 0 / 0 0, currentcolor;
+  mask: var(--gh-octicon-screen-full) center / contain no-repeat;
+}
+
+.graph-controls > .button > .svg.octicon-zoom-out {
+  background: var(--gh-octicon-dash) no-repeat 0 0 / 0 0, currentcolor;
+  mask: var(--gh-octicon-dash) center / contain no-repeat;
+}
+
+.graph-controls > .button > .svg.octicon-zoom-in {
+  background: var(--gh-octicon-plus) no-repeat 0 0 / 0 0, currentcolor;
+  mask: var(--gh-octicon-plus) center / contain no-repeat;
 }
 
 .highlighted-edge,
@@ -388,4 +523,21 @@ a.graph-workflow-name:hover {
   padding: var(--base-size-16);
   border-color: var(--borderColor-default);
   background: var(--bgColor-default);
+}
+
+/* < md, after the Box rules above: Box--responsive — summary and graph run edge to edge (github.com), no side
+   borders or radius; the graph stats wrap under the workflow name */
+@media (max-width: 767.98px) {
+  .action-run-summary-block,
+  .workflow-graph {
+    margin-inline: calc(var(--page-margin-x) * -1);
+    border-inline: 0;
+    border-radius: 0;
+  }
+
+  .graph-stats {
+    margin-left: 0;
+    padding: 0;
+    white-space: normal;
+  }
 }

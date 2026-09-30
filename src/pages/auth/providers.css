@@ -1,11 +1,12 @@
-/* "or" divider + external sign-in buttons — github.com/login: .authentication-divider margin 12px 0, the
+/* "or" divider + external sign-in buttons — github.com/login: .authentication-divider 20px below the primary
+ * button and 12px above the provider list (measured 2026-09-30: button bottom 364, divider top 384), the
  * word 14px --fgColor-default with 8px on each side, 1px rules in --borderColor-default; the provider buttons
  * are Primer secondary medium buttons stretched to 40px, full width, 8px apart (first one 8px below the
  * divider), 16px leading visual with 8px gap. */
 
 .page-content.user:is(.signin, .signup, .link-account) .divider.divider-text {
   height: auto;
-  margin: var(--base-size-12) 0;
+  margin: var(--base-size-20) 0 var(--base-size-12);
   padding: 0;
   color: var(--fgColor-default);
   font-size: var(--text-body-size-medium);

@@ -57,3 +57,65 @@ Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ra
    - Fix: Status icons success/muted; row actions muted IconButtons.
    - Critic refs: C161 (admin-emails, minor), C130 (admin-orgs, nit)
    - PNG: `shots/final-gate/admin-emails/light-1440.png`, `shots/final-gate/admin-orgs/light-1440.png`, `shots/final-gate/admin-emails/light-1440.png`, `shots/final-gate/admin-orgs/light-1440.png`
+
+# From data-display (final gate #1 loop, round 1)
+## DD-SA-1 (FG-111) let the table-scroll shadows through: `background` shorthand → `background-color`
+data-display `tables.css` now draws scroll shadows on `.ui.attached.table.segment` (background-image layers with
+`background-attachment: local/scroll`: a soft `--borderColor-emphasis` shade on the edge that has hidden columns,
+invisible when the table fits). On admin/settings pages two later-layer shorthands in `src/pages/settings-admin/subhead.css`
+reset `background-image` to `none`, so admin users / admin emails at 390 still clip columns with no affordance.
+Proposed diff (colour unchanged, only the longhand):
+```diff
+ /* flat body */
+ :is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment {
+ …
+-  background: transparent;
++  background-color: transparent;
+ …
+ /* Box body: tables, and lists whose first row is a real row */
+ :is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment:not(.danger, :has(> .divider + .flex-divided-list)):is(.table, :has(> .flex-divided-list > .item:first-child > :not(p))) {
+   border: var(--borderWidth-thin) solid var(--borderColor-default);
+   border-radius: var(--borderRadius-medium);
+-  background: var(--bgColor-default);
++  background-color: var(--bgColor-default);
+ }
+```
+(The flat rule's `background-image` stays Gitea's `none` for every other segment, so nothing else changes.)
+Verified by injection (`background: revert-layer` on that element in gh.pages-settings-admin) on /-/admin/emails at 390,
+light, scrollLeft 0 and 90: right shade at rest, both shades mid-scroll (scratchpad sims `dd-sim-ae-*.png`).
+Note: the header row (`th` on `--bgColor-muted`) paints over the shade; body rows show it.
+
+# Builder pages/settings-admin — wave L1 round 1 (2026-09-30)
+- **FG-057 — DONE.** Admin list DataTables: 16px at the Box edges, 8px between cells (admin.css). admin-repos
+  scrollWidth 1052 → 934 = clientWidth at 1440 (measured live, /-/admin/users also 934/934); Created + Op. visible.
+- **FG-062 — DONE.** buttons.css: Subhead actions 32px/14px default, Box-row actions ("Leave", "Delete", "Remove") 28px;
+  demoted to default: security "Add Security Key" / "Add OpenID URI", branches "Update Default Branch" / "Add New Rule",
+  collaborators "Add Team", Actions > General "Add", "Update Avatar" (user/org/repo), plus the earlier list.
+- **FG-064 — DONE.** blankslate.css: empty webhooks (description in a Blankslate Box), empty deploy keys, collaborators
+  with none yet (add form centred in the Box). Subhead text "Settings" on org hooks is template text (skipped).
+- **FG-065 — DONE.** Maintenance "Run" stays on the right of the first line below 768px (text wraps); Subheads with actions
+  no longer wrap the action under the heading (390: "Manage Organizations" + "New Organization" on one row); banner
+  editor toolbar separators hidden below 768px.
+- **FG-079 — DONE** except the token-row ▸ (see integrator request SA-6): config dl rows are Box-rows with 1px
+  --borderColor-muted separators; email list is a Box of Box-rows; "Generate New Token" / "Create a new OAuth2
+  Application" summaries are default buttons without the marker; ToggleSwitch at the row end; description textarea 440px.
+- **FG-082 — DONE.** Status checks success / x muted (also when wrapped in a link); row actions are 28px invisible
+  IconButtons (muted, hover --control-transparent-bgColor-hover, trash → --fgColor-danger), focus ring verified.
+- **SA-5 step 1 — DONE.** Every page-scoped rule now uses `:is(.settings, .admin, [class="page-content "])` (same 0,1,0
+  specificity; only the actions_general and admin/badge/view layouts render that exact class, plus the non-repo 404,
+  which has no settings markup). Step 2 (template condition) requested in docs/requests/integrator.md SA-5b.
+- Deploy-keys empty state (critic w3b-r0) — DONE (same Blankslate). Subhead btn-sm padding item — superseded (Subhead
+  actions are 32px medium now). Header title 20/30 vs 18/1.25 — still open.
+
+# From icons (final gate #1, wave L1 round 1)
+- **SA-6** (asked in integrator.md): `--gh-octicon-chevron-right` now exists in `src/icons/octicon-masks.css` (0.30 KB once
+  referenced); also `chevron-down`, and the settings NavList set listed in docs/requests/navigation.md.
+
+# Integrator (loop 1 integration pass, 2026-09-30 14:30) — DD-SA-1 applied as a seam fix
+- **DD-SA-1 — DONE by the integrator** (cross-folder conflict: this layer's `background` shorthands reset data-display's
+  table scroll-shadow `background-image`). `src/pages/settings-admin/subhead.css`: the flat-body rule
+  (`… .flex-container-main .ui.attached.segment`) now sets `background-color: transparent` and the Box-body rule sets
+  `background-color: var(--bgColor-default)` — exactly the diff data-display proposed, nothing else touched. Probe before:
+  /-/admin/emails 390 `.ui.attached.table.segment` background-image `none` with scrollWidth 485 > clientWidth 374.
+- **SA-5b — ACCEPTED** (template edited; live install pending ORCHESTRATOR.md ORC-11). **SA-6** mask exists; unused (pruned).
+- Budget: the integrator trimmed never-used rules in this folder (see STATUS.json → budget.loop1 for bytes and the list).

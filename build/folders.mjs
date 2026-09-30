@@ -12,7 +12,7 @@ export const GITEA_CONTAINER = process.env.GITEA_CONTAINER || 'gitea-server';
 // `pages` is split into one sub-folder per page group (src/pages/<group>/), each its own layer gh.pages-<group>.
 export const PAGE_GROUPS = ['repo', 'issues-prs', 'actions-packages-projects', 'people', 'settings-admin', 'auth'];
 export const FOLDERS = ['foundation', 'controls', 'overlays', 'navigation', 'data-display', 'code', 'markdown',
-  ...PAGE_GROUPS.map((g) => `pages/${g}`), 'dark'];
+  ...PAGE_GROUPS.map((g) => `pages/${g}`), 'icons', 'dark'];
 export const layerName = (folder) => `gh.${folder.replace('/', '-')}`;
 export const THEMES = {
   'github-light': {display: 'GitHub Light', scheme: 'light'},

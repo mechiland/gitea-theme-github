@@ -5,6 +5,7 @@
  * review threads), labels & milestones pages, new issue / new PR (compare) forms.
  * Shared components (rows, timeline, labels, buttons, tabs) belong to data-display / controls / navigation.
  */
+@import "./issues-nav.css";
 @import "./list.css";
 @import "./header.css";
 @import "./layout.css";
@@ -13,3 +14,4 @@
 @import "./merge-box.css";
 @import "./review.css";
 @import "./labels-milestones.css";
+@import "./issue-view.css";

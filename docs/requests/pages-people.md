@@ -118,3 +118,122 @@ Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ra
    - Fix: Add :not(.settings) to src/pages/people/profile.css:24.
    - Critic refs: C064 (user-settings, minor)
    - PNG: `shots/final-gate/user-settings/light-1440.png`, `shots/final-gate/user-settings/light-1440.png`
+
+# From controls (final gate #1, wave L1 r1, 2026-09-30) — FYI, optional cleanup
+controls now styles every `shared/search/*` search group generically (`src/controls/inputs.css`, "search field"): medium
+32px/14px input, padding-left 32px, the adjacent submit `.ui.icon.button` drawn as the leading muted search octicon
+(32px wide, transparent, hover --fgColor-default, focus-visible ring). Your page-scoped copies in `repo-list.css`
+(`:is(.profile, .explore, .members, .teams) .action.input > [name="q"]` and `… ~ .button`) render the same numbers
+(measured /explore/repos and /org/octo-org/members: input 32px, 14px, padding 0 12px 0 32px; button 32x32 at x=0) and
+can be deleted in a later trim. Keep the hover colour rule in merged.css or drop it too (controls sets the same).
+
+# pages/people — final gate #1, wave L1 round 1 (builder)
+Verified in shots/pages-people-r1b (light+dark, 1440+390, states + measure) unless noted.
+- **FG-067 DONE** — home CLS at 390: 0.322 → 0 (light and dark). Two causes: the Vue list grew in 4 steps, and the feed
+  was painted before the (later-parsed, order −1) sidebar existed. Phones now reserve 384px at the top of the container
+  (padding-top) and the sidebar pulls itself into it (margin-top −384px) with a fixed 384px height; the rows scroll
+  inside (≈6 visible). media.css.
+- **FG-047 DONE** — unread counter is a CounterLabel (counter-bgColor-muted fill, no outline); "Mark all as read" is a
+  small default Button with the octicon + the button's own localized title as text (`::after { content: attr(title) }`);
+  phones: Unread | Read is a SegmentedControl (track + knob). notifications.css, media.css, people.important.css.
+- **FG-052 PARTIAL** — Follow button text only (icon hidden); topic tags 24px, padding 0 10px, weight 500, rows 8px /
+  tags 2px apart (github.com measured); Overview tab book icon wired to `--gh-octicon-book` but the mask does not exist
+  yet → request PPL-I1 in docs/requests/icons.md (until then Gitea's info icon stays, by construction). Follower counts
+  NOT bold: the number shares one text node with the word (profile_big_avatar.tmpl:21), no CSS can split it.
+- **FG-077 DONE** — `html:lang(en)` "Public" Label on profile Repositories / org home rows that carry no Gitea
+  visibility label (not on Stars rows, where github.com has none either). repo-list.css.
+- **FG-080 DONE** — explore users / organizations: one Box with divided rows (repository results stay cards); the
+  sidebar rule now continues through the footer's empty 48px top padding to its text row.
+- **FG-083 DONE** — heatmap svg fills its Box (no 832px cap; the fixed-height formula follows); the autofocused empty
+  repo filter shows the accent border without the 2px ring (outline kept once text is typed).
+- **FG-101 DONE** — org People: role and 2FA on one line, "2FA: ×" is a muted Label (12px glyph); phones: name one line
+  with ellipsis, buttons side by side under it (row ≈117px, was ≈170px); desktop rows 81px (github.com 81px).
+- **FG-102 DONE** — org Teams: one Box, one row per team (name + Label, muted description, 20px avatars, 12px counts);
+  phones stack the row.
+- **FG-104 DONE** — explore meta " · " separators are out-of-flow (absolute) pseudo-elements centred in a 16px gap, so
+  the link's hover underline no longer runs under them.
+- **FG-106 DONE** — `.user.profile:not(.settings) > :first-child`; /user/settings header now at the same y (88px) as
+  the other settings tabs (checked /user/settings, /account, /appearance).
+
+# From navigation (wave L1, round 1, 2026-09-30): FYI org header band rule (FG-030)
+`.organization > .flex-container:first-child + *` (org.css) draws its "edge to edge" rule with a second box-shadow
+`0 var(--borderWidth-thin) 0 100vmax var(--borderColor-muted)`, but the first shadow (`0 0 0 100vmax` bg) also spreads
+100vmax downward and covers it, so no rule is painted (pixel-checked on /octo-org light: rows 252/253 go straight from the
+band colour to white). navigation now draws the rule itself as a `::after` (1px, --borderColor-muted, at `bottom: -1px`,
+with ±50vw box-shadow copies) on `.page-content.organization > .flex-container:first-child + .ui.container`, which relies on
+your `clip-path: inset(0 -100vmax calc(var(--borderWidth-thin) * -1))` keeping 1px below the element visible — please
+keep that clip-path. You can drop the dead second shadow (saves bytes). Verified in shots/navigation-r1/org-home and
+org-settings (light/dark, 1440/390).
+
+# From icons (final gate #1, wave L1 round 1)
+- **PPL-I1 DONE** — `book`, `home`, `people` masks added. `book` switched on with deploy 9ee594a4be: the profile Overview
+  tab shows the book glyph (16×16, both schemes; `shots/icons-l1r1/live/cmp-live.png`). `home` / `people` are pruned until
+  you reference them.
+
+# pages/people — final gate #1, wave L1 round 2 (builder; critic L1r1 issues)
+Verified in shots/pages-people-l1r2c (light+dark, 1440+390, states + measure; 52 pages: 0 console errors, 0 failed
+requests, 0 off-palette, max CLS 0.0023) plus probes in shots/pages-people-l1r2/*.mjs.
+- **FG-067 follow-up DONE** — phone dashboard: no nested scroller any more. The fixed 445px reservation (tabs, heading,
+  search, filter, 8 rows) holds only while the Vue list loads; once `.dashboard-repos .repo-owner-name-list` exists (or
+  the Organizations tab is shown) the list is in the flow at its natural height: all 8 rows visible, no scroller
+  (probe: scrollers []). Home 390 CLS 0 (light/dark); the feed moves by (rows − 8) × 29px for other list sizes.
+- **Org sidebar headings DONE** — "Members" / "Teams" 16/400/24 (the `<strong>` inherits), 16px below (github.com).
+- **Follower counts** — template: request PPL-T1 in docs/requests/integrator.md; the CSS for the count span is already in
+  profile.css (inert until the span exists).
+- **Org Overview / Projects tab icons DONE** — octicon-home (org Overview) and octicon-table (user + org Projects) masks;
+  request PPL-I2 in icons.md for `table` (it rendered already in this run).
+- **Teams DONE** — rows share the Box's columns (subgrid): avatars at x=1015 in every row (was ≈55px off in Owners);
+  Leave button 8px after the counts (was 4).
+- **Phone heatmap DONE** — the Box's 16px side insets are borders in the Box colour and the outline is a 1px ring, so
+  the scrolled weeks clip 16px inside the outline (box x=17, clip x=33).
+- **Notifications 390 DONE** — "Mark all as read" is a medium Button (32px, 14px) next to the 32px SegmentedControl.
+- **Org home CLS DONE** — the one-column fallback keyed on `:has(> .column + .column)` flipped to two columns when the
+  sidebar column was parsed after a first paint (the 0.024 shift); now keyed on the server-rendered `.eleven.wide`
+  class of the first column. Org home CLS 0 in this run (3/3 probe loads: 0 after the change).
+- **Not doable in CSS**: "Public archive" / "Public template" — the row labels differ only by text, so a lone
+  "Archived" / "Template" label on a public repo cannot be told apart from one on a private repo.
+
+# From icons (final gate #1, wave L1 round 2, 2026-09-30)
+- The `--gh-octicon-table` mask exists now (`src/icons/octicon-masks.css`). Your Projects tab rule (`profile.css:224-232`)
+  went live with deploy c4118f2801. Probe on profile and org, light and dark, 1440: 16×16 table, `--fgColor-muted`.
+- The `…` overflow popup (`.overflow-menu-popup`, used at narrow widths) is covered by icons `nav-tabs.css` once IC-1
+  lands. The same file swaps the repo tab bar's `octicon-project`. The selectors don't overlap with yours, so there's
+  no ownership clash.
+
+# From navigation (final gate #1, wave L1 round 3, 2026-09-30) — NAV-P1: org + profile tabs in the AppHeader local bar
+Critic nav-wL1-r2 #2 (minor): repo pages now put their UnderlineNav in the AppHeader's local bar (navigation
+repo-header.css: directly under the 64px global bar, 48px, `--bgColor-inset`, padding 0 16px, 1px `--borderColor-default`
+rule, content 24px below). Signed-in github.com does the same for org and user pages (the band + tabs you built follow the
+logged-out org / profile pages). Your layer is later than gh.navigation, so this can only land in pages/people. Proposal
+(org, all org pages that render org/menu.tmpl):
+```css
+.page-content.organization:has(> .flex-container:first-child + .ui.container > overflow-menu) {
+  display: flex;
+  flex-direction: column;
+}
+/* the tab container becomes the local bar (replaces your band box-shadow / clip-path on `+ *`) */
+.organization > .flex-container:first-child + .ui.container {
+  order: -1;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0 var(--base-size-16);
+  background: var(--bgColor-inset);
+  box-shadow: inset 0 calc(var(--borderWidth-thin) * -1) 0 var(--borderColor-default);
+  clip-path: none;
+}
+/* overflow-menu carries tw-mb-4 (!important) → 0 in your important file */
+/* the org profile (avatar, name, meta) then sits on the page background 24px below the bar, no grey band */
+.organization > .flex-container:first-child {
+  margin-top: var(--base-size-24);
+  background: none;
+  box-shadow: none;
+  clip-path: none;
+}
+```
+Check Gitea's < 768 `.ui.container` rules inside the flex column (auto margins). Profile: `.user.profile .ui.grid` is
+already `display: grid`; making the second column `display: contents` lets `overflow-menu` take
+`grid-column: 1 / -1; grid-row: 1` (full-bleed with your 100vmax shadow trick, `--bgColor-inset`, the 1px
+`--borderColor-default` rule) above the sidebar. When you do the org part, tell me: navigation's edge-to-edge org rule
+(`.page-content.organization > .flex-container:first-child + .ui.container::after`, repo-header.css) then goes away.
+Unverified against signed-in github.com screenshots (the tools capture github.com logged out) — your call.

@@ -96,3 +96,8 @@
 #release-list .meta > a.tw-font-mono {
   font-family: inherit !important;
 }
+
+/* wiki/pages.tmpl: the "Last updated" cell is td.tw-text-right → github.com's left-aligned second column */
+.wiki .wiki-pages-list td.tw-text-right {
+  text-align: left !important;
+}

@@ -11,84 +11,144 @@
  *   wiki/pages.tmpl (?action=_pages): h2 + table.wiki-pages-list → Box rows.
  */
 
-/* ---------- page view: header row + main / sidebar grid ----------
-   .wiki-content-parts is flattened (display: contents) so Gitea's TOC / _Sidebar / _Footer panels join the grid:
-   column 2 stacks [Page ▾ + Code] → TOC → _Sidebar; the main text spans rows 3–6 (row 6 is a 1fr filler that
-   takes the spanning height so the sidebar panels stay packed); _Footer follows the main column. */
-.wiki.view > .ui.container {
+/* ---------- page view: content grid ----------
+   view.tmpl (github-* override, ARCHITECTURE §7 ORC-8): .wiki-content-parts = aside.gh-wiki-aside (details.gh-wiki-pages
+   Box + .gh-wiki-clone input group), [.wiki-content-toc], .wiki-content-main, [.wiki-content-sidebar (_Sidebar)],
+   .tw-clear-both, [.wiki-content-footer]. The aside is flattened so github.com's column-2 order holds: Pages → TOC →
+   custom sidebar → clone; the main text spans rows 1–5 (row 5 is a 1fr filler), the footer follows it. */
+.wiki-content-parts {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) calc(var(--base-size-128) * 2 + var(--base-size-40));
-  grid-template-rows: auto auto auto auto auto 1fr auto;
+  grid-template: auto auto auto auto 1fr auto / minmax(0, 1fr) calc(var(--base-size-128) * 2 + var(--base-size-40));
   align-items: start;
   column-gap: var(--base-size-24);
 }
 
-.wiki.view > .ui.container > .ui.dividing.header {
-  grid-row: 1;
+.gh-wiki-aside {
+  display: contents;
 }
 
-.wiki.view .wiki-content-main {
-  grid-column: 1;
-  grid-row: 3 / 7;
+.wiki-content-sidebar {
+  grid-area: 3 / 2;
+  margin: 0 0 var(--base-size-24);
+  float: none;
+  width: auto;
+  min-width: 0;
+}
+
+.wiki-content-toc {
+  grid-area: 2 / 2;
+}
+
+.wiki-content-main {
+  grid-area: 1 / 1 / 6;
   float: none;
   width: auto;
   max-width: none;
   margin: 0;
 }
 
-.wiki.view .wiki-content-toc {
-  grid-column: 2;
-  grid-row: 4;
-}
-
-.wiki.view .wiki-content-sidebar:not(.wiki-content-toc) {
-  grid-column: 2;
-  grid-row: 5;
-}
-
-.wiki.view .wiki-content-sidebar {
-  float: none;
-  width: auto;
-  min-width: 0;
-  margin: var(--base-size-16) 0 0;
-}
-
-.wiki.view .wiki-content-footer {
-  grid-column: 1;
-  grid-row: 7;
+.wiki-content-footer {
+  grid-area: 6 / 1;
   margin: var(--base-size-24) 0 0;
 }
 
-.wiki.view > .ui.container > .repo-button-row {
-  grid-column: 2;
-  grid-row: 3;
-  flex-direction: column;
-  align-items: stretch;
-  gap: var(--base-size-16);
+/* Pages Box (github.com: Box--condensed, shadow-resting-small; header 4px 8px on --bgColor-muted, 28px caret
+   IconButton, "Pages" 14/600 + primary Counter; rows 8px padding, page link 14/600 accent at the title's x) */
+.gh-wiki-pages {
+  grid-area: 1 / 2;
+  margin: 0 0 var(--base-size-24);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+  box-shadow: var(--shadow-resting-small);
+}
+
+.gh-wiki-pages-header {
+  display: flex;
+  align-items: center;
+  padding: var(--base-size-4) var(--base-size-8);
+  border-radius: inherit;
+  background: var(--bgColor-muted);
+  font-weight: var(--base-text-weight-semibold);
+  list-style: none;
+  cursor: pointer;
+}
+
+.gh-wiki-pages[open] > .gh-wiki-pages-header {
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+}
+
+.gh-wiki-pages-header::-webkit-details-marker {
+  display: none;
+}
+
+.gh-wiki-pages-caret {
+  box-sizing: content-box;
+  padding: var(--base-size-6);
+  color: var(--fgColor-muted);
+  rotate: -90deg;
+}
+
+.gh-wiki-pages[open] .gh-wiki-pages-caret {
+  rotate: none;
+}
+
+.gh-wiki-pages-title {
+  color: var(--fgColor-default);
+}
+
+.gh-wiki-pages-header > .gh-counter { /* size / pill: home-sidebar.css (shared with the sidebar counters) */
+  background: var(--counter-bgColor-emphasis);
+  color: var(--fgColor-onEmphasis);
+  font-weight: var(--base-text-weight-medium);
+  text-align: center;
+}
+
+.gh-wiki-pages-list {
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.wiki.view > .ui.container > .repo-button-row .filter.dropdown,
-.wiki.view > .ui.container > .repo-button-row .filter.dropdown > .ui.button {
+.gh-wiki-pages-list > li {
+  padding: var(--base-size-8);
+}
+
+.gh-wiki-pages-list > li + li {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+.gh-wiki-pages-item {
+  display: block;
+  overflow: hidden;
+  padding: var(--base-size-4) 0 var(--base-size-4) var(--base-size-28);
+  font-weight: var(--base-text-weight-semibold);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* clone URL: github.com input-sm (28px, 12px mono muted) + joined 28px copy button */
+.gh-wiki-clone {
+  grid-area: 4 / 2;
   width: 100%;
 }
 
-.wiki.view > .ui.container > .repo-button-row .filter.dropdown > .ui.button {
-  justify-content: space-between;
-  height: var(--control-medium-size);
-  font-size: var(--text-body-size-medium);
+.gh-wiki-clone > input {
+  min-width: 0;
+  height: var(--control-small-size);
+  color: var(--fgColor-muted);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
 }
 
-.wiki.view > .ui.container > .repo-button-row .filter.dropdown > .menu {
-  width: 100%;
-}
-
-.wiki.view > .ui.container > .repo-button-row > .js-btn-clone-panel {
-  align-self: flex-start;
+.gh-wiki-clone > .ui.button {
+  width: var(--control-small-size);
+  height: var(--control-small-size);
 }
 
 /* title block */
-.wiki.view .ui.dividing.header {
+.wiki.view .dividing.header {
   margin: 0 0 var(--base-size-24);
   padding: 0 0 var(--base-size-16);
   border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
@@ -97,22 +157,22 @@
   line-height: var(--base-size-36);
 }
 
-.wiki.view .ui.dividing.header > .flex-text-block {
+.wiki.view .dividing.header > .flex-text-block {
   align-items: flex-start;
 }
 
-.wiki.view .ui.dividing.header > .flex-text-block > .flex-text-block {
+.wiki.view .dividing.header > .flex-text-block > .flex-text-block {
   align-items: flex-start;
 }
 
-.wiki.view .ui.dividing.header .ui.sub.header {
+.wiki.view .dividing.header .ui.sub.header {
   margin: var(--base-size-4) 0 0;
   padding: 0;
   line-height: var(--text-body-lineHeight-medium);
 }
 
 /* history "N ⟲" → small invisible button after the title (github.com: "· N revisions" link in the meta) */
-.wiki.view .ui.dividing.header > .flex-text-block > .flex-text-block > a.ui.basic.button {
+.wiki.view .dividing.header a.ui.basic.button {
   order: 2;
   height: var(--control-small-size);
   min-height: 0;
@@ -125,17 +185,17 @@
   font-size: var(--text-body-size-small);
 }
 
-.wiki.view .ui.dividing.header > .flex-text-block > .flex-text-block > a.ui.basic.button:hover {
+.wiki.view .dividing.header a.ui.basic.button:hover {
   background: var(--control-transparent-bgColor-hover);
   color: var(--fgColor-accent);
 }
 
-.wiki.view .ui.dividing.header .repo-button-row {
+.wiki.view .dividing.header .repo-button-row {
   gap: var(--base-size-4);
   margin: var(--base-size-4) 0 0;
 }
 
-.wiki.view .ui.dividing.header .repo-button-row > .ui.small.button {
+.wiki.view .dividing.header .repo-button-row > .ui.small.button {
   height: var(--control-small-size);
   min-height: 0;
 }
@@ -145,56 +205,61 @@
   padding: var(--base-size-16);
 }
 
+/* < 1012px: one column — content, footer, then Pages, TOC, custom sidebar, clone (github.com @390) */
 @media (max-width: 1011.98px) {
-  .wiki.view > .ui.container {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: none;
+  .wiki-content-parts {
+    grid-template: none / minmax(0, 1fr);
   }
 
-  .wiki.view :is(.wiki-content-main, .wiki-content-toc, .wiki-content-sidebar:not(.wiki-content-toc), .wiki-content-footer) {
-    grid-column: 1;
-    grid-row: auto;
+  .wiki-content-parts > *,
+  .gh-wiki-aside > * {
+    grid-area: auto;
   }
 
-  .wiki.view .wiki-content-toc {
-    margin: 0 0 var(--base-size-16);
+  :is(.wiki-content-main, .wiki-content-footer) {
+    order: -1;
   }
 
-  .wiki.view > .ui.container > .repo-button-row {
-    grid-column: 1;
-    grid-row: 2;
-    flex-direction: row;
-    margin: 0 0 var(--base-size-16);
+  .wiki-content-main {
+    margin-bottom: var(--base-size-24);
   }
-
 }
 
-/* ---------- page list (?action=_pages) ---------- */
+/* ---------- page list (?action=_pages) ----------
+   github.com /wiki/_pages: h1 32/400/36, Box 24px below (no rule); rows padding 16px (54px), file octicon 16px
+   --fgColor-default + 16px gap, link 14/400 accent; "Last updated …" (--fgColor-default) starts a second column at
+   2/3 of the row (col-md-8 / col-md-4); < 768 it goes under the title, left-aligned. */
 .wiki.pages > .ui.container > h2.ui.header {
-  margin: 0 0 var(--base-size-16);
-  padding: 0 0 var(--base-size-16);
-  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  margin: 0 0 var(--base-size-24);
   font-size: var(--text-title-size-large);
   font-weight: var(--base-text-weight-normal);
   line-height: var(--base-size-36);
 }
 
-.wiki .wiki-pages-list {
-  border-radius: var(--borderRadius-medium);
+.wiki .wiki-pages-list td {
+  padding: var(--base-size-16);
+  color: var(--fgColor-default);
 }
 
-.wiki .wiki-pages-list td {
-  padding: var(--base-size-8) var(--base-size-16);
-  color: var(--fgColor-muted);
-  line-height: var(--base-size-20);
+.wiki .wiki-pages-list td:first-child {
+  width: calc(100% * 2 / 3);
 }
 
 .wiki .wiki-pages-list td > .svg {
-  margin-right: var(--base-size-8);
+  margin-right: var(--base-size-16);
   vertical-align: text-bottom;
 }
 
-.wiki .wiki-pages-list td > a:not(.wiki-git-entry) {
-  color: var(--fgColor-accent);
-  font-weight: var(--base-text-weight-semibold);
+@media (max-width: 767.98px) {
+  .wiki .wiki-pages-list tr {
+    padding: var(--base-size-16) 0;
+  }
+
+  .wiki .wiki-pages-list td {
+    padding: 0 var(--base-size-16);
+  }
+
+  .wiki .wiki-pages-list td + td {
+    padding-left: calc(var(--base-size-16) * 3);
+  }
 }

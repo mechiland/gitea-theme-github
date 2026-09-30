@@ -3,6 +3,12 @@
  * repo wiki / issue-tracker sub-fields, profile "Avatar email" / "Choose new avatar"). github.com nests a checkbox's
  * sub-options under the option label text: 16px control + 8px gap = 24px.
  */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.form:not(.ui.modal *) .field.tw-pl-4 {
+:is(.page-content.settings, .page-content.admin, [class="page-content "]) .flex-container-main .ui.form:not(.ui.modal *) .field.tw-pl-4 {
   padding-left: var(--base-size-24) !important;
+}
+
+/* disclosure summaries styled as buttons (forms.css): the heading inside carries `tw-my-2` (!important) */
+:is(.page-content.settings, .page-content.admin, [class="page-content "]) .flex-container-main .ui.attached.segment > details > summary > .ui.header.tw-my-2 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }

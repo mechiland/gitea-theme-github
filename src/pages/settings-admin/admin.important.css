@@ -20,3 +20,12 @@
   padding-top: var(--base-size-4) !important;
   padding-bottom: var(--base-size-4) !important;
 }
+
+/* repo list trash (`tw-text-red`, !important): a muted IconButton that turns danger on hover (admin.css) */
+.page-content.admin .flex-container-main .ui.table > tbody > tr > td:last-child a.tw-text-red:has(> .svg:only-child) {
+  color: var(--fgColor-muted) !important;
+}
+
+.page-content.admin .flex-container-main .ui.table > tbody > tr > td:last-child a.tw-text-red:has(> .svg:only-child):hover {
+  color: var(--fgColor-danger) !important;
+}

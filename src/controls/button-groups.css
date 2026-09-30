@@ -1,16 +1,19 @@
 /*
  * Button groups.
  *  .ui.buttons                       → Primer ButtonGroup (joined buttons, -1px overlap)
- *  .ui.buttons:has(> .active.button) → Primer SegmentedControl (Gitea uses a group with one
+ *  .ui.buttons:has(> .active.button:not(.dropdown)) → Primer SegmentedControl (Gitea uses a group with one
  *                                      .active button as a view switcher: file view source/rendered,
- *                                      diff/graph toggles)
+ *                                      diff/graph toggles; an opened dropdown button is also .active in
+ *                                      Fomantic, so it does not count — request IP-C3)
  *  .ui.labeled.button                → Primer Button with a Counter inside (Watch / Star / Fork)
  */
 
 /* ---------- ButtonGroup ---------- */
+/* no `isolation: isolate` (request IP-C3): it made every group a stacking context, so a dropdown menu inside a
+   group (PR merge-style menu, "Update branch" split button) was painted under later page content; the z-index 1
+   of hovered / focused / pressed buttons below only has to beat their siblings, which works without it */
 .ui.buttons {
   display: inline-flex;
-  isolation: isolate;
   vertical-align: middle;
 }
 
@@ -62,7 +65,7 @@
 }
 
 /* ---------- SegmentedControl ---------- */
-.ui.buttons:has(> .active.button) {
+.ui.buttons:has(> .active.button:not(.dropdown)) {
   align-items: stretch;
   height: var(--control-medium-size);
   padding: 0;
@@ -71,7 +74,7 @@
   background: var(--controlTrack-bgColor-rest);
 }
 
-.ui.buttons:has(> .active.button) > .button {
+.ui.buttons:has(> .active.button:not(.dropdown)) > .button {
   height: auto;
   min-height: 0;
   margin: -1px 0;
@@ -84,32 +87,32 @@
   font-weight: var(--base-text-weight-normal);
 }
 
-.ui.buttons:has(> .active.button) > .button:first-child {
+.ui.buttons:has(> .active.button:not(.dropdown)) > .button:first-child {
   margin-left: -1px;
 }
 
-.ui.buttons:has(> .active.button) > .button:last-child {
+.ui.buttons:has(> .active.button:not(.dropdown)) > .button:last-child {
   margin-right: -1px;
 }
 
-.ui.buttons:has(> .active.button) > .icon.button,
-.ui.icon.buttons:has(> .active.button) > .button {
+.ui.buttons:has(> .active.button:not(.dropdown)) > .icon.button,
+.ui.icon.buttons:has(> .active.button:not(.dropdown)) > .button {
   min-width: var(--control-medium-size);
   padding: 0 calc((var(--control-medium-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
 }
 
 /* inner hover/press "pill" inset by 4px (Primer --segmented-control-button-bg-inset) */
-.ui.buttons:has(> .active.button) > .button:not(.active):hover {
+.ui.buttons:has(> .active.button:not(.dropdown)) > .button:not(.active):hover {
   background: var(--controlTrack-bgColor-hover);
   box-shadow: inset 0 0 0 var(--base-size-4) var(--controlTrack-bgColor-rest);
 }
 
-.ui.buttons:has(> .active.button) > .button:not(.active):active {
+.ui.buttons:has(> .active.button:not(.dropdown)) > .button:not(.active):active {
   background: var(--controlTrack-bgColor-active);
   box-shadow: inset 0 0 0 var(--base-size-4) var(--controlTrack-bgColor-rest);
 }
 
-.ui.buttons:has(> .active.button) > .active.button {
+.ui.buttons:has(> .active.button:not(.dropdown)) > .active.button {
   z-index: 1;
   border-color: var(--controlKnob-borderColor-rest);
   background: var(--controlKnob-bgColor-rest);
@@ -119,19 +122,19 @@
 }
 
 /* Primer SegmentedControl icons are 16px in both sizes (Gitea's file-view Code / Preview toggle passes 15) */
-.ui.buttons:has(> .active.button) > .button > .svg {
+.ui.buttons:has(> .active.button:not(.dropdown)) > .button > .svg {
   width: var(--base-size-16);
   height: var(--base-size-16);
   color: var(--fgColor-muted);
 }
 
-.ui.buttons:has(> .active.button) > .button:focus-visible {
+.ui.buttons:has(> .active.button:not(.dropdown)) > .button:focus-visible {
   outline: var(--focus-outline-width) solid var(--fgColor-accent);
   outline-offset: -1px;
 }
 
 /* divider between two unselected items */
-.ui.buttons:has(> .active.button) > .button:not(.active, :last-child, :has(+ .active)):not(:hover)::after {
+.ui.buttons:has(> .active.button:not(.dropdown)) > .button:not(.active, :last-child, :has(+ .active)):not(:hover)::after {
   content: "";
   position: absolute;
   top: var(--base-size-8);
@@ -143,24 +146,24 @@
 
 /* Primer SegmentedControl size="small" (28px, 12px text): the group or its items are Gitea small/tiny/mini
    (e.g. file view source/rendered toggle = .ui.compact.icon.buttons > .ui.mini.button) */
-:is(.ui.buttons:is(.small, .tiny, .mini):has(> .active.button), .ui.buttons:has(> .active.button):has(> .button:is(.small, .tiny, .mini))) {
+:is(.ui.buttons:is(.small, .tiny, .mini):has(> .active.button:not(.dropdown)), .ui.buttons:has(> .active.button:not(.dropdown)):has(> .button:is(.small, .tiny, .mini))) {
   height: var(--control-small-size);
   font-size: var(--text-body-size-small);
 }
 
-.ui.buttons:is(.small, .tiny, .mini):has(> .active.button) > .button,
-.ui.buttons:has(> .active.button) > .button:is(.small, .tiny, .mini) {
+.ui.buttons:is(.small, .tiny, .mini):has(> .active.button:not(.dropdown)) > .button,
+.ui.buttons:has(> .active.button:not(.dropdown)) > .button:is(.small, .tiny, .mini) {
   padding: 0 var(--control-small-paddingInline-condensed);
   font-size: var(--text-body-size-small);
 }
 
-.ui.icon.buttons:is(.small, .tiny, .mini):has(> .active.button) > .button,
-.ui.icon.buttons:has(> .active.button) > .button:is(.small, .tiny, .mini) {
+.ui.icon.buttons:is(.small, .tiny, .mini):has(> .active.button:not(.dropdown)) > .button,
+.ui.icon.buttons:has(> .active.button:not(.dropdown)) > .button:is(.small, .tiny, .mini) {
   min-width: var(--control-small-size);
   padding: 0 calc((var(--control-small-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
 }
 
-.ui.buttons:has(> .active.button):has(> .button:is(.small, .tiny, .mini)) > .button:not(.active, :last-child, :has(+ .active)):not(:hover)::after {
+.ui.buttons:has(> .active.button:not(.dropdown)):has(> .button:is(.small, .tiny, .mini)) > .button:not(.active, :last-child, :has(+ .active)):not(:hover)::after {
   top: var(--base-size-6);
   bottom: var(--base-size-6);
 }
@@ -268,7 +271,7 @@
 /* a Select inside a SegmentedControl group (commit graph: "Select branches" + Mono / Color in one
    .ui.icon.buttons.tiny) fills the track height and shares its outer border instead of poking 2px above
    and below the 28px track */
-.ui.buttons:has(> .active.button) > .ui.selection.dropdown {
+.ui.buttons:has(> .active.button:not(.dropdown)) > .ui.selection.dropdown {
   align-self: stretch;
   min-height: 0;
   margin: -1px var(--base-size-4) -1px -1px;

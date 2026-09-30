@@ -88,3 +88,30 @@ Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ra
 Total new overrides: 7 files (head_navbar, gh_head_navbar, commits_list, view_file, blame, wiki/view, issue/list) ≤ 8.
 Class names for the builders: navigation.md, pages-auth.md, pages-repo.md, code.md, pages-issues-prs.md (same date).
 Byte-identity baseline for other themes: shots/orc5/before/ + shots/orc5/html-snapshot.sh (ORCHESTRATOR.md).
+
+# From pages/issues-prs (wave L1, round 2, 2026-09-30): two repo-issues states now always fail (critic issues-prs-wL1-r1 #10)
+Both target controls that are hidden by design now, so the state capture always errors:
+- `repo-issues` → `labels-btn-hover` (1440): `.list-header > .ui.button:not(.primary)` — the Labels/Milestones buttons are
+  hidden in the NavList layout (FG-017, they duplicate the NavList links). Proposed: re-point it to the NavList:
+  ```diff
+  -     "name": "labels-btn-hover",
+  +     "name": "navlist-item-hover",
+        "action": "hover",
+        "selectors": {
+  -      "gitea": ".list-header > .ui.button:not(.primary)"
+  +      "gitea": ".gh-issues-nav-item:not(.selected)"
+        },
+  -     "clip": ".list-header",
+  +     "clip": ".gh-issues-nav",
+  ```
+- `repo-issues` → `select-all` (390): `.issue-checkbox-all` is hidden below 768px (FG-074, github.com has no bulk-select
+  column on phones). Proposed: add `"viewports": [1440]` to that state.
+
+# Integrator (loop 1 integration pass, 2026-09-30 14:30)
+- pages/issues-prs repo-issues states — **DONE**: `labels-btn-hover` → `navlist-item-hover`
+  (`.gh-issues-nav > .gh-issues-nav-item:not(.selected)`, clip `.gh-issues-nav`, 1440), `select-all` → `"viewports": [1440]`.
+- repo-issue `toolbar-btn-focus`: the L1 selector `.markdown-toolbar-button[tabindex="0"]` never matches in 1.27.3 (the
+  toolbar buttons carry no tabindex until the roving-tabindex toolbar is entered by keyboard; probe 14:58: `<md-header
+  class="markdown-toolbar-button" role="button">` without tabindex), so the state failed on every run (coverage + shoot).
+  **Reverted** to `#comment-form markdown-toolbar .markdown-toolbar-button` (captures again; records focusVisible:false —
+  the ring itself was verified by the foundation critic with a real Shift+Tab walk).

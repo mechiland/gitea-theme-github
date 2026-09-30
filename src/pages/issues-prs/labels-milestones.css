@@ -9,7 +9,7 @@
 
 /* ---------- labels ---------- */
 .repository.labels .issue-navbar .ui.button,
-.repository.milestones .list-header > .ui.button {
+.repository.milestones:not(.projects) .list-header > .ui.button {
   height: var(--control-medium-size);
   padding: 0 var(--control-medium-paddingInline-normal);
   font-size: var(--text-body-size-medium);
@@ -140,75 +140,209 @@
 }
 
 /* ---------- milestones ---------- */
-.repository.milestones .issue-list-toolbar ~ .milestone-list {
+.repository.milestones:not(.projects) .issue-list-toolbar ~ .milestone-list {
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
   background: var(--bgColor-default);
 }
 
-.repository.milestones .milestone-list:not(:has(> .item)) {
+.repository.milestones:not(.projects) .milestone-list:not(:has(> .item)) {
   border: 0;
 }
 
-.repository.milestones .milestone-list > .item {
+.repository.milestones:not(.projects) .milestone-list > .item {
   gap: var(--base-size-4);
   padding: var(--base-size-16);
 }
 
-.repository.milestones .milestone-list > .item:hover {
+.repository.milestones:not(.projects) .milestone-list > .item:hover {
   background: var(--bgColor-muted);
 }
 
-.repository.milestones .milestone-list > .item:last-child {
+.repository.milestones:not(.projects) .milestone-list > .item:last-child {
   border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
 }
 
-.repository.milestones .milestone-list .list-item-large-title {
+.repository.milestones:not(.projects) .milestone-list .list-item-large-title {
   gap: var(--base-size-8);
   color: var(--fgColor-default);
   font-size: var(--text-title-size-small);
-  font-weight: var(--base-text-weight-semibold);
+  font-weight: var(--base-text-weight-medium);
+  line-height: var(--base-size-24);
 }
 
-.repository.milestones .milestone-list .list-item-large-title > .svg {
-  color: var(--fgColor-muted);
+/* github.com milestone rows have no leading icon */
+.repository.milestones:not(.projects) .milestone-list .list-item-large-title > .svg {
+  display: none;
 }
 
-.repository.milestones .milestone-list .list-item-large-title > a {
+.repository.milestones:not(.projects) .milestone-list .list-item-large-title > a {
   color: var(--fgColor-default);
 }
 
-.repository.milestones .milestone-list .list-item-large-title > a:hover {
+.repository.milestones:not(.projects) .milestone-list .list-item-large-title > a:hover {
   color: var(--fgColor-accent);
 }
 
-.repository.milestones .milestone-list .flex-left-right > .flex-text-inline {
+.repository.milestones:not(.projects) .milestone-list .flex-left-right > .flex-text-inline {
   gap: var(--base-size-8);
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-medium);
 }
 
-.repository.milestones .milestone-list .list-item-secondary-bar {
+.repository.milestones:not(.projects) .milestone-list .list-item-secondary-bar {
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
   line-height: var(--text-body-lineHeight-medium);
 }
 
-.repository.milestones .milestone-list .list-item-secondary-bar .svg {
+.repository.milestones:not(.projects) .milestone-list .list-item-secondary-bar .svg {
   width: var(--base-size-12);
   height: var(--base-size-12);
 }
 
-.repository.milestones .milestone-list .list-item-secondary-bar a {
+.repository.milestones:not(.projects) .milestone-list .list-item-secondary-bar a {
   color: var(--fgColor-muted);
 }
 
-.repository.milestones .milestone-list .list-item-secondary-bar a:hover {
+.repository.milestones:not(.projects) .milestone-list .list-item-secondary-bar a:hover {
   color: var(--fgColor-accent);
 }
 
 /* milestone description (rendered markdown under the meta line) */
-.repository.milestones .milestone-list .markup.content {
+.repository.milestones:not(.projects) .milestone-list .markup.content {
   margin-top: var(--base-size-8);
   color: var(--fgColor-muted);
+}
+
+/* ---------- FG-039: Labels | Milestones switch (repo/issue/navbar.tmpl h2.small-menu-items.issue-list-navbar) ----------
+   Primer SegmentedControl (medium): 32px track --controlTrack-bgColor-rest, 1px --controlTrack-borderColor-rest,
+   radius 6px; items 0 12px, 14px; the selected item is the knob (--controlKnob-bgColor-rest, 1px
+   --controlKnob-borderColor-rest, 600) overlapping the track border; unselected hover = an inner pill inset by 4px.
+   Backgrounds are in labels-milestones.important.css (navigation paints .small-menu-items items with !important). */
+.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu {
+  flex: 0 0 auto;
+  align-items: stretch;
+  gap: 0;
+  height: var(--control-medium-size);
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: var(--borderWidth-thin) solid var(--controlTrack-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+}
+
+.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item {
+  position: relative;
+  min-height: 0;
+  margin: -1px 0;
+  padding: 0 var(--control-medium-paddingInline-normal);
+  border: var(--borderWidth-thin) solid transparent;
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+}
+
+.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item:first-child {
+  margin-left: -1px;
+}
+
+.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item:last-child {
+  margin-right: -1px;
+}
+
+.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item:not(.active):hover {
+  box-shadow: inset 0 0 0 var(--base-size-4) var(--controlTrack-bgColor-rest);
+  color: var(--fgColor-default);
+}
+
+.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item.active {
+  z-index: 1;
+  border-color: var(--controlKnob-borderColor-rest);
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item:focus-visible {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: calc(var(--borderWidth-thin) * -1);
+}
+
+/* ---------- FG-073: milestone row = github.com RepositoryMilestone ----------
+   title column | 320px progress column (5px bar 18px below the row top, "N%" 600 --fgColor-default under it);
+   the meta line stays under the title. Gitea: .item > .flex-left-right (title | "N%" + <progress>) +
+   .list-item-secondary-bar; the wrappers are dissolved into a two-column grid. */
+.repository.milestones:not(.projects) .milestone-list > .item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) calc(var(--base-size-80) * 4);
+  column-gap: var(--base-size-16);
+  row-gap: var(--base-size-4);
+}
+
+.repository.milestones:not(.projects) .milestone-list > .item > .flex-left-right {
+  display: contents;
+}
+
+.repository.milestones:not(.projects) .milestone-list > .item > * {
+  grid-column: 1 / -1;
+}
+
+.repository.milestones:not(.projects) .milestone-list > .item > .flex-left-right > .list-item-large-title {
+  grid-row: 1;
+  grid-column: 1;
+  min-width: 0;
+}
+
+.repository.milestones:not(.projects) .milestone-list > .item > .list-item-secondary-bar {
+  grid-row: 2;
+  grid-column: 1;
+  min-width: 0;
+}
+
+.repository.milestones:not(.projects) .milestone-list > .item > .flex-left-right > .flex-text-inline {
+  display: flex;
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  align-self: start;
+  gap: var(--base-size-8);
+  padding-top: var(--base-size-6);
+}
+
+.repository.milestones:not(.projects) .milestone-list > .item > .flex-left-right > .flex-text-inline > .list-item-title-progress {
+  width: 100%;
+}
+
+.repository.milestones:not(.projects) .milestone-list > .item > .flex-left-right > .flex-text-inline > span {
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+@media (max-width: 767.98px) {
+  .repository.milestones:not(.projects) .milestone-list > .item {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* github.com at 390: title, bar, "N%", then the meta line */
+  .repository.milestones:not(.projects) .milestone-list > .item > .flex-left-right > .flex-text-inline {
+    grid-row: 2;
+    grid-column: 1;
+    align-self: stretch;
+    padding-top: var(--base-size-8);
+  }
+
+  .repository.milestones:not(.projects) .milestone-list > .item > .list-item-secondary-bar {
+    grid-row: 3;
+  }
+}
+
+/* FG-069: org settings → Labels: "New Label" is a medium Button (32px) like the repo labels page (Gitea: small) */
+.organization.settings.labels .org-setting-content > .flex-text-block > .new-label.ui.button {
+  height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
 }

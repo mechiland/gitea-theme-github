@@ -321,3 +321,285 @@ In round 4 pages/repo instead made the commits page get a real "N Commits" 24px 
 - Dark-only proof: light .src.css byte-identical with/without src/dark; pixeldiff light --states --stable run vs the same
   run with a no-dark auto CSS: 553/568 identical, the rest site-admin-config JSON key order + known-noisy/≤22 px AA.
 - No restart (restartRequired false, iconsChanged 0, no new theme files); 17 themes offered.
+
+# From pages/auth (wave L1, round 1, 2026-09-30): PA-L1-1 — slim auth header also on "Forgot password" when mail is off
+**What:** `templates/custom/gh_head_navbar.tmpl` line 13, add `.IsResetDisable` to the auth condition:
+```diff
+-{{- $isAuth := and (not .IsSigned) (or .PageIsSignIn .PageIsSignUp .IsResetRequest .IsResetForm) -}}
++{{- $isAuth := and (not .IsSigned) (or .PageIsSignIn .PageIsSignUp .IsResetRequest .IsResetForm .IsResetDisable) -}}
+```
+**Why:** `routers/web/auth/password.go:34-40` (ForgotPasswd): with no mail service configured (this instance) the handler
+sets only `IsResetDisable` and returns, so `IsResetRequest` is never set and /user/forgot_password — route
+`forgot-password`, cited by FG-063 / C060 — still renders the full header (Explore / Help / search / Register / Sign In).
+Measured 2026-09-30: login / sign_up / recover_account / login/openid get `nav.gh-app-header--auth` (94px, 48px mark at
+y=46, title at y=108 = github.com/login), forgot_password gets the full bar (111px, no --auth). The drawer's Register /
+Sign In items are already emitted for `$isAuth`, so no link is lost. `IsResetDisable` is only set by that one handler.
+Styling is already in place (src/pages/auth/app-header.css keys on `.gh-app-header--auth` only). Needs only
+`gitea manager reload-templates` (no restart).
+
+## pages/settings-admin — L1 round 1 (2026-09-30)
+### SA-5b — relax the settings header condition (SA-5 step 2)
+pages/settings-admin now styles pages whose pageClass is empty (`[class="page-content "]`: user + org Actions > General,
+admin badge view). Proposed change in templates/user/settings/layout_head.tmpl (github-* branch only): render the
+`.gh-settings-header` block when `(or (not .pageClass) (StringUtils.Contains .pageClass "settings"))` instead of only the
+"settings" check, so /user/settings/actions/general gets the same header as its sibling pages. Org layout_head is not
+overridden (no header by design).
+### SA-6 — octicon mask `--gh-octicon-chevron-right` (optional, low impact)
+Token rows (user/settings/applications.tmpl) wrap the token name in `<details><summary>`, which shows the native ▸.
+With a `--gh-octicon-chevron-right` mask in src/icons/octicon-masks.css this folder would replace the marker with a
+12px --fgColor-muted chevron (`summary::before { mask: var(--gh-octicon-chevron-right) … }`). Skip if the budget is tight.
+### Budget note
+Measured 2026-09-30 (other folders deploying concurrently): full build theme-github-auto.css 337,942 B; the same build
+with `--exclude pages/settings-admin` 311,755 B → this folder is 26,187 B minified in the auto file, of which ~2.4 KB is
+the SA-5 scope (`,[class=page-content\ ]` in 107 selectors). Both are above the 300 KB budget (ARCHITECTURE §10), and
+the build did not fail. Tell me a size target if this folder should trim.
+
+# From pages/repo (final gate #1 loop 1, round 1)
+- **routes.json repo-commits `row-hover`**: its selector hovers the first `#commits-table tbody tr`, which is now the
+  `tr.gh-commit-day` date header (ORC-6) — the state no longer shows a commit row. Proposed selector:
+  `#commits-table > tbody > tr:not(.gh-commit-day)` (gitea side only). Same for `copy-focus` if it targets the first row's
+  button: it already targets `.copy-commit-id`, fine.
+- **routes.json repo-home `tooltip-hover`** fails on every run (`locator.waitFor` timeout): its gitea selector
+  `#navbar .navbar-right .ui.dropdown:has(.octicon-plus)` no longer exists since the github-* header override (ORC-5,
+  `.gh-app-header*`). Needs a new selector from navigation (not pages/repo markup).
+- **FYI budget:** the full themes now build OVER BUDGET (auto 331.5 KB, light 326.2, dark 327.5 at 2026-09-30 ~04:50);
+  gh.pages-repo is 31,740 B (was 30,577 B; +1,163 B for the day-group Timeline, the wiki Pages Box and FG-018/036/037/040,
+  after ~1.7 KB of trims in this folder). The rest of the growth is in other folders.
+- **FG-018 for other owners:** Gitea's `ShortSha` is 10 characters everywhere. pages/repo now clips the SHA to 7ch on
+  /commits, PR Commits, compare and the commit page (`#commits-table .commit-id-short`, `.commit-header + .segment
+  .commit-id-short`). The issue timeline commit rows (pages/issues-prs, critic C200) and any other `.ui.label.commit-id-short`
+  (data-display generic rule) still show 10 characters. Technique that works with mono text: `width: calc(7ch + <inline
+  padding>); overflow: hidden;` with the inline padding drawn as a transparent border (overflow clips at the padding edge).
+
+# From navigation (wave L1, round 1, 2026-09-30)
+## NAV-I1 routes.json: header states for the github-only AppHeader (ORC-5 markup)
+The `home` states `create-menu-open`, `avatar-menu-open`, `mobile-menu-open` and repo-home `tooltip-hover` still use the
+old navbar selectors (`#navbar .navbar-right .ui.dropdown:has(.octicon-plus)`, `…:has(.navbar-avatar)`,
+`#navbar-expand-toggle`), which no longer exist for github-* themes. Proposed replacements (verified in
+`shots/navigation-r1` with my routes file `shots/navigation-routes.json`, all states captured, light/dark, 1440/390):
+```json
+{"name":"create-menu-open","action":"click","selectors":{"gitea":".gh-app-header-create"},"clip":".gh-app-header-create .menu","pad":16,"viewports":[1440]},
+{"name":"avatar-menu-open","action":"click","selectors":{"gitea":".gh-app-header-avatar"},"clip":".gh-app-header-avatar .menu","pad":16},
+{"name":"drawer-open","action":"click","selectors":{"gitea":".gh-app-header-menu > summary"},"clip":".gh-app-header-drawer","pad":0},
+{"name":"search-focus-header","action":"focus","selectors":{"gitea":".gh-app-header-search input"},"clip":".gh-app-header-search","pad":8,"viewports":[1440]},
+{"name":"iconbtn-hover","action":"hover","selectors":{"gitea":".gh-app-header .gh-icon-btn[href$=\"/pulls\"]"},"clip":".gh-app-header-end","pad":8,"viewports":[1440]}
+```
+(`drawer-open` replaces `mobile-menu-open` and works at both widths.) repo-home `tooltip-hover`: use
+`.gh-app-header .gh-icon-btn[href$="/pulls"]` (it has `data-tooltip-content`). If `lib/measure.mjs` has a `header` set with
+`.navbar-*` selectors, the new ones are `.gh-app-header` (bar), `.gh-icon-btn` (IconButtons), `.gh-context-item` (crumbs).
+## NAV-I2 FYI budget
+gh.navigation adds ~+3.3 KB minified (before var renaming) this round: the AppHeader + drawer (7.5 KB) replace the old
+navbar rules (6.1 KB), plus FG-041/042/030 (repo header, org rule), FG-029 (mobile TabNav), FG-059 (pagination), FG-117.
+Dead rules removed (`.navbar-*`, `#navbar-expand-toggle`, avatar/sign-in !important overrides, two never-used NavList rules).
+In the whole build gh.navigation is 24.7 KB of 333.9 KB (auto; measured by `--exclude navigation`: 309.2 KB). The themes were
+already over budget from concurrent growth in other folders when this round started deploying.
+## NAV-I3 FG-050 (settings / admin NavList leading Octicons) not done — needs ~25 new `--gh-octicon-*` masks
+Each mask is a data-URI (~0.3–0.8 KB); person, gear, paintbrush, shield-lock, key, apps, organization, people, webhook,
+server, repo, package, … would add roughly 8–15 KB to every theme file, which the 300 KB budget cannot absorb today.
+Decision needed (integrator/orchestrator): accept FG-050 as inherent, or free budget first.
+
+## overlays — L1 round 1 (2026-09-30): FYI, shoot states that no longer resolve (tools/shoot/routes.json)
+Seen in shots/overlays-r1c (light+dark 1440) and shots/overlays-r1 (both viewports), `locator.waitFor` timeouts:
+`home` create-menu-open (`#navbar .navbar-right .ui.dropdown:has(.octicon-plus)`), `home` avatar-menu-open
+(`#navbar .navbar-right .ui.dropdown:has(.navbar-avatar)`), `repo-home` tooltip-hover (same `+` selector),
+`repo-issues` labels-btn-hover (`.list-header > .ui.button:not(.primary)`, 1440) and select-all (`.issue-checkbox-all`, 390).
+Most likely the github-* AppHeader / issue-list template overrides changed the markup. Please point the selectors at the new
+markup so critics still capture the create / avatar ActionMenus (overlays styles them). No overlays change needed.
+
+# From icons (final gate #1, wave L1 round 1, 2026-09-30)
+
+## IC-1 Register `src/icons/` as a CSS folder → `@layer gh.icons` (FG-091, FG-114)
+What: FG-091 and FG-114 are assigned to icons and are theme-scoped Octicon swaps (CSS masks). A server file cannot do
+them (CUSTOM_PATH/public/assets/img/svg is global for every theme, ARCHITECTURE §6), and icons has no layer today, so
+`src/icons/index.css` (→ `theme-menu.css`, `pr-tabs.css`, 6 selectors, lint 0/0) is not compiled. Proposed: add
+`icons` to FOLDERS right before `dark`, so an icon swap wins over the component/page folder that sizes and colours the
+same svg (they keep size/colour; icons only sets `background-color: currentcolor` + `mask` and hides the drawing).
+```diff
+ export const FOLDERS = ['foundation', 'controls', 'overlays', 'navigation', 'data-display', 'code', 'markdown',
+-  ...PAGE_GROUPS.map((g) => `pages/${g}`), 'dark'];
++  ...PAGE_GROUPS.map((g) => `pages/${g}`), 'icons', 'dark'];
+```
+and in ARCHITECTURE.md §5 table: `| icons → gh.icons | theme-scoped Octicon swaps (masks) | .svg.gitea-colorblind-*, .pull.tabular.menu > .item > .svg.octicon-diff | Octicons |`.
+Notes: `compileFolder` only reads `index.css` (+ `*.important.css`); `octicon-masks.css` is not imported by index.css, so it
+keeps going through the token path only. Lint with all 15 folders + icons: 0 errors, no ownership clash. Size: ~0.4 KB rules +
+the two masks it references (`eye` 0.76 KB, `file-diff` 0.66 KB) ≈ 1.8 KB per theme file.
+Verified by injection (same CSS as `@layer gh.icons` + the two mask vars) on the live github-auto pages, light/dark ×
+1440/390: `shots/icons-l1r1-sim.mjs`, `shots/icons-l1r1/sim/{cmp-repo-pull,cmp-appearance-1440,cmp-appearance-390}.png`,
+`report.json`. After the change: `npm run deploy` (no restart: no icon file changes).
+
+## IC-2 audit: count `gitea-running` as GitHub-native, not "non-Octicon" (FG-091)
+Re-verified today (logged out, python/cpython `/actions?query=is:in_progress`, `shots/icons-l1r1/gh-probe.json`):
+github.com's "currently running" svg is the same three paths as Gitea's `gitea-running` (ring `M3.05 3.05a7 7…` at .5,
+dot `M8 4a4 4…`, arc `M14 8a6 6 0 0 0-6-6V0a8 8…`), fill `var(--fgColor-attention)`, `.anim-rotate` 1s. Ours: 16×16,
+`--fgColor-attention` both schemes, `rotate-clockwise` 1s. Masking it (dot-fill/sync, as FG-091 suggested) would move
+away from github.com, so icons keeps it. Proposed in `tools/shoot/lib/audit.mjs`: report `svg.gitea-running` under a
+separate `icons.githubNative` list (name `github-native:in-progress`) instead of `icons.nonOcticon`. Today it is the 4
+`nonOcticonIcons` on actions-list (shots/icons-l1r1/shoot/summary.json).
+
+## IC-3 (FYI) SA-6 / APK-M1 / PPL-I1 masks now exist
+`src/icons/octicon-masks.css` has 65 masks (catalogue `shots/icons-l1r1/masks-catalogue.png`, 65/65). SA-6's
+`--gh-octicon-chevron-right` is available to pages/settings-admin (they asked here; forwarded in their request file).
+This deploy (9ee594a4be) switched on 4 masks that folders already referenced (book 0.59 KB, screen-full 0.64 KB,
+plus 0.27 KB, dash 0.21 KB ≈ 1.7 KB/theme). Budget: the build reports 334.4 KB auto / 329.2 light / 330.4 dark
+(over the 300 KB cap before and after this change — the masks are ~0.5 % of it).
+
+# From code (wave L1, round 1)
+## CODE-L1-1 lint exception: show the blame age on mobile (FG-028)
+github.com's mobile blame header row shows `avatar · message … age · re-blame` (docs/reference/blame/light-390.png).
+Gitea renders the age as `div.blame-time.not-mobile` and hides it below 768px with helpers.css
+`.not-mobile.not-mobile { display: none !important }`, which only a `display` in `gh-important` can undo — and lint
+rule 4 forbids `display` there. Proposed: allow exactly this selector in `src/code/code.important.css`
+(e.g. an allow-list in build/lint.mjs rule 4: `if (important && /^(display|visibility)$/.test(d.prop) && !ALLOW.has(rule.selector))`
+with `ALLOW = new Set(['.blame .lines-commit .blame-time.not-mobile'])`), and code would add
+```css
+@media (max-width: 767.98px) { .blame .lines-commit .blame-time.not-mobile { display: block !important; } }
+```
+Scope: blame page only; tw-hidden is not involved. Until then the mobile header row is `avatar · message … re-blame`
+(everything else of FG-028 is done: shots/code-r1/blame/{light,dark}-390.png).
+Same lint rule, second case (FG-100): Gitea hides the diff summary ("25 changed files with N additions and M
+deletions") below 800px with `.repository .diff-detail-box .diff-detail-stats { display: none !important }`
+(repo.css:853-857); github.com keeps it on mobile. If the allow-list is accepted, code would add
+`@media (max-width: 800px) { .repository .diff-detail-box .diff-detail-stats { display: flex !important; } }` plus a
+`height: auto` / wrap rule for the 44px `.diff-detail-box`. Not urgent (impact 3).
+
+# From pages/auth (wave L1, round 2, 2026-09-30): PA-L1-1 reminder + PA-L1-2 — slim auth header on the remaining signed-out auth pages
+**PA-L1-1 is still open** (re-checked 2026-09-30 r2: `templates/custom/gh_head_navbar.tmpl:11` has no `.IsResetDisable`;
+`/user/forgot_password` still measures the full bar + the title's ::before logo = the logo twice, critic
+`docs/critiques/pages/auth-wL1-r1.md` issue 1). Same one-word diff as above.
+
+**PA-L1-2 (optional, same line):** 2FA / scratch code / WebAuthn prompt / link-account are signed-out auth steps too, but their
+handlers (routers/web/auth/2fa.go, webauthn.go, linkaccount.go) set none of PageIsSignIn/PageIsSignUp/IsReset*, so they keep
+the full bar (critic issue 8). `.Link` is set for every page (services/context/context.go:168), so key on the path:
+```diff
+-{{- $isAuth := and (not .IsSigned) (or .PageIsSignIn .PageIsSignUp .IsResetRequest .IsResetForm) -}}
++{{- $isAuth := and (not .IsSigned) (or .PageIsSignIn .PageIsSignUp .IsResetRequest .IsResetForm .IsResetDisable
++	(StringUtils.HasPrefix .Link (print AppSubUrl "/user/two_factor"))
++	(StringUtils.HasPrefix .Link (print AppSubUrl "/user/webauthn"))
++	(StringUtils.HasPrefix .Link (print AppSubUrl "/user/link_account"))) -}}
+```
+(`/user/settings/security/two_factor` is signed-in only, so `not .IsSigned` excludes it.) No CSS change needed: the
+auth styling keys on `.gh-app-header--auth` and the title's ::before logo is already skipped under it (header.css).
+Activation (/user/activate) is for a signed-in inactive user, so it is intentionally not included.
+
+## PPL-T1 (from pages/people, final gate #1 wave L1 round 2) — profile follower counts bold (FG-052, critic L1r1 #3)
+What: github.com shows "**3** followers · **2** following" with the numbers 14/600 `--fgColor-default` and the words
+muted. Gitea renders number and word in one text node (templates/shared/user/profile_big_avatar.tmpl:21), so no CSS
+can style the number. Proposed override `templates/shared/user/profile_big_avatar.tmpl` (copy of the 1.27.3 file, line 21
+only changed; theme-scoped via the usual github-* branch if the template policy needs it):
+```diff
+-			<a class="muted" href="{{.ContextUser.HomeLink}}?tab=followers">{{svg "octicon-person" 18 "tw-mr-1"}}{{.NumFollowers}} {{ctx.Locale.Tr "user.followers"}}</a> · <a class="muted" href="{{.ContextUser.HomeLink}}?tab=following">{{.NumFollowing}} {{ctx.Locale.Tr "user.following"}}</a>
++			<a class="muted" href="{{.ContextUser.HomeLink}}?tab=followers">{{svg "octicon-person" 18 "tw-mr-1"}}<span class="text">{{.NumFollowers}}</span> {{ctx.Locale.Tr "user.followers"}}</a> · <a class="muted" href="{{.ContextUser.HomeLink}}?tab=following"><span class="text">{{.NumFollowing}}</span> {{ctx.Locale.Tr "user.following"}}</a>
+```
+pages/people will then add (profile.css): `.profile-avatar-name .tw-mt-2 > a > .text { color: var(--fgColor-default); font-weight: var(--base-text-weight-semibold) }`
+(hover keeps the link's accent through `a:hover > .text { color: inherit }`). No behaviour change; the same markup renders in
+every theme.
+
+## NAV-I4 (navigation, wave L1 round 2) — AppHeader crumb text on admin / user-settings pages (critic nav-wL1-r1 #7)
+The context crumb in `templates/custom/gh_head_navbar.tmpl` falls through to `.Title`, so it reads "Dashboard" on
+/-/admin (the admin dashboard's title, identical to the real dashboard crumb) and "Profile" on /user/settings.
+github.com's crumb names the area ("Settings"). Proposed diff (github-only template, no CSS change needed; the crumb is
+already styled as `.gh-context-item`, the last crumb semibold):
+```diff
+ 			{{if .Repository}}
+ 				…
++			{{else if .PageIsAdmin}}
++				<a class="gh-context-item" href="{{AppSubUrl}}/-/admin">{{ctx.Locale.Tr "admin_panel"}}</a>
++			{{else if .PageIsUserSettings}}
++				<a class="gh-context-item" href="{{AppSubUrl}}/user/settings">{{ctx.Locale.Tr "your_settings"}}</a>
+ 			{{else if .PageIsDashboard}}
+```
+(`PageIsAdmin` is set for every /-/admin route by the middleware in routers/web/web.go:241; `PageIsUserSettings` by
+routers/web/user/setting/settings.go. Locale keys exist: admin_panel = "Site Administration", your_settings = "Settings".)
+
+## NAV-I5 FYI (navigation, wave L1 round 2) — repo band now follows signed-in github.com (critic nav-wL1-r1 #3)
+- The repo UnderlineNav is drawn as the AppHeader local bar: `.secondary-nav > .ui.container:has(> overflow-menu)` gets
+  `order: -1`, --bgColor-inset, padding 0 16px and the 1px --borderColor-default rule (header + tabs = one 112px block).
+- The title row (owner / repo, Public, Watch / Fork / Star, RSS, forked-from line) is shown **only on the repo overview**
+  (`.page-content:has(.repo-grid-filelist-sidebar)`) and the empty-repo quick setup (`.quickstart`), below the local bar on
+  the page background, aligned with the content container — as on signed-in github.com, where sub-pages (issues, PRs,
+  code tree, actions, settings) start directly under the header and the crumbs name the repo. Consequence: Watch / Star /
+  Fork are reachable from the overview only; FG-041 / FG-042 now only show on the overview. Reverting is one rule in
+  src/navigation/repo-header.css ("github.com signed-in shows the title row on the repo overview …") if the orchestrator
+  prefers the logged-out band on every page.
+- Other folders' layouts that assumed "band bottom = rule" (code file-tree pane, actions run list) are unaffected: on
+  those pages the band bottom is the local-bar rule again (checked: /octo-org/grex/src/branch/main/src,
+  /octo-org/theme-playground/actions, light/dark 1440/390).
+- Budget: navigation's minified layer is 21,293 B (was 21,387 B before this round) + ~60 B in gh-important → net ≈ 0.
+
+# From icons (final gate #1, wave L1 round 2, 2026-09-30)
+
+## IC-1 (reminder, still blocking FG-091 / FG-114) — register `src/icons/` → `@layer gh.icons`
+Same one-line diff as in L1 r1 (`'icons'` before `'dark'` in `build/folders.mjs` FOLDERS). The critic scored icons 8.0 only
+because this change is missing. The folder now has three files and 10 selectors:
+- `theme-menu.css`: the colorblind markers are hidden (github.com has no marker).
+- `pr-tabs.css`: Files changed → `file-diff`.
+- `nav-tabs.css`: repo Projects tab and the `…` popup → `table`.
+
+Verified with the real build script on a scratch copy of the project that has only this FOLDERS change:
+- `node build/lint.mjs`: all 15 folders plus icons have 0 errors and no ownership clash (icons: 10 selectors).
+- `build.mjs`: icons ok, 3.0 KB src. The build report lists `--gh-octicon-file-diff` and `--gh-octicon-table` as used.
+- Size: +1,401 B per theme file.
+- Output: `shots/icons-l1r2/sim-theme-github-auto.css`. Served with `--theme-css`, the shoot gives 0 console errors,
+  0 off-palette colours and 0 unresolved vars (`shots/icons-l1r2/sim-shoot`, probe `shots/icons-l1r2/probe/report.json`).
+
+ARCHITECTURE §5 row: `| icons → gh.icons | theme-scoped Octicon swaps (masks) / dropped brand markers | .svg.gitea-colorblind-*, .pull.tabular.menu > .item > .svg.octicon-diff, overflow-menu .item > .svg.octicon-project, .overflow-menu-popup > .item > .svg.octicon-project(-symlink) | Octicons |`.
+No restart is needed, because no icon files change.
+
+## IC-4 audit: don't count theme-hidden svgs as non-Octicon (FG-091)
+`tools/shoot/lib/audit.mjs` §3 counts every `svg.svg`, including ones the theme hides. With IC-1 the 7 colorblind markers
+per appearance page have `display: none` on the svg itself, yet they would still show up as 7 `nonOcticon`, which is
+28 on the standard 4-mode run.
+Proposed: before the mask check, add
+```js
+    if (getComputedStyle(svg).display === 'none') { bump(hidden, baseName, svg); continue; }
+```
+with `const hidden = new Map();` next to `masked`, and report `icons.hidden`.
+
+Only the svg's **own** computed display is tested. Icons inside a closed dropdown keep their own display value, so they
+are still counted, exactly as today.
+
+# Integrator (loop 1 integration pass after wave L1, 2026-09-30 14:30) — status of every request above since final gate #1
+Applied by the integrator in this loop (build/tools edits made 13:38–13:46, verified again 14:30: `node build/lint.mjs` 15 folders
+0 errors, no ownership clash; `npm run build` ok):
+- **IC-1 — DONE.** `build/folders.mjs` FOLDERS has `'icons'` before `'dark'` (layer `gh.icons`, 660 B in the auto file);
+  ARCHITECTURE §3 order and §5 row updated. Masks file-diff / table now in `octiconMasks.used`.
+- **IC-2 — DONE.** `tools/shoot/lib/audit.mjs`: `svg.gitea-running` → `icons.githubNative` (`github-native:in-progress`), not nonOcticon.
+- **IC-4 — DONE.** audit.mjs: an svg whose own computed display is none → `icons.hidden` (checked before the mask test).
+- **CODE-L1-1 — DONE (both cases).** `build/lint.mjs` rule 4 has the exact-selector allow-list `IMPORTANT_DISPLAY_ALLOW`
+  (`.blame .lines-commit .blame-time.not-mobile`, `.repository .diff-detail-box .diff-detail-stats`; `display` only);
+  ARCHITECTURE §4 documents it.
+- **NAV-I1 — DONE.** routes.json home: create-menu-open → `.gh-app-header-create`, avatar-menu-open → `.gh-app-header-avatar`
+  (both viewports), mobile-menu-open replaced by `drawer-open` (both viewports), + `search-focus-header`, `iconbtn-hover`;
+  repo-home tooltip-hover → `.gh-app-header .gh-icon-btn[href$="/pulls"]`.
+- **overlays L1 FYI (dead states) — DONE** with NAV-I1 and the issues-prs request in integrator-tools.md (labels-btn-hover →
+  `navlist-item-hover` on `.gh-issues-nav`, select-all 1440 only).
+- **pages/repo routes (row-hover, tooltip-hover) — DONE.** repo-commits row-hover → `#commits-table > tbody > tr:not(.gh-commit-day)`;
+  repo-issue toolbar-btn-focus → `markdown-toolbar-button[tabindex="0"]` (foundation critic, roving tabindex).
+- **PA-L1-1, PA-L1-2, NAV-I4, SA-5b — ACCEPTED, project templates edited, live install PENDING (ORCHESTRATOR.md ORC-11).**
+  The integrator's copy + `reload-templates` is refused by the session permission policy (tried once per pass, not retried).
+  PA-L1-2 went in nil-safe: `StringUtils.HasPrefix (StringUtils.ToString .Link) (print AppSubUrl "/user/two_factor")` etc.
+  (HasPrefix takes `string`; a data map without `Link` would otherwise fail at execution). Until ORC-11 is installed:
+  forgot-password keeps the full bar, the admin / settings crumbs read "Dashboard" / "Profile", Actions > General has no
+  settings header.
+- **SA-6 — DONE** (icons shipped `--gh-octicon-chevron-right`; using it is pages/settings-admin's call, currently unused → pruned).
+- **PPL-T1 — REJECTED.** (1) `shared/user/profile_big_avatar.tmpl` would be the 8th and last new override allowed by §7 (e) for a
+  part of FG-052 whose judge impact is small (bold numbers in one meta line); (2) the proposed diff adds `<span class="text">`
+  unconditionally, so every other theme's HTML changes (§7 d) — a github-only branch would duplicate the whole line; (3)
+  template installs are currently blocked for the integrator anyway (ORC-11). Documented as a known gap (STATUS.json).
+- **NAV-I3 (FG-050 NavList leading Octicons) — REJECTED for this loop (budget).** The build is 338.5 KB auto / 333.4 light /
+  334.5 dark before this pass's trim, 44 KB over the 295 KB gate; ~25 masks (8–15 KB) cannot be afforded. Revisit only if the
+  trim leaves ≥ 12 KB headroom under 285 KB.
+- **NAV-I2, NAV-I5, IC-3 — FYI, noted** (NAV-I5 layout decision recorded in STATUS.json → templateOverrides/notes).
+- **pages/settings-admin budget note / all budget FYIs** — handled by the integrator's budget trim in this pass (see STATUS.json →
+  budget.loop1).
+- **FG-018 for other owners (pages/repo note)** — forwarded: data-display.md (generic `.ui.label.commit-id-short`) and
+  pages-issues-prs.md (timeline SHAs), no integrator action.
+- **Budget (all budget FYIs above) — RESOLVED without deleting rules.** Wave L1 grew the flat build by 63.6 KB (auto 283,706 →
+  347,273 B; largest: pages/issues-prs +11.9 KB, pages/settings-admin +9.6, pages/actions-packages-projects +8.4, code +5.9,
+  pages/people +5.1, tokens/masks +4.2). A coverage run (shots/coverage-integrate-L1 + rerun) showed that deleting every
+  never-used rule would save only ~33 KB and would strip real but unseeded features (toasts, @-mention suggestions, delete
+  modals, markdown footnotes / code previews …), so instead `build/nest.mjs` factors shared selector prefixes of adjacent rules
+  into CSS nesting in the minified files (lossless; self-checked per build by lowering both texts and comparing 3,393 selector
+  members; pixel-diffed flat vs nested: 1,138 pairs, 1,103 identical, 14 ≤ 2 px AA, 16 known-noisy, 5 explained). Result:
+  auto 295,880 B (288.9 KB), light 290,683, dark 291,734 — under the 295 KB gate. Browser floor raised to CSS nesting
+  (Chrome/Edge 112+, Safari 16.5+, Firefox 117+; ARCHITECTURE §9). No folder was trimmed.

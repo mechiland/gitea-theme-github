@@ -19,6 +19,99 @@
  *   the header rules); `.run-list` and `.filter.menu` exist on the runs list page only (runs_list.tmpl, list.tmpl).
  */
 
+/* ---------- page layout (FG-027) ----------
+   github.com /actions is a full-bleed Primer PageLayout (paneWidth wide, divider, no column gap), measured at 1440:
+   pane x=0 w=336 (256 md / 320 lg / 336 xl), padding 16px, 1px --borderColor-default on its right, directly under
+   the repo UnderlineNav (no gap); content padding 16px 24px (16px at md), so the runs Box is 1056px wide at x=360.
+   Gitea: .ui.container (1280px, centred) > .flex-container (240px nav, 16px gap) → from md the container spans the
+   page and the nav becomes the bordered pane. `:has(.run-list)` = the runs list page only (also with an empty
+   filter result); the settings Actions pages share `.repository.actions` but have no .run-list. */
+@media (min-width: 768px) {
+  .page-content.repository.actions:has(.run-list) > .secondary-nav {
+    margin-bottom: 0;
+  }
+
+  .page-content.repository.actions:has(.run-list) > .ui.container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  /* alerts above the layout keep the content padding */
+  .page-content.repository.actions:has(.run-list) > .ui.container > :not(.flex-container) {
+    margin: var(--base-size-16) var(--base-size-16) 0;
+  }
+
+  .repository.actions > .ui.container > .flex-container:has(.run-list) {
+    gap: 0;
+    margin-top: 0;
+  }
+
+  /* github.com: the PageLayout fills the space down to the page end (a short/empty-filter page still reaches the
+     fold) and its pane divider runs the layout's full height; only the pane's content is sticky (top 0, max-height
+     100vh). Gitea: the chain .full.height > .page-content > .ui.container > .flex-container grows to the footer
+     (the page's bottom space moves into the content column), the nav is the full-height bordered pane and its menu
+     is the sticky part. */
+  .full.height:has(> .page-content .run-list) {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+  .page-content.repository.actions:has(.run-list),
+  .page-content.repository.actions:has(.run-list) > .ui.container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .repository.actions > .ui.container > .flex-container:has(.run-list) {
+    flex-grow: 1;
+  }
+
+  .flex-container:has(.run-list) > .flex-container-nav {
+    flex: 0 0 auto;
+    width: calc(var(--base-size-128) * 2);
+    padding: var(--base-size-16);
+    border-right: var(--borderWidth-thin) solid var(--borderColor-default);
+  }
+
+  .flex-container:has(.run-list) > .flex-container-nav > .menu {
+    position: sticky;
+    top: var(--base-size-16);
+    max-height: calc(100vh - var(--base-size-32));
+    overflow-y: auto;
+    /* the scroll box also clips inline: keep the NavList's current-item bar (8px left of the item) inside it; the
+       matching width is in pages.important.css (Gitea: `.ui.vertical.menu.fluid { width: 100% !important }`) */
+    margin-inline: calc(var(--base-size-8) * -1);
+    padding-inline: var(--base-size-8);
+  }
+
+  .flex-container:has(.run-list) > .flex-container-main {
+    padding: var(--base-size-16) var(--base-size-16) var(--page-space-bottom);
+  }
+}
+
+@media (min-width: 1012px) {
+  .flex-container:has(.run-list) > .flex-container-nav {
+    width: calc(var(--base-size-128) * 2 + var(--base-size-64));
+  }
+
+  .flex-container:has(.run-list) > .flex-container-main {
+    padding-inline: var(--base-size-24);
+  }
+
+  .page-content.repository.actions:has(.run-list) > .ui.container > :not(.flex-container) {
+    margin-inline: var(--base-size-24);
+  }
+}
+
+@media (min-width: 1280px) {
+  .flex-container:has(.run-list) > .flex-container-nav {
+    width: calc(var(--base-size-128) * 2 + var(--base-size-80));
+  }
+}
+
 /* ---------- Box header ---------- */
 
 .repository.actions .filter.menu {
@@ -172,10 +265,20 @@
   margin-left: auto;
 }
 
+/* github.com's run row is a table: title col-md-6 (48%), branch col-4 with 16px padding, time/duration col-3 = 168px
+   + the 24px kebab. With the 1056px full-bleed Box the branch column starts half way (x≈887 at 1440). */
 @media (min-width: 1012px) {
   .run-list-item-trailing {
-    flex: 0 0 calc(var(--base-size-128) * 3);
-    width: calc(var(--base-size-128) * 3);
+    flex: 0 0 50%;
+    width: 50%;
+  }
+
+  .run-list-item-trailing > .run-list-item-right {
+    width: calc(var(--base-size-128) + var(--base-size-40));
+  }
+
+  .run-list-item-trailing > .run-list-item-right + .ui.dropdown.jump {
+    margin-left: calc(var(--base-size-16) * -1);
   }
 }
 
@@ -207,21 +310,29 @@ a.run-list-ref:hover {
   line-height: var(--base-text-lineHeight-tight);
 }
 
+/* two 16px lines 4px apart (40px): the row height comes from the 46px title + meta column like github.com's 79px row */
 .run-list-meta {
   gap: var(--base-size-4);
-  margin: var(--base-size-4) 0;
+  margin: var(--base-size-2) 0;
   white-space: nowrap;
 }
 
-/* kebab: github.com timeline-comment-action btn-link (24x34, muted, hover accent) */
+/* kebab: 24x34 like github.com's timeline-comment-action, with Primer invisible IconButton states (FG-072: the
+   accent-only hover read as a stray link) — muted icon, hover/open --button-invisible-bgColor-hover + default icon */
 .run-list-item-trailing > .ui.dropdown.jump {
   justify-content: center;
   border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-muted);
+  color: var(--button-invisible-iconColor-rest);
+  transition: background-color var(--base-duration-100) var(--base-easing-linear);
 }
 
 .run-list-item-trailing > .ui.dropdown.jump:is(:hover, .active) {
-  color: var(--fgColor-accent);
+  background: var(--button-invisible-bgColor-hover);
+  color: var(--button-invisible-iconColor-hover);
+}
+
+.run-list-item-trailing > .ui.dropdown.jump:active {
+  background: var(--button-invisible-bgColor-active);
 }
 
 /* paginator: below the Box, like github.com's paginate-container (16px margin) */

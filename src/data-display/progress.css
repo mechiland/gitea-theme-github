@@ -29,7 +29,9 @@ progress::-moz-progress-bar {
   background-color: var(--progressBar-bgColor-success);
 }
 
+/* FG-099: Gitea sizes it min(420px, 96vw), which runs into the 16px page gutter at 390; cap it to its column */
 .milestone-progress-big {
+  max-width: 100%;
   height: var(--base-size-8);
 }
 

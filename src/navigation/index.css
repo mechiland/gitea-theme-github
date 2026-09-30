@@ -1,6 +1,7 @@
 /*
  * src/navigation — GitHub navigation chrome for Gitea (layer gh.navigation).
- * Owns: #navbar* / .navbar-* (global header = Primer AppHeader), .secondary-nav / .repo-header / .secondary-info
+ * Owns: #navbar / .gh-app-header* / .gh-drawer* / .gh-context-* (global header = github.com AppHeader + nav drawer,
+ * templates/custom/gh_head_navbar.tmpl), .secondary-nav / .repo-header / .secondary-info
  * (repo header band), overflow-menu* / .ui.secondary.pointing.menu (Primer UnderlineNav), .ui.tabular.menu (TabNav),
  * the issue-list Open/Closed state switcher (.small-menu-items), .ui.vertical.menu (settings / admin sidebars =
  * Primer NavList), .breadcrumb, .ui.pagination.menu (Primer Pagination), .page-footer.
@@ -10,6 +11,7 @@
  * avatar rules here (see docs/requests/data-display.md, navigation section).
  */
 @import "./header.css";
+@import "./drawer.css";
 @import "./repo-header.css";
 @import "./underline-nav.css";
 @import "./tabnav.css";

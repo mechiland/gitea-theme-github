@@ -206,3 +206,96 @@ Behaviour/styling targets are in the Header decision (64px bar, 32px bordered Ic
 Your current `.navbar-left` / `.navbar-right` / `.navbar-mobile-right` / `#navbar-expand-toggle` rules become dead for the
 github themes after the install — remove them (budget). Overlays keeps the dropdown popups (NO-1). Closes FG-068 once styled
 (create + avatar stay visible at 390).
+
+# From pages/auth (wave L1, round 1, 2026-09-30): FYI for the drawer on the slim auth header
+pages/auth styles `.gh-app-header--auth` (src/pages/auth/app-header.css): transparent bar, no rule, the 48px mark centred,
+and `details.gh-app-header-menu` is `position: absolute; top: 16px; left: 16px` with the summary as a 32px invisible
+IconButton. The drawer (`.gh-app-header-drawer`) is yours and unstyled today: on the auth pages it currently opens as bare
+inline links under the button (shots/pages-auth-r1/login/states/light-1440-menu-open.png). Please make the drawer
+`position: fixed` (left overlay, as the Header decision says) so it does not depend on the summary's box; nothing else in
+pages/auth touches the drawer or `.gh-drawer-*`.
+
+# Navigation builder — wave L1, round 1 (2026-09-30): status
+- FG-007 DONE: AppHeader styled (header.css + drawer.css) from github.com's live .AppHeader / .Overlay CSS — 64px bar
+  (padding 16, gap 12, --bgColor-inset, inset 1px --borderColor-default; dropped on repo pages), 32px bordered IconButtons
+  (radius 6, muted), 32px round logo, crumbs 4px/6px 14/20 (last semibold, owner shrinks first), search 272px from 1012px
+  (IconButton below), 1×20 divider, "+ ▾" 50px, 8px accent unread dot, 32px avatar. Drawer: fixed left Overlay
+  min(320px, 100vw-32px), --shadow-floating-small, 12px right radius, backdrop + close (Gitea's --octicon-x) both drawn by
+  the summary, page scroll locked while open, NavList rows with 4px accent bar. Old .navbar-* / #navbar-expand-toggle rules removed.
+- FG-068 DONE: at 390 the bar keeps hamburger, logo, crumbs, search, "+" (icon only), bell and avatar.
+- pages/auth drawer note DONE: `.gh-app-header-drawer` is `position: fixed` (independent of the summary's box).
+- FG-026 DONE: timing span hidden; the version string moved to the end of the footer row; logo + Powered by Gitea stay.
+- FG-029 DONE (partly): the "…" trigger no longer carries the selected underline; < 768 TabNav hides icons, 8px padding,
+  scrolls sideways (PR "Files Changed" still needs a scroll at 390, like github.com's Checks tab). The selected tab can still
+  end up inside the overflow menu (Gitea's overflow-menu.ts cannot swap it).
+- FG-030 DONE: dashboard context bar 1px --borderColor-muted rule; org header tab row rule edge to edge (pages/people told).
+- FG-041 DONE: "Public" Label (English UI only) when no lock / shield-lock icon is rendered.
+- FG-042 DONE: Watch, Fork, Star, RSS order; the UnderlineNav spacer is hidden, so Settings follows the other tabs.
+- FG-050 NOT DONE: needs ~25 new masks, no budget (docs/requests/integrator.md NAV-I3).
+- FG-059 DONE: < 768 pagination shows "Previous" / "Next" labels (First / Last stay icon-only).
+- FG-109 NOT DONE this round (impact 3).
+- FG-115 DONE: Issues tab selected on labels / milestones / milestone issue lists.
+- FG-117 DONE: chevron points down when closed, up when open (Gitea's chevron-right mask rotated ±90°).
+- PPL-N1 DONE: `.ui.secondary.pointing.tabular.menu .active.item` radius 6 (important file); measured 6px on /alice-dev,
+  /explore/repos, /octo-org.
+
+# From icons (final gate #1, wave L1 round 1) — masks available
+- **FG-050** settings / org / repo / admin NavList leading visuals: `src/icons/octicon-masks.css` now has gear, paintbrush,
+  shield-lock, key, key-asterisk, apps, organization, repo, package, play, webhook, server, mail, bell, blocked, git-branch,
+  globe, terminal, file-binary, checklist, id-badge, sliders, meter, pulse, graph, clock, stack, cpu, person, people, tag
+  (+ the earlier 21). Suggested Gitea-item → Octicon mapping (github.com's sidebars where an equivalent exists) is in
+  docs/icons-audit.md §5 "Final gate #1". Each mask is pruned until referenced (0.2–1.1 KB each once used).
+- **FG-117** NavList group chevrons: `--gh-octicon-chevron-down` (and `-chevron-up`, `-chevron-right`) exist.
+- AppHeader: `--gh-octicon-three-bars` exists if a JS/Vue copy ever needs it (the server-rendered hamburger is already
+  `octicon-three-bars`).
+- **FG-114** (PR "Files changed" tab icon): handled in icons (`src/icons/pr-tabs.css`, `.pull.tabular.menu > .item >
+  .svg.octicon-diff` → file-diff), pending integrator IC-1 (icons layer). Please don't add a rule for it.
+Catalogue (all 65, mask vs source SVG): `shots/icons-l1r1/masks-catalogue.png`.
+
+# From code (wave L1, round 1) — FYI, not a code selector
+## Header avatar pushes the page to 407px at 390 on theme-playground routes
+`div.ui.dropdown.jump.item.gh-app-header-avatar` ends at x=407 (viewport 390) on every octo-org/theme-playground page
+whose crumb is long (e.g. /octo-org/theme-playground/src/branch/main/internal/palette/generated.go,
+/octo-org/theme-playground/blame/branch/main/internal/render/render.go, /octo-org/theme-playground/pulls/16/files):
+`document.scrollWidth` 407 (shots/code-r1/{file-view-large-file-playground,blame-playground-multiple-authors,
+pr-files-changed-*-playground-large-diff}/*-390.json → horizontalOverflow true). The code surfaces themselves stay
+inside 390 (probe: the only elements past 390 are the avatar dropdown and its children). Likely the context crumb
+(`octo-org / theme-playground`) needs `min-width: 0` + ellipsis so the right-hand icon group keeps its width.
+
+# Navigation builder — wave L1, round 2 (2026-09-30): status
+- From code (header avatar pushes the page to 407px at 390) DONE: below 768 the create button and the owner crumb are
+  hidden (github.com .AppHeader-actions / compact crumb); document.scrollWidth = 390 on
+  /octo-org/theme-playground/src/branch/main/internal/palette/generated.go (probe shots/navigation-wL1r2-probe.mjs) and no
+  horizontal overflow on any of the 88 captures in shots/navigation-wL1r2.
+- FG-029 DONE (rest): when overflow-menu.ts moves the selected tab into "…", the trigger keeps the 2px selected bar on the
+  nav's edge (same ::after as the tabs), so narrow repo pages always show the current tab.
+- FG-068 REVISED: below 768 github.com hides the whole actions group ("+", Issues, PRs); ours now does too (bar = hamburger,
+  logo, repo crumb, search, bell, avatar). Create stays reachable from ≥ 768 and the dashboard.
+- FG-041 / FG-042: unchanged, but the repo title row now shows on the repo overview only (NAV-I5 in integrator.md).
+  "Public" Label padding 0 6px (github.com measure).
+- FG-050 NOT DONE: budget (the build is still over 300 KB); masks exist in icons.
+- FG-109 NOT APPLICABLE any more below the overview: sub-pages have no title row; on the overview the row stays.
+
+# Navigation builder — wave L1, round 3 (2026-09-30): status
+- Critic nav-wL1-r2 #1 (overflow popup) DONE: popup rows are ActionList items — 32px, padding 6px 8px, 8px inset on both
+  sides, radius 6; the selected row has --control-transparent-bgColor-selected, semibold and NavList's 4×24
+  --borderColor-accent-emphasis bar in the inset; the tab underline no longer leaks into the popup (probe
+  shots/navigation-wL1r3-popup.mjs: rows 176×32 at x=190 in a 192px popup at x=182).
+- Critic #6 (only Code + Issues at 390) DONE in CSS: UnderlineNav hides its leading icons before overflowing (Primer
+  React behaviour) — repo local bar < 1200px, other tab rows < 768px. 390: Code, Issues, Pull Requests, then "…".
+- Critic #3 (overview title row) DONE: repo name only, 20px semibold --fgColor-default (owner hidden; the crumbs carry
+  it). Owner avatar would need a template change (repo/icon renders the repo's own avatar / octicon).
+- Critic #2 (org / profile tabs in the local bar): request NAV-P1 in pages-people.md (their later layer owns the band).
+- NAV-I4 (crumb text) / FG-050 (NavList icons, budget ORC-4): still pending elsewhere.
+
+# Integrator (loop 1 integration pass, 2026-09-30 15:05) — FYI / next round
+- **Anonymous AppHeader overflows at 390 when the crumb is long** (audit shots/integrate-wL1): not-found-anon 396px and
+  forgot-password 399px wide (light + dark). Probe (anonymous, 390): on `/nope-404` `.gh-app-header-start` keeps 96–192
+  ("Page Not …" crumb) while `.gh-app-header-end` (min-width 0, flex-shrink 1) is squeezed to 204–374 and its children
+  (search IconButton, Sign In, Register) overflow to x=396. Normal anonymous pages (repo, explore, issues) fit (end 182–374).
+  Suggested: `.gh-app-header-end { flex-shrink: 0 }` so only the crumb shrinks/ellipsizes (forgot-password goes to the slim
+  auth header once ORC-11 is installed, but any long page title reproduces it).
+- NAV-I4 (crumb text) accepted; live once ORC-11 is installed. NAV-I3 (FG-050) rejected for this loop (budget) — see
+  integrator.md.
+- Size: the build now writes the minified files with CSS nesting (build/nest.mjs, lossless, self-checked); `*.src.css` stays
+  flat. Nothing to change in your sources.

@@ -1,0 +1,883 @@
+{
+ "route": "critic-nav-wl1-login",
+ "target": "github",
+ "url": "https://github.com/login",
+ "scheme": "dark",
+ "viewport": 390,
+ "theme": null,
+ "auth": false,
+ "consoleErrors": [],
+ "consoleWarnings": [],
+ "failedRequests": [],
+ "expectedFailures": [],
+ "ignoredRequests": [],
+ "cssBytes": 179918,
+ "cssFiles": [
+  {
+   "url": "https://github.githubassets.com/assets/app-runtime.70b2cadcfd63fdd3.module.css",
+   "bytes": 1517
+  },
+  {
+   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
+   "bytes": 41152
+  },
+  {
+   "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
+   "bytes": 7273
+  },
+  {
+   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.6779928e8ca626b6.module.css",
+   "bytes": 399
+  },
+  {
+   "url": "https://github.githubassets.com/assets/sessions-auth-header.5f5dfcbc0d8e346c.module.css",
+   "bytes": 1131
+  },
+  {
+   "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
+   "bytes": 7389
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-react-css.e6a43c45f45572ae.module.css",
+   "bytes": 35258
+  },
+  {
+   "url": "https://github.githubassets.com/assets/react-core.c096e568423212a2.module.css",
+   "bytes": 699
+  },
+  {
+   "url": "https://github.githubassets.com/assets/github-7338c07b3a07b8be.css",
+   "bytes": 22092
+  },
+  {
+   "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
+   "bytes": 7249
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-4136ede8b2650a2d.css",
+   "bytes": 43337
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
+   "bytes": 2312
+  },
+  {
+   "url": "https://github.githubassets.com/assets/light_high_contrast-48fdd0811afbab3c.css",
+   "bytes": 7393
+  },
+  {
+   "url": "https://github.githubassets.com/assets/1rv.158b1250f377514f.module.css",
+   "bytes": 1392
+  },
+  {
+   "url": "https://github.githubassets.com/assets/u2l.54b6ba2af351ee33.module.css",
+   "bytes": 653
+  },
+  {
+   "url": "https://github.githubassets.com/assets/fg.2616179aabbabe22.module.css",
+   "bytes": 672
+  }
+ ],
+ "problems": [],
+ "mainStatus": 200,
+ "finalUrl": "https://github.com/login",
+ "cookieBanner": null,
+ "env": {
+  "prefersDark": true,
+  "bodyBg": "rgb(13, 17, 23)",
+  "bodyColor": "rgb(240, 246, 252)",
+  "fontFamily": "\"Mona Sans VF\", -apple-system, \"system-ui\", \"Segoe UI\", \"Noto Sans Backtick Fix\", \"Noto Sans\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\""
+ },
+ "png": "critic-nav-wl1-login/dark-390.png",
+ "volatile": [],
+ "htmlTheme": "auto",
+ "title": "Sign in to GitHub · GitHub",
+ "signedIn": null,
+ "cssVars": {
+  "referenced": 1080,
+  "defined": 1405,
+  "unresolved": [
+   {
+    "name": "--button-default-shadow-inset",
+    "refs": 3,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 5,
+    "selectors": [
+     ".btn",
+     ".Button--secondary",
+     ".Button--danger"
+    ]
+   },
+   {
+    "name": "--header-height",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 1,
+    "selectors": [
+     ".html-auth .authentication-header-page"
+    ]
+   },
+   {
+    "name": "--avatarSize-narrow",
+    "refs": 8,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
+     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--avatarSize-wide",
+    "refs": 8,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
+     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-dark-rest",
+    "refs": 6,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-dark-hover",
+    "refs": 6,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-dark-active",
+    "refs": 6,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-dark",
+    "refs": 6,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-dark-hover",
+    "refs": 6,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-dark-active",
+    "refs": 6,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-light-rest",
+    "refs": 6,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-light-hover",
+    "refs": 6,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-light-active",
+    "refs": 6,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-light",
+    "refs": 6,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-light-hover",
+    "refs": 6,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-light-active",
+    "refs": 6,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--anchored-overlay-anchor-offset-right",
+    "refs": 4,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-bottom\"]",
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-top\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-top\"]"
+    ]
+   },
+   {
+    "name": "--color-fg-muted",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 98,
+    "matchedElements": 0,
+    "selectors": [
+     ".ipm-nudge-content p"
+    ]
+   },
+   {
+    "name": "--color-mktg-btn-shadow-hover-muted",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".btn-muted-mktg:hover",
+     ".btn-subtle-mktg:hover"
+    ]
+   },
+   {
+    "name": "--truncate-max-width",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Truncate-Truncate-2G1eo"
+    ]
+   },
+   {
+    "name": "--anchored-overlay-anchor-offset-left",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"outside-bottom\"]"
+    ]
+   },
+   {
+    "name": "--inputValidation-iconSize",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-components-ValidationIcon-sv29w"
+    ]
+   },
+   {
+    "name": "--inputValidation-lineHeight",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-components-ValidationText-JEfut"
+    ]
+   },
+   {
+    "name": "--grid-template-columns",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-DataTable-Table-7ux1n"
+    ]
+   },
+   {
+    "name": "--stackSize-narrow",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--stackSize-regular",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--stackSize-wide",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--color-attention-subtle",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 17,
+    "matchedElements": 0,
+    "selectors": [
+     ".form-group.warn .warning"
+    ]
+   },
+   {
+    "name": "--color-success-subtle",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 9,
+    "matchedElements": 0,
+    "selectors": [
+     ".form-group.successed .success"
+    ]
+   },
+   {
+    "name": "--color-danger-subtle",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 7,
+    "matchedElements": 0,
+    "selectors": [
+     ".form-group.errored .error"
+    ]
+   },
+   {
+    "name": "--color-mktg-btn-bg",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".btn-mktg"
+    ]
+   },
+   {
+    "name": "--color-mktg-btn-shadow-hover",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".btn-mktg:hover"
+    ]
+   },
+   {
+    "name": "--fgColor-muted-hover",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".footer-session-authentication-links a:hover"
+    ]
+   },
+   {
+    "name": "--nested-level",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".ControlGroup-item"
+    ]
+   },
+   {
+    "name": "--color-icon-primary",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": []
+   }
+  ],
+  "unresolvedWithFallback": [
+   {
+    "name": "--shadow-highlight",
+    "refs": 4,
+    "withFallback": 4,
+    "fallbackRefs": 0,
+    "matchedElements": 1,
+    "selectors": [
+     ".btn-primary",
+     ".btn-outline:hover, [open] > .btn-outline",
+     ".btn-danger:hover, [open] > .btn-danger",
+     ".social-count"
+    ]
+   },
+   {
+    "name": "--shadow-floating-legacy",
+    "refs": 8,
+    "withFallback": 8,
+    "fallbackRefs": 0,
+    "matchedElements": 1,
+    "selectors": [
+     ".SelectMenu-modal",
+     ".Toast",
+     ".Toast--loading",
+     ".Toast--error",
+     ".Toast--warning"
+    ]
+   },
+   {
+    "name": "--stack-gap-none",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Stack[data-gap-narrow=\"none\"], .Stack[data-gap=\"none\"]",
+     ".Stack[data-gap-regular=\"none\"]",
+     ".Stack[data-gap-wide=\"none\"]"
+    ]
+   },
+   {
+    "name": "--custom-line-height",
+    "refs": 44,
+    "withFallback": 44,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".TreeViewRootUlStyles .TreeViewItemContent",
+     ".TreeViewRootUlStyles .TreeViewItemVisual",
+     ".prc-TreeView-TreeViewRootUlStyles-Mzrmj .prc-TreeView-TreeViewItemContent-RKsCI",
+     ".prc-TreeView-TreeViewRootUlStyles-Mzrmj .prc-TreeView-TreeViewItemVisual-naWzj",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"large\"]"
+    ]
+   },
+   {
+    "name": "--brand-Link-color-accent",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".locale-trigger:hover .locale-selector-trigger *"
+    ]
+   },
+   {
+    "name": "--base-sticky-header-height",
+    "refs": 5,
+    "withFallback": 5,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".sticky-header-wrapper.is-stuck",
+     ".sticky-header-shadow.is-stuck",
+     ".checks-header-wrapper.is-stuck",
+     ".sticky-file-header"
+    ]
+   },
+   {
+    "name": "--turbo-progress-bar-scale",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ":root > .turbo-progress-bar[data-render-mode=\"transform\"]"
+    ]
+   },
+   {
+    "name": "--pr-toolbar-sticky-header-height",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".sticky-file-header"
+    ]
+   },
+   {
+    "name": "--color-avatar-border",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".SessionsAuthHeader-module__avatarCoinBack__hHzg0::before"
+    ]
+   },
+   {
+    "name": "--bottom",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Overlay-Overlay-jfs-T:not([data-anchor-position]):not([data-variant=\"modal\"]), .prc-Overlay-Overlay-jfs-T[data-anchor-position=\"false\"]"
+    ]
+   },
+   {
+    "name": "--right",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Overlay-Overlay-jfs-T:not([data-anchor-position]):not([data-variant=\"modal\"]), .prc-Overlay-Overlay-jfs-T[data-anchor-position=\"false\"]"
+    ]
+   },
+   {
+    "name": "--left",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Overlay-Overlay-jfs-T:not([data-anchor-position]):not([data-variant=\"modal\"]):not([data-variant]), .prc-Overlay-Overlay-jfs-T[data-anchor-position=\"false\"]:not(.prc-Overlay-does-not-exist-pxAm4):not([data-variant])"
+    ]
+   },
+   {
+    "name": "--top",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Overlay-Overlay-jfs-T:not([data-anchor-position]):not([data-variant=\"modal\"]):not([data-variant]), .prc-Overlay-Overlay-jfs-T[data-anchor-position=\"false\"]:not(.prc-Overlay-does-not-exist-pxAm4):not([data-variant])"
+    ]
+   },
+   {
+    "name": "--anchored-overlay-top-override",
+    "refs": 4,
+    "withFallback": 4,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-side=\"inside-left\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-side=\"outside-left\"]",
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-side=\"inside-right\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-side=\"outside-right\"]"
+    ]
+   },
+   {
+    "name": "--control-bgColor-contrast",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-components-TextInputBaseWrapper-wY-n0:where([data-contrast])"
+    ]
+   },
+   {
+    "name": "--dialog-width",
+    "refs": 4,
+    "withFallback": 4,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Dialog-Dialog-G8cDF",
+     ".prc-Dialog-Dialog-G8cDF[data-position-narrow=\"center\"]"
+    ]
+   },
+   {
+    "name": "--BaseStyles-fgColor",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-src-BaseStyles-aopSS"
+    ]
+   },
+   {
+    "name": "--BaseStyles-fontFamily",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-src-BaseStyles-aopSS"
+    ]
+   },
+   {
+    "name": "--BaseStyles-lineHeight",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-src-BaseStyles-aopSS"
+    ]
+   },
+   {
+    "name": "--draggable-handle--bg-color",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-PageLayout-DraggableHandle-9s6B4::before"
+    ]
+   },
+   {
+    "name": "--draggable-handle--drag-opacity",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-PageLayout-DraggableHandle-9s6B4::before"
+    ]
+   },
+   {
+    "name": "--draggable-handle--transition",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-PageLayout-DraggableHandle-9s6B4::before"
+    ]
+   },
+   {
+    "name": "--hiddenDisplay-narrow",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Hidden-Hidden-cwE-I"
+    ]
+   },
+   {
+    "name": "--hiddenDisplay-regular",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Hidden-Hidden-cwE-I"
+    ]
+   },
+   {
+    "name": "--hiddenDisplay-wide",
+    "refs": 2,
+    "withFallback": 2,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Hidden-Hidden-cwE-I"
+    ]
+   },
+   {
+    "name": "--custom-font-size",
+    "refs": 16,
+    "withFallback": 16,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"large\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"medium\"], .prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"subtitle\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"large\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"medium\"], .prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"subtitle\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-regular=\"large\"]"
+    ]
+   },
+   {
+    "name": "--custom-font-weight",
+    "refs": 24,
+    "withFallback": 24,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"large\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"medium\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"subtitle\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"large\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"medium\"]"
+    ]
+   }
+  ],
+  "unreadableSheets": []
+ },
+ "colors": {
+  "visibleElements": 80,
+  "checked": 74,
+  "inPalette": 65,
+  "offPaletteDistinct": 0,
+  "offPaletteTotal": 0,
+  "offPalette": [],
+  "otherSchemeOnly": [],
+  "exempt": [
+   {
+    "color": "inline-style rgba(240,246,252,1)",
+    "count": 5,
+    "props": {
+     "fill": 5
+    },
+    "samples": [
+     "div.SessionsAuthHeader-module__authFormHeader__S9PBN > div.SessionsAuthHeader-module__authFormHeaderIcon__NP4aI > div.SessionsAuthHeader-module__authFormAvatarWrapperStatic__YE9pe > svg.octicon.octicon-mark-github.SessionsAuthHeader-module__avatarCoinGithub__n0H61",
+     "div.SessionsAuthHeader-module__authFormHeaderIcon__NP4aI > div.SessionsAuthHeader-module__authFormAvatarWrapperStatic__YE9pe > svg.octicon.octicon-mark-github.SessionsAuthHeader-module__avatarCoinGithub__n0H61 > path",
+     "span.Button-content > span.Button-visual.Button-leadingVisual > svg > svg.octicon",
+     "span.Button-visual.Button-leadingVisual > svg > svg.octicon > g",
+     "svg > svg.octicon > g > path"
+    ],
+    "reason": "inline-style"
+   },
+   {
+    "color": "inline-style rgba(234,67,53,1)",
+    "count": 1,
+    "props": {
+     "fill": 1
+    },
+    "samples": [
+     "svg > svg.octicon.color-fg-default > g > path"
+    ],
+    "reason": "inline-style"
+   },
+   {
+    "color": "inline-style rgba(66,133,244,1)",
+    "count": 1,
+    "props": {
+     "fill": 1
+    },
+    "samples": [
+     "svg > svg.octicon.color-fg-default > g > path"
+    ],
+    "reason": "inline-style"
+   },
+   {
+    "color": "inline-style rgba(251,188,5,1)",
+    "count": 1,
+    "props": {
+     "fill": 1
+    },
+    "samples": [
+     "svg > svg.octicon.color-fg-default > g > path"
+    ],
+    "reason": "inline-style"
+   },
+   {
+    "color": "inline-style rgba(52,168,83,1)",
+    "count": 1,
+    "props": {
+     "fill": 1
+    },
+    "samples": [
+     "svg > svg.octicon.color-fg-default > g > path"
+    ],
+    "reason": "inline-style"
+   }
+  ]
+ },
+ "icons": {
+  "octicons": 0,
+  "nonOcticon": [],
+  "masked": []
+ },
+ "unlayeredGiteaCss": [],
+ "cls": {
+  "total": 0.0091,
+  "shifts": [
+   {
+    "value": 0.0091,
+    "t": 1652,
+    "sources": [
+     "div.authentication-footer"
+    ]
+   }
+  ]
+ },
+ "timing": {
+  "domContentLoaded": 1172,
+  "load": 1324,
+  "transferSize": 13528,
+  "resources": 91,
+  "cssResources": 16,
+  "cssTransferBytesPerfApi": 179941
+ },
+ "document": {
+  "width": 390,
+  "height": 844,
+  "horizontalOverflow": false
+ },
+ "measureJson": "critic-nav-wl1-login/dark-390.measure.json",
+ "states": [],
+ "ms": 2710
+}

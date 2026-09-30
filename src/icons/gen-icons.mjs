@@ -74,6 +74,19 @@ export const MASKS = [
   'file', 'file-directory-fill', 'file-directory-open-fill', 'file-submodule', 'file-symlink-file', 'file-directory-symlink',
   'unverified', // w2 r1: signed-but-unverified commit badge in GitHub themes (data-display D-5)
   'issue-opened', 'git-pull-request', 'milestone', 'telescope', 'search', // w2 r1: navigation NI-1 (AppHeader icon buttons)
+  // final gate #1 (L1 r1) — requested or needed by open FG items (pruned from the bundle until a folder references one):
+  'book', 'home', 'people', // pages/people PPL-I1 (FG-052 profile/org Overview tab, followers line)
+  'plus', 'dash', 'screen-full', // pages/actions-packages-projects APK-M1 (FG-038 workflow-graph controls)
+  'chevron-right', 'chevron-down', 'chevron-up', // settings-admin SA-6 (token <details>), navigation FG-117 (NavList groups)
+  'person', 'person-fill', // data-display FG-011 (default-avatar placeholder)
+  'three-bars', // navigation (AppHeader hamburger, JS/Vue copies)
+  'code', 'tag', // pages/repo FG-086 (commit-row browse button), FG-095 (Tags Box header)
+  'file-diff', 'eye', // icons FG-114 (PR "Files changed" tab), FG-091 (colorblind theme markers)
+  'table', // icons L1 r2: Projects tabs (profile/org/repo nav) — github.com uses octicon-table, Gitea project(-symlink)
+  // navigation FG-050: leading visuals of the settings / org / repo / admin NavLists (mapping in docs/icons-audit.md §5)
+  'gear', 'paintbrush', 'shield-lock', 'key', 'key-asterisk', 'apps', 'organization', 'repo', 'package', 'play',
+  'webhook', 'server', 'mail', 'bell', 'blocked', 'git-branch', 'globe', 'terminal', 'file-binary', 'checklist',
+  'id-badge', 'sliders', 'meter', 'pulse', 'graph', 'clock', 'stack', 'cpu',
 ];
 
 async function loadSvgo() {

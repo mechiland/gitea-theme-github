@@ -125,8 +125,10 @@
   margin-right: 0;
 }
 
+/* github.com PR tabs: the tab icons take the tab text colour (--fgColor-default), selected or not */
 .pull.tabular.menu .svg {
   margin-right: 0;
+  color: var(--fgColor-default);
 }
 
 /* diffstat: "+35 −1" 12px semibold (header.important.css beats Gitea's tw-text-[13px]) + github.com DiffSquares:
@@ -222,12 +224,20 @@
     gap: var(--base-size-8);
   }
 
+  /* the meta text fills the column (start-justified it sized to its unwrapped content: 394px in 358 at 390) */
+  .issue-title-meta > :not(.issue-state-label) {
+    justify-self: stretch;
+    min-width: 0;
+  }
+
   .pull-desc code {
     max-width: 40%;
     vertical-align: bottom;
   }
 
-  .pull-desc code a {
+  /* FG-074: also the struck-through name of a deleted branch (span.tw-line-through, no link) */
+  .pull-desc code a,
+  .pull-desc code > span {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -244,4 +254,35 @@
     overflow-wrap: normal;
     min-width: auto;
   }
+}
+
+/* ---------- PR "Commits" tab (repo/pulls/commits.tmpl → commits_table.tmpl) ----------
+   github.com /pull/N/commits: no "N Commits" Box header (the count is on the tab), the day-grouped timeline
+   (pages/repo, FG-019) starts 16px under the tab bar. The header is kept when it carries a message (no commits). */
+.repository.pull.commits > .ui.container > .ui.top.attached.header:has(+ .commit-table .gh-commit-day) {
+  display: none;
+}
+
+.repository.pull.commits > .ui.container > .ui.top.attached.header + .commit-table:has(.gh-commit-day) {
+  margin-top: var(--base-size-16);
+}
+
+/* github.com PR Commits tab rows (pull/42/commits, 2026-09-30): title 16px / 24px 500 --fgColor-default, author
+   12px / 18px 400 --fgColor-muted (pages/repo gives .pull lists the classic 14px semibold look of compare pages) */
+.repository.pull.commits #commits-table td.message {
+  font-size: var(--text-body-size-large);
+  font-weight: var(--base-text-weight-medium);
+  line-height: var(--base-size-24);
+}
+
+.repository.pull.commits #commits-table td.author a.muted {
+  color: var(--fgColor-muted);
+  font-weight: var(--base-text-weight-normal);
+}
+
+/* FG-084: label pills in timeline events ("added the X labels") sat ~2px high (Gitea nudges both the link and
+   the Label with vertical-align 1–1.5px); github.com aligns the Label's text on the sentence baseline */
+.repository.view.issue .timeline-item .comment-text-line .labels-list > a.item,
+.repository.view.issue .timeline-item .comment-text-line .labels-list > a.item > .ui.label {
+  vertical-align: baseline;
 }

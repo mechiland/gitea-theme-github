@@ -9,6 +9,8 @@
  */
 
 .ui.message:not(.field *) {
+  --gh-flash-icon-color: var(--fgColor-muted);
+  --gh-flash-icon: var(--gh-octicon-info);
   margin: var(--base-size-16) 0;
   padding: var(--base-size-20) var(--control-medium-paddingInline-spacious);
   border: var(--borderWidth-thin) solid var(--borderColor-default);
@@ -37,47 +39,59 @@
   font-weight: var(--base-text-weight-semibold);
 }
 
-.ui.message:not(.field *) > :is(svg, .svg) {
+/* leading Octicon: 16px in the variant's fgColor, 12px before the text (Primer `.flash .octicon`). Gitea puts it
+   either directly in the message or at the start of its first paragraph (user/settings/account.tmpl `.ui.red.message
+   > p > svg`). Variants only set the colour token. */
+.ui.message:not(.field *) > :is(svg, .svg),
+.ui.message:not(.field *) > p:first-child > .svg:first-child {
   margin-right: var(--base-size-12);
-  color: var(--fgColor-muted);
+  color: var(--gh-flash-icon-color);
   vertical-align: text-bottom;
 }
 
 /* ---------- variants ---------- */
 .ui:is(.info, .blue).message:not(.field *) {
+  --gh-flash-icon-color: var(--fgColor-accent);
   border-color: var(--borderColor-accent-muted);
   background: var(--bgColor-accent-muted);
 }
 
 .ui:is(.success, .positive).message:not(.field *) {
+  --gh-flash-icon-color: var(--fgColor-success);
+  --gh-flash-icon: var(--gh-octicon-check-circle);
   border-color: var(--borderColor-success-muted);
   background: var(--bgColor-success-muted);
 }
 
 .ui:is(.error, .red, .negative).message:not(.field *) {
+  --gh-flash-icon-color: var(--fgColor-danger);
+  --gh-flash-icon: var(--gh-octicon-alert);
   border-color: var(--borderColor-danger-muted);
   background: var(--bgColor-danger-muted);
 }
 
 .ui.warning.message:not(.field *) {
+  --gh-flash-icon-color: var(--fgColor-attention);
+  --gh-flash-icon: var(--gh-octicon-alert);
   border-color: var(--borderColor-attention-muted);
   background: var(--bgColor-attention-muted);
 }
 
-.ui:is(.info, .blue).message:not(.field *) > :is(svg, .svg) {
-  color: var(--fgColor-accent);
+/* flash messages (base/alert.tmpl: RenderFlashMessage, validation errors) carry no icon → the variant's Octicon as a
+   mask in a hanging 16px + 12px column, aligned with the first 20px line */
+.ui.message.flash-message:not(:has(svg)) {
+  padding-left: calc(var(--control-medium-paddingInline-spacious) + var(--base-size-16) + var(--base-size-12));
 }
 
-.ui:is(.success, .positive).message:not(.field *) > :is(svg, .svg) {
-  color: var(--fgColor-success);
-}
-
-.ui:is(.error, .red, .negative).message:not(.field *) > :is(svg, .svg) {
-  color: var(--fgColor-danger);
-}
-
-.ui.warning.message:not(.field *) > :is(svg, .svg) {
-  color: var(--fgColor-attention);
+.ui.message.flash-message:not(:has(svg))::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--base-size-20) + (1lh - var(--base-size-16)) / 2);
+  left: var(--control-medium-paddingInline-spacious);
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  background-color: var(--gh-flash-icon-color);
+  mask: var(--gh-flash-icon) center / contain no-repeat;
 }
 
 /* ---------- attached (message glued to a box) ---------- */

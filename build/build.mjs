@@ -1,6 +1,6 @@
 // Builds dist/theme-github-{light,dark,auto}.css from src/ and (with --deploy) syncs them into Gitea's CUSTOM_PATH.
 //
-//   node build/build.mjs [--deploy] [--exclude a,b] [--no-lint] [--no-prune] [--no-rename]
+//   node build/build.mjs [--deploy] [--exclude a,b] [--no-lint] [--no-prune] [--no-rename] [--no-nest]
 //
 // Per folder: postcss-import resolves the folder's index.css; *.important.css files go to @layer gh-important.
 // A folder that fails to parse/compile or lint is EXCLUDED (reported in dist/build-report.json) — the rest
@@ -8,6 +8,8 @@
 // Primer tokens not transitively referenced by the mapping or any folder are pruned to respect the size budget.
 // Custom properties the theme itself defines (Primer tokens, --gh-octicon-* masks) get short names in the minified
 // files only (request PPL-1 addendum); dist/theme-*.src.css keeps the real names and dist/varmap.json maps them.
+// Last size step (loop 1, build/nest.mjs): shared selector prefixes of consecutive rules are factored into CSS nesting in
+// the minified files only, checked by lowering both texts and comparing every selector member (falls back to flat output).
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -17,6 +19,7 @@ import postcssImport from 'postcss-import';
 import {transform} from 'lightningcss';
 import {FOLDERS, THEMES, SRC, DIST, ROOT, CUSTOM_PATH, GITEA_URL, GITEA_CONTAINER, BUDGET_BYTES, layerName} from './folders.mjs';
 import {lintAll} from './lint.mjs';
+import {nest, verifyNest} from './nest.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (n) => argv.includes(`--${n}`);
@@ -24,7 +27,9 @@ const opt = (n) => { const i = argv.indexOf(`--${n}`); return i >= 0 ? argv[i + 
 const excluded = new Set((opt('exclude') || '').split(',').filter(Boolean));
 const report = {startedAt: new Date().toISOString(), folders: {}, themes: {}, deploy: null};
 const read = (p) => fs.readFileSync(p, 'utf8');
-const TARGETS = {chrome: 111 << 16, firefox: 113 << 16, safari: (16 << 16) | (5 << 8)};
+// Browsers with CSS nesting (`&`): Chrome/Edge 112+, Safari 16.5+, Firefox 117+ (build/nest.mjs output needs it).
+const TARGETS = {chrome: 120 << 16, firefox: 117 << 16, safari: (16 << 16) | (5 << 8)};
+const NEST = !flag('no-nest');
 
 function validate(css, filename) {
   // throws on syntax errors; returns nothing. Keeps modern syntax (targets are recent evergreen browsers).
@@ -184,6 +189,13 @@ for (const [name, meta] of Object.entries(THEMES)) {
     console.error(`✗ ${name}: minify failed: ${e.message}`);
     fs.writeFileSync(path.join(DIST, `${name}.debug.css`), source);
     process.exit(1);
+  }
+  if (NEST) {
+    const nested = nest(min);
+    const check = verifyNest(min, nested, transform);
+    transform({filename: `${name}.nested.css`, code: Buffer.from(nested), minify: false, targets: TARGETS, errorRecovery: false});
+    if (check.ok) { report.nest = report.nest || {}; report.nest[name] = {flatBytes: Buffer.byteLength(min), nestedBytes: Buffer.byteLength(nested), members: check.members}; min = nested; }
+    else { console.error(`! ${name}: nesting self-check failed (${check.reason}) — flat output kept`); report.nest = {...report.nest, [name]: {failed: check.reason}}; }
   }
   const banner = `/* GitHub theme for Gitea 1.27.3 · gitea-theme-github ${version} · ${primerVersion} · Octicons/Primer (MIT) */\n`;
   const metaBlock = `\ngitea-theme-meta-info{--theme-display-name:"${meta.display}";--theme-color-scheme:"${scheme}"}\n`;

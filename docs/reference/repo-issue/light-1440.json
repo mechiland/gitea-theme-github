@@ -31,147 +31,147 @@
  ],
  "expectedFailures": [],
  "ignoredRequests": [],
- "cssBytes": 333637,
+ "cssBytes": 334585,
  "cssFiles": [
   {
    "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
    "bytes": 2615
   },
   {
-   "url": "https://github.githubassets.com/assets/react-core.cbbd4117122d27f9.module.css",
-   "bytes": 434
+   "url": "https://github.githubassets.com/assets/repository-11ee8a031c040c1a.css",
+   "bytes": 5547
+  },
+  {
+   "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
+   "bytes": 7250
   },
   {
    "url": "https://github.githubassets.com/assets/light_high_contrast-48fdd0811afbab3c.css",
-   "bytes": 7649
-  },
-  {
-   "url": "https://github.githubassets.com/assets/app-runtime.bc6140f37acc15cb.module.css",
-   "bytes": 1520
+   "bytes": 7385
   },
   {
    "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
    "bytes": 7271
   },
   {
-   "url": "https://github.githubassets.com/assets/primer-4136ede8b2650a2d.css",
-   "bytes": 43336
-  },
-  {
-   "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
-   "bytes": 7271
-  },
-  {
-   "url": "https://github.githubassets.com/assets/repository-11ee8a031c040c1a.css",
-   "bytes": 5547
-  },
-  {
    "url": "https://github.githubassets.com/assets/github-7338c07b3a07b8be.css",
    "bytes": 21828
   },
   {
-   "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
-   "bytes": 7389
+   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
+   "bytes": 40848
   },
   {
-   "url": "https://github.githubassets.com/assets/44.9be6cfa7a8972e09.module.css",
+   "url": "https://github.githubassets.com/assets/app-runtime.70b2cadcfd63fdd3.module.css",
+   "bytes": 1518
+  },
+  {
+   "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
+   "bytes": 7366
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-4136ede8b2650a2d.css",
+   "bytes": 43600
+  },
+  {
+   "url": "https://github.githubassets.com/assets/react-core.c096e568423212a2.module.css",
+   "bytes": 698
+  },
+  {
+   "url": "https://github.githubassets.com/assets/m4.fec39dd01b1bfcab.module.css",
+   "bytes": 3920
+  },
+  {
+   "url": "https://github.githubassets.com/assets/v.0135404953d89e91.module.css",
+   "bytes": 7272
+  },
+  {
+   "url": "https://github.githubassets.com/assets/44.d69ac6945f0198ad.module.css",
    "bytes": 3480
   },
   {
-   "url": "https://github.githubassets.com/assets/29.98bb7c1b1004d01f.module.css",
-   "bytes": 6255
+   "url": "https://github.githubassets.com/assets/29.d55ed336d79f0913.module.css",
+   "bytes": 6375
   },
   {
-   "url": "https://github.githubassets.com/assets/m4.0ba3500f7e615e53.module.css",
-   "bytes": 4184
+   "url": "https://github.githubassets.com/assets/9x.87181dadfc67fd7b.module.css",
+   "bytes": 4142
   },
   {
-   "url": "https://github.githubassets.com/assets/qt.2959c2f57d8ef379.module.css",
-   "bytes": 3711
+   "url": "https://github.githubassets.com/assets/qt.e2d9000ad9215276.module.css",
+   "bytes": 3972
   },
   {
-   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
-   "bytes": 40849
-  },
-  {
-   "url": "https://github.githubassets.com/assets/v.4d13aaf00716d504.module.css",
-   "bytes": 7269
+   "url": "https://github.githubassets.com/assets/issues-react.0de7f5047d8e7d1c.module.css",
+   "bytes": 394
   },
   {
    "url": "https://github.githubassets.com/assets/9ec.1ab73a072f65d875.module.css",
-   "bytes": 3791
+   "bytes": 3528
   },
   {
-   "url": "https://github.githubassets.com/assets/kw.389601026ca7ce4f.module.css",
-   "bytes": 17471
+   "url": "https://github.githubassets.com/assets/notifications-subscriptions-menu.611eba93202fabff.module.css",
+   "bytes": 1262
   },
   {
-   "url": "https://github.githubassets.com/assets/9x.359ee68aace8c47b.module.css",
-   "bytes": 4138
+   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.6779928e8ca626b6.module.css",
+   "bytes": 639
   },
   {
-   "url": "https://github.githubassets.com/assets/issues-react.09493e9ded187a9c.module.css",
-   "bytes": 630
+   "url": "https://github.githubassets.com/assets/app-install-banner-partial.683b6d8b6c4fce1e.module.css",
+   "bytes": 412
   },
   {
-   "url": "https://github.githubassets.com/assets/notifications-subscriptions-menu.4c655ecdb259af1e.module.css",
-   "bytes": 1259
+   "url": "https://github.githubassets.com/assets/t.ee9b8e8ca9bf0b40.module.css",
+   "bytes": 3705
   },
   {
-   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.a1523bc43e1d725b.module.css",
-   "bytes": 396
+   "url": "https://github.githubassets.com/assets/4k.bd79987fda513edc.module.css",
+   "bytes": 17836
   },
   {
-   "url": "https://github.githubassets.com/assets/app-install-banner-partial.9b99004c798b710f.module.css",
-   "bytes": 420
-  },
-  {
-   "url": "https://github.githubassets.com/assets/primer-react-css.76a197f9dce25e3c.module.css",
-   "bytes": 35272
-  },
-  {
-   "url": "https://github.githubassets.com/assets/t.d7f0479eca0d90af.module.css",
-   "bytes": 3706
+   "url": "https://github.githubassets.com/assets/primer-react-css.e6a43c45f45572ae.module.css",
+   "bytes": 35257
   },
   {
    "url": "https://github.githubassets.com/assets/primer-react-brand-css.6a01c236ff527e7e.module.css",
-   "bytes": 71996
+   "bytes": 71990
   },
   {
    "url": "https://github.githubassets.com/assets/kq9.8ad2074125dec7f9.module.css",
-   "bytes": 410
+   "bytes": 646
   },
   {
    "url": "https://github.githubassets.com/assets/u2l.54b6ba2af351ee33.module.css",
-   "bytes": 390
+   "bytes": 391
   },
   {
-   "url": "https://github.githubassets.com/assets/gq.7919fe36e832754d.module.css",
-   "bytes": 4746
+   "url": "https://github.githubassets.com/assets/gq.fda7b9fb9ad99aaf.module.css",
+   "bytes": 4749
   },
   {
    "url": "https://github.githubassets.com/assets/c1.65ef997b93275132.module.css",
-   "bytes": 1777
+   "bytes": 1801
   },
   {
-   "url": "https://github.githubassets.com/assets/g.31d82d04a74d9d4e.module.css",
-   "bytes": 4258
+   "url": "https://github.githubassets.com/assets/2n.31a81531fe9f75b2.module.css",
+   "bytes": 3199
   },
   {
-   "url": "https://github.githubassets.com/assets/2n.5768534ff0d2862a.module.css",
-   "bytes": 3192
-  },
-  {
-   "url": "https://github.githubassets.com/assets/40o.e81040680844e52d.module.css",
-   "bytes": 4768
-  },
-  {
-   "url": "https://github.githubassets.com/assets/e8.c547e0fadd5a085d.module.css",
-   "bytes": 3743
+   "url": "https://github.githubassets.com/assets/40o.73a8e77842ca15d1.module.css",
+   "bytes": 5029
   },
   {
    "url": "https://github.githubassets.com/assets/fg.2616179aabbabe22.module.css",
-   "bytes": 666
+   "bytes": 689
+  },
+  {
+   "url": "https://github.githubassets.com/assets/e8.d4da58ecac1349ff.module.css",
+   "bytes": 3744
+  },
+  {
+   "url": "https://github.githubassets.com/assets/g.31d82d04a74d9d4e.module.css",
+   "bytes": 4227
   }
  ],
  "problems": [],
@@ -185,11 +185,167 @@
   "fontFamily": "\"Mona Sans VF\", -apple-system, \"system-ui\", \"Segoe UI\", \"Noto Sans Backtick Fix\", \"Noto Sans\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\""
  },
  "png": "repo-issue/light-1440.png",
+ "volatile": [
+  {
+   "kind": "relative-time",
+   "x": 209,
+   "y": 325,
+   "w": 146,
+   "h": 18
+  },
+  {
+   "kind": "relative-time",
+   "x": 113,
+   "y": 579,
+   "w": 2,
+   "h": 24
+  },
+  {
+   "kind": "relative-time",
+   "x": 213,
+   "y": 527,
+   "w": 93,
+   "h": 18
+  },
+  {
+   "kind": "relative-time",
+   "x": 149,
+   "y": 796,
+   "w": 836,
+   "h": 18
+  },
+  {
+   "kind": "relative-time",
+   "x": 149,
+   "y": 844,
+   "w": 836,
+   "h": 18
+  },
+  {
+   "kind": "relative-time",
+   "x": 113,
+   "y": 955,
+   "w": 2,
+   "h": 24
+  },
+  {
+   "kind": "relative-time",
+   "x": 248,
+   "y": 903,
+   "w": 96,
+   "h": 18
+  },
+  {
+   "kind": "relative-time",
+   "x": 149,
+   "y": 1139,
+   "w": 836,
+   "h": 18
+  },
+  {
+   "kind": "relative-time",
+   "x": 113,
+   "y": 1270,
+   "w": 2,
+   "h": 24
+  },
+  {
+   "kind": "relative-time",
+   "x": 213,
+   "y": 1218,
+   "w": 108,
+   "h": 18
+  },
+  {
+   "kind": "relative-time",
+   "x": 113,
+   "y": 1439,
+   "w": 2,
+   "h": 24
+  },
+  {
+   "kind": "relative-time",
+   "x": 197,
+   "y": 1387,
+   "w": 108,
+   "h": 18
+  },
+  {
+   "kind": "relative-time",
+   "x": 113,
+   "y": 1659,
+   "w": 2,
+   "h": 24
+  },
+  {
+   "kind": "relative-time",
+   "x": 213,
+   "y": 1607,
+   "w": 108,
+   "h": 18
+  },
+  {
+   "kind": "relative-time",
+   "x": 113,
+   "y": 1821,
+   "w": 2,
+   "h": 24
+  },
+  {
+   "kind": "relative-time",
+   "x": 197,
+   "y": 1769,
+   "w": 108,
+   "h": 18
+  },
+  {
+   "kind": "relative-time",
+   "x": 113,
+   "y": 1996,
+   "w": 2,
+   "h": 24
+  },
+  {
+   "kind": "relative-time",
+   "x": 241,
+   "y": 1917,
+   "w": 98,
+   "h": 18
+  },
+  {
+   "kind": "relative-time",
+   "x": 113,
+   "y": 2212,
+   "w": 2,
+   "h": 24
+  },
+  {
+   "kind": "relative-time",
+   "x": 234,
+   "y": 2160,
+   "w": 107,
+   "h": 18
+  },
+  {
+   "kind": "relative-time",
+   "x": 113,
+   "y": 2359,
+   "w": 2,
+   "h": 24
+  },
+  {
+   "kind": "relative-time",
+   "x": 241,
+   "y": 2280,
+   "w": 107,
+   "h": 18
+  }
+ ],
  "htmlTheme": "auto",
  "title": "Provide more installation options · Issue #35 · pemistahl/grex",
  "signedIn": null,
  "cssVars": {
-  "referenced": 1890,
+  "referenced": 1891,
   "defined": 2259,
   "unresolved": [
    {
@@ -1995,19 +2151,21 @@
  },
  "icons": {
   "octicons": 0,
-  "nonOcticon": []
+  "nonOcticon": [],
+  "masked": []
  },
+ "unlayeredGiteaCss": [],
  "cls": {
   "total": 0,
   "shifts": []
  },
  "timing": {
-  "domContentLoaded": 2112,
-  "load": 3035,
-  "transferSize": 43074,
+  "domContentLoaded": 2122,
+  "load": 2132,
+  "transferSize": 43044,
   "resources": 250,
   "cssResources": 38,
-  "cssTransferBytesPerfApi": 339522
+  "cssTransferBytesPerfApi": 339735
  },
  "document": {
   "width": 1440,
@@ -2015,5 +2173,5 @@
   "horizontalOverflow": false
  },
  "measureJson": "repo-issue/light-1440.measure.json",
- "ms": 4187
+ "ms": 3928
 }

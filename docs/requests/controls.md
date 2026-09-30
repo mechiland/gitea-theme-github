@@ -264,3 +264,47 @@ Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ra
    - Fix: Borderless textarea inside the editor Box; one input height; .default.text fgColor-default when it is a value; captions max-width none.
    - Critic refs: C121 (issue-detail-playground-reactions-alerts-tables, nit), C150 (labels, nit), C160 (repo-settings-branches, nit), C108 (repo-create, nit)
    - PNG: `shots/final-gate-critic-4/issue-dark-editor.png`, `shots/final-gate/repo-create/dark-390.png`, `shots/final-gate/repo-create/dark-1440.png`, `shots/final-gate/repo-create/light-390.png`
+
+# Controls (final gate #1, wave L1 round 1, 2026-09-30) — handled
+- **FG-048 — DONE.** `inputs.css` "search field": every `shared/search/*` group (`.ui.action.input` with an `input[type=search]` /
+  `input[name=q]` child) is a medium TextInput: 32px, 14px; the submit button that directly follows the input is drawn as
+  the leading search octicon (32px wide, transparent, --fgColor-muted → --fgColor-default on hover, focus-visible ring,
+  input padding-left 32px, = github.com /orgs/*/projects measured padding-left 32px). Groups with a dropdown / select
+  between input and button (dashboard issues/milestones search mode, packages type select) keep a joined trailing 32x32
+  IconButton. Excluded: pages/issues-prs' trailing-button scope (`:is(.issue-list, .milestone-issue-list,
+  .repository.milestones) .list-header-search`), which also covers the repo projects list — see CT-FG048 in
+  pages-issues-prs.md. Measured: /-/admin/users, /-/admin/orgs, /octo-org/-/projects, /explore/repos, /explore/code,
+  /org/octo-org/members, /-/admin/repos/unadopted → input 32px/14px, button 32x32 at x=0 (`shots/controls-fg1/r1.json`, `r2.json`).
+- **FG-060 — FORWARDED** to pages/issues-prs (CT-FG060): the 28px "+" comes from their sidebar sizing (page layer), so the
+  Select must go small there; proposed rule verified by injection (`shots/controls-fg1/dep-proposed.png`). The up/down
+  indicator stays: it is Primer Select's glyph (`@primer/css/forms/form-select.scss`), not the native arrow.
+- **FG-089 — DONE except the editor part.** (a) label edit dialog: a small `.ui.input` directly in a `.ui.form .field` is
+  medium now → Name / Description / Color all 32px/14px; (b) `.default.text` that shows a value (hidden input with a
+  non-empty `value`) → --fgColor-default (settings/branches "main"); (c) `.form .help` → `text-wrap: wrap` (Gitea's
+  `balance` broke captions at ~550px). (d) comment-editor double border → forwarded to pages/issues-prs (CT-FG089a,
+  it is their composer layout).
+- **SA-C1 — DONE.** `.form .help`: 12px / 18px (`--base-text-lineHeight-normal`), padding-bottom 0; inline-field `p` label
+  rule is `p:not(.help)` (org settings "(Enter -1 …)" measured 12px / 400 / 18px / --fgColor-muted).
+- **IP-C3 — DONE.** `.ui.buttons` no longer sets `isolation: isolate`; every SegmentedControl selector uses
+  `:has(> .active.button:not(.dropdown))`, so an opened dropdown button no longer greys a primary split button. Checked on
+  /octo-org/theme-playground/pulls/16 with the merge-style menu open (merge button stays green, menu over the content,
+  `shots/controls-fg1/merge-pair.png`; pages/issues-prs' own workaround is still active there, so it can now be dropped).
+
+# From pages/issues-prs (wave L1 r1, 2026-09-30) — re CT-FG048
+- pages/issues-prs narrowed every `.repository.milestones` selector to `.repository.milestones:not(.projects)` (the repo
+  projects list renders `.page-content.repository.projects.milestones`). The issue-search scope is now
+  `:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search` — please narrow
+  your exclusion the same way so the repo projects list gets the leading search icon like the org projects list.
+
+# Controls (final gate #1, wave L1 round 2, 2026-09-30) — handled
+- **pages/issues-prs re CT-FG048 — DONE.** The 5 leading-visual selectors in `inputs.css` now exclude
+  `:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search > *`, so the repo
+  projects list (/octo-org/theme-playground/projects) gets the leading search icon like the org projects list: measured
+  input 1102x32 (390: 244x32), padding 0 12 0 32, 14px; icon button 32x32 transparent; light + dark
+  (`shots/controls-fg2b/cc-projects-list`). Repo issues / milestones unchanged (trailing, pages/issues-prs).
+- Critic controls-wL1-r1 nits: search icon colour is now documented as static --fgColor-muted (dead hover colour rules
+  removed; github.com's leading visual does not change on hover). Input / Select / selection-dropdown focus ring is
+  drawn inside the box (`outline-offset: calc(var(--borderWidth-thick) * -1)`): org-projects search ring rows 16-17 /
+  46-47, pixel-identical to the github.com reference in light and dark. `.form .help:has(+ .field)` gets an 8px
+  bottom gap (repo/migrate "Access Token is required…" above the item checkboxes). Not changed: the leading icon
+  stays a tab stop after the input (it is Gitea's submit button; making it non-focusable needs a template change).

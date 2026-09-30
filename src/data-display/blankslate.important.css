@@ -1,0 +1,5 @@
+/* gh-important: Fomantic grid column widths are !important (`[class*="twelve wide computer"].column` → 75%); the
+   "no labels yet" Blankslate (blankslate.css, FG-058) uses the full Box width up to its own max-width. */
+.ui.centered.grid:has(form[action$="/initialize"]) > .column {
+  width: 100% !important;
+}

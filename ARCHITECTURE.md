@@ -61,7 +61,7 @@ Resulting order (low → high priority for normal declarations):
 1. `gitea` — all of Gitea's CSS (Fomantic, base, Tailwind `tw-*` utilities)
 2. `gh.tokens` — Primer tokens + Gitea variable mapping
 3. `gh.foundation` → `gh.controls` → `gh.overlays` → `gh.navigation` → `gh.data-display` → `gh.code` →
-   `gh.markdown` → `gh.pages-*` → `gh.dark`
+   `gh.markdown` → `gh.pages-*` → `gh.icons` → `gh.dark`
 
 For `!important` declarations the layer order inverts: Gitea's `tw-*` utilities (Tailwind `important: true`) and
 Fomantic `!important`s now beat our layered `!important`s — which is what we want for `tw-hidden` etc. When a folder
@@ -104,6 +104,10 @@ Consequences every builder must know:
 - `font-size`, `font-weight`, `font-family`, `line-height`, `border-radius`, `box-shadow`, `z-index`, durations must
   use tokens (error). Spacing/size literals other than `0`, `1px`, `2px` are warnings (critics count them).
 - Selector ownership: the same selector may not appear in two folders (except `dark`).
+- Rule 4 (`display`/`visibility` forbidden in `*.important.css`) has an exact-selector allow-list in `build/lint.mjs`
+  (`IMPORTANT_DISPLAY_ALLOW`, request CODE-L1-1): `.blame .lines-commit .blame-time.not-mobile` and
+  `.repository .diff-detail-box .diff-detail-stats` — elements Gitea hides on mobile with its own `display:none !important`
+  that github.com shows; neither can carry `tw-hidden`.
 
 Useful Primer tokens (all available as `var(--…)`): `--fgColor-{default,muted,accent,success,danger,attention,severe,done,onEmphasis,disabled}`,
 `--bgColor-{default,muted,inset,emphasis,accent-muted,accent-emphasis,success-*,danger-*,…}`,
@@ -136,6 +140,7 @@ folder's files) and optionally `*.important.css` (see §3). **A builder edits on
 | `pages/people` | dashboard/feed, user profile, org home/teams/members, explore, notifications | `.dashboard*`, `.feeds`, `.user.profile`, `.org*` page scopes, `.explore*`, `.notifications*`, heatmap | github.com dashboard, profile, org, explore |
 | `pages/settings-admin` | user/repo/org settings, admin panel | `.user.settings`, `.repository.settings`, `.organization.settings`, `.admin*` page scopes | github.com settings pages |
 | `pages/auth` | sign-in, sign-up, forgot password, 2FA, install | `.user.signin`, `.user.signup`, `.page-content.user.*` auth forms | github.com login |
+| `icons` → `gh.icons` (loop 1, request IC-1) | theme-scoped Octicon swaps (CSS masks) and dropped brand markers | `.svg.gitea-colorblind-*`, `.pull.tabular.menu > .item > .svg.octicon-diff`, `overflow-menu .item > .svg.octicon-project`, `.overflow-menu-popup > .item > .svg.octicon-project(-symlink)` | Octicons |
 | `dark` → `gh.dark` | dark-only exceptions after the whole-site dark pass | may repeat any selector (exempt from ownership), emitted only for dark (and inside `@media (prefers-color-scheme: dark)` in auto) | — |
 
 Ownership rules: component folders own **generic** selectors (`.ui.button` everywhere); page folders own selectors
@@ -209,6 +214,16 @@ column colors, repo units, federation, wiki clone box, etc.) get the **closest P
   never renamed. `dist/theme-github-*.src.css` keeps the real names; `dist/varmap.json` maps short → Primer name.
   So in DevTools a computed `--fgColor-muted` reads as `--p…` — look it up in varmap.json, or build with `--no-rename`
   (identical rendering: pixel-diffed on 8 routes × 2 schemes, only the footer's server-timing text differs).
+- Prefix nesting (loop 1, integrator; `build/nest.mjs`): as the last step, in the minified `dist/theme-github-*.css` only,
+  runs of **adjacent** rules whose selectors share a leading complex selector P are written as CSS nesting
+  (`P X{…}P>Y{…}` → `P{& X{…}&>Y{…}}`, recursively; a rule equal to P becomes the parent). `&` = `:is(P)` with one complex
+  P, so matching and specificity are unchanged, and adjacency keeps the cascade order. Every build self-checks it: both
+  texts are lowered with Lightning CSS for a nesting-less browser and compared selector member by selector member
+  (container path + selector + declarations, in order); on any difference the flat output is kept and the report says why
+  (`build-report.json → nest`). Saves ≈ 51 KB per file (auto 347,273 → 295,880 B at revision 85fbd66d9d). Browser floor
+  (TARGETS): Chrome/Edge 112+ (target 120), Safari 16.5+, Firefox 117+ — all evergreen since 2023. `--no-nest` builds the
+  flat file (identical rendering: pixel-diffed, STATUS.json → budget.loop1). `*.src.css` stays flat, so coverage and the
+  lint are unaffected; in DevTools nested rules show as `& …` under their parent.
 - `npm run deploy` — build, then atomically copy the three files to `CUSTOM_PATH/public/assets/css/`, copy icons,
   bump `github_revision` in `head_style.tmpl`, `gitea manager reload-templates`, then **fetch each file back from
   Gitea and compare SHA-256** (the deploy fails if Gitea serves different bytes). Reports `restartRequired` when theme
@@ -218,7 +233,10 @@ column colors, repo units, federation, wiki clone box, etc.) get the **closest P
 
 ## 10. Budget
 
-- ≤ 300 KB per theme file minified (build fails otherwise). Current sizes in `docs/STATUS.json`.
+- ≤ 300 KB per theme file minified (build fails otherwise); gate for every loop: ≤ 295 KB. Current sizes in `docs/STATUS.json`.
+  Loop 1 (after wave L1, 2026-09-30): the wave added 63.6 KB of flat CSS (auto 283,706 → 347,273 B; per-layer growth in
+  STATUS.json → budget.loop1); the lossless prefix nesting (§9) brings the files to auto 295,880 B (288.9 KB), light
+  290,683 B, dark 291,734 B — no rules were deleted.
   Current (after the 2026-09-30 trim round, revision `56d1bf8f9d`; KB = 1024 B): `theme-github-auto.css` **282,796 B
   (276.2 KB)**, `theme-github-light.css` **278,760 B (272.2 KB)**, `theme-github-dark.css` **278,777 B (272.2 KB)**;
   all three are under the 285 KB trim target, which leaves ~8.8 KB (auto) of headroom for the dark pass.

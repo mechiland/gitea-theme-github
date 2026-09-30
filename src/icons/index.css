@@ -1,0 +1,8 @@
+/* icons → @layer gh.icons (proposed to the integrator: docs/requests/integrator.md "icons L1 r1").
+   Theme-scoped Octicon swaps for glyphs a server file cannot (or must not, because CUSTOM_PATH/public/assets/img/svg
+   is global for every theme) replace. Recipe: paint the svg box with currentColor through an Octicon mask
+   (`--gh-octicon-*`, src/icons/octicon-masks.css) and hide the original drawing. Size, color and spacing stay with
+   the folder that owns the surrounding component. One file per surface: */
+@import "theme-menu.css";
+@import "pr-tabs.css";
+@import "nav-tabs.css";

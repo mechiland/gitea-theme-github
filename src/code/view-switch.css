@@ -1,0 +1,93 @@
+/*
+ * Preview | Code | Blame switch of the file and blame headers (FG-021). Markup from the github-* branch of
+ * templates/repo/view_file.tmpl and templates/repo/blame.tmpl (ARCHITECTURE.md §7):
+ *   div.gh-file-view-switch[role=group] > a.gh-file-view-switch-item(.selected[aria-current=page])
+ * Primer SegmentedControl as github.com's blob header renders it (measured on
+ * github.com/pemistahl/grex/blame/main/README.md, 1440, light + dark):
+ *   track 28px, 1px --borderColor-default (--controlTrack-borderColor-rest), radius 6, --controlTrack-bgColor-rest;
+ *   items 14px/20px --fgColor-default, 4px inset around an 8px-padded label ("Preview" item 79px);
+ *   selected item = knob: the full 28px box (overlapping the track border), 1px --controlKnob-borderColor-rest,
+ *   --controlKnob-bgColor-rest, radius 6, label padding 12px, semibold;
+ *   1×12px --borderColor-default divider 8px from the top between two unselected items;
+ *   hover / press: the inset label box turns --controlTrack-bgColor-hover / -active (radius 4).
+ * Gitea's own controls that duplicate the switch stay in the DOM (plugins drive them) and are hidden here:
+ * the source / rendered icon toggle and the Blame link (file view), the "Normal View" link (blame).
+ */
+.gh-file-view-switch {
+  display: inline-flex;
+  flex: none;
+  align-items: stretch;
+  height: var(--control-small-size);
+  margin-right: var(--base-size-8);
+  border: var(--borderWidth-thin) solid var(--controlTrack-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background: var(--controlTrack-bgColor-rest);
+  font-family: var(--fontStack-sansSerif);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--base-size-20);
+}
+
+.gh-file-view-switch-item {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--base-size-12);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-default);
+  white-space: nowrap;
+}
+
+/* the inset hover / press box (Primer: the label span, 4px inside the item, radius 4) */
+.gh-file-view-switch-item::before {
+  content: "";
+  position: absolute;
+  inset: var(--base-size-4);
+  z-index: -1;
+  border-radius: calc(var(--borderRadius-medium) - var(--borderWidth-thick));
+}
+
+.gh-file-view-switch-item:hover {
+  color: var(--fgColor-default);
+  text-decoration: none;
+}
+
+.gh-file-view-switch-item:not(.selected):hover::before {
+  background: var(--controlTrack-bgColor-hover);
+}
+
+.gh-file-view-switch-item:not(.selected):active::before {
+  background: var(--controlTrack-bgColor-active);
+}
+
+.gh-file-view-switch-item:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+
+/* divider between two unselected items */
+.gh-file-view-switch-item:not(.selected) + .gh-file-view-switch-item:not(.selected)::after {
+  content: "";
+  position: absolute;
+  top: var(--base-size-8);
+  left: calc(-1 * var(--borderWidth-thin));
+  width: var(--borderWidth-thin);
+  height: var(--base-size-12);
+  background: var(--borderColor-default);
+}
+
+.gh-file-view-switch-item.selected {
+  z-index: 1;
+  margin: calc(-1 * var(--borderWidth-thin));
+  border: var(--borderWidth-thin) solid var(--controlKnob-borderColor-rest);
+  background: var(--controlKnob-bgColor-rest);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+/* duplicates of the switch (see the header comment) */
+.file-header:has(.gh-file-view-switch) .file-view-toggle-buttons,
+.file-header:has(.gh-file-view-switch) .file-actions > .ui.buttons > a.button[href*="/blame/"],
+.page-content.blame .file-header:has(.gh-file-view-switch) .file-actions > .ui.buttons > a.button[href*="/src/"]:not([href*="/src/commit/"]) {
+  display: none;
+}

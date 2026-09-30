@@ -1,0 +1,43 @@
+/*
+ * Issue detail (not PRs): github.com's issue view has no avatar column — each comment Box starts at the content
+ * edge with a 20px avatar inside its header, and the 2px timeline line runs 16px inside the Boxes' left edge through
+ * the event badges (docs/reference/repo-issue/light-1440.png). The PR conversation keeps the classic layout
+ * (40px avatar outside the Box, data-display's timeline).
+ * Gitea: .comment-list margin-left 40px + padding-left 16px, items margin-left 16px, comment Box margin-left -16px,
+ * .timeline-avatar absolutely placed in the gutter; .inline-timeline-avatar (24px, inside .comment-header-left) is
+ * the phone avatar, hidden on desktop. Below 768px Gitea and data-display already use the inline avatar.
+ * Scope: the issue view is `.repository.view.issue` without the PR tab bar (.pull.tabs).
+ */
+@media (min-width: 768px) {
+  .repository.view.issue:not(:has(.pull.tabs)) .comment-list {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  /* the line through the badge centres (item edge = Box edge + 16px) */
+  .repository.view.issue:not(:has(.pull.tabs)) .comment-list::before {
+    left: var(--base-size-16);
+  }
+
+  .repository.view.issue:not(:has(.pull.tabs)) .comment-list .timeline-item .timeline-avatar {
+    display: none;
+  }
+
+  /* no avatar to point at: no speech-bubble caret on the comment header or the composer */
+  .repository.view.issue:not(:has(.pull.tabs)) .comment-list .avatar-content-left-arrow::before,
+  .repository.view.issue:not(:has(.pull.tabs)) .comment-list .avatar-content-left-arrow::after {
+    display: none;
+  }
+
+  .repository.view.issue:not(:has(.pull.tabs)) .comment-list .timeline-item .comment-header-left > .inline-timeline-avatar {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    margin: 0 var(--base-size-4) 0 0;
+  }
+
+  .repository.view.issue:not(:has(.pull.tabs)) .comment-list .comment-header-left > .inline-timeline-avatar img.ui.avatar {
+    width: var(--base-size-20);
+    height: var(--base-size-20);
+  }
+}

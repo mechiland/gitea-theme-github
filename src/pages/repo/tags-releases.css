@@ -198,10 +198,11 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--base-size-4);
+  gap: var(--base-size-4) 0;
   margin: 0 0 var(--base-size-16);
   padding: 0 0 var(--base-size-24);
   border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  font-size: 0; /* see below */
 }
 
 /* author semibold (github.com 14/600); a bot / deleted user is a bare text node in the span, not a link */
@@ -216,8 +217,7 @@
   color: var(--fgColor-muted);
 }
 
-#release-list .author > .ui.avatar,
-#release-list .author > .svg {
+#release-list .author > * {
   margin: 0;
 }
 
@@ -226,11 +226,6 @@
    hidden (font-size 0 on the row, restored on every span) and the dot is drawn before .ahead. The spacing is a
    trailing 4px margin on each span instead of a column gap, so the (empty) anonymous item adds nothing and a wrapped
    part starts flush left. */
-#release-list .detail > p {
-  column-gap: 0;
-  font-size: 0;
-}
-
 #release-list .detail > p > span {
   margin-right: var(--base-size-4);
   font-size: var(--text-body-size-medium);
@@ -260,6 +255,11 @@
   font-weight: var(--base-text-weight-semibold);
   line-height: var(--text-title-lineHeight-medium);
   cursor: pointer;
+}
+
+/* github.com keeps the disclosure marker at 14px next to the 20px "Assets" title */
+#release-list summary::marker {
+  font-size: var(--text-body-size-medium);
 }
 
 #release-list .detail > details.download[open] > summary {
@@ -303,6 +303,11 @@
     column-gap: var(--base-size-8);
     font-size: calc(var(--base-size-24) + var(--base-size-2));
     line-height: var(--base-text-lineHeight-normal);
+  }
+
+  /* the byline wraps here: no "·" leading the wrapped "N commits to main since this release" line */
+  #release-list .detail > p > .ahead::before {
+    content: none;
   }
 
   /* the state Label sits at the right end of the title row (github.com @390) */

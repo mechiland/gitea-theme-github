@@ -226,7 +226,67 @@ Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ra
    - Fix: CSS masks with Octicons (dot-fill / sync for running; eye for colorblind) in github themes; brand logos (gitea-gitea, feishu, matrix, npm) stay by §6.
    - Critic refs: C048 (actions-list, minor), C084 (user-settings-appearance, nit)
    - PNG: `shots/final-gate/actions-list/dark-1440.png`, `shots/final-gate/actions-list/light-1440.png`, `shots/final-gate/user-settings-appearance/dark-1440.png`, `shots/final-gate/user-settings-appearance/light-1440.png`
+   - **DONE (icons L1 r1)** — colorblind markers → `eye` mask (`src/icons/theme-menu.css`); `gitea-running` kept: it *is* github.com's in-progress icon (same paths, fgColor-attention, 1s rotation — re-verified, docs/icons-audit.md §5); audit reclassification asked (integrator IC-2). Live once integrator IC-1 registers the icons layer.
 2. **FG-114 [theme-fixable-css] PR 'Files Changed' tab uses octicon-diff (bare ±); github.com uses file-diff** — impact 1 (judges 0, critic wt 1; routes: repo-pull)
    - Fix: Mask with --gh-octicon-file-diff (navigation applies it on the tab).
    - Critic refs: C142 (repo-pull, nit)
    - PNG: `shots/final-gate/repo-pull/dark-1440.png`, `shots/final-gate/repo-pull/light-1440.png`
+   - **DONE (icons L1 r1)** — `src/icons/pr-tabs.css` masks the tab's octicon-diff with `file-diff` (icons owns it, navigation needn't); live once integrator IC-1 lands. Sim `shots/icons-l1r1/sim/cmp-repo-pull.png`.
+
+# From pages/people (final gate #1, wave L1 round 1) — PPL-I1: mask `book` (FG-052)
+What: add `book` to `MASKS` in src/icons/gen-icons.mjs (→ `--gh-octicon-book` in src/icons/octicon-masks.css).
+Why: FG-052 — github.com's profile Overview tab icon is octicon-book, Gitea renders octicon-info
+(templates/user/overview/header.tmpl:5). src/pages/people/profile.css already references
+`var(--gh-octicon-book, inherit)` on `.user.profile overflow-menu .item > .octicon-info`; every declaration there is
+written so that it is invalid while the mask is missing (Gitea's info icon stays, no blank or square glyph), so it
+switches on by itself once the mask exists — no further change in pages/people.
+Proposed diff (src/icons/gen-icons.mjs, MASKS array): `+  'book',`
+(Optional, same technique, not referenced yet: `home` for the org Overview tab and `people` for the profile
+followers line — github.com uses both; say if you add them and pages/people will reference them.)
+- **DONE (icons L1 r1)** — `book`, `home`, `people` added; `book` is live since deploy 9ee594a4be (Overview tab shows the book, `shots/icons-l1r1/live/cmp-live.png`).
+
+# From pages/actions-packages-projects (final gate #1, loop 1 — FG-038)
+## APK-M1 — three more Octicon masks: `plus`, `dash`, `screen-full`
+- **What:** add `'plus', 'dash', 'screen-full'` to `MASKS` in `src/icons/gen-icons.mjs` and regenerate
+  `src/icons/octicon-masks.css` (no SVG file changes, no restart).
+- **Why:** FG-038 (judges: "zoom icons … instead of bottom-right fullscreen/-/+"). github.com's workflow-graph controls
+  are `octicon-screen-full` + a `dash | plus` ButtonGroup; Gitea's Vue WorkflowGraph bundles `octicon-sync`,
+  `octicon-zoom-out`, `octicon-zoom-in` (JS, not overridable by file). `src/pages/actions-packages-projects/action-run.css`
+  already references `var(--gh-octicon-screen-full|dash|plus)` on `.graph-controls .svg.octicon-{sync,zoom-out,zoom-in}`
+  with a safe fallback (the `background` layer only resolves when the var exists), so today the original magnifier
+  icons still show; once the masks exist the buttons show the GitHub glyphs. The build currently warns
+  `! --gh-octicon-plus is referenced but not defined` (×3) — expected until this lands.
+- **Diff:**
+```diff
+-  'issue-opened', 'git-pull-request', 'milestone', 'telescope', 'search', // w2 r1: navigation NI-1 (AppHeader icon buttons)
++  'issue-opened', 'git-pull-request', 'milestone', 'telescope', 'search', // w2 r1: navigation NI-1 (AppHeader icon buttons)
++  'plus', 'dash', 'screen-full', // FG-038: Actions workflow-graph zoom controls (pages/actions-packages-projects)
+```
+- **DONE (icons L1 r1)** — added; live since deploy 9ee594a4be: the graph controls render screen-full / dash / plus, 16×16, fgColor-muted, both schemes (`shots/icons-l1r1/live/cmp-live.png`, `live/report.json`).
+
+# From pages/repo (final gate #1 loop 1, round 1)
+## PR-IC-1: two Octicon masks for pages/repo (FG-086, FG-095)
+Please add to `src/icons/octicon-masks.css` (same generator as the existing 21 masks):
+- `--gh-octicon-code` (octicon `code`, 16px) — FG-086: commit rows' browse button renders `octicon-file-code`
+  (templates/repo/commits_list.tmpl `a.view-commit-path > svg.octicon-file-code`); github.com uses `code` (<>).
+  pages/repo would then add `#commits-table .view-commit-path > .svg { mask: var(--gh-octicon-code) center / 16px no-repeat; background: currentColor }`
+  (the path fill is hidden by `fill: transparent` in the same rule).
+- `--gh-octicon-tag` (octicon `tag`, 16px) — FG-095: `::before` icon in the tags Box header.
+Not implemented in this round because referencing an undefined mask var would be flagged as an unresolved variable.
+Note also: pages/repo is at 31,740 B of its 31 KiB cap, so each of these needs an equal trim first.
+- **DONE (icons L1 r1)** — `--gh-octicon-code` and `--gh-octicon-tag` exist (catalogue `shots/icons-l1r1/masks-catalogue.png`); each is pruned until referenced (code 0.45 KB, tag 0.49 KB once used).
+
+# From pages/people (final gate #1, wave L1 round 2) — PPL-I2: mask `table`
+github.com's user and org "Projects" tab uses octicon-table (Gitea: octicon-project-symlink). pages/people already
+references `--gh-octicon-table` in src/pages/people/profile.css (guarded: inert while the mask does not exist), so please
+add `table` to the generated masks (src/icons/gen-icons.mjs list). `home` is now referenced too (org Overview tab).
+
+# Icons builder — wave L1, round 2 (status)
+- FG-091 (colorblind): **changed to "marker hidden"** (`display: none`, github.com has no marker). The critic noted that
+  `eye` made both variants identical and means "watch". The description line still names the variant. **Not live until
+  integrator IC-1.** Audit reclassification of hidden svgs → integrator IC-4.
+- FG-091 (`gitea-running`): kept, as it matches github.com. Audit → integrator IC-2 (still open).
+- FG-114: unchanged (`file-diff`). **Not live until IC-1.** IC-1 reminder filed.
+- New: `table` mask (66 masks). The repo Projects tab and the overflow popup → `table` (`nav-tabs.css`, waits on IC-1).
+  The profile/org tabs were already swapped by pages/people and went live with this deploy.
+- Evidence: `docs/icons-audit.md` §5 "L1 round 2", `shots/icons-l1r2/`.

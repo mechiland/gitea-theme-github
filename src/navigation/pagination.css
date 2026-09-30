@@ -123,11 +123,16 @@
   visibility: hidden;
 }
 
-/* narrow: Gitea keeps only First / Previous / current / Next / Last and drops the labels (menu.css); restate it,
-   because the base rule above sets display on every item */
+/* narrow: Gitea keeps only First / Previous / current / Next / Last (menu.css); restate it, because the base rule
+   above sets display on every item. First / Last are icon-only, Previous / Next keep the text like github.com. */
 @media (max-width: 767.98px) {
   .ui.pagination.menu .item:not(.active, .navigation),
-  .ui.pagination.menu .item.navigation span.navigation_label {
+  .ui.pagination.menu .item.navigation:has(> .gitea-double-chevron-left, > .gitea-double-chevron-right) > .navigation_label {
     display: none;
+  }
+
+  /* Gitea also drops the Previous / Next labels; github.com's narrow Pagination keeps them (FG-059) */
+  .ui.pagination.menu .navigation_label {
+    display: inline;
   }
 }

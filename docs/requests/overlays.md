@@ -28,15 +28,15 @@ preventDuplicates, the default). Needs `src/icons/octicon-masks.css` in the buil
 
 Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only theme-fixable items for this folder are listed; `theme-fixable-template` items need the integrator to install a github-* template branch first (this folder styles the result). Trim before adding (budget caps).
 
-1. **FG-094 [theme-fixable-css] Flash banners: danger icon in fgColor-default with 4px gap; validation flash has no Octicon/dismiss** — impact 4 (judges 0, critic wt 4; routes: signup, user-settings-account)
+1. **FG-094 [theme-fixable-css] Flash banners: danger icon in fgColor-default with 4px gap; validation flash has no Octicon/dismiss** — DONE (overlays L1 r1: flash.css — icons inside the first `<p>` get the variant fgColor + 12px margin; icon-less `.flash-message`s get a hanging 16px alert / info / check-circle mask; no dismiss button: needs markup + JS) — impact 4 (judges 0, critic wt 4; routes: signup, user-settings-account)
    - Fix: .flash-error .svg fgColor-danger, 12px gap; ::before alert mask when Gitea renders no icon.
    - Critic refs: C053 (user-settings-account, minor), C135 (signup, nit)
    - PNG: `shots/final-gate-critic-1/usa-flash-l.png`, `shots/final-gate/signup/dark-1440.png`, `shots/final-gate/signup/light-1440.png`, `shots/final-gate/user-settings-account/dark-1440.png`
-2. **FG-103 [theme-fixable-css] Destructive confirm dialogs use a green primary 'Confirm' (Primer: danger button)** — impact 3 (judges 0, critic wt 3; routes: labels)
+2. **FG-103 [theme-fixable-css] Destructive confirm dialogs use a green primary 'Confirm' (Primer: danger button)** — DONE (overlays L1 r1: dialog.css — delete/remove/leave/revoke/disable/cancel modal ids + id-less fetch-action confirms on pages whose confirm triggers are all destructive re-map the primary button tokens to --button-danger-*; mixed pages such as the project board keep green) — impact 3 (judges 0, critic wt 3; routes: labels)
    - Fix: Style the confirm button of delete modals (data-modal-confirm / .delete modals) as danger.
    - Critic refs: C149 (labels, minor)
    - PNG: `shots/final-gate/labels/dark-390.png`
-3. **FG-121 [theme-fixable-css] Long ActionMenu (theme picker) has no scroll affordance** — impact 1 (judges 0, critic wt 1; routes: user-settings-appearance)
+3. **FG-121 [theme-fixable-css] Long ActionMenu (theme picker) has no scroll affordance** — DONE (overlays L1 r1: action-menu.css — Select / scrolling-list caps end mid-row (7.5 / 9.5 rows desktop, 3.5 phone) + scroll shadows on every dropdown list) — impact 1 (judges 0, critic wt 1; routes: user-settings-appearance)
    - Fix: Bottom fade / visible scrollbar in overflowing menus.
    - Critic refs: C085 (user-settings-appearance, nit)
    - PNG: `shots/final-gate/user-settings-appearance/light-1440.png`

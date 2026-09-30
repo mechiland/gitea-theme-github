@@ -159,3 +159,14 @@
 .ui.warning.header {
   border-color: var(--borderColor-attention-emphasis);
 }
+
+/* FG-058: Fomantic makes attached headers / segments / tables calc(100% + 2px) wide with -1px side margins, so every
+   Box built from them sticks out 1px on each side of its siblings (compare page: commits Box 2px wider than the
+   branch picker and the PR form). Primer Boxes are flush with their column. */
+.ui.attached.segment,
+.ui.attached.header,
+.ui.attached.table {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: 0;
+}

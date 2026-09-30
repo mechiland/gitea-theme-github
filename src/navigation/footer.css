@@ -3,10 +3,12 @@
  * no border-top, transparent bg, 12px / 18px --fgColor-muted text and links, links 16px apart
  * (margin 0 8px), 24px logo mark first. Gitea's own logo stands in for the GitHub mark (no GitHub marks).
  * Gitea: base/footer_content.tmpl `.page-footer > .left-links (Powered by, version, timing) + .right-links
- * (theme menu, language menu, Licenses, API)`.
+ * (theme menu, language menu, Licenses, API)`. Order here: logo, Powered by Gitea, theme, language, Licenses, API,
+ * Version (the admin's version link to /-/admin/config stays).
  */
 
 .page-footer {
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -19,10 +21,20 @@
   line-height: var(--base-text-lineHeight-normal);
 }
 
+/* one flowing row like github.com: the two link groups dissolve into the footer's flex row, so the version string can
+   go last, after the links (FG-026). The server-timing line ("Page: 27ms Template: 3ms", the span with <strong>s)
+   is diagnostic output, not a function: hidden. "Powered by Gitea" stays next to the logo. */
 .page-footer .left-links,
 .page-footer .right-links {
-  gap: var(--base-size-4) var(--base-size-16);
-  min-width: 0;
+  display: contents;
+}
+
+.page-footer .left-links > span:has(> strong) {
+  display: none;
+}
+
+.page-footer .left-links > span {
+  order: 1;
 }
 
 .page-footer .left-links::before {
@@ -41,10 +53,6 @@
 .page-footer a:hover {
   color: var(--fgColor-accent);
   text-decoration: underline;
-}
-
-.page-footer .left-links strong {
-  font-weight: var(--base-text-weight-normal);
 }
 
 .page-footer .right-links > a {

@@ -76,7 +76,7 @@ In `.markup pre.code-block > code.chroma` (e.g. octo-org/theme-playground README
 `.file-view.markup` padding to you (github.com: 32px on every side, confirmed at 1440 and 390).
 
 # Integrator (end of wave 2, 2026-09-30)
-## C-5 Horizontal overflow on the directory view at 390 (regression vs built-in)
+## C-5 **DONE (code L1r1, with FG-020)** Horizontal overflow on the directory view at 390 (regression vs built-in)
 /octo-org/grex/src/branch/main/src at 390 (route directory-tree, both schemes): document 421px wide; the only element
 past the viewport is `a.m-commit-count.muted` (x 393–421), the latest-commit History link un-hidden by
 src/code/file-list.css. gitea-auto has no overflow on this page (shots/baseline-gitea-auto-w2). Also reported by the
@@ -97,6 +97,7 @@ shots/critic-pages/repo-overflow.mjs.
 
 # Integrator (end of wave 3, 2026-09-30)
 - **C-5** (directory-tree 390 overflow, 31px, regression vs built-in) is still OPEN for code; the proposed diff above (pages/repo, w3 r3) is ready. Measured again in shots/integrate-w3 (see docs/STATUS.json audit.horizontalOverflow390).
+- **PERF-1 DONE (code L1r1):** `:has(+ tr.top-line-blame)` removed (next segment draws the rule), Rust/markdown syntax rules keyed by subject class; blame style recalc code share ≈ 56 ms → ≈ 17 ms (CDP RecalcStyleDuration median of 14 loads: 156 vs 139 ms without code); computed colours of every chroma span identical on 7 pages.
 - **PERF-1 (new, budget ARCHITECTURE §10): blame DCL +150 ms vs built-in.** Route blame (/octo-org/grex/blame/…):
   gitea-auto 278–329 ms, github-auto 446–483 ms on all 4 variants in 3 runs (shots/integrate-w3,
   shots/integrate-w3-budget/run-{1,2}). Folder bisect (build --exclude, 8 loads each,
@@ -116,61 +117,77 @@ Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ra
    - Fix: directory-tree: let a.m-commit-count wrap/shrink (github.com wraps into a 2-line commit box). Unified diff: contain the table (overflow-x:auto on .file-body, pre in inline comments white-space:pre-wrap / max-width:100%). Split diff at <768: let .conversation-holder span both columns (colspan via grid) or fall back to unified layout for comment rows.
    - Critic refs: C143 (directory-tree, blocker), C152 (pr-files-changed-unified-playground-large-diff, blocker), C122 (pr-files-changed-split-playground-large-diff, major)
    - PNG: `shots/final-gate/directory-tree/light-390.png`, `shots/final-gate-critic-5/prf-l390-tail.png`, `shots/final-gate-critic-4/pr-files-changed-split-playground-large-diff-390-44230.png`, `shots/final-gate/pr-files-changed-unified-playground-large-diff/dark-390.png`
+   - **DONE (code L1r1):** directory latest-commit authors ellipsize (file-list.css), diff table `width:100%` so Gitea's `table-layout: fixed` applies (diff.css), mobile split threads widen over the empty half; document width 390 on all 8 diff/dir routes × 2 schemes (shots/code-r1/*/{light,dark}-390.json).
 2. **FG-021 [theme-fixable-template] File / blame header: Gitea 'Raw | Permalink | Blame | History' group (+ 'Normal View' / 'Unescape') instead of github.com's Code | Blame (Preview for .md) SegmentedControl with Raw / copy / download icon buttons** — impact 29 (judges 29, critic wt 0; routes: blame, file-view-markdown, repo-code-file)
    - Fix: github-* branch in templates/repo/view_file.tmpl (and repo/blame.tmpl header): left SegmentedControl [Preview (markdown only) | Code | Blame] built from the existing links (Preview/Code = the current file URL with/without ?display=source, Blame = .RepoLink/blame/…), right: Raw button + copy-raw / download icon buttons; Permalink, History, RSS, edit, delete stay as icon buttons (or in a kebab ActionMenu using a Fomantic dropdown). code styles it.
    - PNG: `shots/final-gate/blame/dark-1440.png`, `shots/final-gate/blame/light-1440.png`, `shots/final-gate/file-view-markdown/dark-1440.png`, `shots/final-gate/file-view-markdown/light-1440.png`
+   - **DONE (code L1r1):** src/code/view-switch.css — Primer SegmentedControl 28px, knob/track/divider/hover/press/focus; duplicates hidden (toggle icons, Blame link, Normal View). shots/code-r1/blame/states/*-switch-*.png.
 3. **FG-025 [theme-fixable-template] Branch picker, 'Go to file' and 'Add File' sit above the content instead of in the file-tree pane header (github.com: branch picker + search at the top of the tree)** — impact 22 (judges 22, critic wt 0; routes: blame, directory-tree, file-view-markdown, repo-code-file)
    - Fix: Additive github-* branch in the Modern-owned override templates/repo/view_content.tmpl (integrator only, additive, CONTEXT): when the file tree is shown, render the branch dropdown + 'Go to file' search in the tree pane header; keep the main toolbar's other controls. code styles the pane header.
    - PNG: `shots/final-gate/blame/dark-1440.png`, `shots/final-gate/blame/light-1440.png`, `shots/final-gate/directory-tree/dark-1440.png`, `shots/final-gate/directory-tree/light-1440.png`
+   - REJECTED by integrator (template) — no CSS action.
 4. **FG-028 [theme-fixable-css] Mobile blame: code is entirely off-screen (blame column ~312px, table 1038-2031px wide)** — impact 18 (judges 0, critic wt 18; routes: blame, blame-playground-multiple-authors)
    - Fix: <768px: stack each blame hunk header (avatar, message, age) above its lines (github.com), or collapse .blame-info to avatar + age (~72px) so code starts on screen.
    - Critic refs: C176 (blame, major), C194 (blame-playground-multiple-authors, blocker)
    - PNG: `shots/final-gate/blame/light-390.png`, `shots/final-gate-critic-6/bl-m0.png`, `shots/final-gate/blame-playground-multiple-authors/{light,dark}-390.png`, `shots/final-gate-critic-7/blame-playground-multiple-authors/light-390-0.png`
+   - **DONE (code L1r1)** except the age: mobile blame = per-segment 37px header row (avatar · message … re-blame) above its lines (blame.css). The age needs a lint exception (Gitea `.not-mobile` is `display:none !important`): requested in docs/requests/integrator.md CODE-L1-1.
 5. **FG-032 [theme-fixable-css] Dark diffs painted twice (tr and td both tinted): additions/deletions/hunk rows visibly over-saturated** — impact 15 (judges 0, critic wt 15; routes: pr-compare-form-playground, pr-files-changed-unified, repo-pull-files)
    - Fix: Paint only the cells (or only the row) in src/code/diff.css (~224-280); re-check hunk row (#152843 → #111d2e) and number cells against github.com dark. Light is correct (opaque tokens).
    - Critic refs: C073 (pr-files-changed-unified, major), C209 (pr-compare-form-playground, major), C174 (repo-pull-files, minor)
    - PNG: `shots/final-gate/pr-files-changed-unified/dark-1440.png`, `docs/reference/.../dark-1440.png`, `shots/final-gate-critic-7/pr-compare-form-playground/zoom-dark-diff.png`, `shots/final-gate/repo-pull-files/dark-1440.png`
+   - **DONE (code L1r1):** rows transparent, only cells painted (diff.css); dark unified/split checked against the reference.
 6. **FG-034 [theme-fixable-template] README box header is a single 'README.md' bar with a pencil; github.com has 'README | <license> license' tabs** — impact 13 (judges 10, critic wt 3; routes: repo-home, repo-home-readme-with-images-and-tables)
    - Fix: github-* branch in the README header (repo/view_file.tmpl, ReadmeInList): UnderlineNav-style tabs 'README' + '<license name> license' (from .DetectedRepoLicenses / LICENSE file link) + edit pencil at the right; also fix the 390 wrap (C170: header 75px, pencil drops to a 2nd line).
    - Critic refs: C170 (repo-home, minor)
    - PNG: `shots/final-gate-critic-6/rh-m1.png`, `shots/final-gate/repo-home/dark-390.png`, `shots/final-gate/repo-home/dark-1440.png`, `shots/final-gate/repo-home/light-390.png`
+   - REJECTED by integrator (template) — no CSS action.
 7. **FG-044 [theme-fixable-template] Directory listing has no 'Name | Last commit message | Last commit date' Box header row** — impact 9 (judges 9, critic wt 0; routes: directory-tree)
    - Fix: Additive github-* branch in templates/repo/view_list.tmpl (Modern's override; integrator only, additive) emitting a header row in sub-directories using existing locale keys where they exist (fallback: :lang(en) CSS text). code styles it as a Box header (#f6f8fa / #151b23, 12px/600 muted).
    - PNG: `shots/final-gate/directory-tree/dark-1440.png`, `shots/final-gate/directory-tree/light-1440.png`
+   - REJECTED by integrator (template) — no CSS action.
 8. **FG-054 [theme-fixable-css] File-tree pane is inset with no full-height right border (github.com: flush-left 320px pane with border-right); file box not full-bleed at 390** — impact 7 (judges 0, critic wt 7; routes: blame, directory-tree, repo-code-file)
    - Fix: Make the tree pane flush with the page edge with a full-height 1px --borderColor-default right border; content starts after it. At 390 make the file box full-bleed.
    - Critic refs: C065 (repo-code-file, nit), C145 (directory-tree, minor), C178 (blame, minor)
    - PNG: `docs/reference/repo-code-file/light-1440.png`, `shots/final-gate-critic-2/rcf-l390.png`, `shots/final-gate-critic-6/bl-light-0.png`, `shots/final-gate/blame/dark-390.png`
+   - **DONE (code L1r1):** tree pane flush left (−page-margin-x), full-height 1px rule as the content's left border, pane + rule start at the repo band; 390: latest-commit box and file Box edge to edge (file-tree.css, file-view.css).
 9. **FG-075 [theme-fixable-css] Split diff: addition-side line-number cells are neutral grey instead of green (#aceebb / #1c4428)** — impact 6 (judges 0, critic wt 6; routes: repo-pull-files)
    - Fix: Style the right-hand .lines-num of added lines with --diffBlob-additionNum-bgColor.
    - Critic refs: C173 (repo-pull-files, major)
    - PNG: `shots/final-gate-critic-6/prf-num.png`, `shots/final-gate/repo-pull-files/{light,dark}-1440.png`, `shots/final-gate/repo-pull-files/dark-390.png`, `shots/final-gate/repo-pull-files/dark-1440.png`
+   - **DONE (code L1r1):** paired deletion rows keep the addition number colour on the right (diff.css).
 10. **FG-076 [theme-fixable-css] Markdown-source syntax rules leak into rendered .md preview code blocks (.na underlined navy, .nt uncoloured)** — impact 6 (judges 0, critic wt 6; routes: file-view-markdown)
    - Fix: Exclude .markup descendants from the .md-file selectors in src/code/syntax.css:95 and src/code/editor.css:107.
    - Critic refs: C067 (file-view-markdown, major)
    - PNG: `shots/final-gate-critic-2/fvm-light-script.png`, `shots/final-gate/file-view-markdown/light-1440.png`
+   - **DONE (code L1r1):** .md source rules scoped to `.file-view.code-view` (syntax.css, editor.css).
 11. **FG-081 [theme-fixable-css] Blame metadata ~5px above the code baseline; irregular hunk row heights (20/25/26/31px)** — impact 4 (judges 0, critic wt 4; routes: blame, blame-playground-multiple-authors)
    - Fix: Align .blame-info text to the first code line; fixed 20px row pitch.
    - Critic refs: C177 (blame, minor), C195 (blame-playground-multiple-authors, nit)
    - PNG: `shots/final-gate-critic-6/bl-zoom.png`, `shots/final-gate/blame/dark-1440.png`, `shots/final-gate/blame/light-1440.png`, `shots/final-gate/blame-playground-multiple-authors/dark-1440.png`
+   - **DONE (code L1r1):** commit info padded inside .blame-info (Gitea's td `padding:0 !important`), 5/11px segment padding, 20px pitch; segments 5 + n×20 + 5 + 1.
 12. **FG-088 [theme-fixable-css] ```console block renders monochrome; github.com colours the output lines (chroma emits .go spans)** — impact 4 (judges 4, critic wt 0; routes: repo-pull)
    - Fix: Map .chroma .go (Generic.Output) / .gp (prompt) to the prettylights tokens github.com uses for ShellSession output; verify on /octo-org/grex/pulls/42.
    - PNG: `shots/final-gate/repo-pull/dark-1440.png`, `shots/final-gate/repo-pull/light-1440.png`
+   - **DONE (code L1r1):** `.chroma .go` → --prettylights-syntax-constant (pl-c1 as github.com's shell-session output).
 13. **FG-093 [theme-fixable-css] File info bar ('798 lines · 39 KiB · Go', '676 B · 96x96px') in monospace; github.com uses 12px sans muted** — impact 4 (judges 0, critic wt 4; routes: file-view-large-file-playground, file-view-image-playground)
    - Fix: .file-info: --fontStack-sansSerif 12px fgColor-muted (beats tw-font-mono via code.important.css if needed).
    - Critic refs: C089 (file-view-large-file-playground, minor), C115 (file-view-image-playground, nit)
    - PNG: `shots/final-gate/file-view-image-playground/light-1440.png`, `shots/final-gate/file-view-large-file-playground/light-1440.png`, `shots/final-gate/file-view-image-playground/light-1440.png`
+   - NO CHANGE (code L1r1): github.com renders the size line in 12px ui-monospace --fgColor-muted for both text and image blobs (probed pemistahl/grex blob main.rs and logo.png) — ours matches.
 14. **FG-096 [theme-fixable-css] Diff row pitch 20px (github.com commit view ~24px); bottom expander cell 72px inset vs 88px gutter** — impact 3 (judges 0, critic wt 3; routes: pr-files-changed-unified-playground-large-diff, commit-detail, pr-compare-new-playground)
    - Fix: Check the new github.com diff row height before changing; align the bottom expander with the line-number gutter.
    - Critic refs: C013 (commit-detail, nit), C154 (pr-files-changed-unified-playground-large-diff, nit), C167 (pr-compare-new-playground, nit)
    - PNG: `shots/final-gate-critic-5/cmp-expander.png`, `shots/final-gate/pr-files-changed-unified-playground-large-diff/dark-1440.png`, `shots/final-gate/pr-files-changed-unified-playground-large-diff/light-1440.png`, `shots/final-gate/commit-detail/dark-1440.png`
+   - **DONE (code L1r1)** (expander): hunk expander cell padding 0 (code.important.css), last-row cell no longer hunkLine-coloured; row pitch kept at 20px (classic PR diff reference = 20px).
 15. **FG-097 [theme-fixable-css] Directory icons: outlined grey in dark / different style from github.com's filled folders** — impact 3 (judges 3, critic wt 0; routes: directory-tree, repo-code-file)
    - Fix: Use the filled octicon-file-directory-fill in --treeViewItem-leadingVisual-iconColor-rest for both schemes (check the dark token).
    - PNG: `shots/final-gate/directory-tree/dark-1440.png`, `shots/final-gate/directory-tree/light-1440.png`, `shots/final-gate/repo-code-file/dark-1440.png`, `shots/final-gate/repo-code-file/light-1440.png`
+   - NO CHANGE: folders are filled octicon-file-directory-fill; dark = --fgColor-muted grey like github.com dark (docs/reference/blame/dark-1440.png).
 16. **FG-100 [theme-fixable-css] Mobile code chrome: 88px line-number gutter, latest-commit message dropped, diff summary text hidden** — impact 3 (judges 0, critic wt 3; routes: compare-two-tags, pr-compare-form-playground, file-view-large-file-playground)
    - Fix: Narrower gutter at 390; keep the '25 changed files with…' summary visible (wrap instead of hide).
    - Critic refs: C090 (file-view-large-file-playground, nit), C019 (compare-two-tags, nit), C211 (pr-compare-form-playground, nit)
    - PNG: `shots/final-gate/compare-two-tags/dark-390.png`, `shots/final-gate/compare-two-tags/light-390.png`, `shots/final-gate/pr-compare-form-playground/dark-390.png`, `shots/final-gate/pr-compare-form-playground/light-390.png`
+   - PARTIAL (code L1r1): gutter matches github.com mobile (code text 92px from the box edge on both); the diff summary is hidden by Gitea `display:none !important` below 800px → lint exception requested (integrator.md CODE-L1-1).
 
 # Integrator (final gate #1 follow-up, 2026-09-30): FG-021 SegmentedControl template APPROVED (pending install, ORC-7)
 `templates/repo/view_file.tmpl` (file view only, not the README box) and `templates/repo/blame.tmpl`, github-* themes only:

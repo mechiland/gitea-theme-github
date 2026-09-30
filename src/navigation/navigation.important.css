@@ -14,8 +14,9 @@ overflow-menu .ui.label {
   margin-left: 0 !important;
 }
 
-/* base.css: popup items padding 9px 18px / colour / background !important */
-overflow-menu .overflow-menu-popup > .item {
+/* base.css: popup items padding 9px 18px / colour / background !important; the prefix also beats the tab padding
+   (.ui.secondary.pointing.menu .item, below) */
+overflow-menu.ui.secondary.pointing.menu .overflow-menu-popup > .item {
   padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed) !important;
   color: var(--fgColor-default) !important;
 }
@@ -25,11 +26,14 @@ overflow-menu .overflow-menu-popup > .item.active {
 }
 
 /* navbar.css: .secondary-nav { background: var(--color-secondary-nav-bg) !important } (mapped to --bgColor-inset).
-   github.com's repo band (#repository-container-header) is --page-header-bgColor: --bgColor-muted in light (same
-   #f6f8fa), --bgColor-default in dark (#0d1117, not the header's #010409). Decision (critic r1 #5): match github.com;
-   the header keeps its 1px bottom rule above the band. */
+   Context bars (dashboard, explore): --page-header-bgColor like github.com's page headers. The repo band (the only
+   one with .ui.container children) is transparent: its tab row is the AppHeader local bar (repo-header.css). */
 .secondary-nav {
   background: var(--page-header-bgColor) !important;
+}
+
+.secondary-nav:has(> .ui.container) {
+  background: none !important;
 }
 
 /* base.css: .ui.tabular.menu .item, .ui.secondary.pointing.menu .item { padding: 11.55px 12px !important } */
@@ -41,9 +45,16 @@ overflow-menu .overflow-menu-popup > .item.active {
   padding: var(--base-size-8) var(--control-medium-paddingInline-normal) !important;
 }
 
-/* repo title: tw-text-18 (18px !important) → Primer title-medium 20px */
+/* repo title: tw-text-18 (18px !important); 0 hides the bare "/" between the (hidden) owner and the repo name, which
+   sets its own 20px (repo-header.css) */
 .repo-header .flex-text-block.tw-text-18 {
-  font-size: var(--text-title-size-medium) !important;
+  font-size: 0 !important;
+}
+
+@media (max-width: 767.98px) {
+  .ui.tabular.menu:not(.pointing) .item {
+    padding: var(--base-size-8) var(--control-medium-paddingInline-condensed) !important;
+  }
 }
 
 /* menu.css: .ui.tabular.menu .active.item { border-radius: .28rem .28rem 0 0 !important } */
@@ -71,18 +82,10 @@ overflow-menu .overflow-menu-popup > .item.active {
   background: transparent !important;
 }
 
-/* menu.css: .ui.secondary.vertical.menu > .item { border-radius: .28rem !important } */
-.ui.secondary.vertical.menu > .item {
+/* menu.css: .ui.tabular.menu .active.item { border-radius: .28rem .28rem 0 0 !important } also hits the UnderlineNav
+   tabs of profile / org / explore (pointing tabular): github.com rounds all four corners (PPL-N1) */
+.ui.secondary.pointing.tabular.menu .active.item {
   border-radius: var(--borderRadius-medium) !important;
-}
-
-/* navbar avatar: tw-mr-2 (8px) on the <img>; anonymous Sign in / Register labels: tw-ml-1 after the hidden icon */
-#navbar .navbar-avatar > .ui.avatar {
-  margin-right: 0 !important;
-}
-
-#navbar .navbar-right > a.item[href*="/user/"] > .tw-ml-1 {
-  margin-left: 0 !important;
 }
 
 /* paginate.tmpl: chevrons carry tw-mr-1 / tw-ml-1 (3.5px at Gitea's 14px root) toward the label; the 4px gap is set

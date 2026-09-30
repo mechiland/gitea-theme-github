@@ -13,6 +13,17 @@
   padding: 0 !important;
 }
 
+/* teams: each column is a Box row (org.css) */
+.organization.teams .ui.two.column.grid > .team-item-box {
+  padding: var(--base-size-16) !important;
+}
+
+/* org People: member role and 2FA side by side (tw-flex-col tw-gap-1) */
+.members .item-main > .tw-flex {
+  flex-direction: row !important;
+  gap: var(--base-size-4) var(--base-size-8) !important;
+}
+
 /* org menu: tw-mb-4 on the overflow-menu would leave a 16px strip of band under the tabs */
 .organization > .ui.container > overflow-menu.tw-mb-4 {
   margin-bottom: 0 !important;
@@ -47,6 +58,22 @@
 
   .user.notification .small-menu-items > .item.active {
     background: var(--control-transparent-bgColor-selected) !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  /* notifications Unread | Read SegmentedControl (media.css): Gitea menu.css / navigation force the backgrounds */
+  .user.notification .small-menu-items {
+    min-height: var(--control-medium-size) !important;
+    background: var(--controlTrack-bgColor-rest) !important;
+  }
+
+  .user.notification .small-menu-items > .item:hover {
+    background: var(--controlTrack-bgColor-hover) !important;
+  }
+
+  .user.notification .small-menu-items > .item.active {
+    background: var(--controlKnob-bgColor-rest) !important;
   }
 }
 

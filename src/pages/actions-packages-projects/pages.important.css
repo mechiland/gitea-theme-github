@@ -28,3 +28,35 @@
 .page-content.repository.actions .run-list .run-list-item-trailing > .ui.dropdown.jump.tw-p-2 {
   padding: calc(var(--base-size-8) + var(--borderWidth-thin)) var(--base-size-4) !important;
 }
+
+/* projects list: Delete is `tw-text-red` (color: var(--color-red) !important) → muted at rest, danger on hover
+   (FG-035: a red Delete in every row read as an error state) */
+.projects .list-item-secondary-bar a.tw-text-red {
+  color: var(--fgColor-muted) !important;
+}
+
+.projects .list-item-secondary-bar a.tw-text-red:hover {
+  color: var(--fgColor-danger) !important;
+}
+
+/* projects list Box header: Gitea's menu.css `.small-menu-items { background: none !important }` */
+:is(.repository, .organization).projects > .ui.container > .flex-left-right > .list-header-toggle {
+  background: var(--bgColor-muted) !important;
+}
+
+/* project board < md: the Label / Assignee / Milestone filters start their own row under the title → pull the
+   invisible buttons' 12px padding into the gutter so the labels line up with the title (github.com cancels it with a
+   negative margin too). The menu carries `tw-m-0` (margin: 0 !important). */
+@media (max-width: 767.98px) {
+  .project-header > .list-header-filters.tw-m-0 {
+    margin-left: calc(var(--control-medium-paddingInline-normal) * -1) !important;
+  }
+}
+
+/* Actions runs pane (actions-list.css): the sticky NavList scroll box reaches 8px past the pane padding on both sides
+   so the current-item bar is not clipped; Gitea pins `.ui.vertical.menu.fluid` to `width: 100% !important` */
+@media (min-width: 768px) {
+  .flex-container:has(.run-list) > .flex-container-nav > .menu {
+    width: calc(100% + var(--base-size-16)) !important;
+  }
+}

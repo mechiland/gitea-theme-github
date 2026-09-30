@@ -1,7 +1,8 @@
 /*
  * Text inputs & textareas — Primer React TextInput / Textarea (prc-components-TextInputBaseWrapper):
  * 32px, padding-inline 12px, 14px/20px, bg --bgColor-default, 1px --control-borderColor-rest,
- * radius 6px, inset shadow; focus = accent border + 2px accent outline (offset -1px);
+ * radius 6px, inset shadow; focus = accent border + 2px accent outline drawn inside the box (offset -2px:
+ * github.com org projects search measured ring pixels at the box edge, 32px outer);
  * disabled = --control-bgColor-disabled; error = --borderColor-danger-emphasis.
  * Small (Gitea .small/.tiny/.mini inputs) = 28px, padding-inline 8px, 12px.
  */
@@ -47,7 +48,7 @@ select:focus,
 .ui.form select:focus {
   border-color: var(--borderColor-accent-emphasis);
   outline: var(--borderWidth-thick) solid var(--borderColor-accent-emphasis);
-  outline-offset: -1px;
+  outline-offset: calc(var(--borderWidth-thick) * -1);
 }
 
 /* readonly (e.g. clone URL): Primer uses the muted surface for read-only copy fields */
@@ -95,9 +96,12 @@ select:focus,
 }
 
 /* Primer .input-sm / TextInput size="small": 28px, 8px inline, 12px/20px. `.ui.form` is repeated so the
-   size wins over form.css's generic `.ui.form input` font-size (same layer, equal specificity, later file). */
-.ui.input:is(.small, .tiny, .mini) > input,
-.ui.form .ui.input:is(.small, .tiny, .mini) > input {
+   size wins over form.css's generic `.ui.form input` font-size (same layer, equal specificity, later file).
+   Not for search fields (medium TextInput, "search field" below) nor for a FormControl field's input (a small
+   `.ui.input` directly in a stacked `.field`, e.g. the label edit dialog's Name / Description: Primer form fields
+   are medium, like the dialog's Color field; FG-089). */
+.ui.input:is(.small, .tiny, .mini):not(.ui.form .field > *) > input:not([type="search"], [name="q"]),
+.ui.form .ui.input:is(.small, .tiny, .mini):not(.field > *) > input:not([type="search"], [name="q"]) {
   height: var(--control-small-size);
   padding: 0 var(--control-small-paddingInline-condensed);
   font-size: var(--text-body-size-small);
@@ -134,7 +138,7 @@ select:focus,
 .ui.form .field.error :is(input:not([type="checkbox"], [type="radio"]), textarea, select):focus {
   border-color: var(--control-borderColor-danger);
   outline: var(--borderWidth-thick) solid var(--control-borderColor-danger);
-  outline-offset: -1px;
+  outline-offset: calc(var(--borderWidth-thick) * -1);
   background: var(--bgColor-default);
 }
 
@@ -178,7 +182,7 @@ select:focus,
   min-width: var(--control-medium-size);
 }
 
-:is(.ui.action.input:is(.small, .tiny, .mini):has(> input:not([type="hidden"])), .ui.action.input:has(> .ui.input:is(.small, .tiny, .mini))) > .icon.button {
+:is(.ui.action.input:is(.small, .tiny, .mini):has(> input:not([type="hidden"])), .ui.action.input:has(> .ui.input:is(.small, .tiny, .mini))):not(:has(> input:is([type="search"], [name="q"]))) > .icon.button {
   min-width: var(--control-small-size);
 }
 
@@ -206,10 +210,91 @@ select:focus,
 
 /* native <select> between the input and the button (package list / versions search, request APP-C1) is joined
    like the dropdown (rules above) and small in a small group, so input, select and button share one 28px line */
-.ui.action.input:is(.small, .tiny, .mini) > select {
+.ui.action.input:is(.small, .tiny, .mini):not(:has(> input:is([type="search"], [name="q"]))) > select {
   height: var(--control-small-size);
   padding-left: var(--control-small-paddingInline-condensed);
   font-size: var(--text-body-size-small);
+}
+
+/* ---------- search field (FG-048) ---------- */
+/* Gitea: shared/search/{input,button,combo}.tmpl → `.ui.small.fluid.action.input` = input[type=search][name=q]
+   (+ optional search-mode dropdown / type select) + a joined `.ui.small.icon.button` (octicon-search, submit).
+   github.com search fields (projects list, repositories tab, branches, members…) are a medium Primer TextInput:
+   32px, 14px, the search octicon as a leading visual (8px from the edge, text at 32px + border), no attached
+   button. Every search group is medium; when the submit button directly follows the input it is drawn as that
+   leading visual (still the submit control: keyboard focus, click, Enter). A group with a dropdown or select
+   between the two keeps the joined trailing IconButton at 32px (the github.com issues search look).
+   The issue / milestone list search is laid out by pages/issues-prs with a trailing IconButton (github.com
+   issues), scoped `:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search`:
+   those pages are left out of the leading-visual rules (a page-layer padding would otherwise put the text under the
+   icon). The repo projects list (`.repository.projects.milestones`) is not in that scope and gets the leading icon,
+   like the org projects list (critic controls-wL1-r1 #1).
+   The icon colour is static (--fgColor-muted, via buttons.css `.ui.button > .svg`): github.com's leading visual and
+   Primer Button leading visuals do not change colour on hover. */
+.ui.action.input:has(> input:is([type="search"], [name="q"])) {
+  font-size: var(--text-body-size-medium);
+}
+
+.ui.action.input:has(> input:is([type="search"], [name="q"])) > .icon.button {
+  justify-content: center;
+  min-width: var(--control-medium-size);
+  padding: 0;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+}
+
+.ui.action.input:has(> input:is([type="search"], [name="q"])) > .ui.selection.dropdown {
+  min-height: var(--control-medium-size);
+  padding-top: calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--borderWidth-thin));
+  padding-bottom: calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--borderWidth-thin));
+  padding-left: var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
+}
+
+.ui.action.input:has(> input:is([type="search"], [name="q"])) > select {
+  height: var(--control-medium-size);
+  padding-left: var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
+}
+
+/* leading visual: input + search button, nothing between them */
+.ui.action.input:not(:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search > *) > input:is([type="search"], [name="q"]):has(+ .ui.icon.button:last-child > .octicon-search) {
+  padding-left: var(--base-size-32);
+  border-radius: var(--borderRadius-medium);
+}
+
+.ui.action.input:not(:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search > *) > input:is([type="search"], [name="q"]) + .ui.icon.button:last-child:has(> .octicon-search) {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1; /* above the focused input (position: relative, z-index 1, earlier in the DOM) */
+  justify-content: center;
+  width: var(--base-size-32);
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
+  background: transparent;
+  box-shadow: none;
+  color: var(--fgColor-muted);
+}
+
+.ui.action.input:not(:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search > *) > input:is([type="search"], [name="q"]) + .ui.icon.button:last-child:has(> .octicon-search):is(:hover, :active) {
+  background: transparent;
+}
+
+.ui.action.input:not(:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search > *) > input:is([type="search"], [name="q"]) + .ui.icon.button:last-child:has(> .octicon-search):focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: calc(var(--borderWidth-thick) * -1);
+}
+
+.ui.action.input:not(:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search > *) > input:is([type="search"], [name="q"]) + .ui.icon.button:last-child:has(> .octicon-search):disabled {
+  background: transparent;
+  color: var(--fgColor-disabled);
 }
 
 /* ---------- file input: bare field, the picker button is a Primer default button ---------- */

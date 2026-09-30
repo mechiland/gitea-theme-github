@@ -221,3 +221,56 @@ followed by Gitea's `.wiki-content-sidebar.wiki-content-toc` (if any), `.wiki-co
 (`1fr 296px`, gap 24px ≥ 1012px) with the aside and `.wiki-content-sidebar` in column 2, main + footer in column 1; one
 column below 768 (aside after the content). Not rendered (no JS / no locale key): the "Find a page…" filter input and the
 "Clone this wiki locally" heading. New Page / Edit / Delete Page and the revisions link are untouched.
+
+# From controls (final gate #1, wave L1 r1, 2026-09-30) — FYI, optional cleanup
+controls now draws the leading-search-icon TextInput for every `shared/search/*` group (`src/controls/inputs.css`,
+"search field": input 32px/14px, padding-left 32px, adjacent submit button = transparent 32px leading octicon at x=0).
+`list-search.css` (branches / tags / commits) keeps its measured github.com /branches variant (icon 12px in, text at 36px),
+which wins by layer; nothing to do unless you want to drop the duplicate and take the generic 8px / 32px geometry
+(github.com /orgs/*/projects measured padding-left 32px).
+
+# From data-display (final gate #1 loop, round 1) — FYI
+## DD-PR-1 `tr.gh-commit-day` unstyled on compare pages
+On /octo-org/theme-playground/compare/main...feature/kbd-hints (pr-compare-new-playground, 1440 light,
+shots/data-display-r1/pr-compare-new-playground/light-1440.png) the ORC-6 day row inside the compare commits Box renders
+as a right-aligned large bold "-o-Sep 26, 2026" row (the commits page renders it correctly). The compare page is
+`.page-content.repository.diff.compare` (not `.commits`), so the page-scoped day-row rules probably do not reach it.
+
+# pages/repo builder — final gate #1 loop 1, round 1 status (2026-09-30)
+Folder size: gh.pages-repo 31,740 B minified (cap 31 KiB = 31,744 B; was 30,577 B before this round, ~1.7 KB trimmed to
+make room). Evidence: shots/pages-repo-fg1-r1/, shots/pages-repo-fg1-r1b/ (states), measurements shots/pages-repo-fg1/*.js.
+- **ORC-6 / FG-019 DONE (styling)** — `tr.gh-commit-day` = github.com Timeline: 2px --borderColor-muted line at x+16,
+  32px badge (git-commit octicon, muted, page-bg ring) at x+1, date 14/21 muted at x+41, one Box per day (8px above and
+  below the date, rows keep 64px, top/bottom radius on the first/last row of a day, outer segment Box dropped). Measured
+  /commits @1440 against github.com: h3 x=121 h=29, badge 81/32×32, box x=121 w=1239, 8px gaps — all equal. < 768: Boxes
+  full width, date + badge indented (github.com @390). Compare / PR Commits: the "N Commits" header stands alone above
+  the timeline. Text is the date only (no "Commits on" key, §7 c).
+- **ORC-8 / FG-022 DONE (styling)** — `.wiki-content-parts` grid (1fr | 296px, gap 24): column 2 = Pages Box → TOC →
+  _Sidebar → clone input; main text + footer in column 1; < 1012px one column (content, footer, Pages, sidebar, clone).
+  Pages Box: Box--condensed + shadow-resting-small, 4px 8px --bgColor-muted header, 28px caret (rotates when closed),
+  "Pages" 14/600 + primary Counter, rows 8px, links 14/600 accent at the title's x. Clone: 28px mono 12px muted input +
+  28px copy button. Old container grid / "Page ▾" dropdown / Code-button rules removed.
+- **FG-018 DONE (own lists)** — /commits, PR Commits, compare: SHA 12px mono, 7 characters (7ch clip, transparent-border
+  padding), invisible 28px button; commit page "parent … commit …" 12px mono muted, SHAs plain 7-char links. Other
+  owners notified (integrator.md). Note: github.com /commits itself renders the SHA in the sans font (measured
+  Mona Sans 12/500); mono was chosen so the 7-character clip is exact.
+- **FG-036 DONE** — compare / PR commits: title 14/600, author 12/600 --fgColor-default (github.com's classic list);
+  /commits keeps github.com's measured 16/500. Inline code in titles: plain 12px mono, no chip.
+- **FG-037 partly** — Downloads marker 14px next to the 20px title (github.com keeps the native disclosure marker);
+  < 768 no leading "·" on the wrapped "N commits to main since this release" line. Not done: the red × commit-status
+  glyph (a real CI status; left as is).
+- **FG-040 DONE** — wiki page list: rows 16px padding (54px @1440), link 400, no rule under "Pages" (24px gap), date in a
+  second column at 2/3 (text-align left via repo.important.css), < 768 date under the title aligned with the link.
+- **FG-113 DONE** — compare range bar --bgColor-muted.
+- **Commit page buttons** — Browse Source / Operations now reuse controls' primary rules with the primary Button
+  tokens pointed at the default ones (`.commit-header-buttons { --button-primary-*: var(--button-default-*) }`),
+  replacing four restated state rules (−600 B).
+- NOT done: FG-086 / FG-095 (need `--gh-octicon-code` / `--gh-octicon-tag` masks, requested in icons.md), FG-107
+  (header buttons: github.com's wiki Edit / New page are 28px — measured docs/reference/wiki-page light-1440 y 210–237 —
+  so they stay 28px; the _Sidebar bullets/underline are the markdown folder's list/link style), FG-078, FG-090, FG-098
+  (Fomantic stacks the table cells with `display: block !important`; display may not go in *.important.css),
+  FG-045 Code-tab active state. Template-bound items (FG-024, FG-043, FG-110) stay rejected.
+
+# From icons (final gate #1, wave L1 round 1)
+- **PR-IC-1 DONE** — `--gh-octicon-code` (FG-086) and `--gh-octicon-tag` (FG-095) are in `src/icons/octicon-masks.css`
+  (catalogue `shots/icons-l1r1/masks-catalogue.png`); pruned until referenced (code 0.45 KB, tag 0.49 KB once used).

@@ -1,0 +1,18 @@
+/* Projects tabs — github.com uses octicon-table for the Projects tab of the repo, profile and org tab bars (repo
+   UnderlineNav `octicon-table UnderlineNav-octicon`; profile/org `octicon-table`; checked live on python/cpython and
+   /pemistahl, 2026-09-30). Gitea: repo/header.tmpl:134 octicon-project, user/overview/header.tmpl:16 and
+   org/menu.tmpl:17 octicon-project-symlink. The profile/org tab bar itself is swapped by pages/people (profile.css);
+   icons covers the repo tab bar and the "…" popup, which Gitea's overflow-menu appends to <body> (tippy), outside
+   any `overflow-menu` selector. Only the glyph changes; size, colour and gap stay with the owning folder. */
+overflow-menu .item > .svg.octicon-project,
+.overflow-menu-popup > .item > .svg.octicon-project,
+.overflow-menu-popup > .item > .svg.octicon-project-symlink {
+  background-color: currentcolor;
+  mask: var(--gh-octicon-table) center / contain no-repeat;
+}
+
+overflow-menu .item > .svg.octicon-project > *,
+.overflow-menu-popup > .item > .svg.octicon-project > *,
+.overflow-menu-popup > .item > .svg.octicon-project-symlink > * {
+  visibility: hidden;
+}

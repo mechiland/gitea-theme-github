@@ -31,6 +31,7 @@
   padding: 0 var(--base-size-8);
   border-color: transparent;
   color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold); /* DD-W3B-1: github.com prc-Token-IssueLabel computes 600 */
 }
 
 /* labels in the issue sidebar / list title rows keep a 20px pill even though Gitea sets min-height only there */
@@ -57,8 +58,9 @@ a.ui.label[style]:hover {
   border-color: var(--borderColor-default);
 }
 
-/* Topics → github.com topic-tag: --bgColor-accent-muted pill, --fgColor-accent 12px/500, 0 10px, 24px tall;
-   hover fills with --bgColor-accent-emphasis */
+/* Topics → github.com TopicTag (measured 2026-09-30, PR-DD-1): --bgColor-accent-muted pill, --fgColor-accent 12px/600,
+   padding 0 12px; the text is centred on the 24px pill (Gitea's .ui.large.label keeps Fomantic's line-height, which
+   top-aligns it); hover fills with --bgColor-accent-emphasis */
 a.ui.label[href*="topic=1"],
 .ui.label.repo-topic {
   min-height: var(--base-size-24);
@@ -67,7 +69,8 @@ a.ui.label[href*="topic=1"],
   background: var(--bgColor-accent-muted);
   color: var(--fgColor-accent);
   font-size: var(--text-body-size-small);
-  font-weight: var(--base-text-weight-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: calc(var(--base-size-24) - var(--borderWidth-thin) * 2);
 }
 
 a.ui.label[href*="topic=1"]:hover {
@@ -230,6 +233,34 @@ a.ui.blue.label:hover {
 /* icons D-4: no "unsigned" badge on the commit page (github.com only badges signed commits) */
 .commit-sign-badge:not(.commit-is-signed) {
   display: none;
+}
+
+/* FG-058: compare-page branch refs (repo/commits_table.tmpl `a.ui.green.sha.label`) → Primer a.branch-name /
+   github.com commit-ref: 12px monospace --fgColor-accent on --bgColor-accent-muted, padding 2px 6px, radius 6px,
+   no border; the octicon takes the text colour */
+.ui.green.sha.label {
+  min-height: 0;
+  padding: 2px var(--base-size-6);
+  border: 0;
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-accent-muted);
+  color: var(--fgColor-accent);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-caption-lineHeight);
+}
+
+a.ui.green.sha.label:hover {
+  border-color: transparent;
+  background: var(--bgColor-accent-muted);
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+.ui.green.sha.label > .svg {
+  margin-right: var(--base-size-4);
+  color: inherit;
 }
 
 /* Multiple-selection dropdown chips → Primer Token (20px pill, neutral) */

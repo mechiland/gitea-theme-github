@@ -57,6 +57,21 @@
   margin-left: var(--base-size-4);
 }
 
+/* "Public": github.com labels every public repo row (profile Repositories tab, org home); Gitea renders a label only
+   for private / internal / archived / template / sha256 repos. English text, so English UI only; not on the Stars tab
+   (rows with an owner link), where github.com shows none either. */
+html:lang(en) .profile .item-title:not(:has(> a.name ~ a.name)) > .label-list:not(:has(> .label))::before {
+  content: "Public";
+  min-height: var(--base-size-20);
+  padding: 0 var(--base-size-6);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-full);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-medium);
+  line-height: calc(var(--base-size-20) - 2 * var(--borderWidth-thin));
+}
+
 /* description */
 :is(.profile, .explore) .item-header ~ .item-body:not(:last-child) {
   max-width: 75%;
@@ -67,12 +82,17 @@
   color: var(--fgColor-default);
 }
 
-/* topics */
+/* topics: github.com topic-tag in lists = 24px pill, padding 0 10px, rows 8px apart, tags ~2px apart */
 :is(.profile, .explore) .item-header ~ .label-list {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--base-size-4);
+  gap: var(--base-size-8) var(--base-size-2);
   margin-top: var(--base-size-4);
+}
+
+:is(.profile, .explore) .item-header ~ .label-list > .label {
+  padding: 0 calc(var(--base-size-8) + var(--base-size-2));
+  font-weight: var(--base-text-weight-medium);
 }
 
 /* meta line: language · stars · PRs · forks, then "Updated …" */
@@ -120,14 +140,22 @@
   color: var(--fgColor-muted);
 }
 
-/* " · " between the meta parts, like github.com's search results */
+/* " · " between the meta parts, like github.com's search results; the dot is centred in the 16px gap, out of flow so
+   the link's hover underline does not run under it */
 .explore .item-header > .item-trailing {
-  gap: var(--base-size-4) var(--base-size-8);
+  gap: var(--base-size-4) var(--base-size-16);
+}
+
+.explore .item-trailing > a:not(:last-child) {
+  position: relative;
 }
 
 .explore .item-trailing > a:not(:last-child)::after {
   content: "·";
-  margin-left: var(--base-size-4);
+  position: absolute;
+  left: 100%;
+  width: var(--base-size-16);
+  text-align: center;
 }
 
 .explore .item-header ~ .item-body:last-child {

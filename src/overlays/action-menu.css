@@ -291,12 +291,58 @@ text-expander .suggestions li {
   border-top: 0;
 }
 
-/* narrow screens: Gitea caps scrolling lists at 144px (~4 rows); keep the desktop 9-row list, bounded by half the
-   viewport, so SelectPanels (branch picker, sidebar labels) stay usable */
+/* narrow screens: Gitea caps scrolling lists at 144px (~4 rows); keep the desktop 9½-row list, bounded by half the
+   viewport, so SelectPanels (branch picker, sidebar labels) stay usable; Selects show 3½ rows (Gitea: 3¼) */
 @media (max-width: 767.98px) {
   .ui.dropdown .scrolling.menu,
   .ui.scrolling.dropdown .menu {
-    max-height: min(calc(var(--control-medium-size) * 9), 50vh);
+    max-height: min(calc(var(--control-medium-size) * 9.5), 50vh);
+  }
+
+  .ui.selection.dropdown > .menu,
+  .ui.search.dropdown > .menu {
+    max-height: calc(var(--base-size-8) + var(--control-medium-size) * 3.5);
+  }
+}
+
+/* ---------- scroll affordance for overflowing lists (FG-121) ----------
+   Fomantic caps list heights at whole rows (Select 224px = 7 rows, scrolling lists 288px = 9 rows), so a longer list
+   (theme picker) looks complete; others (label filter, 500px) overflow at any row. Two cues, only visible when a
+   list overflows:
+   - the caps end half-way through a row, like a Primer Overlay whose content is cut by its max-height;
+   - scroll shadows: a soft --borderColor-default shade under the top / above the bottom edge while more content lies
+     that way (the `local` cover gradients in the list's own colour hide the shade at either end). */
+.ui.dropdown > .menu,
+.ui.dropdown .scrolling.menu {
+  background:
+    linear-gradient(var(--overlay-bgColor) 30%, transparent) center top / 100% var(--base-size-24) no-repeat local,
+    linear-gradient(transparent, var(--overlay-bgColor) 70%) center bottom / 100% var(--base-size-24) no-repeat local,
+    radial-gradient(farthest-side at 50% 0, var(--borderColor-default), transparent) center top / 100% var(--base-size-8) no-repeat scroll,
+    radial-gradient(farthest-side at 50% 100%, var(--borderColor-default), transparent) center bottom / 100% var(--base-size-8) no-repeat scroll,
+    var(--overlay-bgColor);
+}
+
+@media (min-width: 768px) {
+  .ui.selection.dropdown > .menu,
+  .ui.search.dropdown > .menu {
+    max-height: calc(var(--base-size-8) + var(--control-medium-size) * 4.5);
+  }
+
+  .ui.dropdown .scrolling.menu,
+  .ui.scrolling.dropdown .menu {
+    max-height: calc(var(--control-medium-size) * 6.5);
+  }
+}
+
+@media (min-width: 992px) {
+  .ui.selection.dropdown > .menu,
+  .ui.search.dropdown > .menu {
+    max-height: calc(var(--base-size-8) + var(--control-medium-size) * 7.5);
+  }
+
+  .ui.dropdown .scrolling.menu,
+  .ui.scrolling.dropdown .menu {
+    max-height: calc(var(--control-medium-size) * 9.5);
   }
 }
 

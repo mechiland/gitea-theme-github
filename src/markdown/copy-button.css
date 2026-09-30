@@ -1,0 +1,101 @@
+/* Code-block copy button (Gitea web_src/js/markup/codecopy.ts: `button.ui.compact.icon.button.code-copy.auto-hide-control`
+ * with octicon-copy, appended to `.code-block-container`, or to a bare `pre.code-block` on package pages).
+ *
+ * github.com has two variants (measured live 2026-09-30, logged out, light + dark, 1440 + 390):
+ *  - comments, wiki, releases (`.highlight.position-relative > .zeroclipboard-container.position-absolute.right-0.top-0 >
+ *    clipboard-copy.btn.m-2.p-0`): a default Button, 1px button-default-borderColor-rest on
+ *    button-default-bgColor-rest, radius 6px, 34x36 (16px icon + 8px icon margins + border; the inline-block line box
+ *    adds 2px of height below the icon, which sits 9px from the top), 8px from the block's top/right corner, floating over the code. Hover: bgColor-hover.
+ *  - rendered files (README, blob view; `.js-snippet-clipboard-copy-unpositioned`): a 28x28 invisible IconButton in its
+ *    own column next to the <pre>, always visible, so code never runs under it.
+ * Gitea only reveals the floating control while the block is hovered (content.css:518-539, kept on touch devices by
+ * its `(hover: none)` rule). The floating variant keeps that reveal, plus keyboard focus: the button stays focusable
+ * (opacity instead of visibility). A pointer over the button is always over the block too, so it is never clickable
+ * while invisible. */
+
+/* ---- floating variant (default) ---- */
+.markup .ui.button.code-copy {
+  top: var(--base-size-8);
+  right: var(--base-size-8);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: calc(var(--base-size-32) + var(--base-size-2));
+  min-width: 0;
+  height: var(--base-size-36);
+  min-height: 0;
+  padding: var(--base-size-8) 0 0;
+  margin: 0;
+  color: var(--button-default-fgColor-rest);
+  background: var(--button-default-bgColor-rest);
+  border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  box-shadow: none;
+  transition:
+    opacity var(--base-duration-200) var(--base-easing-ease),
+    background-color var(--base-duration-100) var(--base-easing-easeOut),
+    border-color var(--base-duration-100) var(--base-easing-easeOut);
+}
+
+.markup .ui.button.code-copy .svg {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  margin: 0;
+  color: var(--fgColor-muted);
+}
+
+.markup .ui.button.code-copy:hover {
+  border-color: var(--button-default-borderColor-hover);
+}
+
+.markup .ui.button.code-copy:active {
+  border-color: var(--button-default-borderColor-active);
+}
+
+.markup .ui.button.code-copy:focus-visible {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: calc(var(--focus-outline-width) * -1);
+}
+
+/* Reveal: hidden but focusable at rest; shown while the block is hovered or anything in it has focus. */
+.markup .code-copy.auto-hide-control {
+  visibility: visible;
+}
+
+.markup .code-block-container:hover > .code-copy.auto-hide-control,
+.markup .code-block-container:focus-within > .code-copy.auto-hide-control,
+.markup .code-block:hover > .code-copy.auto-hide-control,
+.markup .code-block:focus-within > .code-copy.auto-hide-control {
+  opacity: 1;
+}
+
+/* ---- rendered-file variant (README on repo home, file view) ----
+ * github.com `.js-snippet-clipboard-copy-unpositioned .markdown-body .highlight`: the wrapper is a flex row
+ * (justify-content space-between, bgColor-muted, overflow auto); the <pre> scrolls on its own (min-width 0), the
+ * button sits in its own 44px column (28px + 8px margins). Only while the container still holds the source <pre>:
+ * math replaces pre.is-loading and mermaid replaces the pre with its own block — those keep the floating variant. */
+.file-view.markup .code-block-container:has(> pre:not(.is-loading)) {
+  display: flex;
+  justify-content: space-between;
+  overflow: auto;
+  background-color: var(--bgColor-muted);
+}
+
+.file-view.markup .code-block-container:has(> pre:not(.is-loading)) > pre {
+  min-width: 0;
+}
+
+/* `btn-invisible` 28x28 (control-small-size), radius 6px, no border, octicon-copy in fgColor-muted, always visible.
+ * Hover / active backgrounds (opaque button-default-bgColor-*) are in copy-button.important.css. */
+.file-view.markup .code-block-container:has(> pre:not(.is-loading)) > .ui.button.code-copy {
+  position: static;
+  flex-shrink: 0;
+  width: var(--control-small-size);
+  height: var(--control-small-size);
+  align-items: center;
+  padding: 0;
+  margin: var(--base-size-8);
+  background: transparent;
+  border: 0;
+  opacity: 1;
+}

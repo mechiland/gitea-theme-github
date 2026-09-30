@@ -171,3 +171,34 @@ The default avatar image (`img.ui.avatar[src$="/assets/img/avatar_default.png"]`
 branding, so §11 (Gitea logo stays in the chrome: header, footer, sign-in) does not protect it. Replace only that
 placeholder with a neutral Primer placeholder (bgColor-neutral-muted circle + fgColor-muted person Octicon via mask, or a
 token data-URI); never the navbar/footer/sign-in logo. If you need a new token, request it here (integrator adds it).
+
+# Status (data-display, final gate #1 loop, round 1)
+- **FG-011 DONE** — `avatars.css`: `img.ui.avatar[src$="/assets/img/avatar_default.png"]` (and `img.avatar[...]`): image shifted out of its content box, --bgColor-neutral-muted circle + --fgColor-muted head/shoulders silhouette (two closest-side radial gradients, tokens only, scales 20–40px). Header/footer logo untouched. Screenshotted repo-issue (40px), blame + repo-commits (20px), light + dark.
+- **FG-046 DONE** (+ pages/issues-prs comment-header-at-390 proposal) — `timeline.css` <768px: header `nowrap` + `align-items: flex-start`, left part in inline flow (wraps between words), right cluster never wraps. repo-issue / repo-pull headers 85px → 53px (2 lines, kebab + reaction on line 1, even for long names); playground PR 16 headers stay 34–38px.
+- **FG-058 DONE** — branch refs `a.ui.green.sha.label` → Primer a.branch-name (accent-muted bg, fgColor-accent, 12px mono, 2px 6px, 6px radius); `box.css`: attached header/segment/table flush (width 100%, margin-inline 0) — compare Box now 1376px like its siblings (was 1378 at x=31); `blankslate.css` (+ `.important.css` for Fomantic's !important column width): "no labels yet" = centred Blankslate, padding 32px 16px, 14px muted description, select ≤ 448px.
+- **FG-099 DONE** — `progress.css`: `.milestone-progress-big { max-width: 100% }` (ends at the 16px gutter at 390).
+- **FG-111 PARTIAL** — `tables.css`: scroll shadows on `.ui.attached.table.segment`; on admin/settings pages a later-layer `background` shorthand in pages/settings-admin removes them → DD-SA-1 in docs/requests/pages-settings-admin.md (verified by injection).
+- **DD-W3B-1 DONE** — IssueLabel 600 (`.ui.label[style], .labels-list .ui.label`).
+- **PR-DD-1 DONE** — topic pill 12px/600, text centred (line-height 22px on the 24px pill); height kept at 24px.
+
+# From icons (final gate #1, wave L1 round 1) — FG-011 placeholder masks
+`--gh-octicon-person` (outline, 0.33 KB) and `--gh-octicon-person-fill` (0.32 KB) are in `src/icons/octicon-masks.css`
+(pruned until referenced; catalogue `shots/icons-l1r1/masks-catalogue.png`). Two lint-clean ways to use them on
+`img.ui.avatar[src$="/assets/img/avatar_default.png"]` (an `<img>` has no pseudo-elements, and a mask clips the whole
+box including its background):
+1. one-colour cut-out on the img: `object-position: -9999px 0` (hides the teacup, keeps the box) +
+   `background-color: var(--bgColor-neutral-muted)` + `mask: var(--gh-octicon-person-fill) center / 62% no-repeat,
+   linear-gradient(currentcolor, currentcolor); mask-composite: exclude` → a neutral disc with a person-shaped hole
+   (the page background shows through).
+2. two-colour (disc + `--fgColor-muted` silhouette): paint the silhouette on the wrapping link's `::after`
+   (`a:has(> img[src$="avatar_default.png"])::after { background-color: var(--fgColor-muted); mask: var(--gh-octicon-person-fill) center / contain no-repeat }`)
+   over the img's neutral disc — needs the wrapper to be positioned.
+   Recipe 1 checked: all four declarations pass `lintValue`, and it renders as a neutral disc with a person-shaped
+   cut-out (`shots/icons-l1r1-avatar-test.mjs` → `shots/icons-l1r1/avatar-recipe1.png`, standalone page, 40px, light only).
+
+# Integrator (loop 1 integration pass, 2026-09-30 14:30)
+- **DD-SA-1** applied by the integrator in pages/settings-admin (seam fix, see pages-settings-admin.md).
+- FYI from pages/repo (FG-018): Gitea's ShortSha is 10 characters; pages/repo clips it to 7ch only on /commits, PR Commits,
+  compare and the commit page. The generic `.ui.label.commit-id-short` (yours) and the issue-timeline commit rows
+  (pages/issues-prs) still show 10. Technique: `width: calc(7ch + <inline padding>); overflow: hidden` with the padding as a
+  transparent border. Next round, if any.

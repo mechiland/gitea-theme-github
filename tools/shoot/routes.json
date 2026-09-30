@@ -12,9 +12,9 @@
      "name": "create-menu-open",
      "action": "click",
      "selectors": {
-      "gitea": "#navbar .navbar-right .ui.dropdown:has(.octicon-plus)"
+      "gitea": ".gh-app-header-create"
      },
-     "clip": "#navbar .navbar-right .ui.dropdown .menu.visible, #navbar .navbar-right .ui.dropdown .menu",
+     "clip": ".gh-app-header-create .menu",
      "pad": 16,
      "viewports": [
       1440
@@ -24,25 +24,10 @@
      "name": "avatar-menu-open",
      "action": "click",
      "selectors": {
-      "gitea": "#navbar .navbar-right .ui.dropdown:has(.navbar-avatar)"
+      "gitea": ".gh-app-header-avatar"
      },
-     "clip": "#navbar .navbar-right .ui.dropdown .menu.visible, #navbar .navbar-right .ui.dropdown .menu",
-     "pad": 16,
-     "viewports": [
-      1440
-     ]
-    },
-    {
-     "name": "mobile-menu-open",
-     "action": "click",
-     "viewports": [
-      390
-     ],
-     "selectors": {
-      "gitea": "#navbar-expand-toggle"
-     },
-     "clip": "#navbar",
-     "pad": 0
+     "clip": ".gh-app-header-avatar .menu",
+     "pad": 16
     },
     {
      "name": "repo-row-hover",
@@ -100,6 +85,39 @@
       "gitea": "#dashboard-repo-list .repos-search input"
      },
      "clip": "#dashboard-repo-list .repos-search",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "drawer-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".gh-app-header-menu > summary"
+     },
+     "clip": ".gh-app-header-drawer",
+     "pad": 0
+    },
+    {
+     "name": "search-focus-header",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".gh-app-header-search input"
+     },
+     "clip": ".gh-app-header-search",
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "iconbtn-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".gh-app-header .gh-icon-btn[href$=\"/pulls\"]"
+     },
+     "clip": ".gh-app-header-end",
      "pad": 8,
      "viewports": [
       1440
@@ -458,7 +476,7 @@
      "name": "tooltip-hover",
      "action": "hover",
      "selectors": {
-      "gitea": "#navbar .navbar-right .ui.dropdown:has(.octicon-plus)",
+      "gitea": ".gh-app-header .gh-icon-btn[href$=\"/pulls\"]",
       "github": "header button[aria-label='Search or jump to…'], header [data-target='qbsearch-input.inputButton']"
      },
      "clips": {
@@ -635,12 +653,12 @@
      ]
     },
     {
-     "name": "labels-btn-hover",
+     "name": "navlist-item-hover",
      "action": "hover",
      "selectors": {
-      "gitea": ".list-header > .ui.button:not(.primary)"
+      "gitea": ".gh-issues-nav > .gh-issues-nav-item:not(.selected)"
      },
-     "clip": ".list-header",
+     "clip": ".gh-issues-nav",
      "pad": 8,
      "viewports": [
       1440
@@ -689,7 +707,10 @@
       "gitea": ".issue-checkbox-all"
      },
      "clip": "#issue-actions",
-     "pad": 8
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
     }
    ]
   },
@@ -884,7 +905,7 @@
      "name": "row-hover",
      "action": "hover",
      "selectors": {
-      "gitea": "#commits-table tbody tr",
+      "gitea": "#commits-table > tbody > tr:not(.gh-commit-day)",
       "github": "[data-testid='commit-row-item'], li[class*='ListItem']"
      },
      "pad": 8

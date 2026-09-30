@@ -13,7 +13,45 @@
  * the `.notifications-*` classes exist only inside #notification_table, so they go without the id.
  */
 .notifications-unread-count {
+  justify-content: center;
+  min-width: var(--base-size-20);
   margin-left: var(--base-size-8);
+  border-color: var(--counter-borderColor);
+  background: var(--counter-bgColor-muted);
+  color: var(--fgColor-default);
+  line-height: calc(var(--base-size-20) - 2 * var(--borderWidth-thin));
+}
+
+/* "Mark all as read": Gitea's icon-only green button → a small default Button; the label is the button's own
+   (localized) title */
+.notification .flex-left-right > form > .button {
+  height: var(--control-small-size);
+  padding: 0 var(--control-small-paddingInline-condensed);
+  border-color: var(--button-default-borderColor-rest);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-default-fgColor-rest);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-medium);
+}
+
+.notification .flex-left-right > form > .button::after {
+  content: attr(title);
+}
+
+.notification .flex-left-right > form > .button > .svg {
+  color: var(--fgColor-muted);
+}
+
+.notification .flex-left-right > form > .button:hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+  color: var(--button-default-fgColor-rest);
+}
+
+.notification .flex-left-right > form > .button:active {
+  border-color: var(--button-default-borderColor-active);
+  background: var(--button-default-bgColor-active);
 }
 
 /* ---------- Box ---------- */

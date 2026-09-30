@@ -54,3 +54,36 @@ Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ra
    - Fix: Reserve .action-view-left / .action-view-body sizes before mount.
    - Critic refs: C131 (action-job, minor), C164 (action-job-ok, nit)
    - PNG: `shots/final-gate/action-job-ok/dark-390.png`, `shots/final-gate/action-job-ok/dark-1440.png`, `shots/final-gate/action-job-ok/light-390.png`, `shots/final-gate/action-job-ok/light-1440.png`
+
+## Final gate #1 — status (pages/actions-packages-projects, loop 1 round 1; shots/pages-actions-packages-projects-fg1-r4..r6)
+- **FG-027 DONE (CSS part)** — ≥768px the runs page is a full-bleed PageLayout: pane flush left 256/320/336px (md/lg/xl), 16px padding, 1px --borderColor-default divider, min one viewport tall; content 16px 24px → runs Box 1056px at x=360 at 1440 (github.com: 1056 at 360, measured). Row trailing = 50% (branch column ≈ x 889, time + 24px kebab at the end). The 'Actions' / 'All workflows' headings stay FG-049 (template, rejected).
+- **FG-035 DONE** — projects list is a grid: search + 32px "New Project" on top, one Box whose muted header holds Open/Closed (left) and Sort (right), rows below; same order at 390; row actions 12px muted, Delete muted at rest / danger on hover (tw-text-red reset in pages.important.css).
+- **FG-038 DONE except icons** — graph controls at the Box's bottom-right (20px in), reset first, zoom-out|zoom-in joined, 28px; node cards --card-bgColor (dark = --bgColor-muted); <768 summary/graph/log Boxes edge to edge and the NavList moved below the content. Glyphs need masks plus/dash/screen-full → request APK-M1 in docs/requests/icons.md (CSS already wired, falls back to the magnifiers). Graph still wider than 390 (drag/scroll canvas).
+- **FG-055 DONE** — board bleeds to the viewport edges (columns start at the page edge, 4th column scrolls under the viewport edge like github.com); <768 the toolbar wraps into separate 32px buttons (all 5 visible at 390).
+- **FG-061 DONE except keywords** — install commands one line, scrolling in the <code> with a free lane for the copy button (no overlap at 390); "View all" on the "Versions (N)" baseline. Package names/meta links already match github.com (probed github/codeql-action/packages: name Link--primary fgColor-default 600, meta links Link--secondary underlined, repo link 600) — left as is. Keywords are bare text nodes in npm.tmpl → not CSS-reachable (template).
+- **FG-072 DONE** — run-row kebab: invisible IconButton hover/open bg + default icon; run header buttons 32px/14px (re-run split 32 + 32); gear menu hides the empty-checkbox squares (checkmark only on selected); job NavList inside the 16px gutter below md.
+- **FG-085 DONE** — until the run is loaded the body and the footer are visibility:hidden, so mount causes no shift: CLS 0 at 390 on action-run / action-job / action-job-ok (was 0.074 / 0.0599 / 0.0599), 1440: 0.0036 / 0 / 0.
+
+# From icons (final gate #1, wave L1 round 1)
+- **APK-M1 DONE** — `plus`, `dash`, `screen-full` masks added; live since deploy 9ee594a4be: `.graph-controls` shows
+  screen-full / dash / plus, 16×16, `--fgColor-muted` in both schemes (`shots/icons-l1r1/live/cmp-live.png`, `live/report.json`).
+- FYI (FG-091): the Status filter's `gitea-running` icon stays — it is github.com's own in-progress indicator (same paths,
+  `--fgColor-attention`, 1s rotation). github.com's Status filter shows **no** icons at all (checkbox SelectPanel,
+  `shots/icons-l1r1/gh-actions-status-open-light.png`); hiding the status icons inside that menu would be the parity
+  option, which is layout in your scope, not an icon swap.
+
+## Final gate #1 — critic wL1-r1 findings (pages/actions-packages-projects, loop 1 round 2; shots/pages-actions-packages-projects-wL1-r2)
+- **#1 blocker DONE** — FG-085 "loaded" marker is now the run status icon (`.action-info-summary-title > .action-info-summary-title-text:first-child` = no icon yet; ActionStatusIcon is `v-if="status"`, empty run status ''), not the back link; plus a 2s `gh-apx-reveal` fail-safe. Replayed old-attempt POST (workflowLink '' + pullRequest null): run 19 and job 89 body visible, 8 jobs (nolink-run.png, nolink-job-390.png); aborted POST: hidden at 0.8s, visible at 2.5s. CLS unchanged: action-run 0.0036/0, action-job(-ok) 0/0.
+- **#2 DONE** — footer rule rewritten with a single :has() level (valid; footer hidden before load, measured).
+- **#3 DONE** — disabled graph control `--fgColor-disabled` (light rgb(129,139,152), dark rgb(101,108,118) = github); `reading-flow: flex-visual` → Tab order screen-full → dash → plus.
+- **#4 DONE** — Actions pane sticky, align-self start, height 100vh − 176px (336×724 at y=174, ends at the fold).
+- **#5 DONE** — run rows 79px (right column 2px margins).
+- **#6 partly** — projects Box header 65px, row meta 12px/18px; "N Open" text order is template text (not CSS-reachable).
+- **#7 DONE** — board filters at <768 pulled 12px into the gutter (label text x=16 = h2).
+- **#8 partly** — package "Installation" header kept for screen readers only, install block is one headerless Box; org vs repo project search markup differs by template (left).
+- **#9 DONE** — run summary uses the stacked form (trigger row, divider, stats row) below 1012px.
+
+## Final gate #1 — critic wL1-r2 findings (pages/actions-packages-projects, loop 1 round 3; shots/pages-actions-packages-projects-wL1-r3, -wL1-r3b)
+- **#1 major DONE** — the fixed-height sticky pane is gone (no magic number). ≥768px the chain `.full.height > .page-content > .ui.container > .flex-container` on the runs page grows to the footer (bottom page space moved into the content column, same pattern as people/explore); the nav is the full-height bordered pane (divider = layout height, like github's PaneDivider) and only its NavList is sticky (top 16px, max-height 100vh − 32px, scrolls inside). Measured 1440×900 / 1280×720 / 1012 / 800 / 1440×1300: divider reaches the viewport bottom at scroll 0 and while scrolled (scrollY 1500 → visible divider end = viewport height), and ends at the footer at the page end; empty filter: pane 112→788 = footer top (no gap). Menu scroll box widened 8px each side (width in pages.important.css, Gitea's `.ui.vertical.menu.fluid` width is !important) so the current-item accent bar at x=8 is not clipped; items stay 303px at x=16; focus ring inset, unclipped.
+- **#2 partly** — Open/Closed header links no longer show leading octicons (github has none); "N Open" order / Counter stays template text; row icon octicon-project vs table left (icon choice in template).
+- #3, #4, #5 — template / Gitea logic, unchanged.

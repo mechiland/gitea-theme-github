@@ -10,3 +10,9 @@
 .repository.view.issue .issue-title-meta > .tw-ml-2 {
   margin-left: 0 !important;
 }
+
+/* FG-084: PR timeline commit rows (repo/commits_list_small.tmpl) carry Tailwind `tw-font-mono` (!important);
+   github.com sets the commit summaries in the UI sans font (the SHA chip stays mono) */
+.repository.view.issue .timeline-item.commits-list > .flex-text-block > .tw-font-mono.gt-ellipsis {
+  font-family: var(--fontStack-sansSerif) !important;
+}

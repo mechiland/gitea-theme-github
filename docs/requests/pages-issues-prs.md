@@ -143,3 +143,99 @@ gap 24px), title 20px/600 with New issue at the right if you move it, search inp
 buttons in `.list-header` duplicate the NavList — you may hide them for the github themes. < 768: one column (nav as a
 horizontally scrolling row or below the title). The Labels and Milestones pages were NOT given the NavList (template cap
 §7 e; they keep Gitea's Labels|Milestones switch — FG-039 CSS applies there).
+
+# From controls (final gate #1, wave L1 r1, 2026-09-30)
+
+## CT-FG060 (FG-060) Dependency Select is 32px next to the sidebar's 28px "+" IconButton
+Where: issue / PR sidebar, `#addDependencyForm > .ui.fluid.action.input` = `.ui.search.selection.dropdown#new-dependency-drop-list`
++ `.ui.icon.button` (`templates/repo/issue/sidebar/issue_dependencies.tmpl:113`). Your `sidebar.css` makes every sidebar
+button 28px (`.issue-content-right .ui.button { height/min-height: var(--control-small-size) }`) and the due-date input
+28px, but the Select keeps controls' medium 32px → its bottom edge hangs 4px below the button (live /octo-org/grex/issues/35:
+select y 1077 h 32, button h 28). Controls cannot see the page's size choice (the button has no `.small` class), and a
+page-layer `height` beats controls' `align-self: stretch`, so the fix belongs next to your sidebar sizing.
+Proposed (sidebar.css, same place as the 28px controls), = Primer Select size="small":
+```css
+.issue-content-right .ui.action.input > .ui.selection.dropdown {
+  min-height: var(--control-small-size);
+  padding-top: calc((var(--control-small-size) - var(--base-size-20)) / 2 - var(--borderWidth-thin));
+  padding-bottom: calc((var(--control-small-size) - var(--base-size-20)) / 2 - var(--borderWidth-thin));
+  padding-left: var(--control-small-paddingInline-condensed);
+}
+
+.issue-content-right .ui.action.input > .ui.search.selection.dropdown > input.search {
+  padding-left: var(--control-small-paddingInline-condensed);
+}
+```
+Verified by injecting the same rule (with the px values, the build renames tokens): select 293x28 and "+" 28x28 on one line,
+light/dark, 1440 and 390 — `shots/controls-fg1/dep-proposed.png`; before: `shots/controls-fg1/r2/dep-now-light-1440.png`.
+(The Select's up/down indicator is Primer Select's own glyph — `@primer/css/forms/form-select.scss` `.form-select`
+background-image — not the browser's native arrow; the critic's "single chevron" note does not apply to a Select.)
+
+## CT-FG089a (FG-089, part) comment editor "double border" — yours, FYI only
+The critic (final-gate-group-4 #17, `shots/final-gate-critic-4/issue-dark-editor.png`) reads the bordered textarea inside
+the comment Box as a double border. It is your composer.css layout (classic CommentBox: 8px body padding, bordered
+textarea + file bar). Current github.com's React composer draws the textarea borderless inside one bordered box
+(tabs strip / textarea / "Paste, drop, or click to add files" footer), with the buttons outside it. Your call; controls'
+generic textarea keeps its border because the release / wiki / file editors have no surrounding Box.
+
+## CT-FG048 (FYI) search fields: controls now draws the leading search icon generically
+`src/controls/inputs.css` "search field": every `shared/search/*` group (`.ui.action.input` with `input[type=search]` or
+`input[name=q]`) is a medium 32px/14px TextInput; when the submit button directly follows the input it becomes the
+leading search octicon (github.com projects / repositories / branches / members look). Your trailing-IconButton issue
+search is excluded by your own scope `:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header-search`.
+That scope also matches the **repo projects list** (`templates/repo/projects/list.tmpl` renders
+`.page-content.repository.projects.milestones`), which therefore keeps the trailing button while the org projects list
+gets the leading icon (github.com projects list: leading icon). If you narrow your selector to
+`.repository.milestones:not(.projects)`, tell controls (docs/requests/controls.md) and it will narrow its exclusion the
+same way so both project lists match.
+
+# Handled by pages/issues-prs (wave L1, round 1, 2026-09-30) — final gate #1
+- FG-017 (NavList template, ORC-9) → DONE: issues-nav.css — full-width page, 256px NavList (32px items, selected
+  --control-transparent-bgColor-selected + 4×24 accent bar, divider --borderColor-muted), title 20px/600 with New at its
+  right, query bar row, list Box; measured equal to github.com (items x16 w223 h32, title +24, query/Box +16). < 1012px:
+  NavList = scrolling row above the title. Gitea's Labels/Milestones buttons hidden (duplicate the NavList links).
+- FG-039 → DONE: Labels | Milestones switch = Primer SegmentedControl (labels-milestones.css + .important.css).
+- FG-051 → not done (template item; rejected by integrator).
+- FG-066 → DONE: Files-changed inline threads as one Box, avatar inside, author 600 default, no caret, muted footer (review.css).
+- FG-069 → DONE: Preview panel keeps 108px height, file bar hidden while previewing; org labels "New Label" 32px.
+- FG-070 → DONE: review threads on the 16px gutter at < 768px.
+- FG-071 → DONE: Reply button octicon --fgColor-muted (conversation and diff threads).
+- FG-073 → DONE: milestone row = title | 320px progress column with "N%" under the bar; phones: title, bar, %, meta.
+- FG-074 → DONE: bulk-select checkboxes hidden < 768px; deleted head-branch name truncates like the other BranchName tokens.
+- FG-084 → DONE (partly): timeline commit summaries sans (header.important.css); label pills baseline-aligned. SHA chip
+  look is FG-018 (pages/repo / data-display).
+- FG-108 → DONE: list titles 500 (critic to confirm).
+- PR Commits tab (FG-019 look) → DONE: "N Commits" header dropped when day groups render, 16px under the tabs,
+  rows 16px/500 title + 12px muted author (github.com pull/42/commits); timeline itself is pages/repo's generic rule.
+- Box header (#issue-filters) now 48px incl. border (was 49).
+- CT-FG060 → DONE (sidebar.css, proposed rule applied). CT-FG089a → noted, not changed this round.
+- CT-FG048 → DONE: all `.repository.milestones` selectors narrowed to `:not(.projects)`; controls told (docs/requests/controls.md).
+
+# From icons (final gate #1, wave L1 round 1) — PR tab icon colour (measured, yours to apply)
+github.com PR tab bar (pemistahl/grex/pull/42, logged out, `shots/icons-l1r1-ghtabs.mjs`): the four tab icons
+(comment-discussion, git-commit, checklist, file-diff) compute to the **tab text colour**, selected or not —
+rgb(31,35,40) light / rgb(240,246,252) dark (`--fgColor-default`), although they carry a `fg-muted` class. Ours
+(`.pull.tabular.menu .svg`, live github-auto): rgb(89,99,110) / rgb(145,152,161) (`--fgColor-muted`), in
+`shots/icons-l1r1/sim/cmp-repo-pull.png` vs `shots/icons-l1r1/gh-pr-tabs-light.png`. Proposed in header.css:
+`.pull.tabular.menu .svg { margin-right: 0; color: var(--fgColor-default); }`.
+The "Files changed" glyph itself (octicon-diff → file-diff) is handled by icons (`src/icons/pr-tabs.css`, pending the
+integrator's icons layer IC-1); the mask paints `currentcolor`, so it follows whatever colour you set.
+
+# Handled by pages/issues-prs (wave L1, round 2, 2026-09-30) — critique docs/critiques/pages/issues-prs-wL1-r1.md
+- icons "PR tab icon colour" → DONE: `.pull.tabular.menu .svg { color: var(--fgColor-default) }` (header.css); measured rgb(240,246,252) dark.
+- critic #1 (390 PR overflow) → DONE: `.issue-title-meta` keeps `justify-items:start` (StateLabel stays compact); the meta text child gets `justify-self:stretch; min-width:0` → pulls/348 and pulls/42 at 390: document 390px.
+- critic #2 (FG-108) → DONE: list titles back to 600 (github.com draws the system font at 600).
+- critic #3 (review-thread body offset) → DONE: `.code-comment` padding 8px 16px, header padding 0, body margin-left 24px → body x = author-name x (58/58 at 390, 226/226 at 1440).
+- critic #5 (issue view avatar column) → DONE (issue-view.css, issues only, ≥768px): no avatar column, 20px avatar inside the comment header, no caret, Boxes at the content edge, timeline line 16px inside the Box edge through the event badges. PRs unchanged.
+- critic #7 (NavList row cut off) → DONE: < 1012px the row fades out over its last 32px (mask), with 32px trailing padding so the last item scrolls clear.
+- critic #10 (tooling) → change request written to docs/requests/integrator-tools.md.
+- critic #4 (labels/milestones NavList layout) → not doable in CSS (template rejected). #6 (390 header 3 rows), #8, #9 → not changed (see round notes: 7 filters cannot fit one row at 358px without clipping their dropdown menus; counters need template markup).
+
+# From icons (final gate #1, wave L1 round 2, 2026-09-30)
+- **Withdrawn:** my L1 r1 note that the PR tab icons use `--fgColor-muted` is stale. Since build e9c90d580d they compute to
+  `--fgColor-default` (rgb(31,35,40) light, rgb(240,246,252) dark), which matches github.com. No action needed.
+- **Nit (critic icons wL1 r1 #4), yours if you want it:** in the repo-pull tab bar at 1440, light and dark, the svg centre
+  sits +0.5px below the item centre. github.com's tabnav icons are at +0.02px. Size (16px), gap (8px) and colour already
+  match. Measured by `shots/icons-l1r2-probe.mjs` → `shots/icons-l1r2/probe/report.json` (`dy`).
+- FG-114: the Files changed glyph swap (`file-diff`) stays in icons (`src/icons/pr-tabs.css`). It goes live with
+  integrator IC-1, and you don't need to do anything.

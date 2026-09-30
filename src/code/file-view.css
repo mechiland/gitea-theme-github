@@ -294,9 +294,15 @@
     border-radius: var(--borderRadius-medium);
   }
 
-  /* Blame is now the last visible button of the Raw group */
-  .file-header .file-actions > .ui.buttons > .button[href*="/blame/"] {
+  /* Raw is the only visible button of its group (Blame moved into the switch) */
+  .file-header .file-actions > .ui.buttons > .button:first-child {
     border-top-right-radius: var(--borderRadius-medium);
     border-bottom-right-radius: var(--borderRadius-medium);
+  }
+
+  /* github.com mobile: the latest-commit box and the file Box run edge to edge of the page gutter (FG-054) */
+  .repo-view-content > :is(#repo-file-commit-box, .non-diff-file-content) {
+    margin-left: calc(-1 * var(--page-margin-x));
+    margin-right: calc(-1 * var(--page-margin-x));
   }
 }

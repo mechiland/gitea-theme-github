@@ -137,3 +137,15 @@ Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ra
    - Fix: Check .ui.container padding against Primer container-xl (1280 incl. 24px padding → 1232 content).
    - Critic refs: C114 (repo-pulls, nit)
    - PNG: `shots/final-gate-critic-4/pulls-repohead.png`, `shots/final-gate/repo-pulls/dark-1440.png`, `shots/final-gate/repo-pulls/light-1440.png`
+
+### Final gate #1 — foundation (wave L1, round 1)
+- **FG-119 — DONE.** Measured github.com content edges (`shots/foundation-gl1-ghedges.mjs github`, logged-out, 2026-09-30):
+  github.com has two repo containers. Rails `container-xl` pages (repo home, PR conversation, compare, release,
+  pulse, forks, profiles) = 1216 @1440 (x=112) / 1216 @1280 (x=32); React PageLayout pages (issue view, pulls list) =
+  1232 @1440 (x=104) / 1232 @1280 (x=24), 24px gutter from 768px, 16px below. The repo-pulls evidence predates the
+  FG-017 template: the Gitea pulls list is now pages/issues-prs' full-width `.gh-issues-layout`, so no `.ui.container`
+  is left there. The remaining 1216-vs-1232 page was the **issue view**: `src/foundation/layout.css` now sets
+  `--page-margin-x: 24px` from 768px on `.page-content.repository.view.issue` without `> .ui.container > .pull.tabs`
+  (a PR conversation stays 1216, like github.com). Measured on Gitea after deploy (repo-issue):
+  1440 104/1232, 1280 24/1232, 1012 24/964, 1000 24, 800 24, 767 16, 390 16. These match github.com at every width
+  measured. PR, repo home, release detail, org, and profile are unchanged (112/1216 @1440).

@@ -12,7 +12,11 @@
   font-size: 85%;
 }
 
+/* Primer markdown/code.scss: `overflow: auto` next to `overflow-wrap: normal` (MD-1). Gitea's `.markup` clips its
+ * content (overflow: hidden), base.css turns that off for the heading anchors, so a bare <pre> (package pages' install
+ * snippets, raw HTML <pre>) must scroll itself instead of widening the page. */
 .markup pre {
+  overflow: auto;
   font-family: var(--fontStack-monospace);
   color: var(--fgColor-default);
   overflow-wrap: normal;
@@ -43,63 +47,6 @@
  * (51.7px for one line). Gitea marks fences without a language as language-text; indented blocks have no class. */
 .markup .code-block-container > pre:has(> code.chroma:not(.language-text)) {
   min-height: calc(var(--control-small-size) + var(--base-size-24));
-}
-
-/* github.com `.js-snippet-clipboard-copy-unpositioned .markdown-body .highlight`: the wrapper is a flex row
- * (justify-content space-between, bgColor-muted, square corners, overflow auto); the <pre> keeps its own
- * max-content width and scrolls, the copy button sits in its own 44px column (28px + 8px margins), so code
- * never runs under the button. Only while the container still holds the source <pre> (math replaces
- * pre.is-loading, mermaid replaces the pre with its own block). */
-.markup .code-block-container:has(> pre:not(.is-loading)) {
-  display: flex;
-  justify-content: space-between;
-  overflow: auto;
-  background-color: var(--bgColor-muted);
-}
-
-.markup .code-block-container:has(> pre:not(.is-loading)) > pre {
-  min-width: 0;
-}
-
-.markup .code-block-container:has(> pre:not(.is-loading)) > .ui.button.code-copy {
-  position: static;
-  flex-shrink: 0;
-  margin: var(--base-size-8);
-}
-
-/* Copy button — github.com `.zeroclipboard-container clipboard-copy.btn-invisible.m-2`: 28x28, 8px from the
- * top/right corner, always visible, transparent, no border, radius 6px, octicon-copy in fgColor-muted;
- * hover: button-default-bgColor-hover (opaque, so code underneath does not show through). */
-.markup .ui.button.code-copy {
-  top: var(--base-size-8);
-  right: var(--base-size-8);
-  width: var(--control-small-size);
-  min-width: var(--control-small-size);
-  height: var(--control-small-size);
-  min-height: var(--control-small-size);
-  padding: 0;
-  color: var(--fgColor-muted);
-  background: transparent;
-  border: 0;
-  border-radius: var(--borderRadius-medium);
-  box-shadow: none;
-}
-
-/* only while the container still holds the source <pre>: math and mermaid replace it with the rendering and
- * keep Gitea's hover-only behaviour for the leftover button (GitHub shows its own controls there). */
-.markup .code-block-container:has(> pre) > .code-copy.auto-hide-control,
-.markup pre.code-block > .code-copy.auto-hide-control {
-  visibility: visible;
-  opacity: 1;
-}
-
-.markup .ui.button.code-copy .svg {
-  color: var(--fgColor-muted);
-}
-
-.markup .ui.button.code-copy:focus-visible {
-  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
-  outline-offset: calc(var(--focus-outline-width) * -1);
 }
 
 /* kbd — Primer base kbd (same as foundation's global kbd): 4px padding, 11px mono, line-height 10px,

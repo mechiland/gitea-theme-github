@@ -1,301 +1,280 @@
 /*
- * Global header — Primer AppHeader (signed-in github.com global bar).
- * 64px tall: 16px padding around 32px controls, bg --bgColor-inset, 1px bottom rule drawn inside the box.
- * Left: logo (32px) + Gitea's text links (Issues / Pull requests / Milestones / Explore) as AppHeader context items
- * (14px semibold, 32px tall, radius 6, transparent hover). Right: IconButtons with a 1px --borderColor-default border
- * (notifications, create "+ ▾") and a bare 32px avatar. Mobile (<768): hamburger left, logo, icons right.
+ * Global header — github.com signed-in AppHeader (markup: templates/custom/gh_head_navbar.tmpl, github-* themes only).
+ * Spec read from github.com's live stylesheet 2026-09-30 (.AppHeader*):
+ *   bar: padding 16px, gap 12px, bg --bgColor-inset, inset 0 -1px 0 --borderColor-default  → 64px
+ *   start: flex auto, gap 8px — hamburger IconButton, 32px logo (round, hover --bgColor-neutral-muted), context crumbs
+ *   crumbs: padding 4px 6px, 14px/20px, radius 6, hover --control-transparent-bgColor-hover, last crumb semibold,
+ *           "/" --fgColor-muted; the first crumb shrinks first (flex-shrink 100), ellipsis
+ *   end: gap 8px — search field (≥ 1012px; below: 32px icon button), 1px × 20px divider (4px margins), "+ ▾"
+ *        (padding 8px / 4px), Issues / Pull requests / bell IconButtons, 32px avatar on --bgColor-neutral-muted
+ *   IconButton: 32px, 1px --button-default-borderColor-rest, radius 6, transparent, --fgColor-muted icon,
+ *               hover --control-transparent-bgColor-hover, pressed --control-transparent-bgColor-active
+ *   unread: 8px --fgColor-accent dot on the button's top-right corner, 2px ring in the bar colour
+ * Anonymous: "Sign in" (invisible button) then "Sign up" (default button). The auth-page variant
+ * (.gh-app-header--auth) belongs to pages/auth; the drawer is drawer.css. Gitea's admin shield badge keeps its own
+ * navbar.css styling (accent disc with a ring in the bar colour).
  */
 
-#navbar {
+.gh-app-header {
+  gap: var(--base-size-12);
   min-height: var(--base-size-64);
   padding: var(--base-size-16);
-  gap: var(--base-size-12);
-  background: var(--bgColor-inset);
   border-bottom: 0;
+  background: var(--bgColor-inset);
   box-shadow: inset 0 calc(var(--borderWidth-thin) * -1) 0 var(--borderColor-default);
   color: var(--fgColor-default);
+  font-size: var(--text-body-size-medium);
 }
 
-/* The 1px rule stays on repo pages too: the repo band below is --page-header-bgColor (github.com
-   #repository-container-header), which is --bgColor-default in dark, so header and band are two blocks there, like
-   github.com (header rule, then the band). */
+/* repo pages: the repo band follows directly (the same surface in light), header + band read as one block (C190) */
+body:has(.repo-header) .gh-app-header {
+  box-shadow: none;
+}
 
-#navbar .navbar-left,
-#navbar .navbar-right {
-  min-height: var(--control-medium-size);
+.gh-app-header-start,
+.gh-app-header-end {
+  display: flex;
+  align-items: center;
   gap: var(--base-size-8);
+  min-width: 0;
 }
 
-.navbar-left > .item,
-.navbar-right > .item,
-.navbar-mobile-right > .item {
+.gh-app-header-start {
+  flex: 1 1 auto;
+}
+
+.gh-app-header-end {
+  flex: 0 1 auto;
+}
+
+/* ---------- IconButtons (hamburger, search link, Issues, Pull requests, stopwatch, bell) and "+ ▾" ---------- */
+.gh-icon-btn,
+.gh-app-header-create {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  position: relative;
+  width: var(--control-medium-size);
+  height: var(--control-medium-size);
+  padding: 0;
+  border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background: transparent;
+  color: var(--fgColor-muted);
+  cursor: pointer;
+}
+
+.gh-icon-btn::-webkit-details-marker {
+  display: none;
+}
+
+.gh-app-header .gh-icon-btn:hover,
+.gh-app-header .gh-app-header-create:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-muted);
+}
+
+.gh-app-header .gh-icon-btn:active,
+.gh-app-header .gh-app-header-create.active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+/* the Issues / Pull requests button of the page you are on */
+.gh-app-header .gh-icon-btn.active {
+  background: var(--control-transparent-bgColor-selected);
+  color: var(--fgColor-default);
+}
+
+/* create "+ ▾" (AppHeader-button--dropdown): padding 8px / 4px, 4px between plus and caret; the template keeps
+   upstream's "Create…" label for phones, the AppHeader shows the icon only */
+.gh-app-header-create {
+  width: auto;
+  padding: 0 var(--base-size-4) 0 var(--base-size-8);
+}
+
+.gh-app-header-create .flex-text-block {
   gap: var(--base-size-4);
-  min-height: var(--control-medium-size);
-  min-width: var(--control-medium-size);
-  padding: 0 var(--control-medium-paddingInline-condensed);
+}
+
+.gh-app-header-create .only-mobile {
+  display: none;
+}
+
+/* unread / stopwatch indicator: 8px dot + 2px ring (12px box) on the button's corner; the count stays in the DOM */
+.gh-app-header :is(.notification_count, .header-stopwatch-dot) {
+  top: calc(var(--base-size-12) * -1 + var(--borderWidth-thin));
+  right: calc(var(--base-size-12) * -1 + var(--borderWidth-thin));
+  bottom: auto;
+  left: auto;
+  width: var(--base-size-12);
+  min-width: 0;
+  height: var(--base-size-12);
+  padding: 0;
+  border-color: var(--bgColor-inset);
+  background: var(--fgColor-accent);
+  font-size: 0;
+}
+
+.gh-app-header .header-stopwatch-dot {
+  background: var(--fgColor-attention);
+}
+
+/* ---------- logo ---------- */
+#navbar-logo {
+  display: flex;
+  flex: none;
+  border-radius: var(--borderRadius-full);
+}
+
+#navbar-logo:hover,
+#navbar-logo:focus-visible {
+  background: var(--bgColor-neutral-muted);
+}
+
+/* ---------- context crumbs ---------- */
+.gh-app-header-context {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.gh-context-item {
+  flex: 0 99999 auto;
+  min-width: 3ch;
+  padding: var(--base-size-4) var(--base-size-6);
   border-radius: var(--borderRadius-medium);
   color: var(--fgColor-default);
-  font-size: var(--text-body-size-medium);
-  font-weight: var(--base-text-weight-semibold);
-  line-height: var(--text-body-lineHeight-medium);
-  transition: background-color var(--base-duration-100) var(--base-easing-easeInOut);
+  line-height: var(--base-size-20);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
-#navbar a.item:hover,
-#navbar button.item:hover,
-#navbar .item.ui.dropdown:hover {
+.gh-context-item:first-child {
+  flex: 0 100 max-content;
+}
+
+.gh-context-item:last-child {
+  flex: 0 1 max-content;
+  font-weight: var(--base-text-weight-semibold);
+}
+
+a.gh-context-item:hover {
   background: var(--control-transparent-bgColor-hover);
   color: var(--fgColor-default);
   text-decoration: none;
 }
 
-#navbar a.item:active,
-#navbar button.item:active,
-#navbar .item.ui.dropdown.active {
-  background: var(--control-transparent-bgColor-active);
+.gh-context-sep {
+  color: var(--fgColor-muted);
 }
 
-#navbar .item.active {
-  background: var(--control-transparent-bgColor-selected);
+/* ---------- search: the field from 1012px (github.com whenRegular), an IconButton below (whenNarrow) ---------- */
+.gh-app-header-search {
+  display: none;
+  position: relative;
+  width: calc(var(--base-size-128) * 2 + var(--base-size-16));
 }
 
-#navbar .item.ui.dropdown {
-  padding-right: var(--control-medium-paddingInline-condensed);
+.gh-app-header-search > .svg {
+  position: absolute;
+  top: var(--base-size-8);
+  left: var(--base-size-8);
+  color: var(--fgColor-muted);
+  pointer-events: none;
 }
 
-/* ---------- logo ---------- */
-#navbar #navbar-logo {
-  justify-content: center;
-  padding: 0;
-  margin-right: var(--base-size-8);
-}
-
-#navbar #navbar-logo:hover {
+.gh-app-header-search > input {
+  width: 100%;
+  padding: 0 var(--base-size-8) 0 calc(var(--base-size-32) - var(--borderWidth-thin));
+  border-color: var(--button-default-borderColor-rest);
   background: transparent;
+  box-shadow: none;
 }
 
-#navbar #navbar-logo > img {
-  width: var(--base-size-32);
-  height: var(--base-size-32);
+.gh-app-header-search > input:focus,
+.gh-app-header-search > input:not(:placeholder-shown) {
+  background: var(--bgColor-default);
 }
 
-/* ---------- right side: IconButtons (desktop) ---------- */
-@media (min-width: 768px) {
-  #navbar .navbar-right > .item {
-    justify-content: center;
-    padding: 0;
-    border: var(--borderWidth-thin) solid var(--borderColor-default);
-    color: var(--fgColor-muted);
+@media (min-width: 1012px) {
+  .gh-app-header-search {
+    display: block;
   }
 
-  #navbar .navbar-right > .item:hover {
-    color: var(--fgColor-muted);
-  }
-
-  /* create menu: "+ ▾" button, 4px between the glyphs like github.com */
-  #navbar .navbar-right > .item.ui.dropdown:not(:has(.navbar-avatar)) {
-    padding: 0 var(--base-size-6);
-  }
-
-  #navbar .navbar-right > .item.ui.dropdown .flex-text-block {
-    gap: var(--base-size-4);
-  }
-
-  /* avatar menu: bare 32px circle, no border, no caret (github.com) */
-  #navbar .navbar-right > .item.ui.dropdown:has(.navbar-avatar) {
-    padding: 0;
-    border: 0;
-    border-radius: var(--borderRadius-full);
-    margin-left: var(--base-size-4);
-  }
-
-  #navbar .navbar-right > .item.ui.dropdown:has(.navbar-avatar):hover {
-    background: transparent;
-  }
-
-  #navbar .navbar-right > .item.ui.dropdown:has(.navbar-avatar) > .text > .not-mobile {
-    display: none;
-  }
-
-  /* anonymous: "Sign in" text link, then "Sign up" as a bordered button (github.com order) */
-  #navbar .navbar-right > a.item[href*="/user/"] {
-    padding: 0 var(--control-medium-paddingInline-condensed);
-    color: var(--fgColor-default);
-  }
-
-  #navbar .navbar-right > a.item[href*="/user/login"] {
-    border-color: transparent;
-    background: transparent;
-  }
-
-  #navbar .navbar-right > a.item[href*="/user/login"]:hover {
-    background: var(--control-transparent-bgColor-hover);
-  }
-
-  #navbar .navbar-right > a.item[href*="/user/sign_up"] {
-    order: 1;
-    padding: 0 var(--control-medium-paddingInline-normal);
-    background: var(--button-default-bgColor-rest);
-    border-color: var(--button-default-borderColor-rest);
-    box-shadow: var(--button-default-shadow-resting);
-  }
-
-  #navbar .navbar-right > a.item[href*="/user/sign_up"]:hover {
-    background: var(--button-default-bgColor-hover);
-    border-color: var(--button-default-borderColor-hover);
-  }
-
-  #navbar .navbar-right > a.item[href*="/user/"] > .svg {
+  .gh-app-header .gh-app-header-search-link {
     display: none;
   }
 }
 
-#navbar .navbar-right > .item.ui.dropdown > .text {
-  gap: var(--base-size-8);
+/* divider before the actions: 1px × 20px, 4px each side */
+.gh-app-header-divider {
+  width: var(--borderWidth-thin);
+  height: var(--base-size-20);
+  margin: 0 var(--base-size-4);
+  background: var(--borderColor-default);
 }
 
-#navbar .navbar-avatar > .ui.avatar {
-  width: var(--base-size-32);
-  height: var(--base-size-32);
-  min-width: var(--base-size-32);
-  border-radius: var(--borderRadius-full);
-}
-
-/* ---------- unread indicator: github.com shows a dot, not a number (the count stays in the accessible text) ---------- */
-#navbar a.item .notification_count {
-  left: auto;
-  right: calc(var(--base-size-8) * -1);
-  bottom: auto;
-  top: calc(var(--base-size-8) * -1);
-  min-width: 0;
-  width: var(--base-size-12);
-  height: var(--base-size-12);
+/* ---------- avatar (AppHeader-user) ---------- */
+.gh-app-header-avatar {
+  flex: none;
   padding: 0;
-  border: var(--borderWidth-thick) solid var(--bgColor-inset);
   border-radius: var(--borderRadius-full);
-  background: var(--bgColor-accent-emphasis);
-  color: transparent;
-  font-size: 0;
-  line-height: 0;
-  overflow: hidden;
+  background: var(--bgColor-neutral-muted);
 }
 
-#navbar a.item:hover .notification_count {
-  border-color: var(--bgColor-inset);
+/* the ring sits outside the circle (github.com draws it around the avatar; -2px would hide under the image) */
+.gh-app-header-avatar:focus-visible {
+  outline-offset: var(--base-size-2);
 }
 
-#navbar .item .navbar-admin-badge {
-  left: auto;
-  right: calc(var(--base-size-4) * -1);
-  bottom: calc(var(--base-size-4) * -1);
-  width: var(--base-size-16);
-  height: var(--base-size-16);
-  min-width: var(--base-size-16);
-  padding: var(--base-size-2);
-  border: var(--borderWidth-thin) solid var(--bgColor-inset);
+.gh-app-header-avatar .ui.avatar {
+  margin: 0;
   border-radius: var(--borderRadius-full);
-  background: var(--bgColor-accent-emphasis);
-  color: var(--fgColor-onEmphasis);
 }
 
-/* ---------- mobile (<768): hamburger | logo ........ bell ---------- */
+/* ---------- anonymous: "Sign in" (invisible button), then "Sign up" (default button) ---------- */
+.gh-app-header-signin,
+.gh-app-header-signup {
+  display: flex;
+  align-items: center;
+  height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-condensed);
+  border: var(--borderWidth-thin) solid transparent;
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-medium);
+  white-space: nowrap;
+}
+
+.gh-app-header .gh-app-header-signin:hover {
+  background: var(--control-transparent-bgColor-hover);
+}
+
+.gh-app-header-signup {
+  order: 1;
+  padding: 0 var(--control-medium-paddingInline-normal);
+  border-color: var(--button-default-borderColor-rest);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+}
+
+.gh-app-header .gh-app-header-signup:hover {
+  background: var(--button-default-bgColor-hover);
+}
+
+/* ---------- < 768px (github.com): hamburger · logo · repo crumb ······· search · bell · avatar. The actions group
+   (divider, "+ ▾", Issues, Pull requests) is hidden like .AppHeader-actions; Issues / Pull requests stay in the
+   drawer. The context shows the compact crumb (the repo name only). ---------- */
 @media (max-width: 767.98px) {
-  /* no gap: the (empty, closed) .navbar-right must not push the bell 12px away from the 16px edge */
-  #navbar {
-    align-items: center;
-    gap: 0;
-    padding: var(--base-size-16);
-  }
-
-  /* hamburger + logo on the left (also signed out, where there is no bell to push the logo aside) */
-  #navbar .navbar-left {
-    justify-content: flex-start;
-    gap: var(--base-size-8);
-  }
-
-  /* lift the bell and the hamburger into the .navbar-left flex row so they can be ordered */
-  #navbar .navbar-mobile-right {
-    display: contents;
-  }
-
-  #navbar #navbar-expand-toggle {
-    order: -1;
-    justify-content: center;
-    width: var(--control-medium-size);
-    height: var(--control-medium-size);
-    min-height: var(--control-medium-size);
-    padding: 0;
-    border: var(--borderWidth-thin) solid var(--borderColor-default);
-    border-radius: var(--borderRadius-medium);
-    background: transparent;
-    box-shadow: none;
-    color: var(--fgColor-muted);
-  }
-
-  #navbar #navbar-expand-toggle:hover {
-    background: var(--control-transparent-bgColor-hover);
-  }
-
-  #navbar .navbar-mobile-right > a.item {
-    margin-left: auto;
-    justify-content: center;
-    width: var(--control-medium-size);
-    padding: 0;
-    border: var(--borderWidth-thin) solid var(--borderColor-default);
-    color: var(--fgColor-muted);
-  }
-
-  #navbar #navbar-logo {
-    margin-right: 0;
-  }
-
-  /* open menu: rows like a NavList (32px, radius 6, transparent hover) */
-  /* column layout: both halves full width, so the toggle does not move and every row starts at the 16px edge */
-  #navbar.navbar-menu-open {
-    align-items: stretch;
-    padding-bottom: var(--base-size-8);
-  }
-
-  #navbar.navbar-menu-open .navbar-left,
-  #navbar.navbar-menu-open .navbar-right {
-    width: 100%;
-  }
-
-  #navbar.navbar-menu-open .navbar-left > .item:not(#navbar-logo),
-  #navbar.navbar-menu-open .navbar-right > .item {
-    min-height: var(--control-medium-size);
-    padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
-    font-weight: var(--base-text-weight-normal);
-    line-height: var(--base-size-20);
-  }
-
-  #navbar.navbar-menu-open .navbar-left {
-    row-gap: 0;
-  }
-
-  /* the avatar row is a 32px NavList row too: 20px leading avatar instead of the 32px header circle */
-  #navbar.navbar-menu-open .navbar-avatar > .ui.avatar {
-    width: var(--base-size-20);
-    height: var(--base-size-20);
-    min-width: var(--base-size-20);
-  }
-
-  #navbar.navbar-menu-open .item .navbar-admin-badge {
-    width: var(--base-size-12);
-    height: var(--base-size-12);
-    min-width: var(--base-size-12);
-    padding: 0;
-  }
-
-  #navbar.navbar-menu-open .navbar-left > .item:not(#navbar-logo):first-of-type {
-    margin-top: var(--base-size-8);
-  }
-
-  #navbar.navbar-menu-open .navbar-right {
-    align-items: stretch;
-    gap: 0;
-    width: 100%;
-    padding-top: var(--base-size-8);
-    border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+  .gh-app-header-divider,
+  .gh-app-header-create,
+  .gh-icon-btn:is([href$="/issues"], [href$="/pulls"]),
+  .gh-context-owner,
+  .gh-context-sep {
+    display: none;
   }
 }

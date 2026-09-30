@@ -1,0 +1,11 @@
+/* gh-important: Gitea content.css:543-551 paints the auto-hide controls' hover/active background with
+ * `var(--color-secondary) !important`. GitHub's copy button (default btn in comments, btn-invisible in rendered files):
+ * hover = button-default-bgColor-hover, active = button-default-bgColor-active (both opaque, so the code behind a
+ * floating button never shows through). */
+.markup .ui.button.code-copy:hover {
+  background: var(--button-default-bgColor-hover) !important;
+}
+
+.markup .ui.button.code-copy:active {
+  background: var(--button-default-bgColor-active) !important;
+}
