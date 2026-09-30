@@ -39,3 +39,34 @@
 .empty-placeholder > a.ui.button {
   margin-top: var(--base-size-16);
 }
+
+/* FG-058: "no labels yet" (repo/issue/labels/label_load_template.tmpl: centred grid > description + label-set select
+   + "Use Label Set" button, on repo and org-settings label pages) → Blankslate: padding 32px, 14px --fgColor-muted
+   description, 16px to the action, select no wider than a Blankslate column. */
+.ui.attached.segment > .ui.centered.grid:has(form[action$="/initialize"]) {
+  margin: 0;
+  padding: var(--base-size-32) var(--base-size-16);
+  text-align: center;
+}
+
+.ui.centered.grid:has(form[action$="/initialize"]) > .column {
+  max-width: calc(var(--base-size-112) * 4);
+  padding: 0;
+}
+
+.ui.centered.grid:has(form[action$="/initialize"]) > .column > p {
+  margin: 0 0 var(--base-size-16);
+  text-align: center;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.ui.centered.grid > .column > form[action$="/initialize"] > .field {
+  margin-bottom: var(--base-size-16);
+  text-align: left;
+}
+
+.ui.attached.segment > .ui.centered.grid:has(form[action$="/initialize"]) + .divider {
+  display: none;
+}

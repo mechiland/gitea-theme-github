@@ -33,6 +33,12 @@
   padding: 0 var(--base-size-8) 0 var(--base-size-8) !important;
 }
 
+/* hunk expander cell: Gitea's own `.tag-code .lines-num { padding: 0 !important }` lost to the rule above; the
+   expander button fills the 88px cell like github.com's (FG-096: the last-row expander was inset 8px, 72px wide) */
+.repository .diff-file-box .code-diff .tag-code .lines-num {
+  padding: 0 !important;
+}
+
 .repository .diff-file-box .code-diff td.lines-type-marker {
   padding: 0 !important;
 }

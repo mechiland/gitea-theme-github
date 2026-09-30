@@ -7,7 +7,7 @@
  * Gitea's component: <div> > svg.heatmap-svg (viewBox ≈ 663 × 99 units, 10-unit cells, 9-unit labels) +
  * .heatmap-footer (total text | .heatmap-legend: "Less" svg(viewBox 12 0 80 10, 6 squares) "More").
  * ≥ 768px the root div is a grid: heading, svg, legend; the Box is its ::before behind rows 2–3 (box.css).
- * The svg is capped at 832px (1.25 × → 12.5px cells, 15px pitch, 11px labels).
+ * The svg fills the Box (16px inset each side), like github.com's calendar fills its Box.
  * Cell colours are inline `style="fill: var(--color-…)"` → people.important.css maps them to Primer's contribution
  * tokens (Gitea's 6-step legend: steps 5 and 6 both map to level 4; the 6th legend square is hidden).
  */
@@ -15,7 +15,7 @@
 /* fixed height against layout shift: heading 24 + 8, Box 1 + 12 + svg + 8 + 18 + 12 + 1 = 84px + svg height */
 @container (width > 0) {
   #user-heatmap {
-    height: calc(min(100cqw - var(--base-size-32), var(--base-size-128) * 6 + var(--base-size-64)) * 0.1493 + var(--base-size-80) + var(--base-size-4));
+    height: calc((100cqw - var(--base-size-32)) * 0.1493 + var(--base-size-80) + var(--base-size-4));
   }
 }
 
@@ -35,7 +35,6 @@
   grid-area: 2 / 1;
   z-index: 0;
   width: calc(100% - var(--base-size-32));
-  max-width: calc(var(--base-size-128) * 6 + var(--base-size-64));
   margin: var(--base-size-12) var(--base-size-16) 0;
 }
 

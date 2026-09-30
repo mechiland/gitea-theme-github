@@ -156,3 +156,42 @@
 .ui.modal .actions > .ui.button.danger {
   width: 100%;
 }
+
+/* ---------- destructive confirmations → Primer ConfirmationDialog confirmButtonType="danger" ----------
+   Gitea renders the OK of most delete / remove / leave confirmations as a green primary "Yes" / "Confirm"
+   (base/modal_actions_confirm.tmpl, ConfirmModal.ts with confirmButtonColor "primary"). GitHub uses a danger button
+   (red text on the neutral button background, filled red on hover). Recognised as destructive:
+   1. template modals whose id / class says so (#delete-branch-modal, #sidebar-delete-issue, #leave-organization,
+      #remove-team-member, #revoke-gitea-oauth2-grant, #disable-twofa, #cancel-repo-modal, `.delete.modal`, …);
+   2. modals without an id — the ones fetch-action builds from `data-modal-confirm*` (ConfirmModal.ts, or a clone of a
+      template modal with the id removed) — on pages where every confirm trigger is a destructive one (a delete /
+      remove URL or a red trigger), e.g. the Labels page's "Delete Label". Pages that mix in a harmless
+      confirmation (projects "set default column") keep Gitea's colour: CSS cannot tell which trigger opened the modal. */
+:is(
+  .ui.modal:is(.delete, [id*="delete"], [id*="remove"], [id*="leave"], [id*="revoke"], [id^="disable-"], [id^="cancel-"]),
+  body:has(:is([data-modal-confirm], [data-modal-confirm-content]):is(.red, [data-url*="delete"], [data-url*="remove"])):not(:has(:is([data-modal-confirm], [data-modal-confirm-content]):not(.red, [data-url*="delete"], [data-url*="remove"]))) .ui.modal:not([id])
+) .actions > .ui.primary.ok.button {
+  /* the controls' primary-button rules (rest / hover / pressed / disabled) then draw Primer's danger variant */
+  --button-primary-bgColor-rest: var(--button-danger-bgColor-rest);
+  --button-primary-bgColor-hover: var(--button-danger-bgColor-hover);
+  --button-primary-bgColor-active: var(--button-danger-bgColor-active);
+  --button-primary-bgColor-disabled: var(--button-danger-bgColor-disabled);
+  --button-primary-borderColor-rest: var(--button-danger-borderColor-rest);
+  --button-primary-borderColor-hover: var(--button-danger-borderColor-hover);
+  --button-primary-borderColor-active: var(--button-danger-borderColor-active);
+  --button-primary-borderColor-disabled: var(--button-default-borderColor-disabled);
+  --button-primary-fgColor-rest: var(--button-danger-fgColor-rest);
+  --button-primary-fgColor-disabled: var(--button-danger-fgColor-disabled);
+  /* the primary focus ring's inner ring is drawn in --fgColor-onEmphasis; a danger button has only the outline */
+  --fgColor-onEmphasis: transparent;
+  box-shadow: var(--button-default-shadow-resting);
+}
+
+/* filled red while hovered / pressed: white label */
+:is(
+  .ui.modal:is(.delete, [id*="delete"], [id*="remove"], [id*="leave"], [id*="revoke"], [id^="disable-"], [id^="cancel-"]),
+  body:has(:is([data-modal-confirm], [data-modal-confirm-content]):is(.red, [data-url*="delete"], [data-url*="remove"])):not(:has(:is([data-modal-confirm], [data-modal-confirm-content]):not(.red, [data-url*="delete"], [data-url*="remove"]))) .ui.modal:not([id])
+) .actions > .ui.primary.ok.button:is(:hover, :active) {
+  --button-primary-fgColor-rest: var(--button-danger-fgColor-hover);
+  box-shadow: none;
+}

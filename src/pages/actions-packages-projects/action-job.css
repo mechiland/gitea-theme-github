@@ -49,6 +49,12 @@
   color: var(--fgColor-default);
 }
 
+/* gear menu (FG-072): github.com's log settings are an ActionList with a leading checkmark only on the selected
+   options; Gitea draws an empty checkbox square (gitea-empty-checkbox) on the others → keep its slot, hide it */
+.job-info-header-right .menu .svg.gitea-empty-checkbox {
+  visibility: hidden;
+}
+
 /* ---------- steps ---------- */
 .job-step-container {
   padding: var(--base-size-8) 0;
@@ -185,4 +191,17 @@
 /* fullscreen: the header is 80px now */
 .full.height > .action-view-right > .job-step-container {
   height: calc(100% - var(--base-size-80));
+}
+
+/* < md: the log runs edge to edge (github.com CheckRun below md), like the run summary Boxes */
+@media (max-width: 767.98px) {
+  .action-view-right-panel:has(> .job-info-header) {
+    margin-inline: calc(var(--page-margin-x) * -1);
+    border-inline: 0;
+    border-radius: 0;
+  }
+
+  .job-info-header {
+    padding-left: var(--base-size-16);
+  }
 }

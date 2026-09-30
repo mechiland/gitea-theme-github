@@ -36,7 +36,6 @@
   font-weight: var(--base-text-weight-normal);
   line-height: calc(var(--base-size-24) - var(--borderWidth-thin));
   text-decoration: none;
-  transition: color var(--base-duration-200) var(--base-easing-easeInOut);
 }
 
 .ui.tabular.menu:not(.pointing) .item:hover {
@@ -118,4 +117,24 @@
 
 .small-menu-items.ui.compact.menu .item > .svg {
   margin: 0;
+}
+
+/* ---------- phones: github.com hides the tab icons, tightens the tabs and lets the row scroll sideways (FG-029).
+   The bar rule becomes an inset shadow so the scroll box does not clip the selected tab's overlap. ---------- */
+@media (max-width: 767.98px) {
+  .ui.tabular.menu:not(.pointing) {
+    overflow-x: auto;
+    border-bottom: 0;
+    box-shadow: inset 0 calc(var(--borderWidth-thin) * -1) 0 var(--borderColor-default);
+    scrollbar-width: none;
+  }
+
+  .ui.tabular.menu:not(.pointing) .item {
+    flex: none;
+    margin-bottom: 0;
+  }
+
+  .ui.tabular.menu:not(.pointing) .item > .svg {
+    display: none;
+  }
 }

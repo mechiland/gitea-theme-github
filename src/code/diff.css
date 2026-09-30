@@ -192,6 +192,14 @@
   border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
 }
 
+/* Gitea sets `table-layout: fixed` on the diff table but no width, so the table stays in auto layout and grows to
+   the widest cell's min-content: a code block in an inline review comment widened the page to 754px at 390 (FG-020).
+   With a width the fixed layout applies: the code column takes the remaining width (code wraps anyway) and wide
+   content inside a comment scrolls in its own box. */
+.repository .diff-file-box .code-diff table {
+  width: 100%;
+}
+
 .code-diff :is(.lines-num, .lines-escape, .lines-type-marker, .lines-code) {
   font-family: var(--fontStack-monospace);
   font-size: var(--text-body-size-small);
@@ -218,18 +226,19 @@
 
 /* ---------- hunk header rows ---------- */
 
-.code-diff .tag-code,
-.code-diff .tag-code td,
-.code-diff .tag-code.line-expanded {
+/* FG-032: Gitea paints both the <tr> and its <td>s (`.tag-code, .tag-code td`, `.code-diff-unified .add-code,
+   .code-diff-unified .add-code td` …); the dark diffBlob tokens are translucent, so a doubled paint came out twice
+   as saturated. Only the cells are painted; the rows stay transparent. */
+.code-diff tbody > tr:is(.tag-code, .add-code, .del-code) {
+  background: transparent;
+}
+
+.code-diff .tag-code td {
   background-color: var(--diffBlob-hunkLine-bgColor);
   color: var(--diffBlob-hunkLine-fgColor);
 }
 
 /* hunk text colour: shared muted rule in file-icons.css */
-
-.diff-file-body tr.tag-code:last-child > td {
-  background: var(--diffBlob-hunkLine-bgColor);
-}
 
 .diff-file-body tr.tag-code:last-child td:first-child,
 .diff-file-body tr.tag-code:last-child td:first-child * {
@@ -266,13 +275,11 @@
 }
 
 /* ---------- added / removed lines ---------- */
-.code-diff-unified .del-code,
 .code-diff-unified .del-code td,
 .code-diff-split .del-code :is(.lines-num-old, .lines-escape-old, .lines-type-marker-old, .lines-code-old) {
   border-color: var(--diffBlob-deletionLine-bgColor);
 }
 
-.code-diff-unified .add-code,
 .code-diff-unified .add-code td,
 .code-diff-split .add-code :is(.lines-type-marker-new, .lines-escape-new, .lines-code-new),
 .code-diff-split .del-code .add-code:is(.lines-type-marker-new, .lines-escape-new, .lines-code-new) {
@@ -291,8 +298,11 @@
   color: var(--diffBlob-additionNum-fgColor);
 }
 
+/* empty side of a split row. A deletion paired with an addition (tr.del-code) marks its right-hand cells .add-code:
+   those keep the addition colours (FG-075) unless the right side has no line. */
 .code-diff-split .add-code .lines-num.lines-num-old,
-.code-diff-split .del-code .lines-num.lines-num-new {
+.code-diff-split .del-code .lines-num.lines-num-new:not(.add-code),
+.code-diff-split .del-code .lines-num.lines-num-new.add-code[data-line-num=""] {
   background: var(--diffBlob-emptyNum-bgColor);
 }
 
@@ -338,6 +348,25 @@
 .code-diff .conversation-holder .comment-code-cloud {
   margin: var(--base-size-8) var(--base-size-16);
   background: var(--bgColor-default);
+}
+
+/* mobile split view: a review thread lives in one half of the table (colspan 4, ~170px at 390). When the other half
+   of its row has no thread, the thread widens over it (FG-020, github.com shows threads full width). */
+@media (max-width: 767.98px) {
+  .code-diff-split tr.add-comment:not(:has(> .add-comment-right .conversation-holder)) > .add-comment-left > .conversation-holder,
+  .code-diff-split tr.add-comment:not(:has(> .add-comment-left .conversation-holder)) > .add-comment-right > .conversation-holder {
+    position: relative;
+    z-index: 1;
+    width: 200%;
+  }
+
+  .code-diff-split tr.add-comment:not(:has(> .add-comment-left .conversation-holder)) > .add-comment-right > .conversation-holder {
+    margin-left: -100%;
+  }
+
+  .code-diff .conversation-holder .comment-code-cloud {
+    margin: var(--base-size-8);
+  }
 }
 
 /* image / binary / csv diffs keep Gitea's layout; only neutralise the box colours */

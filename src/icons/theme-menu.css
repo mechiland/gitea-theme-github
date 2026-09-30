@@ -1,0 +1,10 @@
+/* FG-091 — theme picker (user/settings/appearance.tmpl, `{{$theme.DisplayName}} {{svg $extraIconName}}`): Gitea marks
+   its colorblind themes with two multicolour pie-chart glyphs (gitea-colorblind-redgreen / -blueyellow, hard-coded
+   fills). github.com's theme picker has no such marker: the variant is named in text only ("Light Protanopia &
+   Deuteranopia"). In the GitHub themes the marker is dropped; the item's description line ("Red-green colorblind
+   friendly" / "Blue-yellow …", GetDescription) still names the variant, so no information is lost. (L1 r1 masked it with
+   `eye`, but both variants became the same glyph and `eye` means "watch" in GitHub's vocabulary — critic wL1 r1 #3.) */
+.svg.gitea-colorblind-redgreen,
+.svg.gitea-colorblind-blueyellow {
+  display: none;
+}

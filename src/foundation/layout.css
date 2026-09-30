@@ -18,6 +18,19 @@
   width: calc(var(--breakpoint-xlarge) - 2 * var(--page-margin-x));
 }
 
+/* FG-119: github.com has two repo sub-page containers (measured 2026-09-30, shots/foundation-gl1-ghedges.mjs):
+ *  - Rails container-xl (repo home, PR conversation, compare, release, pulse, forks, profiles): gutter 16/24/32 → 1216 @1440;
+ *  - React PageLayout for the issue view (and the pulls list): 1280 incl. a 24px gutter from 768px, 16px below
+ *    → x=104 w=1232 @1440, x=24 w=1232 @1280, x=24 @1000/800, x=16 @390.
+ * Gitea renders issues and PRs with the same page class (repo/issue/view.tmpl "view issue pull"); only a PR has the
+ * .pull.tabs container, so the issue view is the page without it. (The pulls list uses pages/issues-prs' full-width
+ * layout; commits / branches / activity keep pages/repo's 1280 + 24px container.) */
+@media (min-width: 768px) {
+  .page-content.repository.view.issue:not(:has(> .ui.container > .pull.tabs)) {
+    --page-margin-x: var(--base-size-24);
+  }
+}
+
 .ui.fluid.container {
   width: 100%;
 }

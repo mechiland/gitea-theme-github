@@ -176,3 +176,15 @@
 #status-button > .status-button-icon > .svg {
   color: inherit;
 }
+
+/* ---- FG-069: Preview tab ----
+   Gitea's previewer panel is empty (0px) until something is typed; github.com keeps the textarea's height and
+   hides the file bar while previewing. */
+:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .combo-markdown-editor > .ui.tab[data-tab-panel="markdown-previewer"] {
+  min-height: calc(var(--base-size-96) + var(--base-size-4) + var(--base-size-8));
+  padding: var(--base-size-8) var(--base-size-16);
+}
+
+:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .field:has(> .combo-markdown-editor > .ui.tab.active[data-tab-panel="markdown-previewer"]) ~ .field:has(> .ui.dropzone) {
+  display: none;
+}

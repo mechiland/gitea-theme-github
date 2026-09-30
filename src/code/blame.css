@@ -1,11 +1,20 @@
 /*
- * Blame (templates/repo/blame.tmpl) — github.com blame view.
- * Measured on github.com/pemistahl/grex/blame/main/README.md (1440, light):
- *   commit column ~350px: age 12px --fgColor-muted (14px from the box edge), avatar 18px round, message 12px
- *   --fgColor-muted link (accent + underline on hover), re-blame invisible IconButton 28px (--fgColor-muted);
- *   segments separated by 1px --borderColor-muted, 5px padding above/below each segment's lines;
- *   line numbers / code as in the file view (12px/20px mono).
- * Not reproducible: the per-segment "heat" age stripe (Gitea emits no age data), the Older/Newer legend.
+ * Blame (templates/repo/blame.tmpl, page scope .page-content.blame) — github.com blame view.
+ * Measured on github.com/pemistahl/grex/blame/main/README.md (1440 + 390, light + dark):
+ *   desktop: commit column 350px = [4px heat stripe] age (10px in, 12px --fgColor-muted) · 18px round avatar at
+ *   108px · message 12px/18px --fgColor-muted link (accent + underline on hover) · 28px invisible re-blame
+ *   IconButton; line numbers in a 72px column (0 16px padding), code 20px after it; 12px/20px mono.
+ *   A segment (one commit's run of lines) = 5px + n × 20px + 5px, then a 1px --borderColor-muted rule; the commit
+ *   info is vertically centred on the segment's first code line.
+ *   mobile (< 768px): every segment starts with a full-width 37px header row (--bgColor-muted, 1px --borderColor-muted
+ *   bottom rule): avatar 18px, message 14px muted, age 12px muted and the 28px re-blame button at the right; the
+ *   segment's lines follow with 10px above and below, line numbers 72px, code not wrapped (the box scrolls).
+ * Not reproducible: the per-segment age heat stripe and the Older/Newer legend (Gitea emits no age data).
+ *
+ * Gitea puts `padding: 0 !important` on td.lines-commit, so the commit info is offset by .blame-info's padding.
+ * Segment spacing (PERF-1): the 5px under a segment's last line and the rule are drawn by the NEXT segment's first
+ * row (11px top padding with the 1px rule painted 5px down as a background line), so no row needs to know about its
+ * following sibling (the old `tr:has(+ tr.top-line-blame)` rule cost ~110 ms of style recalc on long files).
  */
 .file-view .lines-commit,
 #viewed-files-summary-label {
@@ -31,6 +40,10 @@
   min-width: calc(var(--base-size-80) + var(--base-size-4));
 }
 
+.lines-commit .blame-info .blame-data .blame-message {
+  margin-left: var(--base-size-2);
+}
+
 /* .blame-avatar margin-right: 0 — shared rule in file-view.css */
 
 .blame-avatar img.ui.avatar,
@@ -39,46 +52,140 @@
   height: calc(var(--base-size-16) + var(--base-size-2));
 }
 
-/* message link colour: shared muted rule in file-icons.css */
+/* message link colour: shared muted rule in file-icons.css; hover: accent + underline, shared rule in file-list.css */
 
-/* hover: accent + underline, shared rule in file-list.css */
-
-/* re-blame button column */
+/* re-blame button column: a 28px invisible IconButton that overhangs the 20px line by 4px on both sides */
 .file-view .lines-blame-btn {
+  display: table-cell;
   padding: 0 var(--base-size-4);
+  text-align: center;
 }
 
 .file-view .lines-blame-btn > a {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--base-size-24);
-  height: var(--base-size-20);
+  width: var(--control-small-size);
+  height: var(--control-small-size);
+  margin: calc(-1 * var(--base-size-4)) auto;
   border-radius: var(--borderRadius-medium);
   color: var(--fgColor-muted);
 }
 
 /* hover: shared invisible-icon-button rule in file-view.css */
 
-/* segments */
+/* ---------- segments ---------- */
 tr.top-line-blame {
-  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
-}
-
-tr.top-line-blame:first-of-type {
   border-top: 0;
 }
 
-.file-view tr.top-line-blame > td {
-  padding-top: calc(var(--base-size-4) + var(--borderWidth-thin));
+.blame tr.top-line-blame > td,
+tr.top-line-blame .blame-info {
+  padding-top: calc(2 * var(--base-size-4) + var(--base-size-2) + var(--borderWidth-thin));
 }
 
-.file-view tr:has(+ tr.top-line-blame) > td,
-.file-view tr:has(> .lines-commit):last-child > td {
+.blame tr.top-line-blame > td {
+  background: linear-gradient(var(--borderColor-muted), var(--borderColor-muted)) 0 calc(var(--base-size-4) + var(--borderWidth-thin)) / 100% var(--borderWidth-thin) no-repeat;
+}
+
+.blame tr.top-line-blame:first-child > td,
+tr.top-line-blame:first-child .blame-info {
+  padding-top: calc(var(--base-size-4) + var(--borderWidth-thin));
+  background: none;
+}
+
+.blame .file-view tr:last-child > td {
   padding-bottom: calc(var(--base-size-4) + var(--borderWidth-thin));
 }
 
-/* code-inner carries Tailwind's `tw-pl-2` (0.5rem !important): 12px + 7px ≈ github.com's 20px */
+/* the box's own 8px padding is replaced by the 5px segment padding */
+.blame .file-view.code-view {
+  padding: 0;
+}
+
+/* code-inner carries Tailwind's `tw-pl-2` (0.5rem !important): 12px + 8px = github.com's 20px */
 .file-view .lines-code.blame-code {
   padding-left: var(--base-size-12);
+}
+
+/* ---------- mobile: a header row per segment ---------- */
+@media (max-width: 767.98px) {
+  .blame .file-view :is(table, tbody) {
+    display: block;
+  }
+
+  /* each row is a 2-row grid: [commit header | re-blame] over [number | escape | code] */
+  .blame .file-view tr {
+    display: grid;
+    grid-template-columns: calc(var(--base-size-64) + var(--base-size-8)) auto minmax(0, 1fr) auto;
+  }
+
+  .blame .file-view td {
+    grid-row: 2;
+  }
+
+  .blame .file-view td.lines-commit {
+    grid-area: 1 / 1 / 2 / 4;
+    width: auto;
+  }
+
+  .blame .file-view td.lines-blame-btn {
+    grid-area: 1 / 4;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--base-size-8);
+  }
+
+  .blame .file-view td.lines-code {
+    grid-column: 3 / 5;
+    overflow: visible;
+  }
+
+  .blame .file-view tr:not(.top-line-blame) > :is(.lines-commit, .lines-blame-btn) {
+    display: none;
+  }
+
+  .blame .file-view .lines-num {
+    width: auto;
+    min-width: 0;
+  }
+
+  /* header row: 37px --bgColor-muted + 1px rule; 10px above (after the previous segment's lines). Same
+     specificity as the desktop `.blame tr.top-line-blame:first-child > td` rule, declared later. */
+  .blame tr.top-line-blame > td:is(.lines-commit, .lines-blame-btn) {
+    padding-top: 0;
+    border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+    background: var(--bgColor-muted);
+  }
+
+  .blame tr.top-line-blame:not(:first-child) > :is(.lines-commit, .lines-blame-btn) {
+    margin-top: calc(2 * var(--base-size-4) + var(--base-size-2));
+    border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+  }
+
+  tr.top-line-blame .blame-info,
+  tr.top-line-blame:first-child .blame-info {
+    width: auto;
+    padding: 0 0 0 var(--base-size-8);
+  }
+
+  tr.top-line-blame .blame-info .blame-data {
+    min-height: calc(var(--base-size-36) + var(--borderWidth-thin));
+    font-size: var(--text-body-size-medium);
+  }
+
+  .blame .lines-commit .blame-data .blame-message,
+  .blame .file-view .lines-blame-btn > a {
+    margin: 0;
+  }
+
+  /* lines: 10px above the segment's first and below its last line */
+  .blame tr.top-line-blame > td:is(.lines-num, .lines-escape, .lines-code) {
+    padding-top: calc(2 * var(--base-size-4) + var(--base-size-2));
+    background: none;
+  }
+
+  .blame .file-view tr:last-child > td {
+    padding-bottom: calc(2 * var(--base-size-4) + var(--base-size-2));
+  }
 }

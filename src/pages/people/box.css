@@ -1,10 +1,11 @@
 /*
  * Primer Box surfaces used on the people pages (one rule to keep the theme file small):
- * org home repo list, org People list, explore result cards, notifications list, profile / org README,
+ * org home repo list, org People list, explore users / organizations list, explore repository result cards, notifications list, profile / org README,
  * contribution graph box, dashboard feed cards (pushed commits, comment excerpts).
  */
 .organization:is(.profile, .members) .flex-divided-list,
-.explore .flex-divided-list > .item,
+.explore.users .flex-divided-list,
+.explore.repositories .flex-divided-list > .item,
 #notification_table,
 #readme_profile,
 #user-heatmap > div::before,

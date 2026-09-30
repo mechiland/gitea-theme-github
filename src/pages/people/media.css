@@ -63,8 +63,19 @@
     outline-offset: calc(var(--borderWidth-thick) * -1);
   }
 
-  /* results column; its left rule is the sidebar's divider */
+  /* results column; its left rule is the sidebar's divider. It runs on through the footer's empty 48px top
+     padding (::after), so it meets the footer's text row instead of stopping short above it */
+  .explore > .ui.container::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: calc(var(--borderWidth-thin) * -1);
+    height: var(--base-size-48);
+    border-left: var(--borderWidth-thin) solid var(--borderColor-muted);
+  }
+
   .explore > .ui.container {
+    position: relative;
     grid-area: 1 / 2;
     max-width: calc(var(--breakpoint-large) + var(--base-size-48));
     margin: 0;
@@ -131,6 +142,31 @@
 }
 
 @media (max-width: 767.98px) {
+  /* ---------- notifications (notifications.css): Unread | Read as a SegmentedControl (track + knob; the
+     backgrounds are Gitea/navigation !important → people.important.css) ---------- */
+  .notification .small-menu-items {
+    gap: 0;
+    border-radius: var(--borderRadius-medium);
+  }
+
+  .notification .small-menu-items > .item {
+    justify-content: center;
+    padding: 0 var(--control-medium-paddingInline-normal);
+    border: var(--borderWidth-thin) solid transparent;
+    color: var(--fgColor-default);
+  }
+
+  .notification .small-menu-items > .active {
+    border-color: var(--controlKnob-borderColor-rest);
+  }
+
+  /* "Mark all as read" next to the 32px SegmentedControl: a medium Button, so the toolbar row has one control height */
+  .notification .flex-left-right > form > .button {
+    height: var(--control-medium-size);
+    padding: 0 var(--control-medium-paddingInline-normal);
+    font-size: var(--text-body-size-medium);
+  }
+
   /* ---------- profile (profile.css): avatar beside the name; bio, details, followers, then Follow ---------- */
   .user.profile .ui.grid {
     grid-template-columns: minmax(0, 1fr);
@@ -207,8 +243,21 @@
 
   /* ---------- org (org.css) ---------- */
   .organization.profile .ui.grid,
-  .teams .ui.two.column.grid {
+  .teams .ui.two.column.grid,
+  .teams .team-item-box {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* team rows stack: name, description, avatars, counts */
+  .team-item-box > .segment {
+    grid-area: auto;
+    margin-top: var(--base-size-4);
+  }
+
+  .team-item-header > .flex-text-block {
+    grid-area: auto;
+    order: 1;
+    justify-content: flex-start;
   }
 
   /* mobile reversed: Gitea puts the sidebar first on phones; github.com keeps the repositories first */
@@ -227,6 +276,38 @@
     min-width: var(--base-size-64);
   }
 
+  /* People rows: avatar | name (one line, ellipsis) + role / 2FA, the row's buttons side by side under them */
+  .members .flex-divided-list > .item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--base-size-8) var(--base-size-12);
+  }
+
+  .members .item-leading {
+    grid-row: 1 / span 2;
+  }
+
+  .members .item-title {
+    flex-wrap: nowrap;
+  }
+
+  .members .item-title > a {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .members .item-title > .label {
+    flex-shrink: 0;
+  }
+
+  .members .item-trailing {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: var(--base-size-8);
+  }
+
   /* "Members are managed through teams…" above its button */
   :is(.members, .teams) > .ui.container > .flex-text-block {
     flex-direction: column;
@@ -234,15 +315,34 @@
   }
 
   /* ---------- dashboard (dashboard.css) ---------- */
+  /* The Vue repo list sits above the feed and builds itself in four steps after load (empty → header → search →
+     rows), which pushed the feed down each time (CLS 0.32). While it loads, the container reserves a fixed block at
+     its top (padding) and the list pulls itself into it (negative margin, fixed height), so the feed (parsed and
+     painted first) does not move. Once the rows exist (or the Organizations tab is shown) the list takes its natural
+     height in the flow: every row is visible, no nested scroller; the feed moves only by the difference between the
+     reservation (445px: tabs, heading, search, filter and 8 rows) and the real list: 0 for 8 rows, one row (29px) per
+     row more or less; Gitea pages the list at 15 rows. */
   .feeds > .flex-container {
+    padding-top: calc(var(--base-size-128) * 3 + var(--base-size-64) - var(--base-size-2) - var(--borderWidth-thin));
     padding-left: 0;
   }
 
   .feeds .flex-container-sidebar {
     width: auto;
-    margin-left: 0;
+    height: calc(var(--base-size-128) * 3 + var(--base-size-64) - var(--base-size-2) - var(--borderWidth-thin));
+    margin: calc((var(--base-size-128) * 3 + var(--base-size-64) - var(--base-size-2) - var(--borderWidth-thin)) * -1) 0 0;
+    overflow: hidden;
     border-right: 0;
     border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+  }
+
+  .feeds > .flex-container:has(.dashboard-repos .repo-owner-name-list, .dashboard-repos[style*="none"]) {
+    padding-top: 0;
+  }
+
+  .feeds > .flex-container:has(.dashboard-repos .repo-owner-name-list, .dashboard-repos[style*="none"]) > .flex-container-sidebar {
+    height: auto;
+    margin-top: 0;
   }
 
   .feeds .flex-container-main {
@@ -262,21 +362,25 @@
     padding-top: var(--base-size-32);
   }
 
+  /* the Box outline is a 1px ring (box-shadow) and its 16px side insets are borders in the Box colour: a scroller
+     clips at its padding box, so the weeks scroll under an inset instead of running into the outline */
   #user-heatmap > div {
     display: block;
     position: static;
-    padding: var(--base-size-12) var(--base-size-16) calc(var(--base-size-40) - var(--base-size-2));
+    margin: var(--borderWidth-thin);
+    padding: var(--base-size-12) 0 calc(var(--base-size-40) - var(--base-size-2));
     overflow-x: auto;
     scrollbar-width: none;
     direction: rtl;
-    border: var(--borderWidth-thin) solid var(--borderColor-default);
+    border: solid var(--bgColor-default);
+    border-width: 0 var(--base-size-16);
     border-radius: var(--borderRadius-medium);
     background: var(--bgColor-default);
+    box-shadow: 0 0 0 var(--borderWidth-thin) var(--borderColor-default);
   }
 
   .heatmap-svg {
     width: calc(var(--base-size-128) * 5 + var(--base-size-80));
-    max-width: none;
     margin: 0;
     direction: ltr;
   }

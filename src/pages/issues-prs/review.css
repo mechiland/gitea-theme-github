@@ -75,9 +75,13 @@
   background: transparent;
 }
 
+.code-comments-list .conversation-holder .code-comment {
+  padding: var(--base-size-8) var(--base-size-16);
+}
+
 .code-comments-list .conversation-holder .comment-header {
   min-height: 0;
-  padding: var(--base-size-8) var(--base-size-16) 0;
+  padding: 0;
   border-bottom: 0;
   background: transparent;
 }
@@ -87,8 +91,10 @@
   height: var(--base-size-20);
 }
 
+/* body indented under the author name (20px avatar + 4px gap), github.com review-comment */
 .code-comments-list .conversation-holder .comment-content {
-  padding: var(--base-size-4) var(--base-size-16) var(--base-size-12) calc(var(--base-size-16) + var(--base-size-28));
+  margin: var(--base-size-4) 0 0 var(--base-size-24);
+  padding: 0 0 var(--base-size-4);
 }
 
 /* footer: Resolve conversation + Reply */
@@ -132,4 +138,127 @@
 
 .code-comments-list .conversation-holder > .comment-code-cloud > form.comment-form > .field.footer > .flex-text-block {
   gap: var(--base-size-4);
+}
+
+/* ---------- FG-071: thread "Reply" button icon (primary button → default look: the icon kept the primary
+   button's --button-primary-iconColor, white on the default background) ---------- */
+.repository.view.issue .conversation-holder .comment-form-reply.ui.primary.button {
+  gap: var(--base-size-4);
+}
+
+.repository.view.issue .conversation-holder .comment-form-reply.ui.primary.button > .svg {
+  color: var(--fgColor-muted);
+}
+
+/* ---------- FG-066: review threads embedded in the Files changed diff (repo/diff/conversation.tmpl +
+   repo/diff/comments.tmpl inside .code-diff tr.add-comment) ----------
+   github.com: one Box (1px --borderColor-default, radius 6px) holding the comments unboxed — 20px avatar inside
+   the Box, author 600 --fgColor-default, "commented …" muted, no speech-bubble caret, rows 8px 16px divided by
+   1px --borderColor-muted — then a --bgColor-muted footer with the thread actions. Gitea: every comment is its own
+   bordered Box with a caret and the avatar outside, the timeline's .comment-list gutter + line around them. */
+.repository.view.issue .code-diff .conversation-holder > .comment-code-cloud {
+  overflow: hidden;
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud > .comment-list {
+  margin: 0;
+  padding: 0;
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud > .comment-list::before {
+  display: none;
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud .ui.comments {
+  gap: 0;
+  margin: 0;
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud .ui.comments > .comment {
+  padding: var(--base-size-8) var(--base-size-16) var(--base-size-12);
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud .ui.comments > .comment + .comment {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud .ui.comments > .comment img.ui.avatar,
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud .ui.comments > .comment .avatar > img {
+  width: var(--base-size-20);
+  height: var(--base-size-20);
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud .comment-container {
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud .comment-header {
+  min-height: var(--base-size-20);
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud .comment-header::before,
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud .comment-header::after {
+  display: none;
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud .comment-header-left > .muted-links > a:first-child {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud .comment-header-left > .muted-links > a:first-child:hover {
+  color: var(--fgColor-accent);
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud .comment-body {
+  padding: var(--base-size-4) 0 0;
+  border: 0;
+  background: transparent;
+}
+
+/* footer: Previous / Next, Resolve conversation, Reply on a muted strip */
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud > .flex-text-block {
+  padding: var(--base-size-8) var(--base-size-16);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+  background: var(--bgColor-muted);
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-form-reply.ui.primary.button {
+  border-color: var(--button-default-borderColor-rest);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-default-fgColor-rest);
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-form-reply.ui.primary.button:hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-form-reply.ui.primary.button:active {
+  background: var(--button-default-bgColor-active);
+}
+
+/* the reply form (shown by Reply) sits on the footer strip */
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud > form.comment-form {
+  margin: 0;
+  padding: var(--base-size-8) var(--base-size-16) 0;
+  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+  background: var(--bgColor-muted);
+}
+
+/* FG-070: phones — Gitea pulls review threads 28px left of the timeline item (conversation-holder margin-left
+   -28px), 12px past the page gutter; align them with the comment Boxes on the 16px gutter */
+@media (max-width: 767.98px) {
+  .code-comments-list .conversation-holder {
+    margin-left: calc(var(--base-size-16) - var(--base-size-32));
+  }
 }

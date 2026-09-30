@@ -222,6 +222,16 @@ try {
     return { screenshot: path.relative(PROJECT_ROOT, f) };
   }, { always: true });
 
+  await step('close-issue', async () => {
+    // Clean up: the smoke issue is closed again so repeated runs don't pile up open issues in the seeded repo.
+    const num = state.issueUrl && state.issueUrl.match(/\/issues\/(\d+)$/)?.[1];
+    expect(num, 'no issue created');
+    const api = new URL(R.replace(GITEA_URL, `${GITEA_URL}/api/v1/repos`) + `/issues/${num}`);
+    const r = await fetch(api, { method: 'PATCH', headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + Buffer.from(`${ADMIN_USER}:${ADMIN_PASS}`).toString('base64') }, body: JSON.stringify({ state: 'closed' }) });
+    expect(r.ok, `close issue: HTTP ${r.status}`);
+    return { closed: num };
+  });
+
   await step('no-console-errors', async () => {
     expect(result.consoleErrors.length === 0, `${result.consoleErrors.length} console error(s): ${result.consoleErrors.slice(0, 3).map((e) => `[${e.step}] ${e.text}`).join(' ; ')}`);
   }, { always: true });

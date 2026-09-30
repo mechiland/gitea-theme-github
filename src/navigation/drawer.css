@@ -1,0 +1,131 @@
+/*
+ * Global navigation drawer — github.com's hamburger SidePanel (Overlay--size-small-portrait Overlay--placement-left):
+ *   width min(320px, 100vw - 2rem), full height, --overlay-bgColor, --shadow-floating-small, right corners 12px,
+ *   slide in from the left; backdrop --overlay-backdrop-bgColor over the page.
+ *   header: 32px mark at 16px / 16px, close IconButton (invisible, 32px, muted x) top-right; body padding 16px 8px.
+ *   rows = NavList items: 32px, padding 6px 8px, 8px gap, 16px muted icon, 14px/20px, radius 6,
+ *   hover --control-transparent-bgColor-hover, current --control-transparent-bgColor-selected + semibold + 4px accent bar.
+ * Markup: details.gh-app-header-menu > summary.gh-icon-btn + div.gh-app-header-drawer > .gh-drawer-head + nav.gh-drawer-list
+ * (native <details>, no JavaScript). The summary draws the backdrop (::before) and the close button (::after), so a
+ * click on either closes the drawer.
+ */
+
+.gh-app-header-drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--zIndex-overlay);
+  display: flex;
+  flex-direction: column;
+  width: var(--gh-drawer-width);
+  overflow-y: auto;
+  border-radius: 0 var(--borderRadius-large) var(--borderRadius-large) 0;
+  background: var(--overlay-bgColor);
+  box-shadow: var(--shadow-floating-small);
+  color: var(--fgColor-default);
+  cursor: auto;
+  animation: gh-app-header-drawer-in var(--base-duration-200) var(--base-easing-easeOut);
+}
+
+@keyframes gh-app-header-drawer-in {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+/* Overlay--size-small-portrait: min(320px, 100vw - 2rem) */
+.gh-app-header-menu {
+  --gh-drawer-width: min(calc(var(--base-size-128) * 2 + var(--base-size-64)), calc(100vw - var(--base-size-32)));
+}
+
+/* backdrop: part of the summary, so clicking it closes the drawer */
+.gh-app-header-menu[open] > summary::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--zIndex-overlay);
+  background: var(--overlay-backdrop-bgColor);
+  cursor: default;
+}
+
+/* close button (Overlay-closeButton, octicon x = Gitea's own --octicon-x mask): drawn by the summary above the drawer */
+.gh-app-header-menu[open] > summary::after {
+  content: "";
+  position: fixed;
+  top: var(--base-size-16);
+  left: calc(var(--gh-drawer-width) - var(--base-size-48));
+  z-index: var(--zIndex-modal);
+  width: var(--control-medium-size);
+  height: var(--control-medium-size);
+  background: var(--fgColor-muted);
+  mask: var(--octicon-x) center / var(--base-size-16) no-repeat;
+  cursor: pointer;
+}
+
+/* the page behind does not scroll while the drawer is open */
+html:has(.gh-app-header-menu[open]) {
+  overflow: hidden;
+}
+
+.gh-drawer-head {
+  display: flex;
+  min-height: calc(var(--base-size-48) + var(--base-size-8));
+  padding: var(--base-size-16) var(--base-size-16) var(--base-size-8);
+}
+
+.gh-drawer-list {
+  display: flex;
+  flex-direction: column;
+  padding: var(--base-size-16) var(--base-size-8);
+}
+
+.gh-drawer-list > .item {
+  display: flex;
+  align-items: center;
+  gap: var(--control-medium-gap);
+  position: relative;
+  min-height: var(--control-medium-size);
+  padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-default);
+  line-height: var(--base-size-20);
+}
+
+.gh-drawer-list > .item:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+.gh-drawer-list > .item > .svg {
+  color: var(--fgColor-muted);
+}
+
+.gh-drawer-list > .item.active,
+.gh-drawer-list > .item.active:hover {
+  background: var(--control-transparent-bgColor-selected);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.gh-drawer-list > .item.active::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - var(--base-size-12));
+  left: calc(var(--base-size-8) * -1);
+  width: var(--base-size-4);
+  height: var(--base-size-24);
+  border-radius: var(--borderRadius-medium);
+  background: var(--borderColor-accent-emphasis);
+}
+
+.gh-drawer-divider {
+  height: var(--borderWidth-thin);
+  margin: calc(var(--base-size-8) - var(--borderWidth-thin)) calc(var(--base-size-8) * -1) var(--base-size-8);
+  background: var(--borderColor-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gh-app-header-drawer {
+    animation: none;
+  }
+}

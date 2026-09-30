@@ -13,12 +13,12 @@
  */
 
 /* ---------- top bar: search + Labels/Milestones group + New ---------- */
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header {
   gap: var(--base-size-8);
   align-items: center;
 }
 
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header-search .ui.input > input {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search .ui.input > input {
   height: var(--control-medium-size);
   padding: 0 var(--control-medium-paddingInline-condensed) 0 var(--control-medium-paddingInline-normal);
   border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
@@ -26,7 +26,7 @@
 }
 
 /* trailing search button: an IconButton joined to the input (github.com: 32x32, --bgColor-muted, 1px border) */
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header-search .ui.input > .ui.button {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search .ui.input > .ui.button {
   width: var(--control-medium-size);
   min-width: var(--control-medium-size);
   height: var(--control-medium-size);
@@ -37,18 +37,18 @@
   color: var(--fgColor-muted);
 }
 
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header-search .ui.input > .ui.button:hover {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search .ui.input > .ui.button:hover {
   color: var(--fgColor-default);
 }
 
 /* "Go to issue #N" quick jump (shown by JS when the query is a number) keeps its text */
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header-search #issue-list-quick-goto {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search #issue-list-quick-goto {
   width: auto;
   padding: 0 var(--control-medium-paddingInline-condensed);
   gap: var(--control-small-gap);
 }
 
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header > .ui.button {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header > .ui.button {
   height: var(--control-medium-size);
   padding: 0 var(--control-medium-paddingInline-normal);
   font-size: var(--text-body-size-medium);
@@ -56,18 +56,18 @@
 }
 
 /* Labels | Milestones → Primer ButtonGroup (joined, shared border) */
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header > .ui.button:not(.primary):has(+ .ui.button:not(.primary)) {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header > .ui.button:not(.primary):has(+ .ui.button:not(.primary)) {
   margin-right: calc(var(--base-size-negative-8) - 1px);
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header > .ui.button:not(.primary) + .ui.button:not(.primary) {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header > .ui.button:not(.primary) + .ui.button:not(.primary) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .list-header > .ui.button:not(.primary):hover {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header > .ui.button:not(.primary):hover {
   position: relative;
   z-index: 1;
 }
@@ -78,7 +78,8 @@
   gap: var(--base-size-8);
   min-height: var(--base-size-48);
   margin-top: var(--base-size-16);
-  padding: var(--base-size-8) var(--base-size-16);
+  /* github.com Box-header: 48px including its 1px top border (32px controls + 7px + 8px) */
+  padding: calc(var(--base-size-8) - var(--borderWidth-thin)) var(--base-size-16) var(--base-size-8);
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-bottom: 0;
   border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
@@ -153,11 +154,11 @@
 
 /* PR rows: "base ← head" branch chips as Primer BranchName tokens (mono 12px, --bgColor-accent-muted,
    --fgColor-accent, radius 6px, padding 0 6px) with the arrow-left octicon instead of Gitea's «. */
-:is(.issue-list, .milestone-issue-list, .repository.milestones) #issue-list .branches {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) #issue-list .branches {
   gap: var(--base-size-4);
 }
 
-:is(.issue-list, .milestone-issue-list, .repository.milestones) #issue-list .branches .branch {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) #issue-list .branches .branch {
   padding: 0 var(--base-size-6);
   border-radius: var(--borderRadius-medium);
   background: var(--bgColor-accent-muted);
@@ -167,16 +168,16 @@
   line-height: var(--text-body-lineHeight-medium);
 }
 
-:is(.issue-list, .milestone-issue-list, .repository.milestones) #issue-list .branches .branch a {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) #issue-list .branches .branch a {
   color: inherit;
 }
 
-:is(.issue-list, .milestone-issue-list, .repository.milestones) #issue-list .branches > .svg.gitea-double-chevron-left {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) #issue-list .branches > .svg.gitea-double-chevron-left {
   background-color: currentColor;
   mask: var(--gh-octicon-arrow-left) center / contain no-repeat;
 }
 
-:is(.issue-list, .milestone-issue-list, .repository.milestones) #issue-list .branches > .svg.gitea-double-chevron-left > * {
+:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) #issue-list .branches > .svg.gitea-double-chevron-left > * {
   visibility: hidden;
 }
 
@@ -191,4 +192,18 @@
   .issue-list-toolbar-right .ui.secondary.filter.menu > .item {
     padding: 0 var(--control-medium-paddingInline-condensed);
   }
+}
+
+/* FG-074: phones — github.com has no bulk-select column at narrow widths (the rows start with the state icon);
+   bulk actions stay available from 768px up */
+@media (max-width: 767.98px) {
+  :is(.issue-list, .milestone-issue-list) #issue-list > .item .item-leading .issue-checkbox,
+  :is(.issue-list, .milestone-issue-list) .issue-list-toolbar-left > .issue-checkbox-all {
+    display: none;
+  }
+}
+
+/* list titles 600: github.com computes Mona Sans 600 but loads no web font, so it draws the system font at 600 */
+:is(.issue-list, .milestone-issue-list) #issue-list > .item .list-item-large-title {
+  font-weight: var(--base-text-weight-semibold);
 }

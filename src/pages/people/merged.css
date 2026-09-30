@@ -5,9 +5,8 @@
  * The file each selector belongs to is noted in its group.
  */
 
-/* muted text / icons — profile (Follow icon, "Block user"), repo lists (filter caret), org header (description,
+/* muted text / icons — profile ("Block user"), repo lists (filter caret), org header (description,
    meta icons), explore (empty result), dashboard (context bar icons), notifications (empty inbox) */
-.card li.follow .svg,
 .card li:last-child > a.muted,
 :is(.profile, .explore) .filter.menu .dropdown.item > .dropdown.icon,
 .organization > .flex-container:first-child :is(.render-content, .flex-relaxed-list > div:last-child .svg),
@@ -50,8 +49,9 @@
   font-weight: var(--base-text-weight-semibold);
 }
 
-/* hidden — profile repo rows' leading icon, filter-bar rule (org / explore), org sub-page header extras, dashboard
+/* hidden — the Follow button's person icon (github.com: text only), profile repo rows' leading icon, filter-bar rule (org / explore), org sub-page header extras, dashboard
    SegmentedControl dividers, the 6th legend square, the time while a notification row has keyboard focus */
+.card li.follow .svg,
 .profile .item:has(> .item-main > .item-header) > .item-leading,
 :is(.organization, .explore) :is(.filter.menu, .filter.menu + .message) + .divider,
 .organization:not(.profile) > .flex-container:first-child :is(.header .flex-text-block:last-child, .flex-relaxed-list > :not(.header)),
@@ -77,8 +77,8 @@
   gap: var(--base-size-4);
 }
 
-/* 16px gaps — explore result cards, feed rows */
-.explore .flex-divided-list,
+/* 16px gaps — explore repository result cards, feed rows */
+.explore.repositories .flex-divided-list,
 #activity-feed > .item {
   gap: var(--base-size-16);
 }

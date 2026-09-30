@@ -37,8 +37,9 @@
   line-height: var(--base-size-24);
 }
 
-/* section counter (Primer Counter in a heading) */
-.repo-home-sidebar-header > .ui.label {
+/* section counter (Primer Counter in a heading); also the wiki "Pages N" Counter (wiki.css) */
+.repo-home-sidebar-header > .ui.label,
+.gh-wiki-pages-header > .gh-counter {
   min-width: var(--base-size-20);
   margin: 0 0 0 var(--base-size-4);
   padding: 0 var(--base-size-6);

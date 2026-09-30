@@ -253,7 +253,10 @@ export function pageAudit({ palette, otherPalette, target }) {
   // Material file icons carry an octicon-* class but draw a <use href="#svg-mfi-…"> symbol → non-Octicon
   // (name material-file:<symbol>). An svg whose computed mask-image is an SVG data URI is an Octicon drawn by a
   // theme CSS mask (see src/icons/octicon-masks.css) → counted as Octicon and listed separately in icons.masked.
-  const icons = new Map(); const masked = new Map(); let octicons = 0;
+  // svgs the theme hides itself (own computed display:none, e.g. the colorblind markers, IC-4) → icons.hidden;
+  // GitHub's own non-Octicon glyphs (gitea-running = github.com's in-progress spinner, same paths, IC-2) → icons.githubNative.
+  const icons = new Map(); const masked = new Map(); const hidden = new Map(); const githubNative = new Map(); let octicons = 0;
+  const GITHUB_NATIVE = { 'gitea-running': 'github-native:in-progress' };
   const bump = (m, name, svg) => {
     let e = m.get(name);
     if (!e) m.set(name, (e = { name, count: 0, samples: [] }));
@@ -264,6 +267,8 @@ export function pageAudit({ palette, otherPalette, target }) {
     const mfi = svg.querySelector(':scope > use[href^="#svg-mfi-"], :scope > use[*|href^="#svg-mfi-"]');
     const mask = getComputedStyle(svg).maskImage || getComputedStyle(svg).webkitMaskImage || '';
     const baseName = cls.find((c) => /^(gitea|material|fontawesome|fa|octicon|svg-)-?/.test(c) && c !== 'svg') || cls.filter((c) => c !== 'svg').join('.') || '(unnamed)';
+    if (getComputedStyle(svg).display === 'none') { bump(hidden, baseName, svg); continue; }
+    if (GITHUB_NATIVE[baseName]) { bump(githubNative, GITHUB_NATIVE[baseName], svg); continue; }
     if (mask.includes('data:image/svg+xml')) { octicons++; bump(masked, `mask:${mfi ? 'material-file' : baseName}`, svg); continue; }
     if (mfi) { bump(icons, `material-file:${(mfi.getAttribute('href') || mfi.getAttribute('xlink:href') || '').replace('#svg-mfi-', '')}`, svg); continue; }
     if (cls.some((c) => c.startsWith('octicon-'))) { octicons++; continue; }
@@ -292,7 +297,8 @@ export function pageAudit({ palette, otherPalette, target }) {
       otherSchemeOnly: sortTop(otherScheme).slice(0, 20),
       exempt: sortTop(exempt).slice(0, 40),
     },
-    icons: { octicons, nonOcticon: [...icons.values()].sort((a, b) => b.count - a.count), masked: [...masked.values()].sort((a, b) => b.count - a.count) },
+    icons: { octicons, nonOcticon: [...icons.values()].sort((a, b) => b.count - a.count), masked: [...masked.values()].sort((a, b) => b.count - a.count),
+      hidden: [...hidden.values()].sort((a, b) => b.count - a.count), githubNative: [...githubNative.values()].sort((a, b) => b.count - a.count) },
     unlayeredGiteaCss,
     cls: { total: +(window.__shootCLS || 0).toFixed(4), shifts: window.__shootShifts || [] },
     timing: nav ? {

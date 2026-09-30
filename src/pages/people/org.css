@@ -93,7 +93,7 @@
   margin: 0;
 }
 
-.organization.profile .ui.grid:not(:has(> .column + .column)) {
+.organization.profile .ui.grid:not(:has(> .eleven.wide.column)) {
   grid-template-columns: minmax(0, 1fr);
 }
 
@@ -108,17 +108,23 @@
 
 .profile .five.wide > .top.header {
   margin: 0;
-  padding: var(--base-size-16) 0 var(--base-size-8);
+  padding: var(--base-size-16) 0;
   border: 0;
   border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
   border-radius: 0;
   background: none;
   font-size: var(--text-body-size-large);
+  font-weight: var(--base-text-weight-normal);
 }
 
 .profile .five.wide > :is(:first-child, .divider + *).top.header {
   padding-top: 0;
   border-top: 0;
+}
+
+/* github.com sidebar headings (People, Top languages…) are 16/400; Gitea wraps the text in <strong> */
+.profile .five.wide > .header > strong {
+  font-weight: inherit;
 }
 
 .profile .five.wide > .header > a {
@@ -148,8 +154,28 @@
 }
 
 .members .item-main > .tw-flex {
+  flex-wrap: wrap;
+  align-items: center;
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
+}
+
+/* role and 2FA on one line (direction / gap: people.important.css); "2FA: ×" becomes a muted Label */
+.members .item-main > .tw-flex > div:not(:has(> strong)) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base-size-2);
+  min-height: var(--base-size-20);
+  padding: 0 var(--base-size-6);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-full);
+  font-weight: var(--base-text-weight-medium);
+  line-height: calc(var(--base-size-20) - 2 * var(--borderWidth-thin));
+}
+
+.members .item-main > .tw-flex .svg {
+  width: var(--base-size-12);
+  height: var(--base-size-12);
 }
 
 /* manage prompt row above the list */
@@ -158,28 +184,84 @@
   color: var(--fgColor-muted);
 }
 
-/* Teams: Box cards, 2 columns */
+/* Teams → one Box, a row per team (github.com /orgs/<org>/teams): name + visibility Label, description below
+   (muted), member avatars (20px) and "N members · N repositories" (12px muted) on the right. The card header
+   becomes `display: contents` so its two halves are cells of the row grid. */
 .teams .ui.two.column.grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--base-size-16);
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0 var(--base-size-16);
   margin: 0;
+  overflow: hidden;
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+.teams .team-item-box {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid; /* the rows share the Box's columns: avatars and counts line up row to row */
+  align-items: center;
+  gap: var(--base-size-4) var(--base-size-16);
+}
+
+.team-item-box + .team-item-box {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
 }
 
 .team-item-box > .team-item-header {
-  min-height: 0;
-  font-weight: var(--base-text-weight-normal);
+  display: contents;
 }
 
-.team-item-box > .team-item-header .flex-text-block {
+.team-item-header > .flex-text-inline {
+  grid-area: 1 / 1;
+  gap: var(--base-size-8);
+}
+
+.team-item-header > .flex-text-inline strong {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.team-item-header > .flex-text-inline a:hover strong {
+  color: var(--fgColor-accent);
+}
+
+.team-item-header > .flex-text-block > .button {
+  margin-left: var(--base-size-4);
+}
+
+.team-item-header > .flex-text-block {
+  grid-area: 1 / 3 / 3;
   gap: var(--base-size-4);
+  justify-content: flex-end;
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-normal);
 }
 
-.team-item-box .team-item-description {
-  padding: var(--base-size-8) var(--base-size-16);
-  background: var(--bgColor-default);
-  color: var(--fgColor-muted);
+.team-item-box > :is(.team-item-description, .segment) {
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
   font-weight: var(--base-text-weight-normal);
+}
+
+.team-item-box > .team-item-description {
+  grid-area: 2 / 1;
+  color: var(--fgColor-muted);
+  white-space: normal;
+}
+
+.team-item-box > .segment {
+  grid-area: 1 / 2 / 3;
+}
+
+.team-item-box > .segment img.ui.avatar {
+  width: var(--base-size-20);
+  height: var(--base-size-20);
 }

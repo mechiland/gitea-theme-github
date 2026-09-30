@@ -17,6 +17,123 @@
  * then comes inline too, so everything in the header inherits it.
  */
 
+/* ---------- list page layout (FG-035) ----------
+   github.com /orgs/<org>/projects: search input (with the "New project" button beside it) on top, then ONE Box whose
+   header holds the Open N / Closed N state links (left) and Sort (right), rows below. Gitea's DOM order is
+   [state links + New Project] [alert] [search + Sort] [list] → the container becomes a grid, the two wrappers are
+   dissolved (display: contents) and every part is placed by area, at every width (the mobile order no longer flips). */
+:is(.repository, .organization).projects > .ui.container:has(> .milestone-list) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "alert alert"
+    "search new"
+    "toggle sort"
+    "list list";
+  align-items: center;
+}
+
+:is(.repository, .organization).projects > .ui.container:has(> .milestone-list) > :is(.flex-left-right, .list-header) {
+  display: contents;
+}
+
+:is(.repository, .organization).projects > .ui.container:has(> .milestone-list) > .message {
+  grid-area: alert;
+  margin: 0 0 var(--base-size-16);
+}
+
+:is(.repository, .organization).projects > .ui.container > .list-header > .list-header-search {
+  grid-area: search;
+  margin-bottom: var(--base-size-16);
+}
+
+:is(.repository, .organization).projects > .ui.container:not(:has(> .flex-left-right)) > .list-header > .list-header-search {
+  grid-column: 1 / -1;
+}
+
+/* "New project": Primer primary medium (32px, 14px/500, 12px inline padding), 8px after the search */
+:is(.repository, .organization).projects > .ui.container > .flex-left-right > .ui.primary.button {
+  grid-area: new;
+  align-self: start;
+  height: var(--control-medium-size);
+  min-height: var(--control-medium-size);
+  margin: 0 0 var(--base-size-16) var(--base-size-8);
+  padding: 0 var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
+}
+
+/* Box header: state links left, Sort right, one --bgColor-muted band with the Box border and top radius */
+:is(.repository, .organization).projects > .ui.container > .flex-left-right > .list-header-toggle,
+:is(.repository, .organization).projects > .ui.container > .list-header > .list-header-filters {
+  align-self: stretch;
+  /* 65px like github.com's Box-header: the 1px divider below is part of the 16px bottom padding */
+  padding: var(--base-size-16) var(--base-size-16) calc(var(--base-size-16) - var(--borderWidth-thin));
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  background: var(--bgColor-muted);
+}
+
+/* the links / Sort item carry 8px inline padding themselves → the text sits 16px in, like github.com's header */
+:is(.repository, .organization).projects > .ui.container > .flex-left-right > .list-header-toggle {
+  grid-area: toggle;
+  flex-wrap: wrap;
+  padding-inline: var(--base-size-8) 0;
+  border-right: 0;
+  border-top-left-radius: var(--borderRadius-medium);
+}
+
+/* github.com's Open/Closed header links carry no leading octicon (text + Counter only) */
+:is(.repository, .organization).projects > .ui.container > .flex-left-right > .list-header-toggle > .item > .svg {
+  display: none;
+}
+
+:is(.repository, .organization).projects > .ui.container > .list-header > .list-header-filters {
+  grid-area: sort;
+  justify-content: flex-end;
+  padding-inline: 0 var(--base-size-8);
+  border-left: 0;
+  border-top-right-radius: var(--borderRadius-medium);
+}
+
+/* no write access: no state links → Sort spans the whole header */
+:is(.repository, .organization).projects > .ui.container:not(:has(> .flex-left-right)) > .list-header > .list-header-filters {
+  grid-area: auto;
+  grid-row: 3;
+  grid-column: 1 / -1;
+  border-left: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-top-left-radius: var(--borderRadius-medium);
+}
+
+:is(.repository, .organization).projects > .ui.container > .list-header > .list-header-filters > .item {
+  height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-condensed);
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+}
+
+:is(.repository, .organization).projects > .ui.container > .list-header > .list-header-filters > .item:is(:hover, .active) {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+:is(.repository, .organization).projects > .ui.container > .milestone-list {
+  grid-area: list;
+  border-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+:is(.repository, .organization).projects > .ui.container > .milestone-list > .item:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* the empty state is the Box body (github.com Blankslate inside the Box) */
+:is(.repository, .organization).projects > .ui.container > .milestone-list:not(:has(> .item)) {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-top: 0;
+  background: var(--bgColor-default);
+}
+
 /* ---------- list ---------- */
 .projects .milestone-list {
   border: var(--borderWidth-thin) solid var(--borderColor-default);
@@ -34,9 +151,14 @@
   border-top-right-radius: var(--borderRadius-medium);
 }
 
+.projects .milestone-list > .item {
+  padding: var(--base-size-16);
+}
+
 .projects .list-item-large-title {
   display: flex;
   align-items: center;
+  gap: var(--base-size-8);
 }
 
 .projects .list-item-large-title > .svg {
@@ -48,8 +170,12 @@
   text-decoration: underline;
 }
 
+/* github.com: 12px/18px (1.5) */
 .projects .list-item-secondary-bar {
   gap: var(--base-size-8) var(--base-size-16);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--base-text-lineHeight-normal);
 }
 
 .projects .list-item-secondary-bar .flex-text-block {
@@ -61,13 +187,15 @@
   height: var(--base-size-12);
 }
 
-.projects .list-item-secondary-bar a:hover {
-  color: var(--fgColor-accent);
-  text-decoration: none;
+/* row actions (Edit / Close / Delete, FG-035): muted text actions like github.com's Link--muted meta links; Delete
+   is muted at rest (its tw-text-red !important is reset in pages.important.css) and turns danger on hover only */
+.projects .list-item-secondary-bar a {
+  color: var(--fgColor-muted);
 }
 
-.projects .list-item-secondary-bar a.tw-text-red:hover {
-  color: var(--fgColor-danger);
+.projects .list-item-secondary-bar a:hover {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
 }
 
 .projects .milestone-list > .center.page.buttons {
@@ -220,15 +348,42 @@
   font-size: var(--text-title-size-medium);
 }
 
+/* < md (FG-055): the 5-button group (~500px) was cut off at 390 → the group wraps into separate default buttons,
+   8px apart, each with its own radius and shadow (Primer ButtonGroup has no wrapping form) */
+@media (max-width: 767.98px) {
+  .project-header > .compact {
+    flex-wrap: wrap;
+    gap: var(--base-size-8);
+    height: auto;
+    overflow: visible;
+    box-shadow: none;
+  }
+
+  .project-header > .compact > .item,
+  .project-header > .compact > :is(.item:first-child, .item.tw-hidden:first-child + .item, .item:last-child) {
+    margin: 0;
+    border-radius: var(--borderRadius-medium);
+    box-shadow: var(--button-default-shadow-resting);
+  }
+}
+
 .project-description .divider {
   margin: var(--base-size-8) 0 var(--base-size-16);
   border-bottom: 0;
 }
 
+/* board: github.com's board scroller spans the viewport (columns start at the page padding and scroll under the
+   right edge, FG-055: Gitea clipped the 4th column at the container edge 32px before it). The board bleeds into the
+   page margins and pads them back, so the first column still starts at the page edge and the last one can be
+   scrolled clear of the viewport edge (flex scroll containers include the end padding). */
 #project-board {
   gap: var(--base-size-8);
+  margin: 0 calc(var(--page-margin-x) * -1);
+  padding: var(--base-size-8) var(--page-margin-x);
+}
+
+.fullscreen.projects-view #project-board {
   margin: 0;
-  padding: var(--base-size-8) 0;
 }
 
 .project-column {

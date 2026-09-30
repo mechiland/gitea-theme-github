@@ -1,0 +1,6 @@
+/* gh-important: Gitea repo/issue-list.css (< 768px) `.issue-list-search { order: 2 !important }` reorders the
+   list-header flex items; in the github layout they are rows of .gh-issues-main's grid, the query bar stays
+   under the title. */
+.gh-issues-main > .list-header > .issue-list-search {
+  order: 0 !important;
+}

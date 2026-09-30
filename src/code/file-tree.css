@@ -7,11 +7,40 @@
  *   hover --control-transparent-bgColor-hover; current item --control-transparent-bgColor-selected plus a
  *   4×24px --fgColor-accent bar 8px left of the item.
  */
+/* FG-054: github.com's tree pane is flush with the page's left edge (320px incl. 16px padding) and a full-height
+   1px --borderColor-default rule separates it from the content, which starts 16px after the rule. The pane is
+   sticky (max-height 100vh), so the rule is drawn as the content column's left border to run the full page height.
+   The code view always sits in a fluid container, whose side margin is Gitea's --page-margin-x. */
+.repo-view-container:has(> .repo-view-file-tree-container:not(.tw-hidden)) {
+  gap: 0;
+}
+
 .repo-view-file-tree-container {
-  flex: 0 0 clamp(var(--overlay-width-xsmall), 22%, var(--overlay-width-small));
+  flex: 0 0 clamp(var(--overlay-width-xsmall), 22% + var(--page-margin-x), var(--overlay-width-small));
+  margin-left: calc(-1 * var(--page-margin-x));
+  padding: 0 var(--base-size-16) 0 var(--base-size-8);
+}
+
+@media (min-width: 768px) {
+  .repo-view-file-tree-container:not(.tw-hidden) + .repo-view-content {
+    padding-left: var(--base-size-16);
+    border-left: var(--borderWidth-thin) solid var(--borderColor-default);
+  }
+
+  /* the pane and its rule start at the repo header's bottom rule (github.com): cancel foundation's 24px gap under
+     the header band (.page-content > :first-child.secondary-nav) and put 8px back inside both columns, so the
+     breadcrumb row sits 16px under the band as on github.com */
+  .repo-view-container:has(> .repo-view-file-tree-container:not(.tw-hidden)) {
+    margin-top: calc(-1 * var(--base-size-24));
+  }
+
+  .repo-view-container:has(> .repo-view-file-tree-container:not(.tw-hidden)) > * {
+    padding-top: var(--base-size-8);
+  }
 }
 
 .repo-view-file-tree-container > .repo-button-row {
+  padding-left: var(--base-size-8);
   font-size: var(--text-title-size-small);
   font-weight: var(--base-text-weight-semibold);
 }

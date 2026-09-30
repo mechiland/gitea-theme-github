@@ -1,0 +1,16 @@
+/*
+ * gh-important: navigation paints every `.small-menu-items .item` background with !important (transparent,
+ * hover --control-transparent-bgColor-hover). The Labels | Milestones SegmentedControl (FG-039) needs the track,
+ * the knob and the inset hover pill instead.
+ */
+.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu {
+  background: var(--controlTrack-bgColor-rest) !important;
+}
+
+.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item:not(.active):hover {
+  background: var(--controlTrack-bgColor-hover) !important;
+}
+
+.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item.active {
+  background: var(--controlKnob-bgColor-rest) !important;
+}

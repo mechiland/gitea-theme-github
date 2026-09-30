@@ -8,32 +8,32 @@
  * user/settings/applications.tmpl (access tokens).
  */
 
-:is(.settings, .admin) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-leading {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-leading {
   color: var(--fgColor-muted);
 }
 
-:is(.settings, .admin) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-main {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-main {
   gap: var(--base-size-4);
 }
 
-:is(.settings, .admin) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-body {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-body {
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
   line-height: var(--text-body-lineHeight-small);
 }
 
 /* the first body line after the title is the fingerprint (the 14px semibold title comes from the settings list-row rule below) */
-:is(.settings, .admin) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-title + .item-body {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-title + .item-body {
   font-family: var(--fontStack-monospace);
   overflow-wrap: anywhere;
 }
 
-:is(.settings, .admin) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-body i {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-body i {
   font-style: normal;
 }
 
 /* inline octicons in a row's meta line ("— ⓘ Last used …" on keys and access tokens) follow the 12px text */
-:is(.settings, .admin) .flex-container-main .items-with-main > .item .item-body .svg {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .items-with-main > .item .item-body .svg {
   width: var(--base-size-12);
   height: var(--base-size-12);
   min-width: var(--base-size-12); /* Gitea .svg[width="16"] { min-width: 16px } */
@@ -41,19 +41,19 @@
   vertical-align: text-bottom;
 }
 
-:is(.settings, .admin) .flex-container-main .items-with-main > .item .item-trailing {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .items-with-main > .item .item-trailing {
   align-self: center;
 }
 
 /* text Delete buttons in key / token / application rows: github.com uses a text-only btn-danger btn-sm (the trash
    octicon stays on icon-only buttons such as the push-mirror remove button) */
-:is(.settings, .admin) .flex-container-main .flex-divided-list .item-trailing .ui.red.button:not(.basic) > .svg.octicon-trash {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .flex-divided-list .item-trailing .ui.red.button:not(.basic) > .svg.octicon-trash {
   display: none;
 }
 
 /* every settings list row (teams, collaborators, organizations, OAuth2 apps): github.com settings rows use a 14px
    semibold title, not the 16px list title of explore / repo lists */
-:is(.settings, .admin) .flex-container-main .flex-divided-list.items-with-main > .item .item-title {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .flex-divided-list.items-with-main > .item .item-title {
   font-size: var(--text-body-size-medium);
   line-height: var(--text-body-lineHeight-medium);
 }
@@ -61,7 +61,7 @@
 /* access tokens: the name is a disclosure summary (applications.tmpl: details > summary > span.item-title). Gitea's
    .item-title is inline-flex (flex-list.css), so a long name cannot wrap and drops below the ▸ marker at 390px —
    inline text wraps beside the marker like github.com's token names */
-:is(.settings, .admin) .flex-container-main .items-with-main > .item .item-main > details > summary > .item-title {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .items-with-main > .item .item-main > details > summary > .item-title {
   display: inline;
   overflow-wrap: anywhere;
 }

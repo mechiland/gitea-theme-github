@@ -59,8 +59,10 @@ overflow-menu .overflow-menu-items {
   background: var(--control-transparent-bgColor-active);
 }
 
+/* labels / milestones / a milestone's issues belong to the Issues tab on github.com (Gitea selects nothing: FG-115) */
 .ui.secondary.pointing.menu .active.item,
-.ui.secondary.pointing.menu .active.item:hover {
+.ui.secondary.pointing.menu .active.item:hover,
+.repository:is(.milestone-issue-list, .milestones, .labels) overflow-menu a.item[href$="/issues"] {
   border: 0;
   color: var(--fgColor-default);
   font-weight: var(--base-text-weight-semibold);
@@ -74,7 +76,9 @@ overflow-menu .overflow-menu-items {
   display: none;
 }
 
-.ui.secondary.pointing.menu .active.item::after {
+.ui.secondary.pointing.menu .active.item::after,
+.repository:is(.milestone-issue-list, .milestones, .labels) overflow-menu a.item[href$="/issues"]::after,
+overflow-menu .overflow-menu-button.active::after {
   content: "";
   display: block;
   visibility: visible;
@@ -98,8 +102,24 @@ overflow-menu .overflow-menu-items {
   color: var(--underlineNav-iconColor-rest);
 }
 
-.ui.secondary.pointing.menu .active.item > .svg {
+.ui.secondary.pointing.menu .active.item > .svg,
+.repository:is(.milestone-issue-list, .milestones, .labels) overflow-menu a.item[href$="/issues"] > .svg {
   color: inherit;
+}
+
+/* Primer UnderlineNav hides the leading icons before it moves tabs into "More". overflow-menu.ts measures once per
+   width, so the icons go by width: the repo local bar (up to 11 tabs, about 1130px with icons) below 1200px, the profile
+   and org rows (up to 8 tabs) below 768px. At 390 the repo bar then shows Code, Issues, Pull requests before "…". */
+@media (max-width: 1199.98px) {
+  .secondary-nav overflow-menu .overflow-menu-items > .item > .svg {
+    display: none;
+  }
+}
+
+@media (max-width: 767.98px) {
+  :is(.user.profile, .organization) overflow-menu .overflow-menu-items > .item > .svg {
+    display: none;
+  }
 }
 
 /* counter (Primer CounterLabel inside UnderlineNav: 20px, 12px medium, neutral-muted pill) */
@@ -120,9 +140,10 @@ overflow-menu .overflow-menu-items {
   line-height: var(--base-text-lineHeight-normal);
 }
 
-/* space-filler before "Settings" */
+/* github.com: "Settings" is simply the last tab, not pushed to the far right (FG-042). overflow-menu.ts hides the
+   spacer itself while measuring, so hiding it for good changes nothing there. */
 overflow-menu .overflow-menu-items .item-flex-space {
-  align-self: stretch;
+  display: none;
 }
 
 /* ---------- overflow "…" button and its popup (ActionMenu) ---------- */
@@ -140,7 +161,6 @@ overflow-menu .overflow-menu-button {
   background: var(--button-default-bgColor-rest);
   box-shadow: var(--button-default-shadow-resting);
   color: var(--fgColor-muted);
-  transition: background-color var(--base-duration-100) var(--base-easing-easeOut);
 }
 
 overflow-menu .overflow-menu-button:hover {
@@ -158,24 +178,11 @@ overflow-menu .overflow-menu-button:focus-visible {
   outline-offset: calc(var(--borderWidth-thick) * -1);
 }
 
+/* the selected tab moved into the "…" menu (overflow-menu.ts cannot swap it back): instead of Gitea's 2px border
+   on the button, the selected bar of the tabs (::after above) sits under the trigger on the nav's edge (FG-029) */
 overflow-menu.ui.secondary.pointing.menu .overflow-menu-button.active {
   position: relative;
   padding: 0;
-  border-bottom-width: var(--borderWidth-thin);
-  background: var(--button-default-bgColor-rest);
-  color: var(--fgColor-default);
-  font-weight: var(--base-text-weight-semibold);
-}
-
-overflow-menu.ui.secondary.pointing.menu .overflow-menu-button.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: calc(50% - var(--base-size-24) + var(--base-size-2) / 2);
-  height: var(--base-size-2);
-  border-radius: var(--borderRadius-medium);
-  background: var(--underlineNav-borderColor-active);
 }
 
 overflow-menu .overflow-menu-popup {
@@ -194,13 +201,12 @@ overflow-menu .overflow-menu-popup::after {
   display: none;
 }
 
-overflow-menu .overflow-menu-popup > .item {
-  gap: var(--control-medium-gap);
-  width: calc(100% - var(--base-size-16));
+/* popup rows = ActionList items: 32px, padding 6px 8px (important file), 8px inset on both sides, radius 6. The
+   prefix beats the tab rules above (.ui.secondary.pointing.menu .item: 30px line box, margin 0, the 2px underline). */
+overflow-menu.ui.secondary.pointing.menu .overflow-menu-popup > .item {
+  width: auto;
   min-height: var(--control-medium-size);
   margin: 0 var(--base-size-8);
-  border-radius: var(--borderRadius-medium);
-  font-size: var(--text-body-size-medium);
   line-height: var(--base-size-20);
 }
 
@@ -208,17 +214,14 @@ overflow-menu .overflow-menu-popup > .item > .svg {
   color: var(--fgColor-muted);
 }
 
-overflow-menu .overflow-menu-popup > .item.active {
-  position: relative;
-  font-weight: var(--base-text-weight-semibold);
-}
-
-overflow-menu .overflow-menu-popup > .item.active::after {
-  content: "";
-  position: absolute;
-  top: var(--base-size-2);
-  bottom: var(--base-size-2);
-  left: 0;
-  width: var(--base-size-2);
-  background: var(--underlineNav-borderColor-active);
+/* selected: --control-transparent-bgColor-selected (important file) + semibold + NavList's 4px accent bar in the inset */
+overflow-menu.ui.secondary.pointing.menu .overflow-menu-popup > .item.active::after {
+  top: calc(50% - var(--base-size-12));
+  right: auto;
+  bottom: auto;
+  left: calc(var(--base-size-8) * -1);
+  width: var(--base-size-4);
+  height: var(--base-size-24);
+  background: var(--borderColor-accent-emphasis);
+  transform: none;
 }

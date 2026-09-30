@@ -1,13 +1,14 @@
 /*
- * Commits list — github.com /commits (measured 2026-09-30, pemistahl/grex): each commit is a Box row
- *   padding 8px 16px, 64px tall, rows divided by 1px --borderColor-muted;
- *   line 1: title 16px / 24px medium --fgColor-default (links default, issue refs accent);
- *   line 2: 16px avatar + author + date, 12px / 18px --fgColor-muted;
- *   right, vertically centred: [Verified] [short SHA invisible small button, mono 12px] [copy] [browse] 28px buttons.
- * Gitea: templates/repo/commits_list.tmpl — table#commits-table (thead Author | SHA1 | Message | Date | actions;
- * tbody.commit-list > tr > td.author, td.sha, td.message, td (date), td (copy / view buttons)). The same list is
- * used by the PR "Commits" tab, compare pages and wiki revisions. The table is re-laid out as a 2-line grid row;
- * GitHub's per-day "Commits on …" group headers need data Gitea does not render (known gap).
+ * Commit lists — github.com /commits (measured 2026-09-30, pemistahl/grex): a Timeline of day groups. Line 2px
+ *   --borderColor-muted 16px from the container edge; per day a 32px badge (git-commit octicon, muted) on the line and
+ *   the date 14px / 21px muted at x+41; below it one Box (8px down) of 64px rows (padding 8px 16px, rows divided by
+ *   1px --borderColor-muted): title 16px / 24px medium, meta 12px / 18px muted, right: short SHA (7 characters) in an
+ *   invisible 28px button, copy + browse 28px icon buttons. Compare / PR commits (github.com's classic list): title
+ *   14px semibold, author 12px semibold --fgColor-default.
+ * Gitea: templates/repo/commits_list.tmpl (github-* override, ARCHITECTURE §7 ORC-6) — table#commits-table >
+ *   tbody.commit-list > tr.gh-commit-day (td > h3.gh-commit-day-title > svg + span > relative-time) before the first
+ *   commit of each day, then the commit rows (td.author, td.sha, td.message, td date, td actions). Used by /commits,
+ *   the PR "Commits" tab and compare pages; the wiki revision list has no day rows and keeps one Box.
  */
 #commits-table {
   display: block;
@@ -27,6 +28,7 @@
   column-gap: var(--base-size-4);
   min-height: var(--base-size-64);
   padding: var(--base-size-8) var(--base-size-16);
+  position: relative;
   border: 0;
   border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
   background: transparent;
@@ -46,6 +48,18 @@
   font-weight: var(--base-text-weight-medium);
   line-height: var(--base-size-24);
   white-space: normal;
+}
+
+/* compare / PR commits: github.com's classic commit list (14px semibold title, 12px semibold author) */
+:is(.diff, .pull) #commits-table td.message {
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--base-size-20);
+}
+
+:is(.diff, .pull) #commits-table td.author a.muted {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
 }
 
 #commits-table td.message .commit-body {
@@ -90,18 +104,24 @@
   margin-left: var(--base-size-16);
 }
 
-#commits-table td.sha .ui.label.commit-id-short {
+/* short SHA: 12px mono in an invisible 28px button, cut to 7 characters (Gitea renders 10; href, copy button and
+   tooltip keep the full SHA). The inline padding is a transparent border: overflow clips at the padding edge. */
+#commits-table .commit-id-short {
   height: var(--control-small-size);
-  padding: 0 var(--control-small-paddingInline-condensed);
-  border: var(--borderWidth-thin) solid transparent;
+  padding: 0;
+  border: solid transparent;
+  border-width: 0 var(--control-small-paddingInline-condensed);
   background: transparent;
   color: var(--button-default-fgColor-rest);
-  font-family: inherit; /* github.com: sans 12px / 500 in the invisible button colour */
-  font-size: var(--text-body-size-small);
   font-weight: var(--base-text-weight-medium);
 }
 
-#commits-table td.sha .ui.label.commit-id-short:hover {
+#commits-table .commit-id-short:not(.commit-is-signed) {
+  width: calc(7ch + 2 * var(--control-small-paddingInline-condensed));
+  overflow: hidden;
+}
+
+#commits-table .commit-id-short:hover {
   background: var(--control-transparent-bgColor-hover);
   color: var(--button-default-fgColor-rest);
   text-decoration: none;
@@ -113,12 +133,100 @@
   align-items: center;
 }
 
-/* Box around the list: the attached table segment keeps data-display's Box frame; no inner padding */
-.ui.attached.table.segment.commit-table {
-  overflow: hidden;
+/* ---------- day groups (Timeline) ---------- */
+.commit-table:has(.gh-commit-day) {
+  border: 0;
+  background: none;
+}
+
+.commit-list:has(> .gh-commit-day) {
+  position: relative;
+  padding-left: calc(var(--base-size-40) + 1px);
+}
+
+.commit-list:has(> .gh-commit-day)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--base-size-16);
+  width: var(--borderWidth-thick);
+  background: var(--borderColor-muted);
+}
+
+/* commit rows of a day: one Box (rows after the first day row; the day rows reset it below) */
+#commits-table .gh-commit-day ~ tr {
+  border-inline: var(--borderWidth-thin) solid var(--borderColor-default);
+  background: var(--bgColor-default);
+}
+
+#commits-table .gh-commit-day + tr {
+  border-top-color: var(--borderColor-default);
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+}
+
+#commits-table .gh-commit-day ~ tr:is(:has(+ .gh-commit-day), :last-child) {
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
+}
+
+#commits-table .gh-commit-day + tr:is(:has(+ .gh-commit-day), :last-child) {
+  border-radius: var(--borderRadius-medium);
+}
+
+#commits-table > tbody > tr.gh-commit-day {
+  display: block;
+  min-height: 0;
+  padding: var(--base-size-8) 0;
+  border: 0;
+  background: none;
+}
+
+#commits-table > tbody > tr.gh-commit-day:first-child {
+  padding-top: 0;
+}
+
+.gh-commit-day-title {
+  position: relative;
+  margin: 0;
+  padding: var(--base-size-4) 0;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+/* 32px badge: 16px octicon + 8px padding on the page background, centred on the line */
+.gh-commit-day-title > .svg {
+  position: absolute;
+  top: 0;
+  left: calc(-1 * var(--base-size-40));
+  box-sizing: content-box;
+  padding: var(--base-size-8);
+  border-radius: var(--borderRadius-full);
+  background: var(--bgColor-default);
+}
+
+/* compare / PR: the "N Commits" header above a day-grouped list stands alone (the list has no outer Box) */
+.header:has(+ .commit-table .gh-commit-day) {
+  margin-bottom: var(--base-size-16);
+  border-radius: var(--borderRadius-medium);
+}
+
+/* compare range editor: github.com's range bar is a --bgColor-muted Box */
+.diff:not(.pull) .choose.branch {
+  background: var(--bgColor-muted);
 }
 
 @media (max-width: 767.98px) {
+  .commit-list:has(> .gh-commit-day) {
+    padding-left: 0;
+  }
+
+  #commits-table > tbody > tr.gh-commit-day {
+    padding-left: calc(var(--base-size-40) + 1px);
+  }
+
   #commits-table > tbody > tr {
     grid-template-columns: auto minmax(0, 1fr) auto;
     grid-template-areas:
@@ -142,29 +250,34 @@
   background: var(--bgColor-default);
 }
 
+/* commit page "parent fa3e8ed · commit 99cc347": github.com 12px mono muted, SHAs as plain 7-character links */
+.commit-header + .segment > .tw-gap-5 {
+  color: var(--fgColor-muted);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+}
+
+.commit-header + .segment .commit-id-short {
+  width: 7ch;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--fgColor-default);
+}
+
 /* ---------- commit page header (templates/repo/commit_page.tmpl .commit-header-buttons) ----------
    Gitea renders "Browse Source" and "Operations ▾" as green primary buttons; github.com's "Browse files" is a
-   default (secondary) button. Every state is restated because this layer sits above controls. */
-.commit-header-buttons > .ui.primary.button {
-  border-color: var(--button-default-borderColor-rest);
-  background: var(--button-default-bgColor-rest);
-  box-shadow: var(--button-default-shadow-resting);
-  color: var(--button-default-fgColor-rest);
-}
-
-.commit-header-buttons > .ui.primary.button:hover {
-  border-color: var(--button-default-borderColor-hover);
-  background: var(--button-default-bgColor-hover);
-  color: var(--button-default-fgColor-rest);
-}
-
-.commit-header-buttons > .ui.primary.button:active,
-.commit-header-buttons > .ui.primary.button[aria-expanded="true"],
-.commit-header-buttons > .ui.primary.active.button {
-  border-color: var(--button-default-borderColor-active);
-  background: var(--button-default-bgColor-active);
-  box-shadow: none;
-  color: var(--button-default-fgColor-rest);
+   default (secondary) button: the primary Button tokens controls reads are pointed at the default ones here. */
+.commit-header-buttons {
+  --button-primary-bgColor-rest: var(--button-default-bgColor-rest);
+  --button-primary-bgColor-hover: var(--button-default-bgColor-hover);
+  --button-primary-bgColor-active: var(--button-default-bgColor-active);
+  --button-primary-borderColor-rest: var(--button-default-borderColor-rest);
+  --button-primary-borderColor-hover: var(--button-default-borderColor-hover);
+  --button-primary-borderColor-active: var(--button-default-borderColor-active);
+  --button-primary-fgColor-rest: var(--button-default-fgColor-rest);
+  --button-primary-iconColor-rest: var(--fgColor-muted);
 }
 
 .commit-header-buttons > .ui.primary.button:focus-visible {
@@ -206,11 +319,11 @@
    container-xl (1216px at 1440, header, commits and diff) under the same 24px Subhead as /commits; Gitea's two
    containers are fluid there. The commit
    page (no h2) stays full width, as on github.com. */
-.repository.diff:not(.pull):has(> .ui.container > h2.ui.header) > .ui.fluid.container {
+.diff:not(.pull):has(> .ui.container > h2) > .fluid.container {
   width: calc(var(--breakpoint-xlarge) - 2 * var(--page-margin-x));
 }
 
-.repository.diff:not(.pull) > .ui.container > h2.ui.header,
+.diff:not(.pull) > .ui.container > h2,
 .commits:not(.pull) > .ui.container > .ui.top.attached.header {
   grid-row: 1;
   width: auto;
@@ -256,7 +369,7 @@
   }
 }
 
-.commits:not(.pull) > .ui.container > .ui.attached.segment:has(> form) {
+.commits:not(.pull) > .ui.container > .segment:has(> form) {
   padding: 0;
   border: 0;
   background: transparent;
@@ -264,9 +377,7 @@
 
 /* the search field itself: list-search.css */
 
-.commits:not(.pull) > .ui.container > .ui.attached.table.segment.commit-table {
+.commits:not(.pull) > .ui.container > .commit-table {
   width: auto;
   margin-inline: 0;
-  border: var(--borderWidth-thin) solid var(--borderColor-default);
-  border-radius: var(--borderRadius-medium);
 }

@@ -48,6 +48,14 @@ export function lintValue(prop, rawValue) {
   return {errors, warnings};
 }
 
+// Rule 4 exceptions (integrator-approved, CODE-L1-1): Gitea hides these with its own `display: none !important`
+// helpers (.not-mobile.not-mobile, repo.css .diff-detail-stats) and github.com shows them on mobile. Exact selectors
+// only; neither element can carry tw-hidden, so Gitea's show/hide JS is unaffected.
+const IMPORTANT_DISPLAY_ALLOW = new Set([
+  '.blame .lines-commit .blame-time.not-mobile',
+  '.repository .diff-detail-box .diff-detail-stats',
+]);
+
 export async function lintFolder(folder) {
   const dir = path.join(SRC, folder);
   const result = {folder, errors: [], warnings: [], selectors: new Set()};
@@ -66,7 +74,7 @@ export async function lintFolder(folder) {
       const {errors, warnings} = lintValue(d.prop, d.value);
       for (const msg of errors) result.errors.push({file: path.relative(ROOT, file), line: d.source?.start?.line, msg: `${d.prop}: ${msg}`});
       for (const msg of warnings) result.warnings.push({file: path.relative(ROOT, file), line: d.source?.start?.line, msg: `${d.prop}: ${msg}`});
-      if (important && /^(display|visibility)$/.test(d.prop)) result.errors.push({file: path.relative(ROOT, file), line: d.source?.start?.line, msg: `${d.prop} not allowed in gh-important`});
+      if (important && /^(display|visibility)$/.test(d.prop) && !(d.prop === 'display' && IMPORTANT_DISPLAY_ALLOW.has(d.parent?.selector?.replace(/\s+/g, ' ').trim()))) result.errors.push({file: path.relative(ROOT, file), line: d.source?.start?.line, msg: `${d.prop} not allowed in gh-important`});
     });
     root.walkRules((r) => {
       if (r.parent?.type === 'atrule' && /keyframes/.test(r.parent.name)) return;

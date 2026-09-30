@@ -32,6 +32,9 @@
 /* .nb (len, open, super) keeps Gitea's entity mapping: pl-en on github.com (Python) */
 .chroma .ge { color: inherit; font-style: normal; }                  /* github.com source view: *emphasis* unstyled */
 .chroma .gs { color: inherit; font-weight: var(--base-text-weight-normal); }
+/* console / shell-session output (Chroma Generic.Output): pl-c1 on github.com (FG-088, grex pull 42 ```console
+   block). Chroma cannot split a non-`$` prompt line from its output, so command lines take the output colour too. */
+.chroma .go { color: var(--prettylights-syntax-constant); }
 
 /* ---------- Rust ---------- */
 /* Rust identifiers. Chroma emits almost every identifier as plain .n, while github.com (tree-sitter) colours
@@ -44,6 +47,11 @@
    (leave-one-file-out: 18.8 % → 9.7 % of characters differing), plus hand-written structure rules
    (struct fields `name: u32,`, chained / path calls, `use a::B` imports, Ok/Err/Some, macro arguments).
    All Rust rules use :where() after the scope so they share one specificity and the later rule wins.
+   PERF-1 (2026-09-30): each :where() list is followed by the class of its subject (`:where(… .n).n`), or the
+   list is keyed with `span` (first and constant groups), so the browser only tries a rule on spans of that class
+   instead of on every element of the page (a subject that is only :is() / :where() is never bucketed); all
+   positional rules gained the same one class, the leading `span` groups one type selector, so the order between
+   the groups is unchanged (verified: identical computed colours on grex src/main.rs and README.md).
    Size trim (2026-09-30): the original 16 rules are regrouped into 8 by colour. A token span has exactly one
    Chroma class, so only rules aimed at the same class compete; the group order keeps every class's original
    rule sequence (.n: entity, variable, constant, entity, variable, inherit; .nb: inherit, entity, variable,
@@ -52,34 +60,41 @@
    :is() / :has(a, b) (same matches, verified on 677k random token spans against the old rules). Selectors read
    right to left: `:is(.w, .n) + .n + .n:has(+ .p + .n)` = an .n preceded by .n preceded by .w or .n, followed
    by .p then .n. */
-:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.nb, .kt, .nc, .o, .bp) {
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) span:where(.nb, .kt, .nc, .o, .bp) {
   color: inherit;
 }
 
-:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(:is(:is(.w,.n)+.n,:is(.w,.nc)+.p,.w+.bp,.n+.o,.w+.nb)+.n:has(+.p+.n), :is(:is(.s,.mi)+.p,.n+.nc,.p+.n,:is(.w,.o)+.bp)+.n:has(+.p+.w), :is(.p+.nb,.n+.p,:is(.w,.p)+.n)+.n:has(+.p+.s), :is(.w+.n,.n+.p,:is(.o,.w)+.bp)+.n:has(+.p+.o), .k+.w+.nb:has(+.p+.n), .n+.p+.n:has(+.p+.mi), :is(.n,.w)+.p+.n:has(+.p+.sc)) {
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(:is(:is(.w,.n)+.n,:is(.w,.nc)+.p,.w+.bp,.n+.o,.w+.nb)+.n:has(+.p+.n), :is(:is(.s,.mi)+.p,.n+.nc,.p+.n,:is(.w,.o)+.bp)+.n:has(+.p+.w), :is(.p+.nb,.n+.p,:is(.w,.p)+.n)+.n:has(+.p+.s), :is(.w+.n,.n+.p,:is(.o,.w)+.bp)+.n:has(+.p+.o), .n+.p+.n:has(+.p+.mi), :is(.n,.w)+.p+.n:has(+.p+.sc)).n,
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.k+.w+.nb:has(+.p+.n)).nb {
   color: var(--prettylights-syntax-entity);
 }
 
-:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.no, :is(.n,.k)+.n+.n:has(+.p+.w), :is(.w:first-child,.n+.p)+.nb:has(+.p+.w), .w:first-child+.nb:has(+.p+.n), .w+.n+.n:has(+.w+.o), .w:first-child+.n:has(+.p+.nb)) {
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) .no,
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(:is(.n,.k)+.n+.n:has(+.p+.w), .w+.n+.n:has(+.w+.o), .w:first-child+.n:has(+.p+.nb)).n,
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(:is(.w:first-child,.n+.p)+.nb:has(+.p+.w), .w:first-child+.nb:has(+.p+.n)).nb {
   color: var(--prettylights-syntax-variable);
 }
 
-:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.cp, .kp, .na, :is(.w:first-child,.p+.w)+.n:has(+.nb+.o), .w:first-child+.n:has(+.kt+.p,+.nc+:is(.p,.n)), .n+.p+.n:has(+.w+:is(.p,.o)), :is(.n+.p,.p+.w)+.o:has(+.n+.p), .nf+.p+.o:has(+.k+.w), .bp+.p+.n:has(+.p+:is(.n,.w),+.w:last-child), :is(.w:first-child+.n, .n:first-child):has(+:is(.kt, .nb))) {
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) span:is(.cp, .kp, .na),
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(:is(.w:first-child,.p+.w)+.n:has(+.nb+.o), .w:first-child+.n:has(+.kt+.p,+.nc+:is(.p,.n)), .n+.p+.n:has(+.w+:is(.p,.o)), .bp+.p+.n:has(+.p+:is(.n,.w),+.w:last-child), :is(.w:first-child+.n, .n:first-child):has(+:is(.kt, .nb))).n,
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(:is(.n+.p,.p+.w)+.o:has(+.n+.p), .nf+.p+.o:has(+.k+.w)).o {
   color: var(--prettylights-syntax-constant);
 }
 
 /* (keyword group: .w+.kp+.nc:has(+.w+.bp) — the only rule aimed at .nc after the inherit group, so it can sit
    after the .n / .nb groups: declared with the CodeMirror .tok-operator rule in editor.css) */
 
-:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.w:first-child+.p+.n:has(+.p), :is(.n, .nb)+.n:has(+.p+:is(.o, .s)), .nb:has(+.p+:is(.s, .fm, .nb, .sa, .mi))) {
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.w:first-child+.p+.n:has(+.p), :is(.n, .nb)+.n:has(+.p+:is(.o, .s))).n,
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.nb:has(+.p+:is(.s, .fm, .nb, .sa, .mi))).nb {
   color: var(--prettylights-syntax-entity);
 }
 
-:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(:is(.k+.w,.k+.w+.n)+.n+.n:has(+.p), .nb:has(+.p+.n+.p+.w+.o)) {
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(:is(.k+.w,.k+.w+.n)+.n+.n:has(+.p)).n,
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.nb:has(+.p+.n+.p+.w+.o)).nb {
   color: var(--prettylights-syntax-variable);
 }
 
-:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.fm~.n) {
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.fm~.n).n {
   color: inherit;
 }
 
@@ -92,11 +107,11 @@
 /* ---------- Markdown source ---------- */
 /* link URLs (pl-corl): string colour + underline, with the CodeMirror .tok-link rule in editor.css */
 
-:is(.page-content:has(.breadcrumb > .active.section:is([title$=".md" i], [title$=".markdown" i])) .file-view, table.chroma:is([data-path$=".md" i], [data-path$=".markdown" i])) :is(.nt, .o, .m, .nb) {
+:is(.page-content:has(.breadcrumb > .active.section:is([title$=".md" i], [title$=".markdown" i])) .file-view.code-view, table.chroma:is([data-path$=".md" i], [data-path$=".markdown" i])) span:is(.nt, .o, .m, .nb) {
   color: inherit;                                                     /* link text, regex/table punctuation, numbers */
 }
 
-:is(.page-content:has(.breadcrumb > .active.section:is([title$=".md" i], [title$=".markdown" i])) .file-view, table.chroma:is([data-path$=".md" i], [data-path$=".markdown" i])) .sb {
+:is(.page-content:has(.breadcrumb > .active.section:is([title$=".md" i], [title$=".markdown" i])) .file-view.code-view, table.chroma:is([data-path$=".md" i], [data-path$=".markdown" i])) .sb {
   color: var(--prettylights-syntax-constant);                         /* `inline code` (markup.raw → pl-c1) */
 }
 

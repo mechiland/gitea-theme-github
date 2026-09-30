@@ -59,7 +59,7 @@
 .ui.selection.active.dropdown:hover {
   border-color: var(--borderColor-accent-emphasis);
   outline: var(--borderWidth-thick) solid var(--borderColor-accent-emphasis);
-  outline-offset: -1px;
+  outline-offset: calc(var(--borderWidth-thick) * -1);
   box-shadow: none;
 }
 
@@ -70,6 +70,13 @@
 
 .ui.selection.dropdown > .default.text {
   color: var(--fgColor-muted);
+}
+
+/* a `.default.text` that shows the current value, not a placeholder (repo settings → branches: the default
+   branch Select renders `<input type=hidden value=main>` + `<div class="default text">main</div>`): the value
+   colour, like a Primer Select with a selected option (FG-089) */
+.ui.selection.dropdown:has(> input[type="hidden"][value]:not([value=""])) > .default.text {
+  color: var(--fgColor-default);
 }
 
 .ui.selection.dropdown.ellipsis-text-items > .text {

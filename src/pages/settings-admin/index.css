@@ -2,7 +2,8 @@
  * src/pages/settings-admin — github.com settings layout for Gitea's user / repo / org settings and the site admin
  * panel (layer gh.pages-settings-admin).
  * Owns page-scoped selectors under .page-content.settings (user/repo/org settings: pageClass "… settings …") and
- * .page-content.admin (site admin: pageClass "admin …"). The NavList look is navigation's, Box/Box-row/DataTable
+ * .page-content.admin (site admin: pageClass "admin …"), plus [class="page-content "] — the pages whose template passes
+ * an empty pageClass: user / org Actions > General (actions_general.tmpl) and admin badge view (SA-5). The NavList look is navigation's, Box/Box-row/DataTable
  * are data-display's, buttons/inputs are controls'; this folder only lays them out the way github.com settings do:
  *   header.css      page header (avatar + account name + profile button; needs the SA-4 template override)
  *   layout.css      page grid: 256px (240px md) NavList column + 24px gutter + main column (Primer Layout, sidebar-narrow)
@@ -12,6 +13,8 @@
  *   danger-zone.css Danger zone Box (1px --borderColor-danger-emphasis, Box-rows with right-aligned danger buttons)
  *   keys.css        SSH / GPG / deploy key and token rows (key octicon, semibold title, monospace fingerprint)
  *   admin.css       admin panel: definition-list Box rows, DataTable lists, maintenance table
+ *   buttons.css     one primary per view (demoted primaries), Subhead actions 32px, Box-row actions 28px
+ *   blankslate.css  empty lists as a Blankslate Box (webhooks, deploy keys, collaborators), email / target lists as Boxes
  */
 @import "./layout.css";
 @import "./header.css";
@@ -20,3 +23,5 @@
 @import "./danger-zone.css";
 @import "./keys.css";
 @import "./admin.css";
+@import "./buttons.css";
+@import "./blankslate.css";

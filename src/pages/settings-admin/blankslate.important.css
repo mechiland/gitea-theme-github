@@ -1,0 +1,7 @@
+/*
+ * gh-important for settings blankslates / boxes: the Actions > General target-repository list segment carries
+ * Tailwind `tw-p-2` (!important in Gitea's layer); as a Box of Box-rows the rows pad themselves (blankslate.css).
+ */
+:is(.page-content.settings, .page-content.admin, [class="page-content "]) .flex-container-main .ui.form .ui.attached.segment.tw-p-2:has(> .ui.list) {
+  padding: 0 !important;
+}

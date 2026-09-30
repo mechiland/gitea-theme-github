@@ -42,3 +42,18 @@ img.ui.avatar,
 .avatar-stack-popup > a:hover {
   background: var(--control-transparent-bgColor-hover);
 }
+
+/* FG-011: Gitea's default avatar (models/avatars/avatar.go DefaultAvatarLink → /assets/img/avatar_default.png, the
+   Gitea teacup) is shown for migrated authors, unlinked commit authors and blame rows. It is a content placeholder,
+   not site branding (orchestrator ruling, docs/requests/data-display.md), so the GitHub themes replace it with a
+   neutral placeholder: --bgColor-neutral-muted circle with a --fgColor-muted person silhouette (head + shoulders,
+   drawn with two closest-side radial gradients so it scales with every avatar size and uses tokens only). The image
+   itself is shifted out of its content box (replaced content is clipped to it). The header/footer logo is untouched. */
+img.ui.avatar[src$="/assets/img/avatar_default.png"],
+img.avatar[src$="/assets/img/avatar_default.png"] {
+  object-position: calc(var(--base-size-112) * -4) 0;
+  background:
+    radial-gradient(closest-side, var(--fgColor-muted) 92%, transparent) 50% 30% / 38% 38% no-repeat,
+    radial-gradient(closest-side, var(--fgColor-muted) 96%, transparent) 50% 160% / 70% 62% no-repeat,
+    var(--bgColor-neutral-muted);
+}

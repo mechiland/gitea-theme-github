@@ -9,15 +9,15 @@
  * 440px control would set the table's min-content width and overflow a 390px viewport) keep their own widths.
  */
 
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .field {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .field {
   margin-bottom: var(--base-size-16);
 }
 
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .field:last-child {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .field:last-child {
   margin-bottom: 0;
 }
 
-:is(.settings, .admin) .flex-container-main .ui.form:not(.flex-text-block, .ui.modal *, table *)
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.flex-text-block, .ui.modal *, table *)
   .field:not(.inline, .fields .field)
   > :is(input:not([type="checkbox"], [type="radio"], [type="file"], [type="hidden"], [type="color"], [type="range"]), select, .ui.selection.dropdown) {
   width: calc(var(--overlay-width-small) + var(--base-size-112) + var(--base-size-8)); /* Primer .form-group .form-control: 440px */
@@ -25,18 +25,18 @@
 }
 
 /* checkbox / radio rows: Primer CheckboxGroup spacing (8px between options) */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .field:not(.inline.fields > .field):has(> .ui.checkbox:only-child) {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .field:not(.inline.fields > .field):has(> .ui.checkbox:only-child) {
   margin-bottom: var(--base-size-8);
 }
 
 /* a field that is only a submit button: 16px above it like github.com's "Update profile" */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .field:not(.inline.fields > .field):has(> .ui.primary.button:only-child) {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .field:not(.inline.fields > .field):has(> .ui.primary.button:only-child) {
   margin-top: var(--base-size-16);
 }
 
 /* the separators Gitea draws between scoped-workflow sources (shared/actions/scoped_workflows.tmpl, the only
    `ui divider` in a settings page): Primer hr, 16px either side */
-:is(.settings, .admin) .flex-container-main .ui.attached.segment > .ui.divider {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > .ui.divider {
   margin: var(--base-size-16) 0;
   border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
   border-bottom: 0;
@@ -44,14 +44,14 @@
 
 /* Gitea's captions are inline-block (modules/form.css:414); next to a 440px control they would float beside it.
    FormControl.Caption always sits on its own line under the control. */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .field:not(.inline) > .help {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .field:not(.inline) > .help {
   display: block;
 }
 
 /* Gitea's caption keeps a 0.6em bottom padding (modules/form.css:417): the next field would sit 23px below a caption
    instead of FormControl's 16px. FormControl.Caption is 12px / 18px (Primer React storybook, measured); controls'
    generic caption is 12px / 15px (SA-C1 pending), so settings pages set the caption line-height themselves. */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) :is(.field, .ui.checkbox) > .help {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) :is(.field, .ui.checkbox) > .help {
   padding-bottom: 0;
   line-height: var(--base-text-lineHeight-normal); /* 12px x 1.5 = 18px */
 }
@@ -61,81 +61,81 @@
  * mirror settings): github.com settings never put a label beside a text input — FormControl is always vertical
  * (label 4px above the control). Checkbox and file rows keep their inline layout.
  */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .inline.field:has(> :is(input:not([type="checkbox"], [type="radio"], [type="file"], [type="hidden"]), select)) > label {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .inline.field:has(> :is(input:not([type="checkbox"], [type="radio"], [type="file"], [type="hidden"]), select)) > label {
   display: block;
   margin: 0 0 var(--base-size-4);
 }
 
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .inline.field > :is(input:not([type="checkbox"], [type="radio"], [type="file"], [type="hidden"]), select) {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .inline.field > :is(input:not([type="checkbox"], [type="radio"], [type="file"], [type="hidden"]), select) {
   display: block;
   width: 100%;
   max-width: calc(var(--overlay-width-small) + var(--base-size-112) + var(--base-size-8)); /* 440px */
 }
 
 /* forms inside a table cell (push-mirror add form): 440px at most, but shrinkable so the table never overflows */
-:is(.settings, .admin) .flex-container-main table .ui.form .field > input:not([type="checkbox"], [type="radio"], [type="file"], [type="hidden"]) {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main table .ui.form .field > input:not([type="checkbox"], [type="radio"], [type="file"], [type="hidden"]) {
   width: 100%;
   max-width: calc(var(--overlay-width-small) + var(--base-size-112) + var(--base-size-8)); /* 440px */
 }
 
 /* `.inline.fields` groups: a label (legend) followed by fields */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .inline.fields {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .inline.fields {
   flex-wrap: wrap;
   gap: var(--base-size-8);
   margin: 0 0 var(--base-size-16);
 }
 
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .inline.fields > .field,
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .inline.fields > label {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .inline.fields > .field,
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .inline.fields > label {
   margin: 0;
   padding: 0;
 }
 
 /* radio group (external tracker number format): Primer RadioGroup — legend 14px semibold, options stacked 8px apart */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .inline.fields:has(> .field > .ui.radio.checkbox) {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .inline.fields:has(> .field > .ui.radio.checkbox) {
   flex-direction: column;
   align-items: flex-start;
 }
 
 /* value + action row (repository indexers: "Last Indexed SHA" label, SHA chip, "Add to Reindex Queue"): one centred line */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .inline.fields:not(:has(> .field > .ui.radio.checkbox)) {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .inline.fields:not(:has(> .field > .ui.radio.checkbox)) {
   align-items: center;
 }
 
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .inline.fields > .field > .ui.sha.label {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .inline.fields > .field > .ui.sha.label {
   margin: 0;
 }
 
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .inline.fields > .field > .ui.checkbox {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .inline.fields > .field > .ui.checkbox {
   margin: 0;
 }
 
 /* a group legend followed by <br> (repo signing: "Signature Trust Model"): the break would add an empty 20px line
    between the legend and the first radio */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .field > label + br {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .field > label + br {
   display: none;
 }
 
 /* a radio / checkbox caption lines up with the option's label text (Primer FormControl in a CheckboxGroup:
    16px control + 8px gap) */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .ui.checkbox > .help {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .ui.checkbox > .help {
   padding-left: var(--base-size-24);
 }
 
 /* inline label + selection dropdown (user profile: "User visibility"; the label is wrapped in a span.inline.field) */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .inline.field:has(> .ui.selection.dropdown) > :is(label, .inline.field) {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .inline.field:has(> .ui.selection.dropdown) > :is(label, .inline.field) {
   display: block;
   margin: 0 0 var(--base-size-4);
 }
 
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .inline.field > .ui.selection.dropdown {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .inline.field > .ui.selection.dropdown {
   width: 100%;
   max-width: calc(var(--overlay-width-small) + var(--base-size-112) + var(--base-size-8)); /* 440px */
 }
 
 /* the caption of a stacked inline field: Fomantic/controls style `.inline.field > p` as a label (14px semibold);
    once the field is vertical its `p.help` is a FormControl.Caption on its own line */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .inline.field:has(> :is(input:not([type="checkbox"], [type="radio"], [type="file"], [type="hidden"]), select)) > p.help {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .inline.field:has(> :is(input:not([type="checkbox"], [type="radio"], [type="file"], [type="hidden"]), select)) > p.help {
   display: block;
   margin: var(--base-size-4) 0 0;
   color: var(--fgColor-muted);
@@ -150,7 +150,7 @@
  * control, so every checkbox starts at a different x. github.com's repository Features section is a vertical list —
  * the bold label sits on its own line and the checkboxes line up on the column edge.
  */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .inline.field:not(.inline.fields > .field) > label:first-child:has(+ :is(.ui.checkbox, span, input[type="file"])) {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .inline.field:not(.inline.fields > .field) > label:first-child:has(+ :is(.ui.checkbox, span, input[type="file"])) {
   display: block;
   margin: 0 0 var(--base-size-4);
 }
@@ -160,11 +160,11 @@
 
 /* a field that holds only a paragraph legend before a checkbox group (repo "Merge Styles" description in #pull_box):
    the legend's own field adds 16px, so the first checkbox sat 19px below it vs 4-8px for every other legend */
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .field:has(> p:only-child):has(+ .field > .ui.checkbox) {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .field:has(> p:only-child):has(+ .field > .ui.checkbox) {
   margin-bottom: var(--base-size-6); /* measures 7px to the checkbox row, like the "Code" / "Pull Requests" legends */
 }
 
-:is(.settings, .admin) .flex-container-main .ui.form:not(.modal *) .field:has(> p:only-child):has(+ .field > .ui.checkbox) > p {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .field:has(> p:only-child):has(+ .field > .ui.checkbox) > p {
   margin-bottom: 0;
 }
 
@@ -179,4 +179,66 @@
 
 .settings label[for="username"] > span:not(.tw-hidden) {
   margin-left: var(--base-size-4);
+}
+
+/* org / repo description: a textarea in the 440px form column (github.com profile "Bio", org "Description"); other
+   textareas (keys, config lists) keep the full column */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form:not(.modal *) .field > textarea#description {
+  max-width: calc(var(--overlay-width-small) + var(--base-size-112) + var(--base-size-8)); /* 440px */
+}
+
+/*
+ * "Generate New Token" / "Create a new OAuth2 Application" (applications.tmpl, applications_oauth2_list.tmpl): a
+ * <details> whose <summary> holds an h4 and a ▸ marker. github.com offers a "Generate new token" default Button, so
+ * the summary is a medium default button (32px, 14px semibold, padding 0 12px) without the marker; the open form
+ * follows 16px below it.
+ */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > details > summary {
+  display: inline-flex;
+  align-items: center;
+  height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-normal);
+  border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
+  border-radius: var(--borderRadius-medium);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-default-fgColor-rest);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-body-lineHeight-medium);
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > details > summary::-webkit-details-marker {
+  display: none;
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > details > summary:hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > details > summary:active {
+  background: var(--button-default-bgColor-active);
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > details[open] > summary {
+  margin-bottom: var(--base-size-16);
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > details > summary > .ui.header {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+/* banner editor toolbar below 768px (admin config settings): the button groups wrap onto a second row, where the
+   1px group separators would hang at the row starts; the groups are spaced by their own padding instead */
+@media (max-width: 767.98px) {
+  :is(.settings, .admin, [class="page-content "]) .flex-container-main markdown-toolbar .markdown-toolbar-group {
+    border-left: 0;
+  }
 }

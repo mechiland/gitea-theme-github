@@ -9,3 +9,18 @@
 .repository.view.issue .code-comments-list .conversation-holder > .comment-code-cloud {
   padding: 0 !important;
 }
+
+/* Files changed inline threads: review.css `.comment-code-cloud { padding: .5rem !important }`, the avatar
+   wrapper's Tailwind `tw-mt-2 tw-mr-4` and the footer's `tw-mt-2` (all !important) → github.com Box rows */
+.repository.view.issue .code-diff .conversation-holder > .comment-code-cloud {
+  padding: 0 !important;
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud .ui.comments > .comment > .tw-mt-2.tw-mr-4 {
+  margin-top: 0 !important;
+  margin-right: var(--base-size-8) !important;
+}
+
+.repository.view.issue .code-diff .conversation-holder .comment-code-cloud > .flex-text-block.tw-mt-2 {
+  margin-top: 0 !important;
+}

@@ -166,10 +166,18 @@
   font-size: var(--text-body-size-small);
 }
 
-/* long registry URLs / commands have no break opportunity: scroll inside the code block instead of widening the
-   page (390px: the .npmrc line overflowed the viewport by 48px) */
-.packages-content-left .markup pre.code-block {
+/* install snippets (FG-061): github.com keeps each command on one line and scrolls it, with the copy button beside
+   the scrolling text (never over it). Gitea's code wraps (markdown `break-spaces`) and the copy button is absolute
+   in the <pre> → the <code> becomes the one-line scroll area and stops 28 + 8px short of the button. */
+.packages-content-left .ui.form .field > .markup > pre.code-block {
+  overflow: hidden;
+}
+
+.packages-content-left .ui.form .field > .markup > pre.code-block > code {
+  display: block;
   overflow-x: auto;
+  margin-right: calc(var(--control-small-size) + var(--base-size-8));
+  white-space: pre;
 }
 
 /* right column: plain sidebar sections, not a Box */
@@ -188,8 +196,12 @@
   font-size: var(--text-body-size-large);
 }
 
+/* "View all" next to "Versions (N)" (FG-061): same 24px line box as the 16px heading so the float sits on its
+   baseline instead of the line top */
 .packages-content-right > a.tw-float-right {
+  padding-top: var(--base-size-2);
   font-size: var(--text-body-size-small);
+  line-height: var(--base-size-24);
 }
 
 .packages-content-right > .divider {
@@ -240,4 +252,25 @@
     flex-basis: auto;
     width: 100%;
   }
+}
+
+/* package page: github.com's install block is one headerless bordered Box (captions + code blocks, no "Installation"
+   title bar). Every Gitea package type opens .packages-content-left with that header → keep it for screen readers
+   only and give the install segment the Box's top edge. */
+.packages-content-left > h4.ui.top.attached.header:first-child {
+  position: absolute;
+  width: var(--borderWidth-thin);
+  height: var(--borderWidth-thin);
+  margin: calc(var(--borderWidth-thin) * -1);
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.packages-content-left > h4.ui.top.attached.header:first-child + .ui.attached.segment {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-top-left-radius: var(--borderRadius-medium);
+  border-top-right-radius: var(--borderRadius-medium);
 }

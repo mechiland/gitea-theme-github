@@ -9,11 +9,11 @@
  * In all three templates (branch/list.tmpl, tag/list.tmpl, commits_table.tmpl) the search segment is a direct child
  * of .ui.container, so one child chain covers them (size trim 2026-09-30).
  */
-.repository:is(.branches, .tags, .commits:not(.pull)) > .ui.container > .ui.attached.segment > form > .ui.action.input {
+:is(.branches, .tags, .commits:not(.pull)) > .ui.container > .segment > form > .input {
   font-size: var(--text-body-size-medium);
 }
 
-.repository:is(.branches, .tags, .commits:not(.pull)) > .ui.container > .ui.attached.segment > form > .ui.action.input > input[name="q"] {
+:is(.branches, .tags, .commits:not(.pull)) > .ui.container > .segment > form > .input > input[name="q"] {
   height: var(--control-medium-size);
   padding-left: calc(var(--control-medium-paddingInline-normal) + var(--base-size-16) + var(--base-size-8));
   border-radius: var(--borderRadius-medium);
@@ -21,19 +21,19 @@
 }
 
 /* commits: the scope dropdown stays joined at the right end of the field */
-.repository.commits:not(.pull) > .ui.container > .ui.attached.segment > form > .ui.action.input > input[name="q"] {
+.commits:not(.pull) > .ui.container > .segment > form > .input > input[name="q"] {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-.repository.commits:not(.pull) > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.dropdown.selection {
+.commits:not(.pull) > .ui.container > .segment > form > .input > .ui.dropdown.selection {
   min-height: 0;
   border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
   font-size: var(--text-body-size-medium);
 }
 
 /* the submit button → leading search octicon inside the field */
-.repository:is(.branches, .tags, .commits:not(.pull)) > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child {
+:is(.branches, .tags, .commits:not(.pull)) > .ui.container > .segment > form > .input > .ui.icon.button:last-child {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -50,7 +50,7 @@
   color: var(--fgColor-muted);
 }
 
-.repository:is(.branches, .tags, .commits:not(.pull)) > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child:is(:hover, :active) {
+:is(.branches, .tags, .commits:not(.pull)) > .ui.container > .segment > form > .input > .ui.icon.button:last-child:is(:hover, :active) {
   background: transparent;
   color: var(--fgColor-default);
 }

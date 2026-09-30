@@ -10,7 +10,7 @@
  * render the org header band (org/header.tmpl) as a `.flex-container` sibling, which stays pages/people's.
  */
 
-:is(.settings, .admin) > .flex-container:has(> .flex-container-nav) {
+:is(.settings, .admin, [class="page-content "]) > .flex-container:has(> .flex-container-nav) {
   flex-direction: row;
   align-items: stretch;
   gap: var(--base-size-16);
@@ -27,32 +27,32 @@
   width: calc(var(--breakpoint-xlarge) - 2 * var(--page-margin-x));
 }
 
-:is(.settings, .admin) .flex-container-nav {
+:is(.settings, .admin, [class="page-content "]) .flex-container-nav {
   flex-shrink: 0;
   width: calc(var(--base-size-128) + var(--base-size-112)); /* Primer Layout sidebar-narrow md: 240px */
 }
 
 @media (min-width: 1012px) {
-  :is(.settings, .admin) > .flex-container:has(> .flex-container-nav) {
+  :is(.settings, .admin, [class="page-content "]) > .flex-container:has(> .flex-container-nav) {
     gap: var(--base-size-24);
   }
 
-  :is(.settings, .admin) .flex-container-nav {
+  :is(.settings, .admin, [class="page-content "]) .flex-container-nav {
     width: calc(2 * var(--base-size-128)); /* Primer Layout sidebar-narrow lg: 256px */
   }
 }
 
 @media (max-width: 767.98px) {
-  :is(.settings, .admin) > .flex-container:has(> .flex-container-nav) {
+  :is(.settings, .admin, [class="page-content "]) > .flex-container:has(> .flex-container-nav) {
     flex-direction: column;
   }
 
-  :is(.settings, .admin) .flex-container-nav {
+  :is(.settings, .admin, [class="page-content "]) .flex-container-nav {
     width: auto;
   }
 }
 
 /* flash banners above the first section keep the Subhead rhythm */
-:is(.settings, .admin) .flex-container-main > .ui.message {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main > .ui.message {
   margin: 0 0 var(--base-size-16);
 }

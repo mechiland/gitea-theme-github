@@ -1,0 +1,12 @@
+/* FG-114 — PR tab bar (repo/pulls/tab_menu.tmpl): Gitea's "Files changed" tab uses octicon-diff (a bare ±);
+   github.com's tab uses octicon-file-diff (verified live on /pemistahl/grex/pull/42: comment-discussion,
+   git-commit, checklist, file-diff; 16px, fgColor-muted). Only the tab's glyph changes; its size, colour and
+   margin stay with pages/issues-prs (header.css `.pull.tabular.menu .svg`). */
+.pull.tabular.menu > .item > .svg.octicon-diff {
+  background-color: currentcolor;
+  mask: var(--gh-octicon-file-diff) center / contain no-repeat;
+}
+
+.pull.tabular.menu > .item > .svg.octicon-diff > * {
+  visibility: hidden;
+}

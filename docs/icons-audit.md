@@ -47,7 +47,7 @@ migrate, packages, settings, admin). Counts below are from that run (before rest
 | `gitea-empty-checkbox` | JS only: `ActionRunJobView.vue:440-457` (log options), `EasyMDEToolbarActions.ts:111` | empty rounded square | **keep** | It is the outline of `octicon-checkbox` (same 1.75 radius / 1.5 stroke geometry); Octicons has no unchecked variant (`square` is a tiny 8px box). JS-only → no file effect anyway. |
 | `gitea-favicon` | JS `modules/favicon-status.ts:6` | Gitea logo | **keep** | Brand. |
 | `gitea-gitea` | webhook icon `shared/webhook/icon.tmpl:6`, migrate card, OAuth "gitea" (live: icons-migrate) | Gitea logo | **keep** | Brand (the Gitea logo stays, ARCHITECTURE §11). |
-| `gitea-colorblind-redgreen`, `gitea-colorblind-blueyellow` | theme menu extra icon (`services/webtheme/webtheme.go:61-69`; live: settings/appearance ×7) | two-colour disc | **keep (w2 r1 re-checked)** | Meaning *is* the colour pair (hard-coded fills): they tell the protanopia/deuteranopia and tritanopia theme variants apart in Gitea's theme menu. github.com has no equivalent marker (its colour-blind themes are chosen from preview cards in Settings → Appearance), and any Octicon would drop the information. Only on settings/appearance and the footer theme menu (critic w2 r0: 16 + 12 on 4 pages). |
+| `gitea-colorblind-redgreen`, `gitea-colorblind-blueyellow` | theme menu extra icon (`services/webtheme/webtheme.go:61-69`; only `user/settings/appearance.tmpl:23-26`; live ×7) | two-colour disc | **file kept; GitHub themes: marker hidden (`display: none`, final gate FG-091, L1 r2)** | The file is not replaced (global: Gitea's own themes keep the disc). github.com's theme picker has no marker at all (the variant is named in text only), so `src/icons/theme-menu.css` drops it in the GitHub themes. The item's `.description` ("Red-green / Blue-yellow colorblind friendly", `GetDescription`) renders right after it and still names the variant. L1 r1 used an `eye` mask; it was replaced because both variants became the same glyph and `eye` means "watch" in GitHub's vocabulary (critic wL1 r1 #3). Sim: `shots/icons-l1r2/cmp-appearance-{1440,390}.png`. |
 | `gitea-git` | `MigrationIcon` for non-GitHub hosts (issue/comment/review/release), "open in" fallback, migrate card (live: icons-migrate) | git logo | **keep** | Brand of the source system. |
 | `gitea-vscodium`, `gitea-jetbrains` | clone "open with" menu (`routers/web/repo/view_home.go:81-83`); VS Code already uses `octicon-vscode` | IDE logos | **keep** | Brand. |
 | `gitea-feishu`, `gitea-matrix` | webhook type icons `shared/webhook/icon.tmpl:20,22` | service logos | **keep** | Brand. |
@@ -155,11 +155,80 @@ folder resizing an icon must set `width`, `height`, `min-width`, `min-height` to
   `gh.tokens` (integrator I-4, done); only masks some folder references via `var(--gh-octicon-…)` are kept.
   Catalogue check w2 r1: all 21 render as the named Octicon at 32 and 16px next to the source SVG
   (`shots/icons-w2r1-masks.mjs` → `shots/icons-w2r1/masks-catalogue.png`, 21/21 mask-images resolve).
+- **Final gate #1 (L1 r1): 65 masks** — added book, home, people, plus, dash, screen-full, chevron-right, chevron-down,
+  chevron-up, person, person-fill, three-bars, code, tag, file-diff, eye and the settings/admin NavList set (gear, paintbrush,
+  shield-lock, key, key-asterisk, apps, organization, repo, package, play, webhook, server, mail, bell, blocked, git-branch,
+  globe, terminal, file-binary, checklist, id-badge, sliders, meter, pulse, graph, clock, stack, cpu). Catalogue
+  `shots/icons-l1r1-masks.mjs` → `shots/icons-l1r1/masks-catalogue.png`: 65/65 mask-images resolve and match the source SVG.
+- `index.css` (+ `theme-menu.css`, `pr-tabs.css`, `nav-tabs.css`) — theme-scoped Octicon swaps, compiled as
+  `@layer gh.icons` once the integrator adds `icons` to `build/folders.mjs` FOLDERS (IC-1 in docs/requests/integrator.md).
+  Until then they are not in the build. They were verified with a real build (a scratch copy of the project with `icons` in
+  FOLDERS) served through `--theme-css` / route interception (§5). Cost: +1,401 B per theme file.
+- L1 r2: **66 masks** (+ `table`, for the Projects tabs).
 - `manifest.json` — what was generated and why.
 - Contact sheet: `shots/icons-sheet.html` / `shots/icons-sheet.png` (Gitea original vs ours, 16/32px, in a button,
   light + dark). Built by `shots/icons-sheet.mjs`; round 3 and round 4 (chevron rows now "restored: Gitea original", identical glyphs, looked at): **197/197** SVGs render with a non-empty bbox (17 rows × 2 schemes × 5 + 27 candidates; the count grew from 195 (r1) and 196 (r2) because candidates were added: `circle` in r2, `dot` in r3).
 
 ## 5. Open items
+
+### Final gate #1, wave L1 round 2 (2026-09-30)
+- **IC-1 is still open**, so none of `src/icons/index.css` is served yet. The verification method is a scratch copy of the
+  project with only `'icons'` added before `'dark'` in FOLDERS, built with the real `build/build.mjs`. The resulting
+  `theme-github-auto.css` is kept as `shots/icons-l1r2/sim-theme-github-auto.css` (lint of all 15 folders plus icons:
+  0 errors, no ownership clash; +1,401 B per theme). It is served in place of the deployed file by
+  `shots/icons-l1r2-probe.mjs` (route interception) and by `shoot.mjs --theme-css` (`shots/icons-l1r2/sim-shoot`).
+- **FG-114 Files changed tab**, sim, repo-pull, light and dark, 1440: file-diff mask, 16×16, painted with the tab's text
+  colour (rgb(31,35,40) light, rgb(240,246,252) dark), same as the sibling icons. Live today it is still the bare ±. Crop:
+  `shots/icons-l1r2/cmp-repo-pull-1440.png` (rows 1/3 live, 2/4 sim). At 390 Gitea hides the tab icons (0×0), as github.com does.
+- **FG-091 colorblind markers: now dropped** instead of masked (§2 row). Sim, all four modes (light/dark × 1440/390):
+  7/7 svgs `display: none`, 0×0, item height unchanged at 32px. Crops: `shots/icons-l1r2/cmp-appearance-{1440,390}.png`.
+  The shoot audit still lists them as 7 `nonOcticon` per page, because it counts every `svg.svg`, including hidden ones.
+  Integrator IC-4 asks it to skip svgs whose own computed `display` is `none`.
+- **Projects tabs → `table`** (critic wL1 r1 #2, `nav-tabs.css`). github.com uses `octicon-table` in the repo UnderlineNav
+  (python/cpython HTML: `octicon octicon-table UnderlineNav-octicon`) and on the profile tabs (/pemistahl). Coverage:
+  - pages/people already swaps the profile/org tab bar (`profile.css:224-232`, live since this round's deploy, because
+    the `table` mask now exists).
+  - icons swaps the repo tab bar (`octicon-project`) and the `…` overflow popup (`.overflow-menu-popup`, for both glyphs).
+  Sim: repo tab 16×16, table, rgb(89,99,110) light / rgb(145,152,161) dark; 390 popups for repo, profile and org all show
+  table. Crops: `shots/icons-l1r2/cmp-repo-1440.png`, `cmp-popups-390.png`. The projects list page (`projects/list.tmpl`,
+  Open toggle and blankslate) is left alone.
+- **Sim shoot** (7 routes × 2 schemes × 2 viewports, states + measure):
+  - 0 console errors, 0 failed requests, 0 off-palette, 0 unresolved vars, maxCLS 0.0003.
+  - nonOcticon: 7 per appearance page (hidden markers, IC-4) and 1 per actions-list page (`gitea-running`, IC-2).
+  - The live shoot of the same routes is identical, except the swaps are missing.
+
+### Final gate #1, wave L1 round 1 (2026-09-30)
+- **FG-091 colorblind markers → `eye`** (`src/icons/theme-menu.css`, §2 row). Injection sim on the live github-auto
+  page (`shots/icons-l1r1-sim.mjs`, theme menu open and scrolled to the 7 colorblind items, light/dark × 1440/390):
+  7/7 svgs 16×16, mask = eye, background = currentColor rgb(89,99,110) light / rgb(145,152,161) dark
+  (`--fgColor-muted`), original drawing hidden; `shots/icons-l1r1/sim/cmp-appearance-{1440,390}.png`.
+- **FG-091 `gitea-running` → kept, no mask.** Re-verified on github.com today (python/cpython `/actions?query=is:in_progress`,
+  `shots/icons-l1r1/gh-probe.json`, `gh-actions-light.png`): the "currently running" svg has the same three paths,
+  `var(--fgColor-attention)`, `.anim-rotate`. Ours (actions-list status filter, live): 16×16, rgb(154,103,0) light /
+  rgb(210,153,34) dark = `--fgColor-attention`, `rotate-clockwise-keyframes` 1s (`shots/icons-l1r1/sim/cmp-actions-status.png`).
+  A dot-fill / sync mask would move away from github.com. github.com's Status filter itself shows **no icons** (a checkbox
+  SelectPanel, `shots/icons-l1r1/gh-actions-status-open-light.png`) — that is a pages/actions-packages-projects layout
+  question, not an icon swap. Audit: integrator asked to count `gitea-running` as GitHub-native (integrator.md).
+- **FG-114 Files changed tab → `file-diff`** (`src/icons/pr-tabs.css`). github.com (grex PR #42, logged out):
+  comment-discussion / git-commit / checklist / **file-diff**, 16px; their class says `fg-muted` but they compute to `--fgColor-default` (rgb(31,35,40) / rgb(240,246,252), `shots/icons-l1r1-ghtabs.mjs`) — ours were `--fgColor-muted` then; stale since build e9c90d580d (now `--fgColor-default`, withdrawn in L1 r2) (`shots/icons-l1r1/gh-pr-tabs-light.png`).
+  Sim: 16×16, mask file-diff, rgb(89,99,110) / rgb(145,152,161), `shots/icons-l1r1/sim/cmp-repo-pull.png` (1440; at 390
+  Gitea hides the tab icons, as github.com does with `d-none d-sm-inline-block`).
+- **Masks live today** (deploy 9ee594a4be, no restart: `iconsChanged 0`): `book` (pages/people profile Overview tab) and
+  `screen-full` / `dash` / `plus` (pages/actions workflow-graph controls) were already referenced and switched on with this
+  deploy — `shots/icons-l1r1/live/cmp-live.png` (looked at: book on Overview; screen-full, dash, plus on the graph controls, both schemes).
+- Mask catalogue 65/65 (§4). Requests handled: PPL-I1, APK-M1, SA-6, and the FG-011 / FG-050 / FG-086 / FG-095 / FG-117
+  mask needs (consumer notes in their request files; NavList mapping below).
+- **FG-050 NavList leading visuals — suggested mapping** (github.com settings sidebars where an equivalent exists):
+  user: profile `person`, account `gear`, notifications `bell`, appearance `paintbrush`, security `shield-lock`, blocked users
+  `blocked`, applications `apps`, SSH/GPG keys `key`, actions `play` (runners `server`, secrets `key-asterisk`), packages
+  `package`, webhooks `webhook`, organizations `organization`, repositories `repo`. repo: options `gear`, public access
+  `globe`, collaborators `people`, webhooks `webhook`, branches `git-branch`, tags `tag`, git hooks `terminal`, deploy keys
+  `key`, LFS `file-binary`, actions `play`. org: options `gear`, webhooks `webhook`, labels `tag`, applications `apps`,
+  blocked `blocked`, packages `package`, actions `play`. admin: dashboard `meter`, self-check `checklist`,
+  authentication `shield-lock`, organizations `organization`, users `person`, badges `id-badge`, emails `mail`,
+  packages `package`, repositories `repo`, applications `apps`, webhooks `webhook`, actions `play`, config `sliders` /
+  `gear`, notices `bell`, monitor `pulse` (stats `graph`, cron `clock`, queues `stack`, trace `cpu`).
+
 
 ### Wave 2, round 1 (live server started 2026-09-29T18:30Z; w1 overrides are live)
 - **Live audit** `shots/icons-w2r1/full/` (74 routes = routes.json + 6 icon routes, light/dark × 1440/390, `--states`;
@@ -169,7 +238,7 @@ folder resizing an icon must set `width`, `height`, `min-width`, `min-height` to
   | Name | Count / pages | Decision | Status |
   |---|---|---|---|
   | `gitea-double-chevron-left` (PR-list branch chips, 12px) | 208 / 36 | parity: hide chips (P-2) or mask `arrow-left` (P-1) | owner pages/issues-prs, pending |
-  | `gitea-colorblind-blueyellow` / `-redgreen` | 16 + 12 / 4 | keep (meaning is the colour pair) | final |
+  | `gitea-colorblind-blueyellow` / `-redgreen` | 16 + 12 / 4 | keep (meaning is the colour pair) — **superseded: L1 r1 `eye` mask, L1 r2 hidden in GitHub themes** | final |
   | `fontawesome-openid` | 8 / 8 | keep (brand; github.com has no OpenID sign-in) | final |
   | `gitea-npm` | 8 / 8 | keep — github.com shows the npm logo on npm package rows (verified) | final |
   | `gitea-running` | 4 / 4 (actions status filter) | keep — identical paths to github.com's running icon (verified), `--fgColor-attention`, 1s rotation | final |

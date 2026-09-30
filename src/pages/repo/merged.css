@@ -30,7 +30,6 @@
 #commits-table td:last-child > .btn:hover,
 .repository.branches td > .flex-text-block > .btn:hover,
 .repository.branches td .tw-flex > .btn:hover,
-.repository.branches td .tw-flex > .ui.dropdown.btn:hover,
 #release-list .flex-left-right > div > a.muted:hover {
   background: var(--control-transparent-bgColor-hover);
   color: var(--fgColor-default);
@@ -60,7 +59,6 @@
 /* invisible icon buttons: centred muted octicon (from commits.css, branches.css, tags-releases.css) */
 #commits-table td:last-child > .btn,
 .repository.branches td .tw-flex > .btn,
-.repository.branches td .tw-flex > .ui.dropdown.btn,
 .repository.branches td > .flex-text-block > .btn,
 #release-list .flex-left-right > div > a.muted {
   justify-content: center;
@@ -69,8 +67,7 @@
 
 /* 28px icon buttons (from commits.css, branches.css) */
 #commits-table td:last-child > .btn,
-.repository.branches td .tw-flex > .btn,
-.repository.branches td .tw-flex > .ui.dropdown.btn {
+.repository.branches td .tw-flex > .btn {
   width: var(--control-small-size);
   height: var(--control-small-size);
 }
@@ -115,7 +112,7 @@
 }
 
 /* hover: row background (from commits.css, branches.css, tags-releases.css) */
-#commits-table > tbody > tr:hover,
+#commits-table > tbody > tr:not(.gh-commit-day):hover,
 .repository.branches tr:hover,
 .attachment-list > .item:hover {
   background: var(--bgColor-muted);
@@ -123,6 +120,8 @@
 
 /* 12px inline code in commit titles (from commits.css) */
 #commits-table td.message .commit-summary code {
+  padding: 0;
+  background: none;
   font-size: var(--text-body-size-small);
 }
 
@@ -144,7 +143,6 @@
 
 /* muted text colour (from home-sidebar.css, commits.css, branches.css, tags-releases.css) */
 .repo-home-sidebar-top .flex-text-block.muted > b,
-.commit-header-buttons > .ui.primary.button > .svg,
 .repository.branches td .ref-issue,
 .download-icon,
 .tag-list-row > .flex-text-block > .flex-text-inline {
@@ -160,14 +158,12 @@
 
 /* flattened wrappers (from home-toolbar.css, wiki.css) */
 .repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row,
-.repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row > .repo-button-row-left,
-.wiki.view > .ui.container > .wiki-content-parts {
+.repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row > .repo-button-row-left {
   display: contents;
 }
 
 /* page grids: children span the full width (from commits.css, wiki.css) */
-.commits:not(.pull) > .ui.container > *,
-.wiki.view > .ui.container > * {
+.commits:not(.pull) > .ui.container > * {
   grid-column: 1 / -1;
   min-width: 0;
 }

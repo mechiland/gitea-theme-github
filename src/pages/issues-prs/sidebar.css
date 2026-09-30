@@ -218,3 +218,15 @@
 .issue-content-right .ui.depending .ui.dropdown {
   font-size: var(--text-body-size-small);
 }
+
+/* CT-FG060 (controls): the dependency Select next to the 28px "+" IconButton = Primer Select size="small" */
+.issue-content-right .ui.action.input > .ui.selection.dropdown {
+  min-height: var(--control-small-size);
+  padding-top: calc((var(--control-small-size) - var(--base-size-20)) / 2 - var(--borderWidth-thin));
+  padding-bottom: calc((var(--control-small-size) - var(--base-size-20)) / 2 - var(--borderWidth-thin));
+  padding-left: var(--control-small-paddingInline-condensed);
+}
+
+.issue-content-right .ui.action.input > .ui.search.selection.dropdown > input.search {
+  padding-left: var(--control-small-paddingInline-condensed);
+}

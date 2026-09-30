@@ -1,0 +1,94 @@
+/*
+ * Settings / admin buttons — github.com settings keep one primary (green) action per view, section actions at the
+ * medium size and row actions at the small size:
+ *   Subhead actions ("Add webhook", "Add deploy key", "New Organization", "Add New Rule"): Button medium, 32px,
+ *     14px text, padding 0 12px (Primer React Button / PageHeader actions);
+ *   Box-row actions ("Leave", "Delete", "Remove"): Button small, 28px, 12px text (btn-sm), every row the same;
+ *   the Danger zone keeps its 32px danger buttons (danger-zone.css).
+ * Secondary actions that Gitea renders as green primary buttons are default (secondary) buttons on github.com:
+ *   maintenance "Run" (admin dashboard table), config "Test" (cache, in a dd), Subhead "Add webhook" / "Add deploy key"
+ *   / "Add New Rule", repo indexers "Add to Reindex Queue", admin repos "Unadopted repositories", security
+ *   "Add Security Key" / "Add OpenID URI" (the page's primary is "Enroll in Two-Factor Authentication"), branches
+ *   "Update Default Branch" (an inline one-field form like github.com's "Rename"), collaborators "Add Team" (the
+ *   primary is "Add Collaborator"), Actions > General "Add" (the primary is "Update Settings"), "Update Avatar"
+ *   (user / org / repo avatar forms: the section's primary is "Update Settings" / "Update Profile").
+ * Colours: Primer --button-default-* tokens; sizes: --control-{medium,small}-* tokens.
+ */
+
+/* ---------- demoted primaries → default buttons ---------- */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.primary.button:is(
+  .admin.dashboard .ui.table *,
+  .admin dd *,
+  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"], [href$="/settings/branches/edit"]),
+  [name="request_reindex_type"],
+  [href$="/-/admin/repos/unadopted"],
+  #register-webauthn,
+  [action$="/security/openid"] *,
+  .ui.form:has(> input[name="action"][value="default_branch"]) *,
+  #repo-collab-team-form *,
+  [name="cross_repo_add_target"],
+  [action$="/avatar"] *
+) {
+  border-color: var(--button-default-borderColor-rest);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-default-fgColor-rest);
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.primary.button:is(
+  .admin.dashboard .ui.table *,
+  .admin dd *,
+  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"], [href$="/settings/branches/edit"]),
+  [name="request_reindex_type"],
+  [href$="/-/admin/repos/unadopted"],
+  #register-webauthn,
+  [action$="/security/openid"] *,
+  .ui.form:has(> input[name="action"][value="default_branch"]) *,
+  #repo-collab-team-form *,
+  [name="cross_repo_add_target"],
+  [action$="/avatar"] *
+):hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+  color: var(--button-default-fgColor-rest);
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.primary.button:is(
+  .admin.dashboard .ui.table *,
+  .admin dd *,
+  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"], [href$="/settings/branches/edit"]),
+  [name="request_reindex_type"],
+  [href$="/-/admin/repos/unadopted"],
+  #register-webauthn,
+  [action$="/security/openid"] *,
+  .ui.form:has(> input[name="action"][value="default_branch"]) *,
+  #repo-collab-team-form *,
+  [name="cross_repo_add_target"],
+  [action$="/avatar"] *
+):active {
+  background: var(--button-default-bgColor-active);
+}
+
+/* a leading octicon in a default button is --fgColor-muted (Primer Button leadingVisual) */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.primary.button:is(.admin.dashboard .ui.table *, #register-webauthn) > .svg {
+  color: var(--fgColor-muted);
+}
+
+/* ---------- Subhead actions: medium (32px) ---------- */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.top.attached.header > .ui.right .ui.button {
+  gap: var(--control-medium-gap);
+  height: var(--control-medium-size);
+  min-height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
+  white-space: nowrap;
+}
+
+/* ---------- Box-row actions: small (28px) ---------- */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment:not(.danger) .flex-divided-list > .item > .item-trailing .ui.button:not(.icon) {
+  gap: var(--control-small-gap);
+  height: var(--control-small-size);
+  min-height: var(--control-small-size);
+  padding: 0 var(--control-small-paddingInline-condensed);
+  font-size: var(--text-body-size-small);
+}

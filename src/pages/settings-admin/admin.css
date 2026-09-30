@@ -42,6 +42,25 @@
   border-bottom: 0;
 }
 
+/*
+ * Definition lists as Box rows: every key/value pair is a Box-row separated by a 1px --borderColor-muted line (the
+ * group dividers stay the same line). The value column starts right after the 300px key column (Gitea leaves a 1em
+ * gap between them via `margin-left: auto`, which would break the row line).
+ */
+.admin-dl-horizontal > dt {
+  width: calc(2 * var(--base-size-128) + var(--base-size-44)); /* Gitea's 300px key column */
+}
+
+.admin-dl-horizontal > dd {
+  width: calc(100% - 2 * var(--base-size-128) - var(--base-size-44));
+  margin-left: 0;
+}
+
+.admin-dl-horizontal > dd + dt,
+.admin-dl-horizontal > dd + dt + dd {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
 /* phones: key over value (a 300px key column leaves no room for the value) */
 @media (max-width: 543.98px) {
   .admin-dl-horizontal > dt,
@@ -59,49 +78,10 @@
     padding-top: 0;
     overflow-wrap: anywhere;
   }
-}
 
-/* secondary actions that Gitea renders as green primary buttons are default buttons on github.com:
-   maintenance "Run" (admin dashboard table), config "Test" (cache, in a dd), Subhead "Add webhook" / "Add deploy key"
-   (btn-sm, not btn-primary; github.com keeps primary only for the page's main create action, e.g. "New SSH key"),
-   repo indexers "Add to Reindex Queue", admin repos "Unadopted repositories" */
-:is(.settings, .admin) .flex-container-main .ui.primary.button:is(
-  .admin.dashboard .ui.table *,
-  .admin dd *,
-  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"]),
-  [name="request_reindex_type"],
-  [href$="/-/admin/repos/unadopted"]
-) {
-  border-color: var(--button-default-borderColor-rest);
-  background: var(--button-default-bgColor-rest);
-  box-shadow: var(--button-default-shadow-resting);
-  color: var(--button-default-fgColor-rest);
-}
-
-:is(.settings, .admin) .flex-container-main .ui.primary.button:is(
-  .admin.dashboard .ui.table *,
-  .admin dd *,
-  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"]),
-  [name="request_reindex_type"],
-  [href$="/-/admin/repos/unadopted"]
-):hover {
-  border-color: var(--button-default-borderColor-hover);
-  background: var(--button-default-bgColor-hover);
-  color: var(--button-default-fgColor-rest);
-}
-
-:is(.settings, .admin) .flex-container-main .ui.primary.button:is(
-  .admin.dashboard .ui.table *,
-  .admin dd *,
-  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"]),
-  [name="request_reindex_type"],
-  [href$="/-/admin/repos/unadopted"]
-):active {
-  background: var(--button-default-bgColor-active);
-}
-
-.admin.dashboard .ui.table .ui.primary.button > .svg {
-  color: var(--fgColor-muted);
+  .admin-dl-horizontal > dd + dt + dd {
+    border-top: 0;
+  }
 }
 
 /* filter bar above a list (search input + Filter / Sort menus) */
@@ -123,7 +103,7 @@
 
 /* the Subhead "Add webhook" menu: keyboard focus lands on the .ui.jump.dropdown wrapper (base_list.tmpl), whose
    radius is 0 — the focus ring follows the 6px button inside (Primer focusOutline) */
-:is(.settings, .admin) .flex-container-main .ui.top.attached.header .ui.jump.dropdown {
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.top.attached.header .ui.jump.dropdown {
   border-radius: var(--borderRadius-medium);
 }
 
@@ -135,4 +115,105 @@
 
 .admin .flex-container-main .ui.table > tbody > tr > td > .svg.octicon-x {
   color: var(--fgColor-muted);
+}
+
+/*
+ * Admin list DataTables (users, orgs, repos, emails, packages, auths …): Primer DataTable spacing — 16px at the Box
+ * edges, 8px between cells (DataTable condensed inline padding; rows keep the 8px block padding → 37px). With the
+ * 16px of the normal density a 12-column table (repos: ID … Created, Op.) is 1052px wide in a 934px Box and its last
+ * columns hide behind a scroll edge; github.com never scrolls a data table at desktop width.
+ */
+.admin .flex-container-main .ui.attached.table.segment > .ui.table > :is(thead, tbody) > tr > :is(th, td) {
+  padding-right: var(--base-size-8);
+  padding-left: var(--base-size-8);
+}
+
+.admin .flex-container-main .ui.attached.table.segment > .ui.table > :is(thead, tbody) > tr > :is(th, td):first-child {
+  padding-left: var(--base-size-16);
+}
+
+.admin .flex-container-main .ui.attached.table.segment > .ui.table > :is(thead, tbody) > tr > :is(th, td):last-child {
+  padding-right: var(--base-size-16);
+}
+
+/* status flags that are links (emails: "Activated" toggles the state) keep the status colours, not the link blue */
+.admin .flex-container-main .ui.table > tbody > tr > td > a > .svg.octicon-check {
+  color: var(--fgColor-success);
+}
+
+.admin .flex-container-main .ui.table > tbody > tr > td > a > .svg.octicon-x {
+  color: var(--fgColor-muted);
+}
+
+/*
+ * Row actions (the operations column: trash, pencil, person — an icon-only link): Primer IconButton, invisible
+ * variant, small — 28px square, radius 6px, --fgColor-muted icon; hover --control-transparent-bgColor-hover with
+ * --fgColor-default, a destructive action (trash) turns --fgColor-danger on hover (btn-octicon-danger). The -4px block
+ * margin keeps the row at its 37px text height. Gitea colours the repo trash `tw-text-red` (!important):
+ * admin.important.css.
+ */
+.admin .flex-container-main .ui.table > tbody > tr > td:last-child a:has(> .svg:only-child) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-small-size);
+  height: var(--control-small-size);
+  margin: calc(-1 * var(--base-size-4)) 0;
+  border-radius: var(--borderRadius-medium);
+  color: var(--fgColor-muted);
+  vertical-align: middle;
+}
+
+.admin .flex-container-main .ui.table > tbody > tr > td:last-child a:has(> .svg:only-child):hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+  text-decoration: none;
+}
+
+.admin .flex-container-main .ui.table > tbody > tr > td:last-child a:has(> .svg.octicon-trash:only-child):hover {
+  color: var(--fgColor-danger);
+}
+
+.admin .flex-container-main .ui.table > tbody > tr > td:last-child a:has(> .svg:only-child):active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+/* two actions in one cell (users: details + edit): 4px apart instead of Gitea's tw-gap-2 (8px) — IconButtons carry
+   their own padding */
+.admin .flex-container-main .ui.table > tbody > tr > td:last-child > .tw-flex:has(> a > .svg:only-child) {
+  gap: var(--base-size-4);
+}
+
+/* ToggleSwitch rows (config settings: Enable Gravatar …): the switch sits at the row end (Primer ToggleSwitch in a
+   settings row) */
+.admin-dl-horizontal > dd:has(> .ui.toggle.checkbox) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/*
+ * Maintenance operations below 768px: Gitea's stackable table turns each row into two stacked blocks
+ * (`display: block !important`), so every "Run" drops under its description. github.com settings rows keep the
+ * action on the right of the first line and let the text wrap: the button cell is positioned at the row's right
+ * edge, the text cell reserves room for it.
+ */
+@media (max-width: 767.98px) {
+  .admin.dashboard .flex-container-main .ui.table:not(.unstackable) > tbody > tr {
+    position: relative;
+    min-height: calc(var(--control-medium-size) + 2 * var(--base-size-8));
+    padding: var(--base-size-8) 0;
+  }
+
+  .admin.dashboard .flex-container-main .ui.table:not(.unstackable) > tbody > tr > td:first-child {
+    padding: var(--base-size-4) calc(var(--base-size-96) + var(--base-size-16)) var(--base-size-4) var(--base-size-16);
+  }
+
+  .admin.dashboard .flex-container-main .ui.table:not(.unstackable) > tbody > tr > td:last-child {
+    position: absolute;
+    top: 50%;
+    right: var(--base-size-16);
+    padding: 0;
+    transform: translateY(-50%);
+  }
 }

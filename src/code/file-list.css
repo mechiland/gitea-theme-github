@@ -143,7 +143,7 @@
 }
 
 /* age (file view: `> .age`, line-height set in file-view.css) */
-:is(#repo-files-table .repo-file-last-commit > div:not(.latest-commit), #repo-file-commit-box > .age) {
+:is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) > div:not(.latest-commit) {
   order: 5;
   flex-shrink: 0;
   font-size: var(--text-body-size-small);
@@ -154,7 +154,7 @@
   white-space: nowrap;
 }
 
-:is(#repo-files-table .repo-file-last-commit > div:not(.latest-commit), #repo-file-commit-box > .age)::before {
+:is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) > div:not(.latest-commit)::before {
   content: "·";
   margin-right: var(--base-size-4);
 }
@@ -212,9 +212,20 @@
     max-width: none;
   }
 
+  /* FG-020 / C-5: long author lists ("A and B") shrink with an ellipsis instead of pushing the history button out
+     of the Box (the page was 421px wide at 390) */
   :is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .avatar-stack-names {
+    flex-shrink: 1;
     max-width: none;
     min-width: 0;
+    overflow: hidden;
+  }
+
+  :is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .avatar-stack-names > :not(.avatar-stack) {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   /* github.com mobile: [avatar author age] ……… [history icon] (file view: [avatar author age]); message hidden */
@@ -222,11 +233,11 @@
     display: none;
   }
 
-  :is(#repo-files-table .repo-file-last-commit > div:not(.latest-commit), #repo-file-commit-box > .age) {
+  :is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) > div:not(.latest-commit) {
     order: 2;
   }
 
-  :is(#repo-files-table .repo-file-last-commit > div:not(.latest-commit), #repo-file-commit-box > .age)::before {
+  :is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) > div:not(.latest-commit)::before {
     content: none;
   }
 

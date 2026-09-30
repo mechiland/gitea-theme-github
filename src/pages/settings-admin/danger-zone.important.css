@@ -3,17 +3,17 @@
  * `.ui.error.segment` (border-color) with `!important` (modules/header.css:153, modules/segment.css:191).
  * github.com's Danger Zone is a plain Subhead over a Box with a --borderColor-danger-emphasis border.
  */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.error.header {
+:is(.page-content.settings, .page-content.admin, [class="page-content "]) .flex-container-main .ui.top.attached.error.header {
   border-color: var(--borderColor-muted) !important;
   background: transparent !important;
   color: var(--fgColor-default) !important;
 }
 
 /* Subhead-heading--danger (no Danger-zone Box follows: account deletion) */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.error.header:not(:has(+ .danger.segment)) {
+:is(.page-content.settings, .page-content.admin, [class="page-content "]) .flex-container-main .ui.top.attached.error.header:not(:has(+ .danger.segment)) {
   color: var(--fgColor-danger) !important;
 }
 
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.error.danger.segment {
+:is(.page-content.settings, .page-content.admin, [class="page-content "]) .flex-container-main .ui.attached.error.danger.segment {
   border-color: var(--borderColor-danger-emphasis) !important;
 }

@@ -1,10 +1,11 @@
 {{template "base/head" ctx.RootData}}
 <div role="main" aria-label="{{ctx.RootData.Title}}" class="page-content {{.pageClass}}">
 {{- /* gitea-theme-github (ARCHITECTURE.md §7, request SA-4): github.com settings page header (48px avatar, name,
-     subtitle, profile button), github-* themes only and only on pages whose pageClass has "settings" (the CSS in
+     subtitle, profile button), github-* themes only and only on pages whose pageClass has "settings" or is empty
+     (Actions > General, request SA-5b) (the CSS in
      src/pages/settings-admin/header.css is scoped to .page-content.settings). Every other theme renders the upstream
      1.27.3 bytes: the trimmed comment and the false branch emit nothing. */ -}}
-{{- if and (StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-") (StringUtils.Contains (StringUtils.ToString .pageClass) "settings")}}{{with ctx.RootData.SignedUser}}
+{{- if and (StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-") (or (not .pageClass) (StringUtils.Contains (StringUtils.ToString .pageClass) "settings"))}}{{with ctx.RootData.SignedUser}}
 	<div class="ui container gh-settings-header">
 		{{ctx.AvatarUtils.Avatar . 48}}
 		<div class="gh-settings-header-text">

@@ -174,7 +174,7 @@
 }
 
 /* search form: github.com's full-width 32px search field sits outside the Box */
-.repository.branches .ui.attached.segment:has(> form) {
+.repository.branches .segment:has(> form) {
   width: auto;
   margin: 0 0 var(--base-size-16);
   padding: 0;
@@ -184,7 +184,7 @@
 
 /* the search field itself: list-search.css */
 
-.repository.branches .ui.attached.segment:not(:has(> form)) {
+.repository.branches .attached.segment:not(:has(> form)) {
   width: auto;
   margin: 0;
   border: var(--borderWidth-thin) solid var(--borderColor-default);

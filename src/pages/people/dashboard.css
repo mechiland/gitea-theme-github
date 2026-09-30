@@ -122,6 +122,12 @@
   margin-bottom: var(--base-size-8);
 }
 
+/* Gitea focuses the empty filter input on load (Vue, when nothing else has focus): while it is still empty the focus
+   shows as the accent border only, without the 2px ring (github.com never autofocuses this field) */
+.repos-search input:focus:placeholder-shown {
+  outline: 0;
+}
+
 /* Gitea focuses the filter input on load; the focused input (position: relative; z-index: 1 in controls) would paint
    over the absolutely positioned leading search icon */
 .repos-search i.icon {

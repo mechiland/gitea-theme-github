@@ -20,8 +20,9 @@
   text-align: center;
 }
 
-/* Gitea's logo above the title (the OpenID page already renders its own logo image) */
-.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt, .openid) .ui.top.attached.header:not(.segment)::before {
+/* Gitea's logo above the title (the OpenID page already renders its own logo image; under the slim auth header,
+   app-header.css, the header's own logo is the mark) */
+.page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt, .openid, .gh-app-header--auth ~ *) .ui.top.attached.header:not(.segment)::before {
   content: "";
   display: block;
   width: var(--base-size-48);
