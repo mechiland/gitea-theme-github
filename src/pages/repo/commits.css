@@ -308,7 +308,9 @@
    The container becomes a two-column grid: the header moves up as the page heading (row 1), the button row and the
    ref summary share row 2 (left / right; the summary's commits link duplicates the heading and is dropped), and
    everything else spans both columns below. Compare / PR commits keep the attached layout. */
-.commits:not(.pull) > .ui.container {
+/* :not(.flex-container): the Activity pages (pulse, contributors, code frequency, recent commits) share the page class
+   "repository commits" but use the NavList flex layout — this grid must not reach them. */
+.commits:not(.pull) > .ui.container:not(.flex-container) {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   column-gap: var(--base-size-16);
