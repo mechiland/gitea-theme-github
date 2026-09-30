@@ -131,7 +131,7 @@
    (x=24 at 1100), 16px below (measured 2026-09-30). Gitea's 1216px container would start 32px further in. */
 @media (min-width: 768px) {
   .repository.branches > .ui.container,
-  .commits:not(.pull) > .ui.container {
+  .commits:not(.pull) > .ui.container:not(.flex-container) {
     width: var(--breakpoint-xlarge);
     max-width: calc(100% - 2 * var(--base-size-24));
   }

@@ -477,7 +477,7 @@
      "action": "hover",
      "selectors": {
       "gitea": ".gh-app-header .gh-icon-btn[href$=\"/pulls\"]",
-      "github": "header button[aria-label='Search or jump to…'], header [data-target='qbsearch-input.inputButton']"
+      "github": "header button[aria-label='Search or jump to\u2026'], header [data-target='qbsearch-input.inputButton']"
      },
      "clips": {
       "gitea": ".tippy-box[data-theme=tooltip]",
@@ -2762,6 +2762,26 @@
    "github": null,
    "auth": false,
    "expectStatus": 404
+  },
+  {
+   "id": "repo-activity",
+   "gitea": "/octo-org/grex/activity",
+   "github": "https://github.com/pemistahl/grex/pulse"
+  },
+  {
+   "id": "repo-activity-contributors",
+   "gitea": "/octo-org/grex/activity/contributors",
+   "github": "https://github.com/pemistahl/grex/graphs/contributors"
+  },
+  {
+   "id": "repo-activity-code-frequency",
+   "gitea": "/octo-org/grex/activity/code-frequency",
+   "github": "https://github.com/pemistahl/grex/graphs/code-frequency"
+  },
+  {
+   "id": "repo-activity-recent-commits",
+   "gitea": "/octo-org/grex/activity/recent-commits",
+   "github": null
   }
  ]
 }
