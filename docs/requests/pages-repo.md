@@ -89,3 +89,33 @@ Evidence: shots/controls-w3r1/sheet2.png (top two rows: "Mono" circle 5px from t
   (title, tabs and commit Box all at x=112, "2 Commits" back as the Box header) and repo-commits/dark-1440.png
   (/commits page unchanged: 24px h1, toolbar row, 1280 container). Lint clean.
 - Template hooks (commits day groups etc.) — REJECTED, reasons in docs/requests/integrator.md.
+
+# pages/repo builder — wave 3b round 1 status (critic repo-w3b-r0 items)
+- #1 DONE — Compare menu at < 768 opens left-aligned to the button (x=33, right 353 at 390; releases, release-detail,
+  playground releases). #2 DONE — single release ≥ 768: menu right-aligned to Compare (1440: 992–1312, no page
+  scroll at 768/1024/1280/1440; probed after click).
+- #4 DONE — release list title 26/600/39 at < 768 (composed 24+2, no Primer token); single-release h1 stays 32/600/48.
+- #5 DONE — commit page < 768: header row wraps, title full width, Browse Source / Operations on one row below.
+- #6 DONE (CSS) — branches: SHA / message / pusher name hidden (github.com shows none), the line becomes an "Updated"
+  column (avatar + relative time) that starts at one x on every row (name block 70% of a 60% cell, default-branch
+  row included). No more "Bu…" stubs or dangling "·" at 390. Row hover now tints the whole row (also at 390).
+- #7 DONE — repo home: code search moved under the About block (flex order), "Description" heads the sidebar on the
+  toolbar row. Heading text "Description" vs "About" stays (template string).
+- #8 partly — byline author 600 (bot names are bare text), state Label pushed right at 390, tags "zip"/"tar.gz"
+  lower case, release commit link sans 14 (repo.important.css: .tw-font-mono is !important). Not done: "445 Commits"
+  text, DOM vs visual order at 390.
+- New: /compare/a...b (not the PR form) centred in container-xl with the /commits 24px Subhead; commit page header Box
+  on --bgColor-default; Commit Graph button medium (32px) on the commits toolbar row.
+
+# Integrator (end of wave 3b, 2026-09-30)
+- **Routes merged:** measure blocks and 24 states from shots/pages-repo-routes.json (repo-home, repo-commits,
+  directory-tree, commit-detail, branches, tags, releases, release-detail, releases-playground-…, wiki-page) are now in
+  tools/shoot/routes.json (backup shots/routes.pre-w3b-merge.json).
+- **State timeouts fixed (tool side):** repo-home `branches-link-hover/-focus` and repo-commits `sha-hover` now run at
+  1440 only (the targets are hidden at 390 by design); directory-tree `goto-file-focus` selector was matching the
+  branch picker's hidden "Filter branch" input first → now `.repo-file-search-container input` (verified:
+  shots/integrate-w3b-probe/directory-tree/states/light-1440-goto-file-focus.png).
+- **Budget:** gh.pages-repo 29,755 → 30,577 B (+822; cap 30 KiB = 30,720 B, 143 B left); gh-important +65 B (repo.important.css).
+  Any new rule needs an equal trim first.
+- Critic w3b-r1 open items (compare range editor, default-branch Updated column, 390 byline separator, release pencil)
+  stay OPEN for a future round; structural gaps remain REJECTED (template-bound, see integrator.md w3).

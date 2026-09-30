@@ -38,7 +38,6 @@
 
 /* accent text (hover and the release ahead link) (from home-sidebar.css, branches.css, tags-releases.css) */
 .repo-home-sidebar-top #manage_topic:hover,
-.repository.branches td > p.info > a:hover,
 .repository.branches td .ref-issue:hover,
 .repository.branches .ui.top.attached.header > a.right:hover,
 #release-list .author > a:hover,
@@ -117,15 +116,13 @@
 
 /* hover: row background (from commits.css, branches.css, tags-releases.css) */
 #commits-table > tbody > tr:hover,
-.repository.branches tr:hover > td,
+.repository.branches tr:hover,
 .attachment-list > .item:hover {
   background: var(--bgColor-muted);
 }
 
-/* 12px code / mono text (from commits.css, branches.css, tags-releases.css) */
-#commits-table td.message .commit-summary code,
-.repository.branches td > p.info .commit-message code,
-#release-list .meta > a.tw-font-mono {
+/* 12px inline code in commit titles (from commits.css) */
+#commits-table td.message .commit-summary code {
   font-size: var(--text-body-size-small);
 }
 

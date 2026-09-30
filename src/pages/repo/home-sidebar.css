@@ -20,7 +20,11 @@
   gap: 0;
 }
 
-/* code search (Gitea feature, github.com searches from the header): a 32px input above About */
+/* code search (Gitea feature, github.com searches from the header): moved under the About block, so "About" heads
+   the sidebar on the toolbar row as on github.com (flex order, no CLS: the form is in the first paint either way) */
+.repo-home-sidebar-top > form {
+  order: 1; /* 16px below: merged.css */
+}
 
 .repo-home-sidebar-top > .flex-relaxed-list {
   padding: 0 0 var(--base-size-16);

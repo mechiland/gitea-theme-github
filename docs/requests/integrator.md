@@ -306,3 +306,18 @@ In round 4 pages/repo instead made the commits page get a real "N Commits" 24px 
   the template and a new localized "Commits on" string, and no pages/repo round is left to style the new row — so it
   would ship unstyled. Documented gap (STATUS.json exceptions).
 - **Seam fixed (pages/repo ↔ pages/issues-prs):** see docs/requests/pages-repo.md "Integrator (end of wave 3)".
+
+# Integrator (end of wave 3b, 2026-09-30)
+- New requests since wave 3: none addressed to the integrator. dark DD-D1 marked DONE (verified); critic follow-ups routed:
+  dark.md (4 open nits), data-display.md DD-W3B-1 (IssueLabel weight 600, OPEN), pages-settings-admin.md SA-5
+  (actions_general pages, CSS-first then template; OPEN) + header strings REJECTED (no locale keys), pages-repo.md (budget note).
+- tools/shoot/routes.json: merged measure blocks + 24 states from shots/pages-repo-routes.json; state fixes
+  (repo-home branches-link-hover/-focus and repo-commits sha-hover → 1440 only; directory-tree goto-file-focus selector).
+  Light --states run: 0 pages with problems (trim-final had 4).
+- No seams: lint 0 errors in all 14 folders, no duplicate ownership; the new pages/repo selectors (`.commit-header`,
+  `.repository.diff:not(.pull)`, compare frame) are used by no other folder.
+- Budget: auto 278.3 KB, light 273.1, dark 274.3 (≤ 295 KB gate, ≤ 300 hard). Growth: gh.dark +1,293 B (auto) / +1,257 B
+  (dark file, absent from light), gh.pages-repo +822 B (30,577 B, cap 30,720), gh-important +65 B; all other layers 0 B.
+- Dark-only proof: light .src.css byte-identical with/without src/dark; pixeldiff light --states --stable run vs the same
+  run with a no-dark auto CSS: 553/568 identical, the rest site-admin-config JSON key order + known-noisy/≤22 px AA.
+- No restart (restartRequired false, iconsChanged 0, no new theme files); 17 themes offered.

@@ -90,3 +90,9 @@
 #tags-table .tag-list-row > .flex-text-block {
   row-gap: var(--base-size-4) !important;
 }
+
+/* release/list.tmpl: the commit link is a.muted.tw-font-mono → github.com shows the release's short SHA in the body
+   font (sans 14px), like the tag name next to it */
+#release-list .meta > a.tw-font-mono {
+  font-family: inherit !important;
+}

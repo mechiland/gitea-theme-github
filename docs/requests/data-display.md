@@ -131,3 +131,12 @@ FYI measured on github.com 2026-09-30 (pemistahl/grex About): TopicTag is 26px t
 
 # Integrator (end of wave 3, 2026-09-30)
 - **PR-DD-1** (topic pill centring; github.com now 26px / 600 / 2px 12px) and the pages/issues-prs comment-header-at-390 proposal are still OPEN for data-display. pages/repo keeps its repo-home-only line-height fix meanwhile.
+
+# Integrator (end of wave 3b, 2026-09-30)
+## DD-W3B-1 IssueLabel font-weight 600 (from critic dark-w3b-r1, both schemes) — OPEN
+github.com's `prc-Token-IssueLabel` computes font-weight 600 on all 13 labels probed
+(shots/critic-dark-r1-probe/ghlabel.mjs, side by side in shots/critic-dark-r1-probe/labels-sbs.png); ours is 500
+(`src/data-display/labels.css`, `.ui.label[style], .labels-list .ui.label` → `--base-text-weight-medium`).
+Proposed: `font-weight: var(--base-text-weight-semibold)` on the IssueLabel rule only (not topics, not state labels).
+Check label widths in the issue list / sidebar at 390 after the change (600 is ~3 % wider).
+- PR-DD-1 and the comment-header-at-390 proposal remain OPEN (no data-display round in wave 3b).

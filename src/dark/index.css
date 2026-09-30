@@ -1,1 +1,6 @@
-/* src/dark — see ARCHITECTURE.md for ownership. Entry file: @import this folder's files here. */
+/*
+ * src/dark — dark-scheme-only exceptions (layer gh.dark; emitted only for the dark scheme, inside
+ * @media (prefers-color-scheme: dark) in the auto theme). Exempt from selector ownership.
+ * Keep small: anything that is not dark-specific belongs to the owning folder (request it there).
+ */
+@import "./labels.css";

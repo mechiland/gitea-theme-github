@@ -478,7 +478,10 @@
       "gitea": ".repository-summary .item[href$=\"/branches\"]",
       "github": "a[href$='/branches']:has(.octicon-git-branch)"
      },
-     "pad": 16
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
     },
     {
      "name": "branches-link-focus",
@@ -487,7 +490,10 @@
       "gitea": ".repository-summary .item[href$=\"/branches\"]",
       "github": "a[href$='/branches']:has(.octicon-git-branch)"
      },
-     "pad": 16
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
     },
     {
      "name": "goto-file-focus",
@@ -513,7 +519,61 @@
       1440
      ]
     }
-   ]
+   ],
+   "measure": {
+    "gitea": [
+     {
+      "name": "ref-link",
+      "selector": ".repository-summary .sub-menu > .item"
+     },
+     {
+      "name": "goto-file",
+      "selector": ".repo-file-search-container input"
+     },
+     {
+      "name": "sidebar-heading",
+      "selector": ".repo-home-sidebar-top .flex-item-title, .repo-home-sidebar-top h2, .repo-home-sidebar-bottom .flex-item-title, .repo-home-sidebar-bottom h2"
+     },
+     {
+      "name": "topic",
+      "selector": "#repo-topics .repo-topic"
+     },
+     {
+      "name": "sidebar-desc",
+      "selector": ".repo-home-sidebar-top .repo-description"
+     },
+     {
+      "name": "lang-bar",
+      "selector": ".language-stats, .repository-summary-language-stats, .repo-home-sidebar-bottom .language-stats"
+     }
+    ],
+    "github": [
+     {
+      "name": "ref-link",
+      "selector": "a[href$='/branches']:has(.octicon-git-branch), a[href$='/tags']:has(.octicon-tag)"
+     },
+     {
+      "name": "goto-file",
+      "selector": "#file-finder-input, input[placeholder='Go to file']"
+     },
+     {
+      "name": "sidebar-heading",
+      "selector": ".Layout-sidebar h2"
+     },
+     {
+      "name": "topic",
+      "selector": "a.topic-tag"
+     },
+     {
+      "name": "sidebar-desc",
+      "selector": ".Layout-sidebar p.f4"
+     },
+     {
+      "name": "lang-bar",
+      "selector": ".Layout-sidebar .Progress"
+     }
+    ]
+   }
   },
   {
    "id": "repo-issues",
@@ -836,7 +896,10 @@
       "gitea": "#commits-table td.sha a",
       "github": "[data-testid='commit-row-item'] a[href*='/commit/'][class*='Button'], li a[class*='prc-Button']"
      },
-     "pad": 12
+     "pad": 12,
+     "viewports": [
+      1440
+     ]
     },
     {
      "name": "copy-focus",
@@ -846,8 +909,91 @@
       "github": "[data-testid='commit-row-item'] button[aria-label*='Copy'], li button[aria-label*='Copy']"
      },
      "pad": 12
+    },
+    {
+     "name": "search-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".repository.commits form > .ui.action.input > input[name=q]"
+     },
+     "clip": ".repository.commits form > .ui.action.input",
+     "pad": 16,
+     "viewports": [
+      1440,
+      390
+     ]
+    },
+    {
+     "name": "search-btn-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".repository.commits form > .ui.action.input > .ui.icon.button:last-child"
+     },
+     "clip": ".repository.commits form > .ui.action.input",
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "search-btn-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".repository.commits form > .ui.action.input > .ui.icon.button:last-child"
+     },
+     "clip": ".repository.commits form > .ui.action.input",
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
     }
-   ]
+   ],
+   "measure": {
+    "gitea": [
+     {
+      "name": "commit-row",
+      "selector": "#commits-table tbody tr"
+     },
+     {
+      "name": "commit-title",
+      "selector": "#commits-table .commit-summary a, #commits-table .commit-summary"
+     },
+     {
+      "name": "commit-sha",
+      "selector": "#commits-table td.sha a"
+     },
+     {
+      "name": "commit-iconbtn",
+      "selector": "#commits-table td:last-child > .btn"
+     },
+     {
+      "name": "commit-meta",
+      "selector": "#commits-table td.author"
+     }
+    ],
+    "github": [
+     {
+      "name": "commit-row",
+      "selector": "[data-testid='commit-row-item'], li[class*='ListItem-module']"
+     },
+     {
+      "name": "commit-title",
+      "selector": "[data-testid='commit-row-item'] h4 a, [data-testid='listview-item-title-container'] a"
+     },
+     {
+      "name": "commit-sha",
+      "selector": "[data-testid='commit-row-item'] a[href*='/commit/'][class*='Button'], li[class*='ListItem'] a[class*='prc-Button']"
+     },
+     {
+      "name": "commit-iconbtn",
+      "selector": "[data-testid='commit-row-item'] button[aria-label], li[class*='ListItem'] [class*='IconButton']"
+     },
+     {
+      "name": "commit-meta",
+      "selector": "[data-testid='listview-item-description'], [class*='ListItem'] [class*='Description']"
+     }
+    ]
+   }
   },
   {
    "id": "org-home",
@@ -892,7 +1038,20 @@
   {
    "id": "directory-tree",
    "gitea": "/octo-org/grex/src/branch/main/src",
-   "github": "https://github.com/pemistahl/grex/tree/main/src"
+   "github": "https://github.com/pemistahl/grex/tree/main/src",
+   "states": [
+    {
+     "name": "goto-file-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".repo-file-search-container input"
+     },
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "blame",
@@ -907,7 +1066,54 @@
   {
    "id": "commit-detail",
    "gitea": "/octo-org/grex/commit/99cc347707375e00514f938b76d885a201dfc110",
-   "github": "https://github.com/pemistahl/grex/commit/99cc347707375e00514f938b76d885a201dfc110"
+   "github": "https://github.com/pemistahl/grex/commit/99cc347707375e00514f938b76d885a201dfc110",
+   "states": [
+    {
+     "name": "browse-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".commit-header-buttons > a.ui.button"
+     },
+     "pad": 12,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "browse-press",
+     "action": "press",
+     "selectors": {
+      "gitea": ".commit-header-buttons > a.ui.button"
+     },
+     "pad": 12,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "operations-open",
+     "action": "click",
+     "selectors": {
+      "gitea": ".commit-header-buttons > .ui.dropdown"
+     },
+     "clip": ".commit-header-buttons",
+     "pad": 200,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "browse-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".commit-header-buttons > a.ui.button"
+     },
+     "pad": 12,
+     "viewports": [
+      1440
+     ]
+    }
+   ]
   },
   {
    "id": "branches",
@@ -931,13 +1137,171 @@
       "github": "table tbody tr"
      },
      "pad": 8
+    },
+    {
+     "name": "copy-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".repository.branches td > .flex-text-block > .btn.interact-fg"
+     },
+     "pad": 12,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "copy-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".repository.branches td > .flex-text-block > .btn.interact-fg"
+     },
+     "pad": 12,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "search-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".repository.branches form > .ui.action.input > input[name=q]"
+     },
+     "clip": ".repository.branches form > .ui.action.input",
+     "pad": 16,
+     "viewports": [
+      1440,
+      390
+     ]
+    },
+    {
+     "name": "search-btn-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".repository.branches form > .ui.action.input > .ui.icon.button:last-child"
+     },
+     "clip": ".repository.branches form > .ui.action.input",
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "search-btn-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".repository.branches form > .ui.action.input > .ui.icon.button:last-child"
+     },
+     "clip": ".repository.branches form > .ui.action.input",
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
     }
-   ]
+   ],
+   "measure": {
+    "gitea": [
+     {
+      "name": "branch-name",
+      "selector": ".repository.branches .branch-name"
+     },
+     {
+      "name": "branch-row-cell",
+      "selector": ".repository.branches table tbody td"
+     },
+     {
+      "name": "branch-iconbtn",
+      "selector": ".repository.branches td .tw-flex > .btn"
+     },
+     {
+      "name": "state-label",
+      "selector": ".repository.branches td .ui.large.label"
+     }
+    ],
+    "github": [
+     {
+      "name": "branch-name",
+      "selector": "a[class*='BranchName'], .branch-name, table tbody a[href*='/tree/']"
+     },
+     {
+      "name": "branch-row-cell",
+      "selector": "table tbody td"
+     },
+     {
+      "name": "branch-iconbtn",
+      "selector": "table tbody button[class*='IconButton'], table tbody [class*='prc-Button-IconButton']"
+     },
+     {
+      "name": "state-label",
+      "selector": "table tbody [class*='StateLabel']"
+     }
+    ]
+   }
   },
   {
    "id": "tags",
    "gitea": "/octo-org/grex/tags",
-   "github": "https://github.com/pemistahl/grex/tags"
+   "github": "https://github.com/pemistahl/grex/tags",
+   "states": [
+    {
+     "name": "row-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#tags-table .tag-list-row"
+     },
+     "pad": 8,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "search-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".repository.tags form > .ui.action.input > input[name=q]"
+     },
+     "clip": ".repository.tags form > .ui.action.input",
+     "pad": 16,
+     "viewports": [
+      1440,
+      390
+     ]
+    },
+    {
+     "name": "search-btn-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": ".repository.tags form > .ui.action.input > .ui.icon.button:last-child"
+     },
+     "clip": ".repository.tags form > .ui.action.input",
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "search-btn-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".repository.tags form > .ui.action.input > .ui.icon.button:last-child"
+     },
+     "clip": ".repository.tags form > .ui.action.input",
+     "pad": 16,
+     "viewports": [
+      1440
+     ]
+    },
+    {
+     "name": "row-hover-390",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#tags-table .tag-list-row a"
+     },
+     "pad": 8,
+     "viewports": [
+      390
+     ]
+    }
+   ]
   },
   {
    "id": "releases",
@@ -955,18 +1319,135 @@
      "viewports": [
       1440
      ]
+    },
+    {
+     "name": "newrelease-focus",
+     "action": "focus",
+     "selectors": {
+      "gitea": ".repository.releases a.ui.primary.button[href$=\"/releases/new\"]"
+     },
+     "pad": 12,
+     "viewports": [
+      1440,
+      390
+     ]
+    },
+    {
+     "name": "compare-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#release-list .release-branch-tag-selector .branch-dropdown-button"
+     },
+     "pad": 16,
+     "viewports": [
+      1440,
+      390
+     ]
+    },
+    {
+     "name": "compare-open",
+     "action": "click",
+     "selectors": {
+      "gitea": "#release-list .release-branch-tag-selector .branch-dropdown-button"
+     },
+     "pad": 16,
+     "wait": 600,
+     "viewports": [
+      1440,
+      390
+     ]
     }
-   ]
+   ],
+   "measure": {
+    "gitea": [
+     {
+      "name": "release-title",
+      "selector": "#release-list .release-entry h4 a, #release-list .release-entry .release-list-title"
+     },
+     {
+      "name": "segment-item",
+      "selector": ".small-menu-items .item"
+     },
+     {
+      "name": "release-card",
+      "selector": "#release-list .release-entry .detail"
+     },
+     {
+      "name": "asset-row",
+      "selector": "#release-list .attachment-list > li, #release-list .download .list > li"
+     }
+    ],
+    "github": [
+     {
+      "name": "release-title",
+      "selector": "section h2, .Box-body h2"
+     },
+     {
+      "name": "segment-item",
+      "selector": ".subnav-item, nav[aria-label] a[href$='/releases'], nav a[href$='/tags']"
+     },
+     {
+      "name": "release-card",
+      "selector": "section .Box"
+     },
+     {
+      "name": "asset-row",
+      "selector": "details .Box-row, details li.Box-row"
+     }
+    ]
+   }
   },
   {
    "id": "release-detail",
    "gitea": "/octo-org/grex/releases/tag/v1.4.6",
-   "github": "https://github.com/pemistahl/grex/releases/tag/v1.4.6"
+   "github": "https://github.com/pemistahl/grex/releases/tag/v1.4.6",
+   "states": [
+    {
+     "name": "compare-hover",
+     "action": "hover",
+     "selectors": {
+      "gitea": "#release-list .release-branch-tag-selector .branch-dropdown-button"
+     },
+     "pad": 16,
+     "viewports": [
+      1440,
+      390
+     ]
+    },
+    {
+     "name": "compare-open",
+     "action": "click",
+     "selectors": {
+      "gitea": "#release-list .release-branch-tag-selector .branch-dropdown-button"
+     },
+     "pad": 16,
+     "wait": 600,
+     "viewports": [
+      1440,
+      390
+     ]
+    }
+   ]
   },
   {
    "id": "releases-playground-with-assets-prerelease-draft",
    "gitea": "/octo-org/theme-playground/releases",
-   "github": null
+   "github": null,
+   "states": [
+    {
+     "name": "compare-open",
+     "action": "click",
+     "selectors": {
+      "gitea": "#release-list .release-branch-tag-selector .branch-dropdown-button"
+     },
+     "pad": 16,
+     "wait": 600,
+     "viewports": [
+      1440,
+      390
+     ]
+    }
+   ]
   },
   {
    "id": "wiki-home",
@@ -995,7 +1476,29 @@
       1440
      ]
     }
-   ]
+   ],
+   "measure": {
+    "gitea": [
+     {
+      "name": "wiki-title",
+      "selector": ".repository.wiki .wiki-title, .repository.wiki .ui.header"
+     },
+     {
+      "name": "wiki-edit-btn",
+      "selector": ".repository.wiki a.ui.button[href$='?action=_edit']"
+     }
+    ],
+    "github": [
+     {
+      "name": "wiki-title",
+      "selector": "#wiki-wrapper h1, .gh-header-title"
+     },
+     {
+      "name": "wiki-edit-btn",
+      "selector": "a.btn[href$='/_edit'], a[href$='_edit']"
+     }
+    ]
+   }
   },
   {
    "id": "repo-home-readme-with-images-and-tables",

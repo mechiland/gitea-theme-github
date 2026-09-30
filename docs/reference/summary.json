@@ -1,7 +1,7 @@
 {
  "target": "github",
  "theme": null,
- "generated": "2026-09-29T21:46:58.714Z",
+ "generated": "2026-09-30T02:04:38.164Z",
  "outDir": "docs/reference",
  "giteaBase": null,
  "giteaVersion": null,
@@ -11,29 +11,30 @@
   "dark"
  ],
  "viewports": [
-  1440,
-  390
+  1440
  ],
  "appearance": null,
  "paletteVersion": "11.10.0",
+ "stable": false,
+ "themeCss": null,
  "totals": {
-  "pages": 8,
-  "pagesWithProblems": 2,
+  "pages": 4,
+  "pagesWithProblems": 0,
   "consoleErrors": 0,
   "failedRequests": 0,
-  "maxCLS": 0.0015,
+  "maxCLS": 0.0006,
   "nonOcticonIcons": 0,
   "maskedIcons": 0,
   "pagesWithUnlayeredGiteaCss": 0
  },
  "pages": [
   {
-   "route": "critic-sa-r4-releases-blankslate",
+   "route": "critic-sa-w3b-releases-blankslate",
    "scheme": "light",
    "viewport": 1440,
    "url": "https://github.com/octocat/Hello-World/releases",
-   "png": "critic-sa-r4-releases-blankslate/light-1440.png",
-   "json": "critic-sa-r4-releases-blankslate/light-1440.json",
+   "png": "critic-sa-w3b-releases-blankslate/light-1440.png",
+   "json": "critic-sa-w3b-releases-blankslate/light-1440.json",
    "mainStatus": 200,
    "problems": [],
    "consoleErrors": 0,
@@ -47,45 +48,19 @@
    "cls": 0,
    "maskedIcons": 0,
    "unlayeredGiteaCss": 0,
-   "cssBytes": 261265,
+   "cssBytes": 261409,
    "htmlTheme": "auto",
    "prefersDark": false,
    "bodyBg": "rgb(255, 255, 255)",
    "states": []
   },
   {
-   "route": "critic-sa-r4-releases-blankslate",
-   "scheme": "light",
-   "viewport": 390,
-   "url": "https://github.com/octocat/Hello-World/releases",
-   "png": "critic-sa-r4-releases-blankslate/light-390.png",
-   "json": "critic-sa-r4-releases-blankslate/light-390.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 0,
-   "consoleWarnings": 0,
-   "failedRequests": 0,
-   "unresolvedVars": 45,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 4,
-   "offPaletteTotal": 12,
-   "nonOcticonIcons": 0,
-   "cls": 0,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 261021,
-   "htmlTheme": "auto",
-   "prefersDark": false,
-   "bodyBg": "rgb(255, 255, 255)",
-   "states": []
-  },
-  {
-   "route": "critic-sa-r4-releases-blankslate",
+   "route": "critic-sa-w3b-releases-blankslate",
    "scheme": "dark",
    "viewport": 1440,
    "url": "https://github.com/octocat/Hello-World/releases",
-   "png": "critic-sa-r4-releases-blankslate/dark-1440.png",
-   "json": "critic-sa-r4-releases-blankslate/dark-1440.json",
+   "png": "critic-sa-w3b-releases-blankslate/dark-1440.png",
+   "json": "critic-sa-w3b-releases-blankslate/dark-1440.json",
    "mainStatus": 200,
    "problems": [],
    "consoleErrors": 0,
@@ -99,240 +74,121 @@
    "cls": 0,
    "maskedIcons": 0,
    "unlayeredGiteaCss": 0,
-   "cssBytes": 261444,
+   "cssBytes": 261713,
    "htmlTheme": "auto",
    "prefersDark": true,
    "bodyBg": "rgb(13, 17, 23)",
    "states": []
   },
   {
-   "route": "critic-sa-r4-releases-blankslate",
-   "scheme": "dark",
-   "viewport": 390,
-   "url": "https://github.com/octocat/Hello-World/releases",
-   "png": "critic-sa-r4-releases-blankslate/dark-390.png",
-   "json": "critic-sa-r4-releases-blankslate/dark-390.json",
+   "route": "critic-sa-w3b-repo-btn",
+   "scheme": "light",
+   "viewport": 1440,
+   "url": "https://github.com/pemistahl/grex",
+   "png": "critic-sa-w3b-repo-btn/light-1440.png",
+   "json": "critic-sa-w3b-repo-btn/light-1440.json",
    "mainStatus": 200,
    "problems": [],
    "consoleErrors": 0,
    "consoleWarnings": 0,
    "failedRequests": 0,
-   "unresolvedVars": 45,
+   "unresolvedVars": 48,
    "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 3,
-   "offPaletteTotal": 10,
+   "offPaletteDistinct": 7,
+   "offPaletteTotal": 27,
    "nonOcticonIcons": 0,
-   "cls": 0,
+   "cls": 0.0006,
    "maskedIcons": 0,
    "unlayeredGiteaCss": 0,
-   "cssBytes": 261514,
-   "htmlTheme": "auto",
-   "prefersDark": true,
-   "bodyBg": "rgb(13, 17, 23)",
-   "states": []
-  },
-  {
-   "route": "critic-sa-r4-labels",
-   "scheme": "light",
-   "viewport": 1440,
-   "url": "https://github.com/octocat/Hello-World/labels",
-   "png": "critic-sa-r4-labels/light-1440.png",
-   "json": "critic-sa-r4-labels/light-1440.json",
-   "mainStatus": 200,
-   "problems": [
-    "state btn-focus failed: locator.waitFor: Timeout 8000ms exceeded.",
-    "state btn-hover failed: locator.waitFor: Timeout 8000ms exceeded."
-   ],
-   "consoleErrors": 0,
-   "consoleWarnings": 0,
-   "failedRequests": 0,
-   "unresolvedVars": 73,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 8,
-   "offPaletteTotal": 29,
-   "nonOcticonIcons": 0,
-   "cls": 0,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 329824,
+   "cssBytes": 301306,
    "htmlTheme": "auto",
    "prefersDark": false,
    "bodyBg": "rgb(255, 255, 255)",
    "states": [
     {
-     "name": "btn-focus",
-     "ok": false,
-     "error": "locator.waitFor: Timeout 8000ms exceeded."
+     "name": "btn-hover",
+     "ok": true
     },
     {
-     "name": "btn-hover",
-     "ok": false,
-     "error": "locator.waitFor: Timeout 8000ms exceeded."
+     "name": "btn-focus",
+     "ok": true
     }
    ]
   },
   {
-   "route": "critic-sa-r4-labels",
-   "scheme": "light",
-   "viewport": 390,
-   "url": "https://github.com/octocat/Hello-World/labels",
-   "png": "critic-sa-r4-labels/light-390.png",
-   "json": "critic-sa-r4-labels/light-390.json",
+   "route": "critic-sa-w3b-repo-btn",
+   "scheme": "dark",
+   "viewport": 1440,
+   "url": "https://github.com/pemistahl/grex",
+   "png": "critic-sa-w3b-repo-btn/dark-1440.png",
+   "json": "critic-sa-w3b-repo-btn/dark-1440.json",
    "mainStatus": 200,
    "problems": [],
    "consoleErrors": 0,
    "consoleWarnings": 0,
    "failedRequests": 0,
-   "unresolvedVars": 73,
+   "unresolvedVars": 48,
    "unresolvedVarsLive": 1,
    "offPaletteDistinct": 5,
-   "offPaletteTotal": 14,
+   "offPaletteTotal": 23,
    "nonOcticonIcons": 0,
-   "cls": 0.0015,
+   "cls": 0.0006,
    "maskedIcons": 0,
    "unlayeredGiteaCss": 0,
-   "cssBytes": 330089,
-   "htmlTheme": "auto",
-   "prefersDark": false,
-   "bodyBg": "rgb(255, 255, 255)",
-   "states": []
-  },
-  {
-   "route": "critic-sa-r4-labels",
-   "scheme": "dark",
-   "viewport": 1440,
-   "url": "https://github.com/octocat/Hello-World/labels",
-   "png": "critic-sa-r4-labels/dark-1440.png",
-   "json": "critic-sa-r4-labels/dark-1440.json",
-   "mainStatus": 200,
-   "problems": [
-    "state btn-focus failed: locator.waitFor: Timeout 8000ms exceeded.",
-    "state btn-hover failed: locator.waitFor: Timeout 8000ms exceeded."
-   ],
-   "consoleErrors": 0,
-   "consoleWarnings": 0,
-   "failedRequests": 0,
-   "unresolvedVars": 73,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 8,
-   "offPaletteTotal": 29,
-   "nonOcticonIcons": 0,
-   "cls": 0,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 337634,
+   "cssBytes": 301101,
    "htmlTheme": "auto",
    "prefersDark": true,
    "bodyBg": "rgb(13, 17, 23)",
    "states": [
     {
-     "name": "btn-focus",
-     "ok": false,
-     "error": "locator.waitFor: Timeout 8000ms exceeded."
+     "name": "btn-hover",
+     "ok": true
     },
     {
-     "name": "btn-hover",
-     "ok": false,
-     "error": "locator.waitFor: Timeout 8000ms exceeded."
+     "name": "btn-focus",
+     "ok": true
     }
    ]
-  },
-  {
-   "route": "critic-sa-r4-labels",
-   "scheme": "dark",
-   "viewport": 390,
-   "url": "https://github.com/octocat/Hello-World/labels",
-   "png": "critic-sa-r4-labels/dark-390.png",
-   "json": "critic-sa-r4-labels/dark-390.json",
-   "mainStatus": 200,
-   "problems": [],
-   "consoleErrors": 0,
-   "consoleWarnings": 0,
-   "failedRequests": 0,
-   "unresolvedVars": 73,
-   "unresolvedVarsLive": 1,
-   "offPaletteDistinct": 6,
-   "offPaletteTotal": 16,
-   "nonOcticonIcons": 0,
-   "cls": 0.0015,
-   "maskedIcons": 0,
-   "unlayeredGiteaCss": 0,
-   "cssBytes": 337308,
-   "htmlTheme": "auto",
-   "prefersDark": true,
-   "bodyBg": "rgb(13, 17, 23)",
-   "states": []
   }
  ],
  "offPalette": [
   {
    "color": "rgba(38,44,40,1)",
-   "count": 40,
+   "count": 24,
    "props": {
     "border-color": 12
    },
    "samples": [
     "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.HeaderSearch-module__searchSlot__oVOUS > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
     "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.AuthCTAs-module__signInWrap__q2P60 > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
-    "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
-    "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > div.AuthCTAs-module__mobileActions__NNzeV > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
-    "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > div.AuthCTAs-module__mobileActions__NNzeV > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw"
+    "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw"
    ],
    "key": "light|rgba(38,44,40,1)",
    "scheme": "light",
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-repo-btn/light-1440"
    ],
-   "pageCount": 4
+   "pageCount": 2
   },
   {
    "color": "rgba(38,44,40,1)",
-   "count": 40,
+   "count": 24,
    "props": {
     "border-color": 12
    },
    "samples": [
     "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.HeaderSearch-module__searchSlot__oVOUS > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
     "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.AuthCTAs-module__signInWrap__q2P60 > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
-    "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
-    "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > div.AuthCTAs-module__mobileActions__NNzeV > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
-    "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > div.AuthCTAs-module__mobileActions__NNzeV > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw"
+    "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw"
    ],
    "key": "dark|rgba(38,44,40,1)",
    "scheme": "dark",
    "pages": [
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
-   "pageCount": 4
-  },
-  {
-   "color": "rgba(0,0,0,0.01)",
-   "count": 10,
-   "props": {
-    "background-color": 3
-   },
-   "samples": [
-    "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.HeaderSearch-module__searchSlot__oVOUS > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
-    "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.AuthCTAs-module__signInWrap__q2P60 > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
-    "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
-    "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > div.AuthCTAs-module__mobileActions__NNzeV > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
-    "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > div.AuthCTAs-module__mobileActions__NNzeV > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw"
-   ],
-   "key": "light|rgba(0,0,0,0.01)",
-   "scheme": "light",
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390"
-   ],
-   "pageCount": 4
+   "pageCount": 2
   },
   {
    "color": "rgba(53,61,55,1)",
@@ -346,8 +202,8 @@
    "key": "light|rgba(53,61,55,1)",
    "scheme": "light",
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-labels/light-1440"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-repo-btn/light-1440"
    ],
    "pageCount": 2
   },
@@ -363,8 +219,8 @@
    "key": "light|rgba(255,255,255,0.06)",
    "scheme": "light",
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-labels/light-1440"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-repo-btn/light-1440"
    ],
    "pageCount": 2
   },
@@ -380,8 +236,8 @@
    "key": "dark|rgba(53,61,55,1)",
    "scheme": "dark",
    "pages": [
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-labels/dark-1440"
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "pageCount": 2
   },
@@ -397,31 +253,33 @@
    "key": "dark|rgba(255,255,255,0.06)",
    "scheme": "dark",
    "pages": [
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-labels/dark-1440"
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "pageCount": 2
   },
   {
-   "color": "rgba(198,223,245,0.3)",
-   "count": 8,
+   "color": "rgba(0,0,0,0.01)",
+   "count": 6,
    "props": {
-    "border-color": 4
+    "background-color": 3
    },
    "samples": [
-    "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.HeaderSearch-module__searchSlot__oVOUS > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.AuthCTAs-module__signInWrap__q2P60 > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+    "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw"
    ],
-   "key": "dark|rgba(198,223,245,0.3)",
-   "scheme": "dark",
+   "key": "light|rgba(0,0,0,0.01)",
+   "scheme": "light",
    "pages": [
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-repo-btn/light-1440"
    ],
    "pageCount": 2
   },
   {
    "color": "rgba(25,31,27,1)",
-   "count": 6,
+   "count": 4,
    "props": {
     "box-shadow": 1,
     "border-color": 1
@@ -433,36 +291,14 @@
    "key": "light|rgba(25,31,27,1)",
    "scheme": "light",
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-repo-btn/light-1440"
    ],
-   "pageCount": 4
-  },
-  {
-   "color": "rgba(0,0,0,1)",
-   "count": 6,
-   "props": {
-    "background-color": 1
-   },
-   "samples": [
-    "react-partial.loaded > div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out",
-    "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
-   ],
-   "key": "light|rgba(0,0,0,1)",
-   "scheme": "light",
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390"
-   ],
-   "pageCount": 4
+   "pageCount": 2
   },
   {
    "color": "rgba(25,31,27,1)",
-   "count": 6,
+   "count": 4,
    "props": {
     "box-shadow": 1,
     "border-color": 1
@@ -474,31 +310,27 @@
    "key": "dark|rgba(25,31,27,1)",
    "scheme": "dark",
    "pages": [
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
-   "pageCount": 4
+   "pageCount": 2
   },
   {
    "color": "rgba(0,0,0,1)",
-   "count": 4,
+   "count": 2,
    "props": {
     "background-color": 1
    },
    "samples": [
     "react-partial.loaded > div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out"
    ],
-   "key": "dark|rgba(0,0,0,1)",
-   "scheme": "dark",
+   "key": "light|rgba(0,0,0,1)",
+   "scheme": "light",
    "pages": [
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-repo-btn/light-1440"
    ],
-   "pageCount": 4
+   "pageCount": 2
   },
   {
    "color": "rgba(255,255,255,0.12)",
@@ -512,59 +344,25 @@
    "key": "light|rgba(255,255,255,0.12)",
    "scheme": "light",
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-labels/light-1440"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-repo-btn/light-1440"
    ],
    "pageCount": 2
   },
   {
-   "color": "rgba(197,222,245,1)",
+   "color": "rgba(0,0,0,1)",
    "count": 2,
    "props": {
     "background-color": 1
    },
    "samples": [
-    "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
+    "react-partial.loaded > div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out"
    ],
-   "key": "light|rgba(197,222,245,1)",
-   "scheme": "light",
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390"
-   ],
-   "pageCount": 2
-  },
-  {
-   "color": "rgba(197,222,245,0.18)",
-   "count": 2,
-   "props": {
-    "background-color": 1
-   },
-   "samples": [
-    "div.Description-module__container__hpqJz.RepositoryLabel-module__labelRowDescription__AYVyx.RepositoryLabel-module__noActionBar__uIehA > div.DescriptionItem-module__default__XsUZU > a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G"
-   ],
-   "key": "dark|rgba(197,222,245,0.18)",
+   "key": "dark|rgba(0,0,0,1)",
    "scheme": "dark",
    "pages": [
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "pageCount": 2
-  },
-  {
-   "color": "rgba(198,223,245,1)",
-   "count": 2,
-   "props": {
-    "color": 1
-   },
-   "samples": [
-    "a > span.prc-Token-TokenBase-te5-F.prc-Token-IssueLabel-2IazM.LabelToken-module__IssueLabelToken__vAY0G > span.prc-Token-TokenTextContainer-cOUaD > span.prc-Text-Text-9mHv3"
-   ],
-   "key": "dark|rgba(198,223,245,1)",
-   "scheme": "dark",
-   "pages": [
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "pageCount": 2
   }
@@ -581,23 +379,19 @@
     ".Button--secondary",
     ".Button--danger"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".btn",
     ".Button--secondary",
     ".Button--danger"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--avatarSize-narrow",
@@ -609,22 +403,18 @@
     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--avatarSize-wide",
@@ -636,22 +426,18 @@
     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--label-bgColor-dark-rest",
@@ -664,23 +450,19 @@
     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--label-bgColor-dark-hover",
@@ -693,23 +475,19 @@
     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--label-bgColor-dark-active",
@@ -722,23 +500,19 @@
     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--label-fgColor-dark",
@@ -751,23 +525,19 @@
     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--label-fgColor-dark-hover",
@@ -780,23 +550,19 @@
     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--label-fgColor-dark-active",
@@ -809,23 +575,19 @@
     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--label-bgColor-light-rest",
@@ -838,23 +600,19 @@
     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--label-bgColor-light-hover",
@@ -867,23 +625,19 @@
     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--label-bgColor-light-active",
@@ -896,23 +650,19 @@
     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--label-fgColor-light",
@@ -925,23 +675,19 @@
     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--label-fgColor-light-hover",
@@ -954,23 +700,19 @@
     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--label-fgColor-light-active",
@@ -983,23 +725,19 @@
     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--anchored-overlay-anchor-offset-right",
@@ -1011,22 +749,18 @@
     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-bottom\"]",
     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-top\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-top\"]"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-bottom\"]",
     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-top\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-top\"]"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--anchored-overlay-anchor-offset-left",
@@ -1037,21 +771,17 @@
    "selectors": [
     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"outside-bottom\"]"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"outside-bottom\"]"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--inputValidation-iconSize",
@@ -1062,21 +792,17 @@
    "selectors": [
     ".prc-components-ValidationIcon-sv29w"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".prc-components-ValidationIcon-sv29w"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--inputValidation-lineHeight",
@@ -1087,21 +813,17 @@
    "selectors": [
     ".prc-components-ValidationText-JEfut"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".prc-components-ValidationText-JEfut"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--grid-template-columns",
@@ -1112,96 +834,17 @@
    "selectors": [
     ".prc-DataTable-Table-7ux1n"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".prc-DataTable-Table-7ux1n"
    ],
-   "pageCount": 8
-  },
-  {
-   "name": "--stackSize-narrow",
-   "refs": 4,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--stackSize-regular",
-   "refs": 4,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--stackSize-wide",
-   "refs": 4,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
-   ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--color-mktg-btn-shadow-hover-muted",
@@ -1213,22 +856,18 @@
     ".btn-muted-mktg:hover",
     ".btn-subtle-mktg:hover"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".btn-muted-mktg:hover",
     ".btn-subtle-mktg:hover"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--brand-heading-letterSpacing-200",
@@ -1240,22 +879,18 @@
     ".Primer_Brand__AnchorNav-module__AnchorNav-link-label___8TkI7",
     ".Primer_Brand__Prose-module__Prose___8WnSE h5, .Primer_Brand__Prose-module__Prose___8WnSE h6"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".Primer_Brand__AnchorNav-module__AnchorNav-link-label___8TkI7",
     ".Primer_Brand__Prose-module__Prose___8WnSE h5, .Primer_Brand__Prose-module__Prose___8WnSE h6"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--color-attention-subtle",
@@ -1266,21 +901,17 @@
    "selectors": [
     ".form-group.warn .warning"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".form-group.warn .warning"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--color-fg-muted",
@@ -1291,21 +922,17 @@
    "selectors": [
     ".ipm-nudge-content p"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".ipm-nudge-content p"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--color-success-subtle",
@@ -1316,21 +943,17 @@
    "selectors": [
     ".form-group.successed .success"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".form-group.successed .success"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--color-danger-subtle",
@@ -1341,21 +964,17 @@
    "selectors": [
     ".form-group.errored .error"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".form-group.errored .error"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--color-mktg-btn-bg",
@@ -1366,21 +985,17 @@
    "selectors": [
     ".btn-mktg"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".btn-mktg"
    ],
-   "pageCount": 8
+   "pageCount": 4
   },
   {
    "name": "--color-mktg-btn-shadow-hover",
@@ -1391,340 +1006,15 @@
    "selectors": [
     ".btn-mktg:hover"
    ],
-   "count": 8,
+   "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".btn-mktg:hover"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--fgColor-muted-hover",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".footer-session-authentication-links a:hover"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".footer-session-authentication-links a:hover"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--nested-level",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".ControlGroup-item"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".ControlGroup-item"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--brand-image-aspectRatio",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".Primer_Brand__Image-module__Image--aspect-ratio-custom___38Uyb"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".Primer_Brand__Image-module__Image--aspect-ratio-custom___38Uyb"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--brand-Hero-bgColor-gridlineGridInner",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".Primer_Brand__Hero-module__Hero-grid--contained___vfiGA"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".Primer_Brand__Hero-module__Hero-grid--contained___vfiGA"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--brand-River-spacing-outerInline",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".Primer_Brand__river-shared-module__River___PCP5W"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".Primer_Brand__river-shared-module__River___PCP5W"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--brand-fontWeight-300",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".Primer_Brand__Testimonial-module__Testimonial--variant-expressive___J1PIY .Primer_Brand__Testimonial-module__Testimonial__quoteMark___sC3I2"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".Primer_Brand__Testimonial-module__Testimonial--variant-expressive___J1PIY .Primer_Brand__Testimonial-module__Testimonial__quoteMark___sC3I2"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--brand-heading-letterSpacing-300",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".Primer_Brand__Prose-module__Prose___8WnSE h4"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".Primer_Brand__Prose-module__Prose___8WnSE h4"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--base-size-54",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".Primer_Brand__PricingOptions-module__PricingOptions__label-cell___gs_vJ"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".Primer_Brand__PricingOptions-module__PricingOptions__label-cell___gs_vJ"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--padding-block-start",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".Primer_Brand__Section-module__Section___O2zvq"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".Primer_Brand__Section-module__Section___O2zvq"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--brand-BreakoutBanner-bgColor",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".Primer_Brand__BreakoutBanner-module__BreakoutBanner-container--background___Uex_J"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".Primer_Brand__BreakoutBanner-module__BreakoutBanner-container--background___Uex_J"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--brand-color-canvas-backdrop",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".Primer_Brand__Tabs-module__Tabs___zia5x"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".Primer_Brand__Tabs-module__Tabs___zia5x"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--brand-Tabs-slider-width",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".Primer_Brand__Tabs-module__Tabs__slider___tkaHu"
-   ],
-   "count": 8,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390",
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".Primer_Brand__Tabs-module__Tabs__slider___tkaHu"
-   ],
-   "pageCount": 8
-  },
-  {
-   "name": "--truncate-max-width",
-   "refs": 4,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".prc-Truncate-Truncate-2G1eo"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390"
-   ],
-   "samples": [
-    ".prc-Truncate-Truncate-2G1eo"
    ],
    "pageCount": 4
   },
@@ -1739,10 +1029,10 @@
    ],
    "count": 4,
    "pages": [
-    "critic-sa-r4-releases-blankslate/light-1440",
-    "critic-sa-r4-releases-blankslate/light-390",
-    "critic-sa-r4-releases-blankslate/dark-1440",
-    "critic-sa-r4-releases-blankslate/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".html-auth .authentication-header-page"
@@ -1750,297 +1040,431 @@
    "pageCount": 4
   },
   {
-   "name": "--color-canvas-subtle",
+   "name": "--fgColor-muted-hover",
    "refs": 1,
    "withFallback": 0,
-   "fallbackRefs": 46,
-   "matchedElements": 1,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
    "selectors": [
-    ".SearchBar-module__searchInput__t30yK"
+    ".footer-session-authentication-links a:hover"
    ],
    "count": 4,
    "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
-    ".SearchBar-module__searchInput__t30yK"
+    ".footer-session-authentication-links a:hover"
    ],
    "pageCount": 4
   },
   {
-   "name": "--bg",
+   "name": "--nested-level",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".ControlGroup-item"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
+   ],
+   "samples": [
+    ".ControlGroup-item"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--brand-image-aspectRatio",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Image-module__Image--aspect-ratio-custom___38Uyb"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
+   ],
+   "samples": [
+    ".Primer_Brand__Image-module__Image--aspect-ratio-custom___38Uyb"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--brand-Hero-bgColor-gridlineGridInner",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Hero-module__Hero-grid--contained___vfiGA"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
+   ],
+   "samples": [
+    ".Primer_Brand__Hero-module__Hero-grid--contained___vfiGA"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--brand-River-spacing-outerInline",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__river-shared-module__River___PCP5W"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
+   ],
+   "samples": [
+    ".Primer_Brand__river-shared-module__River___PCP5W"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--brand-fontWeight-300",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Testimonial-module__Testimonial--variant-expressive___J1PIY .Primer_Brand__Testimonial-module__Testimonial__quoteMark___sC3I2"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
+   ],
+   "samples": [
+    ".Primer_Brand__Testimonial-module__Testimonial--variant-expressive___J1PIY .Primer_Brand__Testimonial-module__Testimonial__quoteMark___sC3I2"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--brand-heading-letterSpacing-300",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Prose-module__Prose___8WnSE h4"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
+   ],
+   "samples": [
+    ".Primer_Brand__Prose-module__Prose___8WnSE h4"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--base-size-54",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__PricingOptions-module__PricingOptions__label-cell___gs_vJ"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
+   ],
+   "samples": [
+    ".Primer_Brand__PricingOptions-module__PricingOptions__label-cell___gs_vJ"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--padding-block-start",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Section-module__Section___O2zvq"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
+   ],
+   "samples": [
+    ".Primer_Brand__Section-module__Section___O2zvq"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--brand-BreakoutBanner-bgColor",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__BreakoutBanner-module__BreakoutBanner-container--background___Uex_J"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
+   ],
+   "samples": [
+    ".Primer_Brand__BreakoutBanner-module__BreakoutBanner-container--background___Uex_J"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--brand-color-canvas-backdrop",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Tabs-module__Tabs___zia5x"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
+   ],
+   "samples": [
+    ".Primer_Brand__Tabs-module__Tabs___zia5x"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--brand-Tabs-slider-width",
+   "refs": 1,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".Primer_Brand__Tabs-module__Tabs__slider___tkaHu"
+   ],
+   "count": 4,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440",
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
+   ],
+   "samples": [
+    ".Primer_Brand__Tabs-module__Tabs__slider___tkaHu"
+   ],
+   "pageCount": 4
+  },
+  {
+   "name": "--truncate-max-width",
+   "refs": 4,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-Truncate-Truncate-2G1eo"
+   ],
+   "count": 2,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440"
+   ],
+   "samples": [
+    ".prc-Truncate-Truncate-2G1eo"
+   ],
+   "pageCount": 2
+  },
+  {
+   "name": "--stackSize-narrow",
+   "refs": 4,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "count": 2,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440"
+   ],
+   "samples": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "pageCount": 2
+  },
+  {
+   "name": "--stackSize-regular",
+   "refs": 4,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "count": 2,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440"
+   ],
+   "samples": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "pageCount": 2
+  },
+  {
+   "name": "--stackSize-wide",
+   "refs": 4,
+   "withFallback": 0,
+   "fallbackRefs": 0,
+   "matchedElements": 0,
+   "selectors": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "count": 2,
+   "pages": [
+    "critic-sa-w3b-releases-blankslate/light-1440",
+    "critic-sa-w3b-releases-blankslate/dark-1440"
+   ],
+   "samples": [
+    ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+   ],
+   "pageCount": 2
+  },
+  {
+   "name": "--copilot-app-banner-night-compact",
    "refs": 3,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
-    ".DefaultIssueTypePickerAnchor-module__issueTypeDot__tFF3h",
-    ".MetadataFooter-module__SingleSelectFieldDot__Y1QVg",
-    ".IssueTypePickerItemLeadingVisual-module__issueTypeColorIndicator__W1kQd"
+    "[data-color-mode=\"dark\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]",
+    "[data-color-mode=\"auto\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
    ],
-   "count": 4,
+   "count": 2,
    "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
-    ".DefaultIssueTypePickerAnchor-module__issueTypeDot__tFF3h",
-    ".MetadataFooter-module__SingleSelectFieldDot__Y1QVg",
-    ".IssueTypePickerItemLeadingVisual-module__issueTypeColorIndicator__W1kQd"
+    "[data-color-mode=\"dark\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]",
+    "[data-color-mode=\"auto\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
    ],
-   "pageCount": 4
+   "pageCount": 2
   },
   {
-   "name": "--top-offset",
-   "refs": 3,
-   "withFallback": 1,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".SidePanel-module__Backdrop__y9iyE",
-    ".SidePanel-module__sidePanel__Ceqal",
-    ".ArtifactsPanelLayout-module__SidePanelLayout__SgShM"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".SidePanel-module__Backdrop__y9iyE",
-    ".SidePanel-module__sidePanel__Ceqal",
-    ".ArtifactsPanelLayout-module__SidePanelLayout__SgShM"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--token-bg",
+   "name": "--copilot-app-banner-night",
    "refs": 2,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
-    ".SingleSelectToken-module__Token__f1S1H",
-    ".SingleSelectToken-module__Token__f1S1H:hover"
+    "[data-color-mode=\"auto\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]",
+    "[data-color-mode=\"dark\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
    ],
-   "count": 4,
+   "count": 2,
    "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
-    ".SingleSelectToken-module__Token__f1S1H",
-    ".SingleSelectToken-module__Token__f1S1H:hover"
+    "[data-color-mode=\"auto\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]",
+    "[data-color-mode=\"dark\"] .CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
    ],
-   "pageCount": 4
+   "pageCount": 2
   },
   {
-   "name": "--token-fg",
+   "name": "--blame-virt-total-size",
    "refs": 2,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
-    ".SingleSelectToken-module__Token__f1S1H",
-    ".SingleSelectToken-module__Token__f1S1H:hover"
+    ".Blame-module__virtualBlameWrapper__lAWXx"
    ],
-   "count": 4,
+   "count": 2,
    "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
-    ".SingleSelectToken-module__Token__f1S1H",
-    ".SingleSelectToken-module__Token__f1S1H:hover"
+    ".Blame-module__virtualBlameWrapper__lAWXx"
    ],
-   "pageCount": 4
+   "pageCount": 2
   },
   {
-   "name": "--token-border",
-   "refs": 2,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".SingleSelectToken-module__Token__f1S1H",
-    ".SingleSelectToken-module__Token__f1S1H:hover"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".SingleSelectToken-module__Token__f1S1H",
-    ".SingleSelectToken-module__Token__f1S1H:hover"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--transition-duration",
-   "refs": 2,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".SidePanel-module__Backdrop__y9iyE",
-    ".SidePanel-module__sidePanel__Ceqal"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".SidePanel-module__Backdrop__y9iyE",
-    ".SidePanel-module__sidePanel__Ceqal"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--checks-icon-color",
-   "refs": 2,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".ChecksStatusBadge-module__ChecksStatusBadgeButton__vTwYt svg",
-    ".ChecksStatusBadge-module__ChecksStatusBadgeIconButton__rcQQ1 svg"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".ChecksStatusBadge-module__ChecksStatusBadgeButton__vTwYt svg",
-    ".ChecksStatusBadge-module__ChecksStatusBadgeIconButton__rcQQ1 svg"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--color-text-primary",
-   "refs": 2,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".RepositoryLabel-module__heading__yp3oj",
-    ".RepositoryMilestone-module__heading__RdaHD"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".RepositoryLabel-module__heading__yp3oj",
-    ".RepositoryMilestone-module__heading__RdaHD"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--color-fg-subtle",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 13,
-   "matchedElements": 0,
-   "selectors": [
-    ".MilestoneDescription-module__subtle__PRcar"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".MilestoneDescription-module__subtle__PRcar"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--MarkdownRenderer_streaming-fade-duration",
+   "name": "--copilot-app-banner-day",
    "refs": 1,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
-    ".MarkdownRenderer-module__fadeInContent__Z6XDA :not(.MarkdownRenderer-module__noFade__koxjj, .MarkdownRenderer-module__noFade__koxjj *, li:first-child > p:first-child, li:first-child > p:first-child *)"
+    ".CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
    ],
-   "count": 4,
+   "count": 2,
    "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
-    ".MarkdownRenderer-module__fadeInContent__Z6XDA :not(.MarkdownRenderer-module__noFade__koxjj, .MarkdownRenderer-module__noFade__koxjj *, li:first-child > p:first-child, li:first-child > p:first-child *)"
+    ".CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
    ],
-   "pageCount": 4
+   "pageCount": 2
   },
   {
-   "name": "--zIndex-tooltip",
+   "name": "--copilot-app-banner-day-compact",
    "refs": 1,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
-    ".ModelInfoPopover-module__modelInfoPopover__m111U"
+    ".CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
    ],
-   "count": 4,
+   "count": 2,
    "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
-    ".ModelInfoPopover-module__modelInfoPopover__m111U"
+    ".CopilotAppBanner-module__Surface__qrgnp [data-component=\"Banner\"]"
    ],
-   "pageCount": 4
-  },
-  {
-   "name": "--tool-preview-height-threshold",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".Tool-module__toolContentPreview__D2_Nq"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".Tool-module__toolContentPreview__D2_Nq"
-   ],
-   "pageCount": 4
+   "pageCount": 2
   },
   {
    "name": "--fontFamily-mono",
@@ -2051,353 +1475,34 @@
    "selectors": [
     ".RefSelectorV1-module__RefActionText__PX9V2"
    ],
-   "count": 4,
+   "count": 2,
    "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
     ".RefSelectorV1-module__RefActionText__PX9V2"
    ],
-   "pageCount": 4
+   "pageCount": 2
   },
   {
-   "name": "--slash-menu-top",
+   "name": "--blame-segments-count",
    "refs": 1,
    "withFallback": 0,
    "fallbackRefs": 0,
    "matchedElements": 0,
    "selectors": [
-    ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
+    ".Blame-module__virtualBlameWrapper__lAWXx"
    ],
-   "count": 4,
+   "count": 2,
    "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
+    "critic-sa-w3b-repo-btn/light-1440",
+    "critic-sa-w3b-repo-btn/dark-1440"
    ],
    "samples": [
-    ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
+    ".Blame-module__virtualBlameWrapper__lAWXx"
    ],
-   "pageCount": 4
-  },
-  {
-   "name": "--slash-menu-left",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".SlashCommandsProvider-module__slashCommandContainer__cOhBG .js-slash-command-menu"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--accent",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".IssueTypePickerItemLeadingVisual-module__issueTypeColorIndicator__W1kQd"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".IssueTypePickerItemLeadingVisual-module__issueTypeColorIndicator__W1kQd"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--indicator-bg",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".SingleSelectToken-module__colorIndicator__krSWU"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".SingleSelectToken-module__colorIndicator__krSWU"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--indicator-border",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".SingleSelectToken-module__colorIndicator__krSWU"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".SingleSelectToken-module__colorIndicator__krSWU"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--leadingVisual-size-default",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--leadingVisual-marginTop-default",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--leadingVisual-size-narrow",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--leadingVisual-marginTop-narrow",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--leadingVisual-size-regular",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--leadingVisual-marginTop-regular",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--leadingVisual-size-wide",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--leadingVisual-marginTop-wide",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".LeadingVisual-module__outer__SRqB8"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--base-size-14",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".RelationshipsAlertDialog-module__footer__gTIMF button"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".RelationshipsAlertDialog-module__footer__gTIMF button"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--base-duration-150",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".IssueBody-module__modernUxEditButton__ixYeZ"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".IssueBody-module__modernUxEditButton__ixYeZ"
-   ],
-   "pageCount": 4
-  },
-  {
-   "name": "--state-icon-color",
-   "refs": 1,
-   "withFallback": 0,
-   "fallbackRefs": 0,
-   "matchedElements": 0,
-   "selectors": [
-    ".PinnedIssueCard-module__Octicon__ZtzXr"
-   ],
-   "count": 4,
-   "pages": [
-    "critic-sa-r4-labels/light-1440",
-    "critic-sa-r4-labels/light-390",
-    "critic-sa-r4-labels/dark-1440",
-    "critic-sa-r4-labels/dark-390"
-   ],
-   "samples": [
-    ".PinnedIssueCard-module__Octicon__ZtzXr"
-   ],
-   "pageCount": 4
+   "pageCount": 2
   }
  ],
  "nonOcticonIcons": [],

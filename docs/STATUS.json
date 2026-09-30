@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-30T10:00:00+08:00",
- "phase": "wave-3 integrated (pages/*: issues-prs, actions-packages-projects, people, auth passed; repo 8.3 and settings-admin 8.4 did not reach 8.5 after 4 rounds); next: whole-site dark pass; ORC-4 trim round integrated (auto 276.2 KB, under 285 KB target, 0 pixel regressions)",
+ "updated": "2026-09-30T10:58:00+08:00",
+ "phase": "wave-3b integrated (dark pass 8.6 passed; pages/repo 8.5 and pages/settings-admin 8.6 now passed after re-rounds); all 14 folders passed; next: final gate / restore admin theme + diff-style",
  "pinned": {
   "gitea": "1.27.3",
   "@primer/primitives": "11.10.0",
@@ -25,7 +25,7 @@
    "path": "templates/user/settings/layout_head.tmpl",
    "reason": "github.com settings page header (avatar, name, subtitle, profile button), request SA-4; needs signed-in user data",
    "scope": "github-* themes only, pageClass containing \"settings\"; other themes render upstream bytes",
-   "liveInstall": "PENDING — orchestrator ORC-3 (integrator write to CUSTOM_PATH/templates refused by the permission policy)"
+   "liveInstall": "DONE (orchestrator ORC-3; live copy == project copy, verified 2026-09-30 w3b)"
   }
  ],
  "folders": {
@@ -88,7 +88,7 @@
    "rounds": 3,
    "passed": true,
    "openIssues": [
-    "Dark: #000000 IssueLabels have no ring (DD-D1 → wave-3 dark, first item)",
+    "DD-W3B-1 IssueLabel weight 500 vs github.com 600 (both schemes; from dark critic)",
     "Files-changed review-comment author muted/regular (namelink.tmpl plain <a>)",
     "PR-timeline commit rows: 13.3px subject, SHA as bordered label vs GitHub 12px mono muted",
     "Migrated-comment header wraps badly at 390"
@@ -117,17 +117,19 @@
    ]
   },
   "pages/repo": {
-   "score": 8.3,
-   "rounds": 4,
-   "passed": false,
+   "score": 8.5,
+   "rounds": 6,
+   "passed": true,
    "openIssues": [
-    "Compare dropdown opens off-screen at 390 (releases, release-detail) — r4 regression, unfixed",
-    "Structural gaps are template-bound: commits day groups, branches tabs/headers, releases nav, wiki Pages/clone box (hooks REJECTED by integrator w3)",
-    "Release list title 32px at 390 vs github.com 26px",
-    "Search-icon syntax tooltip (template), topic tag 24/500 vs 26/600 (data-display PR-DD-1)"
+    "Template-bound structural gaps (commits day groups, branches h1/tabs, releases nav, wiki Pages box, commit h1) — accepted exceptions",
+    "/compare range editor 1216x62 bgColor-default vs github.com 46px bgColor-muted (minor)",
+    "Default-branch Updated time not in the Updated column; muted vs default fg (minor)",
+    "Size cap nearly used: gh.pages-repo 30,577 B of 30,720 B",
+    "directory-tree 390 overflow belongs to code C-5"
    ],
    "notes": [
-    "integrator w3 seam fix: .repository.commits → .repository.commits:not(.pull) (leaked into the PR Commits tab)"
+    "integrator w3 seam fix: .repository.commits → .repository.commits:not(.pull) (leaked into the PR Commits tab)",
+    "w3b: 2 critic rounds (8.1 → 8.5); Compare menu off-screen at 390 and page scroll at >=768 fixed"
    ]
   },
   "pages/issues-prs": {
@@ -162,14 +164,14 @@
    ]
   },
   "pages/settings-admin": {
-   "score": 8.4,
-   "rounds": 4,
-   "passed": false,
+   "score": 8.6,
+   "rounds": 5,
+   "passed": true,
    "openIssues": [
-    "Settings page header missing until ORC-3 installs SA-4 (the critic cap)",
-    "Deploy-keys / SSH-key empty states are bare text",
-    "Native disclosure markers on token names",
-    "Caption line-height needs controls SA-C1 outside settings pages"
+    "SA-5 Actions > General settings pages have no header/Subhead styling (empty pageClass; folder CSS first, then template)",
+    "Deploy-keys empty state bare text",
+    "Header strings Settings/Profile vs github.com (no locale keys; rejected)",
+    "Header title 20/30 not condensed; native disclosure markers; btn-sm padding (nits)"
    ]
   },
   "pages/auth": {
@@ -183,22 +185,26 @@
    ]
   },
   "dark": {
-   "score": null,
-   "rounds": 0,
-   "passed": null,
+   "score": 8.6,
+   "rounds": 1,
+   "passed": true,
    "openIssues": [
-    "empty; DD-D1 IssueLabel ring is the first item of the dark pass"
+    "Saturated dark labels paler/duller than github.com (50% white veil vs HSL lightness shift; minor)",
+    "Scoped labels double seam in dark (nit)",
+    "Selected label text low contrast (text-fill transparent; nit)",
+    "Unwrapped emoji become label-coloured silhouettes (nit)",
+    "Literal inset -1px (token nit)"
+   ],
+   "notes": [
+    "DD-D1 done: tint 18% + ring 30% + lightened text; gh.dark only inside @media (prefers-color-scheme: dark) in auto, absent from light"
    ]
   }
  },
  "openIssues": [
-  "ORC-3: install templates/user/settings/layout_head.tmpl (SA-4) + reload-templates",
-  "ORC-4 DONE: trim round brought the files to 276.2 / 272.2 / 272.2 KB (limit 300, target 285); pixeldiff 0 unexplained (budget.trim)",
+  "Restore at the very end: admin theme (baseline gitea-auto-tritanopia) and diff-style preference (unified)",
   "Regressions vs built-in still open: directory-tree 390 overflow (code C-5), blame DCL +150ms (code PERF-1), pr-files-changed-unified-large-diff 390 width 754 vs 666 (pre-existing)",
-  "Open component requests with no round scheduled: controls SA-C1/IP-C3, navigation PPL-N1, data-display PR-DD-1 + comment header 390",
-  "pages/repo (8.3) and pages/settings-admin (8.4) did not pass; pages/repo Compare dropdown off-screen at 390",
-  "Wave 3 dark pass: DD-D1 IssueLabel ring first",
-  "Restore at the very end: admin theme (baseline gitea-auto-tritanopia) and diff-style preference (unified)"
+  "Open component requests with no round scheduled: data-display DD-W3B-1 + PR-DD-1 + comment header 390, controls SA-C1/IP-C3, navigation PPL-N1, settings-admin SA-5, dark nits",
+  "pages/repo layer at its 30 KiB cap (143 B left)"
  ],
  "finalGate": null,
  "exceptions": [
@@ -251,75 +257,94 @@
    "themesOffered": 17,
    "previouslyOfferedStillOffered": true,
    "themesIni": "unchanged"
+  },
+  "wave3b": {
+   "status": "not needed",
+   "reason": "no new theme files, no icon changes (deploy restartRequired:false, iconsChanged 0, templatesPending [])",
+   "migrationCheck": "no task rows with status 0/1 (2026-09-30 10:43)",
+   "themesOffered": 17,
+   "previouslyOfferedStillOffered": true,
+   "themesIni": "unchanged (14 previous + github-auto/light/dark; DEFAULT_THEME gitea-auto)"
   }
  },
  "themeSizes": {
   "github-light": {
-   "bytes": 278760,
-   "kb": 272.2
+   "bytes": 279647,
+   "kb": 273.1
   },
   "github-dark": {
-   "bytes": 278777,
-   "kb": 272.2
+   "bytes": 280906,
+   "kb": 274.3
   },
   "github-auto": {
-   "bytes": 282796,
-   "kb": 276.2
+   "bytes": 284961,
+   "kb": 278.3
   },
   "budgetKb": 300,
+  "gateKb": 295,
   "targetKb": 285,
   "withinBudget": true,
   "withinTarget": true,
-  "beforeTrim": {
-   "github-light": {
-    "bytes": 338716,
-    "kb": 330.8
+  "wave3bGrowthBytes": {
+   "gh.dark": {
+    "auto": 1293,
+    "dark": 1257,
+    "light": 0
    },
-   "github-dark": {
-    "bytes": 338733,
-    "kb": 330.8
-   },
-   "github-auto": {
-    "bytes": 342815,
-    "kb": 334.8
+   "gh.pages-repo": 822,
+   "gh-important": 65,
+   "otherLayers": 0,
+   "files": {
+    "github-auto": 2165,
+    "github-light": 887,
+    "github-dark": 2129
    }
   },
-  "note": "after the trim round (ORC-4), revision 56d1bf8f9d, deployed and SHA-verified; KB = 1024 B; the auto file has 9,044 B (8.8 KB) of headroom under the 285 KB target, and 24,404 B under 300 KB"
+  "previous": {
+   "github-auto": 282796,
+   "github-light": 278760,
+   "github-dark": 278777,
+   "revision": "56d1bf8f9d"
+  },
+  "note": "revision c3fb51f4c5 (dist/build-report.json), deployed and SHA-verified; auto has 6.7 KB under the 285 KB target"
  },
- "revision": "56d1bf8f9d",
+ "revision": "c3fb51f4c5",
  "audit": {
-  "run": "shots/integrate-w3 (101 routes x light/dark x 1440/390 = 404 pages, github-auto, rev f39440e9a0)",
+  "run": "shots/integrate-w3b (101 routes x light/dark x 1440/390 = 404 pages, github-auto, rev c3fb51f4c5)",
   "consoleErrors": 8,
   "consoleErrorsNote": "all 8 are the intentional 404 document on not-found and not-found-anon",
   "failedRequests": 0,
   "unresolvedVars": 0,
   "offPaletteTotal": 0,
-  "offPaletteNote": "w2: 148 (dropzone border, workflow-graph fill) — both gone",
   "nonOcticonIcons": 88,
-  "nonOcticonNote": "colorblind markers 28, fontawesome-openid 16, gitea-npm 12, gitea-gitea/feishu/matrix 24 (webhook types), gitea-running 8; gitea-double-chevron-left gone (P-1)",
+  "nonOcticonNote": "colorblind markers 28, fontawesome-openid 16, gitea-npm 12, gitea-gitea/feishu/matrix 24 (webhook types), gitea-running 8 — unchanged",
   "maskedIcons": 1936,
   "pagesWithUnlayeredGiteaCss": 0,
   "pagesWithProblems": 0,
+  "statesRun": "shots/integrate-w3b-light (light, --states --stable): 0 pages with problems after the routes.json state fixes",
   "horizontalOverflow390": {
    "ours": [
-    "directory-tree (421px, a.m-commit-count, code C-5)",
+    "directory-tree (421px, code C-5)",
     "pr-files-changed-unified-playground-large-diff (754 vs built-in 666)"
-   ],
-   "fixedSinceW2": [
-    "package-detail-npm",
-    "project-board (now 390, built-in 447)"
    ]
   },
   "maxCLS": 0.3648,
-  "maxCLSNote": "home @390 (built-in 0.375); action-run now 0.074 (built-in 0.4861)",
-  "compare": "shots/integrate-w3/compare.html (404 pages, 156 with a github.com reference)"
+  "maxCLSNote": "home @390 (built-in 0.375); next file-view-markdown light-390 0.1949 (README badges, content)",
+  "samplesViewed": [
+   "repo-issues/dark-1440",
+   "repo-pulls/dark-1440 (#000 labels grey with ring)",
+   "user-settings/dark-1440 (settings header live)",
+   "releases/light-390",
+   "branches/dark-1440",
+   "smoke final.png"
+  ]
  },
  "smoke": {
   "result": "green",
   "steps": "12/12",
   "consoleErrors": 0,
-  "log": "shots/trim-final-smoke.log",
-  "run": "shots/20260930-095651-smoke-github-auto"
+  "run": "shots/20260930-105428-smoke-github-auto",
+  "log": "shots/integrate-w3b-smoke.log"
  },
  "budget": {
   "baseline": "shots/baseline-gitea-auto-w2 (gitea-auto, same 272 pages, with audit, same concurrency 3, same server start)",
@@ -614,6 +639,58 @@
     "markdown MD-1",
     "dark DD-D1"
    ]
+  },
+  "wave3bIntegrator": {
+   "applied": [
+    "pages/repo routes/states merge",
+    "state timeout fixes (tool)"
+   ],
+   "verifiedDone": [
+    "DD-D1 (dark)",
+    "ORC-3/SA-4 live"
+   ],
+   "rejected": [
+    "settings header locale strings (no Gitea locale keys)"
+   ],
+   "forwardedOpen": [
+    "data-display DD-W3B-1 (IssueLabel 600)",
+    "pages/settings-admin SA-5 (actions_general pages)",
+    "dark critic nits (veil saturation, scoped seam, ::selection, inset token)",
+    "pages/repo critic r1 minors",
+    "code C-5, PERF-1"
+   ],
+   "seamsFixed": []
   }
+ },
+ "wave3b": {
+  "darkOnlyPixeldiff": {
+   "method": "light-scheme --states --stable run with the deployed auto CSS (shots/integrate-w3b-light) vs the same run with an auto CSS built without src/dark changes (shots/integrate-w3b-light-nodark, --theme-css shots/integrate-w3b-nodark-css/theme-github-auto.css); tolerance 4, minor 50",
+   "out": "shots/integrate-w3b-light/pixeldiff-vs-nodark/pixeldiff.json",
+   "pairs": 568,
+   "identical": 553,
+   "different": 2,
+   "differentMinor": 4,
+   "differentKnownNoisy": 9,
+   "sizeMismatch": 0,
+   "missing": 0,
+   "explained": "different = site-admin-config light 390/1440 (logger JSON key order random per load, looked at); minor ≤16 px AA (packages-org, package-versions, merge-form, follow-focus); noisy = site-admin live stats, reviewers order, project-board ≤22 px",
+   "unexplained": 0,
+   "lightFile": "theme-github-light.src.css byte-identical with and without src/dark (gh.dark not emitted in light)"
+  },
+  "vsTrimFinal": {
+   "a": "shots/trim-final light PNGs (hard links in shots/trim-final-lightonly)",
+   "b": "shots/integrate-w3b-light",
+   "out": "shots/integrate-w3b-light/pixeldiff-vs-trimfinal/pixeldiff.json",
+   "pairs": 502,
+   "identical": 355,
+   "different": 43,
+   "differentMinor": 6,
+   "differentKnownNoisy": 98,
+   "sizeMismatch": 12,
+   "missingInA": 66,
+   "explained": "all 39 non-volatile different pairs are pages/repo routes changed in wave 3b (repo-home 11 incl. readme route 2, branches 8, repo-commits 7, releases 3, compare-two-tags 2, commit-detail 2, release-detail 2, tags 2; checked repo-home 1440 sidebar reorder and commits 390 Commit Graph button); site-admin-config 2 + admin-monitor-stats 2 volatile; missingInA 66 = new pages/repo states",
+   "regressions": []
+  },
+  "routes": "routes.json: +measure/+24 states from pages/repo; 3 states limited to 1440; directory-tree goto-file-focus selector fixed (backup shots/routes.pre-w3b-merge.json)"
  }
 }

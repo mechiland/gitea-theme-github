@@ -125,6 +125,21 @@
       "msg msg msg"
       "author date act";
   }
+
+  /* commit page: Gitea stacks Browse Source / Operations in a column beside the title, which squeezes it to ~190px.
+     The row wraps instead: a long title takes the full width, the buttons go on one row under it. */
+  .commit-header > .tw-flex {
+    flex-wrap: wrap;
+  }
+
+  .commit-header-buttons {
+    flex-direction: row;
+  }
+}
+
+/* commit page: github.com's commit message Box has no muted header band */
+.commit-header {
+  background: var(--bgColor-default);
 }
 
 /* ---------- commit page header (templates/repo/commit_page.tmpl .commit-header-buttons) ----------
@@ -187,6 +202,15 @@
   align-items: center;
 }
 
+/* /compare/<a>...<b> (the new-PR form, .compare.pull, is pages/issues-prs): github.com's "Comparing changes" sits in
+   container-xl (1216px at 1440, header, commits and diff) under the same 24px Subhead as /commits; Gitea's two
+   containers are fluid there. The commit
+   page (no h2) stays full width, as on github.com. */
+.repository.diff:not(.pull):has(> .ui.container > h2.ui.header) > .ui.fluid.container {
+  width: calc(var(--breakpoint-xlarge) - 2 * var(--page-margin-x));
+}
+
+.repository.diff:not(.pull) > .ui.container > h2.ui.header,
 .commits:not(.pull) > .ui.container > .ui.top.attached.header {
   grid-row: 1;
   width: auto;
@@ -211,6 +235,13 @@
 .commits:not(.pull) > .ui.container > .repository-summary {
   grid-row: 2;
   grid-column: 2;
+}
+
+/* Commit Graph (basic small compact button): github.com's toolbar buttons on this row are medium (32px, 14px) */
+.commits:not(.pull) > .ui.container > .repo-button-row a.ui.button {
+  height: var(--control-medium-size);
+  padding: 0 var(--control-medium-paddingInline-normal);
+  font-size: var(--text-body-size-medium);
 }
 
 .commits:not(.pull) > .ui.container > .repo-button-row ~ :not(.ui.top.attached.header) {
