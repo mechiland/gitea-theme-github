@@ -119,3 +119,105 @@ Evidence: shots/controls-w3r1/sheet2.png (top two rows: "Mono" circle 5px from t
   Any new rule needs an equal trim first.
 - Critic w3b-r1 open items (compare range editor, default-branch Updated column, 390 byline separator, release pencil)
   stay OPEN for a future round; structural gaps remain REJECTED (template-bound, see integrator.md w3).
+
+
+# Final gate #1 (loop iteration 1)
+
+Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only theme-fixable items for this folder are listed; `theme-fixable-template` items need the integrator to install a github-* template branch first (this folder styles the result). Trim before adding (budget caps).
+
+1. **FG-018 [theme-fixable-css] Commit SHAs are 10 characters (and sans-serif on the commits list / PR commits tab); github.com shows 7-char 12px mono muted** — impact 40 (judges 33, critic wt 7; routes: directory-tree, commit-detail, compare-two-tags, repo-commits, pr-commits-tab, pr-draft-wip-playground …)
+   - Fix: Render SHA links as ui-monospace 12px fgColor-muted with inline-size:7ch; overflow:hidden (href, tooltip and copy button keep the full SHA). Applies to #commits-table td.sha, commit page parent/commit, tag rows, timeline commit rows (issues-prs owns the timeline selector: C200 bordered chip → plain mono link).
+   - Critic refs: C191 (repo-commits, major), C200 (pr-draft-wip-playground, nit)
+   - PNG: `docs/reference/repo-commits/light-1440.png`, `shots/final-gate-critic-7/repo-commits/zoom-row-ours.png`, `docs/reference/pr-conversation-open/light-1440.png`, `shots/final-gate/directory-tree/dark-1440.png`
+2. **FG-019 [theme-fixable-template] Commit lists are a flat Box ('445 Commits' / '1 Commits' header) instead of github.com's 'Commits on <date>' timeline groups (commits page, PR Commits tab, compare)** — impact 35 (judges 26, critic wt 9; routes: compare-two-tags, repo-commits, pr-commits-tab, pr-commits-tab-playground)
+   - Fix: github-* branch in templates/repo/commits_list.tmpl: before each row whose committer day differs from the previous row, close the Box and emit a timeline header (git-commit Octicon + date via DateUtils.AbsoluteShort; 'Commits on' via :lang(en) CSS or date only); pages/repo styles it (12px muted, 16px gutter line, one Box per day).
+   - Critic refs: C015 (pr-commits-tab, minor), C183 (pr-commits-tab-playground, minor), C017 (compare-two-tags, minor)
+   - PNG: `shots/final-gate/pr-commits-tab/light-1440.png`, `shots/final-gate-critic-6/prc-sha.png`, `shots/final-gate/pr-commits-tab-playground/light-1440.png`, `docs/reference/pr-commits-tab/light-1440.png`
+3. **FG-022 [theme-fixable-template] Wiki sidebar is a 'Page: Home' dropdown + green 'Code' clone button instead of github.com's 'Pages (N)' Box with filter and 'Clone this wiki locally' input** — impact 27 (judges 21, critic wt 6; routes: wiki-home, wiki-page)
+   - Fix: github-* branch in templates/repo/wiki/view.tmpl: right-column Box 'Pages <count>' with the existing filter input and the .Pages list (data IS loaded on view: routers/web/repo/wiki.go renderViewPage sets ctx.Data["Pages"]; the earlier rejection assumed ?action=_pages only), plus a 'Clone this wiki locally' input group from .CloneButtonOriginLink.HTTPS with the copy button. Keep 'New Page', 'Edit', 'Delete Page' and the revisions link.
+   - Critic refs: C014 (wiki-page, minor), C180 (wiki-home, minor)
+   - PNG: `shots/final-gate/wiki-page/light-1440.png`, `shots/final-gate-critic-6/wiki-d.png`, `shots/final-gate/wiki-home/dark-390.png`, `shots/final-gate/wiki-home/dark-1440.png`
+4. **FG-024 [theme-fixable-template] Branches page: no 'Branches' title, no column-header row (Branch / Updated / Check status / Behind|Ahead / Pull request), 5 icon buttons per row instead of delete + kebab** — impact 23 (judges 11, critic wt 12; routes: branches)
+   - Fix: github-* branch in templates/repo/branch/list.tmpl: Subhead 'Branches' (repo.branches key), a <thead>-style Box header row using existing locale keys, per-row actions: delete icon button + kebab ActionMenu (Fomantic dropdown) holding create-branch / RSS / download / rename. Overview/Active/Stale tabs stay out (no Gitea data).
+   - Critic refs: C036 (branches, major), C037 (branches, minor), C038 (branches, minor)
+   - PNG: `shots/final-gate-critic-1/br-l.png`, `shots/final-gate/branches/dark-1440.png`, `shots/final-gate/branches/light-1440.png`
+5. **FG-036 [theme-fixable-css] Commit list titles: 16px/400 (compare) or 14px/500 (commits) vs github.com 14px/600; inline code drawn as a grey chip** — impact 12 (judges 0, critic wt 12; routes: compare-two-tags, repo-commits)
+   - Fix: .commit-summary 14px semibold fgColor-default; author bold fgColor-default; inline code in commit titles plain mono without background.
+   - Critic refs: C191 (repo-commits, major), C017 (compare-two-tags, minor), C192 (repo-commits, minor)
+   - PNG: `docs/reference/repo-commits/light-1440.png`, `shots/final-gate-critic-7/repo-commits/zoom-row-ours.png`, `shots/final-gate-critic-0/ct-l-z.png`, `shots/final-gate/compare-two-tags/dark-1440.png`
+6. **FG-037 [theme-fixable-css] Release 'Downloads' uses the browser's disclosure triangle at 20px bold; mobile release header/meta wraps with orphan '·'; bare red × status glyph** — impact 11 (judges 0, critic wt 11; routes: releases-playground-with-assets-prerelease-draft, releases, release-detail)
+   - Fix: summary: list-style none + chevron Octicon mask, 16px/600; mobile meta wraps without leading separators; status icon as muted IconButton.
+   - Critic refs: C118 (release-detail, nit), C146 (releases-playground-with-assets-prerelease-draft, minor), C092 (releases, minor), C147 (releases-playground-with-assets-prerelease-draft, minor), C148 (releases-playground-with-assets-prerelease-draft, nit)
+   - PNG: `shots/final-gate/release-detail/light-1440.png`, `shots/final-gate-critic-5/rel-light-390-1.png`, `shots/final-gate/releases-playground-with-assets-prerelease-draft/dark-390.png`, `shots/final-gate/releases-playground-with-assets-prerelease-draft/dark-1440.png`
+7. **FG-040 [theme-fixable-css] Wiki page list rows too dense (36px vs 54px), link too heavy, extra Subhead rule, narrow container, date right-aligned / separate line on mobile** — impact 11 (judges 5, critic wt 6; routes: wiki-page-list)
+   - Fix: Box rows 16px padding (54px), link 400, no rule under 'Pages', full container width, 'Last updated' in the middle column (mobile: left-aligned under the title).
+   - Critic refs: C196 (wiki-page-list, minor), C197 (wiki-page-list, minor)
+   - PNG: `shots/final-gate-critic-7/wiki-page-list/zoom-row.png`, `shots/final-gate/wiki-page-list/dark-390.png`, `docs/reference/wiki-page-list/dark-390.png`, `shots/final-gate/wiki-page-list/dark-390.png`
+8. **FG-043 [theme-fixable-template] Repo sidebar has no stars / watching / forks rows (github.com About box lists them)** — impact 10 (judges 10, critic wt 0; routes: repo-home, repo-home-readme-with-images-and-tables)
+   - Fix: Low priority: github-* branch in the repo home sidebar template adding star/eye/repo-forked rows from .Repository.NumStars/NumWatches/NumForks.
+   - PNG: `shots/final-gate/repo-home/dark-1440.png`, `shots/final-gate/repo-home/light-1440.png`, `shots/final-gate/repo-home-readme-with-images-and-tables/dark-1440.png`, `shots/final-gate/repo-home-readme-with-images-and-tables/light-1440.png`
+9. **FG-045 [theme-fixable-template] Commit page has no 'Commit <sha7>' H1 above the message Box; Code tab not marked active** — impact 9 (judges 6, critic wt 3; routes: commit-detail)
+   - Fix: Low priority: github-* branch in templates/repo/commit_page.tmpl adding <h1>Commit <ShortSha></h1>. Code tab active state: CSS on .repository.commit (the tab exists) if the template does not set it.
+   - Critic refs: C012 (commit-detail, minor)
+   - PNG: `shots/final-gate/commit-detail/dark-1440.png`, `shots/final-gate/commit-detail/light-1440.png`
+10. **FG-078 [theme-fixable-css] Mobile repo pages: full 17-entry file list + counter row, directory toolbar wraps to 3 rows, copy-path button orphaned** — impact 5 (judges 0, critic wt 5; routes: directory-tree, file-view-image-playground, repo-home-readme-with-images-and-tables)
+   - Fix: <768px: single toolbar row (branch, breadcrumb, kebab); copy button stays on the breadcrumb line. (File-list truncation to ~10 rows + 'View all files' would need a template: skip.)
+   - Critic refs: C043 (repo-home-readme-with-images-and-tables, nit), C144 (directory-tree, minor), C116 (file-view-image-playground, nit)
+   - PNG: `shots/final-gate-critic-1/rp-mob.png`, `docs/reference/directory-tree/light-390.png`, `shots/final-gate-critic-4/file-view-image-playground-390-0.png`, `shots/final-gate/directory-tree/dark-390.png`
+11. **FG-086 [theme-fixable-css] Commit rows' browse button uses octicon-file-code; github.com uses code (<>)** — impact 4 (judges 3, critic wt 1; routes: repo-commits, pr-commits-tab)
+   - Fix: Mask the svg with --gh-octicon-code (request the mask from icons).
+   - Critic refs: C193 (repo-commits, nit)
+   - PNG: `shots/final-gate/repo-commits/dark-1440.png`, `shots/final-gate/repo-commits/light-1440.png`, `shots/final-gate/pr-commits-tab/dark-1440.png`, `shots/final-gate/pr-commits-tab/light-1440.png`
+12. **FG-090 [theme-fixable-css] Image view footer CLS 0.022 at 1440; repo-create is a boxed form (github.com /new is unboxed with owner/name side by side)** — impact 4 (judges 0, critic wt 4; routes: repo-create, file-view-image-playground)
+   - Fix: Reserve image box height; /repo/create: unbox, 24px heading row, owner + name side by side (visibility stays Gitea's checkbox).
+   - Critic refs: C117 (file-view-image-playground, nit), C107 (repo-create, minor)
+   - PNG: `shots/final-gate/repo-create/dark-1440.png`, `shots/final-gate/repo-create/light-1440.png`, `shots/final-gate/file-view-image-playground/dark-1440.png`, `shots/final-gate/file-view-image-playground/light-1440.png`
+13. **FG-095 [theme-fixable-css] Tags Box header has no tag Octicon** — impact 4 (judges 3, critic wt 1; routes: tags)
+   - Fix: ::before mask octicon-tag in the Box header.
+   - Critic refs: C069 (tags, nit)
+   - PNG: `docs/reference/tags/light-1440.png`, `shots/final-gate/tags/light-1440.png`, `shots/final-gate/tags/dark-1440.png`, `shots/final-gate/tags/light-1440.png`
+14. **FG-098 [theme-fixable-css] Mobile branches rows become 3-line stacked cards (github.com keeps a horizontally scrolling table)** — impact 3 (judges 0, critic wt 3; routes: branches)
+   - Fix: <768px keep one row per branch in an overflow-x:auto Box.
+   - Critic refs: C039 (branches, minor)
+   - PNG: `shots/final-gate-critic-1/br-mob-l.png`, `shots/final-gate/branches/dark-390.png`, `shots/final-gate/branches/light-390.png`
+15. **FG-107 [theme-fixable-css] Wiki _Sidebar renders as a bulleted underlined list; Edit/New Page/Delete Page header buttons are 28px** — impact 3 (judges 0, critic wt 3; routes: wiki-page-playground)
+   - Fix: Sidebar Box: no bullets/underline; header buttons medium 32px.
+   - Critic refs: C071 (wiki-page-playground, minor)
+   - PNG: `shots/final-gate/wiki-page-playground/light-1440.png`, `shots/final-gate/wiki-page-playground/light-1440.png`
+16. **FG-110 [theme-fixable-template] Single release page has no 'Releases / v1.4.6' breadcrumb (shows the list's Releases/Tags toggle)** — impact 3 (judges 3, critic wt 0; routes: release-detail)
+   - Fix: Low priority: github-* branch in templates/repo/release/list.tmpl for the single-release view: Breadcrumbs 'Releases / <tag>' in place of the toggle.
+   - PNG: `shots/final-gate/release-detail/dark-1440.png`, `shots/final-gate/release-detail/light-1440.png`
+17. **FG-113 [theme-fixable-css] Compare range editor box is white (github.com #f6f8fa)** — impact 1 (judges 0, critic wt 1; routes: compare-two-tags)
+   - Fix: --bgColor-muted.
+   - Critic refs: C018 (compare-two-tags, nit)
+   - PNG: `shots/final-gate/compare-two-tags/dark-1440.png`, `shots/final-gate/compare-two-tags/light-1440.png`
+
+# Integrator (final gate #1 follow-up, 2026-09-30): two template overrides APPROVED for this folder (pending install)
+## FG-019 commit day groups — `templates/repo/commits_list.tmpl` (ORC-6)
+github-* themes only, not on the wiki revision list. Before the first commit of each committer day, inside
+`#commits-table > tbody.commit-list`:
+```
+tr.gh-commit-day > td[colspan=5] > h3.gh-commit-day-title > svg.octicon-git-commit + span.gh-commit-day-date > relative-time
+```
+The date is `DateUtils.AbsoluteShort` ("Sep 30, 2026", localised client-side). There is no "Commits on" locale key, so the
+text is the date only — do not add English with `content:` (§7 c). Everything else in the table is unchanged (thead, rows,
+`.commit-table` segment, commits_table.tmpl's "N Commits" header). Suggested: hide `thead`, draw the day rows as the timeline
+header (12px muted, 16px gutter with a 2px `--borderColor-muted` line on the left through the rows), and give the commit
+rows of each day the Box look (first row after a day row: top radius; last row before the next day row
+`tr:has(+ tr.gh-commit-day)`: bottom radius), dropping the outer segment border. Applies to the commits page, PR Commits tab
+and compare pages.
+## FG-022 wiki Pages box — `templates/repo/wiki/view.tmpl` (ORC-8)
+github-* themes only: the `.repo-button-row` with the "Page: …" dropdown and the green Code clone button is not rendered;
+the first child of `.wiki-content-parts` is
+```
+aside.gh-wiki-aside
+  details.gh-wiki-pages[open] > summary.gh-wiki-pages-header > svg.octicon-triangle-down.gh-wiki-pages-caret
+                                                              + a.gh-wiki-pages-title ("Pages" → ?action=_pages) + span.gh-counter (N)
+                              + ul.gh-wiki-pages-list > li > a.gh-wiki-pages-item[.selected][aria-current=page]
+  div.gh-wiki-clone.ui.action.input > input.gh-wiki-clone-url[readonly] + button.ui.icon.button[data-clipboard-target] (copy)
+```
+followed by Gitea's `.wiki-content-sidebar.wiki-content-toc` (if any), `.wiki-content-main`, `.wiki-content-sidebar`
+(custom _Sidebar), `.tw-clear-both`, `.wiki-content-footer`. Layout suggestion: `.wiki-content-parts` as a grid
+(`1fr 296px`, gap 24px ≥ 1012px) with the aside and `.wiki-content-sidebar` in column 2, main + footer in column 1; one
+column below 768 (aside after the content). Not rendered (no JS / no locale key): the "Find a page…" filter input and the
+"Clone this wiki locally" heading. New Page / Edit / Delete Page and the revisions link are untouched.

@@ -127,3 +127,13 @@ If a page needs a different gap, set it in the page folder (later layer wins).
 - **#1 — DONE (live).** CUSTOM_PATH/templates/base/head_style.tmpl now carries the inert `media="not all"` link (identical to
   the project copy modulo `github_revision`; installed by the orchestrator at 03:50). Full audit shots/integrate-w2:
   `pagesWithUnlayeredGiteaCss: 0` on 272 pages. `npm run deploy` now also reports template drift (`templatesPending`).
+
+
+# Final gate #1 (loop iteration 1)
+
+Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only theme-fixable items for this folder are listed; `theme-fixable-template` items need the integrator to install a github-* template branch first (this folder styles the result). Trim before adding (budget caps).
+
+1. **FG-119 [theme-fixable-css] Repo sub-page container 1216px (x=112-1328) vs github.com 1232px (104-1336) at 1440** — impact 1 (judges 0, critic wt 1; routes: repo-pulls)
+   - Fix: Check .ui.container padding against Primer container-xl (1280 incl. 24px padding → 1232 content).
+   - Critic refs: C114 (repo-pulls, nit)
+   - PNG: `shots/final-gate-critic-4/pulls-repohead.png`, `shots/final-gate/repo-pulls/dark-1440.png`, `shots/final-gate/repo-pulls/light-1440.png`

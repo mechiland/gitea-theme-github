@@ -216,3 +216,17 @@ pagination (`move-to-start/end`), overlays toasts (`alert`, `x-circle`, `info`, 
 - Audit after restart (shots/integrate-w2, 272 pages): nonOcticon 96 = PR-list `gitea-double-chevron-left` 48 (4 pages,
   pages/issues-prs P-1/P-2 in wave 3), colorblind markers 28, fontawesome-openid 8, gitea-npm 8, gitea-running 4;
   masked 1832; material file icons 0 unmasked.
+
+
+# Final gate #1 (loop iteration 1)
+
+Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only theme-fixable items for this folder are listed; `theme-fixable-template` items need the integrator to install a github-* template branch first (this folder styles the result). Trim before adding (budget caps).
+
+1. **FG-091 [theme-fixable-css] Non-Octicon icons left: gitea-running (Actions status filter), gitea-colorblind-* (theme menu)** — impact 4 (judges 0, critic wt 4; routes: actions-list, user-settings-appearance)
+   - Fix: CSS masks with Octicons (dot-fill / sync for running; eye for colorblind) in github themes; brand logos (gitea-gitea, feishu, matrix, npm) stay by §6.
+   - Critic refs: C048 (actions-list, minor), C084 (user-settings-appearance, nit)
+   - PNG: `shots/final-gate/actions-list/dark-1440.png`, `shots/final-gate/actions-list/light-1440.png`, `shots/final-gate/user-settings-appearance/dark-1440.png`, `shots/final-gate/user-settings-appearance/light-1440.png`
+2. **FG-114 [theme-fixable-css] PR 'Files Changed' tab uses octicon-diff (bare ±); github.com uses file-diff** — impact 1 (judges 0, critic wt 1; routes: repo-pull)
+   - Fix: Mask with --gh-octicon-file-diff (navigation applies it on the tab).
+   - Critic refs: C142 (repo-pull, nit)
+   - PNG: `shots/final-gate/repo-pull/dark-1440.png`, `shots/final-gate/repo-pull/light-1440.png`

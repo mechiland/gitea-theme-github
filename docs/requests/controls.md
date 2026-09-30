@@ -246,3 +246,21 @@ The original APP-C1 text was wrong: input, Type select and search button were al
 
 # Integrator (end of wave 3, 2026-09-30)
 - **SA-C1** (caption 12/18px, `p:not(.help)`) and **IP-C3** (`.ui.buttons` isolation + SegmentedControl `:has(> .active.button)` catching opened dropdown buttons) are still OPEN for controls. Not applied by the integrator: neither is an ownership conflict (pages/settings-admin and pages/issues-prs carry page-scoped workarounds, so nothing is broken on their pages today). First items for the next controls round.
+
+
+# Final gate #1 (loop iteration 1)
+
+Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only theme-fixable items for this folder are listed; `theme-fixable-template` items need the integrator to install a github-* template branch first (this folder styles the result). Trim before adding (budget caps).
+
+1. **FG-048 [theme-fixable-css] Action-input searches are 28px/12px with an attached square search button (Semantic look); Primer TextInput is 32px/14px with a leading icon** — impact 9 (judges 0, critic wt 9; routes: org-projects, site-admin-users, admin-orgs)
+   - Fix: .ui.action.input (search forms) → medium 32px, 14px, leading search icon, button detached or invisible.
+   - Critic refs: C006 (site-admin-users, minor), C057 (org-projects, minor), C129 (admin-orgs, minor)
+   - PNG: `shots/final-gate/admin-orgs/light-1440.png`, `shots/final-gate/org-projects/light-1440.png`, `shots/final-gate/site-admin-users/light-1440.png`, `shots/final-gate/admin-orgs/light-1440.png`
+2. **FG-060 [theme-fixable-css] 'Add dependency…' select (32px, native double arrow) next to a 28px '+' button: bottoms misaligned by 4px** — impact 7 (judges 0, critic wt 7; routes: repo-issue, repo-pull, issue-detail-playground-reactions-alerts-tables)
+   - Fix: Same control size in the input group; Primer single chevron (appearance:none + mask).
+   - Critic refs: C087 (repo-issue, minor), C139 (repo-pull, minor), C120 (issue-detail-playground-reactions-alerts-tables, nit)
+   - PNG: `shots/final-gate-critic-5/pull-light-dep.png`, `shots/final-gate-critic-4/issue-light-1.png`, `shots/final-gate/repo-issue/dark-390.png`, `shots/final-gate/repo-issue/dark-1440.png`
+3. **FG-089 [theme-fixable-css] Controls details: comment editor double border, label edit modal inputs 27/28/32px, default-branch value in placeholder colour, help text capped at ~550px** — impact 4 (judges 0, critic wt 4; routes: repo-create, repo-settings-branches, labels, issue-detail-playground-reactions-alerts-tables)
+   - Fix: Borderless textarea inside the editor Box; one input height; .default.text fgColor-default when it is a value; captions max-width none.
+   - Critic refs: C121 (issue-detail-playground-reactions-alerts-tables, nit), C150 (labels, nit), C160 (repo-settings-branches, nit), C108 (repo-create, nit)
+   - PNG: `shots/final-gate-critic-4/issue-dark-editor.png`, `shots/final-gate/repo-create/dark-390.png`, `shots/final-gate/repo-create/dark-1440.png`, `shots/final-gate/repo-create/light-390.png`

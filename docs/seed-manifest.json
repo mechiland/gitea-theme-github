@@ -3,6 +3,22 @@
   "generator": "tools/seed/seed.mjs",
   "gitea_base": "http://localhost:3000",
   "note": "Everything listed here was created by the seed script. Seeded users share the password documented in tools/seed/README.md. Pre-seed baseline (admin, ai, admin/jiri, ai/jiri) is untouched.",
+  "markers": {
+    "how_to_recognise": "This manifest is the machine-readable marker for seeded objects (users, orgs, repos, issues, PRs, releases, wiki, packages). Issue/PR/release bodies created by the script also end with the invisible HTML comment below. The admin API token used by the script is named theme-seed.",
+    "hidden_body_marker": "<!-- theme-seed -->",
+    "api_token_name": "theme-seed",
+    "visible_markers": "none (FG-015): no [seed] description prefix, no \"(migrated from ...)\" suffix, no theme-seed/migrated-from-github topics, no \"seeded\" wording in bios, org descriptions or READMEs. `node tools/seed/seed.mjs --only=tidy` removes those from instances seeded by older versions.",
+    "legacy_visible_markers_removed": {
+      "description_prefix": "[seed] ",
+      "description_suffix": " (migrated from github.com/<owner>/<repo>)",
+      "topics": [
+        "theme-seed",
+        "migrated-from-github"
+      ]
+    },
+    "tidied_at": "2026-09-30 (FG-015, --only=tidy: 21 changes)",
+    "known_leftovers": "Immutable or history-bound: npm @octo-org/theme-tokens@1.0.0 registry metadata (keywords theme-seed, description \"(seeded package)\"; not rendered in the UI), existing Smoke edit/Smoke PR commits, merges and Actions runs by admin, README line 3 \"A seeded repository ...\" (left so open PR #16 stays mergeable)."
+  },
   "run": {
     "changes": 0,
     "failures": []

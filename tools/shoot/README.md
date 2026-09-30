@@ -54,6 +54,17 @@ signed-in Gitea pages because of the notification EventSource) → `document.fon
 inject a capture-only style that zeroes animations/transitions, finish/cancel running
 animations, 2×rAF + 250 ms → full-page PNG → audit.
 
+Capture fixes (final gate #1, 2026-09-30):
+- **Diff style (FG-033).** Every diff route in routes.json carries an explicit `?style=unified|split`; `pinDiffStyle()`
+  adds `style=unified` to any other commit / compare / PR-files URL. Visiting `?style=` as admin saves that preference, so
+  the run reads `diff_view_style` from `/api/v1/user/settings` first and PATCHes it back at the end
+  (`summary.json → diffViewStyle {before, afterRun, restored}`).
+- **Lazy images (FG-056).** Before the full-page shot: `img/iframe[loading=lazy]` → eager, one walk down the page, wait ≤ 8 s
+  for images; the resulting layout shifts are removed from `cls` and logged as `lazyImages.cls` (plus forcedEager / images /
+  notLoaded).
+- **Tall pages (FG-118).** Pages taller than 15,000 device px (Chromium leaves everything below ~16,384 px blank) are
+  captured in clipped segments and stitched with Pillow (`tiledCapture: {segments, cssHeight, dpr}` in the page JSON).
+
 ### Output per page: `<out>/<routeId>/<scheme>-<vw>.png` + `.json`
 
 - `mainStatus`, `finalUrl`, `problems[]` (wrong status, redirected to login, no avatar in navbar,
@@ -228,7 +239,9 @@ skipped after a failure): `apply-theme` → `create-issue` → `comment` → `ad
 CodeMirror in 1.27, "create a new branch and start a pull request") → `open-pr` → `merge-pr` →
 `change-repo-setting` (description, restored afterwards) → `switch-theme-alt` →
 `switch-theme-back` → `screenshot-final` → `no-console-errors`.
-Names carry a timestamp so reruns never collide. Prints `{theme, repo, ok, steps:[{step, ok, ms,
+The branch (`patch-<ts>`) and issue title carry a timestamp so reruns never collide; the commit
+and the PR are titled `Update <file>` (neutral like github.com, since PR/commit titles become Actions
+run titles; FG-015). Prints `{theme, repo, ok, steps:[{step, ok, ms,
 error, url, screenshot}], consoleErrors}` and writes it to `shots/<run>/smoke.json`.
 Exit 0 = pass, 1 = a step failed, 2 = refused (protected repo). If the seeded repo does not exist
 it prints `SKIPPED: seed missing` and exits 0 (`--strict-seed` → exit 3). It refuses to run

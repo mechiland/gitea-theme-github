@@ -22,3 +22,21 @@ preventDuplicates, the default). Needs `src/icons/octicon-masks.css` in the buil
   the integrator, who removes it from controls in the same build (the lint rejects the same selector in two folders).
   — DONE (overlays r1): generalized as `.ui.selection.dropdown > .menu` in action-menu.css (all open selects); integrator
   asked to delete the controls rule (docs/requests/integrator.md OV-1).
+
+
+# Final gate #1 (loop iteration 1)
+
+Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only theme-fixable items for this folder are listed; `theme-fixable-template` items need the integrator to install a github-* template branch first (this folder styles the result). Trim before adding (budget caps).
+
+1. **FG-094 [theme-fixable-css] Flash banners: danger icon in fgColor-default with 4px gap; validation flash has no Octicon/dismiss** — impact 4 (judges 0, critic wt 4; routes: signup, user-settings-account)
+   - Fix: .flash-error .svg fgColor-danger, 12px gap; ::before alert mask when Gitea renders no icon.
+   - Critic refs: C053 (user-settings-account, minor), C135 (signup, nit)
+   - PNG: `shots/final-gate-critic-1/usa-flash-l.png`, `shots/final-gate/signup/dark-1440.png`, `shots/final-gate/signup/light-1440.png`, `shots/final-gate/user-settings-account/dark-1440.png`
+2. **FG-103 [theme-fixable-css] Destructive confirm dialogs use a green primary 'Confirm' (Primer: danger button)** — impact 3 (judges 0, critic wt 3; routes: labels)
+   - Fix: Style the confirm button of delete modals (data-modal-confirm / .delete modals) as danger.
+   - Critic refs: C149 (labels, minor)
+   - PNG: `shots/final-gate/labels/dark-390.png`
+3. **FG-121 [theme-fixable-css] Long ActionMenu (theme picker) has no scroll affordance** — impact 1 (judges 0, critic wt 1; routes: user-settings-appearance)
+   - Fix: Bottom fade / visible scrollbar in overflowing menus.
+   - Critic refs: C085 (user-settings-appearance, nit)
+   - PNG: `shots/final-gate/user-settings-appearance/light-1440.png`

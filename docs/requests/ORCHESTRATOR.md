@@ -69,3 +69,92 @@ github-auto 334.8 KB, github-light/dark 330.8 KB minified (gzip ≈ 52 KB, one r
 
 - ORC-3 DONE (orchestrator, 2026-09-30): templates/user/settings/layout_head.tmpl installed + reloaded; verified header on /user/settings (light 1440 screenshot), 0 console errors.
 - ORC-4 DECIDED (orchestrator): the 300 KB budget is a user requirement and is NOT raised. Trim round ordered (coverage-driven, per-folder caps, zero-pixel-diff proof), target ≤ 285 KB per file to leave dark-pass headroom.
+
+# Final gate #1 follow-up (integrator, 2026-09-30): template installs ORC-5 … ORC-9
+Seven new files (§7 cap is 8). None exists in CUSTOM_PATH today, so nothing is overwritten (Modern's
+`repo/view_content.tmpl` / `repo/view_list.tmpl` are NOT touched; they include `repo/view_file` / `repo/blame`, whose
+non-github output is upstream bytes). Every override is upstream 1.27.3 + github-only blocks inserted with no whitespace
+outside template actions, so non-GitHub themes render byte-identical HTML (proven offline: deleting the inserted blocks
+yields the upstream file exactly; the head_navbar else-branch is the upstream file verbatim, no newline after `{{end}}`).
+Templates were not parsed by Go here (no Go toolchain, docker is off-limits for the integrator): `reload-templates`
+refuses a broken template and keeps the old one — if it does, send the error text back to the integrator.
+
+**Timing:** the markup is unstyled until the owning builders style it (navigation for the header, code, pages/repo,
+pages/issues-prs, pages/auth). Install right before those builders' round, not before a critic/judge run.
+
+## Common byte-identity check (all of ORC-5…9)
+A "before" snapshot was taken by the integrator at 12:05 on 2026-09-30 (templates not installed):
+`shots/orc5/before/` (21 pages × {anon gitea-auto, anon modern, anon studio, signed-in seeded user dave-qa with theme
+gitea-auto}; normalised for CSP nonces, footer timing, file-icon sprite order and pagination query order — two
+consecutive snapshots were identical). After installing, run:
+```sh
+cd /Users/michael/work/gitea/gitea-theme-github
+sh shots/orc5/html-snapshot.sh shots/orc5/after
+diff -rq shots/orc5/before shots/orc5/after && echo "non-GitHub HTML unchanged"
+```
+Expect no output from diff (if repo content changed in between, e.g. a smoke run or new commits, re-take `before` with the
+templates removed, or compare only pages that did not change). Admin-only pages (/-/admin) are covered by the same
+branches; check one by hand if wanted: switch the admin to gitea-auto (`node tools/shoot/shoot.mjs --theme gitea-auto
+--only home --schemes light --viewports 1440 --no-audit --out shots/orc5-tmp`), compare, then switch back with
+`--theme github-auto`.
+
+## ORC-5 FG-007 AppHeader + FG-063 auth header (navigation / pages-auth)
+```sh
+mkdir -p /Users/michael/work/gitea/gitea/gitea/templates/base /Users/michael/work/gitea/gitea/gitea/templates/custom
+cp /Users/michael/work/gitea/gitea-theme-github/templates/base/head_navbar.tmpl /Users/michael/work/gitea/gitea/gitea/templates/base/head_navbar.tmpl
+cp /Users/michael/work/gitea/gitea-theme-github/templates/custom/gh_head_navbar.tmpl /Users/michael/work/gitea/gitea/gitea/templates/custom/gh_head_navbar.tmpl
+docker exec -u git gitea-server gitea manager reload-templates --config /data/gitea/conf/app.ini
+```
+Verify: `curl -s -b 'gitea_theme=github-auto; lang=en-US' http://localhost:3000/explore/repos | grep -c 'gh-app-header'` ≥ 1;
+same with `gitea_theme=gitea-auto` → 0; `/user/login` with github-auto contains `gh-app-header--auth`. Signed in (shoot as
+admin, github-auto): bell count present, create/avatar menus open, hamburger drawer opens/closes, file tree still detects
+signed-in (`#navbar .user-menu`), project board fullscreen hides the header, 0 console errors
+(`node tools/shoot/shoot.mjs --target gitea --only home,repo-home,login,not-found --out shots/orc5-verify`).
+Rollback: delete both files, reload.
+
+## ORC-6 FG-019 commit day groups (pages/repo)
+```sh
+mkdir -p /Users/michael/work/gitea/gitea/gitea/templates/repo
+cp /Users/michael/work/gitea/gitea-theme-github/templates/repo/commits_list.tmpl /Users/michael/work/gitea/gitea/gitea/templates/repo/commits_list.tmpl
+docker exec -u git gitea-server gitea manager reload-templates --config /data/gitea/conf/app.ini
+```
+Verify: `curl -s -b 'gitea_theme=github-auto; lang=en-US' 'http://localhost:3000/octo-org/grex/commits/branch/main' | grep -c 'gh-commit-day"'` ≥ 1
+(one per distinct day on the page); gitea-auto → 0. Wiki revisions (`/octo-org/theme-playground/wiki/?action=_revision`) → 0 for both.
+
+## ORC-7 FG-021 Code | Blame SegmentedControl (code)
+```sh
+cp /Users/michael/work/gitea/gitea-theme-github/templates/repo/view_file.tmpl /Users/michael/work/gitea/gitea/gitea/templates/repo/view_file.tmpl
+cp /Users/michael/work/gitea/gitea-theme-github/templates/repo/blame.tmpl /Users/michael/work/gitea/gitea/gitea/templates/repo/blame.tmpl
+docker exec -u git gitea-server gitea manager reload-templates --config /data/gitea/conf/app.ini
+```
+Verify (github-auto cookie, count `gh-file-view-switch"`): `/octo-org/grex/src/branch/main/src/main.rs` → 1 (Code selected,
+Blame), `/octo-org/grex/src/branch/main/README.md` → 1 (Preview selected), `/octo-org/grex/blame/branch/main/src/main.rs` → 1,
+repo home `/octo-org/grex` → 0 (README box untouched); gitea-auto and modern → 0 everywhere.
+
+## ORC-8 FG-022 wiki Pages box (pages/repo)
+```sh
+mkdir -p /Users/michael/work/gitea/gitea/gitea/templates/repo/wiki
+cp /Users/michael/work/gitea/gitea-theme-github/templates/repo/wiki/view.tmpl /Users/michael/work/gitea/gitea/gitea/templates/repo/wiki/view.tmpl
+docker exec -u git gitea-server gitea manager reload-templates --config /data/gitea/conf/app.ini
+```
+Verify: github-auto `/octo-org/theme-playground/wiki` contains `gh-wiki-aside` and no `js-btn-clone-panel`; the copy button
+copies the wiki clone URL; gitea-auto → no `gh-wiki-aside`, has `js-btn-clone-panel`.
+
+## ORC-9 FG-017 issues / PRs NavList (pages/issues-prs)
+```sh
+mkdir -p /Users/michael/work/gitea/gitea/gitea/templates/repo/issue
+cp /Users/michael/work/gitea/gitea-theme-github/templates/repo/issue/list.tmpl /Users/michael/work/gitea/gitea/gitea/templates/repo/issue/list.tmpl
+docker exec -u git gitea-server gitea manager reload-templates --config /data/gitea/conf/app.ini
+```
+Verify: github-auto `/octo-org/grex/issues` and `/octo-org/grex/pulls` contain `gh-issues-nav` (anonymous: 1 item + Milestones +
+Labels; signed in: 4 / 6 filter items); `?type=assigned` marks that item selected and titles the page; gitea-auto → 0.
+
+After ORC-5…9: `npm run deploy` → `templatesPending` must be `[]`. Add a DONE line under Status.
+
+## ORC-10 (decision, optional) FG-105 forgot-password page
+The capture instance has no mailer, so /user/forgot_password only shows "Account recovery is disabled". Exercising the form
+needs `[mailer] ENABLED = true` + `PROTOCOL = dummy` in app.ini and a Gitea restart (orchestrator only; it affects every
+theme's forgot-password page, harmless). Otherwise treat FG-105 as environment/inherent and drop the route from the gate.
+
+- ORC-5..9 DONE (orchestrator, 2026-09-30): 7 template files installed + reloaded; html-snapshot before/after diff: other themes (gitea-auto/modern/studio anon + gitea-auto signed-in, 21 pages) byte-identical; github-only markers present only for github-auto; smoke 12/12 green; 0 console errors except intentional 404.
+- ORC-10: FG-105 treated as environment/inherent (no mailer change).

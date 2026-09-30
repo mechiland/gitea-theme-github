@@ -140,3 +140,34 @@ github.com's `prc-Token-IssueLabel` computes font-weight 600 on all 13 labels pr
 Proposed: `font-weight: var(--base-text-weight-semibold)` on the IssueLabel rule only (not topics, not state labels).
 Check label widths in the issue list / sidebar at 390 after the change (600 is ~3 % wider).
 - PR-DD-1 and the comment-header-at-390 proposal remain OPEN (no data-display round in wave 3b).
+
+
+# Final gate #1 (loop iteration 1)
+
+Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only theme-fixable items for this folder are listed; `theme-fixable-template` items need the integrator to install a github-* template branch first (this folder styles the result). Trim before adding (budget caps).
+
+1. **FG-011 [theme-fixable-css] Gitea default avatar (teacup logo image) on migrated authors, commit authors and blame rows** — impact 95 (judges 95, critic wt 0; routes: blame, directory-tree, commit-detail, repo-issue, compare-two-tags, org-members …)
+   - Fix: Replace the placeholder only: img.ui.avatar[src$='/assets/img/avatar_default.png'] → neutral Primer placeholder (bgColor-neutral-muted circle + fgColor-muted person Octicon) via object-position + background/mask, or a token data-URI per scheme (integrator adds the token). The navbar logo and footer logo are untouched.
+   - PNG: `shots/final-gate/blame/dark-1440.png`, `shots/final-gate/blame/light-1440.png`, `shots/final-gate/directory-tree/dark-1440.png`, `shots/final-gate/directory-tree/light-1440.png`
+2. **FG-046 [theme-fixable-css] Mobile comment header wraps to 3 rows (~85px): name/time, '(Migrated from github.com)', then reactions/kebab** — impact 9 (judges 0, critic wt 9; routes: repo-issue, repo-pull)
+   - Fix: <768: keep reaction + kebab on the first row (absolute right), let the meta text wrap under the name; ~40px.
+   - Critic refs: C086 (repo-issue, major), C140 (repo-pull, minor)
+   - PNG: `shots/final-gate/repo-issue/light-390.png`, `shots/final-gate-critic-5/pull-light-390-0.png`, `shots/final-gate/repo-issue/light-390.png`, `shots/final-gate/repo-pull/light-390.png`
+3. **FG-058 [theme-fixable-css] Org labels empty state not a Blankslate; branch refs as green-outlined labels (github.com: accent-muted commit-ref); commits Box 2px wider than siblings** — impact 7 (judges 0, critic wt 7; routes: org-settings-labels, pr-compare-form-playground, pr-compare-new-playground)
+   - Fix: Blankslate pattern; .ui.sha.label → commit-ref style; box widths.
+   - Critic refs: C205 (org-settings-labels, minor), C210 (pr-compare-form-playground, minor), C166 (pr-compare-new-playground, nit)
+   - PNG: `shots/final-gate/org-settings-labels/dark-390.png`, `shots/final-gate/org-settings-labels/dark-1440.png`, `shots/final-gate/org-settings-labels/light-390.png`, `shots/final-gate/org-settings-labels/light-1440.png`
+4. **FG-099 [theme-fixable-css] Milestone big progress bar touches the viewport edge at 390 (Gitea width:min(420px,96vw))** — impact 3 (judges 0, critic wt 3; routes: milestone-issues)
+   - Fix: src/data-display/progress.css: width:100%; max-width:420px.
+   - Critic refs: C024 (milestone-issues, minor)
+   - PNG: `shots/final-gate/milestone-issues/light-390.png`, `shots/final-gate/milestone-issues/light-390.png`
+5. **FG-111 [theme-fixable-css] Mobile tables clip columns with no scroll affordance (admin users, admin emails)** — impact 2 (judges 0, critic wt 2; routes: admin-emails, site-admin-users)
+   - Fix: Right-edge fade / visible scrollbar on overflowing .ui.attached.table.segment.
+   - Critic refs: C008 (site-admin-users, nit), C162 (admin-emails, nit)
+   - PNG: `shots/final-gate-critic-0/sau-l-m.png`, `shots/final-gate/admin-emails/dark-390.png`, `shots/final-gate/admin-emails/dark-1440.png`, `shots/final-gate/admin-emails/light-390.png`
+
+# Orchestrator ruling relayed by the integrator (2026-09-30): FG-011 is CSS-fixable — go
+The default avatar image (`img.ui.avatar[src$="/assets/img/avatar_default.png"]`) is a content placeholder, not site
+branding, so §11 (Gitea logo stays in the chrome: header, footer, sign-in) does not protect it. Replace only that
+placeholder with a neutral Primer placeholder (bgColor-neutral-muted circle + fgColor-muted person Octicon via mask, or a
+token data-URI); never the navbar/footer/sign-in logo. If you need a new token, request it here (integrator adds it).

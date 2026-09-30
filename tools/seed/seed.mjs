@@ -31,10 +31,23 @@ const ORG = 'octo-org';
 const ORG2 = 'pixel-guild';
 const PLAY = 'theme-playground';
 const PLAY_FULL = `${ORG}/${PLAY}`;
+const PLAY_DESCRIPTION = 'Markdown, diff and CI showcase';
+const ORG_SPECS = {
+  [ORG]: { full_name: 'Octo Org', description: 'Design tokens, themes and small developer tools.', website: 'https://example.com/octo-org', location: 'The Internet' },
+  [ORG2]: { full_name: 'Pixel Guild', description: 'Pixel art tools, sprites and tiny games.', website: '', location: 'Remote' },
+};
 
 const ARGS = new Set(process.argv.slice(2));
 const SKIP_MIGRATIONS = ARGS.has('--skip-migrations');
 const ONLY_MANIFEST = ARGS.has('--only=manifest');
+const ONLY_TIDY = ARGS.has('--only=tidy');
+
+// How seeded objects are recognised: docs/seed-manifest.json (machine-readable inventory) and, only where it
+// is invisible, the HTML comment MARK at the end of issue/PR/release bodies. Nothing visible (descriptions,
+// topics, bios, READMEs, titles) carries a seed marker. Older runs did; these are the markers they used, and
+// the steps below remove them from existing instances.
+const LEGACY_TOPICS = ['theme-seed', 'migrated-from-github'];
+const cleanDescription = (d = '') => d.replace(/^\[seed\]\s*/, '').replace(/\s*\(migrated from github\.com\/[^)]*\)$/, '');
 
 // ------------------------------------------------------------------ logging / stats
 const stats = { changes: 0, skipped: 0, failures: [] };
@@ -138,17 +151,17 @@ function longPost(p, body, timeoutMs = 60 * 60 * 1000) {
 // ------------------------------------------------------------------ data
 const USERS = [
   { login: 'alice-dev', full_name: 'Alice Anders', location: 'Lisbon, Portugal', website: 'https://example.com/alice',
-    description: 'Frontend engineer. Design tokens, accessible palettes and tidy CSS. (seeded test account)' },
+    description: 'Frontend engineer. Design tokens, accessible palettes and tidy CSS.' },
   { login: 'bob-dev', full_name: 'Bob Brennan', location: 'Toronto, Canada', website: 'https://example.com/bob',
-    description: 'Backend developer working on Go services and APIs. (seeded test account)' },
+    description: 'Backend developer working on Go services and APIs.' },
   { login: 'carol-ops', full_name: 'Carol Chen', location: 'Singapore', website: 'https://example.com/carol',
-    description: 'Platform and CI/CD. Keeps the runners running. (seeded test account)' },
+    description: 'Platform and CI/CD. Keeps the runners running.' },
   { login: 'dave-qa', full_name: 'Dave Diaz', location: 'Berlin, Germany', website: 'https://example.com/dave',
-    description: 'QA engineer. Writes the bug reports you did not want to read. (seeded test account)' },
+    description: 'QA engineer. Writes the bug reports you did not want to read.' },
 ];
 const EMAIL = (login) => `${login}@example.com`;
 const ID = (login) => {
-  if (login === ADMIN_USER) return { name: 'Seed Admin', email: 'admin@seed.localhost' };
+  if (login === ADMIN_USER) return { name: 'admin', email: 'admin@example.com' };
   const u = USERS.find((x) => x.login === login);
   return { name: u.full_name, email: EMAIL(login) };
 };
@@ -282,16 +295,39 @@ async function ensureRepo(owner, name, { description, website = '', topics = [],
   const want = { description, website, ...settings };
   const diff = Object.entries(want).filter(([k, v]) => repo[k] !== undefined && repo[k] !== v);
   if (diff.length) { await patch(`/repos/${owner}/${name}`, want); changed(`repo ${owner}/${name} settings (${diff.map(([k]) => k).join(', ')})`); }
-  if (topics.length) await ensureTopics(owner, name, topics);
+  await ensureTopics(owner, name, topics);
   return repo;
 }
 
-async function ensureTopics(owner, name, topics) {
+// Adds `topics` and drops the legacy marker topics; other existing topics (e.g. the ones a migration copied
+// from github.com) are kept.
+async function ensureTopics(owner, name, topics, drop = LEGACY_TOPICS) {
   const cur = (await get(`/repos/${owner}/${name}/topics`))?.topics || [];
-  const missing = topics.filter((t) => !cur.includes(t));
-  if (!missing.length) { skip('topics'); return; }
-  await put(`/repos/${owner}/${name}/topics`, { topics: [...new Set([...cur, ...topics])] });
-  changed(`topics ${owner}/${name} += ${missing.join(',')}`);
+  const want = [...new Set([...cur.filter((t) => !drop.includes(t)), ...topics])];
+  if (want.length === cur.length && want.every((t) => cur.includes(t))) { skip('topics'); return; }
+  await put(`/repos/${owner}/${name}/topics`, { topics: want });
+  const added = want.filter((t) => !cur.includes(t)), removed = cur.filter((t) => !want.includes(t));
+  changed(`topics ${owner}/${name}${added.length ? ` += ${added.join(',')}` : ''}${removed.length ? ` -= ${removed.join(',')}` : ''}`);
+}
+
+/**
+ * Rewrites text in existing files (fixes: { path: [[old, new], ...] }) in ONE commit, only for files where an
+ * `old` string still occurs. Converges older instances on the current wording; a no-op everywhere else.
+ */
+async function ensureFileFixes(repo, branch, message, fixes, { author } = {}) {
+  const files = [];
+  for (const [p, pairs] of Object.entries(fixes)) {
+    let cur;
+    try { cur = await rawFile(repo, p, branch); } catch { continue; }
+    let next = cur;
+    for (const [a, b] of pairs) next = next.split(a).join(b);
+    if (next !== cur) files.push({ operation: 'update', path: p, content: b64(next), sha: await fileSha(repo, p, branch) });
+  }
+  if (!files.length) { skip(`file fixes ${repo}`); return false; }
+  const id = ID(author);
+  await post(`/repos/${repo}/contents`, { message, branch, files, author: id, committer: id }, { sudo: asWriter(author, repo) });
+  changed(`commit on ${repo}@${branch}: ${message} (${files.map((f) => f.path).join(', ')})`);
+  return true;
 }
 
 async function branchCommits(repo, branch, limit = 100) {
@@ -341,9 +377,9 @@ async function ensureBranch(repo, branch, from) {
 async function seedPlaygroundCode() {
   const R = PLAY_FULL;
   const repo = await ensureRepo(ORG, PLAY, {
-    description: '[seed] Markdown, diff and CI showcase for the GitHub-lookalike theme',
+    description: PLAY_DESCRIPTION,
     website: 'https://example.com/theme-playground',
-    topics: ['theme-seed', 'markdown', 'design-tokens', 'playground'],
+    topics: ['markdown', 'design-tokens', 'playground'],
     settings: { has_issues: true, has_wiki: true, has_projects: true, has_pull_requests: true, has_actions: true, has_packages: true, has_releases: true },
   });
   const isEmpty = repo.empty || !(await get(`/repos/${R}/branches/main`));
@@ -394,6 +430,13 @@ async function seedPlaygroundCode() {
   await ensureCommit(R, 'main', 'docs: reference the first commit in the README', [
     { op: 'update', path: 'README.md', content: C.readme({ firstSha: first }) },
   ], { author: 'alice-dev', date: daysAgo(21) });
+
+  await tidyPlaygroundFiles();
+}
+
+// Removes the visible seed wording that older runs committed (README, LICENSE, package.json, ci.yml).
+async function tidyPlaygroundFiles() {
+  await ensureFileFixes(PLAY_FULL, 'main', 'Tidy up README, LICENSE and package metadata', C.LEGACY_FILE_FIXES, { author: 'alice-dev' });
 }
 
 // ---------------------------------------------------------------- playground: labels, milestones
@@ -844,7 +887,22 @@ async function seedWiki(R) {
     } else skip(`wiki ${p.title}`);
     out.push({ title: p.title, gitea_url: `${BASE}/${R}/wiki/${enc(p.title)}` });
   }
+  await tidyWiki(R);
   return out;
+}
+
+// Applies C.LEGACY_WIKI_FIXES to existing wiki pages (edits, never deletes).
+async function tidyWiki(R) {
+  for (const [title, pairs] of Object.entries(C.LEGACY_WIKI_FIXES)) {
+    const page = await get(`/repos/${R}/wiki/page/${enc(title)}`);
+    if (!page?.content_base64) continue;
+    const cur = Buffer.from(page.content_base64, 'base64').toString('utf8');
+    let next = cur;
+    for (const [a, b] of pairs) next = next.split(a).join(b);
+    if (next === cur) { skip(`wiki fixes ${title}`); continue; }
+    await patch(`/repos/${R}/wiki/page/${enc(title)}`, { title, content_base64: b64(next), message: `Update ${title}` }, { sudo: 'alice-dev' });
+    changed(`wiki page ${title} updated`);
+  }
 }
 
 async function ensureStar(who, repo) {
@@ -861,22 +919,46 @@ async function ensureWatch(who, repo) {
 }
 
 async function seedFork() {
-  if (await get(`/repos/bob-dev/${PLAY}`)) { skip('fork'); return `bob-dev/${PLAY}`; }
+  const fork = await get(`/repos/bob-dev/${PLAY}`);
+  if (fork) {
+    skip('fork');
+    // a fork copies the parent's description at fork time; keep it in line with the (cleaned) parent
+    const parent = await get(`/repos/${PLAY_FULL}`);
+    if (parent && fork.description !== parent.description && cleanDescription(fork.description) !== fork.description) {
+      await patch(`/repos/bob-dev/${PLAY}`, { description: parent.description });
+      changed(`description of bob-dev/${PLAY}`);
+    }
+    return `bob-dev/${PLAY}`;
+  }
   await api('POST', `/repos/${PLAY_FULL}/forks`, { body: {}, sudo: 'bob-dev' });
   changed(`fork bob-dev/${PLAY}`);
   return `bob-dev/${PLAY}`;
 }
 
+const ORG_README = () => `## octo-org
+
+We build design tokens, themes and small developer tools.
+
+- :art: [theme-playground](${BASE}/${PLAY_FULL}): markdown, diffs, CI and releases in one place
+- :package: Tools we use every day: [grex](${BASE}/${ORG}/grex), [prom_ex](${BASE}/${ORG}/prom_ex) and [folderify](${BASE}/${ORG}/folderify)
+- :handshake: Contributions are welcome. Open an issue or a pull request in any repository.
+
+> [!TIP]
+> New here? Start with the [wiki](${BASE}/${PLAY_FULL}/wiki).
+`;
+// what older runs committed (named the seed script); replaced as a whole by ensureFileFixes
+const LEGACY_ORG_README = () => `## octo-org\n\nA seeded organization used to build and screenshot a GitHub-lookalike Gitea theme.\n\n- :package: Repositories migrated from public GitHub projects for side-by-side comparison\n- :test_tube: [theme-playground](${BASE}/${PLAY_FULL}) exercises markdown, diffs, CI and releases\n\n> [!NOTE]\n> All data here is test data created by \`tools/seed/seed.mjs\`.\n`;
+
 async function seedProfiles() {
   // user profile README (alice-dev/.profile) and org profile README (octo-org/.profile)
-  await ensureRepo('alice-dev', '.profile', { description: '[seed] Profile README for alice-dev', isOrg: false });
+  await ensureRepo('alice-dev', '.profile', { description: '', isOrg: false });
   await ensureCommit('alice-dev/.profile', 'main', 'Add profile README', [{ op: 'create', path: 'README.md', content:
     `### Hi there, I'm Alice :wave:\n\n- :art: I work on design tokens and theming at **octo-org**\n- :seedling: Currently polishing [theme-playground](${BASE}/${PLAY_FULL})\n- :speech_balloon: Ask me about color contrast\n\n| Language | Share |\n| --- | ---: |\n| TypeScript | 48% |\n| Go | 32% |\n| CSS | 20% |\n` }],
   { author: 'alice-dev', date: daysAgo(70) });
-  await ensureRepo(ORG, '.profile', { description: '[seed] Organization profile README' });
-  await ensureCommit(`${ORG}/.profile`, 'main', 'Add organization profile README', [{ op: 'create', path: 'README.md', content:
-    `## octo-org\n\nA seeded organization used to build and screenshot a GitHub-lookalike Gitea theme.\n\n- :package: Repositories migrated from public GitHub projects for side-by-side comparison\n- :test_tube: [theme-playground](${BASE}/${PLAY_FULL}) exercises markdown, diffs, CI and releases\n\n> [!NOTE]\n> All data here is test data created by \`tools/seed/seed.mjs\`.\n` }],
+  await ensureRepo(ORG, '.profile', { description: '' });
+  await ensureCommit(`${ORG}/.profile`, 'main', 'Add organization profile README', [{ op: 'create', path: 'README.md', content: ORG_README() }],
   { author: 'alice-dev', date: daysAgo(70) });
+  await ensureFileFixes(`${ORG}/.profile`, 'main', 'Update README.md', { 'README.md': [[LEGACY_ORG_README(), ORG_README()]] }, { author: 'alice-dev' });
 }
 
 // ---------------------------------------------------------------- migrations
@@ -900,17 +982,28 @@ async function seedMigrations() {
       const r = await longPost('/repos/migrate', {
         clone_addr: `https://github.com/${m.github}.git`, service: 'github', auth_token: GH_TOKEN,
         repo_owner: ORG, repo_name: m.name, mirror: false, private: false,
-        description: `[seed] ${gh.description || ''} (migrated from github.com/${m.github})`.slice(0, 255),
+        description: (gh.description || '').slice(0, 255), // exactly the github.com description
         wiki: true, milestones: true, labels: true, issues: true, pull_requests: true, releases: true, lfs: false,
       });
       if (r.status !== 201) throw new Error(`migrate ${m.github}: ${r.status} ${scrub(JSON.stringify(r.data)).slice(0, 400)}`);
       changed(`migrated github.com/${m.github} -> ${full} in ${Math.round((Date.now() - t0) / 1000)}s`);
       repo = await get(`/repos/${full}`);
     }
-    await ensureTopics(ORG, m.name, ['theme-seed', 'migrated-from-github']);
+    await tidyMigratedRepo(m);
     out.push({ ...m, full_name: full, status: 'ok' });
   }
   return out;
+}
+
+// Migrated repos keep github.com's description and topics (the migration copies both); older runs added a
+// '[seed] ' prefix, a ' (migrated from github.com/...)' suffix and two marker topics. Remove them.
+async function tidyMigratedRepo(m) {
+  const full = `${ORG}/${m.name}`;
+  const repo = await get(`/repos/${full}`);
+  if (!repo) return;
+  const clean = cleanDescription(repo.description);
+  if (clean !== repo.description) { await patch(`/repos/${full}`, { description: clean }); changed(`description of ${full}`); }
+  await ensureTopics(ORG, m.name, []);
 }
 
 // ---------------------------------------------------------------- actions
@@ -918,7 +1011,7 @@ async function seedActions(R) {
   const runs = async () => (await get(`/repos/${R}/actions/runs?limit=50`))?.workflow_runs || [];
   let list = await runs();
   if (!list.some((r) => r.event === 'workflow_dispatch')) {
-    await api('POST', `/repos/${R}/actions/workflows/ci.yml/dispatches`, { body: { ref: 'main', inputs: { reason: 'triggered by tools/seed/seed.mjs' } } });
+    await api('POST', `/repos/${R}/actions/workflows/ci.yml/dispatches`, { body: { ref: 'main', inputs: { reason: 'manual run' } } });
     changed('workflow_dispatch run of ci.yml');
     await sleep(2000);
     list = await runs();
@@ -946,7 +1039,7 @@ async function seedActions(R) {
 async function seedPackages() {
   const out = [];
   const auth = { Authorization: `token ${TOKEN}` };
-  for (const [ver, text] of [['1.0.0', 'theme-demo 1.0.0\nSeeded generic package.\n'], ['1.1.0', 'theme-demo 1.1.0\nSeeded generic package (newer version).\n']]) {
+  for (const [ver, text] of [['1.0.0', 'theme-demo 1.0.0\nDemo generic package.\n'], ['1.1.0', 'theme-demo 1.1.0\nDemo generic package (newer version).\n']]) {
     const exists = await get(`/packages/${ORG}/generic/theme-demo/${ver}`);
     if (!exists) {
       const r = await request('PUT', `${BASE}/api/packages/${ORG}/generic/theme-demo/${ver}/file.txt`, { body: Buffer.from(text), headers: { ...auth, 'Content-Type': 'text/plain' }, auth: 'none' });
@@ -960,8 +1053,8 @@ async function seedPackages() {
   const npmVer = '1.0.0';
   const npmExists = await get(`/packages/${ORG}/npm/${enc(npmName)}/${npmVer}`);
   if (!npmExists) {
-    const pkgJson = { name: npmName, version: npmVer, description: 'Design tokens for the theme playground (seeded package)', main: 'index.js', license: 'MIT', keywords: ['theme-seed', 'tokens'] };
-    const readmeTxt = `# ${npmName}\n\nSeeded npm package with design tokens.\n\n\`\`\`js\nimport tokens from '${npmName}';\n\`\`\`\n`;
+    const pkgJson = { name: npmName, version: npmVer, description: 'Design tokens for the theme playground', main: 'index.js', license: 'MIT', keywords: ['design-tokens', 'tokens'] };
+    const readmeTxt = `# ${npmName}\n\nDesign tokens as a tiny npm package.\n\n\`\`\`js\nimport tokens from '${npmName}';\n\`\`\`\n`;
     const tgz = zlib.gzipSync(C.makeTar([
       { name: 'package/package.json', content: JSON.stringify(pkgJson, null, 2) },
       { name: 'package/index.js', content: "module.exports = { 'fgColor-default': '#1f2328', 'bgColor-default': '#ffffff' };\n" },
@@ -1225,6 +1318,7 @@ async function buildManifest(ctx) {
     generator: 'tools/seed/seed.mjs',
     gitea_base: BASE,
     note: 'Everything listed here was created by the seed script. Seeded users share the password documented in tools/seed/README.md. Pre-seed baseline (admin, ai, admin/jiri, ai/jiri) is untouched.',
+    markers: MARKERS,
     run: { changes: stats.changes, failures: stats.failures },
     users: USERS.map((u) => ({ login: u.login, full_name: u.full_name, gitea_url: G(`/${u.login}`), github_url: null })),
     orgs: [
@@ -1256,6 +1350,14 @@ async function buildManifest(ctx) {
   };
 }
 
+const MARKERS = {
+  how_to_recognise: 'This manifest is the machine-readable marker for seeded objects (users, orgs, repos, issues, PRs, releases, wiki, packages). Issue/PR/release bodies created by the script also end with the invisible HTML comment below. The admin API token used by the script is named theme-seed.',
+  hidden_body_marker: MARK,
+  api_token_name: TOKEN_NAME,
+  visible_markers: 'none (FG-015): no [seed] description prefix, no "(migrated from ...)" suffix, no theme-seed/migrated-from-github topics, no "seeded" wording in bios, org descriptions or READMEs. `node tools/seed/seed.mjs --only=tidy` removes those from instances seeded by older versions.',
+  legacy_visible_markers_removed: { description_prefix: '[seed] ', description_suffix: ' (migrated from github.com/<owner>/<repo>)', topics: LEGACY_TOPICS },
+};
+
 // ---------------------------------------------------------------- main
 async function step(name, fn, ctx, key) {
   log(`• ${name}`);
@@ -1275,10 +1377,25 @@ async function main() {
   const t0 = Date.now();
   const ctx = {};
   await ensureToken();
+  if (ONLY_TIDY) {
+    // Only removes visible seed markers from existing objects (no migrations, no new content, manifest untouched).
+    await step('users', ensureUsers, ctx);
+    await step(`org ${ORG}`, () => ensureOrg(ORG, ORG_SPECS[ORG], ['alice-dev']), ctx);
+    await step(`org ${ORG2}`, () => ensureOrg(ORG2, ORG_SPECS[ORG2], ['carol-ops']), ctx);
+    await step('playground repo', () => ensureRepo(ORG, PLAY, { description: PLAY_DESCRIPTION, website: 'https://example.com/theme-playground', topics: ['markdown', 'design-tokens', 'playground'] }), ctx);
+    await step('playground files', tidyPlaygroundFiles, ctx);
+    await step('wiki', () => tidyWiki(PLAY_FULL), ctx);
+    await step('profiles', seedProfiles, ctx);
+    await step('fork', seedFork, ctx);
+    for (const m of MIGRATIONS) await step(`migrated ${m.name}`, () => tidyMigratedRepo(m), ctx);
+    log(`\nDone in ${Math.round((Date.now() - t0) / 1000)}s: ${stats.changes} change(s), ${stats.failures.length} failure(s). Manifest not rewritten (--only=tidy).`);
+    if (stats.failures.length) process.exitCode = 1;
+    return;
+  }
   if (!ONLY_MANIFEST) {
     await step('users', ensureUsers, ctx);
-    await step(`org ${ORG}`, () => ensureOrg(ORG, { full_name: 'Octo Org', description: 'Seeded organization for the GitHub-lookalike theme (test data).', website: 'https://example.com/octo-org', location: 'The Internet' }, ['alice-dev']), ctx);
-    await step(`org ${ORG2}`, () => ensureOrg(ORG2, { full_name: 'Pixel Guild', description: 'A second seeded organization (test data).', website: '', location: 'Remote' }, ['carol-ops']), ctx);
+    await step(`org ${ORG}`, () => ensureOrg(ORG, ORG_SPECS[ORG], ['alice-dev']), ctx);
+    await step(`org ${ORG2}`, () => ensureOrg(ORG2, ORG_SPECS[ORG2], ['carol-ops']), ctx);
     await step('teams', ensureTeams, ctx);
     await step('playground code', seedPlaygroundCode, ctx);
     const labels = await step('labels', () => seedLabels(PLAY_FULL), ctx);

@@ -68,3 +68,53 @@ band box-shadow/clip-path on its Subheads), so either order of landing is safe.
 - **PPL-1 addendum — DONE** (short custom-property names at build time: auto 435 → 335 KB). Budget still exceeded;
   decision escalated as ORCHESTRATOR.md ORC-4.
 - **PPL-N1** (UnderlineNav radius) — still open in docs/requests/navigation.md (no navigation round scheduled).
+
+
+# Final gate #1 (loop iteration 1)
+
+Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only theme-fixable items for this folder are listed; `theme-fixable-template` items need the integrator to install a github-* template branch first (this folder styles the result). Trim before adding (budget caps).
+
+1. **FG-047 [theme-fixable-css] Notifications: unread counter outlined (not a CounterLabel), icon-only green 'Mark all as read', no selected state on mobile Unread/Read** — impact 9 (judges 0, critic wt 9; routes: notifications)
+   - Fix: CounterLabel fill; default (neutral) button; SegmentedControl selected state.
+   - Critic refs: C136 (notifications, minor), C137 (notifications, minor), C138 (notifications, minor)
+   - PNG: `shots/final-gate-critic-5/notif-light-top.png`, `shots/final-gate/notifications/light-390.png`, `shots/final-gate/notifications/dark-390.png`, `shots/final-gate/notifications/dark-1440.png`
+2. **FG-052 [theme-fixable-css] Profile: follower counts not bold, Follow button has a person icon, Overview tab uses info icon (github.com: book), topic tags oversized** — impact 8 (judges 5, critic wt 3; routes: user-profile, user-profile-repositories-tab, user-profile-stars-tab)
+   - Fix: Counts 600 fgColor-default; hide the svg inside the Follow button (icon only, button stays); mask the Overview tab icon with octicon-book; topic-tag 22px / 10px padding.
+   - Critic refs: C020 (user-profile-repositories-tab, nit), C168 (user-profile, nit), C201 (user-profile-stars-tab, nit)
+   - PNG: `shots/final-gate/user-profile-repositories-tab/light-1440.png`, `shots/final-gate/user-profile/light-1440.png`, `shots/final-gate/user-profile/dark-1440.png`, `shots/final-gate/user-profile/light-1440.png`
+3. **FG-053 [theme-fixable-template] Profile README Box has no '<user> / README.md' mono caption header** — impact 8 (judges 7, critic wt 1; routes: user-profile)
+   - Fix: github-* branch in templates/user/profile.tmpl (README block): Box header with '<name> / README.md' in 12px mono.
+   - Critic refs: C168 (user-profile, nit)
+   - PNG: `shots/final-gate/user-profile/light-1440.png`, `shots/final-gate/user-profile/dark-1440.png`, `shots/final-gate/user-profile/light-1440.png`
+4. **FG-067 [theme-fixable-css] Dashboard CLS 0.365 at 390 (Vue repo list grows 4 times while loading)** — impact 6 (judges 0, critic wt 6; routes: home)
+   - Fix: Reserve the repo-list height (min-height placeholder) in .flex-container-main.
+   - Critic refs: C001 (home, major)
+   - PNG: `shots/final-gate/home/dark-390.png`, `shots/final-gate/home/light-390.png`
+5. **FG-077 [theme-fixable-css] Repo rows on org home / profile / explore have no 'Public' Label** — impact 6 (judges 5, critic wt 1; routes: org-home, user-profile-repositories-tab)
+   - Fix: Same technique as public-badge (html:lang(en), only when Gitea renders no visibility label on the row).
+   - Critic refs: C010 (org-home, nit)
+   - PNG: `shots/final-gate/org-home/dark-1440.png`, `shots/final-gate/org-home/light-1440.png`, `shots/final-gate/user-profile-repositories-tab/dark-1440.png`, `shots/final-gate/user-profile-repositories-tab/light-1440.png`
+6. **FG-080 [theme-fixable-css] Explore users/orgs listed as separate bordered cards with 16px gaps; sidebar rule stops mid-page** — impact 5 (judges 0, critic wt 5; routes: explore-orgs, explore-users)
+   - Fix: One Box with divided rows; sidebar border full height.
+   - Critic refs: C062 (explore-users, minor), C082 (explore-orgs, nit), C083 (explore-orgs, nit)
+   - PNG: `shots/final-gate/explore-users/light-1440.png`, `shots/final-gate/explore-orgs/light-1440.png`, `shots/final-gate/explore-orgs/dark-390.png`, `shots/final-gate/explore-orgs/dark-1440.png`
+7. **FG-083 [theme-fixable-css] Dashboard: heatmap does not fill its Box (~165px empty), repo search autofocused with accent ring in every capture** — impact 4 (judges 0, critic wt 4; routes: home)
+   - Fix: Heatmap width 100%; focus ring only on :focus-visible.
+   - Critic refs: C003 (home, minor), C005 (home, nit)
+   - PNG: `shots/final-gate/home/dark-390.png`, `shots/final-gate/home/dark-1440.png`, `shots/final-gate/home/light-390.png`, `shots/final-gate/home/light-1440.png`
+8. **FG-101 [theme-fixable-css] Org members at 390: ~170px rows (names wrap, Hidden label on its own line, buttons stacked); '2FA: ×' bare glyph** — impact 3 (judges 0, critic wt 3; routes: org-members)
+   - Fix: One-line rows with a single trailing button group; 2FA as a muted Label.
+   - Critic refs: C051 (org-members, minor)
+   - PNG: `shots/final-gate-critic-1/om-mob.png`, `shots/final-gate/org-members/dark-1440.png`, `shots/final-gate/org-members/light-1440.png`
+9. **FG-102 [theme-fixable-css] Org teams: staggered two-column card grid with unequal headers (github.com: one Box, one row per team)** — impact 3 (judges 0, critic wt 3; routes: org-teams)
+   - Fix: Single Box with a row per team.
+   - Critic refs: C077 (org-teams, minor)
+   - PNG: `shots/final-gate/org-teams/light-1440.png`, `shots/final-gate-critic-2/ot-l390.png`, `shots/final-gate/org-teams/light-390.png`, `shots/final-gate/org-teams/light-1440.png`
+10. **FG-104 [theme-fixable-css] Explore meta-row link hover underlines the '·' separator** — impact 3 (judges 0, critic wt 3; routes: explore-repos)
+   - Fix: src/pages/people/repo-list.css:127: separator pseudo-element display:inline-block (or outside the link).
+   - Critic refs: C026 (explore-repos, minor)
+   - PNG: `shots/final-gate-critic-1/live/explore-repos/states/light-1440-meta-hover-clip.png`, `shots/final-gate-critic-1/er-meta.png`, `shots/final-gate/explore-repos/light-1440.png`
+11. **FG-106 [theme-fixable-css] /user/settings header 8px lower than other settings tabs (profile.css:24 .user.profile > :first-child also matches settings)** — impact 3 (judges 0, critic wt 3; routes: user-settings)
+   - Fix: Add :not(.settings) to src/pages/people/profile.css:24.
+   - Critic refs: C064 (user-settings, minor)
+   - PNG: `shots/final-gate/user-settings/light-1440.png`, `shots/final-gate/user-settings/light-1440.png`

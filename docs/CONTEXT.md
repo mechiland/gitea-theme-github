@@ -37,3 +37,4 @@
 - Extra Docker container `gitea-theme-runner` (volume `gitea-theme-runner-data`, label purpose=gitea-theme-github-seed): act runner registered to org `octo-org` only, so the playground's Actions runs execute. The pre-existing `gitea-runner-1` (admin-scoped) is untouched.
 - Smoke test edits `SMOKE.md` in octo-org/theme-playground (never README.md, the markdown showcase).
 - Visiting `?style=split|unified` as admin saves the admin's diff-style preference (baseline: unified) → restore at the end together with the theme (baseline: gitea-auto-tritanopia).
+  Since 2026-09-30 tools/shoot/shoot.mjs pins `?style=` on diff routes and restores the diff-style preference itself after every run (FG-033); the theme preference still has to be restored at the end.
