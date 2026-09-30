@@ -16,111 +16,37 @@
   gap: var(--base-size-8);
   min-height: calc(var(--base-size-28) + 2 * var(--base-size-8) + 2 * var(--borderWidth-thin));
   padding: var(--base-size-8) var(--base-size-16);
-  border: var(--borderWidth-thin) solid var(--borderColor-default);
-  border-radius: var(--borderRadius-medium);
-  background: var(--bgColor-default);
-  box-shadow: none;
   color: var(--fgColor-muted);
-  font-size: var(--text-body-size-medium);
 }
 
-#repo-file-commit-box .latest-commit {
-  display: contents;
-}
-
-#repo-file-commit-box .avatar-stack-names {
-  order: 1;
-  flex-shrink: 0;
-  gap: var(--base-size-8);
-}
-
-#repo-file-commit-box .avatar-stack-names > a.muted {
-  color: var(--fgColor-default);
-  font-weight: var(--base-text-weight-semibold);
-}
-
+/* .latest-commit / avatar / summary / SHA / age parts: shared rules with the file list in file-list.css */
 #repo-file-commit-box .commit-summary {
-  order: 2;
   flex: 1 1 auto;
-  min-width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: var(--fgColor-muted);
 }
 
-#repo-file-commit-box .commit-summary a.muted {
-  color: var(--fgColor-muted);
-}
-
-#repo-file-commit-box .commit-summary a.muted:hover {
-  color: var(--fgColor-accent);
-  text-decoration: underline;
-}
-
-#repo-file-commit-box .latest-commit > :not(.avatar-stack-names, .commit-summary, .commit-id-short) {
-  order: 3;
-}
-
-#repo-file-commit-box .ui.label.commit-id-short {
-  order: 4;
-  height: auto;
-  max-width: 7ch;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: var(--fgColor-muted);
-  font-family: var(--fontStack-monospace);
-  font-size: var(--text-body-size-small);
-  font-weight: var(--base-text-weight-normal);
+#repo-file-commit-box .ui.label.commit-id-short,
+#repo-file-commit-box > .age {
   line-height: var(--base-text-lineHeight-normal);
-  white-space: nowrap;
-}
-
-#repo-file-commit-box .ui.label.commit-id-short:hover {
-  color: var(--fgColor-accent);
-  text-decoration: underline;
 }
 
 #repo-file-commit-box > .age {
-  order: 5;
   gap: 0;
-  flex-shrink: 0;
-  color: var(--fgColor-muted);
-  font-size: var(--text-body-size-small);
-  line-height: var(--base-text-lineHeight-normal);
-}
-
-#repo-file-commit-box > .age::before {
-  content: "·";
-  margin-right: var(--base-size-4);
 }
 
 /* ---------- blob header (Box-header) ---------- */
 .file-header {
-  gap: var(--base-size-8);
   min-height: calc(var(--control-small-size) + 2 * var(--base-size-8) + var(--borderWidth-thin));
-  border: var(--borderWidth-thin) solid var(--borderColor-default);
-  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
-  background: var(--bgColor-muted);
-  color: var(--fgColor-default);
   font-weight: var(--base-text-weight-normal);
-  line-height: var(--text-body-lineHeight-medium);
 }
 
+/* padding-top/-bottom: 0 lives in code.important.css (beats Tailwind tw-py-2) */
 .file-header .file-header-left {
-  padding-top: 0;
-  padding-bottom: 0;
   min-width: 0;
 }
 
 .file-info {
   color: var(--fgColor-muted);
-  font-family: var(--fontStack-monospace);
   font-size: var(--text-body-size-small);
-  line-height: var(--base-text-lineHeight-normal);
 }
 
 .file-info-entry + .file-info-entry {
@@ -134,11 +60,13 @@
   margin: 0 var(--base-size-4);
 }
 
-.file-header .file-header-right {
+.file-header .file-header-right,
+.diff-file-header .diff-file-header-actions {
   gap: var(--base-size-8);
 }
 
-.file-header .file-header-right > .ui.buttons {
+.file-header .file-header-right > .ui.buttons,
+.blame-avatar {
   margin-right: 0;
 }
 
@@ -155,7 +83,12 @@
   line-height: 1;
 }
 
-.non-diff-file-content .header .file-actions .btn-octicon:hover {
+/* invisible icon buttons: blob header, blame re-blame, diff header (fold / popup / copy path) */
+.non-diff-file-content .header .file-actions .btn-octicon:hover,
+.file-view .lines-blame-btn > a:hover,
+.diff-file-header .fold-file:hover,
+.diff-file-header .diff-header-popup-btn:hover,
+.diff-file-header .diff-file-name .btn[data-clipboard-text]:hover {
   background: var(--control-transparent-bgColor-hover);
   color: var(--fgColor-default);
 }
@@ -179,7 +112,9 @@
    28px default buttons (icon --fgColor-muted), then invisible icon buttons. Gitea renders
    [Raw | Permalink | Blame | History] download copy rss pencil trash; the text group stays first, copy and
    download become one bordered group (GitHub's order: copy before download), pencil + trash a second one,
-   and the rss link stays an invisible icon button at the end. Not applied to the README header (pencil only). */
+   and the rss link stays an invisible icon button at the end. Not applied to the README header (pencil only).
+   In a header with a download link the .btn-octicon children are exactly download, copy, rss, pencil, trash
+   (templates/repo/view_file.tmpl), so "every icon button but rss" is written :not(:has(> .octicon-rss)). */
 .file-header .file-actions:has(> .btn-octicon[download]) > .ui.buttons {
   order: 1;
 }
@@ -204,24 +139,23 @@
   order: 6;
 }
 
-.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:is([data-global-click], [download], :has(> .octicon-pencil), :has(> .octicon-trash)) {
+.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:not(:has(> .octicon-rss)) {
   border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
   background: var(--button-default-bgColor-rest);
   box-shadow: var(--button-default-shadow-resting);
-  color: var(--fgColor-muted);
 }
 
-.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:is([data-global-click], [download], :has(> .octicon-pencil), :has(> .octicon-trash)):hover {
+.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:not(:has(> .octicon-rss)):hover {
   border-color: var(--button-default-borderColor-hover);
   background: var(--button-default-bgColor-hover);
   color: var(--fgColor-muted);
 }
 
-.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:is([data-global-click], [download], :has(> .octicon-pencil), :has(> .octicon-trash)):active {
+.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:not(:has(> .octicon-rss)):active {
   background: var(--button-default-bgColor-active);
 }
 
-.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:is([data-global-click], [download], :has(> .octicon-pencil), :has(> .octicon-trash)).disabled {
+.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:not(:has(> .octicon-rss)).disabled {
   border-color: var(--button-default-borderColor-disabled);
   background: var(--button-default-bgColor-disabled);
   box-shadow: none;
@@ -244,8 +178,9 @@
   color: var(--button-danger-fgColor-hover);
 }
 
-/* ---------- Box body ---------- */
-.file-view-container {
+/* ---------- Box body (same box as the diff body) ---------- */
+.file-view-container,
+.diff-file-box .diff-file-body {
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-top: 0;
   border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
@@ -255,47 +190,26 @@
 .file-view.code-view {
   overflow-x: auto;
   padding: var(--base-size-8) 0;
-  background: var(--bgColor-default);
   border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
 }
 
 .file-view .lines-num {
-  min-width: calc(var(--base-size-48) + var(--base-size-24));
   padding: 0 var(--base-size-16) 0 var(--base-size-8);
-  color: var(--fgColor-muted);
-  font-family: var(--fontStack-monospace);
-  font-size: var(--text-body-size-small);
-  line-height: var(--base-size-20);
 }
 
 .file-view .lines-num span::after {
   padding: 0;
-  line-height: var(--base-size-20);
-}
-
-.file-view.code-view .lines-num:hover {
-  color: var(--fgColor-default);
 }
 
 .file-view .lines-code {
   padding-left: var(--base-size-20);
   padding-right: var(--base-size-16);
-  color: var(--fgColor-default);
-  font-family: var(--fontStack-monospace);
-  font-size: var(--text-body-size-small);
-  line-height: var(--base-size-20);
 }
 
 /* github.com's code and blame views do not wrap long lines; the box scrolls horizontally */
 .file-view.code-view .lines-code .code-inner {
   white-space: pre;
   overflow-wrap: normal;
-}
-
-.file-view .lines-code .code-inner {
-  font-family: var(--fontStack-monospace);
-  font-size: var(--text-body-size-small);
-  line-height: var(--base-size-20);
 }
 
 /* selected lines (#L12 / #L12-L20) */
@@ -305,13 +219,7 @@
   background: var(--bgColor-attention-muted);
 }
 
-.file-view tr.active .lines-num {
-  color: var(--fgColor-default);
-}
-
-.file-view tr.active .lines-num::before {
-  content: none;
-}
+/* (line number colour and ::before of selected lines: shared rules in file-list.css) */
 
 /* the "…" line menu button on a selected line (Primer small invisible-ish IconButton on the line) */
 .file-view.code-view .ui.button.code-line-button {
@@ -362,11 +270,6 @@
     padding: var(--base-size-16);
   }
 
-  #repo-file-commit-box .avatar-stack-names {
-    max-width: none;
-    min-width: 0;
-  }
-
   /* github.com mobile: [avatar author age] only */
   #repo-file-commit-box {
     flex-wrap: nowrap;
@@ -374,33 +277,12 @@
     padding: var(--base-size-8) var(--base-size-12);
   }
 
-  #repo-file-commit-box .commit-summary {
-    display: none;
-  }
-
-  #repo-file-commit-box > .age {
-    order: 2;
-  }
-
-  #repo-file-commit-box > .age::before {
-    content: none;
-  }
-
   /* github.com's mobile blob header is one 46px row (Code/Blame + icons; the "N lines" info sits above it).
      Gitea's header wrapped to three rows (108px): keep the info on its own row and one row of actions —
      Raw | Blame, copy | download, edit — and drop the secondary Permalink / History / RSS / delete. */
-  .file-header {
-    flex-wrap: wrap;
-    row-gap: var(--base-size-8);
-  }
 
   .file-header .file-header-left {
     flex: 1 0 100%;
-    padding-right: 0;
-  }
-
-  .file-header .file-header-right {
-    gap: var(--base-size-8);
   }
 
   .file-header .file-actions > .ui.buttons > .button:is([href*="/src/commit/"], [href*="/commits/"]),

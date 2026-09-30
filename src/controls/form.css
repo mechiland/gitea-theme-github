@@ -9,7 +9,6 @@
 .ui.form .grouped.fields > label,
 .ui.form .inline.fields > label,
 .ui.form .inline.fields .field > label,
-.ui.form .inline.field > label,
 .ui.form .inline.fields .field > p,
 .ui.form .inline.field > p {
   color: var(--fgColor-default);
@@ -43,11 +42,8 @@
   font-weight: var(--base-text-weight-normal);
 }
 
-.ui.form .required.fields:not(.grouped) > .field > label::after,
-.ui.form .required.fields.grouped > label::after,
 .ui.form .required.field > label::after,
 .ui.form label.required::after,
-.ui.form .required.fields:not(.grouped) > .field > .checkbox::after,
 .ui.form .required.field > .checkbox::after {
   margin: 0 0 0 var(--base-size-4);
   color: var(--fgColor-default);
@@ -55,7 +51,6 @@
 }
 
 /* FormControl.Caption */
-.ui.form .help,
 .form .help {
   margin-top: var(--base-size-4);
   color: var(--fgColor-muted);
@@ -65,12 +60,6 @@
 
 .form .help code {
   color: var(--fgColor-muted);
-}
-
-/* textarea without rows (Gitea --min-height-textarea) keeps its height; Primer textarea look */
-.ui.form textarea {
-  padding: var(--base-size-8) var(--control-medium-paddingInline-normal);
-  line-height: var(--base-size-20);
 }
 
 .ui.form input:not([type="checkbox"], [type="radio"], [type="file"], [type="color"], [type="range"]) {
@@ -83,16 +72,14 @@
   opacity: 1;
 }
 
-.ui.form .disabled.field > label,
-.ui.form .field.disabled > label {
+.ui.form .disabled.field > label {
   color: var(--fgColor-disabled);
   opacity: 1;
 }
 
 /* field titles Gitea writes as <p> (repo settings: "Projects Mode", "Merge Styles", "Default merge style"):
    a <p> that heads a nested field or a select is a FormControl label */
-.ui.form .field > .field > p:only-child,
-.ui.form .field > p:first-child:has(+ .ui.selection.dropdown, + .ui.dropdown.selection, + select) {
+:is(.ui.form .field > .field > p:only-child, .ui.form .field > p:first-child:has(+ .ui.selection.dropdown, + select)) {
   margin: 0 0 var(--base-size-4);
   color: var(--fgColor-default);
   font-size: var(--text-body-size-medium);
@@ -100,33 +87,6 @@
   line-height: var(--base-size-20);
 }
 
-/* FormControl.Validation — 12px semibold danger text with a 12px alert-fill octicon (4px gap), 4px below
-   the control. Gitea hides `.field.error .error.message` until it has content; a `.help.error` caption
-   (see docs/requests/controls.md #5) renders the same. */
-.ui.form .field.error .error.message:not(:empty),
-.ui.form .fields.error .error.message:not(:empty),
-.ui.form .field .help.error,
-.form .help.error {
-  display: flex;
-  align-items: center;
-  gap: var(--base-size-4);
-  margin: var(--base-size-4) 0 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  box-shadow: none;
-  color: var(--fgColor-danger);
-  font-size: var(--text-body-size-small);
-  font-weight: var(--base-text-weight-semibold);
-  line-height: var(--text-caption-lineHeight);
-}
-
-.ui.form .field.error .error.message > .svg,
-.ui.form .field .help.error > .svg,
-.form .help.error > .svg {
-  flex-shrink: 0;
-  width: var(--base-size-12);
-  height: var(--base-size-12);
-  color: var(--fgColor-danger);
-  fill: currentcolor;
-}
+/* No FormControl.Validation caption rules: Gitea 1.27.3 renders no `.help.error` (template request #5 was rejected)
+   and no `.error.message` inside `.field.error`/`.fields.error` (errors go to the top flash), so the former rules
+   (Primer 12px danger caption + alert octicon) were removed in the 2026-09-30 size trim. */

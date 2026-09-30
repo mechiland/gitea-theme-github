@@ -14,13 +14,19 @@
  */
 
 /* ---------- overlay container ---------- */
-.ui.dropdown > .menu {
-  min-width: var(--overlay-width-xsmall);
+/* shared Overlay chrome: dropdown popups, autocomplete results (search-results.css), @-suggesters */
+.ui.dropdown > .menu,
+.ui.search > .results,
+text-expander .suggestions {
   padding: var(--base-size-8) 0;
   border: 0;
   border-radius: var(--borderRadius-large);
   background: var(--overlay-bgColor);
   box-shadow: var(--shadow-floating-small);
+}
+
+.ui.dropdown > .menu {
+  min-width: var(--overlay-width-xsmall);
   color: var(--fgColor-default);
   font-size: var(--text-body-size-medium);
   line-height: var(--base-size-20);
@@ -63,36 +69,39 @@
 }
 
 /* ---------- items (ActionList.Item) ---------- */
+/* shared ActionList row metrics: dropdown items, tippy menu items (tippy.css), clone panel lists (clone-panel.css),
+   autocomplete results and @-suggestions (search-results.css). Dropdown item padding is also !important. */
 .ui.dropdown .menu > .item,
-.ui.menu .ui.dropdown .menu > .item,
-.ui.selection.dropdown .menu > .item,
-.user-menu > .item {
-  width: auto;
+.tippy-box[data-theme="menu"] .item,
+.clone-panel-popup > .clone-panel-list > .item,
+.ui.search > .results .result,
+text-expander .suggestions li {
   min-height: var(--control-medium-size);
   margin: 0 var(--base-size-8);
-  border: 0;
+  padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
   border-radius: var(--borderRadius-medium);
-  background: var(--control-transparent-bgColor-rest);
   color: var(--fgColor-default);
   font-size: var(--text-body-size-medium);
-  font-weight: var(--base-text-weight-normal);
   line-height: var(--base-size-20);
+}
+
+.ui.dropdown .menu > .item {
+  width: auto;
+  border: 0;
+  background: var(--control-transparent-bgColor-rest);
+  font-weight: var(--base-text-weight-normal);
   text-decoration: none;
   transition: background-color var(--base-duration-100) var(--base-easing-easeOut);
 }
 
-.ui.dropdown .menu .item:first-of-type,
-.ui.dropdown .menu .item:last-of-type,
-.ui.selection.dropdown .menu .item:first-of-type {
-  border-radius: var(--borderRadius-medium);
-}
-
 .ui.dropdown .menu > .item:hover,
-.ui.menu .ui.dropdown .menu > .item:hover,
 .ui.dropdown .menu > .item.selected,
-.ui.menu .ui.dropdown .menu > .selected.item {
+.ui.dropdown .menu .active.item:hover,
+.clone-panel-popup > .clone-panel-list > .item:hover,
+.clone-panel-field > .ui.action.input > .ui.button:hover,
+.ui.search > .results .result:hover,
+.ui.search > .results .result.active {
   background: var(--control-transparent-bgColor-hover);
-  color: var(--fgColor-default);
 }
 
 /* one highlighted row at a time: while the pointer is over the list, the hovered row wins over Fomantic's
@@ -102,38 +111,31 @@
 }
 
 .ui.dropdown .menu > .item:active,
-.ui.dropdown .menu > .item.selected:active {
+.clone-panel-popup > .clone-panel-list > .item:active,
+.clone-panel-field > .ui.action.input > .ui.button:active {
   background: var(--control-transparent-bgColor-active);
-  color: var(--fgColor-default);
+}
+
+.ui.dropdown .menu > .item:focus-visible,
+.tippy-box[data-theme="menu"] .item:focus-visible,
+.clone-panel-popup > .clone-panel-list > .item:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: 0;
 }
 
 .ui.dropdown .menu > .item:focus-visible {
-  outline: var(--focus-outline);
-  outline-offset: 0;
   box-shadow: none;
 }
 
 /* current value / current page: Primer ActionList [data-active] (selected bg + semibold label) */
-.ui.dropdown .menu .active.item,
-.ui.menu .ui.dropdown .menu > .active.item {
+.ui.dropdown .menu .active.item {
   background: var(--control-transparent-bgColor-rest);
-  color: var(--fgColor-default);
   font-weight: var(--base-text-weight-normal);
   box-shadow: none;
 }
 
-.ui.dropdown .menu .active.item:hover,
-.ui.menu .ui.dropdown .menu > .active.item:hover {
-  background: var(--control-transparent-bgColor-hover);
-}
-
-/* single-select menus (a list that marks its current value): reserve the leading check column for every item
-   and draw Primer's 16px check on the chosen one — ActionMenu selectionVariant="single" */
-.ui.dropdown:not(.branch-selector-dropdown) .menu:not(.user-menu):has(> .item.active:not(.clear-selection)) > .item,
-.ui.dropdown:not(.branch-selector-dropdown) .menu:not(.user-menu):has(> .item.active:not(.clear-selection)) > .item:hover {
-  padding-left: calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16) + var(--control-medium-gap));
-}
-
+/* single-select menus: Primer's 16px check on the chosen item — ActionMenu selectionVariant="single" (the leading
+   check column is reserved in overlays.important.css) */
 .ui.dropdown:not(.branch-selector-dropdown) .menu:not(.user-menu) > .item.active:not(.clear-selection)::after,
 .branch-selector-dropdown.select-branch .scrolling.menu > .item.active::after,
 .branch-selector-dropdown:not(.select-branch) .scrolling.menu > .item.selected::after {
@@ -151,12 +153,6 @@
   transform: none;
   background: var(--fgColor-muted);
   mask: var(--checkbox-mask-checked) center / var(--base-size-12) auto no-repeat;
-}
-
-/* the user menu's current page (Settings / Site Administration) → NavList current item */
-.user-menu > .item.active {
-  background: var(--control-transparent-bgColor-selected);
-  font-weight: var(--base-text-weight-semibold);
 }
 
 .ui.dropdown .menu > .disabled.item,
@@ -177,8 +173,7 @@
 }
 
 /* leading visual: 16px, muted, 8px gap */
-.ui.dropdown .menu > .item > svg,
-.ui.dropdown .menu > .item > .svg,
+.ui.dropdown .menu > .item > :is(svg, .svg),
 .ui.menu .ui.dropdown .menu > .item > svg {
   margin: 0 var(--control-medium-gap) 0 0;
   color: var(--fgColor-muted);
@@ -214,8 +209,7 @@
 }
 
 /* ---------- group heading ---------- */
-.ui.dropdown .menu > .header,
-.ui.dropdown .menu > .header:not(.ui) {
+.ui.dropdown .menu > .header {
   margin: 0;
   padding: var(--base-size-6) var(--base-size-16);
   color: var(--fgColor-muted);
@@ -227,8 +221,6 @@
 
 /* the "Signed in as …" header of the user menu reads as body text in GitHub's account menu */
 .ui.dropdown .user-menu > .header:not(.ui) {
-  padding: var(--base-size-6) var(--base-size-16);
-  color: var(--fgColor-muted);
   font-size: var(--text-body-size-medium);
   font-weight: var(--base-text-weight-normal);
 }
@@ -239,7 +231,6 @@
 }
 
 /* ---------- divider ---------- */
-.ui.dropdown .menu > .divider,
 .ui.dropdown .menu .divider {
   height: 0;
   margin: calc(var(--base-size-8) - var(--borderWidth-thin)) 0 var(--base-size-8);
@@ -248,8 +239,7 @@
 }
 
 /* ---------- no-results / info text ---------- */
-.ui.dropdown .menu > .message,
-.ui.dropdown .menu > .message:not(.ui) {
+.ui.dropdown .menu > .message {
   padding: var(--base-size-6) var(--base-size-16);
   color: var(--fgColor-muted);
   font-weight: var(--base-text-weight-normal);
@@ -292,7 +282,6 @@
 }
 
 /* ---------- scrolling list area ---------- */
-.ui.dropdown .scrolling.menu,
 .ui.scrolling.dropdown .menu {
   padding: 0;
 }
@@ -312,11 +301,9 @@
 }
 
 /* ---------- selection dropdown's open list (anchored overlay under a Select) ---------- */
+/* (:hover member: while the pointer is on an open Select, its list keeps the downward offset, as before) */
 .ui.selection.dropdown > .menu,
-.ui.selection.active.dropdown > .menu,
-.ui.selection.dropdown:focus > .menu,
-.ui.selection.active.dropdown:hover > .menu,
-.ui.upward.selection.dropdown > .menu {
+.ui.selection.active.dropdown:hover > .menu {
   width: max-content;
   min-width: max(100%, var(--overlay-width-xsmall));
   max-width: calc(100vw - 2 * var(--base-size-16));
@@ -392,7 +379,6 @@
 
 .branch-selector-dropdown .branch-tag-item:hover {
   background: var(--control-transparent-bgColor-hover);
-  color: var(--fgColor-default);
   text-decoration: none;
 }
 
@@ -403,8 +389,6 @@
 
 /* current tab → UnderlineNav current item (semibold + 2px --underlineNav-borderColor-active under it) */
 .branch-selector-dropdown .branch-tag-item.active {
-  border: 0;
-  border-radius: var(--borderRadius-medium);
   background: transparent;
   font-weight: var(--base-text-weight-semibold);
 }
@@ -427,8 +411,8 @@
 
 /* github.com RefSelector rows: 8px padding, a 16px check box (12px glyph + 4px padding) and the name right after it
    (text 32px from the overlay edge); long ref names wrap instead of being cut */
+/* (padding-left: overlays.important.css) */
 .branch-selector-dropdown .scrolling.menu > .item {
-  padding-left: calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16));
   overflow-wrap: anywhere;
 }
 

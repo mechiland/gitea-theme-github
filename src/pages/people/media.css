@@ -1,0 +1,300 @@
+/*
+ * Viewport-dependent rules of every people page in one block per condition (theme size budget: one @media prelude
+ * instead of one per file). Imported last; in each block the rules keep the order of the files they belong to
+ * (explore → notifications; profile → repo lists → org → dashboard → contribution graph).
+ */
+
+@media (min-width: 768px) {
+  /* ---------- explore (explore.css): sidebar NavList + results column ---------- */
+  /* the page fills the space down to the footer so the sidebar rule does too */
+  .full.height:has(> .explore) {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+  .explore {
+    display: grid;
+    flex-grow: 1;
+    grid-template-columns: calc(var(--base-size-128) * 2) minmax(0, 1fr);
+  }
+
+  /* the menu box runs 40px under the results column (width in people.important.css) so its items can span the
+     visible sidebar while still ending 56px before the menu's right edge (see the overflow-menu note in explore.css) */
+  .explore > overflow-menu {
+    display: block;
+    grid-area: 1 / 1;
+    min-height: 0;
+    max-width: none;
+    margin: 0;
+    padding: var(--base-size-16) calc(var(--base-size-48) + var(--base-size-8)) var(--base-size-16) var(--base-size-16);
+    box-shadow: none;
+  }
+
+  .explore .overflow-menu-items {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--base-size-2);
+  }
+
+  /* radius 6 comes from the navigation layer's menu items */
+  .explore .overflow-menu-items > .item {
+    align-self: stretch;
+    justify-content: flex-start;
+    min-height: var(--control-medium-size);
+    line-height: var(--text-body-lineHeight-medium);
+  }
+
+  .explore .overflow-menu-items > .active.item {
+    background: var(--control-transparent-bgColor-selected);
+  }
+
+  /* current item: the accent bar on the left instead of the UnderlineNav underline */
+  .explore .overflow-menu-items > .active.item::after {
+    inset: calc(50% - var(--base-size-12)) auto auto calc(var(--base-size-8) * -1);
+    width: var(--base-size-4);
+    height: var(--base-size-24);
+    background: var(--borderColor-accent-emphasis);
+    transform: none;
+  }
+
+  .explore .overflow-menu-items > .item:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: calc(var(--borderWidth-thick) * -1);
+  }
+
+  /* results column; its left rule is the sidebar's divider */
+  .explore > .ui.container {
+    grid-area: 1 / 2;
+    max-width: calc(var(--breakpoint-large) + var(--base-size-48));
+    margin: 0;
+    padding: var(--base-size-24) var(--base-size-24) var(--base-size-40);
+    border-left: var(--borderWidth-thin) solid var(--borderColor-muted);
+  }
+
+  /* ---------- notifications (notifications.css): NavList column + Box ---------- */
+  .notification > .ui.container {
+    display: grid;
+    grid-template: auto auto 1fr / calc(var(--base-size-128) * 2) minmax(0, 1fr);
+    column-gap: var(--base-size-24);
+    align-items: start;
+  }
+
+  .notification .flex-left-right {
+    display: contents;
+  }
+
+  /* NavList (the items are position: relative already: Fomantic .ui.menu .item) */
+  .notification .small-menu-items {
+    grid-area: 1 / 1 / 4;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--base-size-2);
+  }
+
+  .notification .small-menu-items > .item {
+    justify-content: space-between;
+    min-height: var(--control-medium-size);
+    color: var(--fgColor-default);
+  }
+
+  .notification .small-menu-items > .active::after {
+    content: "";
+    position: absolute;
+    top: calc(50% - var(--base-size-12));
+    left: calc(var(--base-size-8) * -1);
+    width: var(--base-size-4);
+    height: var(--base-size-24);
+    border-radius: var(--borderRadius-medium);
+    background: var(--borderColor-accent-emphasis);
+  }
+
+  .notification .flex-left-right > form {
+    grid-area: 1 / 2;
+    justify-self: end;
+    margin-bottom: var(--base-size-16);
+  }
+
+  .notification #notification_table {
+    grid-area: 2 / 2;
+  }
+
+  /* no purge button (read view / nothing unread): the Box starts at the top */
+  .notification :not(:has(.flex-left-right > form)) > #notification_table {
+    grid-row: 1 / span 2;
+  }
+
+  .notification > .ui.container > .page.buttons {
+    grid-area: 3 / 2;
+    justify-self: center;
+  }
+}
+
+@media (max-width: 767.98px) {
+  /* ---------- profile (profile.css): avatar beside the name; bio, details, followers, then Follow ---------- */
+  .user.profile .ui.grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--base-size-24);
+  }
+
+  .profile .card {
+    display: grid;
+    grid-template-columns: var(--base-size-64) minmax(0, 1fr);
+    column-gap: var(--base-size-16);
+    align-items: center;
+  }
+
+  .profile .card > *,
+  .profile-avatar-name > *,
+  .card li {
+    grid-column: 1 / -1;
+  }
+
+  #profile-avatar {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .profile-avatar-name > :is(.header, .username) {
+    grid-column: 2;
+    margin-top: 0;
+    align-self: end;
+  }
+
+  .profile-avatar-name > .username {
+    align-self: start;
+  }
+
+  .profile-avatar-name > .username:first-child {
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+
+  .card li:has(> .render-content) {
+    margin: var(--base-size-16) 0 var(--base-size-8);
+  }
+
+  .profile-avatar-name > div {
+    order: 7;
+    margin: var(--base-size-8) 0 0;
+  }
+
+  .card li.follow {
+    order: 7;
+  }
+
+  /* ---------- repo lists (repo-list.css) ---------- */
+  :is(.profile, .explore) .filter.menu > form > .ui.action.input {
+    flex-basis: 100%;
+    margin-right: 0;
+  }
+
+  :is(.profile, .explore) .item-header ~ .item-body:not(:last-child),
+  :is(.members, .teams) .ui.container > form.ui.form {
+    max-width: none;
+  }
+
+  /* "Updated …" gets its own line under the counters */
+  :is(.profile, .explore) .item-header ~ .item-body:last-child {
+    grid-column: 1 / -1;
+    margin-left: 0;
+  }
+
+  .explore .item-header ~ .item-body:last-child::before,
+  #user-heatmap > div::before {
+    content: none;
+  }
+
+  /* ---------- org (org.css) ---------- */
+  .organization.profile .ui.grid,
+  .teams .ui.two.column.grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* mobile reversed: Gitea puts the sidebar first on phones; github.com keeps the repositories first */
+  .profile .five.wide {
+    order: 1;
+  }
+
+  .organization > .flex-container:first-child {
+    flex-direction: row;
+    gap: var(--base-size-16);
+  }
+
+  .organization.profile > .flex-container:first-child .avatar {
+    width: var(--base-size-64);
+    height: var(--base-size-64);
+    min-width: var(--base-size-64);
+  }
+
+  /* "Members are managed through teams…" above its button */
+  :is(.members, .teams) > .ui.container > .flex-text-block {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* ---------- dashboard (dashboard.css) ---------- */
+  .feeds > .flex-container {
+    padding-left: 0;
+  }
+
+  .feeds .flex-container-sidebar {
+    width: auto;
+    margin-left: 0;
+    border-right: 0;
+    border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+  }
+
+  .feeds .flex-container-main {
+    padding: var(--base-size-16);
+  }
+
+  /* ---------- contribution graph (heatmap.css): the Box scrolls horizontally (rtl start = the most recent weeks);
+     heading and legend stay outside the scroller (absolutely positioned against #user-heatmap, so the scroller does
+     not clip or move them) ---------- */
+  @container (width > 0) {
+    #user-heatmap {
+      height: calc((var(--base-size-128) * 5 + var(--base-size-80)) * 0.1493 + var(--base-size-80) + var(--base-size-4));
+    }
+  }
+
+  #user-heatmap {
+    padding-top: var(--base-size-32);
+  }
+
+  #user-heatmap > div {
+    display: block;
+    position: static;
+    padding: var(--base-size-12) var(--base-size-16) calc(var(--base-size-40) - var(--base-size-2));
+    overflow-x: auto;
+    scrollbar-width: none;
+    direction: rtl;
+    border: var(--borderWidth-thin) solid var(--borderColor-default);
+    border-radius: var(--borderRadius-medium);
+    background: var(--bgColor-default);
+  }
+
+  .heatmap-svg {
+    width: calc(var(--base-size-128) * 5 + var(--base-size-80));
+    max-width: none;
+    margin: 0;
+    direction: ltr;
+  }
+
+  .heatmap-footer {
+    direction: ltr;
+  }
+
+  .heatmap-footer > :first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .heatmap-legend {
+    position: absolute;
+    right: var(--base-size-16);
+    bottom: var(--base-size-12);
+    margin: 0;
+  }
+}

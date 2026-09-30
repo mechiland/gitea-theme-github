@@ -1,0 +1,30 @@
+{
+ "note": "Pages whose pixels change without any CSS change. pixeldiff.mjs still compares them but flags them knownNoisy and counts them separately. Patterns are regexes on the PNG's relative path. 'content-drift' entries change only when somebody writes to Gitea between the two runs (tools/shoot/smoke.mjs creates issues/PRs/branches/commits in octo-org/theme-playground on every run); two runs with no write in between are identical there. Verified 2026-09-30 with --stable runs; residual rasterization noise (<=50 px, navbar avatar/logo edges in hover/menu states) is handled by --tolerance/--minor, not listed here (tools/shoot/README.md, pixeldiff).",
+ "entries": [
+  {
+   "pattern": "^site-admin/",
+   "kind": "live-data",
+   "reason": "/-/admin system status (uptime, memory, GC counters) changes every load; verified 2026-09-30: 5.4k-21k px per shot between two identical runs"
+  },
+  {
+   "pattern": "^home/",
+   "kind": "content-drift",
+   "reason": "dashboard feed + heatmap: every smoke.mjs run adds activity"
+  },
+  {
+   "pattern": "^notifications/",
+   "kind": "content-drift",
+   "reason": "notification list changes with new issues/PRs"
+  },
+  {
+   "pattern": "^(repo-home-markdown-showcase-playground|file-view-.*-playground|blame-playground-.*|releases-playground-.*|wiki-page-playground|issue-detail-playground-.*|pr-.*-playground.*|pr-draft-wip-playground|actions-list|action-run|action-job|action-job-ok|actions-empty-filter|projects-list|project-board|packages-repo|issue-new-playground|pr-compare-new-playground|issue-playground-1|pr-compare-form-playground)/",
+   "kind": "content-drift",
+   "reason": "octo-org/theme-playground: repo header counters (issues/PRs/branches), latest commit and lists change whenever smoke.mjs runs"
+  },
+  {
+   "pattern": "^(org-home|explore-repos|admin-repos)/",
+   "kind": "content-drift",
+   "reason": "repo lists sorted by update time / activity of octo-org/theme-playground (smoke.mjs)"
+  }
+ ]
+}

@@ -6,18 +6,14 @@
  *   input[name=q] (+ commits: "Search in branch / All" dropdown) + a joined `.ui.small.icon.button` (octicon-search,
  *   submit). The submit button is kept (keyboard / click submit) but drawn as the leading visual: transparent,
  *   borderless, overlaid on the input's left padding.
+ * In all three templates (branch/list.tmpl, tag/list.tmpl, commits_table.tmpl) the search segment is a direct child
+ * of .ui.container, so one child chain covers them (size trim 2026-09-30).
  */
-.repository.branches .ui.attached.segment > form > .ui.action.input,
-.repository.commits:not(.pull) > .ui.container > .ui.attached.segment > form > .ui.action.input,
-.repository.tags > .ui.container > .ui.attached.segment > form > .ui.action.input {
-  position: relative;
-  height: var(--control-medium-size);
+.repository:is(.branches, .tags, .commits:not(.pull)) > .ui.container > .ui.attached.segment > form > .ui.action.input {
   font-size: var(--text-body-size-medium);
 }
 
-.repository.branches .ui.attached.segment > form > .ui.action.input > input[name="q"],
-.repository.commits:not(.pull) > .ui.container > .ui.attached.segment > form > .ui.action.input > input[name="q"],
-.repository.tags > .ui.container > .ui.attached.segment > form > .ui.action.input > input[name="q"] {
+.repository:is(.branches, .tags, .commits:not(.pull)) > .ui.container > .ui.attached.segment > form > .ui.action.input > input[name="q"] {
   height: var(--control-medium-size);
   padding-left: calc(var(--control-medium-paddingInline-normal) + var(--base-size-16) + var(--base-size-8));
   border-radius: var(--borderRadius-medium);
@@ -31,25 +27,20 @@
 }
 
 .repository.commits:not(.pull) > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.dropdown.selection {
-  height: var(--control-medium-size);
   min-height: 0;
   border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
   font-size: var(--text-body-size-medium);
 }
 
 /* the submit button → leading search octicon inside the field */
-.repository.branches .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child,
-.repository.commits:not(.pull) > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child,
-.repository.tags > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child {
+.repository:is(.branches, .tags, .commits:not(.pull)) > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
   z-index: 1; /* above the focused input (z-index 1, earlier in the DOM) */
   justify-content: flex-start;
   width: calc(var(--control-medium-paddingInline-normal) + var(--base-size-16) + var(--base-size-4));
   min-width: 0;
-  height: auto;
   margin: 0;
   padding: 0 0 0 var(--control-medium-paddingInline-normal);
   border: 0;
@@ -59,18 +50,7 @@
   color: var(--fgColor-muted);
 }
 
-.repository.branches .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child:hover,
-.repository.commits:not(.pull) > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child:hover,
-.repository.tags > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child:hover,
-.repository.branches .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child:active,
-.repository.commits:not(.pull) > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child:active,
-.repository.tags > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child:active {
+.repository:is(.branches, .tags, .commits:not(.pull)) > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child:is(:hover, :active) {
   background: transparent;
   color: var(--fgColor-default);
-}
-
-.repository.branches .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child > .svg,
-.repository.commits:not(.pull) > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child > .svg,
-.repository.tags > .ui.container > .ui.attached.segment > form > .ui.action.input > .ui.icon.button:last-child > .svg {
-  margin: 0;
 }

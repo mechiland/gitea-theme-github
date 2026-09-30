@@ -11,13 +11,6 @@
  */
 #commits-table {
   display: block;
-  margin: 0;
-  border: 0;
-  background: transparent;
-}
-
-#commits-table > thead {
-  display: none;
 }
 
 #commits-table > tbody {
@@ -39,69 +32,36 @@
   background: transparent;
 }
 
-#commits-table > tbody > tr:first-child {
-  border-top: 0;
-}
-
-#commits-table > tbody > tr:hover {
-  background: var(--bgColor-muted);
-}
-
-#commits-table > tbody > tr > td {
-  display: block;
+#commits-table td {
   min-width: 0;
   padding: 0;
   border: 0;
-  background: transparent;
-  white-space: nowrap;
 }
 
 /* line 1: title */
-#commits-table > tbody > tr > td.message {
+#commits-table td.message {
   grid-area: msg;
   overflow: hidden;
-  color: var(--fgColor-default);
   font-size: var(--text-body-size-large);
   font-weight: var(--base-text-weight-medium);
   line-height: var(--base-size-24);
   white-space: normal;
 }
 
-#commits-table td.message .message-wrapper {
-  display: inline;
-}
-
-#commits-table td.message a.muted,
-#commits-table td.message .commit-summary {
-  color: var(--fgColor-default);
-}
-
-#commits-table td.message a.muted:hover {
-  color: var(--fgColor-accent);
-  text-decoration: underline;
-}
-
-#commits-table td.message .commit-summary code {
-  font-size: var(--text-body-size-small);
-}
-
 #commits-table td.message .commit-body {
   margin: var(--base-size-4) 0 0;
   color: var(--fgColor-muted);
-  font-family: var(--fontStack-monospace);
   font-size: var(--text-body-size-small);
   font-weight: var(--base-text-weight-normal);
   line-height: var(--text-body-lineHeight-small);
-  white-space: pre-wrap;
 }
 
 #commits-table td.message > .ui.label {
   margin-left: var(--base-size-4);
-  vertical-align: middle;
 }
 
 /* line 2: author + date */
-#commits-table > tbody > tr > td.author {
+#commits-table td.author {
   grid-area: author;
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
@@ -110,27 +70,9 @@
 
 #commits-table td.author .avatar-stack-names {
   max-width: none;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--base-size-4);
 }
 
-#commits-table td.author .ui.avatar {
-  width: var(--base-size-16);
-  height: var(--base-size-16);
-}
-
-#commits-table td.author a.muted {
-  color: var(--fgColor-muted);
-  font-weight: var(--base-text-weight-normal);
-}
-
-#commits-table td.author a.muted:hover {
-  color: var(--fgColor-accent);
-  text-decoration: underline;
-}
-
-#commits-table > tbody > tr > td:nth-child(4) {
+#commits-table td:nth-child(4) {
   grid-area: date;
   overflow: hidden;
   color: var(--fgColor-muted);
@@ -140,7 +82,7 @@
 }
 
 /* right: SHA button + icon buttons */
-#commits-table > tbody > tr > td.sha {
+#commits-table td.sha {
   grid-area: sha;
   display: flex;
   align-items: center;
@@ -149,10 +91,7 @@
 }
 
 #commits-table td.sha .ui.label.commit-id-short {
-  display: inline-flex;
-  align-items: center;
   height: var(--control-small-size);
-  margin: 0;
   padding: 0 var(--control-small-paddingInline-condensed);
   border: var(--borderWidth-thin) solid transparent;
   background: transparent;
@@ -168,30 +107,14 @@
   text-decoration: none;
 }
 
-#commits-table > tbody > tr > td:last-child {
+#commits-table td:last-child {
   grid-area: act;
   display: flex;
   align-items: center;
 }
 
-#commits-table td:last-child > .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--control-small-size);
-  height: var(--control-small-size);
-  border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-muted);
-}
-
-#commits-table td:last-child > .btn:hover {
-  background: var(--control-transparent-bgColor-hover);
-  color: var(--fgColor-default);
-}
-
 /* Box around the list: the attached table segment keeps data-display's Box frame; no inner padding */
 .ui.attached.table.segment.commit-table {
-  padding: 0;
   overflow: hidden;
 }
 
@@ -202,53 +125,45 @@
       "msg msg msg"
       "author date act";
   }
-
-  #commits-table > tbody > tr > td.sha {
-    display: none;
-  }
 }
 
 /* ---------- commit page header (templates/repo/commit_page.tmpl .commit-header-buttons) ----------
    Gitea renders "Browse Source" and "Operations ▾" as green primary buttons; github.com's "Browse files" is a
    default (secondary) button. Every state is restated because this layer sits above controls. */
-.repository.diff .commit-header-buttons > .ui.primary.button {
+.commit-header-buttons > .ui.primary.button {
   border-color: var(--button-default-borderColor-rest);
   background: var(--button-default-bgColor-rest);
   box-shadow: var(--button-default-shadow-resting);
   color: var(--button-default-fgColor-rest);
 }
 
-.repository.diff .commit-header-buttons > .ui.primary.button:hover {
+.commit-header-buttons > .ui.primary.button:hover {
   border-color: var(--button-default-borderColor-hover);
   background: var(--button-default-bgColor-hover);
   color: var(--button-default-fgColor-rest);
 }
 
-.repository.diff .commit-header-buttons > .ui.primary.button:active,
-.repository.diff .commit-header-buttons > .ui.primary.button[aria-expanded="true"],
-.repository.diff .commit-header-buttons > .ui.primary.active.button {
+.commit-header-buttons > .ui.primary.button:active,
+.commit-header-buttons > .ui.primary.button[aria-expanded="true"],
+.commit-header-buttons > .ui.primary.active.button {
   border-color: var(--button-default-borderColor-active);
   background: var(--button-default-bgColor-active);
   box-shadow: none;
   color: var(--button-default-fgColor-rest);
 }
 
-.repository.diff .commit-header-buttons > .ui.primary.button:focus-visible {
+.commit-header-buttons > .ui.primary.button:focus-visible {
   box-shadow: none;
 }
 
 /* github.com "Browse files" is a medium Button: 32px, 14px / 500, 12px inline padding (130×32) */
-.repository.diff .commit-header-buttons > .ui.tiny.button {
+.commit-header-buttons > .ui.tiny.button {
   height: var(--control-medium-size);
   min-height: 0;
   padding: 0 var(--control-medium-paddingInline-normal);
   font-size: var(--text-body-size-medium);
   font-weight: var(--base-text-weight-medium);
   line-height: var(--base-size-20);
-}
-
-.repository.diff .commit-header-buttons > .ui.primary.button > .svg {
-  color: var(--fgColor-muted);
 }
 
 /* ---------- commit graph Mono / Color toggle (request from controls, wave 3 r1) ----------
@@ -265,19 +180,14 @@
    The container becomes a two-column grid: the header moves up as the page heading (row 1), the button row and the
    ref summary share row 2 (left / right; the summary's commits link duplicates the heading and is dropped), and
    everything else spans both columns below. Compare / PR commits keep the attached layout. */
-.repository.commits:not(.pull) > .ui.container {
+.commits:not(.pull) > .ui.container {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   column-gap: var(--base-size-16);
   align-items: center;
 }
 
-.repository.commits:not(.pull) > .ui.container > * {
-  grid-column: 1 / -1;
-  min-width: 0;
-}
-
-.repository.commits:not(.pull) > .ui.container > .ui.top.attached.header {
+.commits:not(.pull) > .ui.container > .ui.top.attached.header {
   grid-row: 1;
   width: auto;
   min-height: 0;
@@ -287,55 +197,45 @@
   border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
   border-radius: 0;
   background: transparent;
-  color: var(--fgColor-default);
   font-size: var(--base-size-24); /* Primer .h2 / PageHeader title: 24px, no primitive type token */
   font-weight: var(--base-text-weight-normal);
   line-height: var(--base-text-lineHeight-normal);
 }
 
-.repository.commits:not(.pull) > .ui.container > .repo-button-row {
+.commits:not(.pull) > .ui.container > .repo-button-row {
   grid-row: 2;
   grid-column: 1;
   margin: 0;
 }
 
-.repository.commits:not(.pull) > .ui.container > .repository-summary {
+.commits:not(.pull) > .ui.container > .repository-summary {
   grid-row: 2;
   grid-column: 2;
 }
 
-.repository.commits:not(.pull) > .ui.container > .repository-summary .item[href*="/commits/"] {
-  display: none;
-}
-
-.repository.commits:not(.pull) > .ui.container > .repo-button-row ~ :not(.ui.top.attached.header) {
+.commits:not(.pull) > .ui.container > .repo-button-row ~ :not(.ui.top.attached.header) {
   margin-top: var(--base-size-16);
 }
 
 /* phones: the branch picker and Commit Graph keep one row; the ref links go to their own row under it */
 @media (max-width: 767.98px) {
-  .repository.commits:not(.pull) > .ui.container > .repository-summary {
+  .commits:not(.pull) > .ui.container > .repository-summary {
     grid-row: 3;
     grid-column: 1 / -1;
-    margin-top: var(--base-size-8);
   }
 }
 
-.repository.commits:not(.pull) > .ui.container > .ui.attached.segment:has(> form) {
-  width: auto;
-  margin-bottom: 0;
+.commits:not(.pull) > .ui.container > .ui.attached.segment:has(> form) {
   padding: 0;
   border: 0;
-  border-radius: 0;
   background: transparent;
 }
 
 /* the search field itself: list-search.css */
 
-.repository.commits:not(.pull) > .ui.container > .ui.attached.table.segment.commit-table {
+.commits:not(.pull) > .ui.container > .ui.attached.table.segment.commit-table {
   width: auto;
   margin-inline: 0;
-  margin-bottom: 0;
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-radius: var(--borderRadius-medium);
 }

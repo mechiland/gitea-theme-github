@@ -9,26 +9,23 @@
  * Gitea: .item-leading | .item-main > .item-header > (.item-title | .item-trailing = language, stars, PRs, forks)
  * + .item-body (description) + .label-list (topics) + .item-body ("Updated …"). .item-main becomes a grid so the
  * counters move under the description, before "Updated". Issue lists also use .item-header, hence the page scope.
- * Short selectors on purpose (theme size budget): `.profile` = user + org profile, `.repositories` = explore.
+ * Short selectors on purpose (theme size budget): `.profile` = user + org profile; `.explore` for anything with
+ * .item-header / .item-trailing (only explore → repositories has them), `.repositories` otherwise.
  */
 
-:is(.profile, .repositories) .item-main:has(> .item-header) {
+:is(.profile, .explore) .item-main:has(> .item-header) {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: var(--base-size-4) var(--base-size-16);
 }
 
-:is(.profile, .repositories) .item-main:has(> .item-header) > * {
+:is(.profile, .explore) .item-main:has(> .item-header) > * {
   grid-column: 1 / -1;
   min-width: 0;
 }
 
-:is(.profile, .repositories) .item-main > .item-header {
-  display: contents;
-}
-
-:is(.profile, .repositories) .item-header > .item-title {
+:is(.profile, .explore) .item-header > .item-title {
   grid-column: 1 / -1;
   gap: 0 var(--base-size-4);
   color: var(--fgColor-muted);
@@ -37,42 +34,41 @@
 }
 
 /* org home (Box-rows) and explore (cards): 16px/24px titles */
-:is(.organization, .repositories) .item-header > .item-title {
+:is(.organization, .explore) .item-header > .item-title {
   font-size: var(--text-body-size-large);
-  line-height: var(--text-body-lineHeight-large);
 }
 
-:is(.profile, .repositories) .item-header a.name {
+:is(.profile, .explore) .item-header a.name {
   font-weight: var(--base-text-weight-semibold);
 }
 
-.repositories .item-header a.name {
+.explore .item-header a.name {
   font-weight: var(--base-text-weight-medium);
 }
 
 /* "owner / name": the owner part is regular weight (github.com stars tab) */
-:is(.profile, .repositories) .item-header a.name:not(:last-of-type) {
+:is(.profile, .explore) .item-header a.name:not(:last-of-type) {
   font-weight: var(--base-text-weight-normal);
 }
 
-:is(.profile, .repositories) .item-header .label-list {
+:is(.profile, .explore) .item-header .label-list {
   display: inline-flex;
   gap: var(--base-size-4);
   margin-left: var(--base-size-4);
 }
 
 /* description */
-:is(.profile, .repositories) .item-header ~ .item-body:not(:last-child) {
+:is(.profile, .explore) .item-header ~ .item-body:not(:last-child) {
   max-width: 75%;
 }
 
-.repositories .item-header ~ .item-body:not(:last-child) {
+.explore .item-header ~ .item-body:not(:last-child) {
   max-width: none;
   color: var(--fgColor-default);
 }
 
 /* topics */
-:is(.profile, .repositories) .item-header ~ .label-list {
+:is(.profile, .explore) .item-header ~ .label-list {
   display: flex;
   flex-wrap: wrap;
   gap: var(--base-size-4);
@@ -80,7 +76,7 @@
 }
 
 /* meta line: language · stars · PRs · forks, then "Updated …" */
-:is(.profile, .repositories) :is(.item-header > .item-trailing, .item-header ~ .item-body:last-child) {
+:is(.profile, .explore) :is(.item-header > .item-trailing, .item-header ~ .item-body:last-child) {
   order: 1;
   grid-column: 1;
   margin-top: var(--base-size-4);
@@ -88,21 +84,17 @@
   font-size: var(--text-body-size-small);
 }
 
-:is(.profile, .repositories) .item-header > .item-trailing {
+:is(.profile, .explore) .item-header > .item-trailing {
   gap: var(--base-size-4) var(--base-size-16);
 }
 
-:is(.profile, .repositories) .item-header ~ .item-body:last-child {
+:is(.profile, .explore) .item-header ~ .item-body:last-child {
   grid-column: 2;
   display: block;
 }
 
-:is(.profile, .repositories) .item-trailing > a {
-  gap: var(--base-size-4);
-}
-
 /* language dot: 12px, 1px translucent ring (github.com .repo-language-color) */
-:is(.profile, .repositories) .item-trailing .color-icon {
+:is(.profile, .explore) .item-trailing .color-icon {
   width: var(--base-size-12);
   height: var(--base-size-12);
   border: var(--borderWidth-thin) solid var(--borderColor-translucent);
@@ -115,69 +107,42 @@
   border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
 }
 
-.profile .item:has(> .item-main > .item-header) > .item-leading {
-  display: none;
-}
-
-/* org home: Box-rows (the Box itself is in org.css) */
-.organization.profile .flex-divided-list > .item {
+/* org home / People: Box-rows (the Box itself is in box.css); explore: search-result cards (users / organizations
+   share them, explore.css) */
+:is(.organization.profile, .members, .explore) .flex-divided-list > .item {
   padding: var(--base-size-16);
 }
 
-/* explore: search-result cards (users / organizations share them, explore.css) */
-.explore .flex-divided-list {
-  gap: var(--base-size-16);
-}
-
-.explore .flex-divided-list > .item {
-  padding: var(--base-size-16);
-}
-
-.repositories .flex-divided-list > .item {
-  gap: var(--base-size-8);
-}
-
-/* Gitea renders a 24px repo octicon (and .svg[width="24"] { min-width: 24px }): a 16px muted glyph */
+/* Gitea renders a 24px repo octicon (and .svg[width="24"] { min-width: 24px }): a muted glyph, 16px in merged.css */
 .repositories .item-leading {
   align-items: center;
   height: var(--base-size-24);
   color: var(--fgColor-muted);
 }
 
-.repositories .item-leading > .svg {
-  width: var(--base-size-16);
-  min-width: var(--base-size-16);
-  height: var(--base-size-16);
-  min-height: var(--base-size-16);
-}
-
 /* " · " between the meta parts, like github.com's search results */
-.repositories .item-header > .item-trailing {
+.explore .item-header > .item-trailing {
   gap: var(--base-size-4) var(--base-size-8);
 }
 
-.repositories .item-trailing > a:not(:last-child)::after,
-.repositories .item-header ~ .item-body:last-child::before {
+.explore .item-trailing > a:not(:last-child)::after {
   content: "·";
   margin-left: var(--base-size-4);
 }
 
-.repositories .item-header ~ .item-body:last-child {
+.explore .item-header ~ .item-body:last-child {
   margin-left: calc(var(--base-size-8) * -1);
 }
 
-.repositories .item-header ~ .item-body:last-child::before {
+.explore .item-header ~ .item-body:last-child::before {
+  content: "·";
   margin: 0 var(--base-size-8) 0 0;
 }
 
 /* ---------- filter bar: search input with a leading icon + Filter / Sort buttons ---------- */
-:is(.profile, .explore) .ui.secondary.filter.menu {
+:is(.profile, .explore) .filter.menu {
   min-height: 0;
   margin: 0;
-}
-
-:is(.profile, .explore) .filter.menu > form {
-  gap: var(--base-size-8);
 }
 
 :is(.profile, .explore) .filter.menu > form > .ui.action.input {
@@ -186,25 +151,20 @@
 
 /* github.com: a medium TextInput ("Find a repository…") with a leading, non-interactive search octicon.
    Gitea's attached search button (still the submit control) is laid over the input's start as that icon. */
-:is(.profile, .explore, .members, .teams) form .ui.action.input:has(> input[name="q"]) {
-  position: relative;
-}
-
-:is(.profile, .explore, .members, .teams) form .ui.action.input > input[name="q"] {
+:is(.profile, .explore, .members, .teams) .action.input > [name="q"] {
   min-height: var(--control-medium-size);
   padding: 0 var(--control-medium-paddingInline-normal) 0 var(--base-size-32);
   border-radius: var(--borderRadius-medium);
   font-size: var(--text-body-size-medium);
 }
 
-:is(.profile, .explore, .members, .teams) form .ui.action.input > input[name="q"] ~ .ui.button:last-child {
+:is(.profile, .explore, .members, .teams) .action.input > [name="q"] ~ .button {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   z-index: 1;
   width: var(--base-size-32);
-  min-height: 0;
   padding: 0;
   border: 0;
   background: none;
@@ -212,12 +172,8 @@
   color: var(--fgColor-muted);
 }
 
-:is(.profile, .explore, .members, .teams) form .ui.action.input > input[name="q"] ~ .ui.button:last-child:hover {
-  color: var(--fgColor-default);
-}
-
 /* Filter ▾ / Sort ▾ → Primer default Button with a trailing caret (github.com "Type ▾", "Sort ▾") */
-:is(.profile, .explore) .filter.menu .item.ui.dropdown {
+:is(.profile, .explore) .filter.menu .dropdown.item {
   height: var(--control-medium-size);
   padding: 0 var(--control-medium-paddingInline-normal);
   border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
@@ -230,29 +186,20 @@
   line-height: var(--text-body-lineHeight-medium);
 }
 
-:is(.profile, .explore) .filter.menu .item.ui.dropdown:hover {
+:is(.profile, .explore) .filter.menu .dropdown.item:hover {
   border-color: var(--button-default-borderColor-hover);
   background: var(--button-default-bgColor-hover);
   color: var(--button-default-fgColor-rest);
 }
 
-:is(.profile, .explore) .filter.menu .item.ui.dropdown:is(:active, .active) {
-  border-color: var(--button-default-borderColor-active);
-  background: var(--button-default-bgColor-active);
-}
-
-:is(.profile, .explore) .filter.menu .item.ui.dropdown:focus-visible {
+:is(.profile, .explore) .filter.menu .dropdown.item:focus-visible {
   outline: var(--focus-outline);
   outline-offset: calc(var(--borderWidth-thick) * -1);
   box-shadow: none;
 }
 
-:is(.profile, .explore) .filter.menu .item.ui.dropdown > .dropdown.icon {
-  color: var(--fgColor-muted);
-}
-
 /* the rule under the filter bar: github.com has one on the profile tab, none on org / search */
-:is(.organization, .explore) .ui.secondary.filter.menu {
+:is(.organization, .explore) .filter.menu {
   margin-bottom: var(--base-size-16);
 }
 
@@ -260,29 +207,4 @@
   margin: var(--base-size-16) 0 0;
   border-top: 0;
   border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
-}
-
-:is(.organization, .explore) :is(.filter.menu, .filter.menu + .ui.message) + .divider {
-  display: none;
-}
-
-@media (max-width: 767.98px) {
-  :is(.profile, .explore) .filter.menu > form > .ui.action.input {
-    flex-basis: 100%;
-    margin-right: 0;
-  }
-
-  :is(.profile, .repositories) .item-header ~ .item-body:not(:last-child) {
-    max-width: none;
-  }
-
-  /* "Updated …" gets its own line under the counters */
-  :is(.profile, .repositories) .item-header ~ .item-body:last-child {
-    grid-column: 1 / -1;
-    margin-left: 0;
-  }
-
-  .repositories .item-header ~ .item-body:last-child::before {
-    content: none;
-  }
 }

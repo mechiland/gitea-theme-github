@@ -1,6 +1,14 @@
 /* src/code → @layer gh.code. Owner: code builder. See ARCHITECTURE.md §5.
  * github.com code surfaces: repo file list, file trees (TreeView), file view + blame, diffs, syntax colours,
  * web editor chrome. Gitea `!important` rules that must be beaten live in code.important.css (gh-important layer).
+ *
+ * Size trim (2026-09-30, 36.1 KB → ~26 KB minified, no visual change): identical declaration blocks share one
+ * selector list (sometimes across files — the moved selector keeps its specificity and no rule in between sets the
+ * same property on the same element with the same specificity), selector lists of equal specificity are factored
+ * with :is(), the Rust syntax rules are regrouped (syntax.css), and declarations that only restated what Gitea's
+ * own CSS already computes through the token map (same computed value in light + dark, 1440 + 390, at rest and
+ * with :hover / :active / :focus forced, on every tested route) or what code.important.css sets !important were
+ * dropped. Before re-adding a "missing" colour / font / border here, check Gitea's rule for the element first.
  */
 @import "./file-icons.css";
 @import "./file-list.css";

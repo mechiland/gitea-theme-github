@@ -33,25 +33,25 @@
   padding: 0;
 }
 
-.repository.labels .issue-label-list > .item,
-.repository.labels .issue-label-list > .item:first-child,
-.repository.labels .issue-label-list > .item:last-child {
+.repository .issue-label-list > .item,
+.repository .issue-label-list > .item:first-child,
+.repository .issue-label-list > .item:last-child {
   align-items: center;
   padding: var(--base-size-16);
 }
 
-.repository.labels .issue-label-list > .item {
+.repository .issue-label-list > .item {
   min-height: calc(var(--base-size-48) + var(--base-size-8) + var(--borderWidth-thin));
   border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
 }
 
-.repository.labels .issue-label-list > .item:last-child {
+.repository .issue-label-list > .item:last-child {
   border-bottom: 0;
 }
 
 /* one line per row like github.com /labels: token column (37.5% of the title area) | description column, then the
    open count and the row actions right-aligned (Gitea: three 33% columns with the description under the token) */
-.repository.labels .issue-label-list > .item .label-title {
+.repository .issue-label-list > .item .label-title {
   display: grid;
   flex: 1 1 auto;
   grid-template-columns: minmax(0, 3fr) minmax(0, 5fr);
@@ -62,19 +62,19 @@
   padding-right: var(--base-size-16);
 }
 
-.repository.labels .issue-label-list > .item .label-title > .ui.label {
+.repository .issue-label-list > .item .label-title > .ui.label {
   justify-self: start;
   max-width: 100%;
 }
 
-.repository.labels .issue-label-list > .item .label-title .desc {
+.repository .issue-label-list > .item .label-title .desc {
   grid-column: 2;
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
   line-height: var(--text-body-lineHeight-medium);
 }
 
-.repository.labels .issue-label-list > .item .label-issues {
+.repository .issue-label-list > .item .label-issues {
   display: flex;
   align-items: center;
   flex: 0 0 auto;
@@ -82,18 +82,18 @@
   padding-right: var(--base-size-16);
 }
 
-.repository.labels .issue-label-list > .item .label-operation {
+.repository .issue-label-list > .item .label-operation {
   flex: 0 0 auto;
   width: auto;
   min-width: calc(var(--base-size-80) + var(--base-size-40));
   gap: var(--base-size-16);
 }
 
-.repository.labels .issue-label-list > .item .label-title > br {
+.repository .issue-label-list > .item .label-title > br {
   display: none;
 }
 
-.repository.labels .issue-label-list > .item .label-issues a {
+.repository .issue-label-list > .item :is(.label-issues, .label-operation) a {
   display: inline-flex;
   align-items: center;
   gap: var(--base-size-4);
@@ -101,48 +101,40 @@
   font-size: var(--text-body-size-small);
 }
 
-.repository.labels .issue-label-list > .item .label-operation a {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--base-size-4);
-  color: var(--fgColor-muted);
-  font-size: var(--text-body-size-small);
-}
-
-.repository.labels .issue-label-list > .item :is(.label-issues, .label-operation) a:hover {
+.repository .issue-label-list > .item :is(.label-issues, .label-operation) a:hover {
   color: var(--fgColor-accent);
   text-decoration: none;
 }
 
-.repository.labels .issue-label-list > .item :is(.label-issues, .label-operation) .svg {
+.repository .issue-label-list > .item :is(.label-issues, .label-operation) .svg {
   width: var(--base-size-16);
   height: var(--base-size-16);
 }
 
 /* phones (github.com /labels at 390): token, description under it, then the count and the actions */
 @media (max-width: 767.98px) {
-  .repository.labels .issue-label-list > .item {
+  .repository .issue-label-list > .item {
     flex-wrap: wrap;
     row-gap: var(--base-size-8);
   }
 
-  .repository.labels .issue-label-list > .item .label-title {
+  .repository .issue-label-list > .item .label-title {
     flex-basis: 100%;
     grid-template-columns: minmax(0, 1fr);
     row-gap: var(--base-size-4);
     padding-right: 0;
   }
 
-  .repository.labels .issue-label-list > .item .label-title .desc {
+  .repository .issue-label-list > .item .label-title .desc {
     grid-column: 1;
   }
 
-  .repository.labels .issue-label-list > .item .label-issues {
+  .repository .issue-label-list > .item .label-issues {
     flex: 1 1 auto;
     width: auto;
   }
 
-  .repository.labels .issue-label-list > .item .label-operation {
+  .repository .issue-label-list > .item .label-operation {
     min-width: 0;
   }
 }

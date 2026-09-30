@@ -5,6 +5,12 @@
  * .job-log-line, .left-list-header), packages (.page-content.packages, .packages-content*), projects list
  * (.page-content.projects) and board (.projects-view, #project-board, .project-column*, cards inside columns).
  * *.important.css in this folder is placed in @layer gh-important by the build.
+ *
+ * Size trim (2026-09-30, budget): selectors are scoped as tightly as the templates allow (each family keeps its
+ * internal specificity order), and declarations that only restated what Gitea or an earlier gh layer already computes
+ * on the same elements were removed (verified per declaration with computed styles on every Actions / Packages /
+ * Projects route, both schemes, 1440 + 390, forced :hover/:focus/:active). Hover / focus / active rules were kept
+ * verbatim. Before re-adding a "missing" property, check what the element already computes.
  */
 @import "./actions-list.css";
 @import "./action-run.css";

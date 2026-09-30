@@ -9,7 +9,7 @@
  * Gitea separates the items with `.divider` elements; the data-display Box frame of `.ui.segment` is removed here.
  */
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right.ui.segment {
+.issue-content-right.ui.segment {
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -20,14 +20,14 @@
   line-height: var(--text-body-lineHeight-medium);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .divider {
+.issue-content-right > .divider {
   margin: var(--base-size-16) 0;
   border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
   border-bottom: 0;
 }
 
 /* ---- section headings: combo dropdown triggers (Reviewers, Labels, Milestone, Projects, Assignees) ---- */
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.dropdown.full-width > .fixed-text {
+.issue-content-right .ui.dropdown.full-width > .fixed-text {
   align-items: center;
   margin-bottom: var(--base-size-8);
   color: var(--fgColor-muted);
@@ -35,37 +35,37 @@
   line-height: var(--text-body-lineHeight-medium);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.dropdown.full-width > .fixed-text strong,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .text > strong,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > div > .text > strong,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > div > .flex-text-block > strong {
+.issue-content-right .ui.dropdown.full-width > .fixed-text strong,
+.issue-content-right > .text > strong,
+.issue-content-right > div > .text > strong,
+.issue-content-right > div > .flex-text-block > strong {
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
   font-weight: var(--base-text-weight-semibold);
   line-height: var(--text-body-lineHeight-medium);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.dropdown.full-width > .fixed-text .svg {
+.issue-content-right .ui.dropdown.full-width > .fixed-text .svg {
   color: var(--fgColor-muted);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.dropdown.full-width:hover > .fixed-text,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.dropdown.full-width:hover > .fixed-text strong,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.dropdown.full-width:hover > .fixed-text .svg {
+.issue-content-right .ui.dropdown.full-width:hover > .fixed-text,
+.issue-content-right .ui.dropdown.full-width:hover > .fixed-text strong,
+.issue-content-right .ui.dropdown.full-width:hover > .fixed-text .svg {
   color: var(--fgColor-accent);
   text-decoration: none;
 }
 
 /* the combo's list (labels, milestone, assignees, reviewers, projects) */
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .issue-sidebar-combo .ui.list {
+.issue-content-right .issue-sidebar-combo .ui.list {
   margin: 0;
   font-size: var(--text-body-size-small);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .empty-list,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.list > .item.empty-list,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.form.tw-mt-2,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.depending > p {
+.issue-content-right .empty-list,
+.issue-content-right .ui.list > .item.empty-list,
+.issue-content-right .ui.form.tw-mt-2,
+.issue-content-right .ui.depending > p {
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
   line-height: var(--text-body-lineHeight-medium);
@@ -77,91 +77,91 @@
   color: var(--fgColor-default);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.list > .item {
+.issue-content-right .ui.list > .item {
   color: var(--fgColor-default);
   font-size: var(--text-body-size-small);
   line-height: var(--text-body-lineHeight-medium);
 }
 
 /* assignee / reviewer rows: 20px avatar + semibold login (github.com .assignee .css-truncate-target) */
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.relaxed.list > .item:not(.empty-list) {
+.issue-content-right .ui.relaxed.list > .item:not(.empty-list) {
   gap: var(--base-size-8);
   padding: var(--base-size-4) 0;
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.relaxed.list > .item .username-display,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.relaxed.list > .item .flex-text-inline > a:not(.ui) {
+.issue-content-right .ui.relaxed.list > .item .username-display,
+.issue-content-right .ui.relaxed.list > .item .flex-text-inline > a:not(.ui) {
   color: var(--fgColor-default);
   font-weight: var(--base-text-weight-semibold);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.relaxed.list > .item a:hover .username-display,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.relaxed.list > .item .flex-text-inline > a:not(.ui):hover {
+.issue-content-right .ui.relaxed.list > .item a:hover .username-display,
+.issue-content-right .ui.relaxed.list > .item .flex-text-inline > a:not(.ui):hover {
   color: var(--fgColor-accent);
 }
 
 /* labels: IssueLabel tokens wrap with a 4px gap */
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.list.labels-list {
+.issue-content-right .ui.list.labels-list {
   gap: var(--base-size-4);
 }
 
 /* milestone: title + progress (data-display owns the bar) */
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.list.muted-links > a.item {
+.issue-content-right .ui.list.muted-links > a.item {
   color: var(--fgColor-default);
   font-weight: var(--base-text-weight-semibold);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.list.muted-links > a.item:hover {
+.issue-content-right .ui.list.muted-links > a.item:hover {
   color: var(--fgColor-accent);
 }
 
 /* participants: 26px avatars with 4px gap (github.com .participant-avatar) */
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .ui.list.tw-flex {
+.issue-content-right > .ui.list.tw-flex {
   gap: var(--base-size-4);
   margin: 0;
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .ui.list.tw-flex img.ui.avatar {
+.issue-content-right > .ui.list.tw-flex img.ui.avatar {
   width: calc(var(--base-size-24) + var(--base-size-2));
   height: calc(var(--base-size-24) + var(--base-size-2));
   margin: 0;
 }
 
 /* "Still in progress? Add WIP: prefix" — a link on github.com's classic sidebar too */
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > a {
+.issue-content-right > a {
   display: inline-block;
   margin-top: var(--base-size-8);
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > a:hover {
+.issue-content-right > a:hover {
   color: var(--fgColor-accent);
 }
 
 /* ---- controls inside the sidebar: small (28px) like github.com's btn-sm ---- */
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.button,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.input > input {
+.issue-content-right .ui.button,
+.issue-content-right .ui.input > input {
   height: var(--control-small-size);
   min-height: var(--control-small-size);
   font-size: var(--text-body-size-small);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.icon.button {
+.issue-content-right .ui.icon.button {
   width: var(--control-small-size);
   min-width: var(--control-small-size);
   padding: 0;
   justify-content: center;
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.watching > .tw-mt-2,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.buttons.tw-mt-2 {
+.issue-content-right .ui.watching > .tw-mt-2,
+.issue-content-right .ui.buttons.tw-mt-2 {
   margin-top: var(--base-size-8);
 }
 
 /* bottom actions: Pin / Lock conversation / Delete → Primer link buttons */
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .single-button-form > .fluid.ui.button,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .fluid.ui.show-modal.button {
+.issue-content-right > .single-button-form > .fluid.ui.button,
+.issue-content-right > .fluid.ui.show-modal.button {
   justify-content: flex-start;
   gap: var(--base-size-8);
   width: auto;
@@ -178,43 +178,43 @@
   line-height: var(--text-body-lineHeight-medium);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .single-button-form > .fluid.ui.button .svg,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .fluid.ui.show-modal.button .svg {
+.issue-content-right > .single-button-form > .fluid.ui.button .svg,
+.issue-content-right > .fluid.ui.show-modal.button .svg {
   color: var(--fgColor-muted);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .single-button-form > .fluid.ui.button:hover,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .fluid.ui.show-modal.button:hover,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .single-button-form > .fluid.ui.button:hover .svg,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .fluid.ui.show-modal.button:hover .svg {
+.issue-content-right > .single-button-form > .fluid.ui.button:hover,
+.issue-content-right > .fluid.ui.show-modal.button:hover,
+.issue-content-right > .single-button-form > .fluid.ui.button:hover .svg,
+.issue-content-right > .fluid.ui.show-modal.button:hover .svg {
   background: transparent;
   color: var(--fgColor-accent);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .single-button-form,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .fluid.ui.show-modal.button {
+.issue-content-right > .single-button-form,
+.issue-content-right > .fluid.ui.show-modal.button {
   display: flex;
   margin-top: 0;
 }
 
 /* "Reference: owner/repo#N" + copy */
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right > .flex-text-block {
+.issue-content-right > .flex-text-block {
   color: var(--fgColor-muted);
 }
 
 /* reviewer rows: re-request / dismiss / state octicons on the right (muted unless Gitea colours the state) */
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.relaxed.list > .item > .flex-text-inline:last-child {
+.issue-content-right .ui.relaxed.list > .item > .flex-text-inline:last-child {
   gap: var(--base-size-4);
   color: var(--fgColor-muted);
 }
 
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.relaxed.list > .item > .flex-text-inline:last-child a:hover {
+.issue-content-right .ui.relaxed.list > .item > .flex-text-inline:last-child a:hover {
   color: var(--fgColor-accent);
 }
 
 /* Gitea-only fields (due date, dependencies): 12px text and 28px controls */
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.form.tw-mt-2 > form,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.depending .ui.input,
-:is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .ui.depending .ui.dropdown {
+.issue-content-right .ui.form.tw-mt-2 > form,
+.issue-content-right .ui.depending .ui.input,
+.issue-content-right .ui.depending .ui.dropdown {
   font-size: var(--text-body-size-small);
 }

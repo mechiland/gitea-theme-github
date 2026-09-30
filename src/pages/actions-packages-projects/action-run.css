@@ -30,12 +30,10 @@
 }
 
 .action-view-back {
-  gap: var(--base-size-4);
   height: var(--base-size-28);
   margin-left: calc(var(--base-size-8) * -1);
   padding: 0 var(--base-size-8);
   border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-muted);
   font-size: var(--text-body-size-medium);
   line-height: var(--base-text-lineHeight-tight);
 }
@@ -73,7 +71,6 @@
   min-height: var(--base-size-32);
   padding-left: calc(var(--base-size-24) + var(--base-size-8));
   font-size: var(--text-title-size-medium);
-  line-height: var(--base-text-lineHeight-normal);
 }
 
 .action-info-summary-title > .svg {
@@ -86,22 +83,11 @@
 
 .action-info-summary-title-text {
   display: inline;
-  color: var(--fgColor-default);
   font-size: var(--text-title-size-medium);
-  font-weight: var(--text-title-weight-medium);
-  line-height: var(--base-text-lineHeight-normal);
-}
-
-.action-info-summary-title-text a {
-  color: var(--fgColor-accent);
 }
 
 .action-info-summary-title-index {
   margin-left: var(--base-size-4);
-  color: var(--fgColor-muted);
-  font-size: var(--text-title-size-medium);
-  font-weight: var(--base-text-weight-normal);
-  line-height: var(--base-text-lineHeight-normal);
 }
 
 .action-info-summary > .flex-text-block {
@@ -135,7 +121,6 @@
   max-width: none;
   margin-left: calc(var(--base-size-8) * -1);
   padding-left: var(--base-size-8);
-  background: var(--bgColor-default);
 }
 
 .action-view-right {
@@ -143,7 +128,6 @@
   width: auto;
   min-width: 0;
   gap: var(--base-size-16);
-  color: var(--fgColor-muted);
 }
 
 /* before the run is loaded the jobs list is empty: reserve four 32px rows so the rows below (and, on narrow
@@ -178,12 +162,8 @@
 .action-view-sidebar-list > .item {
   position: relative;
   margin-right: var(--base-size-8);
-  gap: var(--base-size-8);
   min-height: var(--control-medium-size);
   padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
-  border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-medium);
   line-height: var(--base-size-20);
   transition: background-color var(--base-duration-100) var(--base-easing-linear);
 }
@@ -219,24 +199,13 @@
   outline-offset: calc(var(--borderWidth-thick) * -1);
 }
 
-.action-view-sidebar-list > .item > .svg:not(.job-rerun-button) {
-  flex-shrink: 0;
-}
-
-.action-view-sidebar-list > .item .octicon-home,
-.action-view-sidebar-list > .item .octicon-file-code,
-.action-view-sidebar-list > .item .octicon-lock,
-.action-view-sidebar-list > .item .octicon-file {
+.action-view-sidebar-list > .item :is(.octicon-home, .octicon-file-code, .octicon-lock, .octicon-file) {
   color: var(--fgColor-muted);
 }
 
 /* run-details rows are a div.item wrapping the link: make the link fill the row */
-.action-view-sidebar-list > div.item > a.flex-text-block,
-.action-view-sidebar-list > div.item > span.flex-text-block {
+.action-view-sidebar-list > div.item > :is(a, span).flex-text-block {
   flex: 1;
-  gap: var(--base-size-8);
-  min-width: 0;
-  color: var(--fgColor-default);
 }
 
 .action-view-sidebar-list > div.item:has(> a.flex-text-block) {
@@ -249,17 +218,10 @@
   font-weight: var(--base-text-weight-normal);
 }
 
-.action-view-sidebar-list > .item .job-rerun-button {
-  color: var(--fgColor-muted);
-}
-
 .left-list-header {
   margin-left: calc(var(--base-size-8) * -1);
   padding: var(--base-size-6) var(--base-size-8);
-  color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
-  font-weight: var(--base-text-weight-semibold);
-  line-height: var(--base-text-lineHeight-normal);
 }
 
 .left-list-header + .action-view-sidebar-list {
@@ -269,16 +231,10 @@
 .action-view-left > .ui.divider {
   margin: var(--base-size-8) 0 var(--base-size-8) calc(var(--base-size-8) * -1);
   width: calc(100% + var(--base-size-8));
-  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
   border-bottom: 0;
 }
 
 /* ---------- main column: summary Box + graph Box ---------- */
-.action-view-right-panel {
-  border: var(--borderWidth-thin) solid var(--borderColor-default);
-  border-radius: var(--borderRadius-medium);
-  background: var(--bgColor-default);
-}
 
 .action-view-right-panel:has(> .action-run-summary-view) {
   border: 0;
@@ -287,21 +243,16 @@
 
 .action-run-summary-view {
   gap: var(--base-size-16);
-  color: var(--fgColor-muted);
 }
 
 .action-run-summary-block {
   padding: var(--base-size-20);
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-radius: var(--borderRadius-medium);
-  background: var(--bgColor-default);
   box-shadow: var(--shadow-resting-small);
 }
 
 .action-run-summary-label {
-  margin-bottom: var(--base-size-4);
-  color: var(--fgColor-muted);
-  font-size: var(--text-body-size-small);
   line-height: var(--text-body-lineHeight-medium);
 }
 
@@ -312,14 +263,9 @@
 .action-run-summary-trigger-content {
   gap: var(--base-size-4);
   color: var(--fgColor-default);
-  font-size: var(--text-body-size-medium);
-  line-height: var(--text-body-lineHeight-medium);
 }
 
 .action-run-summary-user {
-  gap: var(--base-size-4);
-  color: var(--fgColor-default);
-  font-weight: var(--base-text-weight-semibold);
   line-height: var(--text-body-lineHeight-medium);
 }
 
@@ -336,11 +282,6 @@
 .action-run-summary-branch-label {
   min-height: 0;
   padding: var(--base-size-2) var(--base-size-6);
-  border-radius: var(--borderRadius-medium);
-  background: var(--bgColor-accent-muted);
-  color: var(--fgColor-accent);
-  font-family: var(--fontStack-monospace);
-  font-size: var(--text-body-size-small);
   line-height: var(--base-text-lineHeight-tight);
 }
 
@@ -350,9 +291,6 @@
 }
 
 .action-run-summary-stat-value {
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-large);
-  font-weight: var(--base-text-weight-semibold);
   line-height: var(--text-body-lineHeight-large);
 }
 
@@ -386,65 +324,49 @@
 }
 
 /* unpainted SVG containers default to black fill (invisible, but off-palette in audits): paint with the text colour */
-.workflow-graph .graph-svg {
+.graph-svg {
   fill: currentcolor;
 }
 
-.workflow-graph .graph-header {
+.graph-header {
   padding: var(--base-size-8) var(--base-size-12) 0;
   background: transparent;
 }
 
-.workflow-graph .graph-workflow-name {
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-large);
-  font-weight: var(--base-text-weight-semibold);
+.graph-workflow-name {
   line-height: var(--text-body-lineHeight-large);
 }
 
-.workflow-graph a.graph-workflow-name:hover {
+a.graph-workflow-name:hover {
   color: var(--fgColor-accent);
   text-decoration: underline;
 }
 
-.workflow-graph .graph-workflow-trigger {
+.graph-workflow-trigger {
   margin-top: 0;
-  color: var(--fgColor-muted);
-  font-size: var(--text-body-size-small);
   line-height: var(--text-body-lineHeight-medium);
 }
 
-.workflow-graph .graph-stats {
-  color: var(--fgColor-muted);
+.graph-stats {
   font-size: var(--text-body-size-small);
 }
 
-.workflow-graph .graph-container {
+.graph-container {
   border-radius: 0;
   background: transparent;
 }
 
-.workflow-graph .job-rect {
-  fill: var(--bgColor-default);
-  stroke: var(--borderColor-default);
-}
-
-.workflow-graph .node-edge {
-  stroke: var(--borderColor-emphasis);
-}
-
-.workflow-graph .job-node-group:hover .job-rect,
-.workflow-graph .job-node-group.related-node .job-rect {
+.job-node-group:is(:hover, .related-node) .job-rect {
   fill: var(--bgColor-default);
   stroke: var(--borderColor-accent-emphasis);
 }
 
-.workflow-graph .highlighted-edge,
-.workflow-graph .highlighted-port {
+.highlighted-edge,
+.highlighted-port {
   stroke: var(--borderColor-accent-emphasis);
 }
 
-.workflow-graph .highlighted-port {
+.highlighted-port {
   fill: var(--borderColor-accent-emphasis);
 }
 

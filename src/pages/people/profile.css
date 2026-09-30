@@ -10,31 +10,27 @@
  * Gitea: templates/user/profile.tmpl (.ui.grid > .column (#profile-avatar-card.ui.card) + .column (overflow-menu +
  * tab content)), shared/user/profile_big_avatar.tmpl. The card's wrappers become `display: contents` so its pieces
  * can be re-ordered into GitHub's order.
+ * Size budget: `.profile .card` = #profile-avatar-card (the only .card on profile pages); `.card li` = its items (no
+ * other .card in Gitea's templates holds an li). Shared declaration blocks: merged.css; phones: media.css.
  */
 
-.user.profile > .ui.container > .ui.grid {
+.user.profile .ui.grid {
   display: grid;
   grid-template-columns: calc(var(--base-size-128) * 2 + var(--base-size-40)) minmax(0, 1fr);
   gap: 0 var(--base-size-24);
   margin: 0;
 }
 
-.user.profile > .ui.container:first-child {
+.user.profile > :first-child {
   margin-top: var(--base-size-32);
 }
 
 /* ---------- sidebar (the Fomantic card flattened into a flex column) ---------- */
-#profile-avatar-card {
+.profile .card {
   width: 100%;
   margin: 0;
   border: 0;
   background: none;
-}
-
-#profile-avatar-card > .content,
-#profile-avatar-card > .extra,
-#profile-avatar-card > .extra > ul {
-  display: contents;
 }
 
 /* above the tab bar's full-width rule (profile.css bottom), which would otherwise cross the avatar */
@@ -49,12 +45,9 @@
   line-height: 0;
 }
 
+/* circle, ring and 1:1 come from data-display's avatar rules */
 #profile-avatar img {
   width: 100%;
-  height: auto;
-  aspect-ratio: 1;
-  border-radius: var(--borderRadius-full);
-  box-shadow: 0 0 0 var(--borderWidth-thin) var(--avatar-borderColor);
 }
 
 /* name block */
@@ -80,10 +73,6 @@
 }
 
 /* no full name: the username stands where the name would be */
-.profile-avatar-name > .username:first-child {
-  margin-top: var(--base-size-16);
-}
-
 /* followers · following (the counts share a text node with the words, so they cannot be bold on their own) */
 .profile-avatar-name > div {
   display: flex;
@@ -101,11 +90,6 @@
   color: var(--fgColor-muted);
 }
 
-.profile-avatar-name > div a:hover {
-  color: var(--fgColor-accent);
-  text-decoration: none;
-}
-
 .profile-avatar-name > div .svg {
   margin-right: var(--base-size-4);
 }
@@ -115,7 +99,7 @@
 }
 
 /* vcard details (location, email, website, joined …); .user-orgs items are reset below */
-#profile-avatar-card li {
+.card li {
   align-items: flex-start;
   gap: var(--base-size-8);
   order: 6;
@@ -124,35 +108,31 @@
   list-style: none;
 }
 
-#profile-avatar-card li > .svg {
+.card li > .svg {
   flex-shrink: 0;
   margin-top: var(--base-size-2);
   color: var(--fgColor-muted);
 }
 
-#profile-avatar-card li a:hover {
-  color: var(--fgColor-accent);
-}
-
 /* bio (rendered description): 16px/24px above the follower line */
-#profile-avatar-card li:has(> .render-content) {
+.card li:has(> .render-content) {
   order: 4;
   margin-bottom: var(--base-size-16);
   padding: 0;
 }
 
-#profile-avatar-card li > .render-content {
+.card li > .render-content {
   font-size: var(--text-body-size-large);
 }
 
 /* Follow / Unfollow: full-width default button (not primary-outline), 16px under the username */
-#profile-avatar-card li.follow {
+.card li.follow {
   order: 3;
   margin: var(--base-size-16) 0;
   padding: 0;
 }
 
-#profile-avatar-card li.follow .ui.button {
+.card li.follow .ui.button {
   width: 100%;
   margin: 0;
   border-color: var(--button-default-borderColor-rest);
@@ -161,64 +141,41 @@
   color: var(--button-default-fgColor-rest);
 }
 
-#profile-avatar-card li.follow .ui.button:hover {
+.card li.follow .ui.button:hover {
   border-color: var(--button-default-borderColor-hover);
   background: var(--button-default-bgColor-hover);
 }
 
-#profile-avatar-card li.follow .ui.button:active {
-  border-color: var(--button-default-borderColor-active);
-  background: var(--button-default-bgColor-active);
-}
-
-#profile-avatar-card li.follow .svg {
-  color: var(--fgColor-muted);
-}
-
 /* organisations: own section with a rule, 32px org avatars 4px apart; badges; "Block user" last (12px muted) */
-#profile-avatar-card li:is(:has(> .user-orgs), :has(> .user-badges), :last-child:has(> a.muted)) {
+.card li:is(:has(> .user-orgs, > .user-badges), :last-child:has(> a.muted)) {
   order: 8;
   margin-top: var(--base-size-16);
   padding: var(--base-size-16) 0 0;
   border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
 }
 
-#profile-avatar-card li:has(> .user-badges) {
+.card li:has(> .user-badges) {
   margin: 0;
   padding: var(--base-size-8) 0 0;
   border: 0;
 }
 
-#profile-avatar-card li:last-child:has(> a.muted) {
+.card li:last-child:has(> a.muted) {
   order: 9;
   font-size: var(--text-body-size-small);
 }
 
-#profile-avatar-card li:last-child > a.muted {
-  color: var(--fgColor-muted);
-}
-
-#profile-avatar-card .user-orgs {
-  gap: var(--base-size-4);
-}
-
-#profile-avatar-card .user-orgs img.ui.avatar {
-  width: var(--base-size-32);
-  height: var(--base-size-32);
-}
-
 /* blocked-user notice stays at the top of the details */
-#profile-avatar-card li.tw-text-red {
+.card li.tw-text-red {
   order: 4;
 }
 
 /* ---------- main column: the UnderlineNav's bottom rule runs across the whole page ---------- */
-.user.profile .ui.grid > .column > overflow-menu:first-child {
-  position: relative;
+.user.profile overflow-menu {
   margin-bottom: var(--base-size-24);
 }
 
-.user.profile .ui.grid > .column > overflow-menu:first-child::before {
+.user.profile overflow-menu::before {
   content: "";
   position: absolute;
   left: 0;
@@ -229,58 +186,4 @@
   box-shadow: 0 0 0 100vmax var(--borderColor-muted);
   clip-path: inset(0 -100vmax);
   pointer-events: none;
-}
-
-/* ---------- narrow: avatar beside the name; bio, details, followers, then Follow ---------- */
-@media (max-width: 767.98px) {
-  .user.profile > .ui.container > .ui.grid {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: var(--base-size-24);
-  }
-
-  #profile-avatar-card {
-    display: grid;
-    grid-template-columns: var(--base-size-64) minmax(0, 1fr);
-    column-gap: var(--base-size-16);
-    align-items: center;
-  }
-
-  #profile-avatar-card > *,
-  .profile-avatar-name > *,
-  #profile-avatar-card li {
-    grid-column: 1 / -1;
-  }
-
-  #profile-avatar {
-    grid-column: 1;
-    grid-row: 1 / span 2;
-  }
-
-  .profile-avatar-name > :is(.header, .username) {
-    grid-column: 2;
-    margin-top: 0;
-    align-self: end;
-  }
-
-  .profile-avatar-name > .username {
-    align-self: start;
-  }
-
-  .profile-avatar-name > .username:first-child {
-    grid-row: 1 / span 2;
-    align-self: center;
-  }
-
-  #profile-avatar-card li:has(> .render-content) {
-    margin: var(--base-size-16) 0 var(--base-size-8);
-  }
-
-  .profile-avatar-name > div {
-    order: 7;
-    margin: var(--base-size-8) 0 0;
-  }
-
-  #profile-avatar-card li.follow {
-    order: 7;
-  }
 }

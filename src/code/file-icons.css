@@ -11,10 +11,21 @@
   color: var(--treeViewItem-leadingVisual-iconColor-rest);
 }
 
+/* the --fgColor-muted text colours of the whole code folder share this rule (one declaration block; each
+   selector keeps its own specificity and nothing between here and the rules it came from competes with it):
+   file icons, file-list message column + latest-commit summary links (file list and file view), blame message
+   links, hunk header text, viewed files in the diff tree */
 .svg.octicon-file,
 .svg.octicon-file-symlink-file,
 .svg.octicon-file-directory-symlink,
-.svg.octicon-file-submodule {
+.svg.octicon-file-submodule,
+#repo-files-table .repo-file-cell.message,
+#repo-files-table .repo-file-cell.message a,
+:is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .commit-summary a.muted,
+.lines-commit .blame-info .blame-data .blame-message a,
+.code-diff .tag-code .lines-code .code-inner,
+.code-diff .tag-code .blob-hunk .code-inner,
+.diff-file-tree-items :is(.item-file, .item-directory).viewed {
   color: var(--fgColor-muted);
 }
 

@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-30T06:50:00+08:00",
- "phase": "wave-3 integrated (pages/*: issues-prs, actions-packages-projects, people, auth passed; repo 8.3 and settings-admin 8.4 did not reach 8.5 after 4 rounds); next: whole-site dark pass",
+ "updated": "2026-09-30T10:00:00+08:00",
+ "phase": "wave-3 integrated (pages/*: issues-prs, actions-packages-projects, people, auth passed; repo 8.3 and settings-admin 8.4 did not reach 8.5 after 4 rounds); next: whole-site dark pass; ORC-4 trim round integrated (auto 276.2 KB, under 285 KB target, 0 pixel regressions)",
  "pinned": {
   "gitea": "1.27.3",
   "@primer/primitives": "11.10.0",
@@ -193,7 +193,7 @@
  },
  "openIssues": [
   "ORC-3: install templates/user/settings/layout_head.tmpl (SA-4) + reload-templates",
-  "ORC-4: budget decision — files 331–335 KB vs 300 KB after short var names",
+  "ORC-4 DONE: trim round brought the files to 276.2 / 272.2 / 272.2 KB (limit 300, target 285); pixeldiff 0 unexplained (budget.trim)",
   "Regressions vs built-in still open: directory-tree 390 overflow (code C-5), blame DCL +150ms (code PERF-1), pr-files-changed-unified-large-diff 390 width 754 vs 666 (pre-existing)",
   "Open component requests with no round scheduled: controls SA-C1/IP-C3, navigation PPL-N1, data-display PR-DD-1 + comment header 390",
   "pages/repo (8.3) and pages/settings-admin (8.4) did not pass; pages/repo Compare dropdown off-screen at 390",
@@ -255,25 +255,38 @@
  },
  "themeSizes": {
   "github-light": {
-   "bytes": 338716,
-   "kb": 330.8
+   "bytes": 278760,
+   "kb": 272.2
   },
   "github-dark": {
-   "bytes": 338733,
-   "kb": 330.8
+   "bytes": 278777,
+   "kb": 272.2
   },
   "github-auto": {
-   "bytes": 342815,
-   "kb": 334.8
+   "bytes": 282796,
+   "kb": 276.2
   },
   "budgetKb": 300,
-  "gzipKb": {
-   "github-auto": 51.3,
-   "github-light": 50.1
+  "targetKb": 285,
+  "withinBudget": true,
+  "withinTarget": true,
+  "beforeTrim": {
+   "github-light": {
+    "bytes": 338716,
+    "kb": 330.8
+   },
+   "github-dark": {
+    "bytes": 338733,
+    "kb": 330.8
+   },
+   "github-auto": {
+    "bytes": 342815,
+    "kb": 334.8
+   }
   },
-  "note": "short custom-property names (PPL-1 addendum) cut 435→335 KB; still over budget → ORC-4"
+  "note": "after the trim round (ORC-4), revision 56d1bf8f9d, deployed and SHA-verified; KB = 1024 B; the auto file has 9,044 B (8.8 KB) of headroom under the 285 KB target, and 24,404 B under 300 KB"
  },
- "revision": "f39440e9a0",
+ "revision": "56d1bf8f9d",
  "audit": {
   "run": "shots/integrate-w3 (101 routes x light/dark x 1440/390 = 404 pages, github-auto, rev f39440e9a0)",
   "consoleErrors": 8,
@@ -303,10 +316,10 @@
  },
  "smoke": {
   "result": "green",
-  "steps": "13/13",
+  "steps": "12/12",
   "consoleErrors": 0,
-  "log": "shots/integrate-w3-smoke.log",
-  "run": "shots/20260930-064553-smoke-github-auto"
+  "log": "shots/trim-final-smoke.log",
+  "run": "shots/20260930-095651-smoke-github-auto"
  },
  "budget": {
   "baseline": "shots/baseline-gitea-auto-w2 (gitea-auto, same 272 pages, with audit, same concurrency 3, same server start)",
@@ -350,8 +363,11 @@
   ],
   "dclRegressions": "none reproduced: repo-issues 390 (133→708ms) and repo-settings 390 (99→276ms) were one-offs; compare-two-tags 390 is server-bound and varies 660–2147ms in both themes",
   "sizeKb": {
-   "github-auto": 334.8,
-   "limit": 300
+   "github-auto": 276.2,
+   "github-light": 272.2,
+   "github-dark": 272.2,
+   "limit": 300,
+   "target": 285
   },
   "wave3": {
    "compare": "shots/integrate-w3/budget-compare.json (272 comparable pages); re-runs shots/integrate-w3-budget/compare-{1,2}.json; bisect shots/integrate-w3-budget/bisect",
@@ -384,6 +400,163 @@
     "repo-settings 390 one-off"
    ],
    "newRoutesNoBaseline": "33 routes added in w3 have no gitea-auto baseline (admin theme stays github-auto)"
+  },
+  "trim": {
+   "decision": "ORC-4: 300 KB budget kept; trim round with per-folder caps, target <= 285 KB per file",
+   "metric": "minified @layer block bytes, sliced out of shots/trim-before-css/theme-github-*.css (before) and the deployed dist/theme-github-*.css (after); identical in all three files except gh.tokens",
+   "folders": {
+    "gh.pages-repo": {
+     "beforeBytes": 40768,
+     "afterBytes": 29842,
+     "savedBytes": 10926,
+     "capKb": 30,
+     "capMet": true
+    },
+    "gh.code": {
+     "beforeBytes": 36115,
+     "afterBytes": 26357,
+     "savedBytes": 9758,
+     "capKb": 28,
+     "capMet": true
+    },
+    "gh.pages-issues-prs": {
+     "beforeBytes": 36090,
+     "afterBytes": 26894,
+     "savedBytes": 9196,
+     "capKb": 27,
+     "capMet": true
+    },
+    "gh.controls": {
+     "beforeBytes": 30597,
+     "afterBytes": 25254,
+     "savedBytes": 5343,
+     "capKb": 25,
+     "capMet": true
+    },
+    "gh.pages-actions-packages-projects": {
+     "beforeBytes": 30550,
+     "afterBytes": 20264,
+     "savedBytes": 10286,
+     "capKb": 22,
+     "capMet": true
+    },
+    "gh.pages-people": {
+     "beforeBytes": 26375,
+     "afterBytes": 21701,
+     "savedBytes": 4674,
+     "capKb": 20,
+     "capMet": false
+    },
+    "gh.overlays": {
+     "beforeBytes": 22868,
+     "afterBytes": 18834,
+     "savedBytes": 4034,
+     "capKb": 19,
+     "capMet": true
+    },
+    "gh.pages-settings-admin": {
+     "beforeBytes": 20459,
+     "afterBytes": 14814,
+     "savedBytes": 5645,
+     "capKb": 16,
+     "capMet": true
+    }
+   },
+   "notTrimmed": {
+    "gh-important": {
+     "beforeBytes": 14252,
+     "afterBytes": 14255
+    },
+    "gh.tokens (auto)": {
+     "beforeBytes": 25262,
+     "afterBytes": 25103
+    },
+    "gh.data-display": {
+     "beforeBytes": 18834,
+     "afterBytes": 18836
+    },
+    "gh.navigation": {
+     "beforeBytes": 18739,
+     "afterBytes": 18742
+    },
+    "gh.markdown": {
+     "beforeBytes": 8534,
+     "afterBytes": 8529
+    },
+    "gh.pages-auth": {
+     "beforeBytes": 8044,
+     "afterBytes": 8044
+    },
+    "gh.foundation": {
+     "beforeBytes": 5096,
+     "afterBytes": 5095
+    }
+   },
+   "notTrimmedNote": "the few-byte changes come from the short-name var map shifting after the trim, not from edits",
+   "capsMissed": {
+    "gh.pages-people": "21,701 B vs 20 KB (20,480 B) cap, 1,221 B over; the file total is still under target"
+   },
+   "totalSavedBytes": {
+    "github-auto": 60019,
+    "github-light": 59956,
+    "github-dark": 59956
+   },
+   "pixeldiff": {
+    "tool": "tools/shoot/pixeldiff.mjs --tolerance 4 --minor 50",
+    "final": "shots/trim-final (github-auto, deployed rev 56d1bf8f9d, --states --stable, with audit)",
+    "vsFrozenBaseline": {
+     "a": "shots/trim-before",
+     "out": "shots/trim-final/pixeldiff/pixeldiff.json",
+     "pairs": 1004,
+     "identical": 961,
+     "different": 8,
+     "differentMinor": 6,
+     "differentKnownNoisy": 29,
+     "sizeMismatch": 6,
+     "missing": 0
+    },
+    "vsFreshBaseline": {
+     "a": "shots/trim-final-before (trim-before CSS served via --theme-css, captured right after trim-final, no Gitea writes in between)",
+     "noisyList": "disabled",
+     "out": "shots/trim-final/pixeldiff-fresh/pixeldiff.json",
+     "pairs": 1004,
+     "identical": 981,
+     "different": 13,
+     "differentMinor": 10,
+     "differentKnownNoisy": 0,
+     "sizeMismatch": 0,
+     "missing": 0
+    },
+    "explained": {
+     "site-admin-config (4)": "logger-config JSON prints its keys in random order on each load (Go map); shows up between two old-CSS runs too",
+     "site-admin (4)": "live system status (uptime, memory, GC counters)",
+     "admin-monitor-stats (4)": "live counter, 1819 vs 1821",
+     "pr-conversation-playground-large-diff-reviews (4)": "Reviewers list order differs between loads; it also differs between trim-before and trim-final-before, which use the same CSS",
+     "project-board/states/light-1440-toolbar-hover (1,341 px)": "one card text line rasterized 1 px higher; the layout is identical to 0.001 px under both CSS files (measured), and a re-shoot with the new CSS (shots/trim-final-pb-new2) is pixel-identical to the old-CSS baseline, so it is non-deterministic",
+     "minor <= 28 px (packages-org, package-versions, repo-issues labels hover, repo-home code-menu, pr-conversation-open merge-form/cmdline, user-profile follow)": "anti-aliasing on the edges of the navbar notification dot, the state-badge edge and 1 px on the avatar",
+     "vsFrozenBaseline knownNoisy / sizeMismatch": "notifications, site-admin, home, playground pages: content drift from smoke runs and live data"
+    },
+    "unexplained": 0,
+    "regressions": []
+   },
+   "audit": {
+    "run": "shots/trim-final",
+    "pages": 404,
+    "offPalette": 0,
+    "unresolvedVars": 0,
+    "pagesWithUnlayeredGiteaCss": 0,
+    "nonOcticonIcons": 88,
+    "consoleErrors": "192 = 184 third-party requests blocked by --stable + 8 intentional 404s on not-found routes",
+    "pagesWithProblems": "4, the same as trim-before: repo-home 390 branches-link hover/focus and repo-commits 390 sha-hover (the target is hidden at 390)",
+    "maxCls": "0.3927 home light-390 (dashboard feed mount; built-in 0.375, w3 0.3648; +0.018 over built-in is inside the 0.02 noise threshold)"
+   },
+   "smoke": {
+    "result": "green",
+    "steps": "12/12",
+    "consoleErrors": 0,
+    "run": "shots/20260930-095651-smoke-github-auto",
+    "log": "shots/trim-final-smoke.log"
+   }
   }
  },
  "requests": {

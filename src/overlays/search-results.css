@@ -4,37 +4,20 @@
  * ActionList rows as action-menu.css (32px+ rows, 8px inset, radius 6px, hover --control-transparent-bgColor-hover).
  */
 
+/* overlay chrome, row metrics and hover: action-menu.css */
 .ui.search > .results {
   min-width: var(--overlay-width-xsmall);
   margin-top: var(--overlay-offset);
-  padding: var(--base-size-8) 0;
-  border: 0;
-  border-radius: var(--borderRadius-large);
-  background: var(--overlay-bgColor);
-  box-shadow: var(--shadow-floating-small);
 }
 
-.ui.search > .results > :first-child,
-.ui.search > .results > :last-child {
+.ui.search > .results > :is(:first-child, :last-child) {
   border-radius: var(--borderRadius-medium);
 }
 
 .ui.search > .results .result {
   gap: var(--control-medium-gap);
-  min-height: var(--control-medium-size);
-  margin: 0 var(--base-size-8);
-  padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
   border: 0;
-  border-radius: var(--borderRadius-medium);
   background: transparent;
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-medium);
-  line-height: var(--base-size-20);
-}
-
-.ui.search > .results .result:hover,
-.ui.search > .results .result.active {
-  background: var(--control-transparent-bgColor-hover);
 }
 
 .ui.search > .results .result .image {
@@ -58,46 +41,18 @@
   color: var(--fgColor-muted);
 }
 
-/* ---------- @mention / :emoji: / #issue suggesters (text-expander, tribute) → GitHub suggester overlay ---------- */
-text-expander .suggestions,
-.tribute-container {
-  padding: var(--base-size-8) 0;
-  border: 0;
-  border-radius: var(--borderRadius-large);
-  background: var(--overlay-bgColor);
-  box-shadow: var(--shadow-floating-small);
-}
-
-text-expander .suggestions {
-  margin-top: var(--base-size-24);
-}
-
-text-expander .suggestions li,
-.tribute-container li {
+/* ---------- @mention / :emoji: / #issue suggesters (text-expander; Gitea's 24px offset kept) → GitHub suggester
+   overlay (chrome and row metrics: action-menu.css) ---------- */
+text-expander .suggestions li {
   gap: var(--control-medium-gap);
-  min-height: var(--control-medium-size);
-  margin: 0 var(--base-size-8);
-  padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
-  border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-medium);
   font-weight: var(--base-text-weight-semibold);
-  line-height: var(--base-size-20);
 }
 
-text-expander .suggestions li + li,
-.tribute-container li + li {
+text-expander .suggestions li + li {
   border-top: 0;
 }
 
-text-expander .suggestions li:first-child,
-text-expander .suggestions li:last-child,
-text-expander .suggestions li:only-child {
-  border-radius: var(--borderRadius-medium);
-}
-
-text-expander .suggestions .fullname,
-.tribute-container li .fullname {
+text-expander .suggestions .fullname {
   color: var(--fgColor-muted);
   font-weight: var(--base-text-weight-normal);
 }
@@ -105,15 +60,12 @@ text-expander .suggestions .fullname,
 text-expander .suggestions li:hover,
 text-expander .suggestions li:hover *,
 text-expander .suggestions li[aria-selected="true"],
-text-expander .suggestions li[aria-selected="true"] *,
-.tribute-container li.highlight,
-.tribute-container li.highlight * {
+text-expander .suggestions li[aria-selected="true"] * {
   background: var(--bgColor-accent-emphasis);
   color: var(--fgColor-onEmphasis);
 }
 
-text-expander .suggestions img,
-.tribute-item img {
+text-expander .suggestions img {
   width: var(--base-size-20);
   height: var(--base-size-20);
   border-radius: var(--borderRadius-full);

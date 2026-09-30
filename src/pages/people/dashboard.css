@@ -8,6 +8,8 @@
  * Gitea: templates/user/dashboard/dashboard.tmpl (.page-content.dashboard.feeds > .secondary-nav context bar +
  * .ui.container.flex-container > .flex-container-main (heatmap, #activity-feed) + #dashboard-repo-list
  * .flex-container-sidebar (Vue DashboardRepoList, scoped CSS inside Gitea's layered index.css)).
+ * Size budget: the DashboardRepoList-only classes (.repos-search, .repos-filter, .repo-owner-name-list,
+ * .repo-list-link, .empty-repo-or-org) go without the #dashboard-repo-list prefix. Phone rules: mobile.css.
  */
 
 /* ---------- page layout ---------- */
@@ -22,11 +24,11 @@
   gap: 0;
 }
 
-.dashboard > .secondary-nav:first-child {
+.dashboard > .secondary-nav {
   margin-bottom: 0;
 }
 
-.feeds > .flex-container > .flex-container-sidebar {
+.feeds .flex-container-sidebar {
   order: -1;
   flex: 0 0 auto;
   width: calc(var(--base-size-128) * 2 + var(--base-size-64));
@@ -35,102 +37,64 @@
   border-right: var(--borderWidth-thin) solid var(--borderColor-muted);
 }
 
-.feeds > .flex-container > .flex-container-main {
+.feeds .flex-container-main {
   max-width: calc(var(--breakpoint-large) + var(--base-size-64));
   padding: var(--base-size-24) var(--base-size-32) var(--base-size-40);
 }
 
-@media (max-width: 767.98px) {
-  .feeds > .flex-container {
-    padding-left: 0;
-  }
-
-  .feeds > .flex-container > .flex-container-sidebar {
-    width: auto;
-    margin-left: 0;
-    border-right: 0;
-    border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
-  }
-
-  .feeds > .flex-container > .flex-container-main {
-    padding: var(--base-size-16);
-  }
-}
-
 /* ---------- context bar (switch dashboard context / org tabs) ---------- */
-.dashboard > .secondary-nav > .ui.menu {
+.dashboard > .secondary-nav > .menu {
   align-items: center;
   min-height: var(--base-size-48);
   padding: 0 var(--base-size-8);
 }
 
-.dashboard > .secondary-nav .ui.dropdown > .text {
+.dashboard > .secondary-nav .dropdown > .text {
   display: inline-flex;
   align-items: center;
   gap: var(--base-size-8);
   font-weight: var(--base-text-weight-semibold);
 }
 
-.dashboard > .secondary-nav .ui.dropdown > .text > * {
-  margin: 0;
-}
-
-.dashboard > .secondary-nav .ui.dropdown > .text > .icon,
-.dashboard > .secondary-nav .right.menu > .item > .svg {
-  color: var(--fgColor-muted);
-}
-
-.dashboard > .secondary-nav .right.menu > .item {
+.dashboard .right.menu > .item {
   gap: var(--base-size-8);
   border-radius: var(--borderRadius-medium);
 }
 
-.dashboard > .secondary-nav .right.menu > a.item:hover {
-  background: var(--control-transparent-bgColor-hover);
-}
-
-.dashboard > .secondary-nav .right.menu > .item.active {
+.dashboard .right.menu > .active {
   background: var(--control-transparent-bgColor-selected);
   font-weight: var(--base-text-weight-semibold);
 }
 
 /* ---------- sidebar: DashboardRepoList.vue ---------- */
 /* Repository | Organization → SegmentedControl (track 32px, knob on the selected item) */
-#dashboard-repo-list .ui.two.item.menu {
+#dashboard-repo-list .two.menu {
   min-height: var(--control-medium-size);
   margin: 0 0 var(--base-size-16);
-  border: var(--borderWidth-thin) solid var(--controlTrack-borderColor-rest);
   border-radius: var(--borderRadius-medium);
   background: var(--controlTrack-bgColor-rest);
 }
 
-#dashboard-repo-list .ui.two.item.menu > .item {
+#dashboard-repo-list .two.menu > .item {
   flex: 1 1 0;
   padding: 0 var(--base-size-12);
   border: var(--borderWidth-thin) solid transparent;
   border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-medium);
   line-height: var(--text-body-lineHeight-medium);
-  cursor: pointer;
 }
 
-#dashboard-repo-list .ui.two.item.menu > .item::before {
-  display: none;
-}
-
-#dashboard-repo-list .ui.two.item.menu > .item:hover {
+#dashboard-repo-list .two.menu > .item:hover {
   background: var(--controlTrack-bgColor-hover);
 }
 
-#dashboard-repo-list .ui.two.item.menu > .item.active {
+#dashboard-repo-list .two.menu > .item.active {
   border-color: var(--controlKnob-borderColor-rest);
   background: var(--controlKnob-bgColor-rest);
   font-weight: var(--base-text-weight-semibold);
 }
 
 /* "Repositories 8  +" heading */
-#dashboard-repo-list .ui.top.attached.header {
+#dashboard-repo-list .top.header {
   gap: var(--base-size-8);
   margin: 0;
   padding: 0 0 var(--base-size-8);
@@ -147,49 +111,44 @@
   color: var(--fgColor-muted);
 }
 
-#dashboard-repo-list .ui.header > a.muted:hover {
-  background: var(--control-transparent-bgColor-hover);
-  color: var(--fgColor-default);
-}
-
-#dashboard-repo-list .ui.attached.segment {
+#dashboard-repo-list .attached.segment {
   margin: 0;
   padding: 0;
   border: 0;
   background: none;
 }
 
-#dashboard-repo-list .ui.attached.segment.repos-search {
+#dashboard-repo-list .segment.repos-search {
   margin-bottom: var(--base-size-8);
 }
 
 /* Gitea focuses the filter input on load; the focused input (position: relative; z-index: 1 in controls) would paint
    over the absolutely positioned leading search icon */
-#dashboard-repo-list .repos-search i.icon {
+.repos-search i.icon {
   z-index: 1;
 }
 
 /* All / Sources / Forks / Mirrors / Collaborative: a compact UnderlineNav */
-#dashboard-repo-list .repos-filter {
+.repos-filter {
   min-height: var(--base-size-40);
 }
 
-#dashboard-repo-list .repos-filter .overflow-menu-items {
+.repos-filter .overflow-menu-items {
   gap: 0;
 }
 
-#dashboard-repo-list .repos-filter .item {
+.repos-filter .item,
+.repo-owner-name-list > li > .tw-text-grey-light {
   gap: var(--base-size-4);
   font-size: var(--text-body-size-small);
 }
 
-#dashboard-repo-list .repos-filter .active.item::after {
+.repos-filter .active::after {
   bottom: calc(50% - var(--base-size-20));
 }
 
 /* repo rows */
-
-#dashboard-repo-list .repo-owner-name-list > li {
+.repo-owner-name-list > li {
   gap: var(--base-size-8);
   padding-left: 0;
   padding-right: 0;
@@ -197,80 +156,52 @@
   border-radius: var(--borderRadius-medium);
 }
 
-#dashboard-repo-list .repo-owner-name-list > li.active {
-  background: var(--control-transparent-bgColor-hover);
-}
-
-#dashboard-repo-list .repo-list-link {
+.repo-list-link {
   gap: var(--base-size-8);
   font-weight: var(--base-text-weight-semibold);
 }
 
-#dashboard-repo-list .repo-list-link:hover {
+.repo-list-link:hover {
   color: var(--fgColor-accent);
   text-decoration: underline;
 }
 
-#dashboard-repo-list .repo-list-link .svg {
-  margin: 0;
-}
-
-#dashboard-repo-list .repo-owner-name-list .ui.label {
+/* org rows: visibility label */
+.repo-owner-name-list .ui.label {
   font-weight: var(--base-text-weight-medium);
 }
 
-/* org rows: "N ⎕" repo count */
-#dashboard-repo-list .repo-owner-name-list > li > .tw-text-grey-light {
-  gap: var(--base-size-4);
-  font-size: var(--text-body-size-small);
-}
-
-#dashboard-repo-list .empty-repo-or-org {
+.empty-repo-or-org {
   margin: var(--base-size-16) 0;
   color: var(--fgColor-muted);
 }
 
-/* paging under the list */
-#dashboard-repo-list .tw-text-center > .divider {
-  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
-}
-
-/* icons P-1: Gitea glyphs in the Vue list → Octicons via CSS mask (the icons are bundled in JS) */
-.dashboard-repos :is(.gitea-exclamation, .gitea-double-chevron-left, .gitea-double-chevron-right) {
+/* icons P-1: Gitea glyphs in the Vue list → Octicons via CSS mask (the icons are bundled in JS). The only gitea-*
+   icons of the repo tab are gitea-exclamation (commit status) and gitea-double-chevron-left/right (paging). The glyph
+   is chosen through the folder-local --gh-i so the (prefixed) mask shorthand is written once. */
+.dashboard-repos [class*="gitea-"] {
+  --gh-i: var(--gh-octicon-alert);
   background-color: currentColor;
-  mask: var(--gh-octicon-alert) center / contain no-repeat;
+  mask: var(--gh-i) center / contain no-repeat;
 }
 
 .dashboard-repos .gitea-double-chevron-left {
-  mask-image: var(--gh-octicon-move-to-start);
+  --gh-i: var(--gh-octicon-move-to-start);
 }
 
 .dashboard-repos .gitea-double-chevron-right {
-  mask-image: var(--gh-octicon-move-to-end);
+  --gh-i: var(--gh-octicon-move-to-end);
 }
 
-.dashboard-repos :is(.gitea-exclamation, .gitea-double-chevron-left, .gitea-double-chevron-right) > * {
+.dashboard-repos [class*="gitea-"] > * {
   visibility: hidden;
 }
 
 /* ---------- activity feed (dashboard + profile "Public Activity") ---------- */
-#activity-feed > .item {
-  gap: var(--base-size-16);
-}
-
-#activity-feed > .item > .item-leading img.ui.avatar {
-  width: var(--base-size-32);
-  height: var(--base-size-32);
-}
-
-#activity-feed .item-main > div:first-child > a {
+#activity-feed .item-main > div:first-child > a,
+#activity-feed .item-main > .issue.title {
   color: var(--fgColor-default);
   font-weight: var(--base-text-weight-semibold);
-}
-
-#activity-feed .item-main > div:first-child > a:hover,
-#activity-feed .item-main > a.issue.title:hover {
-  color: var(--fgColor-accent);
 }
 
 #activity-feed .item-main > div:first-child > relative-time {
@@ -296,19 +227,9 @@
   padding: var(--base-size-12) var(--base-size-16);
 }
 
-#activity-feed .item-main > div > .flex-text-block {
-  font-size: var(--text-body-size-small);
-}
-
 #activity-feed .item-main > a[href*="/compare/"] {
   align-self: flex-start;
   font-size: var(--text-body-size-small);
-}
-
-/* issue / PR title under the event line */
-#activity-feed .item-main > .issue.title {
-  color: var(--fgColor-default);
-  font-weight: var(--base-text-weight-semibold);
 }
 
 /* comment excerpt (Box card), muted text */
@@ -317,6 +238,3 @@
   color: var(--fgColor-muted);
 }
 
-#activity-feed > :is(.ui.pagination.menu, .center.page.buttons) {
-  margin-top: var(--base-size-16);
-}

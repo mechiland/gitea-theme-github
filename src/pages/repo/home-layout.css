@@ -33,7 +33,6 @@
   .repo-grid-filelist-sidebar > .repo-home-sidebar-top {
     flex: 0 0 100%;
     order: 7;
-    min-width: 0;
   }
 
   .repo-grid-filelist-sidebar > .repo-home-filelist > #readme {
@@ -44,7 +43,6 @@
   .repo-grid-filelist-sidebar > .repo-home-sidebar-bottom {
     flex: 0 0 100%;
     order: 9;
-    min-width: 0;
     margin-top: var(--base-size-16);
   }
 }

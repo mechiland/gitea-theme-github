@@ -22,7 +22,6 @@
 .tippy-box[data-theme="bare"],
 .tippy-box[data-theme="menu"],
 .tippy-box[data-theme="box-with-header"] {
-  border: 0;
   box-shadow: var(--shadow-floating-small);
 }
 
@@ -39,29 +38,30 @@
 
 /* anchor gap: Gitea places every tippy 6px (= --base-size-6, tippy.ts `offset: [0, 6]`) from its anchor; Primer
    overlays and tooltips sit --overlay-offset (4px) away. The code editor's context menu opens at the pointer
-   (offset 0) and is left alone. */
-.tippy-box[data-placement^="top"]:not(:has(> .tippy-content > .cm-context-menu)) {
-  translate: 0 calc(var(--base-size-6) - var(--overlay-offset));
+   (offset 0) and is left alone:
+   --gh-tn (folder-local) is the nudge; it stays undefined on the context menu, so `translate` there is invalid at
+   computed-value time → none (also where :has() is unsupported, as before). */
+.tippy-box:not(:has(> .tippy-content > .cm-context-menu)) {
+  --gh-tn: calc(var(--base-size-6) - var(--overlay-offset));
 }
 
-.tippy-box[data-placement^="bottom"]:not(:has(> .tippy-content > .cm-context-menu)) {
-  translate: 0 calc(var(--overlay-offset) - var(--base-size-6));
+.tippy-box[data-placement^="top"] {
+  translate: 0 var(--gh-tn);
 }
 
-.tippy-box[data-placement^="left"]:not(:has(> .tippy-content > .cm-context-menu)) {
-  translate: calc(var(--base-size-6) - var(--overlay-offset)) 0;
+.tippy-box[data-placement^="bottom"] {
+  translate: 0 calc(-1 * var(--gh-tn));
 }
 
-.tippy-box[data-placement^="right"]:not(:has(> .tippy-content > .cm-context-menu)) {
-  translate: calc(var(--overlay-offset) - var(--base-size-6)) 0;
+.tippy-box[data-placement^="left"] {
+  translate: var(--gh-tn) 0;
 }
 
-/* ---------- menu theme (e.g. code line "…" menu, commit/branch action menus) ---------- */
-.tippy-box[data-theme="menu"] {
-  background-color: var(--overlay-bgColor);
-  color: var(--fgColor-default);
+.tippy-box[data-placement^="right"] {
+  translate: calc(-1 * var(--gh-tn)) 0;
 }
 
+/* ---------- menu theme (e.g. code line "…" menu, commit/branch action menus; row metrics: action-menu.css) ---------- */
 .tippy-box[data-theme="menu"] .tippy-content {
   padding: var(--base-size-8) 0;
 }
@@ -69,30 +69,17 @@
 .tippy-box[data-theme="menu"] .item {
   gap: var(--control-medium-gap);
   width: auto;
-  min-height: var(--control-medium-size);
-  margin: 0 var(--base-size-8);
-  padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
-  border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-medium);
-  line-height: var(--base-size-20);
 }
 
 .tippy-box[data-theme="menu"] .item:hover,
 .tippy-box[data-theme="menu"] .item:focus {
   background: var(--control-transparent-bgColor-hover);
-  color: var(--fgColor-default);
   text-decoration: none;
 }
 
 .tippy-box[data-theme="menu"] .item:active,
 .tippy-box[data-theme="menu"] .item.active {
   background: var(--control-transparent-bgColor-active);
-}
-
-.tippy-box[data-theme="menu"] .item:focus-visible {
-  outline: var(--focus-outline);
-  outline-offset: 0;
 }
 
 .tippy-box[data-theme="menu"] .item > svg {
@@ -108,7 +95,6 @@
 
 /* ---------- tooltip theme ---------- */
 .tippy-box[data-theme="tooltip"] {
-  border: 0;
   border-radius: var(--borderRadius-medium);
   background-color: var(--tooltip-bgColor);
   box-shadow: none;
@@ -122,10 +108,4 @@
 
 .tippy-box[data-theme="tooltip"] .tippy-content {
   padding: var(--overlay-paddingBlock-condensed) var(--overlay-padding-condensed);
-}
-
-
-.tippy-box[data-theme="tooltip"] .tippy-svg-arrow-inner,
-.tippy-box[data-theme="tooltip"] .tippy-svg-arrow-outer {
-  fill: var(--tooltip-bgColor);
 }

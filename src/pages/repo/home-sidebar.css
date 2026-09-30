@@ -11,7 +11,9 @@
  * Gitea: templates/repo/home_sidebar_top.tmpl (search form + .flex-relaxed-list) and home_sidebar_bottom.tmpl.
  */
 
-/* ---------- containers ---------- */
+/* ---------- containers ----------
+   (size trim: .flex-text-block.muted / .flex-text-block / .language-stats* occur only once each in these templates,
+   so the intermediate child steps are dropped from every rule on them alike) */
 .repo-home-sidebar-top,
 .repo-home-sidebar-top > .flex-relaxed-list,
 .repo-home-sidebar-bottom {
@@ -19,9 +21,6 @@
 }
 
 /* code search (Gitea feature, github.com searches from the header): a 32px input above About */
-.repo-home-sidebar-top > form {
-  margin: 0 0 var(--base-size-16);
-}
 
 .repo-home-sidebar-top > .flex-relaxed-list {
   padding: 0 0 var(--base-size-16);
@@ -31,33 +30,16 @@
   display: flex;
   align-items: center;
   margin: 0 0 var(--base-size-12);
-  color: var(--fgColor-default);
-  font-size: var(--text-title-size-small);
-  font-weight: var(--base-text-weight-semibold);
   line-height: var(--base-size-24);
-}
-
-.repo-home-sidebar-header > a.item.muted {
-  color: var(--fgColor-default);
-}
-
-.repo-home-sidebar-header > a.item.muted:hover {
-  color: var(--fgColor-accent);
-  text-decoration: none;
 }
 
 /* section counter (Primer Counter in a heading) */
 .repo-home-sidebar-header > .ui.label {
-  display: inline-flex;
-  align-items: center;
   min-width: var(--base-size-20);
-  height: var(--base-size-20);
   margin: 0 0 0 var(--base-size-4);
   padding: 0 var(--base-size-6);
   border: var(--borderWidth-thin) solid var(--counter-borderColor);
   border-radius: var(--borderRadius-full);
-  background: var(--counter-bgColor-muted);
-  color: var(--fgColor-default);
   font-size: var(--text-body-size-small);
   font-weight: var(--base-text-weight-semibold);
   line-height: var(--base-text-lineHeight-normal);
@@ -66,15 +48,12 @@
 /* ---------- About ---------- */
 .repo-home-sidebar-top .repo-description {
   margin: 0 0 var(--base-size-12);
-  color: var(--fgColor-default);
   font-size: var(--text-body-size-large);
   line-height: var(--base-size-24);
 }
 
 .repo-home-sidebar-top .repo-description + a.flex-text-block {
-  gap: var(--base-size-8);
   margin: 0 0 var(--base-size-12);
-  font-size: var(--text-body-size-medium);
   font-weight: var(--base-text-weight-semibold);
   line-height: var(--text-body-lineHeight-medium);
 }
@@ -91,64 +70,26 @@
   white-space: nowrap;
 }
 
-.repo-home-sidebar-top .repo-description + a.flex-text-block:hover > span {
-  text-decoration: underline;
-}
-
-.repo-home-sidebar-top #repo-topics:empty {
-  display: none;
-}
-
 /* "Manage topics": github.com has a gear next to "About"; Gitea's text button stays, as a 12px muted link */
 .repo-home-sidebar-top #manage_topic {
   align-self: flex-start;
   margin: var(--base-size-8) 0 0;
-  padding: 0;
   color: var(--fgColor-muted);
-  font-size: var(--text-body-size-small);
   line-height: var(--text-body-lineHeight-small);
 }
 
-.repo-home-sidebar-top #manage_topic:hover {
-  color: var(--fgColor-accent);
-}
-
 /* Readme / License / Cite / size rows */
-.repo-home-sidebar-top > .flex-relaxed-list > .flex-text-block.muted {
-  gap: var(--base-size-8);
+.repo-home-sidebar-top .flex-text-block.muted {
   margin: var(--base-size-8) 0 0;
   color: var(--fgColor-muted);
-  font-size: var(--text-body-size-medium);
   line-height: var(--text-body-lineHeight-medium);
-}
-
-.repo-home-sidebar-top > .flex-relaxed-list > .flex-text-block.muted > .svg {
-  flex-shrink: 0;
-  color: var(--fgColor-muted);
-}
-
-.repo-home-sidebar-top > .flex-relaxed-list > a.flex-text-block.muted:hover,
-.repo-home-sidebar-top > .flex-relaxed-list > a.flex-text-block.muted:hover > .svg {
-  color: var(--fgColor-accent);
-  text-decoration: none;
-}
-
-.repo-home-sidebar-top > .flex-relaxed-list > .flex-text-block.muted > b {
-  color: var(--fgColor-muted);
-  font-weight: var(--base-text-weight-semibold);
 }
 
 /* ---------- sections below About ---------- */
 .repo-home-sidebar-bottom > .divider {
-  height: 0;
   margin: 0 0 var(--base-size-16);
   border: 0;
   border-top: var(--borderWidth-thin) solid var(--borderColor-default);
-}
-
-.repo-home-sidebar-bottom > .flex-relaxed-list,
-.repo-home-sidebar-bottom > .repo-home-sidebar-header + div {
-  margin: 0 0 var(--base-size-16);
 }
 
 /* latest release */
@@ -156,55 +97,41 @@
   gap: 0;
 }
 
-.repo-home-sidebar-bottom > .flex-relaxed-list > .flex-text-block {
+.repo-home-sidebar-bottom .flex-text-block {
   align-items: flex-start;
-  gap: var(--base-size-8);
   line-height: var(--text-body-lineHeight-medium);
 }
 
-.repo-home-sidebar-bottom > .flex-relaxed-list > .flex-text-block > div:first-child {
+.repo-home-sidebar-bottom .flex-text-block > div:first-child {
   display: flex;
   padding: var(--base-size-2) 0 0;
   color: var(--fgColor-success);
 }
 
-.repo-home-sidebar-bottom > .flex-relaxed-list > .flex-text-block > a {
+.repo-home-sidebar-bottom .flex-text-block > a {
   color: var(--fgColor-default);
-  font-size: var(--text-body-size-medium);
   font-weight: var(--base-text-weight-semibold);
 }
 
-.repo-home-sidebar-bottom > .flex-relaxed-list > .flex-text-block > a:hover {
-  color: var(--fgColor-accent);
-  text-decoration: none;
-}
-
-.repo-home-sidebar-bottom > .flex-relaxed-list > .flex-text-block > .tw-shrink-0 {
+.repo-home-sidebar-bottom .flex-text-block > .tw-shrink-0 {
   display: flex;
   align-items: center;
   min-height: calc(var(--base-size-20) + var(--base-size-2));
 }
 
-.repo-home-sidebar-bottom > .flex-relaxed-list > .flex-text-block + div {
-  color: var(--fgColor-muted);
-  font-size: var(--text-body-size-small);
-  line-height: var(--text-body-lineHeight-small);
-}
-
 /* languages */
-.repo-home-sidebar-bottom .language-stats {
-  gap: var(--base-size-2);
+.language-stats {
   height: var(--base-size-8);
   margin: 0 0 var(--base-size-8);
   border-radius: var(--borderRadius-medium);
   background: var(--bgColor-neutral-muted);
 }
 
-.repo-home-sidebar-bottom .language-stats-details {
+.language-stats-details {
   gap: 0 var(--base-size-12);
 }
 
-.repo-home-sidebar-bottom .language-stats-details .item {
+.language-stats-details .item {
   justify-content: flex-start;
   gap: var(--base-size-4);
   height: auto;
@@ -214,12 +141,7 @@
   line-height: var(--text-body-lineHeight-small);
 }
 
-.repo-home-sidebar-bottom .language-stats-details .item > strong {
-  color: var(--fgColor-default);
-  font-weight: var(--base-text-weight-semibold);
-}
-
-.repo-home-sidebar-bottom .language-stats-details .color-icon {
+.language-stats-details .color-icon {
   width: var(--base-size-8);
   height: var(--base-size-8);
   margin-right: var(--base-size-4);

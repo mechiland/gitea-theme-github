@@ -18,96 +18,59 @@
  */
 
 /* ---------- list ---------- */
-.page-content.projects .milestone-list {
+.projects .milestone-list {
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-radius: var(--borderRadius-medium);
   background: var(--bgColor-default);
 }
 
-.page-content.projects .milestone-list:not(:has(> .item)) {
+.projects .milestone-list:not(:has(> .item)) {
   border: 0;
   background: transparent;
 }
 
-.page-content.projects .milestone-list > .item {
-  gap: var(--base-size-4);
-  padding: var(--base-size-16);
-}
-
-.page-content.projects .milestone-list > .item:first-child {
+.projects .milestone-list > .item:first-child {
   border-top-left-radius: var(--borderRadius-medium);
   border-top-right-radius: var(--borderRadius-medium);
 }
 
-.page-content.projects .milestone-list > .item:last-child {
-  border-bottom-left-radius: var(--borderRadius-medium);
-  border-bottom-right-radius: var(--borderRadius-medium);
-}
-
-.page-content.projects .milestone-list .list-item-large-title {
+.projects .list-item-large-title {
   display: flex;
   align-items: center;
-  gap: var(--base-size-8);
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-large);
-  font-weight: var(--base-text-weight-semibold);
-  line-height: var(--text-body-lineHeight-large);
 }
 
-.page-content.projects .milestone-list .list-item-large-title > .svg {
-  flex-shrink: 0;
+.projects .list-item-large-title > .svg {
   color: var(--fgColor-default);
 }
 
-.page-content.projects .milestone-list .list-item-large-title > a {
-  color: var(--fgColor-default);
-}
-
-.page-content.projects .milestone-list .list-item-large-title > a:hover {
+.projects .list-item-large-title > a:hover {
   color: var(--fgColor-accent);
   text-decoration: underline;
 }
 
-.page-content.projects .milestone-list .list-item-secondary-bar {
+.projects .list-item-secondary-bar {
   gap: var(--base-size-8) var(--base-size-16);
-  color: var(--fgColor-muted);
-  font-size: var(--text-body-size-small);
-  line-height: var(--text-body-lineHeight-medium);
 }
 
-.page-content.projects .milestone-list .list-item-secondary-bar .flex-text-block {
+.projects .list-item-secondary-bar .flex-text-block {
   gap: var(--base-size-4) var(--base-size-12);
 }
 
-.page-content.projects .milestone-list .list-item-secondary-bar .flex-text-inline {
-  gap: var(--base-size-4);
-}
-
-.page-content.projects .milestone-list .list-item-secondary-bar .svg {
+.projects .list-item-secondary-bar .svg {
   width: var(--base-size-12);
   height: var(--base-size-12);
 }
 
-.page-content.projects .milestone-list .list-item-secondary-bar a {
-  color: var(--fgColor-muted);
-}
-
-.page-content.projects .milestone-list .list-item-secondary-bar a:hover {
+.projects .list-item-secondary-bar a:hover {
   color: var(--fgColor-accent);
   text-decoration: none;
 }
 
-.page-content.projects .milestone-list .list-item-secondary-bar a.tw-text-red:hover {
+.projects .list-item-secondary-bar a.tw-text-red:hover {
   color: var(--fgColor-danger);
 }
 
-.page-content.projects .milestone-list > .item > .render-content {
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-medium);
-  line-height: var(--text-body-lineHeight-medium);
-}
-
-.page-content.projects .milestone-list > .center.page.buttons {
+.projects .milestone-list > .center.page.buttons {
   padding: var(--base-size-16);
   border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
 }
@@ -118,11 +81,10 @@
    page, a 64px seam at 1440 → the header parts fill the fluid `.projects-view` and the board has no inline padding,
    so every part starts at the page margin (x=32 at 1440, like the repo header). The repo "Labels / Milestones /
    New issue" row above the board is widened the same way. */
-.projects-view .project-header,
-.projects-view .project-description {
+.project-header,
+.project-description {
   width: 100%;
   max-width: none;
-  margin-inline: 0;
 }
 
 /* a .ui.container keeps its page-margin max-width and auto margins: 100% width = the fluid page width */
@@ -130,73 +92,65 @@
   width: 100%;
 }
 
-.projects-view .project-header {
-  gap: var(--base-size-8);
+.project-header {
   padding: var(--base-size-8) 0;
 }
 
 /* toolbar, part 1: the Label / Assignee / Milestone filters (Fomantic secondary menu items, 39px, 11px 13px
    padding) → Primer invisible buttons, 32px, 14px/500, 12px inline padding, trailing triangle-down 16px */
-.projects-view .project-header > .list-header-filters {
-  align-items: center;
+.project-header > .list-header-filters {
   gap: var(--base-size-4);
   min-height: 0;
 }
 
-.projects-view .project-header > .list-header-filters > .item {
-  gap: var(--base-size-4);
+.project-header > .list-header-filters > .item {
   height: var(--control-medium-size);
-  margin: 0;
   padding: 0 var(--control-medium-paddingInline-normal);
   border-radius: var(--borderRadius-medium);
   background: transparent;
   color: var(--button-invisible-fgColor-rest);
-  font-size: var(--text-body-size-medium);
   font-weight: var(--base-text-weight-medium);
   line-height: var(--text-body-lineHeight-medium);
 }
 
-.projects-view .project-header > .list-header-filters > .item:hover,
-.projects-view .project-header > .list-header-filters > .item.active {
+.project-header > .list-header-filters > .item:is(:hover, .active) {
   background: var(--control-transparent-bgColor-hover);
   color: var(--button-invisible-fgColor-rest);
 }
 
-.projects-view .project-header > .list-header-filters > .item:active {
+.project-header > .list-header-filters > .item:active {
   background: var(--control-transparent-bgColor-active);
 }
 
-.projects-view .project-header > .list-header-filters > .item:focus-visible {
+.project-header > .list-header-filters > .item:focus-visible {
   outline: var(--focus-outline);
   outline-offset: calc(var(--borderWidth-thick) * -1);
 }
 
-.projects-view .project-header > .list-header-filters > .item > .dropdown.icon {
+.project-header > .list-header-filters > .item > .dropdown.icon {
   width: var(--base-size-16);
   height: var(--base-size-16);
-  margin: 0;
   color: var(--button-invisible-iconColor-rest);
 }
 
 /* toolbar, part 2: Fullscreen / Edit / Close / Delete / New column (Fomantic `.ui.compact.mini.menu`, 38px, 11px
    text, em paddings) → Primer ButtonGroup of default buttons: 32px, 14px/500, 12px inline padding, 8px icon gap,
    joined 1px borders, 6px outer radius. */
-.projects-view .project-header > .ui.compact.menu {
+.project-header > .compact {
   align-items: stretch;
   min-height: 0;
   height: var(--control-medium-size);
-  margin: 0;
   border: 0;
   border-radius: var(--borderRadius-medium);
   background: transparent;
   box-shadow: var(--button-default-shadow-resting);
   font-size: var(--text-body-size-medium);
+  /* the button group is wider than a phone: scroll it instead of widening the page */
+  max-width: 100%;
+  overflow-x: auto;
 }
 
-.projects-view .project-header > .ui.compact.menu > .item {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
+.project-header > .compact > .item {
   gap: var(--base-size-8);
   height: var(--control-medium-size);
   margin: 0 calc(var(--borderWidth-thin) * -1) 0 0;
@@ -205,37 +159,34 @@
   border-radius: 0;
   background: var(--button-default-bgColor-rest);
   color: var(--button-default-fgColor-rest);
-  font-size: var(--text-body-size-medium);
   font-weight: var(--base-text-weight-medium);
   line-height: var(--text-body-lineHeight-medium);
   white-space: nowrap;
 }
 
-.projects-view .project-header > .ui.compact.menu > .item::before {
+.project-header > .compact > .item::before {
   display: none;
 }
 
-.projects-view .project-header > .ui.compact.menu > .item:first-child,
-.projects-view .project-header > .ui.compact.menu > .item.tw-hidden:first-child + .item {
+.project-header > .compact > :is(.item:first-child, .item.tw-hidden:first-child + .item) {
   border-top-left-radius: var(--borderRadius-medium);
   border-bottom-left-radius: var(--borderRadius-medium);
 }
 
-.projects-view .project-header > .ui.compact.menu > .item:last-child {
+.project-header > .compact > .item:last-child {
   margin-right: 0;
   border-top-right-radius: var(--borderRadius-medium);
   border-bottom-right-radius: var(--borderRadius-medium);
 }
 
-.projects-view .project-header > .ui.compact.menu > .item > .svg {
-  flex-shrink: 0;
+.project-header > .compact > .item > .svg {
   width: var(--base-size-16);
   height: var(--base-size-16);
   margin: 0;
   color: var(--fgColor-muted);
 }
 
-.projects-view .project-header > .ui.compact.menu > .item:hover {
+.project-header > .compact > .item:hover {
   position: relative;
   z-index: 1;
   border-color: var(--button-default-borderColor-hover);
@@ -243,11 +194,11 @@
   color: var(--button-default-fgColor-rest);
 }
 
-.projects-view .project-header > .ui.compact.menu > .item:active {
+.project-header > .compact > .item:active {
   background: var(--button-default-bgColor-active);
 }
 
-.projects-view .project-header > .ui.compact.menu > .item:focus-visible {
+.project-header > .compact > .item:focus-visible {
   position: relative;
   z-index: 1;
   outline: var(--focus-outline);
@@ -255,32 +206,22 @@
 }
 
 /* Delete: Primer danger treatment on hover (default at rest, like github.com's "Delete" in a group) */
-.projects-view .project-header > .ui.compact.menu > .item[data-url*="/delete"]:hover {
+.project-header > .compact > .item[data-url*="/delete"]:hover {
   border-color: var(--button-danger-borderColor-hover);
   background: var(--button-danger-bgColor-hover);
   color: var(--button-danger-fgColor-hover);
 }
 
-.projects-view .project-header > .ui.compact.menu > .item[data-url*="/delete"]:hover > .svg {
+.project-header > .compact > .item[data-url*="/delete"]:hover > .svg {
   color: inherit;
 }
 
-/* the button group is wider than a phone: scroll it instead of widening the page */
-.projects-view .project-header > .ui.compact.menu {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-.projects-view .project-header h2 {
-  color: var(--fgColor-default);
+.project-header h2 {
   font-size: var(--text-title-size-medium);
-  font-weight: var(--text-title-weight-medium);
-  line-height: var(--base-text-lineHeight-normal);
 }
 
-.projects-view .project-description .divider {
+.project-description .divider {
   margin: var(--base-size-8) 0 var(--base-size-16);
-  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
   border-bottom: 0;
 }
 
@@ -294,10 +235,6 @@
   width: calc(var(--base-size-128) * 2 + var(--base-size-96) - var(--base-size-2));
   margin: 0;
   padding: 0;
-  border: var(--borderWidth-thin) solid var(--borderColor-default);
-  border-radius: var(--borderRadius-medium);
-  background: var(--color-project-column-bg);
-  color: var(--fgColor-default);
 }
 
 /* column header: name · count … menu */
@@ -310,51 +247,40 @@
 
 .project-column-header .project-column-title-text {
   order: -1;
-  min-width: 0;
-  gap: var(--base-size-4);
-  font-size: var(--text-body-size-medium);
   font-weight: var(--base-text-weight-semibold);
-  line-height: var(--text-body-lineHeight-medium);
 }
 
 .project-column-header .project-column-title-text .svg {
   flex-shrink: 0;
-  color: inherit;
 }
 
 /* Primer CounterLabel (size, padding and 18px line come from data-display counters.css: 20px pill); github.com's
    board counter is the muted variant: --fgColor-muted on --bgColor-neutral-muted, no border */
-.project-column-header .ui.label.project-column-issue-count {
+.project-column-issue-count {
   flex-shrink: 0;
-  margin: 0;
   border-color: transparent;
-  background: var(--bgColor-neutral-muted);
   color: var(--fgColor-muted);
 }
 
-.project-column[style] .project-column-header .ui.label.project-column-issue-count {
+.project-column[style] .project-column-issue-count {
   color: inherit;
 }
 
 /* "…" column menu: IconButton invisible 28px */
-.project-column-header > .ui.dropdown {
-  display: inline-flex;
-  align-items: center;
+.project-column-header > .dropdown {
   justify-content: center;
   width: var(--control-small-size);
   height: var(--control-small-size);
   margin-left: auto;
-  padding: 0;
   border-radius: var(--borderRadius-medium);
   color: var(--fgColor-muted);
 }
 
-.project-column[style] .project-column-header > .ui.dropdown {
+.project-column[style] .project-column-header > .dropdown {
   color: inherit;
 }
 
-.project-column-header > .ui.dropdown:hover,
-.project-column-header > .ui.dropdown.active {
+.project-column-header > .dropdown:is(:hover, .active) {
   background: var(--control-transparent-bgColor-hover);
 }
 
@@ -369,14 +295,8 @@
 
 /* card */
 .project-column .issue-card {
-  gap: var(--base-size-4);
   padding: var(--base-size-8) var(--base-size-12) var(--base-size-12);
-  border: var(--borderWidth-thin) solid var(--borderColor-default);
-  border-radius: var(--borderRadius-medium);
-  background: var(--bgColor-default);
   box-shadow: var(--shadow-resting-small);
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-medium);
 }
 
 .project-column .issue-card:hover {
@@ -393,23 +313,14 @@
   margin-top: var(--base-size-2);
 }
 
-.project-column .issue-card .issue-card-title {
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-medium);
-  font-weight: var(--base-text-weight-normal);
-  line-height: var(--text-body-lineHeight-medium);
-}
-
 .project-column .issue-card .issue-card-title:hover {
   color: var(--fgColor-accent);
   text-decoration: underline;
 }
 
 .project-column .issue-card .meta {
-  margin: 0;
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
-  line-height: var(--text-body-lineHeight-medium);
 }
 
 .project-column .issue-card .meta a {

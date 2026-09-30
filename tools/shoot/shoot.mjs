@@ -23,7 +23,12 @@ const HELP = `usage: node tools/shoot/shoot.mjs --target gitea|github [options]
   --out <dir>            output dir (gitea default shots/<run-id>, github default docs/reference)
   --concurrency <n>      parallel captures (default 3 gitea / 2 github)
   --no-audit             skip color/var/icon audit (faster)
-  --relogin              discard cached session`;
+  --relogin              discard cached session
+  --stable               deterministic captures for pixel diffs (gitea only): fixed page clock (relative times
+                         never drift; --stable-time <iso>, default 2027-01-01T00:00:00Z) and third-party requests
+                         aborted (external README badges etc.)
+  --theme-css <file>     serve this local file instead of the deployed /assets/css/theme-<theme>.css (gitea only;
+                         e.g. a trimmed dist/theme-github-auto.css, tested without deploying)`;
 
 const args = parseArgs();
 if (args.help || args.h) { console.log(HELP); process.exit(0); }
@@ -39,6 +44,10 @@ const measure = !!(args.measure || args['measure-only']);
 const measureOnly = !!args['measure-only'];
 const doStates = !!args.states;
 const doAudit = !args['no-audit'] && !measureOnly;
+const stable = !!args.stable && target === 'gitea';
+const themeCssFile = args['theme-css'] && args['theme-css'] !== true && target === 'gitea' ? path.resolve(PROJECT_ROOT, args['theme-css']) : null;
+const themeCssBody = themeCssFile ? fs.readFileSync(themeCssFile) : null;
+const stableTime = args['stable-time'] && args['stable-time'] !== true ? args['stable-time'] : '2027-01-01T00:00:00Z';
 let previewTheme = null;
 const concurrency = Number(args.concurrency) || (target === 'github' ? 2 : 3);
 const giteaBase = (cfg.giteaBase || GITEA_URL).replace(/\/$/, '');
@@ -154,8 +163,46 @@ async function newContext(browser, route, scheme, vw, storageState) {
   });
   if (target === 'gitea') await ctx.addCookies(langCookies(giteaBase, auth ? undefined : theme));
   if (target === 'gitea' && previewTheme) await installThemePreview(ctx, previewTheme);
+  if (themeCssBody) {
+    const themePath = `/assets/css/theme-${previewTheme || theme}.css`;
+    await ctx.route((u) => u.pathname === themePath, (r) => r.fulfill({ status: 200, contentType: 'text/css; charset=utf-8', body: themeCssBody, headers: { 'cache-control': 'no-store' } }));
+  }
+  if (stable) {
+    await ctx.clock.setFixedTime(new Date(stableTime));
+    const own = new URL(giteaBase).origin;
+    await ctx.route((u) => u.origin !== own && /^https?:$/.test(u.protocol), (r) => r.abort('blockedbyclient'));
+  }
   await ctx.addInitScript(INIT_SCRIPT);
   return ctx;
+}
+
+// Regions whose pixels legitimately differ between two identical runs (for tools/shoot/pixeldiff.mjs):
+// the footer server-timing text ("Page: NNms Template: NNms"; the whole footer width of that line, since the
+// rows are centred at some widths) and relative times (<relative-time>, whose text depends on "now"; the whole
+// width of its block for that line). With --stable the clock is fixed, so relative times do not drift anyway. Rects are in screenshot CSS px: document coordinates for full-page shots, viewport for viewport shots.
+async function volatileRects(page, fullPage) {
+  return page.evaluate((fullPage) => {
+    const out = [];
+    const ox = fullPage ? scrollX : 0, oy = fullPage ? scrollY : 0;
+    const push = (kind, r, right) => {
+      if (!r || r.width <= 0 || r.height <= 0) return;
+      out.push({ kind, x: Math.floor(r.left + ox), y: Math.floor(r.top + oy), w: Math.ceil((right ?? r.right) - r.left) + 1, h: Math.ceil(r.height) + 1 });
+    };
+    const block = (el) => { let a = el.parentElement; while (a && getComputedStyle(a).display.startsWith('inline')) a = a.parentElement; return a; };
+    for (const f of document.querySelectorAll('footer.page-footer, .page-footer')) {
+      for (const sp of f.querySelectorAll('span')) {
+        if (!/Page:\s*\S+\s*Template:/.test(sp.textContent)) continue;
+        const fb = f.getBoundingClientRect(); // centred rows: a width change moves the whole line
+        for (const r of sp.getClientRects()) push('footer-timing', { left: fb.left, right: fb.right, top: r.top, width: fb.width, height: r.height });
+      }
+    }
+    for (const el of document.querySelectorAll('relative-time, [data-tooltip-content] > relative-time')) {
+      const b = block(el);
+      const bb = b ? b.getBoundingClientRect() : null;
+      for (const r of el.getClientRects()) push('relative-time', bb ? { left: bb.left, right: bb.right, top: r.top, width: bb.width, height: r.height } : r);
+    }
+    return out.slice(0, 400);
+  }, fullPage).catch(() => []);
 }
 
 async function runStates(browser, route, scheme, vw, storageState, dir) {
@@ -223,6 +270,7 @@ async function runStates(browser, route, scheme, vw, storageState, dir) {
       const base = path.join(dir, 'states', `${scheme}-${vw}-${st.name}`);
       await page.screenshot({ path: base + '.png', animations: 'disabled', caret: 'hide' });
       res.viewportPng = path.relative(outDir, base + '.png');
+      res.volatile = await volatileRects(page, false);
       const clipSel = (st.clips && st.clips[target]) || st.clip || (st.action === 'submitEmpty' ? null : st.selector);
       if (clipSel) {
         const clipLoc = page.locator(clipSel).filter({ visible: true }).first();
@@ -236,6 +284,7 @@ async function runStates(browser, route, scheme, vw, storageState, dir) {
             if (clip.width > 0 && clip.height > 0) {
               await page.screenshot({ path: base + '-clip.png', clip, animations: 'disabled', caret: 'hide' });
               res.clipPng = path.relative(outDir, base + '-clip.png');
+              res.clipRect = clip;
             }
           }
         } else res.clipMissing = clipSel;
@@ -280,6 +329,7 @@ async function capture(browser, route, scheme, vw, storageState, palette) {
       const png = path.join(dir, `${scheme}-${vw}.png`);
       await page.screenshot({ path: png, fullPage: true, animations: 'disabled', caret: 'hide' });
       log.png = path.relative(outDir, png);
+      log.volatile = await volatileRects(page, true);
     }
     if (doAudit) {
       const pal = palette.schemes[scheme] || {};
@@ -386,7 +436,8 @@ async function main() {
   });
   const meta = { target, theme: target === 'gitea' ? theme : null, generated: new Date().toISOString(), outDir: path.relative(PROJECT_ROOT, outDir),
     giteaBase: target === 'gitea' ? giteaBase : null, giteaVersion: target === 'gitea' ? await giteaVersion() : null, browser: browser.version(),
-    schemes, viewports, appearance, paletteVersion: palette && palette.version };
+    schemes, viewports, appearance, paletteVersion: palette && palette.version, stable: stable ? { time: stableTime, thirdPartyBlocked: true } : false,
+    themeCss: themeCssFile ? { file: path.relative(PROJECT_ROOT, themeCssFile), bytes: themeCssBody.length, sha256: (await import('node:crypto')).createHash('sha256').update(themeCssBody).digest('hex').slice(0, 16) } : null };
   await browser.close();
   // partial runs (--only) into an existing dir (e.g. docs/reference) merge page lists instead of overwriting
   const summaryFile = path.join(outDir, 'summary.json');

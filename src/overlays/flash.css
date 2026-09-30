@@ -37,51 +37,34 @@
   font-weight: var(--base-text-weight-semibold);
 }
 
-.ui.message:not(.field *) > .svg,
-.ui.message:not(.field *) > svg {
+.ui.message:not(.field *) > :is(svg, .svg) {
   margin-right: var(--base-size-12);
   color: var(--fgColor-muted);
   vertical-align: text-bottom;
 }
 
 /* ---------- variants ---------- */
-.ui.info.message:not(.field *),
-.ui.attached.info.message:not(.field *),
-.ui.blue.message:not(.field *),
-.ui.attached.blue.message:not(.field *) {
+.ui:is(.info, .blue).message:not(.field *) {
   border-color: var(--borderColor-accent-muted);
   background: var(--bgColor-accent-muted);
-  color: var(--fgColor-default);
 }
 
-.ui.success.message:not(.field *),
-.ui.attached.success.message:not(.field *),
-.ui.positive.message:not(.field *),
-.ui.attached.positive.message:not(.field *) {
+.ui:is(.success, .positive).message:not(.field *) {
   border-color: var(--borderColor-success-muted);
   background: var(--bgColor-success-muted);
-  color: var(--fgColor-default);
 }
 
-.ui.error.message:not(.field *),
-.ui.attached.error.message:not(.field *),
-.ui.red.message:not(.field *),
-.ui.negative.message:not(.field *),
-.ui.attached.negative.message:not(.field *) {
+.ui:is(.error, .red, .negative).message:not(.field *) {
   border-color: var(--borderColor-danger-muted);
   background: var(--bgColor-danger-muted);
-  color: var(--fgColor-default);
 }
 
-.ui.warning.message:not(.field *),
-.ui.attached.warning.message:not(.field *) {
+.ui.warning.message:not(.field *) {
   border-color: var(--borderColor-attention-muted);
   background: var(--bgColor-attention-muted);
-  color: var(--fgColor-default);
 }
 
-.ui.info.message:not(.field *) > :is(svg, .svg),
-.ui.blue.message:not(.field *) > :is(svg, .svg) {
+.ui:is(.info, .blue).message:not(.field *) > :is(svg, .svg) {
   color: var(--fgColor-accent);
 }
 

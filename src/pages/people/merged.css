@@ -1,0 +1,154 @@
+/*
+ * Shared declaration blocks (theme size budget): rules of the other files whose whole declaration block is identical
+ * are listed once here instead of once per file. Every selector here targets elements no later rule of this folder
+ * styles with the same property at the same specificity, so moving it here does not change the cascade.
+ * The file each selector belongs to is noted in its group.
+ */
+
+/* muted text / icons — profile (Follow icon, "Block user"), repo lists (filter caret), org header (description,
+   meta icons), explore (empty result), dashboard (context bar icons), notifications (empty inbox) */
+.card li.follow .svg,
+.card li:last-child > a.muted,
+:is(.profile, .explore) .filter.menu .dropdown.item > .dropdown.icon,
+.organization > .flex-container:first-child :is(.render-content, .flex-relaxed-list > div:last-child .svg),
+.explore .flex-divided-list > :only-child:not(:has(.item-main)),
+.dashboard > .secondary-nav :is(.text > .icon, .right.menu > .item > .svg),
+#notification_table > .empty-placeholder {
+  color: var(--fgColor-muted);
+}
+
+/* accent links / hovers — profile details, org header meta, org People + explore users names, dashboard feed,
+   notifications (pinned icon, title hover) */
+.card li a:hover,
+.organization > .flex-container:first-child a.muted:hover,
+.members .item-title > a,
+.explore.users :is(.item-title > a, .item-body a:hover),
+#activity-feed .item-main > div:first-child > a:hover,
+#activity-feed .item-main > a.issue.title:hover,
+.notifications-link > .flex-text-block .svg,
+.notifications-link:hover > :last-child {
+  color: var(--fgColor-accent);
+}
+
+/* accent hover without underline — profile followers line, org home sidebar headings */
+.profile-avatar-name > div a:hover,
+.profile .five.wide > .header > a:hover {
+  color: var(--fgColor-accent);
+  text-decoration: none;
+}
+
+/* default text — search button hover (repo lists), org sidebar team counts, org People meta counts */
+:is(.profile, .explore, .members, .teams) .action.input > [name="q"] ~ .button:hover,
+.profile .five.wide p strong,
+.members .item-main > .tw-flex strong {
+  color: var(--fgColor-default);
+}
+
+/* semibold — org sidebar team names; unread (1) and pinned (3) notification titles */
+.profile .five.wide .flex-relaxed-list a:not(.muted),
+:not([data-status="2"]) > .notifications-link > :last-child {
+  font-weight: var(--base-text-weight-semibold);
+}
+
+/* hidden — profile repo rows' leading icon, filter-bar rule (org / explore), org sub-page header extras, dashboard
+   SegmentedControl dividers, the 6th legend square, the time while a notification row has keyboard focus */
+.profile .item:has(> .item-main > .item-header) > .item-leading,
+:is(.organization, .explore) :is(.filter.menu, .filter.menu + .message) + .divider,
+.organization:not(.profile) > .flex-container:first-child :is(.header .flex-text-block:last-child, .flex-relaxed-list > :not(.header)),
+#dashboard-repo-list .two.menu > .item::before,
+.heatmap-legend-svg rect:last-child,
+.notifications-item:focus-within .notifications-updated {
+  display: none;
+}
+
+/* boxes whose children join the parent's layout — profile card wrappers, repo list headers, heatmap footer */
+.profile .card > *,
+.profile .card > .extra > ul,
+:is(.profile, .explore) .item-main > .item-header,
+.heatmap-footer {
+  display: contents;
+}
+
+/* 4px gaps — profile org avatars, repo list counters, org header meta, team card rows */
+.user-orgs,
+:is(.profile, .explore) .item-trailing > a,
+.organization > .flex-container:first-child div:last-child > .flex-text-block,
+.team-item-box > .segment .flex-text-block {
+  gap: var(--base-size-4);
+}
+
+/* 16px gaps — explore result cards, feed rows */
+.explore .flex-divided-list,
+#activity-feed > .item {
+  gap: var(--base-size-16);
+}
+
+/* 8px gaps — explore result cards (repositories), filter bar */
+.repositories .flex-divided-list > .item,
+:is(.profile, .explore) .filter.menu > form {
+  gap: var(--base-size-8);
+}
+
+/* 16px top margin — username without a full name (profile), feed pagination */
+.profile-avatar-name > .username:first-child,
+#activity-feed > .page.buttons {
+  margin-top: var(--base-size-16);
+}
+
+/* 32px avatars — profile organisations, feed actors */
+.user-orgs .avatar,
+#activity-feed > .item > .item-leading img.ui.avatar {
+  width: var(--base-size-32);
+  height: var(--base-size-32);
+}
+
+/* 16px glyph in a 24px-glyph slot (Gitea's .svg[width="24"] { min-width: 24px }) — explore repo icon, org RSS */
+.repositories .item-leading > .svg,
+.organization > .flex-container:first-child .label.button .svg {
+  width: var(--base-size-16);
+  min-width: var(--base-size-16);
+  height: var(--base-size-16);
+  min-height: var(--base-size-16);
+}
+
+/* 12px text — org sidebar team meta, feed commit lines */
+.profile .five.wide p,
+#activity-feed .item-main > div > .flex-text-block {
+  font-size: var(--text-body-size-small);
+}
+
+/* no margin — context bar avatar/name (dashboard), repo row icons */
+.dashboard > .secondary-nav .dropdown > .text > *,
+.repo-list-link .svg {
+  margin: 0;
+}
+
+/* muted separators — dashboard repo paging, notification rows */
+#dashboard-repo-list .tw-text-center > .divider,
+.notifications-item + .notifications-item {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+/* transparent-control hover — org dashboard team tabs, the dashboard's keyboard-selected repo row */
+.dashboard .right.menu > a.item:hover,
+.repo-owner-name-list > .active {
+  background: var(--control-transparent-bgColor-hover);
+}
+
+/* icon buttons: hover, then pressed — dashboard "+" (new repo), notification row actions */
+#dashboard-repo-list .ui.header > a.muted:hover,
+.notifications-buttons .btn:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+.notifications-buttons .btn:active {
+  background: var(--control-transparent-bgColor-active);
+}
+
+/* pressed / open default buttons — Follow (profile), Filter / Sort (repo lists) */
+.card li.follow .ui.button:active,
+:is(.profile, .explore) .filter.menu .dropdown.item:is(:active, .active) {
+  border-color: var(--button-default-borderColor-active);
+  background: var(--button-default-bgColor-active);
+}
