@@ -14,13 +14,13 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -47,7 +47,7 @@ jobs:
           echo "### Theme files" >> "$GITHUB_STEP_SUMMARY"
           node -e "const r=require('./dist/build-report.json');for(const [n,t] of Object.entries(r.themes))console.log('- theme-'+n+'.css: '+t.kb+' KB'+(t.overBudget?' (over 300 KB budget)':''))" >> "$GITHUB_STEP_SUMMARY"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: gitea-theme-github
           path: |
@@ -58,7 +58,7 @@ jobs:
 
       - name: GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: |
             dist/gitea-theme-github-*.zip
