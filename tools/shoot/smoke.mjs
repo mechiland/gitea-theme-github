@@ -140,7 +140,7 @@ try {
     const files = (tree.json || []).filter((f) => f.type === 'file');
     const file = (files.find((f) => f.name === "SMOKE.md") || files.find((f) => /\.(txt)$/i.test(f.name)) || files[0]); // never README: it is the markdown showcase
     expect(file, 'seeded repo has no file at the root to edit');
-    state.branch = `smoke-${ts}`;
+    state.branch = `patch-${ts}`; // github.com's web editor names branches <user>-patch-N
     await page.goto(`${R}/_edit/${encodeURIComponent(defaultBranch)}/${file.path.split('/').map(encodeURIComponent).join('/')}`);
     const line = `Smoke edit ${ts}`;
     const monaco = page.locator('.cm-editor .cm-content, .monaco-editor').first(); // 1.27 uses CodeMirror 6
@@ -154,7 +154,8 @@ try {
       await page.evaluate((l) => { const t = document.querySelector('#edit_area'); t.value += `\n${l}\n`; }, line);
       synced = 'fallback';
     }
-    await page.fill('input[name=commit_summary]', `Smoke edit ${ts}`);
+    state.commitTitle = `Update ${file.path}`; // neutral, like github.com's default commit title (FG-015)
+    await page.fill('input[name=commit_summary]', state.commitTitle);
     await page.check('input[name=commit_choice][value=commit-to-new-branch]', { force: true });
     await page.locator('input[name=new_branch_name]').fill(state.branch);
     await Promise.all([page.waitForURL(/\/compare\//, { timeout: 30000 }), page.click('#commit-button')]);
@@ -166,7 +167,7 @@ try {
     if (await toggle.isVisible().catch(() => false)) await toggle.click();
     const title = page.locator('.pullrequest-form #issue_title');
     await title.waitFor();
-    state.prTitle = `Smoke PR ${ts}`;
+    state.prTitle = state.commitTitle || `Update ${ts}`; // the PR title is also the Actions run title
     await title.fill(state.prTitle);
     await Promise.all([page.waitForURL(/\/pulls\/\d+$/, { timeout: 30000 }), page.locator('.pullrequest-form #new-issue button.ui.primary.button').first().click()]);
     state.prUrl = page.url();

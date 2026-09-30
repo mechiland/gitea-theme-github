@@ -1,0 +1,221 @@
+{{- /* gitea-theme-github (ARCHITECTURE.md §7, FG-007 + FG-063; spec: docs/final-gate/issues.md "Header decision").
+     github.com signed-in AppHeader, rendered by templates/base/head_navbar.tmpl for github-* themes ONLY
+     (every other theme gets Gitea 1.27.3's navbar byte-for-byte from the else-branch there).
+     Kept JS hooks (Gitea 1.27.3 web_src/js): #navbar (utils.ts toggleFullScreen), #navbar .user-menu
+     (repo-view-file-tree.ts), .notification_count (notification.ts), .active-stopwatch, .active-stopwatch-popup,
+     .stopwatch-link/-commit/-cancel/-issue, .header-stopwatch-dot (stopwatch.ts), Fomantic .ui.dropdown.jump.item
+     menus, the custom/extra_links hook. #navbar-expand-toggle is intentionally absent (common-page.ts returns early).
+     The hamburger is a native <details> disclosure (no JavaScript). Every link, condition, href and locale key of the
+     upstream navbar is kept; only the arrangement changes. Styled by src/navigation (.gh-app-header*) and
+     src/pages/auth (.gh-app-header--auth). */ -}}
+{{- $isAuth := and (not .IsSigned) (or .PageIsSignIn .PageIsSignUp .IsResetRequest .IsResetForm) -}}
+<nav id="navbar" class="gh-app-header{{if $isAuth}} gh-app-header--auth{{end}}" aria-label="{{ctx.Locale.Tr "aria.navbar"}}">
+	<div class="gh-app-header-start">
+		{{if not (and .IsSigned .MustChangePassword)}}
+		<details class="gh-app-header-menu">
+			<summary class="item gh-icon-btn" aria-label="{{ctx.Locale.Tr "home.nav_menu"}}" data-tooltip-content="{{ctx.Locale.Tr "home.nav_menu"}}">{{svg "octicon-three-bars"}}</summary>
+			<div class="gh-app-header-drawer">
+				<div class="gh-drawer-head">
+					<img width="32" height="32" src="{{AssetUrlPrefix}}/img/logo.svg" alt="" aria-hidden="true">
+				</div>
+				<nav class="gh-drawer-list" aria-label="{{ctx.Locale.Tr "home.nav_menu"}}">
+					{{if .IsSigned}}
+						<a class="item{{if .PageIsDashboard}} active{{end}}" href="{{AppSubUrl}}/">{{svg "octicon-home"}}<span>{{ctx.Locale.Tr "dashboard"}}</span></a>
+						{{if not ctx.Consts.RepoUnitTypeIssues.UnitGlobalDisabled}}
+							<a class="item{{if .PageIsIssues}} active{{end}}" href="{{AppSubUrl}}/issues">{{svg "octicon-issue-opened"}}<span>{{ctx.Locale.Tr "issues"}}</span></a>
+						{{end}}
+						{{if not ctx.Consts.RepoUnitTypePullRequests.UnitGlobalDisabled}}
+							<a class="item{{if .PageIsPulls}} active{{end}}" href="{{AppSubUrl}}/pulls">{{svg "octicon-git-pull-request"}}<span>{{ctx.Locale.Tr "pull_requests"}}</span></a>
+						{{end}}
+						{{if not (and ctx.Consts.RepoUnitTypeIssues.UnitGlobalDisabled ctx.Consts.RepoUnitTypePullRequests.UnitGlobalDisabled)}}
+							{{if .ShowMilestonesDashboardPage}}
+								<a class="item{{if .PageIsMilestonesDashboard}} active{{end}}" href="{{AppSubUrl}}/milestones">{{svg "octicon-milestone"}}<span>{{ctx.Locale.Tr "milestones"}}</span></a>
+							{{end}}
+						{{end}}
+						<a class="item{{if .PageIsExplore}} active{{end}}" href="{{AppSubUrl}}/explore/repos">{{svg "octicon-telescope"}}<span>{{ctx.Locale.Tr "explore_title"}}</span></a>
+					{{else if .IsLandingPageOrganizations}}
+						<a class="item{{if .PageIsExplore}} active{{end}}" href="{{AppSubUrl}}/explore/organizations">{{svg "octicon-telescope"}}<span>{{ctx.Locale.Tr "explore_title"}}</span></a>
+					{{else}}
+						<a class="item{{if .PageIsExplore}} active{{end}}" href="{{AppSubUrl}}/explore/repos">{{svg "octicon-telescope"}}<span>{{ctx.Locale.Tr "explore_title"}}</span></a>
+					{{end}}
+					{{template "custom/extra_links" .}}
+					{{if not .IsSigned}}
+						<a class="item" target="_blank" href="https://docs.gitea.com">{{svg "octicon-question"}}<span>{{ctx.Locale.Tr "help"}}</span></a>
+						{{if $isAuth}}
+							<div class="gh-drawer-divider" role="separator"></div>
+							{{if .ShowRegistrationButton}}
+								<a class="item{{if .PageIsSignUp}} active{{end}}" href="{{AppSubUrl}}/user/sign_up">{{svg "octicon-person"}}<span>{{ctx.Locale.Tr "register"}}</span></a>
+							{{end}}
+							<a class="item{{if .PageIsSignIn}} active{{end}}" rel="nofollow" href="{{AppSubUrl}}/user/login">{{svg "octicon-sign-in"}}<span>{{ctx.Locale.Tr "sign_in"}}</span></a>
+						{{end}}
+					{{end}}
+				</nav>
+			</div>
+		</details>
+		{{end}}
+		<a class="item" id="navbar-logo" href="{{AppSubUrl}}/" aria-label="{{if .IsSigned}}{{ctx.Locale.Tr "dashboard"}}{{else}}{{ctx.Locale.Tr "home_title"}}{{end}}">
+			<img width="32" height="32" src="{{AssetUrlPrefix}}/img/logo.svg" alt="{{ctx.Locale.Tr "logo"}}" aria-hidden="true">
+		</a>
+		{{if not $isAuth}}
+		<div class="gh-app-header-context">
+			{{if .Repository}}
+				<a class="gh-context-item gh-context-owner" href="{{AppSubUrl}}/{{PathEscape .Repository.OwnerName}}">{{.Repository.OwnerName}}</a><span class="gh-context-sep" aria-hidden="true">/</span><a class="gh-context-item gh-context-repo" href="{{.RepoLink}}">{{.Repository.Name}}</a>
+			{{else if .PageIsDashboard}}
+				<span class="gh-context-item">{{ctx.Locale.Tr "dashboard"}}</span>
+			{{else if and .ContextUser (not .PageIsUserSettings) (not .PageIsAdmin)}}
+				<a class="gh-context-item" href="{{.ContextUser.HomeLink}}">{{.ContextUser.Name}}</a>
+			{{else if .Title}}
+				<span class="gh-context-item">{{.Title}}</span>
+			{{end}}
+		</div>
+		{{end}}
+	</div>
+
+	{{if not $isAuth}}
+	<div class="gh-app-header-end">
+		{{if and .IsSigned .MustChangePassword}}
+			<div class="ui dropdown jump item" data-tooltip-content="{{ctx.Locale.Tr "user_profile_and_more"}}">
+				<span class="text">
+					{{ctx.AvatarUtils.Avatar .SignedUser 24 "tw-mr-1"}}
+					<span class="only-mobile">{{.SignedUser.Name}}</span>
+					<span class="not-mobile flex-text-block">{{svg "octicon-triangle-down"}}</span>
+				</span>
+				<div class="menu user-menu">
+					<div class="header">
+						{{ctx.Locale.Tr "signed_in_as"}} <strong>{{.SignedUser.Name}}</strong>
+					</div>
+
+					<div class="divider"></div>
+					<a class="item" href="{{AppSubUrl}}/user/logout">
+						{{svg "octicon-sign-out"}}
+						{{ctx.Locale.Tr "sign_out"}}
+					</a>
+				</div><!-- end content avatar menu -->
+			</div><!-- end dropdown avatar menu -->
+		{{else}}
+			{{- $searchURL := print AppSubUrl "/explore/repos" -}}
+			{{- if .Repository}}{{$searchURL = print .RepoLink "/search"}}{{end -}}
+			<form class="gh-app-header-search" role="search" method="get" action="{{$searchURL}}">
+				{{svg "octicon-search"}}
+				<input type="search" name="q" autocomplete="off" aria-label="{{ctx.Locale.Tr "search.search"}}" placeholder="{{if .Repository}}{{ctx.Locale.Tr "search.code_kind"}}{{else}}{{ctx.Locale.Tr "search.repo_kind"}}{{end}}">
+			</form>
+			<a class="item gh-icon-btn gh-app-header-search-link" href="{{$searchURL}}" aria-label="{{ctx.Locale.Tr "search.search"}}">{{svg "octicon-search"}}</a>
+			{{if .IsSigned}}
+				<span class="gh-app-header-divider" aria-hidden="true"></span>
+				<div class="ui dropdown jump item gh-app-header-create" data-tooltip-content="{{ctx.Locale.Tr "create_new"}}">
+					<span class="flex-text-block">
+						{{svg "octicon-plus"}}
+						<span class="not-mobile flex-text-block">{{svg "octicon-triangle-down"}}</span>
+						<span class="only-mobile">{{ctx.Locale.Tr "create_new"}}</span>
+					</span>
+					<div class="menu">
+						<a class="item" href="{{AppSubUrl}}/repo/create">
+							{{svg "octicon-plus"}} {{ctx.Locale.Tr "new_repo"}}
+						</a>
+						{{if not .DisableMigrations}}
+							<a class="item" href="{{AppSubUrl}}/repo/migrate">
+								{{svg "octicon-repo-push"}} {{ctx.Locale.Tr "new_migrate"}}
+							</a>
+						{{end}}
+						{{if .SignedUser.CanCreateOrganization}}
+						<a class="item" href="{{AppSubUrl}}/org/create">
+							{{svg "octicon-organization"}} {{ctx.Locale.Tr "new_org"}}
+						</a>
+						{{end}}
+					</div><!-- end content create new menu -->
+				</div><!-- end dropdown menu create new -->
+				{{if not ctx.Consts.RepoUnitTypeIssues.UnitGlobalDisabled}}
+					<a class="item gh-icon-btn{{if .PageIsIssues}} active{{end}}" href="{{AppSubUrl}}/issues" aria-label="{{ctx.Locale.Tr "issues"}}" data-tooltip-content="{{ctx.Locale.Tr "issues"}}">{{svg "octicon-issue-opened"}}</a>
+				{{end}}
+				{{if not ctx.Consts.RepoUnitTypePullRequests.UnitGlobalDisabled}}
+					<a class="item gh-icon-btn{{if .PageIsPulls}} active{{end}}" href="{{AppSubUrl}}/pulls" aria-label="{{ctx.Locale.Tr "pull_requests"}}" data-tooltip-content="{{ctx.Locale.Tr "pull_requests"}}">{{svg "octicon-git-pull-request"}}</a>
+				{{end}}
+				{{template "base/head_navbar_icons" dict "ItemExtraClass" "gh-icon-btn" "PageGlobalData" .PageGlobalData}}
+				<div class="ui dropdown jump item gh-app-header-avatar" data-tooltip-content="{{ctx.Locale.Tr "user_profile_and_more"}}">
+					<span class="text tw-flex tw-items-center">
+						<span class="navbar-avatar">
+							{{ctx.AvatarUtils.Avatar .SignedUser 32}}
+							{{if .IsAdmin}}{{svg "octicon-shield-check" 16 "navbar-admin-badge"}}{{end}}
+						</span>
+					</span>
+					<div class="menu user-menu">
+						<div class="header">
+							{{ctx.Locale.Tr "signed_in_as"}} <strong>{{.SignedUser.Name}}</strong>
+						</div>
+
+						<div class="divider"></div>
+						<a class="item" href="{{.SignedUser.HomeLink}}">
+							{{svg "octicon-person"}}
+							{{ctx.Locale.Tr "your_profile"}}
+						</a>
+						{{if not .DisableStars}}
+							<a class="item" href="{{.SignedUser.HomeLink}}?tab=stars">
+								{{svg "octicon-star"}}
+								{{ctx.Locale.Tr "your_starred"}}
+							</a>
+						{{end}}
+						<a class="item" href="{{AppSubUrl}}/notifications/subscriptions">
+							{{svg "octicon-bell"}}
+							{{ctx.Locale.Tr "notification.subscriptions"}}
+						</a>
+						<a class="{{if .PageIsUserSettings}}active {{end}}item" href="{{AppSubUrl}}/user/settings">
+							{{svg "octicon-tools"}}
+							{{ctx.Locale.Tr "your_settings"}}
+						</a>
+						<a class="item" target="_blank" href="https://docs.gitea.com">
+							{{svg "octicon-question"}}
+							{{ctx.Locale.Tr "help"}}
+						</a>
+						{{if .IsAdmin}}
+						<div class="divider"></div>
+						<a class="{{if .PageIsAdmin}}active {{end}}item" href="{{AppSubUrl}}/-/admin">
+							{{svg "octicon-server"}}
+							{{ctx.Locale.Tr "admin_panel"}}
+						</a>
+						{{end}}
+						<div class="divider"></div>
+						<a class="item" href="{{AppSubUrl}}/user/logout">
+							{{svg "octicon-sign-out"}}
+							{{ctx.Locale.Tr "sign_out"}}
+						</a>
+					</div><!-- end content avatar menu -->
+				</div><!-- end dropdown avatar menu -->
+			{{else}}
+				{{if .ShowRegistrationButton}}
+					<a class="item gh-app-header-signup{{if .PageIsSignUp}} active{{end}}" href="{{AppSubUrl}}/user/sign_up">{{ctx.Locale.Tr "register"}}</a>
+				{{end}}
+				<a class="item gh-app-header-signin{{if .PageIsSignIn}} active{{end}}" rel="nofollow" href="{{AppSubUrl}}/user/login">{{ctx.Locale.Tr "sign_in"}}</a>
+			{{end}}
+		{{end}}
+	</div>
+	{{end}}
+
+	{{$activeStopwatch := and .PageGlobalData (call .PageGlobalData.GetActiveStopwatch)}}
+	{{if $activeStopwatch}}
+		<div class="active-stopwatch-popup tippy-target">
+			<div class="flex-text-block tw-p-3">
+				<a class="stopwatch-link flex-text-block muted" href="{{$activeStopwatch.IssueLink}}">
+					{{svg "octicon-issue-opened" 16}}
+					<span class="stopwatch-issue">{{$activeStopwatch.RepoSlug}}#{{$activeStopwatch.IssueIndex}}</span>
+				</a>
+				<div class="tw-flex tw-gap-1">
+					<form class="stopwatch-commit form-fetch-action" method="post" action="{{$activeStopwatch.IssueLink}}/times/stopwatch/stop">
+						<button
+							type="submit"
+							class="ui button mini compact basic icon tw-mr-0"
+							data-tooltip-content="{{ctx.Locale.Tr "repo.issues.stop_tracking"}}"
+						>{{svg "octicon-square-fill"}}</button>
+					</form>
+					<form class="stopwatch-cancel form-fetch-action" method="post" action="{{$activeStopwatch.IssueLink}}/times/stopwatch/cancel">
+						<button
+							type="submit"
+							class="ui button mini compact basic icon tw-mr-0"
+							data-tooltip-content="{{ctx.Locale.Tr "repo.issues.cancel_tracking"}}"
+						>{{svg "octicon-trash"}}</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	{{end}}
+</nav>
+{{template "base/head_banner"}}

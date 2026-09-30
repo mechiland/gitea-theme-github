@@ -8,6 +8,7 @@ next to the same page on github.com.
 node tools/seed/seed.mjs                    # full run (the first run takes ~10+ min because of the GitHub migrations)
 node tools/seed/seed.mjs --skip-migrations  # everything except the three GitHub migrations
 node tools/seed/seed.mjs --only=manifest    # only rebuild docs/seed-manifest.json from the live instance
+node tools/seed/seed.mjs --only=tidy        # only remove visible seed markers left by older runs (no migrations, manifest untouched)
 SEED_VERBOSE=1 node tools/seed/seed.mjs     # also print every item that already existed
 ```
 
@@ -47,9 +48,9 @@ creates a new one. The GitHub token from `gh auth token` is only held in memory 
 
 | Kind | Items |
 | --- | --- |
-| Users | `alice-dev`, `bob-dev`, `carol-ops`, `dave-qa`: full name, bio ending in "(seeded test account)", location, website, generated avatar, follows |
-| Orgs | `octo-org` (description, website, location, generated avatar, teams `Owners`, `core` (write), `triage` (read)); `pixel-guild` (second org, no repos) |
-| Migrated repos | `octo-org/grex` ← github.com/pemistahl/grex, `octo-org/prom_ex` ← github.com/akoutmos/prom_ex, `octo-org/folderify` ← github.com/lgarron/folderify (issues, PRs, labels, milestones, releases, wiki). Issue/PR numbers and commit SHAs match GitHub. Topics `theme-seed`, `migrated-from-github` |
+| Users | `alice-dev`, `bob-dev`, `carol-ops`, `dave-qa`: full name, short bio, location, website, generated avatar, follows |
+| Orgs | `octo-org` (neutral description, website, location, generated avatar, teams `Owners`, `core` (write), `triage` (read)); `pixel-guild` (second org, no repos) |
+| Migrated repos | `octo-org/grex` ← github.com/pemistahl/grex, `octo-org/prom_ex` ← github.com/akoutmos/prom_ex, `octo-org/folderify` ← github.com/lgarron/folderify (issues, PRs, labels, milestones, releases, wiki). Issue/PR numbers and commit SHAs match GitHub. Description and topics are exactly github.com's |
 | Native repo | `octo-org/theme-playground`: GFM showcase README, sources in Go/TS/TSX/Python/Rust/SQL/Shell/CSS/YAML/JSON, nested `docs/` tree, an ~800 line generated file, PNG/SVG images, 6 commits by 4 authors |
 | Issues | #1–#15 with labels (including exclusive scoped `priority/*`), 3 milestones (one with due date, one closed), assignees, comments by several users, reactions, pinned #1, closed #4/#9/#12/#15, cross references, task lists |
 | PRs | #16 large diff (20 files: modified, added, deleted, renamed, binary, long lines; approve + request changes + comment reviews with line comments), #17 merged (closes #5), #18 closed unmerged, #19 draft (`WIP:`), #20 open with requested reviewer |
@@ -60,9 +61,16 @@ creates a new one. The GitHub token from `gh auth token` is only held in memory 
 | Packages | generic `theme-demo` 1.0.0 and 1.1.0, npm `@octo-org/theme-tokens` 1.0.0 (linked to theme-playground) |
 | Social | fork `bob-dev/theme-playground`, stars, watches, profile READMEs `alice-dev/.profile` and `octo-org/.profile` |
 
-Every seeded issue, PR and release body ends with the hidden marker `<!-- theme-seed -->`; seeded repos
-have a `[seed]` description prefix and the `theme-seed` topic; seeded users' bios say "seeded test
-account". The full inventory, with Gitea and github.com URLs, is written to `docs/seed-manifest.json`.
+Seeded objects carry **no visible marker** (FG-015: blind judges used them to spot the clone). They are
+recognised by `docs/seed-manifest.json` (the machine-readable inventory, with Gitea and github.com URLs,
+see its `markers` block) and, where it is invisible, by the HTML comment `<!-- theme-seed -->` at the end
+of every seeded issue, PR and release body. Older versions of the script added a `[seed] ` description
+prefix, a ` (migrated from github.com/…)` suffix, `theme-seed` / `migrated-from-github` topics,
+"(seeded test account)" bios and seed wording in the org README, playground README/LICENSE/package.json/
+ci.yml and wiki; every run (and `--only=tidy` on its own) rewrites those in place, never deleting anything.
+Leftovers that cannot be rewritten: the published npm package `@octo-org/theme-tokens@1.0.0` metadata
+(immutable; not shown in the UI), existing "Smoke edit …" commits / "Smoke PR …" merges and their Actions
+runs, and README line 3 ("A seeded repository …"), kept so the open PR #16 stays mergeable.
 
 ## Never touched
 
@@ -86,3 +94,4 @@ inside seeded repos.
   admin's `diff_view_style`; capture as a seeded user or reset it afterwards if that matters.
 - Other sessions have used `octo-org/theme-playground` for smoke tests (issues/PRs titled "Smoke …"
   by admin, appended lines in README.md). Those are not seed data; the script leaves them alone.
+  `tools/shoot/smoke.mjs` now titles its commit and PR `Update <file>` on a `patch-<ts>` branch.

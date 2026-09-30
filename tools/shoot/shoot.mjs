@@ -5,7 +5,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { launchBrowser } from './lib/browser.mjs';
 import { parseArgs, list, runId } from './lib/args.mjs';
-import { PROJECT_ROOT, GITEA_URL, ensureLogin, ensureAppearance, langCookies, giteaVersion } from './lib/gitea.mjs';
+import { PROJECT_ROOT, GITEA_URL, ensureLogin, ensureAppearance, langCookies, giteaVersion, getDiffViewStyle, setDiffViewStyle } from './lib/gitea.mjs';
+import { execFileSync } from 'node:child_process';
 import { loadPalette } from './lib/palette.mjs';
 import { INIT_SCRIPT, FREEZE_CSS, settle, pageAudit } from './lib/audit.mjs';
 import { measureItems, pageMeasure, MEASURE_PROPS } from './lib/measure.mjs';
@@ -93,10 +94,71 @@ async function dismissCookieBanner(page) {
   return clicked;
 }
 
+// FG-033: a diff page visited without ?style= renders the admin's saved preference, and every ?style=split visit
+// saves "split" as that preference, so capture order leaked split view into unrelated routes. routes.json pins
+// ?style= on every diff route; this is the safety net for other route files (default: unified, the baseline).
+const DIFF_ROUTE = /\/(commit\/[0-9a-f]{7,40}|compare\/|pulls\/\d+\/files|wiki\/commit\/)/;
+function pinDiffStyle(u) {
+  if (!DIFF_ROUTE.test(u) || /[?&]style=/.test(u)) return u;
+  return u + (u.includes('?') ? '&' : '?') + 'style=unified';
+}
 function urlFor(route) {
   const u = route[target];
   if (target === 'github') return u;
-  return u.startsWith('http') ? u : giteaBase + u;
+  return pinDiffStyle(u.startsWith('http') ? u : giteaBase + u);
+}
+
+// FG-056: README media and avatars are <img loading="lazy">; a full-page capture never scrolls, so everything
+// below the first viewport stayed blank. Switch them to eager, walk the page once (IntersectionObserver-driven
+// content), return to the top and wait (max 8 s) until every image has loaded or failed. The layout shifts this
+// causes are not the page's load CLS: they are removed from the CLS total and reported as lazyImages.cls.
+async function loadLazyImages(page, timeout = 8000) {
+  return page.evaluate(async (timeout) => {
+    const cls0 = window.__shootCLS || 0; const shifts0 = (window.__shootShifts || []).length;
+    const lazy = [...document.querySelectorAll('img[loading="lazy"], iframe[loading="lazy"]')];
+    for (const el of lazy) el.loading = 'eager';
+    const raf = () => new Promise((r) => requestAnimationFrame(() => r()));
+    const H = () => Math.max(document.documentElement.scrollHeight, document.body ? document.body.scrollHeight : 0);
+    if (H() > innerHeight) { for (let y = 0; y < H(); y += innerHeight) { scrollTo(0, y); await raf(); } scrollTo(0, 0); await raf(); }
+    const pending = [...document.images].filter((i) => !i.complete);
+    await Promise.race([
+      Promise.all(pending.map((i) => new Promise((r) => { i.addEventListener('load', r, { once: true }); i.addEventListener('error', r, { once: true }); }))),
+      new Promise((r) => setTimeout(r, timeout)),
+    ]);
+    await raf(); await raf();
+    const cls = (window.__shootCLS || 0) - cls0;
+    window.__shootCLS = cls0; if (window.__shootShifts) window.__shootShifts.length = Math.min(window.__shootShifts.length, shifts0);
+    const imgs = [...document.images];
+    return { forcedEager: lazy.length, images: imgs.length, notLoaded: imgs.filter((i) => !i.complete || !i.naturalWidth).length, cls: +cls.toFixed(4) };
+  }, timeout).catch((e) => ({ error: String(e.message || e).split('\n')[0] }));
+}
+
+// FG-118: Chromium paints at most ~16,384 device px in one capture; taller full-page shots (390 @2x of long files)
+// came out blank below ~17,000 px. Tall pages are captured in clipped segments of <= 15,000 device px and stitched
+// (Pillow, like lib/pixeldiff.py). Pages below the limit keep the single-shot path (identical output to before).
+const MAX_DEVICE_PX = 15000;
+async function fullPageScreenshot(page, png) {
+  const dpr = await page.evaluate(() => devicePixelRatio).catch(() => 1);
+  const { w, h } = await page.evaluate(() => ({ w: document.documentElement.scrollWidth,
+    h: Math.max(document.documentElement.scrollHeight, document.body ? document.body.scrollHeight : 0) })).catch(() => ({ w: 0, h: 0 }));
+  const opts = { animations: 'disabled', caret: 'hide' };
+  if (!h || h * dpr <= MAX_DEVICE_PX) { await page.screenshot({ path: png, fullPage: true, ...opts }); return null; }
+  const seg = Math.floor(MAX_DEVICE_PX / dpr);
+  const parts = [];
+  for (let y = 0, i = 0; y < h; y += seg, i++) {
+    const part = `${png}.part${i}.png`;
+    await page.screenshot({ path: part, fullPage: true, clip: { x: 0, y, width: w, height: Math.min(seg, h - y) }, ...opts });
+    parts.push(part);
+  }
+  execFileSync('python3', ['-c', `import sys
+from PIL import Image
+ims=[Image.open(p) for p in sys.argv[2:]]
+out=Image.new(ims[0].mode,(max(i.width for i in ims),sum(i.height for i in ims)))
+y=0
+for i in ims: out.paste(i,(0,y)); y+=i.height
+out.save(sys.argv[1])`, png, ...parts]);
+  for (const p of parts) fs.rmSync(p, { force: true });
+  return { segments: parts.length, cssHeight: h, dpr };
 }
 
 // Playwright's 'networkidle' never fires on signed-in Gitea pages (the
@@ -324,10 +386,12 @@ async function capture(browser, route, scheme, vw, storageState, palette) {
     if (target === 'gitea' && route.auth !== false && /\/user\/login/.test(new URL(log.finalUrl).pathname)) log.problems.push('redirected to login (session lost)');
     log.env = await page.evaluate(() => ({ prefersDark: matchMedia('(prefers-color-scheme: dark)').matches, bodyBg: getComputedStyle(document.body).backgroundColor, bodyColor: getComputedStyle(document.body).color, fontFamily: getComputedStyle(document.body).fontFamily }));
     if (!measureOnly) {
+      if (target === 'gitea') log.lazyImages = await loadLazyImages(page);
       await injectFreeze(page);
       await settle(page);
       const png = path.join(dir, `${scheme}-${vw}.png`);
-      await page.screenshot({ path: png, fullPage: true, animations: 'disabled', caret: 'hide' });
+      const tiled = await fullPageScreenshot(page, png);
+      if (tiled) log.tiledCapture = tiled;
       log.png = path.relative(outDir, png);
       log.volatile = await volatileRects(page, true);
     }
@@ -417,7 +481,9 @@ async function main() {
   fs.mkdirSync(outDir, { recursive: true });
   const browser = await launchBrowser();
   let storageState = null; let appearance = null;
+  let diffStyle0 = null;
   if (target === 'gitea') {
+    diffStyle0 = await getDiffViewStyle();
     storageState = await ensureLogin(browser, { force: !!args.relogin });
     appearance = await ensureAppearance(browser, storageState, { theme, lang: 'en-US' });
     previewTheme = appearance.preview || null;
@@ -439,6 +505,10 @@ async function main() {
     schemes, viewports, appearance, paletteVersion: palette && palette.version, stable: stable ? { time: stableTime, thirdPartyBlocked: true } : false,
     themeCss: themeCssFile ? { file: path.relative(PROJECT_ROOT, themeCssFile), bytes: themeCssBody.length, sha256: (await import('node:crypto')).createHash('sha256').update(themeCssBody).digest('hex').slice(0, 16) } : null };
   await browser.close();
+  if (target === 'gitea' && diffStyle0) { // FG-033: put the admin's diff-style preference back
+    const now = await getDiffViewStyle();
+    meta.diffViewStyle = { before: diffStyle0, afterRun: now, restored: now !== diffStyle0 ? await setDiffViewStyle(diffStyle0).catch((e) => 'FAILED: ' + e.message) : false };
+  }
   // partial runs (--only) into an existing dir (e.g. docs/reference) merge page lists instead of overwriting
   const summaryFile = path.join(outDir, 'summary.json');
   const summary = summarize(logs, meta);

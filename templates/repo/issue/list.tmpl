@@ -1,0 +1,59 @@
+{{template "base/head" .}}
+<div role="main" aria-label="{{.Title}}" class="page-content repository issue-list">
+	{{template "repo/header" .}}
+	<div class="ui container">{{/* gitea-theme-github (ARCHITECTURE.md §7, FG-017): github-* themes only: left NavList (existing ?type= filters, Milestones, Labels) + page title; other themes: upstream bytes. */}}{{if StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-"}}<div class="gh-issues-layout"><nav class="gh-issues-nav" aria-label="{{ctx.Locale.Tr "repo.issues.filter_type"}}"><a class="gh-issues-nav-item{{if or (eq .ViewType "all") (eq .ViewType "")}} selected{{end}}"{{if or (eq .ViewType "all") (eq .ViewType "")}} aria-current="page"{{end}} href="{{QueryBuild "?" "type" "all" "state" $.State}}">{{if .PageIsPullList}}{{svg "octicon-git-pull-request"}}{{else}}{{svg "octicon-issue-opened"}}{{end}}<span>{{if .PageIsPullList}}{{ctx.Locale.Tr "repo.issues.filter_type.all_pull_requests"}}{{else}}{{ctx.Locale.Tr "repo.issues.filter_type.all_issues"}}{{end}}</span></a>{{if .IsSigned}}<a class="gh-issues-nav-item{{if eq .ViewType "assigned"}} selected{{end}}"{{if eq .ViewType "assigned"}} aria-current="page"{{end}} href="{{QueryBuild "?" "type" "assigned" "state" $.State}}">{{svg "octicon-people"}}<span>{{ctx.Locale.Tr "repo.issues.filter_type.assigned_to_you"}}</span></a><a class="gh-issues-nav-item{{if eq .ViewType "created_by"}} selected{{end}}"{{if eq .ViewType "created_by"}} aria-current="page"{{end}} href="{{QueryBuild "?" "type" "created_by" "state" $.State}}">{{svg "octicon-smiley"}}<span>{{ctx.Locale.Tr "repo.issues.filter_type.created_by_you"}}</span></a>{{if .PageIsPullList}}<a class="gh-issues-nav-item{{if eq .ViewType "review_requested"}} selected{{end}}"{{if eq .ViewType "review_requested"}} aria-current="page"{{end}} href="{{QueryBuild "?" "type" "review_requested" "state" $.State}}">{{svg "octicon-eye"}}<span>{{ctx.Locale.Tr "repo.issues.filter_type.review_requested"}}</span></a><a class="gh-issues-nav-item{{if eq .ViewType "reviewed_by"}} selected{{end}}"{{if eq .ViewType "reviewed_by"}} aria-current="page"{{end}} href="{{QueryBuild "?" "type" "reviewed_by" "state" $.State}}">{{svg "octicon-code-review"}}<span>{{ctx.Locale.Tr "repo.issues.filter_type.reviewed_by_you"}}</span></a>{{end}}<a class="gh-issues-nav-item{{if eq .ViewType "mentioned"}} selected{{end}}"{{if eq .ViewType "mentioned"}} aria-current="page"{{end}} href="{{QueryBuild "?" "type" "mentioned" "state" $.State}}">{{svg "octicon-mention"}}<span>{{ctx.Locale.Tr "repo.issues.filter_type.mentioning_you"}}</span></a>{{end}}<div class="gh-issues-nav-divider" role="separator"></div><a class="gh-issues-nav-item" href="{{.RepoLink}}/milestones">{{svg "octicon-milestone"}}<span>{{ctx.Locale.Tr "repo.milestones"}}</span></a><a class="gh-issues-nav-item" href="{{.RepoLink}}/labels">{{svg "octicon-tag"}}<span>{{ctx.Locale.Tr "repo.labels"}}</span></a></nav><div class="gh-issues-main"><h2 class="gh-issues-title">{{if eq .ViewType "assigned"}}{{ctx.Locale.Tr "repo.issues.filter_type.assigned_to_you"}}{{else if eq .ViewType "created_by"}}{{ctx.Locale.Tr "repo.issues.filter_type.created_by_you"}}{{else if eq .ViewType "review_requested"}}{{ctx.Locale.Tr "repo.issues.filter_type.review_requested"}}{{else if eq .ViewType "reviewed_by"}}{{ctx.Locale.Tr "repo.issues.filter_type.reviewed_by_you"}}{{else if eq .ViewType "mentioned"}}{{ctx.Locale.Tr "repo.issues.filter_type.mentioning_you"}}{{else}}{{if .PageIsPullList}}{{ctx.Locale.Tr "repo.issues.filter_type.all_pull_requests"}}{{else}}{{ctx.Locale.Tr "repo.issues.filter_type.all_issues"}}{{end}}{{end}}</h2>{{end}}
+	{{template "base/alert" .}}
+
+	{{template "repo/code/recently_pushed_new_branches" dict "RecentBranchesPromptData" .RecentBranchesPromptData}}
+
+	{{if .PinnedIssues}}
+		<div id="issue-pins" {{if .IsRepoAdmin}}data-is-repo-admin{{end}}>
+			{{range .PinnedIssues}}
+				<div class="issue-card tw-break-anywhere {{if $.IsRepoAdmin}}tw-cursor-grab{{end}}" data-move-url="{{$.Link}}/move_pin" data-issue-id="{{.ID}}">
+					{{template "repo/issue/card" (dict "Issue" . "Page" $ "isPinnedIssueCard" true)}}
+				</div>
+			{{end}}
+		</div>
+	{{end}}
+
+		<div class="list-header flex-text-block">
+			{{template "repo/issue/search" .}}
+			<a class="ui small button" href="{{.RepoLink}}/labels">{{ctx.Locale.Tr "repo.labels"}}</a>
+			<a class="ui small button" href="{{.RepoLink}}/milestones">{{ctx.Locale.Tr "repo.milestones"}}</a>
+			{{if not .Repository.IsArchived}}
+				{{if .PageIsIssueList}}
+					<a class="ui small primary button issue-list-new" href="{{.RepoLink}}/issues/new{{if .NewIssueChooseTemplate}}/choose{{end}}">{{ctx.Locale.Tr "repo.issues.new"}}</a>
+				{{else}}
+					<a class="ui small primary button new-pr-button issue-list-new {{if not .PullRequestCtx.CanCreateNewPull}}disabled{{end}}" href="{{.PullRequestCtx.MakeDefaultCompareLink .Repository.DefaultBranch}}">{{ctx.Locale.Tr "repo.pulls.new"}}</a>
+				{{end}}
+			{{else}}
+				{{/* archived, view compare page only */}}
+				{{if not .PageIsIssueList}}
+					<a class="ui small primary small button issue-list-new" href="{{.PullRequestCtx.MakeDefaultCompareLink .Repository.DefaultBranch}}">{{ctx.Locale.Tr "action.compare_commits_general"}}</a>
+				{{end}}
+			{{end}}
+		</div>
+
+		{{template "repo/issue/filters" .}}
+
+		<div id="issue-actions" class="issue-list-toolbar tw-hidden">
+			<div class="issue-list-toolbar-left">
+				{{template "repo/issue/openclose" .}}
+				<!-- Total Tracked Time -->
+				{{if .TotalTrackedTime}}
+					<div class="ui compact tiny secondary menu">
+						<span class="item" data-tooltip-content='{{ctx.Locale.Tr "tracked_time_summary"}}'>
+							{{svg "octicon-clock"}}
+							{{.TotalTrackedTime | Sec2Hour}}
+						</span>
+					</div>
+				{{end}}
+			</div>
+			<div class="issue-list-toolbar-right">
+				{{template "repo/issue/filter_actions" .}}
+			</div>
+		</div>
+		{{template "shared/issuelist" dict "." . "listType" "repo"}}{{if StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-"}}</div></div>{{end}}
+	</div>
+</div>
+{{template "base/footer" .}}

@@ -110,3 +110,21 @@ export async function giteaVersion() {
     return (await r.json()).version;
   } catch { return null; }
 }
+
+// Diff view style preference (FG-033). Visiting a diff page with ?style=split|unified as the admin SAVES that
+// style as the admin's preference (routers/web/repo/middlewares.go SetDiffViewStyle), which then leaks into every
+// later diff route without an explicit ?style=. shoot.mjs pins ?style= on diff routes and restores the preference
+// it found before the run with these two helpers (REST API, basic auth as the admin).
+const basicAuth = () => 'Basic ' + Buffer.from(`${ADMIN_USER}:${ADMIN_PASS}`).toString('base64');
+export async function getDiffViewStyle() {
+  try {
+    const r = await fetch(`${GITEA_URL}/api/v1/user/settings`, { headers: { authorization: basicAuth() } });
+    if (!r.ok) return null;
+    return (await r.json()).diff_view_style ?? null;
+  } catch { return null; }
+}
+export async function setDiffViewStyle(style) {
+  const r = await fetch(`${GITEA_URL}/api/v1/user/settings`, { method: 'PATCH', headers: { authorization: basicAuth(), 'content-type': 'application/json' }, body: JSON.stringify({ diff_view_style: style }) });
+  if (!r.ok) throw new Error(`PATCH /api/v1/user/settings diff_view_style=${style}: HTTP ${r.status}`);
+  return (await r.json()).diff_view_style;
+}
