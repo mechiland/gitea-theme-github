@@ -1,0 +1,6 @@
+/* gh-important: FG2-083 — the merge-style menu (lazy PullRequestMergeForm chunk, unlayered scoped CSS:
+   `.action-text { padding: 0.8rem }`) = Primer ActionList items: overlays already gives the item 32px / 6px 8px, so the
+   inner text box adds no padding of its own */
+.repository.view.issue .ui.merge-button .ui.dropdown .menu > .item > .action-text {
+  padding: 0 !important;
+}

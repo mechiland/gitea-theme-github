@@ -65,7 +65,6 @@
   gap: var(--base-size-8);
 }
 
-.file-header .file-header-right > .ui.buttons,
 .blame-avatar {
   margin-right: 0;
 }
@@ -85,6 +84,7 @@
 
 /* invisible icon buttons: blob header, blame re-blame, diff header (fold / popup / copy path) */
 .non-diff-file-content .header .file-actions .btn-octicon:hover,
+.file-header .file-actions > .ui.buttons > .button:is([href*="/src/commit/"], [href*="/commits/"]):hover,
 .file-view .lines-blame-btn > a:hover,
 .diff-file-header .fold-file:hover,
 .diff-file-header .diff-header-popup-btn:hover,
@@ -93,7 +93,8 @@
   color: var(--fgColor-default);
 }
 
-.non-diff-file-content .header .file-actions .btn-octicon:active {
+.non-diff-file-content .header .file-actions .btn-octicon:active,
+.file-header .file-actions > .ui.buttons > .button:is([href*="/src/commit/"], [href*="/commits/"]):active {
   background: var(--control-transparent-bgColor-active);
 }
 
@@ -108,14 +109,24 @@
   color: var(--fgColor-disabled);
 }
 
-/* github.com groups the blob actions: [Raw | copy | download] then [pencil | ▾] as bordered ButtonGroups of
-   28px default buttons (icon --fgColor-muted), then invisible icon buttons. Gitea renders
-   [Raw | Permalink | Blame | History] download copy rss pencil trash; the text group stays first, copy and
-   download become one bordered group (GitHub's order: copy before download), pencil + trash a second one,
-   and the rss link stays an invisible icon button at the end. Not applied to the README header (pencil only).
-   In a header with a download link the .btn-octicon children are exactly download, copy, rss, pencil, trash
-   (templates/repo/view_file.tmpl), so "every icon button but rss" is written :not(:has(> .octicon-rss)). */
-.file-header .file-actions:has(> .btn-octicon[download]) > .ui.buttons {
+/* github.com blob actions (FG2-015): [Raw | copy | download] [pencil | trash] then invisible IconButtons.
+   Gitea renders [Raw | Permalink | Blame | History | (Un)escape] download copy rss pencil trash. Its text group is
+   flattened (display: contents) so every action is an item of .file-actions and can be regrouped with `order`:
+   Raw joins copy + download, pencil joins trash, (Un)escape stays a text button, Permalink / History become link /
+   history IconButtons (label kept for AT, font-size 0) and RSS stays last. Blame (in the switch) and the README
+   header's source/rendered toggle are not touched. In a header with a download link the .btn-octicon children are
+   exactly download, copy, rss, pencil, trash (templates/repo/view_file.tmpl). */
+.file-header .file-actions > .ui.buttons:not(.file-view-toggle-buttons) {
+  display: contents;
+}
+
+.file-header .file-actions > .ui.buttons > .button {
+  order: 6;
+  margin: 0;
+  border-radius: var(--borderRadius-medium);
+}
+
+.file-header .file-actions > .ui.buttons > .button:first-child {
   order: 1;
 }
 
@@ -135,47 +146,113 @@
   order: 5;
 }
 
-.file-header .file-actions > .btn-octicon:has(> .octicon-rss) {
-  order: 6;
+.file-header .file-actions > .ui.buttons > .button[href*="/src/commit/"] {
+  order: 7;
 }
 
-.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:not(:has(> .octicon-rss)) {
+.file-header .file-actions > .ui.buttons > .button[href*="/commits/"] {
+  order: 8;
+}
+
+.file-header .file-actions > .btn-octicon:has(> .octicon-rss) {
+  order: 9;
+}
+
+/* Permalink / History → invisible IconButtons (28px) with the link / history octicon (mask; until the icons folder
+   ships the two masks, the served Octicon file is the fallback) */
+.file-header .file-actions > .ui.buttons > .button:is([href*="/src/commit/"], [href*="/commits/"]) {
+  width: var(--control-small-size);
+  padding: 0;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: var(--fgColor-muted);
+  font-size: 0;
+}
+
+.file-header .file-actions > .ui.buttons > .button:is([href*="/src/commit/"], [href*="/commits/"])::before {
+  content: "";
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  background: currentColor;
+  mask: var(--gh-octicon-link, url("../img/svg/octicon-link.svg")) center / contain no-repeat;
+}
+
+.file-header .file-actions > .ui.buttons > .button[href*="/commits/"]::before {
+  mask-image: var(--gh-octicon-history, url("../img/svg/octicon-history.svg"));
+}
+
+/* Raw is the first button of the [Raw | copy | download] group */
+.file-header .file-actions:has(> [download]) > .ui.buttons > .button:first-child {
+  border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
+}
+
+.file-header .file-actions:has(> [download]) > .btn-octicon:not(:has(> .octicon-rss)) {
   border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
   background: var(--button-default-bgColor-rest);
   box-shadow: var(--button-default-shadow-resting);
 }
 
-.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:not(:has(> .octicon-rss)):hover {
+.file-header .file-actions:has(> [download]) > .btn-octicon:not(:has(> .octicon-rss)):hover {
   border-color: var(--button-default-borderColor-hover);
   background: var(--button-default-bgColor-hover);
   color: var(--fgColor-muted);
 }
 
-.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:not(:has(> .octicon-rss)):active {
+.file-header .file-actions:has(> [download]) > .btn-octicon:not(:has(> .octicon-rss)):active {
   background: var(--button-default-bgColor-active);
 }
 
-.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:not(:has(> .octicon-rss)).disabled {
+.file-header .file-actions:has(> [download]) > .btn-octicon:not(:has(> .octicon-rss)).disabled {
   border-color: var(--button-default-borderColor-disabled);
   background: var(--button-default-bgColor-disabled);
   box-shadow: none;
   color: var(--fgColor-disabled);
 }
 
-.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:is([data-global-click], :has(> .octicon-pencil)) {
-  border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
-}
-
-/* second button of a group: joined to the first (cancel the 8px flex gap, overlap the 1px border) */
-.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:is([download], :has(> .octicon-trash)) {
+/* joined buttons: cancel the 8px flex gap and overlap the 1px border; copy sits in the middle of its group */
+.file-header .file-actions:has(> [download]) > .btn-octicon:is([data-global-click], [download], :has(> .octicon-trash)) {
   margin-left: calc(-1 * (var(--base-size-8) + var(--borderWidth-thin)));
   border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
 }
 
-.non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon-danger:hover {
+.file-header .file-actions:has(> [download]) > .btn-octicon[data-global-click] {
+  border-radius: 0;
+}
+
+.file-header .file-actions:has(> [download]) > .btn-octicon:has(> .octicon-pencil) {
+  border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
+}
+
+.file-header .file-actions:has(> [download]) > .btn-octicon.btn-octicon-danger:hover {
   border-color: var(--button-danger-borderColor-hover);
   background: var(--button-danger-bgColor-hover);
   color: var(--button-danger-fgColor-hover);
+}
+
+/* README box header (repo home): github.com draws a white 48px header whose "README" item is a selected
+   UnderlineNav tab (book icon, 14px semibold, 2px --underlineNav-borderColor-active bar on the bottom edge), FG2-077.
+   The README | license tab pair itself needs markup (FG-034, rejected). */
+#readme > .file-header {
+  min-height: calc(var(--base-size-48) + var(--borderWidth-thin));
+  background: var(--bgColor-default);
+}
+
+#readme > .file-header .file-header-left {
+  position: relative;
+  align-self: stretch;
+  padding-left: var(--base-size-8);
+}
+
+#readme > .file-header .file-header-left::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: calc(-1 * var(--base-size-8));
+  left: 0;
+  height: var(--borderWidth-thick);
+  border-radius: var(--borderRadius-medium);
+  background: var(--underlineNav-borderColor-active);
 }
 
 /* ---------- Box body (same box as the diff body) ---------- */
@@ -266,6 +343,8 @@
 }
 
 @media (max-width: 767.98px) {
+  /* github.com's mobile blob / README Box is full-bleed with 32px padding (text 324px wide at 390); ours stays in the
+     16px page gutter (FG2-055), so 16px padding gives the same 324px measure (FG2-086) */
   .file-view.markup {
     padding: var(--base-size-16);
   }
@@ -277,32 +356,10 @@
     padding: var(--base-size-8) var(--base-size-12);
   }
 
-  /* github.com's mobile blob header is one 46px row (Code/Blame + icons; the "N lines" info sits above it).
-     Gitea's header wrapped to three rows (108px): keep the info on its own row and one row of actions —
-     Raw | Blame, copy | download, edit — and drop the secondary Permalink / History / RSS / delete. */
-
-  .file-header .file-header-left {
+  /* Gitea's header wrapped to three rows (108px): the switch + "N lines" info get their own row, the actions one row
+     below (all of them fit in 358px as 28px buttons: Raw | copy | download, pencil | trash, link, history, rss).
+     Not the README box (#readme): its header is one row, name + pencil (FG2-034). */
+  .non-diff-file-content:not(#readme) > .file-header .file-header-left {
     flex: 1 0 100%;
-  }
-
-  .file-header .file-actions > .ui.buttons > .button:is([href*="/src/commit/"], [href*="/commits/"]),
-  .file-header .file-actions > .btn-octicon:is(:has(> .octicon-rss), :has(> .octicon-trash)) {
-    display: none;
-  }
-
-  .non-diff-file-content .header .file-actions:has(> .btn-octicon[download]) > .btn-octicon:has(> .octicon-pencil) {
-    border-radius: var(--borderRadius-medium);
-  }
-
-  /* Raw is the only visible button of its group (Blame moved into the switch) */
-  .file-header .file-actions > .ui.buttons > .button:first-child {
-    border-top-right-radius: var(--borderRadius-medium);
-    border-bottom-right-radius: var(--borderRadius-medium);
-  }
-
-  /* github.com mobile: the latest-commit box and the file Box run edge to edge of the page gutter (FG-054) */
-  .repo-view-content > :is(#repo-file-commit-box, .non-diff-file-content) {
-    margin-left: calc(-1 * var(--page-margin-x));
-    margin-right: calc(-1 * var(--page-margin-x));
   }
 }

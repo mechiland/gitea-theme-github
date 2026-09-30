@@ -11,83 +11,83 @@
  "failedRequests": [],
  "expectedFailures": [],
  "ignoredRequests": [],
- "cssBytes": 256853,
+ "cssBytes": 256846,
  "cssFiles": [
   {
-   "url": "https://github.githubassets.com/assets/profile-f92baa562c27f6e0.css",
-   "bytes": 2482
+   "url": "https://github.githubassets.com/assets/app-runtime.70b2cadcfd63fdd3.module.css",
+   "bytes": 1558
   },
   {
-   "url": "https://github.githubassets.com/assets/react-core.cbbd4117122d27f9.module.css",
-   "bytes": 696
-  },
-  {
-   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.a1523bc43e1d725b.module.css",
-   "bytes": 396
+   "url": "https://github.githubassets.com/assets/app-install-banner-partial.e8934decca2d3cfc.module.css",
+   "bytes": 671
   },
   {
    "url": "https://github.githubassets.com/assets/light_high_contrast-48fdd0811afbab3c.css",
-   "bytes": 7649
+   "bytes": 7386
   },
   {
-   "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
-   "bytes": 7390
-  },
-  {
-   "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
-   "bytes": 7271
-  },
-  {
-   "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
-   "bytes": 2574
-  },
-  {
-   "url": "https://github.githubassets.com/assets/github-7338c07b3a07b8be.css",
-   "bytes": 22131
-  },
-  {
-   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
-   "bytes": 40849
-  },
-  {
-   "url": "https://github.githubassets.com/assets/primer-react-css.76a197f9dce25e3c.module.css",
-   "bytes": 35271
+   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.c83fd3e6c58504ad.module.css",
+   "bytes": 390
   },
   {
    "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
-   "bytes": 7250
+   "bytes": 7273
   },
   {
-   "url": "https://github.githubassets.com/assets/app-runtime.bc6140f37acc15cb.module.css",
-   "bytes": 1522
+   "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
+   "bytes": 7249
   },
   {
-   "url": "https://github.githubassets.com/assets/t.d7f0479eca0d90af.module.css",
-   "bytes": 3457
+   "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
+   "bytes": 2552
   },
   {
-   "url": "https://github.githubassets.com/assets/app-install-banner-partial.9b99004c798b710f.module.css",
-   "bytes": 636
+   "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
+   "bytes": 7653
+  },
+  {
+   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
+   "bytes": 40848
   },
   {
    "url": "https://github.githubassets.com/assets/primer-4136ede8b2650a2d.css",
    "bytes": 43337
   },
   {
-   "url": "https://github.githubassets.com/assets/primer-react-brand-css.6a01c236ff527e7e.module.css",
-   "bytes": 71990
+   "url": "https://github.githubassets.com/assets/primer-react-css.e6a43c45f45572ae.module.css",
+   "bytes": 35258
   },
   {
-   "url": "https://github.githubassets.com/assets/kq9.8ad2074125dec7f9.module.css",
-   "bytes": 412
+   "url": "https://github.githubassets.com/assets/t.ee9b8e8ca9bf0b40.module.css",
+   "bytes": 3450
+  },
+  {
+   "url": "https://github.githubassets.com/assets/react-core.bd3724a91c8f1bf9.module.css",
+   "bytes": 696
+  },
+  {
+   "url": "https://github.githubassets.com/assets/profile-f92baa562c27f6e0.css",
+   "bytes": 2481
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-react-brand-css.6a01c236ff527e7e.module.css",
+   "bytes": 71996
+  },
+  {
+   "url": "https://github.githubassets.com/assets/github-7338c07b3a07b8be.css",
+   "bytes": 22085
   },
   {
    "url": "https://github.githubassets.com/assets/u2l.54b6ba2af351ee33.module.css",
-   "bytes": 632
+   "bytes": 629
+  },
+  {
+   "url": "https://github.githubassets.com/assets/kq9.8ad2074125dec7f9.module.css",
+   "bytes": 436
   },
   {
    "url": "https://github.githubassets.com/assets/fg.2616179aabbabe22.module.css",
-   "bytes": 908
+   "bytes": 898
   }
  ],
  "problems": [],
@@ -101,6 +101,218 @@
   "fontFamily": "\"Mona Sans VF\", -apple-system, \"system-ui\", \"Segoe UI\", \"Noto Sans Backtick Fix\", \"Noto Sans\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\""
  },
  "png": "user-profile-stars-tab/light-1440.png",
+ "volatile": [
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 1195,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 1333,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 1492,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 1651,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 1810,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 1948,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2086,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2224,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2383,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2542,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2701,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2839,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2998,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 3157,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 3295,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 3433,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 3592,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 3751,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 3868,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4006,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4165,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4324,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4462,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4600,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4759,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4897,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 5035,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 5173,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 5332,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 5512,
+   "w": 665,
+   "h": 16
+  }
+ ],
  "htmlTheme": "auto",
  "title": "pemistahl (Peter M. Stahl) / Starred · GitHub",
  "signedIn": null,
@@ -1528,14 +1740,18 @@
  },
  "icons": {
   "octicons": 0,
-  "nonOcticon": []
+  "nonOcticon": [],
+  "masked": [],
+  "hidden": [],
+  "githubNative": []
  },
+ "unlayeredGiteaCss": [],
  "cls": {
   "total": 0.0006,
   "shifts": [
    {
     "value": 0.0003,
-    "t": 2499,
+    "t": 2277,
     "sources": [
      "div.border-top.color-border-muted.tmp-pt-3",
      "span.Label.achievement-tier-label.achievement-tier-label--gold",
@@ -1544,7 +1760,7 @@
    },
    {
     "value": 0.0004,
-    "t": 2522,
+    "t": 2434,
     "sources": [
      "span.Label.achievement-tier-label.achievement-tier-label--bronze",
      "span.Label.achievement-tier-label.achievement-tier-label--bronze",
@@ -1554,12 +1770,12 @@
   ]
  },
  "timing": {
-  "domContentLoaded": 1947,
-  "load": 2809,
-  "transferSize": 41743,
+  "domContentLoaded": 2086,
+  "load": 2636,
+  "transferSize": 41736,
   "resources": 106,
   "cssResources": 20,
-  "cssTransferBytesPerfApi": 257476
+  "cssTransferBytesPerfApi": 257460
  },
  "document": {
   "width": 1440,
@@ -1567,5 +1783,5 @@
   "horizontalOverflow": false
  },
  "measureJson": "user-profile-stars-tab/light-1440.measure.json",
- "ms": 3993
+ "ms": 3979
 }

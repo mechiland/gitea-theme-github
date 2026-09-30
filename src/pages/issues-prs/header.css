@@ -103,12 +103,19 @@
   text-decoration: underline;
 }
 
-/* copy-branch button inside the head token: muted octicon like github.com's CopyToClipboard after the tokens */
-.pull-desc code .btn {
-  color: var(--fgColor-muted);
+/* copy-branch button (Gitea renders it inside the head <code>): FG2-072 — the token look moves onto the link, so the
+   muted copy octicon sits AFTER the token like github.com's CopyToClipboard */
+.pull-desc code:has(> .btn) {
+  margin-right: var(--base-size-4);
+  padding: 0;
+  background: transparent;
+  color: var(--fgColor-muted); /* the copy button is .interact-fg (color: inherit !important) */
 }
 
-.pull-desc code .btn:hover {
+.pull-desc code:has(> .btn) > a {
+  padding: var(--base-size-2) var(--base-size-6);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-accent-muted);
   color: var(--fgColor-accent);
 }
 
@@ -194,17 +201,25 @@
   background: var(--bgColor-danger-emphasis);
 }
 
-/* phones (github.com PageHeader at 390): actions row above the title, title 26px / 1.25, the StateLabel on its own
-   row and the meta text full width below it; BranchName tokens stay on one line and truncate with an ellipsis */
+/* phones (github.com PageHeader at 390): title 26px / 1.25 first; FG2-093: the actions (Edit / New) share the
+   StateLabel's row on the right (the meta block is pulled up over the actions row: 32px + the title's 10px margin),
+   the meta text full width below; BranchName tokens stay on one line and truncate with an ellipsis */
 @media (max-width: 767.98px) {
   #issue-title-display {
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: var(--base-size-8);
   }
 
   #issue-title-display > .issue-title-buttons {
+    position: relative;
+    z-index: 1;
     justify-content: flex-end;
+    align-self: flex-end;
     min-height: 0;
+  }
+
+  .issue-title-header:has(> #issue-title-display:not(.tw-hidden) > .issue-title-buttons > *) > .issue-title-meta {
+    margin-top: calc((var(--control-medium-size) + var(--base-size-8) + var(--base-size-2)) * -1);
   }
 
   #issue-title-display > .issue-title-buttons:not(:has(> *)) {
@@ -285,4 +300,25 @@
 .repository.view.issue .timeline-item .comment-text-line .labels-list > a.item,
 .repository.view.issue .timeline-item .comment-text-line .labels-list > a.item > .ui.label {
   vertical-align: baseline;
+}
+
+/* FG2-073: PR timeline commit rows — github.com draws the SHA as a plain muted mono link (7 characters), not a chip */
+.repository.view.issue .timeline-item.commits-list .ui.label.commit-id-short {
+  width: 7ch;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  color: var(--fgColor-muted);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.repository.view.issue .timeline-item.commits-list .ui.label.commit-id-short:hover {
+  background: transparent;
+  color: var(--fgColor-accent);
+  text-decoration: underline;
 }

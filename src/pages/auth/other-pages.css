@@ -61,13 +61,16 @@
   margin-bottom: calc(var(--base-size-12) - var(--base-size-16));
 }
 
-.page-content.user.signin.openid .ui.top.attached.header > .svg {
-  vertical-align: text-bottom;
+/* the OpenID brand glyph (fontawesome-openid) in the title and in the field label (FG2-065 / C073): github.com auth
+   pages never put icons in headings or labels; the "Sign in with OpenID" provider button on sign-in keeps its icon */
+.page-content.user.signin.openid .ui.top.attached.header > .svg,
+.page-content.user.signin.openid .ui.form .field > label > .svg {
+  display: none;
 }
 
 /* "OpenID URI *" label: the template leaves a newline between the text and </label>, which rendered as a space
    before the 4px-margined required marker ("URI  *", FG-092 / C081). As a flex row the whitespace-only runs drop
-   out: icon 4px text 4px "*" (Primer InputLabel: 4px between the text and the marker). */
+   out: text 4px "*" (Primer InputLabel: 4px between the text and the marker). */
 .page-content.user.signin.openid .ui.form .required.field > label {
   display: flex;
   align-items: center;
@@ -81,4 +84,15 @@
 /* OpenID intro ("Sign in with an OpenID URI…"): centred under the centred title, like the other auth pages' copy */
 .page-content.user.signin.openid .ui.form > .inline.field:first-child {
   text-align: center;
+}
+
+/* "Account recovery is disabled…" / "resend limit" (forgot password without a form, FG2-065 / C041): the message sits in
+   a Primer Box under the title like github.com's password-reset Box — --bgColor-muted, 1px --borderColor-default,
+   6px radius, 16px padding, 14px/21px text — across the auth column. */
+.page-content.user.forgot .ui.attached.segment > p.center {
+  padding: var(--base-size-16);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-muted);
+  text-align: left;
 }

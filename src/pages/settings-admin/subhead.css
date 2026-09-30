@@ -29,6 +29,7 @@
   font-size: var(--base-size-24); /* Primer Subhead-heading = $h2-size 24px; no text token between 20 and 32 */
   font-weight: var(--base-text-weight-normal);
   line-height: var(--base-text-lineHeight-normal);
+  text-wrap: balance; /* a wrapped heading ("… (Total: 5)") never leaves one word on its last line */
   /* org settings: pages/people's header-band rule `.organization > .flex-container .ui.header` also matches */
   box-shadow: none;
   clip-path: none;
@@ -50,10 +51,20 @@
   line-height: var(--text-body-lineHeight-medium);
 }
 
-/* a Subhead with actions never wraps the actions under the heading (390px: "Manage Organizations" + "New
-   Organization"): the heading text wraps beside them and the actions stay on the right of the first line, centred */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.top.attached.header:has(> .ui.right) {
-  flex-wrap: nowrap;
+/* md and up: a Subhead with actions keeps them on the right of the first line (the heading text wraps beside them).
+   Below 768px the Subhead stacks (FG2-040): heading on its own full-width line(s), actions below it, left-aligned,
+   8px apart — a 24px heading squeezed beside a 32px button broke into three lines at 390px. */
+@media (min-width: 768px) {
+  :is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.top.attached.header:has(> .ui.right) {
+    flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 767.98px) {
+  :is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.top.attached.header > .ui.right {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 
 :is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.top.attached.header > .ui.right {

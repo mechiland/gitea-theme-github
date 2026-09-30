@@ -107,18 +107,44 @@ overflow-menu .overflow-menu-button.active::after {
   color: inherit;
 }
 
-/* Primer UnderlineNav hides the leading icons before it moves tabs into "More". overflow-menu.ts measures once per
-   width, so the icons go by width: the repo local bar (up to 11 tabs, about 1130px with icons) below 1200px, the profile
-   and org rows (up to 8 tabs) below 768px. At 390 the repo bar then shows Code, Issues, Pull requests before "…". */
-@media (max-width: 1199.98px) {
+/* 768–1199: the repo local bar (up to 11 tabs, about 1130px with icons) drops its icons before it overflows (Primer
+   React UnderlineNav); below 768 it overflows either way, and keeps them like github.com at 390 */
+@media (min-width: 768px) and (max-width: 1199.98px) {
   .secondary-nav overflow-menu .overflow-menu-items > .item > .svg {
     display: none;
   }
 }
 
+/* < 768 (FG2-020): the icons stay (github.com 390 keeps them). Primer UnderlineNav swaps the selected item into the last
+   visible slot; overflow-menu.ts measures laid-out positions (`order` included), so a current tab that sits after the
+   first two moves up to the slot where it fits: 2nd slot < 576 (only two tabs fit at 390), 3rd slot 576–767. When
+   the script then moves the overflowing tabs out, the rule either still matches or the tab is 2nd in the DOM anyway,
+   so the layout does not change after measuring. Full-bleed rows (explore, `.secondary-nav`, three tabs) fit from 360
+   and keep their order (the script spares the last item by DOM order, which a reorder would break). */
 @media (max-width: 767.98px) {
-  :is(.user.profile, .organization) overflow-menu .overflow-menu-items > .item > .svg {
-    display: none;
+  overflow-menu:not(.secondary-nav) .overflow-menu-items > .item.active:nth-child(n+3) {
+    order: -1;
+  }
+
+  overflow-menu .overflow-menu-items > .item:first-child {
+    order: -2;
+  }
+
+  /* full-bleed rows: keep the "…" button off the screen edge (16px would squeeze two explore tabs at 320) */
+  overflow-menu.secondary-nav .overflow-menu-button {
+    margin-right: var(--base-size-8);
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  overflow-menu .overflow-menu-items > .item:nth-child(2) {
+    order: -2;
+  }
+}
+
+@media (max-width: 359.98px) {
+  overflow-menu.secondary-nav .overflow-menu-items > .item.active:nth-child(n+3) {
+    order: -1;
   }
 }
 

@@ -1,0 +1,1568 @@
+{
+ "route": "awl2-projects-list",
+ "target": "github",
+ "url": "https://github.com/orgs/github/projects?query=is%3Aopen",
+ "scheme": "light",
+ "viewport": 1440,
+ "theme": null,
+ "auth": false,
+ "consoleErrors": [],
+ "consoleWarnings": [],
+ "failedRequests": [],
+ "expectedFailures": [],
+ "ignoredRequests": [],
+ "cssBytes": 258733,
+ "cssFiles": [
+  {
+   "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
+   "bytes": 2615
+  },
+  {
+   "url": "https://github.githubassets.com/assets/app-runtime.70b2cadcfd63fdd3.module.css",
+   "bytes": 1255
+  },
+  {
+   "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
+   "bytes": 7270
+  },
+  {
+   "url": "https://github.githubassets.com/assets/suggestions-90f02f7222a2d258.css",
+   "bytes": 643
+  },
+  {
+   "url": "https://github.githubassets.com/assets/light_high_contrast-48fdd0811afbab3c.css",
+   "bytes": 7649
+  },
+  {
+   "url": "https://github.githubassets.com/assets/orgs-1df0a12b63c2f9ee.css",
+   "bytes": 3039
+  },
+  {
+   "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
+   "bytes": 7250
+  },
+  {
+   "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
+   "bytes": 7389
+  },
+  {
+   "url": "https://github.githubassets.com/assets/github-7338c07b3a07b8be.css",
+   "bytes": 22091
+  },
+  {
+   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
+   "bytes": 41111
+  },
+  {
+   "url": "https://github.githubassets.com/assets/react-core.bd3724a91c8f1bf9.module.css",
+   "bytes": 432
+  },
+  {
+   "url": "https://github.githubassets.com/assets/projects-0a0c819599c6f483.css",
+   "bytes": 1386
+  },
+  {
+   "url": "https://github.githubassets.com/assets/app-install-banner-partial.e8934decca2d3cfc.module.css",
+   "bytes": 409
+  },
+  {
+   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.c83fd3e6c58504ad.module.css",
+   "bytes": 401
+  },
+  {
+   "url": "https://github.githubassets.com/assets/t.ee9b8e8ca9bf0b40.module.css",
+   "bytes": 3449
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-4136ede8b2650a2d.css",
+   "bytes": 43338
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-react-css.e6a43c45f45572ae.module.css",
+   "bytes": 35520
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-react-brand-css.6a01c236ff527e7e.module.css",
+   "bytes": 71990
+  },
+  {
+   "url": "https://github.githubassets.com/assets/kq9.8ad2074125dec7f9.module.css",
+   "bytes": 413
+  },
+  {
+   "url": "https://github.githubassets.com/assets/u2l.54b6ba2af351ee33.module.css",
+   "bytes": 404
+  },
+  {
+   "url": "https://github.githubassets.com/assets/fg.2616179aabbabe22.module.css",
+   "bytes": 679
+  }
+ ],
+ "problems": [],
+ "mainStatus": 200,
+ "finalUrl": "https://github.com/orgs/github/projects?query=is%3Aopen",
+ "cookieBanner": null,
+ "env": {
+  "prefersDark": false,
+  "bodyBg": "rgb(255, 255, 255)",
+  "bodyColor": "rgb(31, 35, 40)",
+  "fontFamily": "\"Mona Sans VF\", -apple-system, \"system-ui\", \"Segoe UI\", \"Noto Sans Backtick Fix\", \"Noto Sans\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\""
+ },
+ "png": "awl2-projects-list/light-1440.png",
+ "volatile": [
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 376,
+   "w": 159,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 491,
+   "w": 165,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 577,
+   "w": 151,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 663,
+   "w": 167,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 749,
+   "w": 167,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 864,
+   "w": 144,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 950,
+   "w": 148,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 1036,
+   "w": 179,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 1122,
+   "w": 190,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 1208,
+   "w": 193,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 1294,
+   "w": 193,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 1380,
+   "w": 180,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 1466,
+   "w": 182,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 1552,
+   "w": 183,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 1638,
+   "w": 182,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 425,
+   "y": 1724,
+   "w": 185,
+   "h": 16
+  }
+ ],
+ "htmlTheme": "auto",
+ "title": "Projects · github · GitHub",
+ "signedIn": null,
+ "cssVars": {
+  "referenced": 1813,
+  "defined": 2236,
+  "unresolved": [
+   {
+    "name": "--button-default-shadow-inset",
+    "refs": 3,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 1,
+    "selectors": [
+     ".btn",
+     ".Button--secondary",
+     ".Button--danger"
+    ]
+   },
+   {
+    "name": "--avatarSize-narrow",
+    "refs": 12,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
+     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--avatarSize-wide",
+    "refs": 12,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ":where(.prc-Avatar-Avatar-0xaUi):where([data-responsive])",
+     ".prc-SkeletonAvatar-SkeletonAvatar-IS5NT:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-dark-rest",
+    "refs": 9,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-dark-hover",
+    "refs": 9,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-dark-active",
+    "refs": 9,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-dark",
+    "refs": 9,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-dark-hover",
+    "refs": 9,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-dark-active",
+    "refs": 9,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"dark\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-light-rest",
+    "refs": 9,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-light-hover",
+    "refs": 9,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-bgColor-light-active",
+    "refs": 9,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-light",
+    "refs": 9,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-light-hover",
+    "refs": 9,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--label-fgColor-light-active",
+    "refs": 9,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     "[data-color-mode=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-light-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])",
+     "[data-color-mode=\"auto\"][data-dark-theme*=\"light\"] .prc-IssueLabel-IssueLabel-tPs7V:not([data-variant])"
+    ]
+   },
+   {
+    "name": "--anchored-overlay-anchor-offset-right",
+    "refs": 6,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-bottom\"]",
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"inside-top\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"right\"][data-side=\"outside-top\"]"
+    ]
+   },
+   {
+    "name": "--truncate-max-width",
+    "refs": 3,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Truncate-Truncate-2G1eo"
+    ]
+   },
+   {
+    "name": "--anchored-overlay-anchor-offset-left",
+    "refs": 3,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"inside-bottom\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-align=\"left\"][data-side=\"outside-bottom\"]"
+    ]
+   },
+   {
+    "name": "--inputValidation-iconSize",
+    "refs": 3,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-components-ValidationIcon-sv29w"
+    ]
+   },
+   {
+    "name": "--inputValidation-lineHeight",
+    "refs": 3,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-components-ValidationText-JEfut"
+    ]
+   },
+   {
+    "name": "--grid-template-columns",
+    "refs": 3,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-DataTable-Table-7ux1n"
+    ]
+   },
+   {
+    "name": "--stackSize-narrow",
+    "refs": 3,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--stackSize-regular",
+    "refs": 3,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--stackSize-wide",
+    "refs": 3,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AvatarStack-AvatarStack-vkIK2:where([data-responsive])"
+    ]
+   },
+   {
+    "name": "--color-mktg-btn-shadow-hover-muted",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".btn-muted-mktg:hover",
+     ".btn-subtle-mktg:hover"
+    ]
+   },
+   {
+    "name": "--brand-heading-letterSpacing-200",
+    "refs": 2,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__AnchorNav-module__AnchorNav-link-label___8TkI7",
+     ".Primer_Brand__Prose-module__Prose___8WnSE h5, .Primer_Brand__Prose-module__Prose___8WnSE h6"
+    ]
+   },
+   {
+    "name": "--color-attention-subtle",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 17,
+    "matchedElements": 0,
+    "selectors": [
+     ".form-group.warn .warning"
+    ]
+   },
+   {
+    "name": "--color-fg-muted",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 114,
+    "matchedElements": 0,
+    "selectors": [
+     ".ipm-nudge-content p"
+    ]
+   },
+   {
+    "name": "--color-success-subtle",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 9,
+    "matchedElements": 0,
+    "selectors": [
+     ".form-group.successed .success"
+    ]
+   },
+   {
+    "name": "--color-danger-subtle",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 7,
+    "matchedElements": 0,
+    "selectors": [
+     ".form-group.errored .error"
+    ]
+   },
+   {
+    "name": "--color-mktg-btn-bg",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".btn-mktg"
+    ]
+   },
+   {
+    "name": "--color-mktg-btn-shadow-hover",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".btn-mktg:hover"
+    ]
+   },
+   {
+    "name": "--header-height",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".html-auth .authentication-header-page"
+    ]
+   },
+   {
+    "name": "--fgColor-muted-hover",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".footer-session-authentication-links a:hover"
+    ]
+   },
+   {
+    "name": "--nested-level",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".ControlGroup-item"
+    ]
+   },
+   {
+    "name": "--brand-image-aspectRatio",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Image-module__Image--aspect-ratio-custom___38Uyb"
+    ]
+   },
+   {
+    "name": "--brand-Hero-bgColor-gridlineGridInner",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Hero-module__Hero-grid--contained___vfiGA"
+    ]
+   },
+   {
+    "name": "--brand-River-spacing-outerInline",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__river-shared-module__River___PCP5W"
+    ]
+   },
+   {
+    "name": "--brand-fontWeight-300",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Testimonial-module__Testimonial--variant-expressive___J1PIY .Primer_Brand__Testimonial-module__Testimonial__quoteMark___sC3I2"
+    ]
+   },
+   {
+    "name": "--brand-heading-letterSpacing-300",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Prose-module__Prose___8WnSE h4"
+    ]
+   },
+   {
+    "name": "--base-size-54",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__PricingOptions-module__PricingOptions__label-cell___gs_vJ"
+    ]
+   },
+   {
+    "name": "--padding-block-start",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-bgColor",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner-container--background___Uex_J"
+    ]
+   },
+   {
+    "name": "--brand-color-canvas-backdrop",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Tabs-module__Tabs___zia5x"
+    ]
+   },
+   {
+    "name": "--brand-Tabs-slider-width",
+    "refs": 1,
+    "withFallback": 0,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Tabs-module__Tabs__slider___tkaHu"
+    ]
+   }
+  ],
+  "unresolvedWithFallback": [
+   {
+    "name": "--shadow-highlight",
+    "refs": 4,
+    "withFallback": 4,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".btn-primary",
+     ".btn-outline:hover, [open] > .btn-outline",
+     ".btn-danger:hover, [open] > .btn-danger",
+     ".social-count"
+    ]
+   },
+   {
+    "name": "--shadow-floating-legacy",
+    "refs": 8,
+    "withFallback": 8,
+    "fallbackRefs": 0,
+    "matchedElements": 2,
+    "selectors": [
+     ".SelectMenu-modal",
+     ".Toast",
+     ".Toast--loading",
+     ".Toast--error",
+     ".Toast--warning"
+    ]
+   },
+   {
+    "name": "--stack-gap-none",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Stack[data-gap-narrow=\"none\"], .Stack[data-gap=\"none\"]",
+     ".Stack[data-gap-regular=\"none\"]",
+     ".Stack[data-gap-wide=\"none\"]"
+    ]
+   },
+   {
+    "name": "--custom-line-height",
+    "refs": 64,
+    "withFallback": 64,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".TreeViewRootUlStyles .TreeViewItemContent",
+     ".TreeViewRootUlStyles .TreeViewItemVisual",
+     ".prc-TreeView-TreeViewRootUlStyles-Mzrmj .prc-TreeView-TreeViewItemContent-RKsCI",
+     ".prc-TreeView-TreeViewRootUlStyles-Mzrmj .prc-TreeView-TreeViewItemVisual-naWzj",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"large\"]"
+    ]
+   },
+   {
+    "name": "--base-sticky-header-height",
+    "refs": 4,
+    "withFallback": 4,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".sticky-header-wrapper.is-stuck",
+     ".sticky-header-shadow.is-stuck",
+     ".checks-header-wrapper.is-stuck",
+     ".sticky-file-header"
+    ]
+   },
+   {
+    "name": "--turbo-progress-bar-scale",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ":root > .turbo-progress-bar[data-render-mode=\"transform\"]"
+    ]
+   },
+   {
+    "name": "--pr-toolbar-sticky-header-height",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".sticky-file-header"
+    ]
+   },
+   {
+    "name": "--bottom",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Overlay-Overlay-jfs-T:not([data-anchor-position]):not([data-variant=\"modal\"]), .prc-Overlay-Overlay-jfs-T[data-anchor-position=\"false\"]"
+    ]
+   },
+   {
+    "name": "--right",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Overlay-Overlay-jfs-T:not([data-anchor-position]):not([data-variant=\"modal\"]), .prc-Overlay-Overlay-jfs-T[data-anchor-position=\"false\"]"
+    ]
+   },
+   {
+    "name": "--left",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Overlay-Overlay-jfs-T:not([data-anchor-position]):not([data-variant=\"modal\"]):not([data-variant]), .prc-Overlay-Overlay-jfs-T[data-anchor-position=\"false\"]:not(.prc-Overlay-does-not-exist-pxAm4):not([data-variant])"
+    ]
+   },
+   {
+    "name": "--top",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Overlay-Overlay-jfs-T:not([data-anchor-position]):not([data-variant=\"modal\"]):not([data-variant]), .prc-Overlay-Overlay-jfs-T[data-anchor-position=\"false\"]:not(.prc-Overlay-does-not-exist-pxAm4):not([data-variant])"
+    ]
+   },
+   {
+    "name": "--anchored-overlay-top-override",
+    "refs": 6,
+    "withFallback": 6,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-side=\"inside-left\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-side=\"outside-left\"]",
+     ".prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-side=\"inside-right\"], .prc-AnchoredOverlay-AnchoredOverlay-fYg9Z[data-side=\"outside-right\"]"
+    ]
+   },
+   {
+    "name": "--control-bgColor-contrast",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-components-TextInputBaseWrapper-wY-n0:where([data-contrast])"
+    ]
+   },
+   {
+    "name": "--dialog-width",
+    "refs": 6,
+    "withFallback": 6,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Dialog-Dialog-G8cDF",
+     ".prc-Dialog-Dialog-G8cDF[data-position-narrow=\"center\"]"
+    ]
+   },
+   {
+    "name": "--BaseStyles-fgColor",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-src-BaseStyles-aopSS"
+    ]
+   },
+   {
+    "name": "--BaseStyles-fontFamily",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-src-BaseStyles-aopSS"
+    ]
+   },
+   {
+    "name": "--BaseStyles-lineHeight",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-src-BaseStyles-aopSS"
+    ]
+   },
+   {
+    "name": "--draggable-handle--bg-color",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-PageLayout-DraggableHandle-9s6B4::before"
+    ]
+   },
+   {
+    "name": "--draggable-handle--drag-opacity",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-PageLayout-DraggableHandle-9s6B4::before"
+    ]
+   },
+   {
+    "name": "--draggable-handle--transition",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-PageLayout-DraggableHandle-9s6B4::before"
+    ]
+   },
+   {
+    "name": "--hiddenDisplay-narrow",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Hidden-Hidden-cwE-I"
+    ]
+   },
+   {
+    "name": "--hiddenDisplay-regular",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Hidden-Hidden-cwE-I"
+    ]
+   },
+   {
+    "name": "--hiddenDisplay-wide",
+    "refs": 3,
+    "withFallback": 3,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-Hidden-Hidden-cwE-I"
+    ]
+   },
+   {
+    "name": "--custom-font-size",
+    "refs": 24,
+    "withFallback": 24,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"large\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"medium\"], .prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"subtitle\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"large\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"medium\"], .prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"subtitle\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-regular=\"large\"]"
+    ]
+   },
+   {
+    "name": "--custom-font-weight",
+    "refs": 36,
+    "withFallback": 36,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"large\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"medium\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant=\"subtitle\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"large\"]",
+     ".prc-PageHeader-PageHeader-YLwBQ[data-title-size-variant-narrow=\"medium\"]"
+    ]
+   },
+   {
+    "name": "--brand-RiverAccordion-visual-background",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__RiverAccordion-module__RiverAccordion--variant-gridline___1SmA4 .Primer_Brand__RiverAccordion-module__RiverAccordion__visualsWrapper___Z8Yr6 > .Primer_Brand__RiverAccordion-module__RiverAccordion__visual--has-background___JQ9GB"
+    ]
+   },
+   {
+    "name": "--brand-RiverBreakout-gridline-trailing-width",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__river-shared-module__RiverBreakout--variant-gridline___2_O5H .Primer_Brand__river-shared-module__River__content___udxiD"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-narrow-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-narrow-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-narrow-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-regular-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-regular-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-regular-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-regular-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-wide-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-wide-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-wide-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--brand-CTABanner-wide-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__CTABanner-module__CTABanner-container--background___p6ig8"
+    ]
+   },
+   {
+    "name": "--subnav-available-height",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__SubNav-module__SubNav--open___uMKHN .Primer_Brand__SubNav-module__SubNav--header-container-outer___TODOB"
+    ]
+   },
+   {
+    "name": "--brand-Section-narrow-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-narrow-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-narrow-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-narrow-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-regular-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-regular-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-regular-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-regular-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-wide-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-wide-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-wide-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-Section-wide-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Section-module__Section___O2zvq"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-narrow-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-narrow-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-narrow-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-narrow-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-regular-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-regular-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-regular-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-regular-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-wide-background-color",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-wide-background-image-src",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-wide-background-image-size",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--brand-BreakoutBanner-wide-background-image-position",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__BreakoutBanner-module__BreakoutBanner___QH5la"
+    ]
+   },
+   {
+    "name": "--has-overflow",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Tabs-module__Tablist__wrapper___MDIB8::after"
+    ]
+   },
+   {
+    "name": "--can-scroll-right",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Tabs-module__Tablist__wrapper___MDIB8::after"
+    ]
+   },
+   {
+    "name": "--brand-Tabs-slider-x",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".Primer_Brand__Tabs-module__Tabs__slider___tkaHu"
+    ]
+   },
+   {
+    "name": "--marketing-header-fixed-top",
+    "refs": 1,
+    "withFallback": 1,
+    "fallbackRefs": 0,
+    "matchedElements": 0,
+    "selectors": [
+     ".MarketingHeader-module__root__Tk7n3[data-marketing-header].MarketingHeader-module__fixed__OvI_y"
+    ]
+   }
+  ],
+  "unreadableSheets": []
+ },
+ "colors": {
+  "visibleElements": 391,
+  "checked": 279,
+  "inPalette": 236,
+  "offPaletteDistinct": 7,
+  "offPaletteTotal": 27,
+  "offPalette": [
+   {
+    "color": "rgba(38,44,40,1)",
+    "count": 12,
+    "props": {
+     "border-color": 12
+    },
+    "samples": [
+     "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.HeaderSearch-module__searchSlot__oVOUS > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+     "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.AuthCTAs-module__signInWrap__q2P60 > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+     "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw"
+    ]
+   },
+   {
+    "color": "rgba(53,61,55,1)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "span.Primer_Brand__Button-module__Button__text___ED0bX > span.Primer_Brand__Text-module__Text___XeGJJ.Primer_Brand__Text-module__Text-font--mona-sans___a8XJD.Primer_Brand__Text-module__Text--default___GhPh_ > span.HeaderSearch-module__content__kMpxU > kbd.HeaderSearch-module__kbd__HNG0o"
+    ]
+   },
+   {
+    "color": "rgba(255,255,255,0.06)",
+    "count": 4,
+    "props": {
+     "border-color": 4
+    },
+    "samples": [
+     "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--secondary___gHnw_.Primer_Brand__Button-module__Button--size-small___zQrEw"
+    ]
+   },
+   {
+    "color": "rgba(0,0,0,0.01)",
+    "count": 3,
+    "props": {
+     "background-color": 3
+    },
+    "samples": [
+     "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.HeaderSearch-module__searchSlot__oVOUS > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+     "div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > div.AuthCTAs-module__signInWrap__q2P60 > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw",
+     "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw"
+    ]
+   },
+   {
+    "color": "rgba(25,31,27,1)",
+    "count": 2,
+    "props": {
+     "box-shadow": 1,
+     "border-color": 1
+    },
+    "samples": [
+     "span.Primer_Brand__Button-module__Button__text___ED0bX > span.Primer_Brand__Text-module__Text___XeGJJ.Primer_Brand__Text-module__Text-font--mona-sans___a8XJD.Primer_Brand__Text-module__Text--default___GhPh_ > span.HeaderSearch-module__content__kMpxU > kbd.HeaderSearch-module__kbd__HNG0o",
+     "div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out > div.MarketingHeader-module__bottomBorder__uZT38"
+    ]
+   },
+   {
+    "color": "rgba(0,0,0,1)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "react-partial.loaded > div > div > header.MarketingHeader-module__root__Tk7n3.HeaderMktg.header-logged-out"
+    ]
+   },
+   {
+    "color": "rgba(255,255,255,0.12)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.MarketingHeader-module__menu__GIy3y > div.MarketingHeader-module__menuWrapper__owstH > div.MarketingHeader-module__ctaContainer__tBmPz > a.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--secondary___gHnw_.Primer_Brand__Button-module__Button--size-small___zQrEw"
+    ]
+   }
+  ],
+  "otherSchemeOnly": [],
+  "exempt": [
+   {
+    "color": "inline-style rgba(255,255,255,1)",
+    "count": 14,
+    "props": {
+     "fill": 14
+    },
+    "samples": [
+     "div.MarketingHeader-module__bar__mBSyE > div.MarketingHeader-module__topRow__yeury > a.HeaderLogo-module__logo__UFyHI > svg.octicon.octicon-mark-github",
+     "div.MarketingHeader-module__topRow__yeury > a.HeaderLogo-module__logo__UFyHI > svg.octicon.octicon-mark-github > path",
+     "li > div.NavDropdown-module__container__l2YeI > button.NavDropdown-module__button__PEHWX > svg.octicon.octicon-triangle-right.NavDropdown-module__buttonIcon__Tkl8_",
+     "div.NavDropdown-module__container__l2YeI > button.NavDropdown-module__button__PEHWX > svg.octicon.octicon-triangle-right.NavDropdown-module__buttonIcon__Tkl8_ > path",
+     "div.MarketingHeader-module__ctaContainer__tBmPz > button.Primer_Brand__Button-module__Button___scH9Z.Primer_Brand__Button-module__Button--subtle___F7pEE.Primer_Brand__Button-module__Button--size-small___zQrEw > span.Primer_Brand__Button-module__Button__leading-visual___jjtTe > svg.octicon.octicon-sliders.Primer_Brand__Button-module__Button__icon-visual____qybb"
+    ],
+    "reason": "inline-style"
+   },
+   {
+    "color": "avatar/image rgba(255,255,255,1)",
+    "count": 1,
+    "props": {
+     "background-color": 1
+    },
+    "samples": [
+     "div.clearfix.container-xl.p-responsive > h1.h3.lh-condensed.tmp-mt-3 > a.color-fg-default.no-underline > img.avatar.float-left"
+    ],
+    "reason": "avatar/image"
+   },
+   {
+    "color": "avatar/image rgba(31,35,40,0.15)",
+    "count": 1,
+    "props": {
+     "box-shadow": 1
+    },
+    "samples": [
+     "div.clearfix.container-xl.p-responsive > h1.h3.lh-condensed.tmp-mt-3 > a.color-fg-default.no-underline > img.avatar.float-left"
+    ],
+    "reason": "avatar/image"
+   }
+  ]
+ },
+ "icons": {
+  "octicons": 0,
+  "nonOcticon": [],
+  "masked": [],
+  "hidden": [],
+  "githubNative": []
+ },
+ "unlayeredGiteaCss": [],
+ "cls": {
+  "total": 0,
+  "shifts": []
+ },
+ "timing": {
+  "domContentLoaded": 2386,
+  "load": 2697,
+  "transferSize": 30102,
+  "resources": 101,
+  "cssResources": 22,
+  "cssTransferBytesPerfApi": 260265
+ },
+ "document": {
+  "width": 1440,
+  "height": 1896,
+  "horizontalOverflow": false
+ },
+ "measureJson": "awl2-projects-list/light-1440.measure.json",
+ "states": [],
+ "ms": 3754
+}

@@ -31,6 +31,20 @@ img.ui.avatar,
   box-shadow: 0 0 0 var(--borderWidth-thin) var(--bgColor-default);
 }
 
+/* FG2-091: team member rows (org/team/teams.tmpl, 20px via pages/people) as an overlapping AvatarStack:
+   8px overlap, 2px page-coloured ring */
+.team-item-box > .segment > .flex-text-block {
+  gap: 0;
+}
+
+.team-item-box > .segment > .flex-text-block > .avatar-with-link + .avatar-with-link {
+  margin-left: var(--base-size-negative-8);
+}
+
+.team-item-box > .segment .avatar-with-link > img.ui.avatar {
+  box-shadow: 0 0 0 var(--borderWidth-thick) var(--bgColor-default);
+}
+
 .avatar-stack-overflow-chip {
   border-color: var(--bgColor-default);
   border-radius: var(--borderRadius-full);

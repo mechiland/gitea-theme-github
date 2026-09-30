@@ -69,16 +69,20 @@
   flex: 1 1 0;
   min-width: 0;
   min-height: var(--base-size-32);
-  padding-left: calc(var(--base-size-24) + var(--base-size-8));
+  /* github.com: the status icon is 22px on the 30px title line (16px below md), 8px to the title */
+  --gh-apx-icon: calc(var(--base-size-20) + var(--base-size-2));
+  padding-left: calc(var(--gh-apx-icon) + var(--base-size-8));
   font-size: var(--text-title-size-medium);
 }
 
 .action-info-summary-title > .svg {
   position: absolute;
-  top: var(--base-size-4);
+  top: calc((1lh - var(--gh-apx-icon)) / 2);
   left: 0;
-  width: var(--base-size-24);
-  height: var(--base-size-24);
+  width: var(--gh-apx-icon);
+  min-width: 0;
+  height: var(--gh-apx-icon);
+  min-height: 0;
 }
 
 .action-info-summary-title-text {
@@ -163,15 +167,28 @@
     min-height: 100vh;
   }
 
-  /* github.com < md shows the run/job content first (its job list collapses into a "Summary ▾" menu): Gitea has no
-     such menu, so the NavList moves below the main column instead of pushing it a screen down (FG-038), inside the
-     16px page gutter (FG-072: the 4px current bar no longer hangs into the gutter) */
-  .action-view-left {
-    order: 1;
-    width: auto;
-    margin-left: 0;
+  /* github.com < md: under the title a selector row names the current view ("Summary ▾" / "<status> <job> ▾",
+     20px/600) and the content follows; there is no sidebar. Gitea has no menu for it (FG2-056): the pane and its
+     lists dissolve (display: contents), the current item moves up under the header as that 20px/600 row, the content
+     comes next and the rest of the NavList (summary, all jobs, run details) follows below it, inside the 16px page
+     gutter (FG-072). */
+  .action-view-body {
+    gap: 0;
   }
 
+  .action-view-left,
+  .action-view-left > .action-view-sidebar-list {
+    display: contents;
+  }
+
+  .action-view-left > *,
+  .action-view-sidebar-list > .item {
+    order: 1;
+  }
+
+  .action-view-right {
+    margin: var(--base-size-16) 0;
+  }
 }
 
 /* layout shift on mount (FG-085): the header grows to the loaded title's height (2–3 lines at 390) and the jobs list
@@ -496,6 +513,95 @@ a.graph-workflow-name:hover {
   mask: var(--gh-octicon-plus) center / contain no-repeat;
 }
 
+/* edges (FG2-085): Gitea masks the dimmed edges with an objectBoundingBox mask; a straight (horizontal) edge has a
+   zero-height bounding box, so the mask hides it completely and only the ports showed. The node cards are painted
+   after the edges, so the mask is not needed to keep edges out of them. */
+.graph-svg > g[mask] {
+  mask: none;
+}
+
+/* matrix label (FG2-095): github.com draws it as a tab on the card's top edge — 20px above the card border, 12px/500
+   --fgColor-default, 16px inline padding, --card-bgColor, 6px top radius, 1px border on three sides whose right side
+   bends into the card's top border through a 6px concave corner — and the card's top-left corner is square under
+   it. The label leaves the panel flow and sits above the node rect (the foreignObject and the SVG do not clip); the
+   panel's ::before squares the rect's rounded corner, the label's ::after draws the concave corner (the label clips
+   its text with a margin wide enough for it). */
+.graph-svg {
+  overflow: visible;
+}
+
+.matrix-panel {
+  --gh-mx-bc: var(--borderColor-default);
+  position: relative;
+  padding: var(--base-size-8) var(--base-size-16);
+}
+
+.job-node-group:is(:hover, .related-node) .matrix-panel {
+  --gh-mx-bc: var(--borderColor-accent-emphasis);
+}
+
+.matrix-panel-label {
+  position: absolute;
+  bottom: calc(100% - var(--borderWidth-thin));
+  left: 0;
+  max-width: 100%;
+  overflow: clip;
+  overflow-clip-margin: var(--base-size-8);
+  padding: var(--base-size-2) var(--base-size-16) 0;
+  border: var(--borderWidth-thin) solid var(--gh-mx-bc);
+  border-bottom: 0;
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+  background: var(--card-bgColor);
+  color: var(--fgColor-default);
+  font-size: var(--text-body-size-small);
+  line-height: var(--base-text-lineHeight-normal);
+}
+
+.matrix-panel-label::after {
+  --gh-mx-r: var(--borderRadius-medium);
+  --gh-mx-o: calc(var(--gh-mx-r) + var(--borderWidth-thin));
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: var(--gh-mx-o);
+  height: var(--gh-mx-o);
+  background: radial-gradient(circle at 100% 0, transparent calc(var(--gh-mx-r) - var(--borderWidth-thin) / 2), var(--gh-mx-bc) var(--gh-mx-r) var(--gh-mx-o), var(--card-bgColor) calc(var(--gh-mx-o) + var(--borderWidth-thin) / 2));
+}
+
+.matrix-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--base-size-8);
+  height: var(--base-size-8);
+  border-left: var(--borderWidth-thin) solid var(--gh-mx-bc);
+  background: var(--card-bgColor);
+}
+
+/* collapsed card body: github.com centres "N jobs completed" (14px, normal weight) + "Show all jobs" (12px muted,
+   under the icon) in the card */
+.matrix-panel:has(> .matrix-panel-collapsed) {
+  justify-content: center;
+}
+
+.matrix-panel-collapsed {
+  gap: var(--base-size-4);
+  padding: 0;
+}
+
+.matrix-panel-summary {
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+.matrix-panel-toggle {
+  padding: 0;
+  font-size: var(--text-body-size-small);
+}
+
 .highlighted-edge,
 .highlighted-port {
   stroke: var(--borderColor-accent-emphasis);
@@ -539,5 +645,33 @@ a.graph-workflow-name:hover {
     margin-left: 0;
     padding: 0;
     white-space: normal;
+  }
+}
+
+/* < md, after the NavList rules: the current item as github.com's 20px/600 selector row under the header (FG2-056) */
+@media (max-width: 767.98px) {
+  .action-view-sidebar-list > .item.selected {
+    order: -1;
+    gap: var(--base-size-8);
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    font-size: var(--text-title-size-medium);
+    line-height: var(--base-text-lineHeight-normal);
+  }
+
+  .action-view-sidebar-list > .item.selected::after,
+  .action-view-sidebar-list > .item.selected :is(.octicon-home, .job-duration) {
+    display: none;
+  }
+
+  /* the run title's status icon and the row's are 16px (github.com < md), so both names start at x = 40 */
+  .action-info-summary-title {
+    --gh-apx-icon: var(--base-size-16);
+  }
+
+  /* the Summary item leaves the list it opened: the divider after that list would double the graph's bottom edge */
+  .action-view-sidebar-list:has(> .item.selected:only-child) + .divider {
+    display: none;
   }
 }

@@ -43,8 +43,10 @@ body:has(.repo-header) .gh-app-header {
   flex: 1 1 auto;
 }
 
+/* the actions never shrink; the context crumb gives way (ellipsis) — a long anonymous crumb ("Page Not Found") pushed
+   Sign in / Sign up past 390 (FG2-054) */
 .gh-app-header-end {
-  flex: 0 1 auto;
+  flex: none;
 }
 
 /* ---------- IconButtons (hamburger, search link, Issues, Pull requests, stopwatch, bell) and "+ ▾" ---------- */
@@ -248,6 +250,7 @@ a.gh-context-item:hover {
   color: var(--fgColor-default);
   font-weight: var(--base-text-weight-medium);
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .gh-app-header .gh-app-header-signin:hover {

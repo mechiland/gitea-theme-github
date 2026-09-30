@@ -65,16 +65,3 @@
   display: inline;
   overflow-wrap: anywhere;
 }
-
-/* empty list row (branch protection "There are no protected branches."): Primer Blankslate (spacious 32px, muted
-   centred text) instead of a plain left-aligned row */
-/* (beats subhead.css's "description-only first row" padding reset: a text-only row matches that rule too) */
-.settings .flex-container-main .ui.attached.segment > .flex-divided-list > .item.tw-text-center:only-child:not(:has(> *)) {
-  justify-content: center;
-  padding: var(--base-size-32) var(--base-size-16);
-  border: var(--borderWidth-thin) solid var(--borderColor-default); /* github.com: the Blankslate sits in a Box */
-  border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-muted);
-  font-size: var(--text-body-size-medium);
-  line-height: var(--text-body-lineHeight-medium);
-}

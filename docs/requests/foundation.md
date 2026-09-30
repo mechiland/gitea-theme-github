@@ -149,3 +149,38 @@ Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ra
   (a PR conversation stays 1216, like github.com). Measured on Gitea after deploy (repo-issue):
   1440 104/1232, 1280 24/1232, 1012 24/964, 1000 24, 800 24, 767 16, 390 16. These match github.com at every width
   measured. PR, repo home, release detail, org, and profile are unchanged (112/1216 @1440).
+
+
+# Final gate #2 (loop iteration 2)
+
+Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids of docs/final-gate-2/raw.json) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only this folder’s theme-fixable items; `theme-fixable-template` items are either installed by the integrator first (this folder styles the result) or stay rejected (noted per item). Budget: github-auto 288.9 / 300 KB — trim before adding. Check every page-scoped selector against the shared page classes (see FG2-105) before you ship.
+
+1. **FG2-061 [theme-fixable-css] In-text and meta author links are not underlined (github.com underlines them: 'X opened on …', inline body links)** — impact 6 (judges 4, critic wt 2; new; routes: repo-issues, compare-two-tags, user-settings-security, issues-list-closed)
+   - Fix: Primer link-underline behaviour: `.markup p a`, `.flex-item-body a.muted`, issue/commit meta author links → `text-decoration: underline; text-underline-offset: .2rem` (github.com default 'link underlines' preference). Check the reference PNGs for which meta links are underlined before widening.
+   - Critic refs: C069 (user-settings-security, nit), C174 (repo-issues, nit)
+   - PNG: `shots/final-gate-2/repo-issues/dark-1440.png`, `shots/final-gate-2/repo-issues/light-1440.png`, `shots/final-gate-2/compare-two-tags/dark-1440.png`, `shots/final-gate-2/compare-two-tags/light-1440.png`
+2. **FG2-097 [theme-fixable-css] Short pages pin the footer to the viewport bottom, leaving a large empty gap; github.com's footer follows the content** — impact 2 (judges 2, critic wt 0; new; routes: user-profile-repositories-tab, wiki-page-list)
+   - Fix: Drop the flex-grow on `.page-content` (or `min-height` on body) in github-* themes so the footer follows content, with 40px top margin like github.com. Check wiki-page-list, empty settings pages, 404.
+   - PNG: `shots/final-gate-2/user-profile-repositories-tab/dark-1440.png`, `shots/final-gate-2/user-profile-repositories-tab/light-1440.png`, `shots/final-gate-2/wiki-page-list/dark-1440.png`, `shots/final-gate-2/wiki-page-list/light-1440.png`
+
+# From pages/auth (wave L2 r1, 2026-09-30): FYI — FG2-097 footer flow, auth-page exception
+pages/auth (footer-band.css) sets `.full.height:has(> .gh-app-header--auth) { flex-grow: 1 }`: github.com/login pins its
+muted footer band to the viewport bottom (1440: y=850, h=50), so on the slim-header auth pages only the footer stays at
+the bottom. No change needed in foundation; if FG2-097's `:where(:not(:has(...)))` list is edited, auth needs nothing there.
+
+### Final gate #2 — foundation (wave L2, round 1)
+- **FG2-061 — DONE.** New `src/foundation/links.css`. Measured github.com (logged-out, `data-a11y-link-underlines=true`,
+  `shots/foundation-l2/links-probe.mjs`): underlined at rest are Link--inTextBlock links (offset 3.2px), the issue-list
+  meta author + milestone links (Link--muted, offset 2px; the **pulls** list author is not underlined), and timeline
+  event "ago" links (offset 3.2px); nav, titles, commit titles/authors in the commits list, labels are not. Gitea now:
+  classless `p > a` / `.help > a` outside `.markup` (e.g. settings/security "WebAuthn Authenticator"); `#issue-list`
+  rows without `.branches` → author link + `a.milestone` (the data-display " · " `::after` is floated so it is not
+  underlined; float has no layout effect on a flex item); `.timeline-item.event .comment-text-line > a[href^="#"]`.
+  Migrated grex issues keep a plain-text author (Gitea renders OriginalAuthor as text, not a link — inherent).
+  Evidence: `shots/foundation-l2-r2/issues-playground/*`, `user-settings-security/*`, `shots/foundation-l2/event-{light,dark}.png`.
+- **FG2-097 — DONE.** `src/foundation/layout.css`: `.full.height` no longer grows (footer follows the content like
+  github.com's Rails pages: wiki _pages content end 321 = footer box top) except where a layout needs the full height
+  (`> .fullscreen` Actions log, the Actions run list and explore, whose page folders make it a flex column).
+  `.full.height` padding-bottom 64 → 16 (github.com releases/tags/profile: last row → footer box 16px).
+  Login keeps its bottom footer via pages/auth (same as github.com/login). Measured (`shots/foundation-l2/footer-gap.mjs`):
+  wiki list footer box 16px under the table @1440/390, 404 and milestones likewise; actions/explore still grow=1.

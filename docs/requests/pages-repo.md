@@ -274,3 +274,153 @@ make room). Evidence: shots/pages-repo-fg1-r1/, shots/pages-repo-fg1-r1b/ (state
 # From icons (final gate #1, wave L1 round 1)
 - **PR-IC-1 DONE** — `--gh-octicon-code` (FG-086) and `--gh-octicon-tag` (FG-095) are in `src/icons/octicon-masks.css`
   (catalogue `shots/icons-l1r1/masks-catalogue.png`); pruned until referenced (code 0.45 KB, tag 0.49 KB once used).
+
+
+# Final gate #2 (loop iteration 2)
+
+Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids of docs/final-gate-2/raw.json) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only this folder’s theme-fixable items; `theme-fixable-template` items are either installed by the integrator first (this folder styles the result) or stay rejected (noted per item). Budget: github-auto 288.9 / 300 KB — trim before adding. Check every page-scoped selector against the shared page classes (see FG2-105) before you ship.
+
+1. **FG2-016 [theme-fixable-template] Branches page: no 'Branches' title, no Overview/Active/Stale/All tabs, no column-header row, 5 icon buttons per row, 'Default Branch' box** — impact 25 (judges 16, critic wt 9, majors C028; gate 1 FG-024; routes: branches)
+   - Fix: Rejected in gate 1 (FG-024: no locale keys for Updated / Check status / Behind|Ahead; kebab needs a row rewrite; §7 e). Still no slot. CSS-only mitigation (pages/repo): collapse the rss/download/rename icons into a hover-revealed group (visible on row hover/focus-within, always visible < 768), keep trash visible — nothing removed.
+   - Critic refs: C028 (branches, major), C029 (branches, minor)
+   - PNG: `shots/final-gate-critic-1/br-light.png`, `shots/final-gate-2/branches/dark-1440.png`, `shots/final-gate-2/branches/light-1440.png`
+2. **FG2-018 [theme-fixable-css] 'Browse at this commit' button uses octicon-file-code on every commit row (commits, PR Commits tab, compare, compare form); github.com uses octicon-code (<>)** — impact 24 (judges 11, critic wt 13; gate 1 FG-086; routes: pr-compare-form-playground, compare-two-tags, pr-commits-tab, pr-commits-tab-playground, repo-commits)
+   - Fix: Apply the existing mask (icons PR-IC-1 DONE: `--gh-octicon-code` in src/icons/octicon-masks.css, pruned until referenced) to the browse button in `#commits-table` / `.commit-list` rows — one un-page-scoped rule so the commits page, PR Commits tab, compare and the new-PR compare form all get it (critics assigned it to icons; the mask is ready, the rule belongs to the commit list owner). Gate-1 FG-086, still open.
+   - Critic refs: C012 (pr-commits-tab, minor), C014 (compare-two-tags, minor), C157 (pr-commits-tab-playground, nit), C175 (repo-commits, minor), C198 (pr-compare-form-playground, minor)
+   - PNG: `shots/final-gate-critic-0/pc-icons.png`, `shots/final-gate-critic-0/ct-l.png`, `shots/final-gate-critic-7/commits_icons_zoom.png`, `shots/final-gate-2/pr-compare-form-playground/dark-1440.png`
+3. **FG2-021 [theme-fixable-css] Commit day groups read 'May 31, 2021'; github.com reads 'Commits on May 31, 2021' (commits page, PR Commits tab, compare)** — impact 20 (judges 19, critic wt 1; gate 1 FG-019; routes: compare-two-tags, pr-commits-tab, repo-commits)
+   - Fix: `html:lang(en) .gh-commit-day-title > span::before { content: "Commits on " }` (English only, same precedent as the 'Public' Label FG-041: other locales keep the bare date). No template change; the day rows come from our commits_list.tmpl override.
+   - Critic refs: C177 (repo-commits, nit)
+   - PNG: `shots/final-gate-2/compare-two-tags/dark-1440.png`, `shots/final-gate-2/compare-two-tags/light-1440.png`, `shots/final-gate-2/pr-commits-tab/dark-1440.png`, `shots/final-gate-2/pr-commits-tab/light-1440.png`
+4. **FG2-025 [theme-fixable-css] Releases (≥ 768): tag / commit / Compare sit in a left metadata column beside each card; github.com puts tag + commit in the byline and Compare at the card's top right** — impact 15 (judges 9, critic wt 6, majors C080; gate 1 FG-013; routes: releases, release-detail)
+   - Fix: Reuse the 390 reorder (already in tags-releases.css) at ≥ 768: single-column card, tag + short SHA as muted byline items, Compare as a small button at the card's top right. Remove the deliberate exception at tags-releases.css:11.
+   - Critic refs: C080 (releases, major)
+   - PNG: `docs/reference/releases/light-1440.png`, `shots/final-gate-2/releases/dark-390.png`, `shots/final-gate-2/releases/dark-1440.png`, `shots/final-gate-2/releases/light-390.png`
+5. **FG2-026 [theme-fixable-css] Wiki clone input has no 'Clone this wiki locally' label; revision count shown as '1 🕒' at the right instead of '· 1 revision' in the byline** — impact 15 (judges 14, critic wt 1; gate 1 FG-022; routes: wiki-home, wiki-page)
+   - Fix: English-only generated label (precedent FG-041): `html:lang(en) .gh-wiki-clone::before { content: "Clone this wiki locally"; flex-basis:100% }` with `flex-wrap:wrap` on the action input (or on `.gh-wiki-aside`), 14px/600 above the input; the localhost URL is instance data (inherent). Revision counter: move next to the byline via `order` and style muted (count text is Gitea's).
+   - Critic refs: C011 (wiki-page, nit)
+   - PNG: `shots/final-gate-critic-0/wp-l.png`, `shots/final-gate-2/wiki-home/dark-1440.png`, `shots/final-gate-2/wiki-home/light-1440.png`, `shots/final-gate-2/wiki-page/dark-1440.png`
+6. **FG2-030 [theme-fixable-css] 390 directory / blame toolbar wraps into 3 rows (branch + compare + breadcrumb / Go to file + Add File / lone '…'), ~111px** — impact 12 (judges 0, critic wt 12, majors C124; gate 1 FG-078; routes: blame-playground-multiple-authors, blame, directory-tree)
+   - Fix: < 768: row 1 = branch picker + breadcrumb (ellipsis), row 2 = Go to file (flex 1) + Add File + '…' + History icon; hide the compare IconButton label; never leave '…' alone on a row. github.com hides Go to file at this width — do not hide ours (feature), just pack it.
+   - Critic refs: C124 (directory-tree, major), C153 (blame, minor), C179 (blame-playground-multiple-authors, minor)
+   - PNG: `docs/reference/directory-tree/light-390.png`, `shots/final-gate-critic-5/directory-tree/z-mobile-toolbar.png`, `shots/final-gate-2/blame-playground-multiple-authors/dark-390.png`, `shots/final-gate-2/blame-playground-multiple-authors/light-390.png`
+7. **FG2-037 [theme-fixable-template] Commit page: no 'Commit <sha7>' H1 above the message Box; the message is the title inside the Box with Browse Source / Operations** — impact 11 (judges 8, critic wt 3; gate 1 FG-045; routes: commit-detail)
+   - Fix: Gate-1 rejection stands (FG-045, §7 e) unless the last slot goes here; it does not (lower impact than the labels/milestones NavList). CSS mitigation: none (the SHA is not reachable as text for ::before).
+   - Critic refs: C009 (commit-detail, minor)
+   - PNG: `shots/final-gate-critic-0/cd-l.png`, `docs/reference/commit-detail/light-1440.png`, `shots/final-gate-2/commit-detail/dark-1440.png`, `shots/final-gate-2/commit-detail/light-1440.png`
+8. **FG2-038 [theme-fixable-css] Compare page: 'Compare commits' title with a bottom rule and no description; '74 Commits' as a grey Box header with tag labels (github.com: Commits | Files changed tabs); SHA plain text (github.com: small bordered button)** — impact 11 (judges 7, critic wt 4; gate 1 FG-113; routes: compare-two-tags)
+   - Fix: Drop the title's bottom rule; restyle the '74 Commits' Box header as a single selected UnderlineNav item ('Commits' + Counter) on the page background; SHA in the compare list as the 24px bordered mono button (like repo commits). Tabs / Files changed switch: Gitea shows both on one page (inherent).
+   - Critic refs: C013 (compare-two-tags, minor), C015 (compare-two-tags, nit)
+   - PNG: `shots/final-gate-critic-0/ct-l.png`, `shots/final-gate-2/compare-two-tags/dark-1440.png`, `shots/final-gate-2/compare-two-tags/light-1440.png`
+9. **FG2-047 [theme-fixable-css] Wiki sidebar polish: clone input touches the ToC box at 390 (0 gap), CLS 0.165 from details.gh-wiki-pages opening after load, Pages rows indented 37px with an empty gutter** — impact 9 (judges 0, critic wt 9; gate 1 FG-022; routes: wiki-page-playground)
+   - Fix: 24px gap between the clone Box and the ToC; `details.gh-wiki-pages` is already rendered `open` in our override, so find the late shift (probe the CLS source at 390: list height after font/JS, or the clone input width) and reserve it (min-height / fixed row height); rows 16px indent (or add the chevron github.com draws).
+   - Critic refs: C055 (wiki-page-playground, minor), C056 (wiki-page-playground, minor), C057 (wiki-page-playground, minor)
+   - PNG: `shots/final-gate-critic-2/wiki-page-playground-390-pair-1.png`, `shots/final-gate-critic-2/wiki-side-l.png`, `shots/final-gate-2/wiki-page-playground/dark-390.png`, `shots/final-gate-2/wiki-page-playground/dark-1440.png`
+10. **FG2-048 [theme-fixable-template] Repo sidebar has no stars / watching / forks rows (github.com About box lists them)** — impact 9 (judges 9, critic wt 0; gate 1 FG-043; routes: repo-home-readme-with-images-and-tables, repo-home)
+   - Fix: Gate-1 FG-043 rejected (a ≤ 10, §7 e); unchanged.
+   - PNG: `shots/final-gate-2/repo-home-readme-with-images-and-tables/dark-1440.png`, `shots/final-gate-2/repo-home-readme-with-images-and-tables/light-1440.png`, `shots/final-gate-2/repo-home/dark-1440.png`, `shots/final-gate-2/repo-home/light-1440.png`
+11. **FG2-049 [theme-fixable-css] Tag rows and compare/commit lists still show 10-character SHAs (github.com 7); commits-list SHA in mono where the critic measured github.com sans** — impact 9 (judges 8, critic wt 1; gate 1 FG-018; routes: repo-commits, tags)
+   - Fix: Clip the SHA text to 7ch: `.tag-list .sha, #commits-table .sha … { display:inline-block; max-width:7ch; overflow:hidden; text-overflow:clip; font-family:mono }` (the link/title keeps the full SHA). Verify the font question (C176) against docs/reference/repo-commits before changing mono → sans.
+   - Critic refs: C176 (repo-commits, nit)
+   - PNG: `shots/final-gate-2/repo-commits/dark-1440.png`, `shots/final-gate-2/repo-commits/light-1440.png`, `shots/final-gate-2/tags/dark-1440.png`, `shots/final-gate-2/tags/light-1440.png`
+12. **FG2-053 [theme-fixable-template] Release detail reuses the list chrome (Releases | Tags toggle, RSS Feed, New Release) instead of a 'Releases / v1.4.6' breadcrumb** — impact 8 (judges 5, critic wt 3; gate 1 FG-110; routes: release-detail)
+   - Fix: Rejected in gate 1 (FG-110, a ≤ 10) and still low impact; not proposed for the last slot. No CSS path (the breadcrumb needs the tag name as text).
+   - Critic refs: C102 (release-detail, minor)
+   - PNG: `shots/final-gate-2/release-detail/light-1440.png`, `docs/reference/release-detail/light-1440.png`, `shots/final-gate-2/release-detail/dark-1440.png`, `shots/final-gate-2/release-detail/light-1440.png`
+13. **FG2-062 [theme-fixable-css] Release 'Downloads' disclosure: native marker, no Counter, collapsed on every release (the with-assets route never shows its assets); no divider under the byline at 390** — impact 6 (judges 1, critic wt 5; gate 1 FG-037; routes: releases, releases-playground-with-assets-prerelease-draft, release-detail)
+   - Fix: `summary::marker` off + Octicon triangle-right/down mask, 16px/600; optional Counter via `details:has(li:nth-child(N):last-child) summary::after` (N ≤ 12). The open/closed default is Gitea behaviour (template attribute): leave it. Add the 1px divider under the byline < 768. 'Downloads' wording stays (inherent).
+   - Critic refs: C081 (releases, nit), C103 (release-detail, nit), C129 (releases-playground-with-assets-prerelease-draft, minor)
+   - PNG: `shots/final-gate-critic-4/rel-390a.png`, `shots/final-gate-2/releases/dark-390.png`, `shots/final-gate-2/releases/dark-1440.png`, `shots/final-gate-2/releases/light-390.png`
+14. **FG2-063 [theme-fixable-css] New-repository form is a 768px boxed card with a grey 'New Repository' Box header; github.com/new is an unboxed page (24px heading + subtitle + Subhead rule, Owner / name side by side)** — impact 6 (judges 0, critic wt 6, majors C092; new; routes: repo-create)
+   - Fix: `.repository.new-repo`: drop the attached segment border/bg; header → 24px Subhead with bottom rule; grid Owner '/' Repository name on one row. Visibility radio cards: template-level, skip.
+   - Critic refs: C092 (repo-create, major)
+   - PNG: `shots/final-gate-2/repo-create/light-1440.png`
+15. **FG2-064 [theme-fixable-css] 390 releases: header row (Releases | Tags, RSS, New Release) inset 15px more than the cards; title row strands the red status × and the 'Stable' label on their own lines** — impact 6 (judges 0, critic wt 6; new; routes: releases-playground-with-assets-prerelease-draft)
+   - Fix: Align the header row to the 16px gutter; title row `flex-wrap:wrap` with the status icon inline before the title and the label inline after it.
+   - Critic refs: C127 (releases-playground-with-assets-prerelease-draft, minor), C128 (releases-playground-with-assets-prerelease-draft, minor)
+   - PNG: `shots/final-gate-critic-5/releases-playground-with-assets-prerelease-draft/z-mobile-header-inset.png`, `shots/final-gate-critic-5/releases-playground-with-assets-prerelease-draft/light-390-1.png`, `shots/final-gate-2/releases-playground-with-assets-prerelease-draft/dark-390.png`, `shots/final-gate-2/releases-playground-with-assets-prerelease-draft/light-390.png`
+16. **FG2-067 [theme-fixable-css] 390 repo home: the whole sidebar (description, topics, size, code search, Releases, Languages) sits between the file list and the README** — impact 6 (judges 0, critic wt 6; gate 1 FG-078; routes: repo-home-markdown-showcase-playground, repo-home-readme-with-images-and-tables)
+   - Fix: < 768: grid/flex `order` so description + topics stay above the file list (under the title) and Releases / Languages / code search follow the README (github.com mobile order).
+   - Critic refs: C026 (repo-home-markdown-showcase-playground, minor), C031 (repo-home-readme-with-images-and-tables, minor)
+   - PNG: `shots/final-gate-critic-1/mdm-01.png`, `shots/final-gate-critic-1/rdm-01.png`, `shots/final-gate-2/repo-home-markdown-showcase-playground/dark-390.png`, `shots/final-gate-2/repo-home-markdown-showcase-playground/light-390.png`
+17. **FG2-087 [theme-fixable-css] File view main column right gutter 32px (box ends x=1408) vs github.com 16px (x=1424)** — impact 3 (judges 0, critic wt 3; new; routes: repo-code-file)
+   - Fix: Reduce the repo file view's right padding to 16px at ≥ 1280 (container of `.repo-view-content`).
+   - Critic refs: C047 (repo-code-file, minor)
+   - PNG: `shots/final-gate-2/repo-code-file/light-1440.png`
+18. **FG2-090 [theme-fixable-css] Tags Box header reads '16 Tags' with no tag Octicon (github.com: '(tag) Tags')** — impact 3 (judges 2, critic wt 1; gate 1 FG-095; routes: tags)
+   - Fix: `::before` with the existing `--gh-octicon-tag` mask (icons PR-IC-1), 16px `--fgColor-muted`, in the tags Box header (count text is Gitea's). Gate-1 FG-095, still open.
+   - Critic refs: C053 (tags, nit)
+   - PNG: `shots/final-gate-2/tags/dark-1440.png`, `shots/final-gate-2/tags/light-1440.png`
+
+## FYI from foundation (wave L2, round 1): repo home → footer gap
+Foundation (FG2-097) changed `.full.height` padding-bottom 64 → 16px (github.com Rails pages end 16px above the footer box).
+github.com repo home is the exception: last README line → footer text 168px @1440 (ours now 87; before 166). If you want
+it back, add ~80px bottom margin to the repo-home README box / `.repo-home-filelist` in pages/repo
+(measure: `node shots/foundation-l2/footer-gap.mjs gitea 1440` vs `github`).
+
+# pages/repo builder — final gate #2 loop 2, wave L2 round 1 status (2026-09-30)
+Screens: shots/pages-repo-r1 (iteration), shots/pages-repo-r1-final (17 routes × light/dark × 1440/390, --states --measure).
+Layer gh.pages-repo 30.89 KB minified (cap 31.5).
+- **FG2-025 DONE** — releases list + single release, every width: `.meta` is `display: contents`, the card a row + column
+  subgrid of the entry (tags-releases.css). ≥ 768: Compare (28px) at the card's top right 17px inside, tag + commit as
+  byline items 24px apart, rule under the byline (1440 ink rows: title→byline / byline→rule / rule→heading = github.com
+  25 / 33 / 22, ours 24 / 34 / 22). The single-release ≥ 768 exception block and the left-column rules are removed.
+- **FG2-063 DONE** — /repo/create unboxed: 24px/600 heading, intro as subtitle over a --borderColor-muted rule, no Box;
+  Owner "/" Repository name on one grid row (fields `display: contents`), help texts full width below (new-repo.css).
+- **FG2-030 DONE** — < 768 directory / file / blame toolbar = 2 rows: Go to file flexes, History becomes a 32px icon
+  button (text stays the accessible name), "…" never alone (home-toolbar.css).
+- **FG2-018 DONE** — `#commits-table .view-commit-path > .svg` masked with `--gh-octicon-code` (commits, PR Commits, compare).
+- **FG2-021 DONE** — `html:lang(en) .gh-commit-day-date::before { content: "Commits on " }`.
+- **FG2-038 DONE** — compare: no rule under "Compare commits"; "74 Commits" header = one selected TabNav tab over a 1px rule;
+  ≥ 768 rows: [copy | SHA] ButtonGroup + [<>] icon button, 28px, bordered (outline) — github.com 33+69 / 28px, ours 32+68 / 28.
+- **FG2-049 DONE (tags)** — tag rows' SHA clipped to 7ch (mono). Commit / compare lists were already 7ch (unchanged). Release
+  byline SHA stays 10 chars in sans (github.com is sans; a proportional font cannot be cut at exactly 7 characters).
+- **FG2-090 DONE** — tags Box header gets the `--gh-octicon-tag` mask (16px muted).
+- **FG2-062 PARTIAL** — native marker replaced by an Octicon-shaped triangle (rotates when open). Counter NOT added (≈ 650 B of
+  :has() rules, over the folder cap). Byline divider at < 768 not added: docs/reference/releases/light-390.png has none.
+- **FG2-064 DONE (title row) / header inset NO CHANGE** — status icon before the title, title link flexes at < 768 so status,
+  title and Label share row 1. The 15px header inset is github.com's own (reference @390: segment x=31, cards x=16).
+- **FG2-026 DONE** — "Clone this wiki locally" (English only) above the clone input; revision count moved after the meta line
+  (title wrapper flattened, forced break after the title).
+- **FG2-047 PARTIAL** — clone box last in the < 1012 column with 24px above it (TOC margin); Pages indent kept (matches the 1440
+  reference: page link x=777 vs ours 775). Remaining CLS 0.049 on wiki-page-playground @390 comes from the markdown content
+  (sources: details + p, t≈230ms, the Architecture page's diagram), not from the Pages box.
+- **FG2-016 DONE (mitigation)** — ≥ 768 branch rows: new-branch / RSS / download / rename icons revealed on row hover or
+  focus-within (opacity), trash always visible; phones unchanged.
+- **FG2-087 DONE** — ≥ 1280 code view content ends at x=1424 (was 1408).
+- **FG2-037 / FG2-048 / FG2-053** — template-bound, rejected upstream (no change). **FG2-067 NOT DONE** — moving About above the
+  file list at < 768 re-introduces the CR-2 layout shift (sidebar is parsed after the file list).
+- Activity pages (pulse / contributors / code frequency / recent commits): NavList left, content right already; added the
+  github.com Insights Subhead (24px normal, 8px + 1px muted rule) to each page title and stacked pulse's stat cells in one column
+  < 768 (github.com @390). Contributors @390 CLS 0.53 is the Vue chart mounting (Gitea behaviour).
+
+# pages/repo builder — final gate #2 loop 2, wave L2 round 2 status (2026-09-30)
+Critique: docs/critiques/pages/repo-wL2-r1.md (8.4). Screens: shots/pages-repo-r2b (18 routes × light/dark × 1440/390,
+--states --measure, routes = tools/shoot/routes.json copy), shots/pages-repo-r2c + r2d (critic's routes file: downloads-focus,
+submit-empty, branches states), shots/pages-repo-r2-tablet (releases / release-detail @800 and @1012).
+Layer gh.pages-repo 32,227 B = 31.47 KiB minified (cap 31.5). Lint 0/0.
+- **C1 release card @768–1011 DONE** — tag · commit sit on the byline row only ≥ 1012; below that they take their own row under
+  the byline (row 4, byline spans the card), 48px above the rule. @800: tag x=65, SHA (84.6px) ends x=227 on its own row; card right edge 752 (was: SHA ending at 752).
+- **C2 FG2-038 compare title rule DONE** — the `border: 0` override now follows the shared Subhead rule (commits.css);
+  computed border-bottom 0 on `h2`.
+- **C3 release byline SHA DONE** — 7 characters, 14px ui-monospace (`max-width: 24px + 7ch`, href keeps the full SHA); the
+  `font-family: inherit !important` override in repo.important.css is removed.
+- **C4 Insights frame DONE** — ≥ 768 nav 296px + 24px gap (content x=432, w=896 @1440 = github.com); classic Menu: 1px
+  --borderColor-default Box r6, 38px rows (8/16, 21px line) split by 1px rules, selected = 2px
+  --underlineNav-borderColor-active bar, normal weight, no fill. Pulse heading 20/32.5/600, Contributors 24/36/600, code
+  frequency / recent commits 24/400. Pulse stat dividers now run the full cell height (wrapper padding 0).
+- **C5 releases sidebar** — inherent (template), no change.
+- **C6 compare actions DONE** — copy / browse filled with --button-default-bgColor-rest (.interact-bg !important beaten in
+  repo.important.css), rows 57–58px (github.com 58.5; min-height 0 on compare ≥ 768).
+- **C7 chart CLS DONE (partly)** — chart containers reserve the mounted height: code frequency 390 0.115 → 0.022, recent
+  commits 0.091 → 0.019, contributors dark-390 0.53 → 0.14 (rest = the per-contributor grid, variable), 1440 0.084 → 0.068.
+- **C8 new-repo error DONE** — subtitle ordered before the flash (segment grid, p order -1).
+- **C9 Downloads DONE** — rounded focus ring with 4px right padding; triangle ~9×9 (was 7×4). Counter still not added (bytes).
+- **C10 wiki 390 PARTIAL** — history button padding 12 → 4px (important file): wrapped "1 ⟲" is 4px in, not 11. No "· N
+  revisions" text (needs a locale string).
+- **C11 FG2-064 DONE** — < 768 status icon and Label align to the first title line (flex-start + 12 / 8px offsets).
+- **C12 branches DONE** — the hover reveal is inside `@media (hover: hover)`; touch tablets keep the icons visible.
+- **C13 tags header DONE** — icon margin removed; the header's leading space gives github.com's ~4px.
+- Budget: the single-release @scope is English only again (`:lang(en):not([aria-label="Releases"])`), freeing ~650 B;
+  other locales show the single release in the col-11 list width (stable, no CLS). A template hook would remove this trade-off.
+- Not done: foundation FYI (repo-home footer gap 87 vs 168px) and FG2-067 — no bytes left (29 B).

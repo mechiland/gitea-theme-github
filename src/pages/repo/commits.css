@@ -133,6 +133,14 @@
   align-items: center;
 }
 
+/* "Browse the repository at this point": github.com draws octicon-code (<>) — the template's octicon-file-code is
+   made transparent and the Octicon mask drawn on the svg box (FG2-018; /commits, PR Commits, compare). */
+#commits-table .view-commit-path > .svg {
+  background: currentColor;
+  fill: transparent;
+  mask: var(--gh-octicon-code) center / contain no-repeat;
+}
+
 /* ---------- day groups (Timeline) ---------- */
 .commit-table:has(.gh-commit-day) {
   border: 0;
@@ -196,6 +204,11 @@
   line-height: var(--text-body-lineHeight-medium);
 }
 
+/* github.com "Commits on May 31, 2021" (FG2-021): English only, other locales keep the bare date (no locale key) */
+html:lang(en) .gh-commit-day-date::before {
+  content: "Commits on ";
+}
+
 /* 32px badge: 16px octicon + 8px padding on the page background, centred on the line */
 .gh-commit-day-title > .svg {
   position: absolute;
@@ -211,6 +224,79 @@
 .header:has(+ .commit-table .gh-commit-day) {
   margin-bottom: var(--base-size-16);
   border-radius: var(--borderRadius-medium);
+}
+
+/* compare (FG2-038): the "74 Commits" Box header becomes github.com's TabNav: one selected tab on the page
+   background above a 1px rule */
+.diff:not(.pull) .ui.top.attached.header:has(+ .commit-table) {
+  align-items: flex-end;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0;
+  background: transparent;
+}
+
+.diff:not(.pull) .ui.top.attached.header:has(+ .commit-table) > .flex-text-block:first-child {
+  margin-bottom: calc(var(--borderWidth-thin) * -1);
+  padding: var(--base-size-8) var(--base-size-16);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-bottom-color: var(--bgColor-default);
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
+  background: var(--bgColor-default);
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--text-body-lineHeight-medium);
+}
+
+/* compare ≥ 768: github.com's classic row actions — [copy | SHA] ButtonGroup + [<>] icon button, 28px, bordered.
+   The actions cell is flattened so copy can sit before the SHA; the transparent-border padding of the 7ch SHA clip
+   stays, the visible border is an inset outline. */
+@media (min-width: 768px) {
+  .diff:not(.pull) #commits-table > tbody > tr {
+    min-height: 0; /* github.com compare rows: 58px (the /commits rows keep 64) */
+    grid-template-columns: auto minmax(0, 1fr) auto auto auto;
+    grid-template-areas:
+      "msg msg copy sha act"
+      "author date copy sha act";
+  }
+
+  .diff:not(.pull) #commits-table td:last-child {
+    display: contents;
+  }
+
+  .diff:not(.pull) #commits-table .copy-commit-id {
+    grid-area: copy;
+    width: calc(var(--control-small-size) + var(--base-size-4));
+    border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
+  }
+
+  .diff:not(.pull) #commits-table .view-commit-path {
+    grid-area: act;
+    width: var(--control-small-size);
+    margin-left: var(--base-size-4); /* + 4px row gap */
+    border-radius: var(--borderRadius-medium);
+  }
+
+  .diff:not(.pull) #commits-table :is(.copy-commit-id, .view-commit-path, .commit-id-short) {
+    outline: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
+    outline-offset: calc(var(--borderWidth-thin) * -1);
+    background: var(--button-default-bgColor-rest);
+  }
+
+  .diff:not(.pull) #commits-table td.sha {
+    margin-left: calc((var(--base-size-4) + var(--borderWidth-thin)) * -1); /* joins copy across the row gap */
+  }
+
+  .diff:not(.pull) #commits-table .commit-id-short {
+    border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
+    font-size: var(--text-body-size-small);
+  }
+
+  .diff:not(.pull) #commits-table :is(.copy-commit-id, .view-commit-path, .commit-id-short):hover {
+    background: var(--button-default-bgColor-hover);
+  }
 }
 
 /* compare range editor: github.com's range bar is a --bgColor-muted Box */
@@ -341,6 +427,12 @@
   line-height: var(--base-text-lineHeight-normal);
 }
 
+/* compare (FG2-038): no rule under "Compare commits" (github.com's rule follows a description Gitea lacks) */
+.diff:not(.pull) > .ui.container > h2 {
+  padding: 0;
+  border: 0;
+}
+
 .commits:not(.pull) > .ui.container > .repo-button-row {
   grid-row: 2;
   grid-column: 1;
@@ -382,4 +474,97 @@
 .commits:not(.pull) > .ui.container > .commit-table {
   width: auto;
   margin-inline: 0;
+}
+
+/* Activity pages (pulse / contributors / code frequency / recent commits, page class "repository commits"): the page
+   title is github.com's Insights Subhead — 24px normal, 8px padding + 1px --borderColor-muted rule, 16px below */
+.commits .flex-container-main > .activity-header,
+.commits .flex-container-main > * > div > .ui.header:first-child {
+  margin: 0 0 var(--base-size-16);
+  padding: 0 0 var(--base-size-8);
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+  font-size: var(--base-size-24); /* Primer Subhead-heading = $h2-size, no text token between 20 and 32 */
+  font-weight: var(--base-text-weight-normal);
+  line-height: var(--base-text-lineHeight-normal);
+}
+
+/* github.com /pulse: 20px semibold date range; /graphs/contributors: 24px semibold (code frequency stays normal) */
+.commits .flex-container-main > .activity-header {
+  font-size: var(--text-title-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-title-lineHeight-medium);
+}
+
+/* pulse: the stat cells' dividers run the full row height (github.com); Gitea pads the wrapping segment */
+.commits .flex-container-main .horizontal.segments {
+  padding: 0;
+}
+
+#repo-contributors-chart .ui.header:first-child {
+  font-weight: var(--base-text-weight-semibold);
+}
+
+/* Insights nav: github.com's classic Menu — 296px bordered Box (r6), 38px rows (8px 16px, 21px line) split by
+   --borderColor-default, the current row marked by a 2px --underlineNav-borderColor-active bar on its left edge */
+.commits .flex-container-nav > .menu {
+  overflow: hidden;
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+}
+
+.commits .flex-container-nav .item {
+  padding: var(--base-size-8) var(--base-size-16);
+  border-radius: 0;
+  line-height: var(--base-text-lineHeight-normal);
+}
+
+.commits .flex-container-nav .item + .item {
+  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+}
+
+.commits .flex-container-nav .active.item {
+  background: transparent;
+  font-weight: var(--base-text-weight-normal);
+}
+
+.commits .flex-container-nav .active.item::after {
+  top: 0;
+  left: 0;
+  width: var(--borderWidth-thick);
+  height: 100%;
+  border-radius: 0;
+  background: var(--underlineNav-borderColor-active);
+}
+
+@media (min-width: 768px) {
+  .commits > .flex-container {
+    gap: var(--base-size-24);
+  }
+
+  .commits .flex-container-nav {
+    width: calc(2 * var(--base-size-128) + var(--base-size-40));
+  }
+}
+
+/* chart pages: reserve the mounted chart (header + Gitea's 440 / 250 / 260px graph) so the footer does not jump when
+   the Vue component mounts (CLS) */
+#repo-code-frequency-chart {
+  min-height: calc(4 * var(--base-size-112) + var(--base-size-48));
+}
+
+:is(#repo-recent-commits-chart, #repo-contributors-chart) {
+  min-height: calc(2 * var(--base-size-128) + var(--base-size-48));
+}
+
+/* pulse < 768: github.com stacks the stat cells (Merged / Open / Closed / New) in one column; Gitea's 4 horizontal
+   segments squeeze their labels to one word per line at 390 */
+@media (max-width: 767.98px) {
+  .commits .flex-container-main .horizontal.segments {
+    flex-direction: column;
+  }
+
+  .commits .flex-container-main .horizontal.segments > .segment + .segment {
+    border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+    border-left: 0;
+  }
 }

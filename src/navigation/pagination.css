@@ -57,15 +57,10 @@
   display: none;
 }
 
-.ui.pagination.menu .item:first-child,
-.ui.pagination.menu .item:last-child {
-  border-radius: var(--borderRadius-medium);
-}
-
+/* no colour here: pages stay --fgColor-default, Previous / Next stay --fgColor-accent when hovered or focused */
 .ui.pagination.menu a.item[href]:hover,
 .ui.pagination.menu a.item[href]:focus {
   background: var(--control-transparent-bgColor-hover);
-  color: var(--fgColor-default);
   text-decoration: none;
 }
 
@@ -74,9 +69,9 @@
   outline-offset: calc(var(--borderWidth-thick) * -1);
 }
 
-.ui.pagination.menu .active.item,
-.ui.pagination.menu .active.item:hover {
-  padding-top: var(--base-size-8);
+/* current page = the page item without a link (paginate.tmpl drops href on it; it only adds .active when the page
+   count is known, so the dashboard feed's "1" had no current style: FG2-089) */
+.ui.pagination.menu .item:not([href], .navigation, .disabled) {
   background: var(--bgColor-accent-emphasis);
   color: var(--fgColor-onEmphasis);
 }
@@ -88,10 +83,6 @@
   color: var(--fgColor-accent);
 }
 
-.ui.pagination.menu a.item.navigation[href]:hover {
-  color: var(--fgColor-accent);
-}
-
 .ui.pagination.menu .item.navigation > .svg {
   width: calc(var(--base-size-16) - var(--base-size-2));
   height: calc(var(--base-size-16) - var(--base-size-2));
@@ -99,9 +90,7 @@
   min-height: calc(var(--base-size-16) - var(--base-size-2));
 }
 
-.ui.pagination.menu .disabled.item,
-.ui.pagination.menu .disabled.item:hover,
-.ui.pagination.menu .item.navigation.disabled {
+.ui.pagination.menu .disabled.item {
   background: transparent;
   color: var(--fgColor-disabled);
   cursor: default;
@@ -123,16 +112,23 @@
   visibility: hidden;
 }
 
-/* narrow: Gitea keeps only First / Previous / current / Next / Last (menu.css); restate it, because the base rule
-   above sets display on every item. First / Last are icon-only, Previous / Next keep the text like github.com. */
+/* narrow: Gitea keeps only First / Previous / current / Next / Last (menu.css) and drops the labels; github.com's narrow
+   Pagination keeps every page and the Previous / Next labels (FG-059), and has no First / Last. The base rule above
+   already shows every item; First / Last stay icon-only < 768 and go < 544. When the window has 6-7 page items (11+
+   children with First / Last) Previous / Next drop their labels < 544 so the row stays on one line at 390. */
 @media (max-width: 767.98px) {
-  .ui.pagination.menu .item:not(.active, .navigation),
   .ui.pagination.menu .item.navigation:has(> .gitea-double-chevron-left, > .gitea-double-chevron-right) > .navigation_label {
     display: none;
   }
 
-  /* Gitea also drops the Previous / Next labels; github.com's narrow Pagination keeps them (FG-059) */
   .ui.pagination.menu .navigation_label {
     display: inline;
+  }
+}
+
+@media (max-width: 543.98px) {
+  .ui.pagination.menu .item.navigation:has(> .gitea-double-chevron-left, > .gitea-double-chevron-right),
+  .ui.pagination.menu:has(> .item:nth-child(10)) .navigation_label {
+    display: none;
   }
 }

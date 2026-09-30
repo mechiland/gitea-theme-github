@@ -1,16 +1,29 @@
 /*
  * gh-important: navigation paints every `.small-menu-items .item` background with !important (transparent,
- * hover --control-transparent-bgColor-hover). The Labels | Milestones SegmentedControl (FG-039) needs the track,
- * the knob and the inset hover pill instead.
+ * hover --control-transparent-bgColor-hover, 6px block padding). The Labels / Milestones NavList (FG2-023) needs
+ * the NavList selected background and its own 6px 8px item padding.
  */
-.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu {
-  background: var(--controlTrack-bgColor-rest) !important;
+:is(.labels, .milestones) .issue-list-navbar > .item {
+  padding-top: var(--base-size-6) !important;
+  padding-bottom: var(--base-size-6) !important;
 }
 
-.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item:not(.active):hover {
-  background: var(--controlTrack-bgColor-hover) !important;
+:is(.labels, .milestones) .issue-list-navbar > .item.active {
+  background: var(--control-transparent-bgColor-selected) !important;
 }
 
-.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item.active {
-  background: var(--controlKnob-bgColor-rest) !important;
+/* FG2-035: milestone row Delete link is muted like Edit / Close and turns danger on hover only (Gitea: tw-text-red,
+   a Tailwind !important utility) */
+.milestones:not(.projects) .list-item-secondary-bar > :last-child > a.tw-text-red {
+  color: var(--fgColor-muted) !important;
+}
+
+.milestones:not(.projects) .list-item-secondary-bar > :last-child > a.tw-text-red:hover {
+  color: var(--fgColor-danger) !important;
+}
+
+/* Gitea repo/issue-list.css (< 768px) `.issue-list-search { order: 2 !important }` would auto-place the query bar
+   after the list in the FG2-023 page grid */
+.milestones:not(.projects, .dashboard) .list-header > .issue-list-search {
+  order: 0 !important;
 }

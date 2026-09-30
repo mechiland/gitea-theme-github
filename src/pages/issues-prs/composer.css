@@ -84,6 +84,20 @@
   }
 }
 
+/* FG2-052 (data-display request): phones — the toolbar stays ONE row that scrolls sideways (github.com's mobile
+   composer) instead of wrapping to two */
+@media (max-width: 767.98px) {
+  :is(#comment-form, #new-issue, .code-comments-list form.comment-form) .combo-markdown-editor markdown-toolbar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  :is(#comment-form, #new-issue, .code-comments-list form.comment-form) .combo-markdown-editor markdown-toolbar > * {
+    flex-shrink: 0;
+  }
+}
+
 :is(.view.issue, .new.issue, .compare.pull) markdown-toolbar .markdown-toolbar-group {
   gap: 0;
   padding: 0 var(--base-size-4);

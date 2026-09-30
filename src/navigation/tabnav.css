@@ -119,8 +119,12 @@
   margin: 0;
 }
 
-/* ---------- phones: github.com hides the tab icons, tightens the tabs and lets the row scroll sideways (FG-029).
-   The bar rule becomes an inset shadow so the scroll box does not clip the selected tab's overlap. ---------- */
+/* ---------- phones: the row scrolls sideways like github.com's PR tabs (FG-029, FG2-050). The bar rule becomes an inset
+   shadow so the scroll box does not clip the selected tab's overlap. Page tab rows (PR tabs, webhook history, not the
+   editor's Write / Preview pair) fade out 24px at each edge that has more content behind it: two mask layers slid in
+   and out by a scroll-driven animation (no fade while the row fits, since then there is no scroll timeline). Below
+   544 (only there does "Files Changed" not fit at 390) the selected tab is scrolled into view on load
+   (scroll-initial-target, Chromium 133+); github.com drops the tab icons there too (d-none d-sm-inline). */
 @media (max-width: 767.98px) {
   .ui.tabular.menu:not(.pointing) {
     overflow-x: auto;
@@ -129,12 +133,53 @@
     scrollbar-width: none;
   }
 
+  .ui.attached.tabular.menu:not(.pointing) {
+    mask-image:
+      linear-gradient(to right, transparent, var(--bgColor-default) var(--base-size-24)),
+      linear-gradient(to left, transparent, var(--bgColor-default) var(--base-size-24));
+    mask-size: calc(100% + var(--base-size-24)) 100%;
+    mask-repeat: no-repeat;
+    mask-position: calc(var(--base-size-24) * -1) 0, 0 0;
+    mask-composite: intersect;
+    animation-name: gh-tabnav-edge-fade;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(self inline);
+  }
+
   .ui.tabular.menu:not(.pointing) .item {
     flex: none;
     margin-bottom: 0;
   }
+}
+
+/* left layer: hidden at -24px, shown at 0; right layer: shown at -24px, hidden at 0 */
+@keyframes gh-tabnav-edge-fade {
+  0% {
+    mask-position: calc(var(--base-size-24) * -1) 0, calc(var(--base-size-24) * -1) 0;
+  }
+
+  10%,
+  90% {
+    mask-position: 0 0, calc(var(--base-size-24) * -1) 0;
+  }
+
+  100% {
+    mask-position: 0 0, 0 0;
+  }
+}
+
+@media (max-width: 543.98px) {
+  .ui.tabular.menu:not(.pointing) {
+    scroll-padding-inline: var(--base-size-24);
+  }
 
   .ui.tabular.menu:not(.pointing) .item > .svg {
     display: none;
+  }
+
+  .ui.tabular.menu:not(.pointing) .active.item {
+    scroll-initial-target: nearest;
+    scroll-snap-align: end;
   }
 }

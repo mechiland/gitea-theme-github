@@ -603,3 +603,62 @@ Applied by the integrator in this loop (build/tools edits made 13:38–13:46, ve
   members; pixel-diffed flat vs nested: 1,138 pairs, 1,103 identical, 14 ≤ 2 px AA, 16 known-noisy, 5 explained). Result:
   auto 295,880 B (288.9 KB), light 290,683, dark 291,734 — under the 295 KB gate. Browser floor raised to CSS nesting
   (Chrome/Edge 112+, Safari 16.5+, Firefox 117+; ARCHITECTURE §9). No folder was trimmed.
+
+# From navigation (wave L2, round 1, 2026-09-30)
+## NAV-I6 FYI / policy: settings NavList icons use Gitea's served Octicon SVGs as masks, not `--gh-octicon-*`
+FG2-014 needs ~22 distinct glyphs (gear alone is a 2.3 KB data URI); as `--gh-octicon-*` masks that is ~15 KB per theme
+file. `src/navigation/nav-list.css` instead uses `mask-image: url("../img/svg/octicon-<name>.svg")` — the Octicon files Gitea
+itself serves from /assets/img/svg (all present in 1.27.3, same origin, Cache-Control 6h, relative to the theme file like the
+footer's existing `../img/logo.svg`). Net cost of the whole FG2-014 change ≈ 2.4 KB minified. Please record it in ARCHITECTURE §6
+if you accept it; if you'd rather have data URIs, the mapping is one rule per glyph and switching is mechanical.
+## Budget (numbers, not a request)
+Navigation layer in the minified auto file: 19,229 B at HEAD → 21,794 B now (+2,565: NavList icons +~2.7 KB, trims −~0.4 KB).
+The auto file is 326,457 B in my last build, but other folders grew far more in the same period (without navigation: 287,104
+at my first build vs 275,456 at the start of the round) — the 295 KB gate is currently broken by the wave as a whole.
+
+# From code (wave L2, round 1) — CODE-L2-1: two Octicon masks `link`, `history` (FG2-015)
+- **What:** add `'link', 'history'` to the mask list in `src/icons/gen-icons.mjs` (same generator as the other masks) and
+  regenerate `src/icons/octicon-masks.css`.
+- **Why:** FG2-015 turns the blob / blame header's Permalink and History text buttons into invisible IconButtons
+  (`src/code/file-view.css`, `.file-header .file-actions > .ui.buttons > .button:is([href*="/src/commit/"], [href*="/commits/"])::before`).
+  The rule already reads `mask: var(--gh-octicon-link, url("../img/svg/octicon-link.svg"))` and
+  `mask-image: var(--gh-octicon-history, url("../img/svg/octicon-history.svg"))`, so today it falls back to the Octicon
+  files Gitea serves at `/assets/img/svg/` (two small cached requests on file / blame pages; verified rendering in
+  `shots/code-l2-r1-states/code-rcf-states/states/*-clip.png`). Once the masks exist the data URIs take over and the
+  requests go away; no code change needed on our side. Cost ≈ 0.9 KB per theme file (both masks, pruned until referenced — they are referenced now).
+- **Diff:**
+```diff
+   'plus', 'dash', 'screen-full', // pages/actions-packages-projects APK-M1 (FG-038 workflow-graph controls)
++  'link', 'history', // FG2-015: blob / blame header Permalink + History IconButtons (code)
+```
+
+# From pages/issues-prs (wave L2, round 1, 2026-09-30)
+## IPR-L2-1 (FG2-027) `templates/repo/issue/list.tmpl` override: no NavList on the PR list
+- **What:** in the github-* branch of line 4, render `<nav class="gh-issues-nav">…</nav>` only when `not .PageIsPullList`.
+  The `.gh-issues-layout` / `.gh-issues-main` / `h2.gh-issues-title` wrappers stay for both lists (the PR list keeps its
+  "All pull requests" title, New button and query bar — that is github.com's PR list header). The PR-only NavList items
+  (review_requested / reviewed_by) become unreachable inside the new `if` and can be dropped. No new slot; non-GitHub
+  output stays upstream bytes.
+- **Diff (line 4, schematic):**
+```diff
+-<div class="gh-issues-layout"><nav class="gh-issues-nav" …>…</nav><div class="gh-issues-main">
++<div class="gh-issues-layout">{{if not .PageIsPullList}}<nav class="gh-issues-nav" …>…(issue items only)…</nav>{{end}}<div class="gh-issues-main">
+```
+- **Why / CSS already live:** src/pages/issues-prs/issues-nav.css treats a `.gh-issues-layout` whose nav has no
+  `octicon-issue-opened` item (the PR list today, or no nav after this edit) as the PR list: nav hidden, centred container
+  with the 24px gutter (x=104 w=1232 @1440, = github.com), title 24px under the tabs, Box 24px under the query bar.
+  So the page is already right before the edit; the edit only removes the hidden markup (and the ~1 KB of links).
+- Verified: shots/pages-issues-prs-L2r1/repo-pulls/{light,dark}-{1440,390}.png, measured title x104 y+24, list w1232.
+
+## IPR-L2-2 FYI: budget
+pages/issues-prs costs 39.2 KB of the minified github-auto file (build without the folder: 289,764 B; with: 328,917 B at
+16:5x). This round's additions (FG2-023 NavList layout, FG2-035 milestone rows, FG2-046 blankslate, FG2-031 mobile
+filters/bottom sheet, FG2-039/059/072/073/074/083/093) replaced the FG-039 SegmentedControl and shortened the
+labels/milestones selectors; the net growth is several KB. The file is over 300 KB with every L2 folder's growth together.
+
+# From navigation (wave L2, round 2) — NAV-I6 still open
+NAV-I6 (settings NavList icons via Gitea's served `/assets/img/svg/octicon-*.svg` as relative `url()` masks) is still
+unanswered; the critic flags it as a nit (breaks only if the theme CSS is ever inlined or moved off `/assets/css/`).
+Navigation layer in the minified auto file this round: 22,745 B (+~950 B: scroll-driven PR tab fades, pagination and
+UnderlineNav breakpoints). FYI outside navigation, seen at 320 only: /octo-org/grex/pulls scrollWidth 331
+(`.user-remote-search` / `.dropdown.jump` filter menus), /octo-org/grex/releases 350 (`.attachment-right-info`).

@@ -182,15 +182,59 @@
 }
 
 /* ---------- narrow viewports ---------- */
+/* FG2-031: phones (github.com @390): Open / Closed on the first row, the filters on ONE row below that scrolls
+   sideways (fades out under its last 32px) — no filter hidden. A scroll box would clip the anchored menus, so each
+   filter menu opens as a Primer bottom sheet (fixed to the viewport bottom, full width, large top radius; left/right
+   in list.important.css against Gitea's `left/right: auto !important`). */
 @media (max-width: 767.98px) {
   .issue-list-toolbar {
     flex-wrap: wrap;
     align-items: flex-start;
+    row-gap: var(--base-size-4);
     padding: var(--base-size-8);
   }
 
+  .issue-list-toolbar-right:has(.filter.menu > * + *) {
+    position: relative;
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  .issue-list-toolbar-right:has(.filter.menu > * + *)::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: var(--base-size-32);
+    background: linear-gradient(to right, transparent, var(--bgColor-muted));
+    pointer-events: none;
+  }
+
+  .issue-list-toolbar-right .ui.secondary.filter.menu:has(> * + *) {
+    flex-wrap: nowrap;
+    padding-right: var(--base-size-32);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
   .issue-list-toolbar-right .ui.secondary.filter.menu > .item {
+    flex: 0 0 auto;
     padding: 0 var(--control-medium-paddingInline-condensed);
+  }
+
+  .issue-list-toolbar-right .ui.secondary.filter.menu > .ui.dropdown > .menu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    z-index: var(--zIndex-overlay);
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    max-height: 70vh;
+    margin: 0;
+    overflow-y: auto;
+    border-radius: var(--borderRadius-large) var(--borderRadius-large) 0 0;
   }
 }
 
@@ -206,4 +250,10 @@
 /* list titles 600: github.com computes Mona Sans 600 but loads no web font, so it draws the system font at 600 */
 :is(.issue-list, .milestone-issue-list) #issue-list > .item .list-item-large-title {
   font-weight: var(--base-text-weight-semibold);
+}
+
+/* FG2-036: github.com's Open / Closed switch has no state icons ("Open 8 | Closed 51"; Gitea's count and label are
+   one text node, so the CounterLabel order cannot be reached in CSS) */
+#issue-filters .small-menu-items .item > .svg {
+  display: none;
 }

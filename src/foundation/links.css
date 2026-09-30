@@ -1,0 +1,38 @@
+/* FG2-061 — github.com "link underlines" (the default a11y preference; html[data-a11y-link-underlines=true], measured
+ * logged-out 2026-09-30 with shots/foundation-l2/links-probe.mjs). Gitea's base.css:272-281 underlines links only on
+ * hover; github.com underlines at rest the links that sit inside running text or a meta line:
+ *   - Primer Link--inTextBlock (a link inside a sentence: settings/help text, Subhead descriptions, flashes):
+ *     underline, text-underline-offset .2rem = 3.2px (markdown links are the markdown folder's);
+ *   - issue list meta line ("#N · <author> opened …", milestone): underline, offset 2px, Link--muted colour;
+ *     the pulls list does NOT underline its author (PullsListItem filterLink), so PR rows (they carry .branches) stay plain;
+ *   - timeline event "… closed this <ago>" links (row-module__timelineAgoLink): underline, offset 3.2px; comment header
+ *     date links (ActivityHeader) stay plain.
+ * Not underlined on github.com (left alone): nav, buttons, list titles, commit titles / authors in the commits list,
+ * labels, counters, the repo title. Gitea's `a.label, .ui .menu a … { text-decoration-line: none !important }`
+ * still wins where it applies. Hover keeps Gitea's accent colour and underline. */
+
+/* Link--inTextBlock: a plain (classless) link that is a direct child of a paragraph or a form caption */
+:where(p, .help) > a[href]:where(:not([class], .markup *)) {
+  text-decoration-line: underline;
+  text-underline-offset: calc(var(--base-size-16) * 0.2);
+}
+
+/* issue list meta: author link (Gitea renders it bare inside the "opened … by" part) and the milestone link */
+#issue-list > .item:where(:not(:has(.branches))) .item-body > .flex-text-inline > a[href]:where(:not([class])),
+#issue-list > .item:where(:not(:has(.branches))) .item-body > a.milestone {
+  text-decoration-line: underline;
+  text-underline-offset: var(--base-size-2);
+}
+
+/* data-display draws the " · " separator as the link's own ::after (a flex item of the inline-flex link), which would
+ * inherit the underline. Text decorations are not propagated to floats; a float on a flex item changes nothing in the
+ * layout (css-flexbox: float does not apply), so the dot keeps its place without the underline. */
+#issue-list > .item:where(:not(:has(.branches))) .item-body > a.milestone::after {
+  float: left;
+}
+
+/* timeline events: the relative-time anchor ("closed this issue <a href=#issuecomment-N>3 days ago</a>") */
+.timeline-item.event .comment-text-line > a[href^="#"] {
+  text-decoration-line: underline;
+  text-underline-offset: calc(var(--base-size-16) * 0.2);
+}

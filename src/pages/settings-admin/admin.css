@@ -82,6 +82,22 @@
   .admin-dl-horizontal > dd + dt + dd {
     border-top: 0;
   }
+
+  /* ToggleSwitch rows stay one Box-row (FG2-040): label on the left, switch at the row end */
+  .admin-dl-horizontal > dt:has(+ dd > .ui.toggle.checkbox) {
+    flex: 1 1 0;
+    width: auto;
+    padding-bottom: var(--base-size-8);
+  }
+
+  .admin-dl-horizontal > dd:has(> .ui.toggle.checkbox) {
+    width: auto;
+    padding-top: var(--base-size-8);
+  }
+
+  .admin-dl-horizontal > dd + dt + dd:has(> .ui.toggle.checkbox) {
+    border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+  }
 }
 
 /* filter bar above a list (search input + Filter / Sort menus) */

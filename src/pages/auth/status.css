@@ -1,7 +1,10 @@
-/* 404 / 500 / 503 — Primer Blankslate (spacious, large) instead of GitHub's illustrated 404:
- * centred, 80px × 40px padding, 32px --fgColor-muted octicon 8px above a 32px semibold heading
- * (--text-title-*-large), description 16px --fgColor-muted, links 16px below.
- * Gitea: .status-page-error (base.css: 45vh top margin, 48px bold muted title). */
+/* 404 / 500 / 503 — Primer Blankslate, size="large" spacious (no GitHub illustration: §11), per Primer React's
+ * Blankslate.module.css: centred column, padding 80px 40px; Visual --fgColor-muted, 8px below it; Heading
+ * --text-title-shorthand-large (32px/600/1.5) with margin-block 8px 4px; Description --text-body-shorthand-large
+ * (16px/1.5) --fgColor-muted, 8px below; Action 16px above, body-large text. Below 34rem (Primer's container query)
+ * it steps down: padding 44px 28px, heading title-small (16px/600), description body-medium (14px), 24px visual.
+ * Gitea: .status-page-error > .status-page-error-title + .tw-text-center > (.tw-my-4 prompt, a.tw-my-4 "Go back")
+ * (base.css: 45vh top margin, 48px bold muted title). The Visual is a ::before mask of octicon-alert. */
 
 .page-content .status-page-error {
   display: flex;
@@ -23,24 +26,26 @@
 }
 
 .page-content .status-page-error-title {
-  margin: 0 0 var(--base-size-4);
+  margin: var(--base-size-8) 0 var(--base-size-4);
   color: var(--fgColor-default);
-  font-size: var(--text-title-size-large);
-  font-weight: var(--text-title-weight-large);
-  line-height: var(--text-title-lineHeight-large);
+  font: var(--text-title-shorthand-large);
   text-align: center;
+  text-wrap: balance;
 }
 
-.page-content .status-page-error > .tw-text-center,
 .page-content .status-page-error > div:not(.status-page-error-title) {
   color: var(--fgColor-muted);
-  font-size: var(--text-body-size-large);
-  line-height: var(--text-body-lineHeight-large);
+  font: var(--text-body-shorthand-large);
+  text-wrap: balance;
 }
 
-
+/* the Description's own block (the prompt) carries the 8px after-margin; the "Go back" link is the Action. Primer's
+   Blankslate.SecondaryAction is an inline Link: Gitea's `tw-block` (display !important) stays, but the box hugs the
+   word (width: fit-content, centred by the inline auto margins in status.important.css) so the hit area and the focus
+   ring are the link's own, not the 437px description width */
 .page-content .status-page-error > .tw-text-center > a {
-  font-size: var(--text-body-size-medium);
+  width: fit-content;
+  font: var(--text-body-shorthand-large);
 }
 
 .page-content .status-page-error strong {
@@ -59,9 +64,25 @@
   text-align: left;
 }
 
-/* phones: keep the Blankslate's 80px block padding, but only the page gutter at the sides */
+/* Primer's @container blankslate (max-width: 34rem) step-down; the Blankslate spans the page here, so the viewport
+   breakpoint is the same test */
 @media (max-width: 543.98px) {
   .page-content .status-page-error {
-    padding: var(--base-size-80) 0;
+    margin: var(--base-size-16) auto;
+    padding: var(--base-size-44) var(--base-size-28);
+  }
+
+  .page-content .status-page-error::before {
+    width: var(--base-size-24);
+    height: var(--base-size-24);
+  }
+
+  .page-content .status-page-error-title {
+    font: var(--text-title-shorthand-small);
+  }
+
+  .page-content .status-page-error > div:not(.status-page-error-title),
+  .page-content .status-page-error > .tw-text-center > a {
+    font: var(--text-body-shorthand-medium);
   }
 }

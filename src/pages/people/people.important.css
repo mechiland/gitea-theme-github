@@ -135,3 +135,8 @@
 #user-heatmap rect.heatmap-day:hover {
   stroke: var(--fgColor-default) !important;
 }
+
+/* explore users / organizations: the avatar top-aligned with the name like Primer list rows (Gitea: tw-items-center) */
+.explore.users .flex-divided-list > .item {
+  align-items: flex-start !important;
+}

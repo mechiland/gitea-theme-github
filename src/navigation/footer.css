@@ -1,48 +1,48 @@
 /*
- * Footer — github.com site footer (measured 2026-09-30 at 1440): one centred row, padding 48px 16px 40px,
- * no border-top, transparent bg, 12px / 18px --fgColor-muted text and links, links 16px apart
- * (margin 0 8px), 24px logo mark first. Gitea's own logo stands in for the GitHub mark (no GitHub marks).
+ * Footer — github.com site footer (live computed styles, github.com/pemistahl/grex/issues, 2026-09-30):
+ *   footer: border-top 1px --borderColor-muted, padding 16px, 12px / 18px --fgColor-muted, transparent bg
+ *   ≥ 1012: one centred row — [24px mark, 8px, "© GitHub, Inc."] then the links, 16px apart (li margin 0 8px)
+ *   < 1012: column-reverse — the links (centred, wrapping, 16px apart, 8px below) above the mark group
  * Gitea: base/footer_content.tmpl `.page-footer > .left-links (Powered by, version, timing) + .right-links
- * (theme menu, language menu, Licenses, API)`. Order here: logo, Powered by Gitea, theme, language, Licenses, API,
- * Version (the admin's version link to /-/admin/config stays).
+ * (theme menu, language menu, Licenses, API)`. Gitea's logo stands in for the GitHub mark (no GitHub marks), and
+ * "Powered by Gitea" for the copyright. The version and the server-timing spans are diagnostics, not functions
+ * (github.com shows neither): hidden (FG2-028); admins still see the version on /-/admin/config.
  */
 
 .page-footer {
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: var(--base-size-8) var(--base-size-16);
-  padding: var(--base-size-48) var(--base-size-16) var(--base-size-40);
-  border-top: 0;
+  gap: 0;
+  padding: var(--base-size-16);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
   background: transparent;
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
   line-height: var(--base-text-lineHeight-normal);
 }
 
-/* one flowing row like github.com: the two link groups dissolve into the footer's flex row, so the version string can
-   go last, after the links (FG-026). The server-timing line ("Page: 27ms Template: 3ms", the span with <strong>s)
-   is diagnostic output, not a function: hidden. "Powered by Gitea" stays next to the logo. */
-.page-footer .left-links,
-.page-footer .right-links {
-  display: contents;
-}
-
-.page-footer .left-links > span:has(> strong) {
-  display: none;
+.page-footer .left-links {
+  flex: none;
+  gap: var(--base-size-8);
+  margin: 0 var(--base-size-8);
 }
 
 .page-footer .left-links > span {
-  order: 1;
+  display: none;
 }
 
 .page-footer .left-links::before {
   content: "";
-  flex: 0 0 auto;
   width: var(--base-size-24);
   height: var(--base-size-24);
   background: url("../img/logo.svg") center / contain no-repeat;
+}
+
+.page-footer .right-links {
+  gap: 0 var(--base-size-16);
+  min-width: 0;
+  margin: 0 var(--base-size-8);
 }
 
 .page-footer a {
@@ -72,4 +72,11 @@
 
 .page-footer .ui.dropdown .theme-menu-item {
   gap: var(--base-size-4);
+}
+
+@media (max-width: 1011.98px) {
+  .page-footer {
+    flex-direction: column-reverse;
+    gap: var(--base-size-8);
+  }
 }

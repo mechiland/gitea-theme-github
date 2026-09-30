@@ -7,11 +7,11 @@
  *    button-default-bgColor-rest, radius 6px, 34x36 (16px icon + 8px icon margins + border; the inline-block line box
  *    adds 2px of height below the icon, which sits 9px from the top), 8px from the block's top/right corner, floating over the code. Hover: bgColor-hover.
  *  - rendered files (README, blob view; `.js-snippet-clipboard-copy-unpositioned`): a 28x28 invisible IconButton in its
- *    own column next to the <pre>, always visible, so code never runs under it.
- * Gitea only reveals the floating control while the block is hovered (content.css:518-539, kept on touch devices by
- * its `(hover: none)` rule). The floating variant keeps that reveal, plus keyboard focus: the button stays focusable
- * (opacity instead of visibility). A pointer over the button is always over the block too, so it is never clickable
- * while invisible. */
+ *    own column next to the <pre>.
+ * Both are always visible: re-probed 2026-09-30 (L2, shots/markdown-L2-probe-gh.mjs) on pemistahl/grex README and
+ * pull/42, mouse never moved, (hover: hover) true: `.zeroclipboard-container` opacity 1 / display block at rest, and
+ * github.com's CSS has no hover reveal left (only `display:block` rules). Gitea's content.css:518-539 hides every
+ * `.auto-hide-control` until the block is hovered; the copy button drops that (mermaid's controls keep it). */
 
 /* ---- floating variant (default) ---- */
 .markup .ui.button.code-copy {
@@ -32,7 +32,6 @@
   border-radius: var(--borderRadius-medium);
   box-shadow: none;
   transition:
-    opacity var(--base-duration-200) var(--base-easing-ease),
     background-color var(--base-duration-100) var(--base-easing-easeOut),
     border-color var(--base-duration-100) var(--base-easing-easeOut);
 }
@@ -57,15 +56,9 @@
   outline-offset: calc(var(--focus-outline-width) * -1);
 }
 
-/* Reveal: hidden but focusable at rest; shown while the block is hovered or anything in it has focus. */
+/* Always visible, like github.com (Gitea: visibility hidden + opacity 0 until the block is hovered). */
 .markup .code-copy.auto-hide-control {
   visibility: visible;
-}
-
-.markup .code-block-container:hover > .code-copy.auto-hide-control,
-.markup .code-block-container:focus-within > .code-copy.auto-hide-control,
-.markup .code-block:hover > .code-copy.auto-hide-control,
-.markup .code-block:focus-within > .code-copy.auto-hide-control {
   opacity: 1;
 }
 
@@ -85,7 +78,7 @@
   min-width: 0;
 }
 
-/* `btn-invisible` 28x28 (control-small-size), radius 6px, no border, octicon-copy in fgColor-muted, always visible.
+/* `btn-invisible` 28x28 (control-small-size), radius 6px, no border, octicon-copy in fgColor-muted.
  * Hover / active backgrounds (opaque button-default-bgColor-*) are in copy-button.important.css. */
 .file-view.markup .code-block-container:has(> pre:not(.is-loading)) > .ui.button.code-copy {
   position: static;
@@ -93,9 +86,8 @@
   width: var(--control-small-size);
   height: var(--control-small-size);
   align-items: center;
-  padding: 0;
+  padding: 0 var(--base-size-4) 0 0; /* Primer `.btn .octicon { margin-right: 4px }`: github's icon sits 4px from the left */
   margin: var(--base-size-8);
   background: transparent;
   border: 0;
-  opacity: 1;
 }

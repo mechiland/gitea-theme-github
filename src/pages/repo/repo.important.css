@@ -91,13 +91,25 @@
   row-gap: var(--base-size-4) !important;
 }
 
-/* release/list.tmpl: the commit link is a.muted.tw-font-mono → github.com shows the release's short SHA in the body
-   font (sans 14px), like the tag name next to it */
-#release-list .meta > a.tw-font-mono {
-  font-family: inherit !important;
-}
-
 /* wiki/pages.tmpl: the "Last updated" cell is td.tw-text-right → github.com's left-aligned second column */
 .wiki .wiki-pages-list td.tw-text-right {
   text-align: left !important;
+}
+
+/* compare ≥ 768 (commits.css): copy / browse are .btn.interact-bg (background transparent !important) → github.com's
+   Button--secondary fill */
+@media (min-width: 768px) {
+  .diff:not(.pull) #commits-table :is(.copy-commit-id, .view-commit-path) {
+    background: var(--button-default-bgColor-rest) !important;
+  }
+
+  .diff:not(.pull) #commits-table :is(.copy-commit-id, .view-commit-path):hover {
+    background: var(--button-default-bgColor-hover) !important;
+  }
+}
+
+/* wiki/view.tmpl: the history button is .tw-px-3 (12px) → when it wraps under the meta line (390) its "1" sat ~11px in
+   from the byline; the invisible button keeps a 4px inline padding (wiki.css) */
+.wiki.view .dividing.header a.ui.basic.button {
+  padding-inline: var(--base-size-4) !important;
 }

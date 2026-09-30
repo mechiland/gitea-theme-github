@@ -1,9 +1,11 @@
 /* status pages: Gitea's prompt/link carry tw-my-4 (Tailwind !important, 14px); Blankslate rhythm is
- * heading → 4px → description → 16px → action. */
+ * heading → 4px → description → 8px (Description margin-block-end) + 16px (Action margin-block-start; grid margins do
+ * not collapse in Primer, block margins do here, so the link carries the sum) → action. The link's inline margins are
+ * auto: with width fit-content (status.css) that centres the hugging box. */
 .page-content .status-page-error > .tw-text-center > .tw-my-4:first-child {
-  margin: 0 !important;
+  margin: 0 0 var(--base-size-8) !important;
 }
 
 .page-content .status-page-error > .tw-text-center > a.tw-my-4 {
-  margin: var(--base-size-16) 0 0 !important;
+  margin: var(--base-size-24) auto 0 !important;
 }

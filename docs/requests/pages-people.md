@@ -237,3 +237,51 @@ already `display: grid`; making the second column `display: contents` lets `over
 `--borderColor-default` rule) above the sidebar. When you do the org part, tell me: navigation's edge-to-edge org rule
 (`.page-content.organization > .flex-container:first-child + .ui.container::after`, repo-header.css) then goes away.
 Unverified against signed-in github.com screenshots (the tools capture github.com logged out) — your call.
+
+
+# Final gate #2 (loop iteration 2)
+
+Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids of docs/final-gate-2/raw.json) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only this folder’s theme-fixable items; `theme-fixable-template` items are either installed by the integrator first (this folder styles the result) or stay rejected (noted per item). Budget: github-auto 288.9 / 300 KB — trim before adding. Check every page-scoped selector against the shared page classes (see FG2-105) before you ship.
+
+1. **FG2-057 [theme-fixable-template] Profile README Box has no '<user> / README.md' caption header** — impact 7 (judges 7, critic wt 0; gate 1 FG-053; routes: user-profile)
+   - Fix: Gate-1 FG-053 rejected (a ≤ 10). CSS could only add a static 'README.md' caption (the user name is not reachable in CSS); worth it as a cheap partial: `.user.profile #readme::before { content: "README.md" }` mono 12px in a Box header.
+   - PNG: `shots/final-gate-2/user-profile/dark-1440.png`, `shots/final-gate-2/user-profile/light-1440.png`
+2. **FG2-066 [theme-fixable-css] People details: dashboard repo filter looks focused at rest (autofocus + accent border), 40px README inset at 390 on org home, row avatars centred against multi-line meta, ragged team meta column, 'Block user' 12px and tight vcard rows, no Star button on starred rows** — impact 6 (judges 0, critic wt 6; gate 1 FG-083; routes: org-home, user-profile, user-profile-stars-tab, org-teams, home, explore-users)
+   - Fix: `.repos-search input:focus:placeholder-shown` border `--borderColor-default`; org README Box-body 16px < 768; `align-items:flex-start` on explore/user rows; fixed-width right column for team meta; 'Block user' 14px, vcard row gap 8px. C188 needs markup: skip.
+   - Critic refs: C002 (home, nit), C007 (org-home, nit), C043 (explore-users, nit), C065 (org-teams, nit), C145 (user-profile, nit), C188 (user-profile-stars-tab, nit)
+   - PNG: `shots/final-gate-critic-0/home-left-zoom.png`, `shots/final-gate-critic-0/oh-390-a.png`, `shots/final-gate-critic-2/explore-users-390-pair.png`, `shots/final-gate-2/org-home/dark-390.png`
+3. **FG2-070 [theme-fixable-template] Profile: follower / following counts not bold (github.com: bold default-colour counts, muted lowercase labels)** — impact 5 (judges 2, critic wt 3; gate 1 FG-052; routes: user-profile, user-profile-stars-tab)
+   - Fix: No CSS path: count and label are one text node (`{{.NumFollowers}} {{ctx.Locale.Tr "user.followers"}}` in shared/user/profile_big_avatar.tmpl) and that override was rejected (PPL-T1). Not proposed for the last slot (impact below the labels/milestones NavList).
+   - Critic refs: C144 (user-profile, minor)
+   - PNG: `shots/final-gate-2/user-profile/light-1440.png`, `shots/final-gate-critic-6/up-l-left.png`, `shots/final-gate-2/user-profile/dark-1440.png`, `shots/final-gate-2/user-profile/light-1440.png`
+4. **FG2-084 [theme-fixable-css] Notifications: row title turns accent blue on hover (github.com does not); Unread/Read nav without icons** — impact 3 (judges 0, critic wt 3; gate 1 FG-047; routes: notifications)
+   - Fix: No colour change on row hover (background `--bgColor-muted` only); inbox/check icons on the two NavList items via masks. Filter bar / grouping / Saved-Done are github.com-only (inherent).
+   - Critic refs: C121 (notifications, minor)
+   - PNG: `shots/final-gate-2/notifications/light-1440.png`, `shots/final-gate-critic-5/live/notifications/states/light-1440-row-hover-clip.png`, `shots/final-gate-2/notifications/light-1440.png`
+5. **FG2-094 [theme-fixable-css] Profile sidebar: the organizations avatar row has no 'Organizations' heading** — impact 2 (judges 0, critic wt 2; new; routes: user-profile, user-profile-repositories-tab)
+   - Fix: `html:lang(en)` generated 16px/600 'Organizations' heading before the org avatar row (precedent FG-041).
+   - Critic refs: C016 (user-profile-repositories-tab, nit), C146 (user-profile, nit)
+   - PNG: `shots/final-gate-critic-0/up-l.png`, `shots/final-gate-2/user-profile/dark-1440.png`, `shots/final-gate-2/user-profile/light-1440.png`, `shots/final-gate-2/user-profile-repositories-tab/dark-1440.png`
+
+# pages/people — final gate #2, wave L2 round 1 (builder)
+Verified in shots/pages-people-fg2-r1 (home, user-profile, org-home, explore-users, org-teams; light+dark, 1440+390,
+states + measure: 20 pages, 0 console errors, 0 failed requests, max CLS 0.0117) plus probes in shots/pages-people-fg2/*.mjs.
+- **FG2-066 DONE (5 of 6 parts)**
+  - Dashboard filter: while the autofocused input is still empty it keeps the resting border (`--borderColor-default`,
+    no ring); probe: rest 209,217,224 / no outline; after typing: accent border + 2px accent ring.
+  - Explore users / orgs rows: avatar top-aligned (Gitea's `tw-items-center` is !important → people.important.css);
+    avatar top = title top (16/17px) at 390 and 1440.
+  - Org Teams: counts column left-aligned inside the shared column 3, so "N members · N repositories" starts at x=1099
+    on every row (was 1099 vs 1158); the Leave button trails.
+  - Profile: "Block user" 14px (was 12px, github.com 14px); vcard rows 29px apart (was 25; github.com 25px rows 29px
+    apart); follower line margin 16 → 12 so the first detail keeps github.com's 20px distance.
+  - Org README at 390: NO CHANGE on evidence. github.com's org and user READMEs keep `Box-body p-4` (24px) at 390
+    (measured github.com/github and /microsoft at 390: article x=41 inside a Box at x=16); ours measures the same
+    (box x=16 w=358, padding 24, content x=41). The critic's 40px is the list/alert indentation inside the markdown.
+  - Star button on starred rows (C188): skipped, needs markup.
+- **FG2-057 DONE (partial, CSS-only)** — profile README Box starts with a 12/18 mono "README.md" caption 16px above the
+  markdown (github.com `text-mono text-small mb-3`), "README" --fgColor-default and ".md" --fgColor-muted (6ch colour
+  stop, mono glyph = 1ch = 7.42px measured). The "<user> /" part needs the template. Only on `.user.profile`.
+- **FG2-094 DONE** — `html:lang(en)` "Organizations" heading (16/600/24, --fgColor-default, 8px above the avatars) in
+  the organisations section of the profile sidebar, light + dark, 1440 + 390.
+- Not in this round's scope: FG2-070 (template, rejected), FG2-084 (notifications).

@@ -299,3 +299,93 @@ inside 390 (probe: the only elements past 390 are the avatar dropdown and its ch
   integrator.md.
 - Size: the build now writes the minified files with CSS nesting (build/nest.mjs, lossless, self-checked); `*.src.css` stays
   flat. Nothing to change in your sources.
+
+
+# Final gate #2 (loop iteration 2)
+
+Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids of docs/final-gate-2/raw.json) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only this folder’s theme-fixable items; `theme-fixable-template` items are either installed by the integrator first (this folder styles the result) or stay rejected (noted per item). Budget: github-auto 288.9 / 300 KB — trim before adding. Check every page-scoped selector against the shared page classes (see FG2-105) before you ship.
+
+1. **FG2-014 [theme-fixable-css] Settings / admin NavList: no leading 16px Octicons (every settings page), and user/repo settings open with a 'User Settings' / 'Settings' group heading github.com does not have** — impact 37 (judges 0, critic wt 37, majors C044 C067 C070; gate 1 FG-050; routes: org-settings, repo-settings, repo-settings-hooks, site-admin, user-settings-keys, user-settings-security …)
+   - Fix: Leading icon per item via `::before` mask keyed on the item href (masks already exist in icons: person, gear, paintbrush, shield-lock, key, apps, organization, people, git-branch, tag, webhook, server, repo, package, play…); 16px, 8px gap, `--fgColor-muted`. Hide/demote the top-level 'User Settings' / 'Settings' heading (keep lower group headings, 12px/600 muted). Rejected in loop 1 for budget only (NAV-I3): trim first — one shared mask rule + `--gh-nav-icon` custom property set per href keeps it to ~1.5 KB.
+   - Critic refs: C005 (repo-settings, minor), C044 (user-settings, major), C067 (user-settings-security, major), C070 (repo-settings-deploykeys, major), C095 (user-settings-keys, minor), C135 (repo-settings-branches, minor), C162 (repo-settings-hooks, nit), C168 (site-admin, minor), C190 (org-settings, minor), C045 (user-settings, minor)
+   - PNG: `shots/final-gate-critic-0/repo-settings-light-1440-t0.png`, `shots/final-gate-2/user-settings/light-1440.png`, `shots/final-gate-2/user-settings-security/light-1440.png`, `shots/final-gate-2/repo-settings-deploykeys/light-1440.png`
+2. **FG2-020 [theme-fixable-css] 390: repo / profile / org UnderlineNav hides its icons below 1200px and the selected tab ends up inside '…' (only the overflow button carries the underline)** — impact 20 (judges 0, critic wt 20; gate 1 FG-029; routes: action-job, package-detail-npm, repo-issues, repo-settings-collab, user-profile, user-profile-stars-tab …)
+   - Fix: < 768: keep the 16px icons (github.com 390 keeps them; underline-nav.css L111-123 hides them) but cut item padding to 8px / gap 4px and hide the counters of non-selected items, so more tabs fit 358px and overflow-menu.ts keeps the selected one visible more often. When it still lands in the popup, keep the loop-1 underline on the trigger (CSS cannot swap it back). Measure Packages / Settings / Actions / Wiki / profile Stars selected at 390.
+   - Critic refs: C111 (package-detail-npm, minor), C113 (repo-settings-collab, minor), C116 (action-job, minor), C147 (user-profile, nit), C155 (wiki-home, nit), C173 (repo-issues, minor), C182 (wiki-page-list, minor), C189 (user-profile-stars-tab, minor)
+   - PNG: `shots/final-gate-critic-4/pkg-390-0.png`, `shots/final-gate-critic-4/collab-390.png`, `shots/final-gate-critic-4/aj-390.png`, `shots/final-gate-critic-6/up-390-a.png`
+3. **FG2-028 [theme-fixable-css] Footer: 'Version: 1.27.3' still shown next to the attribution; no top rule and the link row wraps to 2 lines at 390** — impact 13 (judges 11, critic wt 2; gate 1 FG-026; routes: not-found, branches, site-admin, explore-orgs, pr-commits-tab, repo-pull-files …)
+   - Fix: In github-* themes drop the version span from view (diagnostic, not a function; app.ini SHOW_FOOTER_VERSION=false would be the all-themes alternative — owner consent needed) and keep the logo + 'Powered by Gitea', language, theme, Licenses, API. Add the 1px `--borderColor-muted` top rule github.com draws; < 768 centre the row with 16px/8px gaps so it wraps as one group, not mid-row.
+   - Critic refs: C075 (explore-orgs, nit), C169 (site-admin, nit)
+   - PNG: `shots/final-gate-critic-7/site-admin_m_3.png`, `shots/final-gate-2/not-found/dark-390.png`, `shots/final-gate-2/not-found/dark-1440.png`, `shots/final-gate-2/not-found/light-390.png`
+4. **FG2-050 [theme-fixable-css] 390: PR TabNav (Conversation / Commits / Files Changed) clips 'Files Changed' and its counter at the right edge** — impact 8 (judges 0, critic wt 8; gate 1 FG-029; routes: pr-files-changed-split-playground-large-diff, pr-conversation-playground-large-diff-reviews, pr-files-changed-unified-playground-large-diff, repo-pull-files)
+   - Fix: < 768: `.pull.tabular.menu` items padding 8px, gap 0, icon 16px kept, font 14px; if still > 358px allow `overflow-x:auto` with a right-edge fade mask (github.com also scrolls here) and `scroll-snap`; never clip the counter.
+   - Critic refs: C085 (pr-conversation-playground-large-diff-reviews, minor), C108 (pr-files-changed-split-playground-large-diff, minor), C133 (pr-files-changed-unified-playground-large-diff, nit), C151 (repo-pull-files, nit)
+   - PNG: `shots/final-gate-critic-4/pfs-390-0.png`, `shots/final-gate-2/pr-files-changed-split-playground-large-diff/dark-390.png`, `shots/final-gate-2/pr-files-changed-split-playground-large-diff/dark-1440.png`, `shots/final-gate-2/pr-files-changed-split-playground-large-diff/light-390.png`
+5. **FG2-054 [theme-fixable-css] 390 anonymous AppHeader overflows by 6px when the context crumb is long ('Page Not Found'); Register button ends at x=396** — impact 7 (judges 0, critic wt 7, majors C118; new; routes: not-found-anon)
+   - Fix: `.gh-app-header-end { flex-shrink: 0 }` and let `.gh-app-header-context` shrink with `min-width:0; overflow:hidden; text-overflow:ellipsis` (integrator note in navigation.md, loop 1). Check /nope-404 and /user/forgot_password anonymous at 390: scrollWidth must be 390.
+   - Critic refs: C118 (not-found-anon, major), C119 (not-found-anon, nit)
+   - PNG: `shots/final-gate-2/not-found-anon/light-390.png`, `shots/final-gate-critic-4/nf-390.png`, `shots/final-gate-2/not-found-anon/light-1440.png`, `shots/final-gate-2/not-found-anon/light-390.png`
+6. **FG2-088 [theme-fixable-css] Org header tabs start at x=112 inside the container while repo tabs (and github.com's org UnderlineNav) are flush-left at x=16** — impact 3 (judges 0, critic wt 3; gate 1 FG-030; routes: org-teams)
+   - Fix: Give the org header UnderlineNav the same full-bleed 16px/24px inset as the repo UnderlineNav (coordinate with pages/people NAV-P1, which owns the org band).
+   - Critic refs: C064 (org-teams, minor)
+   - PNG: `shots/final-gate-2/org-teams/light-1440.png`, `shots/final-gate-2/org-teams/light-1440.png`
+7. **FG2-089 [theme-fixable-css] Dashboard feed pagination: the current page ('1', class item, no href, no .active) is plain text instead of the filled accent pill** — impact 3 (judges 0, critic wt 3; gate 1 FG-059; routes: home)
+   - Fix: `.pagination .item:not(.navigation):not([href])` → current-page style (`--bgColor-accent-emphasis`, `--fgColor-onEmphasis`, 6px radius) — same as `.active.item`.
+   - Critic refs: C001 (home, minor)
+   - PNG: `shots/final-gate-critic-0/home-light-pag.png`, `shots/final-gate-2/home/light-1440.png`, `shots/final-gate-2/home/light-1440.png`
+8. **FG2-092 [theme-fixable-css] AppHeader details: search placeholder 'Search repos…' / 'Search code…' (github.com 'Type / to search'); blue site-admin shield badge on the header avatar** — impact 2 (judges 0, critic wt 2; new; routes: explore-repos, explore-users)
+   - Fix: Placeholder: keep (no '/' shortcut in Gitea; do not advertise one) — optional: use the neutral key `search.search` in `custom/gh_head_navbar.tmpl` (our own file, no new override). Admin shield: 12px, `--fgColor-muted` on `--bgColor-default` ring instead of the accent fill, or hide on the header avatar only (the admin link stays in the avatar menu).
+   - Critic refs: C022 (explore-repos, nit), C042 (explore-users, nit)
+   - PNG: `shots/final-gate-critic-1/explore-light-top.png`, `shots/final-gate-critic-2/us-hdr-l.png`, `shots/final-gate-2/explore-repos/dark-1440.png`, `shots/final-gate-2/explore-repos/light-1440.png`
+
+## FYI from foundation (wave L2, round 1): footer now follows the content (FG2-097)
+`.full.height` no longer grows (except Actions list/explore/fullscreen), so the footer sits right after the content with
+`.full.height` padding-bottom 16px. github.com measured 2026-09-30: Rails pages (wiki _pages, releases, tags, profile)
+use a footer with 48px top padding and no border (footer box → first text 52px); your current footer is border-top +
+16px padding (text 21px below the box top). Your call which footer variant to match; nothing needed from you for FG2-097.
+
+# Navigation builder — wave L2, round 1 (2026-09-30): status of "Final gate #2"
+- FG2-054 DONE: `.gh-app-header-end { flex: none }` — only the context crumb shrinks (ellipsis). Anonymous 390:
+  /this-page-does-not-exist-theme-seed and /user/forgot_password scrollWidth 390 (Register ends at x=374, light + dark);
+  no horizontal overflow on any of the 105 routes at 390 (shots/navigation-L2r1-all390).
+- FG2-014 DONE: settings / admin NavList (the four `.flex-container-nav` menus whose first child is `.header.item`):
+  top heading hidden; 16px `--fgColor-muted` leading Octicon, 8px gap, on every top-level item and group summary
+  (user: person, gear, bell, paintbrush, shield-lock, blocked, apps, key, play, package, webhook, organization, repo;
+  repo: gear, globe, people, webhook, git-branch, tag, terminal, key, file-binary, play; org: gear, webhook, tag, apps,
+  blocked, package, play; admin groups: tools, people, repo, plug, play, gear, bell, pulse); sub-items indented to the
+  parent label (32px); the collapsed-group-with-current-page bar moved to `details::before` (the summary's ::before is
+  the icon). NOT via `--gh-octicon-*`: ~20 data-URI masks would add ~15 KB per file; the masks are Gitea's own served
+  Octicon files `url("../img/svg/octicon-<name>.svg")` (same origin, 6h cache, ~40 B each) — see integrator.md NAV-I6.
+- FG2-020 DONE: < 768 the UnderlineNav keeps its icons and the current tab gets `order: -1` (first tab `-2`), so
+  overflow-menu.ts (which measures laid-out positions) keeps it visible: 390 repo Settings → Code, Settings, Issues, "…";
+  Actions / Wiki / Packages / profile Stars all measured visible (probe shots/navigation-L2r1-probe.mjs). 768–1199 the
+  repo bar still drops icons before overflowing.
+- FG2-028 DONE: footer = github.com React footer (live measure): 1px `--borderColor-muted` top rule, padding 16px, logo +
+  "Powered by Gitea" then the links 16px apart; < 1012 column-reverse (links above, logo row below, 8px). Version and
+  timing spans hidden (admins keep the version on /-/admin/config). Foundation FYI (Rails 48px/no-rule variant) noted;
+  kept the rule variant the gate asked for.
+- FG2-050 DONE: < 768 attached TabNav rows (PR tabs, webhook history) scroll with a 24px right fade + 24px end padding;
+  the selected tab is scrolled into view on load (`scroll-initial-target: nearest`, Chromium 133+): /pulls/42/files
+  → Files Changed at x 113–254 of 16–374. Icons hidden only < 544 (github.com d-sm-inline), not the editor Write/Preview.
+- FG2-089 DONE: current page = `.item:not([href], .navigation, .disabled)` (feed "1" now the accent pill, 32×32, radius 6).
+- FG2-088 NOT DONE (impact 3; the org band is pages/people's, NAV-P1). FG2-092 NOT DONE (impact 2; placeholder is a template
+  string, shield badge left as is).
+
+# Navigation builder — wave L2, round 2 (2026-09-30): critic navigation-wL2-r1 fixes
+- #1 (explore orgs "Users" in "…", button flush) DONE: the < 768 reorder no longer applies to `overflow-menu.secondary-nav`
+  (explore, three tabs; they fit from 360) except < 360. 390: Repositories 18–143, Users 151–230, Organizations 238–372, no
+  "…" on all three explore pages (probe shots/navigation-L2r2-tabs.mjs). The "…" of full-bleed rows has an 8px right
+  margin (16 squeezed two tabs at 320).
+- #3 (current tab always 2nd) DONE (partly): only a current tab after the first two moves (`:nth-child(n+3)`), to the 2nd
+  slot < 576 and the 3rd slot 576–767 (Code, Issues, <current> at 600). The rule stays stable after overflow-menu.ts moves
+  items out. At 390 repo Settings still reads Code, Settings, Issues 8 (only two tabs fit at 390 in general: PRs 167px).
+- #2 (PR TabNav scrolls / clips at 544–767) DONE: 24px end padding removed; the fade is now two mask layers moved by a
+  scroll-driven animation — right fade only while more is to the right, left fade only while scrolled (no fade when the
+  row fits); scroll-initial-target only < 544, with `scroll-snap-align: end` + 24px scroll-padding, so /pulls/42/files at
+  390 scrolls 49px (Files Changed 209–350, clear of the fade) and /commits and the conversation stay at 0. 600/700: scrollLeft
+  0, Conversation at x=16 on grex and playground.
+- #4 (pagination hides numbers < 768) DONE: every page item shows at all widths; First / Last icon-only < 768 and hidden
+  < 544; Previous / Next drop their labels < 544 only when the window has 6+ page items (one 32px row at 360).
+- #5 (focused Previous / Next turns default) DONE: hover / focus no longer set a colour (Next stays --fgColor-accent).
+- #6 (Register underlines on hover) DONE: `text-decoration: none` on the Sign in / Register base rule.
+- #7 NAV-I6 (NavList icons as `url("../img/svg/octicon-*.svg")` masks): still waiting for the integrator's decision.

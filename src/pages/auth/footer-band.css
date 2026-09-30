@@ -1,0 +1,45 @@
+/* Footer on the slim-header auth pages (FG2-033) — github.com/login `.footer-session-authentication` (measured
+ * 2026-09-30): a full-width --bgColor-muted band at the bottom of the viewport, NO top rule, 16px block padding,
+ * 12px/18px --fgColor-muted links, no mark. ≥ 768: one centred row, 32px between every link (1440: band y=850,
+ * h=50); < 768: one link per row, centred, 8px apart (390: band h=180 for 6 links). The site footer itself is
+ * navigation's (.page-footer, which draws a 1px top rule and 16px/8px margins); only its auth-page variant lives here.
+ * Gitea: .page-footer > .left-links (Powered by) + .right-links (theme, language, Licenses, API) — the two groups are
+ * flattened into one run of equal gaps. body > .full.height (holding the auth header) + footer. */
+
+/* github.com/login pins that band to the viewport bottom (short page), so on these pages .full.height grows again
+   (Gitea's model; foundation/layout.css FG2-097 stops the growth site-wide so other footers follow the content) */
+.full.height:has(> .gh-app-header--auth) {
+  flex-grow: 1;
+}
+
+.full.height:has(> .gh-app-header--auth) + .page-footer {
+  flex-flow: row wrap;
+  gap: var(--base-size-8) var(--base-size-32);
+  padding: var(--base-size-16);
+  border-top: 0;
+  background: var(--bgColor-muted);
+}
+
+.full.height:has(> .gh-app-header--auth) + .page-footer > .left-links,
+.full.height:has(> .gh-app-header--auth) + .page-footer > .right-links {
+  gap: var(--base-size-8) var(--base-size-32);
+  margin: 0;
+}
+
+.full.height:has(> .gh-app-header--auth) + .page-footer .left-links::before {
+  content: none;
+}
+
+/* the theme / language dropdowns take Fomantic's `line-height: normal` (16px boxes): the band's 18px line keeps every
+   row the same height, so the stacked < 768 rows sit at a steady 26px pitch like github.com's */
+.full.height:has(> .gh-app-header--auth) + .page-footer > .right-links > .ui.dropdown {
+  line-height: inherit;
+}
+
+@media (max-width: 767.98px) {
+  .full.height:has(> .gh-app-header--auth) + .page-footer,
+  .full.height:has(> .gh-app-header--auth) + .page-footer > .right-links {
+    flex-direction: column;
+    gap: var(--base-size-8);
+  }
+}

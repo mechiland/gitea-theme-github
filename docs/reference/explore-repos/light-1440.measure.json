@@ -49,13 +49,13 @@
    "matched": 14,
    "samples": [
     {
-     "text": "Star 47.2k",
+     "text": "Star 49.3k",
      "box": {
-      "w": 127.8,
+      "w": 129.6,
       "h": 28
      },
      "height": "28px",
-     "width": "127.781px",
+     "width": "129.562px",
      "padding-top": "3px",
      "padding-right": "12px",
      "padding-bottom": "3px",
@@ -82,13 +82,13 @@
      "gap": "normal"
     },
     {
-     "text": "Star 10.3k",
+     "text": "Star 11k",
      "box": {
-      "w": 127.4,
+      "w": 114.8,
       "h": 28
      },
      "height": "28px",
-     "width": "127.375px",
+     "width": "114.766px",
      "padding-top": "3px",
      "padding-right": "12px",
      "padding-bottom": "3px",
@@ -115,13 +115,13 @@
      "gap": "normal"
     },
     {
-     "text": "Star 42.4k",
+     "text": "Star 43.3k",
      "box": {
-      "w": 129.8,
+      "w": 129.5,
       "h": 28
      },
      "height": "28px",
-     "width": "129.766px",
+     "width": "129.516px",
      "padding-top": "3px",
      "padding-right": "12px",
      "padding-bottom": "3px",
@@ -159,13 +159,13 @@
    "matched": 14,
    "samples": [
     {
-     "text": "Star 47.2k",
+     "text": "Star 49.3k",
      "box": {
-      "w": 127.8,
+      "w": 129.6,
       "h": 28
      },
      "height": "28px",
-     "width": "127.781px",
+     "width": "129.562px",
      "padding-top": "3px",
      "padding-right": "12px",
      "padding-bottom": "3px",
@@ -192,13 +192,13 @@
      "gap": "normal"
     },
     {
-     "text": "Star 10.3k",
+     "text": "Star 11k",
      "box": {
-      "w": 127.4,
+      "w": 114.8,
       "h": 28
      },
      "height": "28px",
-     "width": "127.375px",
+     "width": "114.766px",
      "padding-top": "3px",
      "padding-right": "12px",
      "padding-bottom": "3px",
@@ -225,13 +225,13 @@
      "gap": "normal"
     },
     {
-     "text": "Star 42.4k",
+     "text": "Star 43.3k",
      "box": {
-      "w": 129.8,
+      "w": 129.5,
       "h": 28
      },
      "height": "28px",
-     "width": "129.766px",
+     "width": "129.516px",
      "padding-top": "3px",
      "padding-right": "12px",
      "padding-bottom": "3px",
@@ -294,13 +294,13 @@
    "matched": 14,
    "samples": [
     {
-     "text": "47.2k",
+     "text": "49.3k",
      "box": {
-      "w": 45.3,
+      "w": 47.1,
       "h": 20
      },
      "height": "20px",
-     "width": "45.2969px",
+     "width": "47.0781px",
      "padding-top": "0px",
      "padding-right": "6px",
      "padding-bottom": "0px",
@@ -327,13 +327,13 @@
      "gap": "normal"
     },
     {
-     "text": "10.3k",
+     "text": "11k",
      "box": {
-      "w": 44.9,
+      "w": 32.3,
       "h": 20
      },
      "height": "20px",
-     "width": "44.8906px",
+     "width": "32.2812px",
      "padding-top": "0px",
      "padding-right": "6px",
      "padding-bottom": "0px",
@@ -360,13 +360,13 @@
      "gap": "normal"
     },
     {
-     "text": "42.4k",
+     "text": "43.3k",
      "box": {
-      "w": 47.3,
+      "w": 47,
       "h": 20
      },
      "height": "20px",
-     "width": "47.2812px",
+     "width": "47.0312px",
      "padding-top": "0px",
      "padding-right": "6px",
      "padding-bottom": "0px",
@@ -695,9 +695,9 @@
      "text": "Skip to content\nNavigation Menu\nPlatform",
      "box": {
       "w": 1440,
-      "h": 8175.1
+      "h": 8130.8
      },
-     "height": "8175.12px",
+     "height": "8130.84px",
      "width": "1440px",
      "padding-top": "0px",
      "padding-right": "0px",
@@ -743,7 +743,7 @@
   },
   "markdown-p": {
    "selector": ".markdown-body p",
-   "matched": 7,
+   "matched": 6,
    "samples": [
     {
      "text": "Discover how your favorite open source p",
@@ -779,12 +779,12 @@
      "gap": "normal"
     },
     {
-     "text": "In this episode of GitHub Checkout, lear",
+     "text": "In this episode of GitHub Checkout, we s",
      "box": {
       "w": 574,
-      "h": 63
+      "h": 106.7
      },
-     "height": "63px",
+     "height": "106.719px",
      "width": "574px",
      "padding-top": "0px",
      "padding-right": "0px",
@@ -812,12 +812,12 @@
      "gap": "normal"
     },
     {
-     "text": "There are over 4B people online behind l",
+     "text": "Go beyond traditional error monitoring a",
      "box": {
       "w": 486,
-      "h": 63
+      "h": 84
      },
-     "height": "63px",
+     "height": "84px",
      "width": "486px",
      "padding-top": "0px",
      "padding-right": "0px",
@@ -848,8 +848,75 @@
   },
   "markdown-code": {
    "selector": ".markdown-body code:not(pre code)",
-   "matched": 0,
-   "samples": []
+   "matched": 2,
+   "samples": [
+    {
+     "text": "/chronicle",
+     "box": {
+      "w": 83.1,
+      "h": 18.8
+     },
+     "height": "auto",
+     "width": "auto",
+     "padding-top": "2.38px",
+     "padding-right": "4.76px",
+     "padding-bottom": "2.38px",
+     "padding-left": "4.76px",
+     "margin-top": "0px",
+     "margin-bottom": "0px",
+     "border-top-left-radius": "6px",
+     "border-top-width": "0px",
+     "border-top-color": "rgb(89, 99, 110)",
+     "border-bottom-color": "rgb(89, 99, 110)",
+     "border-bottom-width": "0px",
+     "font-family": "ui-monospace, SFMono-Regular, \"SF Mono\", Menlo, Consolas, \"Liberation Mono\", monospace",
+     "font-size": "11.9px",
+     "font-weight": "400",
+     "line-height": "17.85px",
+     "letter-spacing": "normal",
+     "color": "rgb(89, 99, 110)",
+     "background-color": "rgba(129, 139, 152, 0.12)",
+     "box-shadow": "none",
+     "outline-style": "none",
+     "outline-color": "rgb(89, 99, 110)",
+     "outline-width": "3px",
+     "outline-offset": "0px",
+     "gap": "normal"
+    },
+    {
+     "text": "/fleet mode",
+     "box": {
+      "w": 90.4,
+      "h": 18.8
+     },
+     "height": "auto",
+     "width": "auto",
+     "padding-top": "2.38px",
+     "padding-right": "4.76px",
+     "padding-bottom": "2.38px",
+     "padding-left": "4.76px",
+     "margin-top": "0px",
+     "margin-bottom": "0px",
+     "border-top-left-radius": "6px",
+     "border-top-width": "0px",
+     "border-top-color": "rgb(89, 99, 110)",
+     "border-bottom-color": "rgb(89, 99, 110)",
+     "border-bottom-width": "0px",
+     "font-family": "ui-monospace, SFMono-Regular, \"SF Mono\", Menlo, Consolas, \"Liberation Mono\", monospace",
+     "font-size": "11.9px",
+     "font-weight": "400",
+     "line-height": "17.85px",
+     "letter-spacing": "normal",
+     "color": "rgb(89, 99, 110)",
+     "background-color": "rgba(129, 139, 152, 0.12)",
+     "box-shadow": "none",
+     "outline-style": "none",
+     "outline-color": "rgb(89, 99, 110)",
+     "outline-width": "3px",
+     "outline-offset": "0px",
+     "gap": "normal"
+    }
+   ]
   },
   "markdown-pre": {
    "selector": ".markdown-body pre, .markdown-body .highlight pre",

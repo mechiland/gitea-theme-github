@@ -1,0 +1,76 @@
+/*
+ * Section layouts that github.com draws differently from Gitea's stacked prose (FG2-042):
+ *   Password and authentication — each two-factor method is a Box row: the method's text on the left, its action on
+ *     the right, vertically centred (github.com "Two-factor methods" Box). Gitea: user/settings/security/twofa.tmpl
+ *     (TOTP: <p> description, recovery tip, status line, .inline.field > enroll button) and webauthn.tmpl
+ *     (<p> ×2, key rows, .ui.form with nickname + "Add Security Key"). Below 768px the action wraps under the text.
+ *   Organization profile — the profile picture form sits in a right-hand column beside the settings form from 1012px
+ *     (github.com org settings "Profile picture"); Gitea renders it under the form after a divider.
+ *   List rows without a body line (organizations without a description) centre the title on the avatar.
+ */
+
+.security .user-setting-content > .ui.attached.segment:is(:has(> .inline.field > .ui.primary.button), :has(> .ui.form > #register-webauthn)) {
+  padding: var(--base-size-16);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background-color: var(--bgColor-default);
+}
+
+.security .user-setting-content > .ui.attached.segment:has(> .inline.field > .ui.primary.button) > p {
+  margin: 0 0 var(--base-size-4);
+}
+
+/* the status line ("Your account is not currently enrolled …"): row meta, 12px --fgColor-muted */
+.security .user-setting-content > .ui.attached.segment:has(> .inline.field > .ui.primary.button) > p:has(+ .inline.field) {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-small);
+}
+
+.security .user-setting-content > .ui.attached.segment:has(> .inline.field > .ui.primary.button) > .inline.field {
+  margin: var(--base-size-8) 0 0;
+}
+
+@media (min-width: 768px) {
+  .security .user-setting-content > .ui.attached.segment:has(> .inline.field > .ui.primary.button) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: var(--base-size-16);
+    align-items: center;
+  }
+
+  .security .user-setting-content > .ui.attached.segment:has(> .inline.field > .ui.primary.button) > p {
+    grid-column: 1;
+  }
+
+  .security .user-setting-content > .ui.attached.segment:has(> .inline.field > .ui.primary.button) > .inline.field {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    margin: 0;
+  }
+}
+
+/* organization profile picture column */
+@media (min-width: 1012px) {
+  .organization.settings .org-setting-content > .ui.attached.segment:has(> form[action$="/avatar"]) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: var(--base-size-32);
+    align-items: start;
+  }
+
+  .organization.settings .org-setting-content > .ui.attached.segment:has(> form[action$="/avatar"]) > .divider {
+    display: none;
+  }
+
+  .organization.settings .org-setting-content > .ui.attached.segment > form[action$="/avatar"] {
+    grid-row: 1;
+    grid-column: 2;
+  }
+}
+
+/* list rows: a title without a body line is centred on the row's avatar / icon */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .items-with-main > .item > .item-main {
+  align-self: stretch;
+  justify-content: center;
+}

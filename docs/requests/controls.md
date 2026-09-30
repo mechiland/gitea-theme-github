@@ -308,3 +308,25 @@ Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ra
   46-47, pixel-identical to the github.com reference in light and dark. `.form .help:has(+ .field)` gets an 8px
   bottom gap (repo/migrate "Access Token is required…" above the item checkboxes). Not changed: the leading icon
   stays a tab stop after the input (it is Gitea's submit button; making it non-focusable needs a template change).
+
+
+# Final gate #2 (loop iteration 2)
+
+Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids of docs/final-gate-2/raw.json) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only this folder’s theme-fixable items; `theme-fixable-template` items are either installed by the integrator first (this folder styles the result) or stay rejected (noted per item). Budget: github-auto 288.9 / 300 KB — trim before adding. Check every page-scoped selector against the shared page classes (see FG2-105) before you ship.
+
+1. **FG2-076 [theme-fixable-css] Controls details: textarea shows a partial third line at 390, tag-search button focus ring hugs the icon inside the input, disabled checkbox label not muted, native date input** — impact 4 (judges 0, critic wt 4; gate 1 FG-089; routes: issue-playground-1, repo-settings, admin-user-edit, tags)
+   - Fix: Textarea min-height in whole lines (3 × 20px + padding); focus ring on the input group, not the inner icon button; `.ui.checkbox.disabled label` `--fgColor-disabled`; date input: 32px TextInput look + calendar Octicon mask over the native indicator.
+   - Critic refs: C006 (repo-settings, nit), C054 (tags, nit), C163 (admin-user-edit, nit), C167 (issue-playground-1, nit)
+   - PNG: `shots/final-gate-critic-0/repo-settings-390-a.png`, `shots/final-gate-critic-2/live/tags/states/light-1440-search-btn-focus-clip.png`, `shots/final-gate-2/issue-playground-1/dark-390.png`, `shots/final-gate-2/issue-playground-1/dark-1440.png`
+   - **DONE (controls wL2 r1)** — textarea[rows] min 3 lines (repo description 78px, 3 lines, no partial line at 390),
+     rowless form textareas 6 lines (138px); leading search button focus draws the ring on the whole input (tags);
+     `.ui.checkbox:has(> input:disabled) > label` muted (admin-user-edit "Disable Sign-In"); date/datetime/month/week
+     indicator = calendar Octicon 16px --fgColor-muted mask (time = clock) — **needs mask `calendar` (docs/requests/icons.md
+     CT-IC-1)**; until then Chrome's glyph stays (guarded) and the audit lists 1 unresolved var on date pages. `shots/controls-r1`.
+2. **FG2-079 [theme-fixable-css] Markdown editor outside issue/PR forms (admin notices, releases, wiki, milestones) gets no composer Box: Write/Preview tabs and toolbar float above a separate textarea** — impact 3 (judges 0, critic wt 3; new; routes: admin-dashboard-config-settings)
+   - Fix: Move the composer chrome from pages/issues-prs composer.css (scoped to `:is(#comment-form,#new-issue,.code-comments-list form.comment-form)`) into a generic `.combo-markdown-editor` rule in controls; pages/issues-prs keeps only page deviations. Coordinate the move (ownership lint).
+   - Critic refs: C090 (admin-dashboard-config-settings, minor)
+   - PNG: `shots/final-gate-2/admin-dashboard-config-settings/dark-1440.png`, `shots/final-gate-2/admin-dashboard-config-settings/light-1440.png`
+   - **DONE (controls wL2 r1)** — new `src/controls/markdown-editor.css`: generic CommentBox for every editor outside the
+     composer scope (admin banner, releases, milestones, projects, wiki, comment edit, review box); toolbar look generic.
+     pages/issues-prs told they may drop their duplicate toolbar rules (docs/requests/pages-issues-prs.md). `shots/controls-r1`.

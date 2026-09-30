@@ -212,25 +212,48 @@
     max-width: none;
   }
 
-  /* FG-020 / C-5: long author lists ("A and B") shrink with an ellipsis instead of pushing the history button out
-     of the Box (the page was 421px wide at 390) */
+  /* github.com mobile latest-commit bar (FG2-060): row 1 [avatars  A and B  age], row 2 [… history]. Long author
+     lists wrap inside the names block instead of being ellipsized (FG-020: they must not push the Box wider). */
   :is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .avatar-stack-names {
+    flex-wrap: wrap;
     flex-shrink: 1;
-    max-width: none;
+    column-gap: var(--base-size-4);
     min-width: 0;
-    overflow: hidden;
+    max-width: calc(100% - var(--base-size-96)); /* leaves the age on row 1 */
   }
 
-  :is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .avatar-stack-names > :not(.avatar-stack) {
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  :is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .avatar-stack-names > .avatar-stack {
+    margin-right: var(--base-size-4);
   }
 
-  /* github.com mobile: [avatar author age] ……… [history icon] (file view: [avatar author age]); message hidden */
-  :is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .commit-summary {
+  #repo-files-table .repo-file-last-commit {
+    flex-wrap: wrap;
+    row-gap: 0;
+  }
+
+  /* when the names take two lines, the age stays on the first one */
+  #repo-files-table .repo-file-last-commit .avatar-stack-names,
+  #repo-files-table .repo-file-last-commit > div:not(.latest-commit) {
+    align-self: baseline;
+  }
+
+  /* line break between the two rows */
+  #repo-files-table .repo-file-last-commit::after {
+    content: "";
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  #repo-file-commit-box .commit-summary,
+  #repo-files-table .repo-file-last-commit .commit-summary:not(:has(> .ellipsis-button)),
+  #repo-files-table .repo-file-last-commit .commit-summary > .message-wrapper {
     display: none;
+  }
+
+  #repo-files-table .repo-file-last-commit .commit-summary {
+    flex: none;
+    order: 4;
+    margin-top: var(--base-size-8);
   }
 
   :is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) > div:not(.latest-commit) {
@@ -242,8 +265,9 @@
   }
 
   #repo-files-table .repo-file-last-commit .m-commit-count {
-    margin-left: auto;
+    order: 5;
     width: var(--control-small-size);
+    margin-top: var(--base-size-8);
     padding: 0;
     justify-content: center;
   }

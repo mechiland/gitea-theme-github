@@ -10,10 +10,26 @@
  *   Actions > General target repositories (shared/actions/owner_general_settings.tmpl): a nested attached segment.
  */
 
-/* ---------- Blankslate in a Box ---------- */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment:has(> .flex-divided-list):not(:has(> .divider)) > div:first-child:not([class]),
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment:has(> #add-deploy-key-panel.tw-hidden):not(:has(> .flex-divided-list)) {
-  padding: var(--base-size-32) var(--base-size-16);
+/* ---------- Blankslate in a Box (FG2-032) ----------
+ * Primer Blankslate (Primer React): padding 32px, centred; Visual 24px Octicon --fgColor-muted, 8px above the text;
+ * Heading 16px semibold --fgColor-default (a one-line "There are no … yet." message), Description 14px
+ * --fgColor-muted (a section description in place of rows). The Octicon is a mask on ::before: key unless the
+ * folder-local --gh-sa-i names another (webhook, git-branch).
+ *   webhooks: the description <div> right before the .flex-divided-list (with hooks a .divider sits between them);
+ *   deploy keys: the text node after the hidden add panel (the panel is the segment's last element);
+ *   branch protection: the lone centred row of #protected-branches-list;
+ *   SSH / GPG keys, access tokens, OAuth2 applications and grants: a list whose only row is its description.
+ * One selector per rule (alternatives inside :is()), so the build's prefix nesting never splits a declaration block.
+ */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main :is(
+  div:not([class]):has(+ .flex-divided-list),
+  :has(> #add-deploy-key-panel.tw-hidden:last-child),
+  #protected-branches-list > .tw-text-center,
+  :is(.sshkeys, .applications) .flex-divided-list > .item:only-child:not(:has(> :not(p)))
+) {
+  display: block;
+  margin: 0;
+  padding: var(--base-size-32);
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-radius: var(--borderRadius-medium);
   background: var(--bgColor-default);
@@ -23,16 +39,62 @@
   text-align: center;
 }
 
-/* collaborators with none yet: the add form sits centred in the Blankslate Box ("Add people" on github.com) */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.top.attached.header + .ui.bottom.attached.segment:has(> #repo-collab-form) {
-  padding: var(--base-size-32) var(--base-size-16);
-  border: var(--borderWidth-thin) solid var(--borderColor-default);
-  border-radius: var(--borderRadius-medium);
-  background: var(--bgColor-default);
+:is(.settings, .admin, [class="page-content "]) .flex-container-main :is(
+  div:not([class]):has(+ .flex-divided-list),
+  :has(> #add-deploy-key-panel.tw-hidden:last-child),
+  #protected-branches-list > .tw-text-center,
+  :is(.sshkeys, .applications) .flex-divided-list > .item:only-child:not(:has(> :not(p)))
+)::before {
+  content: "";
+  display: block;
+  width: var(--base-size-24);
+  height: var(--base-size-24);
+  margin: 0 auto var(--base-size-8);
+  background-color: var(--fgColor-muted);
+  mask: var(--gh-sa-i, var(--gh-octicon-key)) center / contain no-repeat;
 }
 
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.top.attached.header + .ui.bottom.attached.segment > #repo-collab-form {
-  justify-content: center;
+:is(.settings, .admin, [class="page-content "]) .flex-container-main div:not([class]):has(+ .flex-divided-list) {
+  --gh-sa-i: var(--gh-octicon-webhook);
+}
+
+/* a one-line empty message reads as the Blankslate heading */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main :is(
+  :has(> #add-deploy-key-panel.tw-hidden:last-child),
+  #protected-branches-list > .item
+) {
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-small);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-title-lineHeight-small);
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main #protected-branches-list > .item {
+  --gh-sa-i: var(--gh-octicon-git-branch);
+}
+
+/*
+ * Add-people rows (collaborators, teams: form#repo-collab-form / #repo-collab-team-form in a bottom attached
+ * segment): a Box-footer (16px, --bgColor-muted) closing the list Box above it, or — with nobody added yet — the
+ * header row of an empty Box; the search input and the button stay left-aligned (github.com "Manage access").
+ */
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.bottom.attached.segment:has(> form[id^="repo-collab"]) {
+  padding: var(--base-size-16);
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-muted);
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment + .ui.bottom.attached.segment:has(> form[id^="repo-collab"]) {
+  margin-top: 0;
+  border-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment.segment.segment:has(+ .ui.bottom.attached.segment > form[id^="repo-collab"]) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 /* ---------- short lists as a Box of Box-rows ---------- */

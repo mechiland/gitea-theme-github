@@ -11,83 +11,83 @@
  "failedRequests": [],
  "expectedFailures": [],
  "ignoredRequests": [],
- "cssBytes": 256893,
+ "cssBytes": 256631,
  "cssFiles": [
   {
-   "url": "https://github.githubassets.com/assets/profile-f92baa562c27f6e0.css",
-   "bytes": 2785
-  },
-  {
-   "url": "https://github.githubassets.com/assets/app-install-banner-partial.9b99004c798b710f.module.css",
-   "bytes": 413
+   "url": "https://github.githubassets.com/assets/light_high_contrast-48fdd0811afbab3c.css",
+   "bytes": 7687
   },
   {
    "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
-   "bytes": 7535
+   "bytes": 7272
   },
   {
-   "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
-   "bytes": 7389
-  },
-  {
-   "url": "https://github.githubassets.com/assets/t.d7f0479eca0d90af.module.css",
+   "url": "https://github.githubassets.com/assets/t.ee9b8e8ca9bf0b40.module.css",
    "bytes": 3706
   },
   {
-   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.a1523bc43e1d725b.module.css",
-   "bytes": 410
+   "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
+   "bytes": 2287
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-react-css.e6a43c45f45572ae.module.css",
+   "bytes": 35258
+  },
+  {
+   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.c83fd3e6c58504ad.module.css",
+   "bytes": 657
+  },
+  {
+   "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
+   "bytes": 7388
   },
   {
    "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
    "bytes": 40847
   },
   {
-   "url": "https://github.githubassets.com/assets/primer-react-css.76a197f9dce25e3c.module.css",
-   "bytes": 35271
+   "url": "https://github.githubassets.com/assets/primer-react-brand-css.6a01c236ff527e7e.module.css",
+   "bytes": 71988
   },
   {
-   "url": "https://github.githubassets.com/assets/github-7338c07b3a07b8be.css",
-   "bytes": 21828
+   "url": "https://github.githubassets.com/assets/profile-f92baa562c27f6e0.css",
+   "bytes": 2744
   },
   {
-   "url": "https://github.githubassets.com/assets/react-core.cbbd4117122d27f9.module.css",
-   "bytes": 675
+   "url": "https://github.githubassets.com/assets/app-install-banner-partial.e8934decca2d3cfc.module.css",
+   "bytes": 408
+  },
+  {
+   "url": "https://github.githubassets.com/assets/react-core.bd3724a91c8f1bf9.module.css",
+   "bytes": 695
   },
   {
    "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
-   "bytes": 7518
+   "bytes": 7270
   },
   {
-   "url": "https://github.githubassets.com/assets/primer-react-brand-css.6a01c236ff527e7e.module.css",
-   "bytes": 72252
+   "url": "https://github.githubassets.com/assets/github-7338c07b3a07b8be.css",
+   "bytes": 21829
+  },
+  {
+   "url": "https://github.githubassets.com/assets/app-runtime.70b2cadcfd63fdd3.module.css",
+   "bytes": 1263
   },
   {
    "url": "https://github.githubassets.com/assets/primer-4136ede8b2650a2d.css",
-   "bytes": 43336
-  },
-  {
-   "url": "https://github.githubassets.com/assets/app-runtime.bc6140f37acc15cb.module.css",
-   "bytes": 1279
-  },
-  {
-   "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
-   "bytes": 2310
-  },
-  {
-   "url": "https://github.githubassets.com/assets/light_high_contrast-48fdd0811afbab3c.css",
-   "bytes": 7406
+   "bytes": 43601
   },
   {
    "url": "https://github.githubassets.com/assets/u2l.54b6ba2af351ee33.module.css",
-   "bytes": 411
+   "bytes": 413
   },
   {
    "url": "https://github.githubassets.com/assets/kq9.8ad2074125dec7f9.module.css",
-   "bytes": 630
+   "bytes": 646
   },
   {
    "url": "https://github.githubassets.com/assets/fg.2616179aabbabe22.module.css",
-   "bytes": 892
+   "bytes": 672
   }
  ],
  "problems": [],
@@ -101,6 +101,218 @@
   "fontFamily": "\"Mona Sans VF\", -apple-system, \"system-ui\", \"Segoe UI\", \"Noto Sans Backtick Fix\", \"Noto Sans\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\""
  },
  "png": "user-profile-stars-tab/dark-1440.png",
+ "volatile": [
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 1195,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 1333,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 1492,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 1651,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 1810,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 1948,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2086,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2224,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2383,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2542,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2701,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2839,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 2998,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 3157,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 3295,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 3433,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 3592,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 3751,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 3868,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4006,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4165,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4324,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4462,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4600,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4759,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 4897,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 5035,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 5173,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 5332,
+   "w": 665,
+   "h": 16
+  },
+  {
+   "kind": "relative-time",
+   "x": 432,
+   "y": 5512,
+   "w": 665,
+   "h": 16
+  }
+ ],
  "htmlTheme": "auto",
  "title": "pemistahl (Peter M. Stahl) / Starred · GitHub",
  "signedIn": null,
@@ -1506,14 +1718,18 @@
  },
  "icons": {
   "octicons": 0,
-  "nonOcticon": []
+  "nonOcticon": [],
+  "masked": [],
+  "hidden": [],
+  "githubNative": []
  },
+ "unlayeredGiteaCss": [],
  "cls": {
   "total": 0.0005,
   "shifts": [
    {
     "value": 0.0004,
-    "t": 1514,
+    "t": 2225,
     "sources": [
      "div.border-top.color-border-muted.tmp-pt-3",
      "span.Label.achievement-tier-label.achievement-tier-label--bronze",
@@ -1522,7 +1738,7 @@
    },
    {
     "value": 0,
-    "t": 1738,
+    "t": 2398,
     "sources": [
      "span.Label.achievement-tier-label.achievement-tier-label--gold",
      "span.Label.achievement-tier-label.achievement-tier-label--silver"
@@ -1531,12 +1747,12 @@
   ]
  },
  "timing": {
-  "domContentLoaded": 1378,
-  "load": 2095,
+  "domContentLoaded": 1884,
+  "load": 2490,
   "transferSize": 41743,
   "resources": 106,
   "cssResources": 20,
-  "cssTransferBytesPerfApi": 257476
+  "cssTransferBytesPerfApi": 257460
  },
  "document": {
   "width": 1440,
@@ -1544,5 +1760,5 @@
   "horizontalOverflow": false
  },
  "measureJson": "user-profile-stars-tab/dark-1440.measure.json",
- "ms": 3445
+ "ms": 3828
 }

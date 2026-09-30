@@ -94,9 +94,12 @@ input[type="radio"]:disabled:checked {
   cursor: pointer;
 }
 
+/* Gitea writes the label before the input in many forms (admin/user/edit "Disable Sign-In"), so the sibling
+   selector alone missed them (FG2-076) */
 .ui.disabled.checkbox input,
 .ui.disabled.checkbox label,
-.ui.checkbox input[disabled] ~ label {
+.ui.checkbox input[disabled] ~ label,
+.ui.checkbox:has(> input:disabled) > label {
   opacity: 1;
   color: var(--fgColor-disabled);
 }

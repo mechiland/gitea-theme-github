@@ -202,3 +202,44 @@ box including its background):
   compare and the commit page. The generic `.ui.label.commit-id-short` (yours) and the issue-timeline commit rows
   (pages/issues-prs) still show 10. Technique: `width: calc(7ch + <inline padding>); overflow: hidden` with the padding as a
   transparent border. Next round, if any.
+
+
+# Final gate #2 (loop iteration 2)
+
+Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids of docs/final-gate-2/raw.json) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only this folder’s theme-fixable items; `theme-fixable-template` items are either installed by the integrator first (this folder styles the result) or stay rejected (noted per item). Budget: github-auto 288.9 / 300 KB — trim before adding. Check every page-scoped selector against the shared page classes (see FG2-105) before you ship.
+
+1. **FG2-052 [theme-fixable-css] 390 comment headers wrap: 'commented 4 months / ago', '(Migrated from github.com)' on its own line, kebab/reactions squeezing the time** — impact 8 (judges 0, critic wt 8; gate 1 FG-046; routes: issue-detail-playground-reactions-alerts-tables, issue-playground-1, pr-conversation-open, repo-issue)
+   - Fix: < 768: header is one flex row `min-width:0`; author + time truncate with ellipsis (`white-space:nowrap` on the time), reactions/kebab `flex-shrink:0`; the '(Migrated …)' note drops to a second 12px muted line as a whole. Composer toolbar (C077): single row with overflow.
+   - Critic refs: C104 (issue-detail-playground-reactions-alerts-tables, minor), C165 (issue-playground-1, minor), C077 (repo-issue, nit), C184 (pr-conversation-open, nit)
+   - PNG: `shots/final-gate-critic-4/idp-390-0.png`, `shots/final-gate-2/issue-detail-playground-reactions-alerts-tables/dark-390.png`, `shots/final-gate-2/issue-detail-playground-reactions-alerts-tables/dark-1440.png`, `shots/final-gate-2/issue-detail-playground-reactions-alerts-tables/light-390.png`
+2. **FG2-075 [theme-fixable-css] 390 admin tables: heavy radial scroll shadow on the right edge (skips the header row) and ellipsized cells although the table scrolls; sort indicator is a filled caret** — impact 4 (judges 0, critic wt 4; gate 1 FG-082; routes: admin-emails)
+   - Fix: Drop the scroll shadow (tables.css:169-174; Primer DataTable scrolls plain); `white-space:nowrap` without ellipsis inside scrolling tables; sort caret → arrow-up/arrow-down Octicon mask.
+   - Critic refs: C137 (admin-emails, minor), C138 (admin-emails, nit)
+   - PNG: `shots/final-gate-critic-5/admin-emails/z-scroll-light.png`, `shots/final-gate-2/admin-emails/dark-1440.png`, `shots/final-gate-2/admin-emails/light-1440.png`
+3. **FG2-081 [theme-fixable-css] 390: repo description starting with an emoji wraps into a lone-emoji line (flex item split) on explore / list rows** — impact 3 (judges 0, critic wt 3; new; routes: explore-repos)
+   - Fix: `.flex-item-body:has(> .emoji)` (or the description body) `display:block` so emoji and text stay inline.
+   - Critic refs: C021 (explore-repos, minor)
+   - PNG: `shots/final-gate-critic-1/explore-m-00.png`, `shots/final-gate-2/explore-repos/dark-390.png`, `shots/final-gate-2/explore-repos/light-390.png`
+4. **FG2-091 [theme-fixable-css] Team member avatars spaced 4px (github.com overlapping AvatarStack); issue label text 600/12px line-height (Primer IssueLabel 500/18px)** — impact 2 (judges 0, critic wt 2; gate 1 FG-058; routes: repo-pulls, org-teams)
+   - Fix: Org teams avatar row: negative 8px margin + 2px `--bgColor-default` ring; `.ui.label` issue labels font-weight 500, line-height 18px.
+   - Critic refs: C066 (org-teams, nit), C099 (repo-pulls, nit)
+   - PNG: `shots/final-gate-2/repo-pulls/dark-1440.png`, `shots/final-gate-2/repo-pulls/light-1440.png`, `shots/final-gate-2/org-teams/dark-1440.png`, `shots/final-gate-2/org-teams/light-1440.png`
+
+# Status (data-display, final gate #2, wave L2 round 1)
+- **FG2-052 DONE** (comment-header part) — `timeline.css` < 768px: header one flex row; left part one nowrap line
+  "avatar author commented <time>" ending in an ellipsis (no more "4 months / ago"), right cluster `flex: 0 0 auto`,
+  `.migrate` note on its own 12px `--fgColor-muted` line. Measured at 390: repo-issue / repo-pull migrated headers 52px
+  (line 1 + note), playground #2 / PR 16 headers 38px (one line; long names truncate the time, e.g. "16 hours a…").
+  Inline review comments on the Files page (`.comment-code-cloud`, ~160px left part next to the "Review" label) wrap
+  words instead so the time is never cut (44px). `timeline.important.css`: migrated-author `tw-mr-1` → 0 (8px → 4px,
+  same as the opening post). Composer toolbar (C077) is pages/issues-prs → forwarded in pages-issues-prs.md.
+- **FG2-075 DONE except the sort arrow** — `tables.css`: scroll-shadow background removed (Primer DataTable scrolls
+  plain); `tables.important.css`: < 768px `td.gt-ellipsis.tw-max-w-48` inside `.ui.attached.table.segment` → `max-width:
+  none` (full emails, table scrolls). Sort caret → arrow-up/arrow-down needs new masks → DD-IC-1 in icons.md.
+- **FG2-081 DONE** — `list-rows.css`: `.items-with-main > .item .item-body:has(> .emoji) { display: block }` —
+  "📁 Generate pixel-perfect …" stays on one line (explore 390).
+- **FG2-091 DONE** — avatars.css: team member rows = AvatarStack (−8px overlap, 2px `--bgColor-default` ring).
+  Labels: re-probed github.com 2026-09-30 — the issues index renders IssueLabel **500** (pemistahl/grex/issues,
+  go-gitea/gitea/issues), while the pulls index, labels page and issue sidebar render **600**; so only issue rows of
+  `#issue-list` go to 500 (label widths now equal github.com: 96.5px "enhancement" on /issues, 100.9px on /pulls).
+  Line-height kept (box 20px like github.com; its 18px is the inner text container's).

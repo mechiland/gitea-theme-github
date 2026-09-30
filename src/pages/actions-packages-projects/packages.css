@@ -53,6 +53,16 @@
   text-decoration: underline;
 }
 
+/* leading package octicon (github.com: 16px, --fgColor-default, 8px before the name, on the title line) */
+.packages .items-with-main div.item-title::before {
+  content: "";
+  flex-shrink: 0;
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  background: currentcolor;
+  mask: var(--gh-octicon-package) center / contain no-repeat;
+}
+
 /* package type: Primer Label (small) with the registry icon */
 
 .packages .items-with-main .item-title .label-list .ui.label .svg {
@@ -86,6 +96,8 @@
 }
 
 .packages .form > .small.action.input > input {
+  margin-left: calc(var(--borderWidth-thin) * -1);
+  border-radius: 0;
   height: var(--control-medium-size);
   padding: 0 var(--control-medium-paddingInline-normal);
   font-size: var(--text-body-size-medium);
@@ -108,6 +120,60 @@
   font-size: var(--text-body-size-medium);
 }
 
+/* github.com's filter row (FG2-029): the "Type: All" select is a default button joined to the LEFT of the search
+   input, and the group is ~645px, not the page width. Gitea's order is input · Type · search button → the Type
+   dropdown moves first (it carries the group's left radius, the input takes over the -1px join), secondary button
+   look (--button-default-*, 14px/500, 16px inline start padding); the input's join is in its rule above. */
+.packages .form > .small.action.input > .ui.selection.dropdown {
+  order: -1;
+  margin-left: 0;
+  padding-left: var(--control-medium-paddingInline-spacious);
+  border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
+  background: var(--button-default-bgColor-rest);
+  color: var(--button-default-fgColor-rest);
+  font-weight: var(--base-text-weight-medium);
+}
+
+.packages .form > .small.action.input > .ui.selection.dropdown:hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+}
+
+.packages .form > .small.action.input > .ui.selection.dropdown + .ui.selection.dropdown {
+  border-radius: 0;
+}
+
+/* github.com's Type / Sort buttons are ActionMenu buttons, not Selects: "Type: All" (label muted, value default),
+   trailing triangle-down. Gitea shows the "Type" placeholder (muted) or the chosen value → the placeholder reads as the
+   button label, a chosen type gets the English-only "Type: " label, and the Select arrows go back to the template's
+   triangle-down octicon. */
+.packages .form > .small.action.input > .ui.selection.dropdown > .default.text {
+  color: var(--button-default-fgColor-rest);
+}
+
+html:lang(en) .packages .form > .small.action.input > .ui.selection.dropdown:has(> select[name="type"]) > .text:not(.default)::before {
+  content: "Type: ";
+  color: var(--fgColor-muted);
+}
+
+.packages .form > .small.action.input > .ui.selection.dropdown > .dropdown.icon {
+  background: none;
+  color: var(--fgColor-muted);
+  mask: none;
+}
+
+.packages .form > .small.action.input > .ui.selection.dropdown > .dropdown.icon > .svg {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  fill: currentcolor;
+}
+
+@media (min-width: 768px) {
+  .packages .form:has(> .action.input) {
+    max-width: calc(var(--base-size-128) * 5);
+  }
+}
+
 /* ---------- package page ---------- */
 .packages .issue-title-header {
   margin-bottom: var(--base-size-16);
@@ -120,6 +186,52 @@
   color: var(--fgColor-default);
   line-height: var(--base-size-40);
   overflow-wrap: anywhere;
+}
+
+/* github.com package title: 32px package image 12px before the name (the "(version)" is part of Gitea's one
+   text node, so it cannot be muted separately) */
+.packages .issue-title-header h1::before {
+  content: "";
+  display: inline-block;
+  width: var(--base-size-32);
+  height: var(--base-size-32);
+  margin-right: var(--base-size-12);
+  background: var(--fgColor-muted);
+  mask: var(--gh-octicon-package) center / contain no-repeat;
+  vertical-align: text-bottom;
+}
+
+/* versions page (FG2-029): github.com shows the breadcrumb ("name / Versions", link --fgColor-accent, last crumb
+   400), then a spacious Subhead "Versions" (24px/36px 400, 40px above, 8px + 1px --borderColor-muted rule + 16px
+   below). Gitea has only the breadcrumb (ending in <strong>Versions</strong>) → the Subhead is English-only
+   generated text under it. */
+.packages p:has(> .label-list + strong:last-child) > a {
+  text-decoration: none;
+}
+
+.packages p:has(> .label-list + strong:last-child) > a:hover {
+  text-decoration: underline;
+}
+
+/* the "/" separator is --fgColor-muted (github.com), the last crumb and the Subhead stay default */
+.packages p:has(> .label-list + strong:last-child) {
+  color: var(--fgColor-muted);
+}
+
+.packages p > .label-list + strong:last-child {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-normal);
+}
+
+html:lang(en) .packages p:has(> .label-list + strong:last-child)::after {
+  content: "Versions";
+  display: block;
+  color: var(--fgColor-default);
+  margin: calc(var(--base-size-40) + var(--base-size-4)) 0 var(--base-size-16);
+  padding-bottom: var(--base-size-8);
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+  font-size: var(--base-size-24); /* Primer Subhead-heading--large 24px; no text token between 20 and 32 */
+  line-height: var(--base-text-lineHeight-normal);
 }
 
 .packages-content {

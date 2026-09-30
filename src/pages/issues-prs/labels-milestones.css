@@ -111,6 +111,45 @@
   height: var(--base-size-16);
 }
 
+/* FG2-039: row actions = 28px invisible IconButtons (github.com puts them in a row kebab; Gitea renders Edit / Delete
+   links): the label text is pushed out of the clipped 28px box (still the accessible name); revealed on row hover /
+   focus-within on pointer devices, always visible on touch. Delete hovers danger. */
+.repository.labels .issue-label-list > .item .label-operation {
+  gap: var(--base-size-4);
+  min-width: 0;
+}
+
+.repository.labels .issue-label-list > .item .label-operation > a {
+  justify-content: flex-start;
+  gap: var(--base-size-32);
+  width: var(--control-small-size);
+  height: var(--control-small-size);
+  padding: 0 var(--base-size-6);
+  overflow: hidden;
+  border-radius: var(--borderRadius-medium);
+  white-space: nowrap;
+}
+
+.repository.labels .issue-label-list > .item .label-operation > a:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+.repository.labels .issue-label-list > .item .label-operation > a.link-action:hover {
+  color: var(--fgColor-danger);
+}
+
+.repository.labels .issue-label-list > .item .label-operation > a:focus-visible {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: calc(var(--focus-outline-width) * -1);
+}
+
+@media (hover: hover) and (min-width: 768px) {
+  .repository.labels .issue-label-list > .item:not(:hover, :focus-within) .label-operation > a {
+    opacity: 0;
+  }
+}
+
 /* phones (github.com /labels at 390): token, description under it, then the count and the actions */
 @media (max-width: 767.98px) {
   .repository .issue-label-list > .item {
@@ -146,24 +185,24 @@
   background: var(--bgColor-default);
 }
 
-.repository.milestones:not(.projects) .milestone-list:not(:has(> .item)) {
+.milestones:not(.projects) .milestone-list:not(:has(> .item)) {
   border: 0;
 }
 
-.repository.milestones:not(.projects) .milestone-list > .item {
+.milestones:not(.projects) .milestone-list > .item {
   gap: var(--base-size-4);
   padding: var(--base-size-16);
 }
 
-.repository.milestones:not(.projects) .milestone-list > .item:hover {
+.milestones:not(.projects) .milestone-list > .item:hover {
   background: var(--bgColor-muted);
 }
 
-.repository.milestones:not(.projects) .milestone-list > .item:last-child {
+.milestones:not(.projects) .milestone-list > .item:last-child {
   border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
 }
 
-.repository.milestones:not(.projects) .milestone-list .list-item-large-title {
+.milestones:not(.projects) .milestone-list .list-item-large-title {
   gap: var(--base-size-8);
   color: var(--fgColor-default);
   font-size: var(--text-title-size-small);
@@ -172,171 +211,331 @@
 }
 
 /* github.com milestone rows have no leading icon */
-.repository.milestones:not(.projects) .milestone-list .list-item-large-title > .svg {
+.milestones:not(.projects) .milestone-list .list-item-large-title > .svg {
   display: none;
 }
 
-.repository.milestones:not(.projects) .milestone-list .list-item-large-title > a {
+.milestones:not(.projects) .milestone-list .list-item-large-title > a {
   color: var(--fgColor-default);
 }
 
-.repository.milestones:not(.projects) .milestone-list .list-item-large-title > a:hover {
+.milestones:not(.projects) .milestone-list .list-item-large-title > a:hover {
   color: var(--fgColor-accent);
 }
 
-.repository.milestones:not(.projects) .milestone-list .flex-left-right > .flex-text-inline {
-  gap: var(--base-size-8);
-  color: var(--fgColor-muted);
-  font-size: var(--text-body-size-medium);
-}
-
-.repository.milestones:not(.projects) .milestone-list .list-item-secondary-bar {
+.milestones:not(.projects) .milestone-list .list-item-secondary-bar {
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
   line-height: var(--text-body-lineHeight-medium);
 }
 
-.repository.milestones:not(.projects) .milestone-list .list-item-secondary-bar .svg {
+.milestones:not(.projects) .milestone-list .list-item-secondary-bar .svg {
   width: var(--base-size-12);
   height: var(--base-size-12);
 }
 
-.repository.milestones:not(.projects) .milestone-list .list-item-secondary-bar a {
+.milestones:not(.projects) .milestone-list .list-item-secondary-bar a {
   color: var(--fgColor-muted);
 }
 
-.repository.milestones:not(.projects) .milestone-list .list-item-secondary-bar a:hover {
+.milestones:not(.projects) .milestone-list .list-item-secondary-bar a:hover {
   color: var(--fgColor-accent);
 }
 
-/* milestone description (rendered markdown under the meta line) */
-.repository.milestones:not(.projects) .milestone-list .markup.content {
-  margin-top: var(--base-size-8);
-  color: var(--fgColor-muted);
+
+/* ---------- FG2-023 (CSS-only; the NavList template was rejected): Labels / Milestones pages as github.com's
+   issues PageLayout. Gitea's Labels | Milestones switch (repo/issue/navbar.tmpl h2.small-menu-items.issue-list-navbar)
+   becomes the left NavList (256px, same spec as .gh-issues-nav in issues-nav.css: 32px items, selected
+   --control-transparent-bgColor-selected + 4x24 accent bar, 16px muted leading octicon; Milestones before Labels);
+   the page is full width, main column 24px padding, a 20px/600 page title (English UI only: Gitea renders no
+   heading, CSS can only add fixed text) with the New button at its right, then the query bar / list Box.
+   Wrappers (.list-header, .issue-navbar) are dissolved into the container grid. < 1012px: the NavList is a row on
+   top, like the issues list. (Item backgrounds: labels-milestones.important.css — navigation paints every
+   .small-menu-items item with !important.) ---------- */
+.repository:is(.labels, .milestones:not(.projects, .dashboard)) > .secondary-nav {
+  margin-bottom: 0;
 }
 
-/* ---------- FG-039: Labels | Milestones switch (repo/issue/navbar.tmpl h2.small-menu-items.issue-list-navbar) ----------
-   Primer SegmentedControl (medium): 32px track --controlTrack-bgColor-rest, 1px --controlTrack-borderColor-rest,
-   radius 6px; items 0 12px, 14px; the selected item is the knob (--controlKnob-bgColor-rest, 1px
-   --controlKnob-borderColor-rest, 600) overlapping the track border; unselected hover = an inner pill inset by 4px.
-   Backgrounds are in labels-milestones.important.css (navigation paints .small-menu-items items with !important). */
-.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu {
-  flex: 0 0 auto;
-  align-items: stretch;
-  gap: 0;
-  height: var(--control-medium-size);
-  min-height: 0;
+.repository:is(.labels, .milestones:not(.projects, .dashboard)) > .ui.container {
+  display: grid;
+  grid-template-columns: calc(var(--base-size-128) * 2) minmax(0, 1fr) auto;
+  align-content: start;
+  column-gap: var(--base-size-24);
+  width: auto;
+  max-width: none;
   margin: 0;
-  padding: 0;
-  border: var(--borderWidth-thin) solid var(--controlTrack-borderColor-rest);
-  border-radius: var(--borderRadius-medium);
+  padding: 0 var(--base-size-24) var(--base-size-24) 0;
 }
 
-.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item {
-  position: relative;
-  min-height: 0;
-  margin: -1px 0;
-  padding: 0 var(--control-medium-paddingInline-normal);
-  border: var(--borderWidth-thin) solid transparent;
-  border-radius: var(--borderRadius-medium);
+.repository:is(.labels, .milestones:not(.projects, .dashboard)) > .ui.container > * {
+  grid-column: 2 / -1;
+  min-width: 0;
+}
+
+.repository:is(.labels, .milestones:not(.projects, .dashboard)) > .ui.container > :is(.list-header, .issue-navbar) {
+  display: contents;
+}
+
+html:lang(en) .repository:is(.labels, .milestones:not(.projects, .dashboard)) > .ui.container::before {
+  grid-row: 1;
+  grid-column: 2;
+  margin: var(--base-size-24) 0 var(--base-size-16);
   color: var(--fgColor-default);
+  font-size: var(--text-title-size-medium);
+  font-weight: var(--text-title-weight-medium);
+  line-height: var(--text-title-lineHeight-medium);
+}
+
+html:lang(en) .repository.labels > .ui.container::before {
+  content: "Labels";
+}
+
+html:lang(en) .milestones:not(.projects, .dashboard) > .ui.container::before {
+  content: "Milestones";
+}
+
+.repository:is(.labels, .milestones:not(.projects, .dashboard)) > .ui.container > * > .ui.primary.button {
+  grid-row: 1;
+  grid-column: 3;
+  align-self: start;
+  margin: var(--base-size-24) 0 var(--base-size-16);
+}
+
+.milestones:not(.projects, .dashboard) > .ui.container > .list-header > .list-header-search {
+  grid-column: 2 / -1;
+  margin: 0;
+}
+
+.repository.labels > .ui.container > h4.ui.top.attached.header {
+  width: auto;
+  margin: 0;
+}
+
+.repository.labels > .ui.container > .ui.attached.segment {
+  width: auto;
+  margin: 0;
+}
+
+:is(.labels, .milestones) .issue-list-navbar {
+  display: flex;
+  grid-row: 1 / span 8;
+  grid-column: 1;
+  flex-direction: column;
+  align-items: stretch;
+  align-self: stretch;
+  gap: 0;
+  height: auto;
+  margin: 0;
+  padding: var(--base-size-16);
+  border: 0;
+  border-right: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0;
+}
+
+:is(.labels, .milestones) .issue-list-navbar > .item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--base-size-8);
+  min-height: var(--control-medium-size);
+  margin: 0;
+  padding: var(--base-size-6) var(--base-size-8);
+  border-radius: var(--borderRadius-medium);
+  color: var(--control-fgColor-rest);
   font-size: var(--text-body-size-medium);
   font-weight: var(--base-text-weight-normal);
+  line-height: var(--base-size-20);
 }
 
-.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item:first-child {
-  margin-left: -1px;
+:is(.labels, .milestones) .issue-list-navbar > .item:last-child {
+  order: -1;
 }
 
-.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item:last-child {
-  margin-right: -1px;
+:is(.labels, .milestones) .issue-list-navbar > .item::before {
+  content: "";
+  display: block;
+  flex: 0 0 auto;
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  background: var(--fgColor-muted);
+  position: static;
+  mask: var(--gh-octicon-tag) center / contain no-repeat;
 }
 
-.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item:not(.active):hover {
-  box-shadow: inset 0 0 0 var(--base-size-4) var(--controlTrack-bgColor-rest);
-  color: var(--fgColor-default);
+:is(.labels, .milestones) .issue-list-navbar > .item:last-child::before {
+  mask-image: var(--gh-octicon-milestone);
 }
 
-.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item.active {
-  z-index: 1;
-  border-color: var(--controlKnob-borderColor-rest);
-  color: var(--fgColor-default);
+:is(.labels, .milestones) .issue-list-navbar > .item.active {
   font-weight: var(--base-text-weight-semibold);
 }
 
-.repository:is(.labels, .milestones) .issue-list-navbar.small-menu-items.ui.compact.menu > .item:focus-visible {
-  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
-  outline-offset: calc(var(--borderWidth-thin) * -1);
+:is(.labels, .milestones) .issue-list-navbar > .item.active::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - var(--base-size-12));
+  left: var(--base-size-negative-8);
+  width: var(--base-size-4);
+  height: var(--base-size-24);
+  border-radius: var(--borderRadius-medium);
+  background: var(--borderColor-accent-emphasis);
 }
 
-/* ---------- FG-073: milestone row = github.com RepositoryMilestone ----------
-   title column | 320px progress column (5px bar 18px below the row top, "N%" 600 --fgColor-default under it);
-   the meta line stays under the title. Gitea: .item > .flex-left-right (title | "N%" + <progress>) +
-   .list-item-secondary-bar; the wrappers are dissolved into a two-column grid. */
-.repository.milestones:not(.projects) .milestone-list > .item {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) calc(var(--base-size-80) * 4);
+:is(.labels, .milestones) .issue-list-navbar > .item:focus-visible {
+  outline: var(--focus-outline-width) solid var(--focus-outlineColor);
+  outline-offset: calc(var(--focus-outline-width) * -1);
+}
+
+@media (max-width: 1011.98px) {
+  .repository:is(.labels, .milestones:not(.projects, .dashboard)) > .ui.container {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: var(--base-size-16);
+    padding: 0 var(--base-size-16) var(--base-size-16);
+  }
+
+  .repository:is(.labels, .milestones:not(.projects, .dashboard)) > .ui.container > * {
+    grid-column: 1 / -1;
+  }
+
+  html:lang(en) .repository:is(.labels, .milestones:not(.projects, .dashboard)) > .ui.container::before {
+    grid-row: 2;
+    grid-column: 1;
+    margin-top: var(--base-size-16);
+  }
+
+  .repository:is(.labels, .milestones:not(.projects, .dashboard)) > .ui.container > * > .ui.primary.button {
+    grid-row: 2;
+    grid-column: 2;
+    margin-top: var(--base-size-16);
+  }
+
+  .milestones:not(.projects, .dashboard) > .ui.container > .list-header > .list-header-search {
+    grid-column: 1 / -1;
+  }
+
+  :is(.labels, .milestones) .issue-list-navbar {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    flex-direction: row;
+    gap: var(--base-size-4);
+    margin: 0 var(--base-size-negative-16);
+    padding: var(--base-size-8) var(--base-size-16);
+    border-right: 0;
+    border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+  }
+
+  :is(.labels, .milestones) .issue-list-navbar > .item.active::after {
+    display: none;
+  }
+}
+
+/* ---------- FG-073 / FG2-035: milestone row = github.com RepositoryMilestone ----------
+   title | 320px progress column; under the bar ONE row "0% complete  2 open  0 closed" (14px/20px, percentage 600
+   --fgColor-default, the rest --fgColor-muted, 16px apart), the due / updated meta (12px muted) under the title on
+   the same row, row actions (12px muted links, Delete danger on hover only) under the counts.
+   Gitea: .item > .flex-left-right (title | span "N%" + progress) + .list-item-secondary-bar (meta block: open, closed,
+   [tracked], [updated], due | actions block). The wrappers are dissolved into one wrapping flex flow of lines:
+   1 title (100% - 336px) + bar (320px) · 2 counts (the first one offset by 100% - 320px) · ::before (a 100% line
+   break) · 3 meta, pulled up by the two lines above (20px + 2 × 4px gap) onto the counts row · 4 actions (320px
+   offset like the counts). Percent margins/bases resolve against the row width, so the column starts exactly
+   320px from the right whatever the text widths. */
+.milestones:not(.projects) .milestone-list > .item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
   column-gap: var(--base-size-16);
   row-gap: var(--base-size-4);
 }
 
-.repository.milestones:not(.projects) .milestone-list > .item > .flex-left-right {
+.milestones:not(.projects) .milestone-list > .item :is(.flex-left-right, .flex-left-right > .flex-text-inline, .list-item-secondary-bar, .list-item-secondary-bar > .flex-text-block:first-child) {
   display: contents;
 }
 
-.repository.milestones:not(.projects) .milestone-list > .item > * {
-  grid-column: 1 / -1;
+.milestones:not(.projects) .milestone-list > .item::before {
+  content: "";
+  flex: 0 0 100%;
+  order: 6;
+  height: 0;
 }
 
-.repository.milestones:not(.projects) .milestone-list > .item > .flex-left-right > .list-item-large-title {
-  grid-row: 1;
-  grid-column: 1;
+.milestones:not(.projects) .milestone-list .flex-left-right > .list-item-large-title {
+  flex: 0 0 calc(100% - var(--base-size-80) * 4 - var(--base-size-16));
+  order: 1;
   min-width: 0;
 }
 
-.repository.milestones:not(.projects) .milestone-list > .item > .list-item-secondary-bar {
-  grid-row: 2;
-  grid-column: 1;
-  min-width: 0;
+.milestones:not(.projects) .milestone-list .flex-left-right > .flex-text-inline > .list-item-title-progress {
+  flex: 0 0 calc(var(--base-size-80) * 4);
+  order: 2;
 }
 
-.repository.milestones:not(.projects) .milestone-list > .item > .flex-left-right > .flex-text-inline {
-  display: flex;
-  grid-row: 1 / span 2;
-  grid-column: 2;
-  flex-direction: column-reverse;
-  align-items: flex-start;
-  align-self: start;
-  gap: var(--base-size-8);
-  padding-top: var(--base-size-6);
-}
-
-.repository.milestones:not(.projects) .milestone-list > .item > .flex-left-right > .flex-text-inline > .list-item-title-progress {
-  width: 100%;
-}
-
-.repository.milestones:not(.projects) .milestone-list > .item > .flex-left-right > .flex-text-inline > span {
-  color: var(--fgColor-default);
+.milestones:not(.projects) .milestone-list .flex-left-right > .flex-text-inline > span,
+.milestones:not(.projects) .milestone-list .list-item-secondary-bar > :first-child > :nth-child(-n + 2) {
+  order: 3;
+  color: var(--fgColor-muted);
   font-size: var(--text-body-size-medium);
-  font-weight: var(--base-text-weight-semibold);
-  line-height: var(--text-body-lineHeight-medium);
+  line-height: var(--base-size-20);
+  white-space: nowrap;
 }
 
+.milestones:not(.projects) .milestone-list .flex-left-right > .flex-text-inline > span {
+  margin-left: calc(100% - var(--base-size-80) * 4);
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+html:lang(en) .milestones:not(.projects) .milestone-list .flex-left-right > .flex-text-inline > span::after {
+  content: " complete";
+  color: var(--fgColor-muted);
+  font-weight: var(--base-text-weight-normal);
+}
+
+.milestones:not(.projects) .milestone-list .list-item-secondary-bar > :first-child > :nth-child(-n + 2) > .svg {
+  display: none;
+}
+
+.milestones:not(.projects) .milestone-list .list-item-secondary-bar > :first-child > :nth-child(n + 3) {
+  order: 7;
+  align-self: flex-start;
+  margin-top: calc(var(--base-size-20) * -1 - var(--base-size-8));
+  line-height: var(--base-size-20);
+}
+
+/* row actions */
+.milestones:not(.projects) .milestone-list .list-item-secondary-bar > :nth-child(2) {
+  flex: 0 0 calc(var(--base-size-80) * 4);
+  order: 8;
+  gap: var(--base-size-16);
+  margin-left: calc(100% - var(--base-size-80) * 4);
+}
+
+/* milestone description (rendered markdown under the meta line) */
+.milestones:not(.projects) .milestone-list > .item > .markup {
+  flex: 0 0 100%;
+  order: 9;
+  color: var(--fgColor-muted);
+}
+
+/* phones (github.com @390): title, bar, "0% complete  2 open  0 closed", meta, actions */
 @media (max-width: 767.98px) {
-  .repository.milestones:not(.projects) .milestone-list > .item {
-    grid-template-columns: minmax(0, 1fr);
+  .milestones:not(.projects) .milestone-list > .item {
+    row-gap: var(--base-size-8);
   }
 
-  /* github.com at 390: title, bar, "N%", then the meta line */
-  .repository.milestones:not(.projects) .milestone-list > .item > .flex-left-right > .flex-text-inline {
-    grid-row: 2;
-    grid-column: 1;
-    align-self: stretch;
-    padding-top: var(--base-size-8);
+  .milestones:not(.projects) .milestone-list .flex-left-right > .list-item-large-title,
+  .milestones:not(.projects) .milestone-list .flex-left-right > .flex-text-inline > .list-item-title-progress {
+    flex-basis: 100%;
   }
 
-  .repository.milestones:not(.projects) .milestone-list > .item > .list-item-secondary-bar {
-    grid-row: 3;
+  .milestones:not(.projects) .milestone-list .flex-left-right > .flex-text-inline > span,
+  .milestones:not(.projects) .milestone-list .list-item-secondary-bar > :first-child > :nth-child(n + 3),
+  .milestones:not(.projects) .milestone-list .list-item-secondary-bar > :nth-child(2) {
+    margin: 0;
+  }
+
+  .milestones:not(.projects) .milestone-list .list-item-secondary-bar > :nth-child(2) {
+    flex-basis: 100%;
   }
 }
 
@@ -345,4 +544,91 @@
   height: var(--control-medium-size);
   padding: 0 var(--control-medium-paddingInline-normal);
   font-size: var(--text-body-size-medium);
+}
+
+/* FG2-046: "no labels yet" (repo/issue/labels/label_load_template.tmpl) = Primer Blankslate. Org settings (the
+   section body is flat there): a bordered Box, 24px tag octicon, muted description, then ONE action row — the
+   label-set Select (single line, ellipsis; max 320px) + "Use Label Set". The Select's options keep Gitea's
+   name + description as an ActionList item with a 12px muted description line. Repo labels page: same action row
+   (the Box is already the list's). */
+.organization.settings.labels .ui.centered.grid:has(form[action$="/initialize"]) {
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+}
+
+.organization.settings.labels .ui.centered.grid:has(form[action$="/initialize"]) > .column::before {
+  content: "";
+  display: block;
+  width: var(--base-size-24);
+  height: var(--base-size-24);
+  margin: 0 auto var(--base-size-16);
+  background: var(--fgColor-muted);
+  mask: var(--gh-octicon-tag) center / contain no-repeat;
+}
+
+:is(.organization.settings.labels, .repository.labels) form[action$="/initialize"] {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--base-size-8);
+}
+
+:is(.organization.settings.labels, .repository.labels) form[action$="/initialize"] > .field {
+  flex: 1 1 calc(var(--base-size-80) * 2);
+  max-width: calc(var(--base-size-80) * 4);
+  min-width: 0;
+  margin: 0;
+}
+
+:is(.organization.settings.labels, .repository.labels) form[action$="/initialize"] .ui.selection.dropdown {
+  width: 100%;
+  min-width: 0;
+}
+
+:is(.organization.settings.labels, .repository.labels) form[action$="/initialize"] .ui.selection.dropdown > .text {
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:is(.organization.settings.labels, .repository.labels) form[action$="/initialize"] .ui.selection.dropdown > .text > br {
+  display: none;
+}
+
+:is(.organization.settings.labels, .repository.labels) form[action$="/initialize"] .ui.selection.dropdown :is(.text, .item) > i {
+  color: var(--fgColor-muted);
+  font-style: normal;
+}
+
+:is(.organization.settings.labels, .repository.labels) form[action$="/initialize"] .ui.selection.dropdown > .text > i {
+  margin-left: var(--base-size-4);
+}
+
+:is(.organization.settings.labels, .repository.labels) form[action$="/initialize"] .ui.selection.dropdown .item > i {
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-small);
+}
+
+:is(.organization.settings.labels, .repository.labels) form[action$="/initialize"] > .ui.button {
+  margin: 0;
+}
+
+/* FG2-035: milestone page "Close" is a default Button (Gitea: red basic = Primer danger); github.com keeps the
+   danger colour for Delete only */
+.milestone-issue-list > .ui.container > .flex-text-block > div > .ui.red.basic.button {
+  border-color: var(--button-default-borderColor-rest);
+  background: var(--button-default-bgColor-rest);
+  color: var(--button-default-fgColor-rest);
+}
+
+.milestone-issue-list > .ui.container > .flex-text-block > div > .ui.red.basic.button:hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+  color: var(--button-default-fgColor-rest);
+}
+
+.milestone-issue-list > .ui.container > .flex-text-block > div > .ui.red.basic.button:active {
+  background: var(--button-default-bgColor-active);
 }

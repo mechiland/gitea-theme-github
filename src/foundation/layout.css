@@ -31,6 +31,26 @@
   }
 }
 
+/* FG2-097 — the footer follows the content. Gitea (base.css:75-90, 386-389) makes body a full-height flex column and lets
+ * .full.height grow, which pins the footer to the viewport bottom on short pages. github.com's Rails pages (wiki page
+ * list, milestones, labels, settings…) are a normal block flow: the footer starts right after the content (measured
+ * 2026-09-30, wiki _pages @1440: content ends at 321, footer box starts at 321 with its own 48px top padding, empty
+ * page background below it). Kept growing (Gitea's model) where a layout needs the full height:
+ *  - the fullscreen Actions log (utils.ts toggleFullScreen appends .fullscreen into .full.height, height 100%),
+ *  - the Actions run list and explore pages, whose page folders turn .full.height into a flex column so their
+ *    sidebar pane runs down to the footer (pages/actions-packages-projects actions-list.css, pages/people media.css). */
+.full.height:where(:not(:has(> .fullscreen, > .page-content .run-list, > .explore))) {
+  flex-grow: 0;
+}
+
+/* Space between the last page element and the footer: github.com Rails pages end their content 16px above the footer
+ * box (releases, tags, profile repositories: last row → footer text 68px = 16 + the footer's 48px top padding + 4px
+ * half-leading). Gitea: --page-space-bottom 64px (→ 116px). The variable itself stays 64px because page folders use
+ * it for their own paddings (Actions list pane). */
+.full.height {
+  padding-bottom: var(--base-size-16);
+}
+
 .ui.fluid.container {
   width: 100%;
 }

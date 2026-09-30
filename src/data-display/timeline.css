@@ -225,22 +225,30 @@
     left: var(--base-size-16);
   }
 
-  /* FG-046 (+ pages/issues-prs request): github.com keeps the reaction/kebab cluster top-right on the author line;
-     Gitea's `flex-wrap: wrap` pushes it onto a third row (85px header). The left part wraps inside its own column
-     (author · "commented …" on the first line, "(Migrated from …)" under it), the right cluster never wraps. */
+  /* FG-046 / FG2-052: github.com keeps the reaction/kebab cluster top-right on the author line. The header is one
+     row (no wrap); the left part is one nowrap line "avatar author commented <time>" that ends in an ellipsis
+     instead of wrapping ("4 months / ago"), the right cluster never shrinks, and Gitea's migration note
+     "(Migrated from github.com)" drops as a whole to a second 12px muted line. */
   .comment-header {
     flex-wrap: nowrap;
     align-items: flex-start;
   }
 
-  /* inline flow instead of flex items: "author commented 6 years ago (Migrated from …)" wraps between words like
-     github.com's header text, so a long author name still gives two lines, not three */
   .comment-header-left {
     display: block;
     flex: 1 1 auto;
     min-width: 0;
+    overflow: hidden;
     /* centres the 21px text line on the 26px action buttons of the right cluster */
     padding-top: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* inline review comments on the Files page share a ~300px box with the "Review" label: there the words wrap so
+     the time is never cut */
+  .comment-code-cloud .comment-header-left {
+    white-space: normal;
   }
 
   .comment-header-left > .inline-timeline-avatar {
@@ -251,6 +259,15 @@
 
   .comment-header-left > * > .svg {
     vertical-align: text-bottom;
+  }
+
+  .comment-header-left > .migrate {
+    display: block;
+    overflow: hidden;
+    color: var(--fgColor-muted);
+    font-size: var(--text-body-size-small);
+    line-height: var(--text-body-lineHeight-small);
+    text-overflow: ellipsis;
   }
 
   .comment-header-right {

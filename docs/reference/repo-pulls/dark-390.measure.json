@@ -308,13 +308,13 @@
      "gap": "normal"
     },
     {
-     "text": "Issues\n8",
+     "text": "Issues\n9",
      "box": {
       "w": 113.1,
       "h": 30
      },
      "height": "30px",
-     "width": "113.125px",
+     "width": "113.062px",
      "padding-top": "0px",
      "padding-right": "8px",
      "padding-bottom": "0px",
@@ -495,13 +495,13 @@
    "matched": 11,
    "samples": [
     {
-     "text": "8",
+     "text": "9",
      "box": {
-      "w": 21.9,
+      "w": 21.8,
       "h": 20
      },
      "height": "20px",
-     "width": "21.8906px",
+     "width": "21.8281px",
      "padding-top": "0px",
      "padding-right": "6px",
      "padding-bottom": "0px",
@@ -528,7 +528,7 @@
      "gap": "normal"
     },
     {
-     "text": "12",
+     "text": "13",
      "box": {
       "w": 32,
       "h": 20
@@ -617,7 +617,7 @@
   },
   "link": {
    "selector": "main a:not(.btn):not(.Button)",
-   "matched": 44,
+   "matched": 47,
    "samples": [
     {
      "text": "pemistahl",
@@ -728,9 +728,9 @@
      "text": "Skip to content\nNavigation Menu\nSign in\n",
      "box": {
       "w": 390,
-      "h": 1770
+      "h": 1885
      },
-     "height": "1770px",
+     "height": "1885px",
      "width": "390px",
      "padding-top": "0px",
      "padding-right": "0px",

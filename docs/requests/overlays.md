@@ -40,3 +40,13 @@ Source: docs/final-gate/issues.md (full evidence, PNG paths) and issues.json. Ra
    - Fix: Bottom fade / visible scrollbar in overflowing menus.
    - Critic refs: C085 (user-settings-appearance, nit)
    - PNG: `shots/final-gate/user-settings-appearance/light-1440.png`
+
+
+# Final gate #2 (loop iteration 2)
+
+Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids of docs/final-gate-2/raw.json) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only this folder’s theme-fixable items; `theme-fixable-template` items are either installed by the integrator first (this folder styles the result) or stay rejected (noted per item). Budget: github-auto 288.9 / 300 KB — trim before adding. Check every page-scoped selector against the shared page classes (see FG2-105) before you ship.
+
+1. **FG2-069 [theme-fixable-css] Overlay details: single-select filter menus show radio circles (Primer: check mark), labels SelectPanel rows show full pills (Primer: dot + name + description), compare SelectPanel has no title, branch names break mid-word, Flash icon wraps under text at 390** — impact 5 (judges 0, critic wt 5; gate 1 FG-121; routes: releases-playground-with-assets-prerelease-draft, repo-issue, repo-home, user-profile-repositories-tab, user-settings-account)
+   - Fix: Radio → check Octicon on the selected item; label rows: 14px colour dot (from the inline background) + name + muted description; branch items `overflow-wrap:normal; text-overflow:ellipsis`; Flash grid (icon column + text column). SelectPanel titles need markup: skip.
+   - Critic refs: C017 (user-profile-repositories-tab, nit), C037 (user-settings-account, nit), C078 (repo-issue, nit), C130 (releases-playground-with-assets-prerelease-draft, nit), C150 (repo-home, nit)
+   - PNG: `shots/final-gate-critic-0/st-up.png`, `shots/final-gate-critic-1/usam-01.png`, `shots/final-gate-critic-5/live/releases-playground-with-assets-prerelease-draft/states/light-1440-compare-open.png`, `shots/final-gate-2/releases-playground-with-assets-prerelease-draft/dark-390.png`

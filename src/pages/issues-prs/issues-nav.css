@@ -16,11 +16,32 @@
  */
 
 /* full-width page body under the repo tabs (Gitea: centred 1280px container, 24px under the tabs) */
-.page-content.issue-list > .secondary-nav:has(~ .ui.container > .gh-issues-layout) {
+/* The issues list keeps the NavList: its first item carries the issue-opened octicon. FG2-027: github.com's PR list
+   has no sidebar (React PageLayout, x=104 w=1232 @1440): the PR list's NavList is hidden (the integrator's list.tmpl
+   edit stops rendering it) and the page keeps the centred container with the 24px gutter, title 24px under the tabs. */
+.page-content.issue-list > .secondary-nav:has(~ .ui.container > .gh-issues-layout > .gh-issues-nav .octicon-issue-opened) {
   margin-bottom: 0;
 }
 
-.page-content.issue-list > .ui.container:has(> .gh-issues-layout) {
+@media (min-width: 768px) {
+  .page-content.issue-list:has(> .ui.container > .gh-issues-layout):not(:has(.gh-issues-nav .octicon-issue-opened)) {
+    --page-margin-x: var(--base-size-24);
+  }
+}
+
+.gh-issues-layout:not(:has(> .gh-issues-nav .octicon-issue-opened)) > .gh-issues-nav {
+  display: none;
+}
+
+.gh-issues-layout:not(:has(> .gh-issues-nav .octicon-issue-opened)) > .gh-issues-main {
+  padding: 0;
+}
+
+.gh-issues-layout:not(:has(> .gh-issues-nav .octicon-issue-opened)) > .gh-issues-main > .issue-list-toolbar {
+  margin-top: var(--base-size-24);
+}
+
+.page-content.issue-list > .ui.container:has(> .gh-issues-layout > .gh-issues-nav .octicon-issue-opened) {
   width: auto;
   max-width: none;
   margin: 0;
@@ -203,5 +224,29 @@
 
   .gh-issues-main {
     padding: var(--base-size-16);
+  }
+}
+
+/* FG2-031: phones — the row would be clipped ("Created by y…"). The selected view keeps its label; every other
+   item is a 32px invisible IconButton (label visually hidden, still its accessible name), so the whole NavList fits
+   one 358px row without scrolling. */
+@media (max-width: 767.98px) {
+  .gh-issues-nav {
+    padding-right: var(--base-size-16);
+    mask-image: none;
+  }
+
+  .gh-issues-nav-item:not(.selected) {
+    justify-content: center;
+    width: var(--control-medium-size);
+    padding: 0;
+  }
+
+  .gh-issues-nav-item:not(.selected) > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
   }
 }

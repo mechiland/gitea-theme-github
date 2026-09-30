@@ -350,14 +350,34 @@
   background: var(--bgColor-default);
 }
 
-/* mobile split view: a review thread lives in one half of the table (colspan 4, ~170px at 390). When the other half
-   of its row has no thread, the thread widens over it (FG-020, github.com shows threads full width). */
+/* split view: the empty half of an inline review row is an empty side like the neighbouring split cells (FG2-078) */
+.code-diff-split tr.add-comment > td:not(:has(.conversation-holder)) {
+  background: var(--diffBlob-emptyLine-bgColor);
+}
+
 @media (max-width: 767.98px) {
+  /* mobile split view (FG2-058): at 390 each half had ~13 characters of code and the page grew to 44,000px. The
+     table keeps a 720px minimum (two 64px number columns + ~40 characters of 12px code per half) and the diff body
+     scrolls sideways; the view style stays the user's choice. */
+  /* position: relative makes the scroller the containing block of the absolutely positioned "+" comment buttons,
+     which otherwise escape the clip and widen the page */
+  .repository .diff-file-box .code-diff-split {
+    position: relative;
+    container-type: inline-size;
+    overflow-x: auto;
+  }
+
+  .repository .diff-file-box .code-diff-split table {
+    width: max(100%, 2 * (var(--base-size-64) + var(--base-size-8) + 6 * var(--base-size-48)));
+  }
+
+  /* a review thread lives in one half of the table (colspan 4). When the other half of its row has no thread, the
+     thread spans the visible width of the scroller from its left edge (FG-020: github.com shows threads full width) */
   .code-diff-split tr.add-comment:not(:has(> .add-comment-right .conversation-holder)) > .add-comment-left > .conversation-holder,
   .code-diff-split tr.add-comment:not(:has(> .add-comment-left .conversation-holder)) > .add-comment-right > .conversation-holder {
     position: relative;
     z-index: 1;
-    width: 200%;
+    width: 100cqw;
   }
 
   .code-diff-split tr.add-comment:not(:has(> .add-comment-left .conversation-holder)) > .add-comment-right > .conversation-holder {
@@ -366,6 +386,33 @@
 
   .code-diff .conversation-holder .comment-code-cloud {
     margin: var(--base-size-8);
+  }
+
+  /* diff summary (FG2-045): Gitea hides it below 800px (display: none !important, beaten in code.important.css).
+     It stays on the 44px sticky toolbar line (a second line would slide under the sticky file headers, top: 44px)
+     as [diff icon] "N changed files" in 12px; the additions / deletions part of the sentence is dropped (the PR tab
+     bar carries +A −D). The toolbar no longer wraps (Gitea: flex-wrap below 480px, which overlapped the first file). */
+  .repository .diff-detail-box {
+    flex-wrap: nowrap;
+  }
+
+  .repository .diff-detail-box > .flex-text-block {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .repository .diff-detail-box .diff-detail-stats {
+    min-width: 0;
+    overflow: hidden;
+    font-size: 0;
+    white-space: nowrap;
+  }
+
+  .repository .diff-detail-box .diff-detail-stats strong:nth-of-type(1) {
+    min-width: 0;
+    overflow: hidden;
+    font-size: var(--text-body-size-small);
+    text-overflow: ellipsis;
   }
 }
 

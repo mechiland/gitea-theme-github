@@ -46,6 +46,12 @@
   color: var(--fgColor-muted);
 }
 
+/* FG2-081: a description with an emoji (<span class="emoji">) is split into flex items by Gitea's flex body, so a
+   leading emoji wraps onto a line of its own at 390; inline flow keeps emoji and text on one line */
+.items-with-main > .item .item-body:has(> .emoji) {
+  display: block;
+}
+
 /* rows inside a Box body: full-bleed separators */
 .ui.segment:not(.fitted) > .flex-divided-list > .item {
   margin-left: var(--base-size-negative-16);

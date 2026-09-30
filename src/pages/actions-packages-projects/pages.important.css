@@ -17,6 +17,13 @@
   padding-left: var(--control-medium-paddingInline-condensed) !important;
 }
 
+/* < md the current job is the selector row under the run title (action-run.css, FG2-056): flush with the title */
+@media (max-width: 767.98px) {
+  .action-view-sidebar-list > .item.selected[style="padding-left: 10px;"] {
+    padding-left: 0 !important;
+  }
+}
+
 /* job log links: Gitea colours them `var(--color-console-link) !important` (muted in our mapping) — github.com:
    --fgColor-muted + underline, hover --fgColor-accent */
 .job-step-logs .log-msg a:hover {

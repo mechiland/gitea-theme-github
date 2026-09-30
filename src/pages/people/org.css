@@ -235,7 +235,6 @@
 .team-item-header > .flex-text-block {
   grid-area: 1 / 3 / 3;
   gap: var(--base-size-4);
-  justify-content: flex-end;
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
   font-weight: var(--base-text-weight-normal);

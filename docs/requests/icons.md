@@ -290,3 +290,51 @@ add `table` to the generated masks (src/icons/gen-icons.mjs list). `home` is now
 - New: `table` mask (66 masks). The repo Projects tab and the overflow popup → `table` (`nav-tabs.css`, waits on IC-1).
   The profile/org tabs were already swapped by pages/people and went live with this deploy.
 - Evidence: `docs/icons-audit.md` §5 "L1 round 2", `shots/icons-l1r2/`.
+
+# From data-display (final gate #2, wave L2 round 1) — DD-IC-1: DataTable sort arrows (FG2-075, critic C138)
+Gitea's `SortArrow` helper (modules/templates/util_misc.go:28) renders a filled `octicon-triangle-up` (ascending) /
+`octicon-triangle-down` (descending, and the default column) inside `th[data-sortt-asc]` of the admin tables
+(admin/emails, admin/user, admin/orgs, admin/repos …). Primer DataTable marks the sorted column with `arrow-up` /
+`arrow-down` (16px, --fgColor-muted). This is a theme-scoped Octicon swap (your `gh.icons` pattern), so please:
+1. add `arrow-up` and `arrow-down` to the generated masks (src/icons/gen-icons.mjs list);
+2. swap them in the table header only (the triangles elsewhere are dropdown carets and must stay):
+```css
+th[data-sortt-asc] > .svg.octicon-triangle-up,
+th[data-sortt-asc] > .svg.octicon-triangle-down {
+  background-color: currentColor;
+  mask: var(--gh-octicon-arrow-up) center / contain no-repeat;
+}
+th[data-sortt-asc] > .svg.octicon-triangle-down { mask-image: var(--gh-octicon-arrow-down); }
+th[data-sortt-asc] > .svg:is(.octicon-triangle-up, .octicon-triangle-down) > * { visibility: hidden; }
+```
+Not done in data-display: the masks do not exist yet, and a `var(--gh-octicon-arrow-up)` with no definition would paint
+a solid currentColor square. Evidence: shots/data-display-r5/emails-390-light.png (caret after "Email Address").
+
+# From controls (wave L2 r1, 2026-09-30) — CT-IC-1: mask `calendar` (FG2-076)
+Please add `'calendar'` to `MASKS` in `src/icons/gen-icons.mjs` and regenerate `src/icons/octicon-masks.css`:
+```diff
+-  'id-badge', 'sliders', 'meter', 'pulse', 'graph', 'clock', 'stack', 'cpu',
++  'id-badge', 'sliders', 'meter', 'pulse', 'graph', 'clock', 'stack', 'cpu',
++  'calendar', // controls FG2-076: date / datetime-local / month / week picker indicator
+```
+**Why:** controls now draws the native date picker indicator as the calendar Octicon (16px --fgColor-muted mask,
+`src/controls/inputs.css` "date / time inputs"; time inputs use the existing `clock` mask). The reference is guarded:
+while `--gh-octicon-calendar` is undefined the indicator falls back (`revert-layer`) to Chrome's own glyph, but the shoot
+audit lists the var as unresolved on pages with a date input (issue sidebar due date, milestone new, admin config).
+
+# pages/auth (wave L2 r2, 2026-09-30) — request PA-L2-IC1: a 24px alert mask for the 404 Blankslate visual (nit)
+- **What**: add a 24-grid Octicon mask `--gh-octicon-alert-24` (source `@primer/octicons/build/svg/alert-24.svg`).
+- **Why**: the 404/500/503 Blankslate (src/pages/auth/status.css) draws its 32px visual (24px below 544) from
+  `--gh-octicon-alert`, a 16-grid drawing scaled 2x, so the stroke reads ~3px — heavier than Primer's Blankslate, which
+  uses the 24px octicon (critic auth-wL2-r1 issue 3). Once the mask exists pages/auth swaps `var(--gh-octicon-alert)` for
+  `var(--gh-octicon-alert-24)` in `.page-content .status-page-error::before`.
+- **Proposed diff** (src/icons/gen-icons.mjs): allow an explicit size suffix in MASKS —
+  ```diff
+  -  'id-badge', 'sliders', 'meter', 'pulse', 'graph', 'clock', 'stack', 'cpu',
+  +  'id-badge', 'sliders', 'meter', 'pulse', 'graph', 'clock', 'stack', 'cpu',
+  +  'alert-24', // pages/auth PA-L2-IC1: 404 Blankslate visual (24-grid drawing)
+  ...
+  -    const src = path.join(OCTICONS, `${n}-16.svg`);
+  +    const src = path.join(OCTICONS, /-(12|16|24|48)$/.test(n) ? `${n}.svg` : `${n}-16.svg`);
+  ```
+  (then regenerate octicon-masks.css; the build keeps only referenced masks, so no bundle cost until pages/auth uses it).

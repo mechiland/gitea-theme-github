@@ -80,7 +80,7 @@
   align-items: center;
   gap: 0 var(--base-size-4);
   order: 5;
-  margin: 0 0 var(--base-size-16);
+  margin: 0 0 var(--base-size-12);
   color: var(--fgColor-muted);
 }
 
@@ -109,12 +109,13 @@
   display: inline-flex;
 }
 
-/* vcard details (location, email, website, joined …); .user-orgs items are reset below */
+/* vcard details (location, email, website, joined …): 25px rows 4px apart like github.com (pt 8px here; the follower
+   line's 12px bottom margin + 8px = github.com's 16px + 4px); .user-orgs items keep Gitea's 3px !important padding */
 .card li {
   align-items: flex-start;
   gap: var(--base-size-8);
   order: 6;
-  padding: var(--base-size-4) 0 0;
+  padding: var(--base-size-8) 0 0;
   border: 0;
   list-style: none;
 }
@@ -157,7 +158,7 @@
   background: var(--button-default-bgColor-hover);
 }
 
-/* organisations: own section with a rule, 32px org avatars 4px apart; badges; "Block user" last (12px muted) */
+/* organisations: own section with a rule, 32px org avatars 4px apart; badges; "Block user" last (14px muted) */
 .card li:is(:has(> .user-orgs, > .user-badges), :last-child:has(> a.muted)) {
   order: 8;
   margin-top: var(--base-size-16);
@@ -173,7 +174,29 @@
 
 .card li:last-child:has(> a.muted) {
   order: 9;
-  font-size: var(--text-body-size-small);
+}
+
+/* "Organizations" heading (github.com h2.h4.mb-2: 16/600/24, 8px above the avatars); Gitea renders none */
+html:lang(en) .card li:has(> .user-orgs) {
+  flex-direction: column;
+}
+
+html:lang(en) .card li:has(> .user-orgs)::before {
+  content: "Organizations";
+  color: var(--fgColor-default);
+  font: var(--text-title-shorthand-small);
+}
+
+/* profile README: github.com's mono caption above the markdown (12/18, 16px below; "README" default, ".md" muted).
+   The "<user> /" part needs the template. The mono glyphs are 1ch each, so a 6ch colour stop splits the two parts. */
+.user.profile #readme_profile::before {
+  content: "README.md";
+  display: block;
+  margin-bottom: var(--base-size-16);
+  background: linear-gradient(90deg, var(--fgColor-default) 6ch, var(--fgColor-muted) 0) text;
+  color: transparent;
+  font: var(--text-caption-weight) var(--text-caption-size) / var(--base-text-lineHeight-normal) var(--fontStack-monospace);
+  width: max-content;
 }
 
 /* blocked-user notice stays at the top of the details */

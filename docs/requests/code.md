@@ -204,3 +204,82 @@ icons) and, in the right `.ui.buttons` group, the Blame link (`a[href*="/blame/"
 (`a[href*="/src/"]:not([href*="/src/commit/"])`) in blame. Raw / Permalink / History / escape buttons and the icon buttons
 stay. FG-025 (branch picker in the tree pane, Modern's view_content.tmpl) and FG-034 (README | license tabs) and FG-044
 (directory header row, Modern's view_list.tmpl) were REJECTED (see docs/requests/integrator-tools.md).
+
+
+# Final gate #2 (loop iteration 2)
+
+Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids of docs/final-gate-2/raw.json) and issues.json. Ranked by impact (judge reasons + critic severity), weakest routes first. Only this folder’s theme-fixable items; `theme-fixable-template` items are either installed by the integrator first (this folder styles the result) or stay rejected (noted per item). Budget: github-auto 288.9 / 300 KB — trim before adding. Check every page-scoped selector against the shared page classes (see FG2-105) before you ship.
+
+1. **FG2-015 [theme-fixable-css] File toolbar: 'Raw | Permalink | History' as text buttons plus copy/download/edit/delete/RSS icons; lone 'Code' segment on images; file info in mono; no lines/loc** — impact 27 (judges 24, critic wt 3; gate 1 FG-021; routes: blame, file-view-image-playground, file-view-markdown, repo-code-file)
+   - Fix: Keep Raw as the one text button; Permalink → link IconButton, History → history IconButton (aria-label/tooltip from the existing text via `font-size:0` + mask, text stays for AT); trash/RSS keep IconButton style in a second group. Hide the SegmentedControl when it has a single item (image/binary). File info sans 12px muted. '(N loc)' is Gitea data (inherent FG-009).
+   - Critic refs: C049 (repo-code-file, nit), C051 (file-view-markdown, nit), C101 (file-view-image-playground, nit)
+   - PNG: `shots/final-gate-2/file-view-image-playground/light-1440.png`, `shots/final-gate-2/blame/dark-390.png`, `shots/final-gate-2/blame/dark-1440.png`, `shots/final-gate-2/blame/light-390.png`
+   - **DONE (code L2 r1):** file-view.css: Gitea's text group flattened (display: contents) and regrouped [Raw | copy | download] [pencil | trash] + invisible 28px IconButtons link (Permalink) / history (History) / rss, labels kept for AT (font-size 0); blame: Raw, Unescape, link, history. Lone "Code" segment hidden (view-switch.css). File info stays 12px **mono**: github.com renders it monospace (docs/reference/repo-code-file/light-1440.png, zoomed). Masks: request CODE-L2-1 in integrator.md (served Octicon files are the fallback meanwhile). shots/code-l2-r1-final, states shots/code-l2-r1-states.
+2. **FG2-019 [theme-fixable-template] Branch picker, 'Go to file' and 'Add File' sit in the content toolbar; github.com puts branch picker + file search at the top of the Files tree pane** — impact 24 (judges 20, critic wt 4; gate 1 FG-025; routes: blame, directory-tree, file-view-markdown, repo-code-file)
+   - Fix: Still blocked: the markup lives in the Modern theme's `repo/view_content.tmpl` override (gate-1 FG-025, rejected: a, d). Not proposed for the last slot. No CSS path (cross-container move).
+   - Critic refs: C048 (repo-code-file, minor), C126 (directory-tree, nit)
+   - PNG: `shots/final-gate-critic-2/rcf-light-top.png`, `docs/reference/directory-tree/light-1440.png`, `shots/final-gate-2/blame/dark-1440.png`, `shots/final-gate-2/blame/light-1440.png`
+   - Not done (template/Modern-owned, still blocked).
+3. **FG2-034 [theme-fixable-css] 390: README box header wraps to two rows (pencil alone on row 2, ~66px) — the blob-header mobile rule `.file-header .file-header-left { flex: 1 0 100% }` also hits `#readme h4.file-header`** — impact 12 (judges 0, critic wt 12, majors C025 C030; new; routes: repo-home-markdown-showcase-playground, repo-home-readme-with-images-and-tables)
+   - Fix: Scope the rule in src/code/file-view.css (~l.284, mobile block) to the file view: `.non-diff-file-content > .file-header .file-header-left`, or exclude `#readme`. Verify repo-home, repo-home-readme-with-images-and-tables and the markdown showcase at 390.
+   - Critic refs: C025 (repo-home-markdown-showcase-playground, major), C030 (repo-home-readme-with-images-and-tables, major)
+   - PNG: `shots/final-gate-critic-1/mdm-01.png`, `shots/final-gate-critic-1/rdm-01.png`, `shots/final-gate-2/repo-home-markdown-showcase-playground/dark-390.png`, `shots/final-gate-2/repo-home-markdown-showcase-playground/light-390.png`
+   - **DONE (code L2 r1):** mobile rule scoped to `.non-diff-file-content:not(#readme) > .file-header .file-header-left`; README header is one 48px row at 390 (repo-home-readme-with-images-and-tables, markdown showcase, light + dark).
+4. **FG2-041 [theme-fixable-template] README header is a single 'README.md' bar, not github.com's 'README | <license> license' tabs** — impact 10 (judges 10, critic wt 0; gate 1 FG-034; routes: repo-home-readme-with-images-and-tables, repo-home)
+   - Fix: Rejected in gate 1 (FG-034: impact 13, §7 e) and not proposed for the last slot (lower impact than the labels/milestones NavList). CSS part: readme-header-style.
+   - PNG: `shots/final-gate-2/repo-home-readme-with-images-and-tables/dark-1440.png`, `shots/final-gate-2/repo-home-readme-with-images-and-tables/light-1440.png`, `shots/final-gate-2/repo-home/dark-1440.png`, `shots/final-gate-2/repo-home/light-1440.png`
+   - Not done (template, rejected). CSS part done under FG2-077.
+5. **FG2-044 [theme-fixable-template] Directory listing has no 'Name | Last commit message | Last commit date' header row; '..' parent row sits flush at the top** — impact 9 (judges 9, critic wt 0; gate 1 FG-044; routes: directory-tree)
+   - Fix: Gate-1 FG-044 rejected (Modern-owned `repo/view_list.tmpl`). A CSS approximation exists: the list is a grid, so `#repo-files-table::before` (col 1 'Name') and `::after` with `order:-1` (last column 'Last commit date') under `:lang(en)` give 2 of 3 labels — judge it at the next critic round; not scheduled here.
+   - PNG: `shots/final-gate-2/directory-tree/dark-1440.png`, `shots/final-gate-2/directory-tree/light-1440.png`
+   - Not done (not scheduled).
+6. **FG2-045 [theme-fixable-css] 390: diff summary ('20 changed files with 106 additions…') and the file-tree toggle are hidden in the PR Files / compare toolbars** — impact 9 (judges 0, critic wt 9; new; routes: pr-compare-form-playground, pr-compare-new-playground, pr-files-changed-unified-playground-large-diff)
+   - Fix: < 768 keep `.diff-detail-stats` visible as a 12px muted line under the toolbar (stack) and keep the tree toggle IconButton; hide nothing that Gitea shows at 1440.
+   - Critic refs: C132 (pr-files-changed-unified-playground-large-diff, minor), C142 (pr-compare-new-playground, minor), C197 (pr-compare-form-playground, minor)
+   - PNG: `shots/final-gate-critic-5/pr-files-changed-unified-playground-large-diff/light-390-0.png`, `shots/final-gate-2/pr-compare-form-playground/dark-390.png`, `shots/final-gate-2/pr-compare-form-playground/light-390.png`, `shots/final-gate-2/pr-compare-new-playground/dark-390.png`
+   - **DONE (code L2 r1), differently:** < 768 the stats stay on the 44px sticky toolbar line as [diff icon] "N changed files" (12px, ellipsis); the additions/deletions words are dropped (a second line would slide under the sticky file headers at top: 44px; the PR tab bar already shows +A −D). display override in code.important.css (allow-listed selector). Tree toggle stays hidden on mobile (Gitea hides the tree there too).
+7. **FG2-055 [theme-fixable-css] 390: full-bleed file box / commit bar / blame box keep 6px radius and side borders at the viewport edge while the breadcrumb keeps the 16px gutter** — impact 7 (judges 0, critic wt 7; gate 1 FG-054; routes: blame-playground-multiple-authors, file-view-image-playground, file-view-large-file-playground)
+   - Fix: Either drop radius + left/right borders on the full-bleed boxes (Primer responsive Box) or return them to the 16px gutter; pick one for file view, image view and blame (code/file-view.css:303, FG-054).
+   - Critic refs: C079 (file-view-large-file-playground, minor), C100 (file-view-image-playground, minor), C180 (blame-playground-multiple-authors, nit)
+   - PNG: `shots/final-gate-critic-4/fvi-390-zoom.png`, `shots/final-gate-2/blame-playground-multiple-authors/dark-390.png`, `shots/final-gate-2/blame-playground-multiple-authors/light-390.png`, `shots/final-gate-2/file-view-image-playground/dark-390.png`
+   - **DONE (code L2 r1):** full-bleed margins removed; commit box, file box and blame box sit in the 16px gutter like the breadcrumb and the repo-home file list.
+8. **FG2-058 [theme-fixable-css] 390: split diff soft-wraps into ~13-character columns (page 44,250px tall vs 9,236 at 1440)** — impact 6 (judges 0, critic wt 6, majors C106; new; routes: pr-files-changed-split-playground-large-diff)
+   - Fix: < 768 in split view: `.code-diff-split td.lines-code { white-space: pre }` inside a horizontally scrolling `.diff-file-body` (overflow-x:auto), min column width ~40ch; or render the split table with `table-layout:auto` + scroll. Do not force unified (user preference).
+   - Critic refs: C106 (pr-files-changed-split-playground-large-diff, major)
+   - PNG: `shots/final-gate-critic-4/pfs-390-0.png`, `shots/final-gate-2/pr-files-changed-split-playground-large-diff/dark-390.png`, `shots/final-gate-2/pr-files-changed-split-playground-large-diff/dark-1440.png`, `shots/final-gate-2/pr-files-changed-split-playground-large-diff/light-390.png`
+   - **DONE (code L2 r1):** < 768 split table min width 720px (≈40 ch of code per half) in a sideways-scrolling `.code-diff-split` (position: relative so the absolutely positioned "+" buttons are clipped; no page overflow); single-sided review threads span the visible width (100cqw). Page 44,250 → 23,760px at 390.
+9. **FG2-060 [theme-fixable-css] 390 latest-commit bar: both author names and the connector are ellipsized ('Joel Nati… a… Peter M. …'); github.com keeps names on one line and moves actions to a second line** — impact 6 (judges 0, critic wt 6, majors C125; new; routes: directory-tree)
+   - Fix: < 768: `#repo-files-table .repo-file-line` (latest commit) wraps into two rows: avatars + authors + 'and' (no ellipsis on the connector, `flex-shrink:0`) + time on row 1; message/SHA/history on row 2.
+   - Critic refs: C125 (directory-tree, major)
+   - PNG: `shots/final-gate-2/directory-tree/light-390.png`, `shots/final-gate-2/directory-tree/light-390.png`
+   - **DONE (code L2 r1):** < 768 the bar wraps: row 1 avatars + names (no ellipsis; long lists wrap inside the names block) + age, row 2 [… message toggle] [history]. Known gap: "Joel Natividad and Peter M. Stahl" + age do not fit one 332px line, so the names take two lines (github.com: one line, shorter logins).
+10. **FG2-068 [theme-fixable-css] Diff file header: diffstat '+3 −3 ■■■■■' at the right (github.com: count + blocks before the file name), no expand/collapse chevron look, rename-only files show an empty body** — impact 5 (judges 2, critic wt 3; gate 1 FG-096; routes: pr-files-changed-split-playground-large-diff, repo-pull-files, pr-files-changed-unified)
+   - Fix: `.diff-file-header`: `order` the stats before the name, chevron fold button first (Octicon chevron-down, rotate when folded); rename-only (empty body) → muted 'File renamed without changes.' is template text — style the empty body as a 32px muted row. C060 markdown highlighting is Chroma: skip.
+   - Critic refs: C059 (pr-files-changed-unified, nit), C060 (pr-files-changed-unified, nit), C109 (pr-files-changed-split-playground-large-diff, nit)
+   - PNG: `shots/final-gate-critic-4/pfs-light-3.png`, `shots/final-gate-2/pr-files-changed-split-playground-large-diff/dark-1440.png`, `shots/final-gate-2/pr-files-changed-split-playground-large-diff/light-1440.png`, `shots/final-gate-2/repo-pull-files/dark-1440.png`
+   - Not done: stats live in `.diff-file-header-actions`, name/chevron in `.diff-file-name` (tw-flex !important → cannot be flattened); CSS cannot put the stats between chevron and name.
+11. **FG2-077 [theme-fixable-css] README box header: 46px grey bar with 'README.md' + pencil; github.com draws a white header with an underlined 'README' tab (accent bar) and a TOC button** — impact 4 (judges 0, critic wt 4; gate 1 FG-034; routes: repo-home-readme-with-images-and-tables, repo-home)
+   - Fix: `#readme > .file-header`: `--bgColor-default`, 16px inset, the file name styled as a selected UnderlineNav item (book icon, 2px `--underlineNav-borderColor-active` bar at the bottom edge); pencil as a 28px invisible IconButton at the right. The 'README | license' tab pair itself is template-only (FG-034, rejected).
+   - Critic refs: C148 (repo-home, minor), C032 (repo-home-readme-with-images-and-tables, nit)
+   - PNG: `shots/final-gate-critic-1/rd-00.png`, `shots/final-gate-2/repo-home-readme-with-images-and-tables/dark-1440.png`, `shots/final-gate-2/repo-home-readme-with-images-and-tables/light-1440.png`, `shots/final-gate-2/repo-home/dark-1440.png`
+   - **DONE (code L2 r1):** `#readme > .file-header` white, 48px, the name as a selected UnderlineNav item (book icon, 2px --underlineNav-borderColor-active bar on the bottom edge, 8px inline padding); pencil stays the 28px invisible IconButton.
+12. **FG2-078 [theme-fixable-css] Split diff: the inline review comment row's empty left half is white while neighbouring empty split cells are muted** — impact 3 (judges 0, critic wt 3; new; routes: pr-files-changed-split-playground-large-diff)
+   - Fix: `.code-diff-split tr.add-comment td:empty, … td.add-comment-left:not(:has(.comment))` → `--diffBlob-emptyLine-bgColor` / `--bgColor-muted`, both schemes.
+   - Critic refs: C107 (pr-files-changed-split-playground-large-diff, minor)
+   - PNG: `shots/final-gate-critic-4/pfs-light-3.png`, `shots/final-gate-2/pr-files-changed-split-playground-large-diff/light-1440.png`
+   - **DONE (code L2 r1):** `.code-diff-split tr.add-comment > td:not(:has(.conversation-holder))` → --diffBlob-emptyLine-bgColor.
+13. **FG2-080 [theme-fixable-css] 390 blame group header: no relative date (github.com right-aligns '3 years ago') and muted background (github.com default bg)** — impact 3 (judges 0, critic wt 3; gate 1 FG-028; routes: blame)
+   - Fix: < 768: show the blame info's `relative-time` right-aligned in the group header and use `--bgColor-default`.
+   - Critic refs: C152 (blame, minor)
+   - PNG: `shots/final-gate-2/blame/dark-390.png`, `shots/final-gate-2/blame/light-390.png`
+   - **DONE (code L2 r1), partly:** relative date shown right-aligned (12px muted) in the mobile group header (display override allow-listed). Background kept --bgColor-muted: the github.com reference header row is rgb(246,248,250) = --bgColor-muted (docs/reference/blame/light-390.png), not the default bg the item claims.
+14. **FG2-086 [theme-fixable-css] 390 markdown file view: body padding 16px (github.com 32px) — paragraphs 356px wide vs 324** — impact 3 (judges 0, critic wt 3; new; routes: file-view-markdown)
+   - Fix: `.file-view.markup` at < 768: padding 32px (github.com `.markdown-body` at small widths keeps 32px in the blob view).
+   - Critic refs: C050 (file-view-markdown, minor)
+   - PNG: `shots/final-gate-2/file-view-markdown/dark-390.png`, `shots/final-gate-2/file-view-markdown/light-390.png`
+   - **DONE (code L2 r1) via FG2-055:** the box is back in the 16px gutter, so 16px padding gives the same 324px text measure as github.com's full-bleed box with 32px padding.
+15. **FG2-099 [theme-fixable-css] Commit page diff: file tree collapsed by default (github.com shows it left of the diff)** — impact 1 (judges 0, critic wt 1; new; routes: commit-detail)
+   - Fix: Nit. The tree visibility is a per-user Gitea toggle (localStorage/JS); CSS cannot open it without fighting the toggle. Tooling option: open it in the capture state. Otherwise leave.
+   - Critic refs: C010 (commit-detail, nit)
+   - PNG: `shots/final-gate-critic-0/cd-l.png`, `shots/final-gate-2/commit-detail/dark-1440.png`, `shots/final-gate-2/commit-detail/light-1440.png`
+   - Not done (per-user JS toggle; nit).

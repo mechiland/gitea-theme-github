@@ -40,3 +40,25 @@
     width: 100%;
   }
 }
+
+/* FG2-059: the new-PR compare page (repo/diff/compare.tmpl, Gitea `ui container fluid padded`) uses github.com's
+   container-xl like the other repo pages (1216px at 1440) instead of spanning the window */
+.page-content.repository.diff.compare.pull > .ui.fluid.container {
+  width: calc(var(--breakpoint-xlarge) - 2 * var(--page-margin-x));
+}
+
+/* FG2-074: compare range editor on --bgColor-muted (github.com .range-editor) */
+.page-content.repository.diff.compare.pull .ui.segment.choose.branch {
+  background: var(--bgColor-muted);
+}
+
+/* FG2-074: "N Commits" above the day-grouped commit timeline is a heading line, not an empty Box header */
+.page-content.repository.diff.compare.pull .ui.top.attached.header:has(+ .commit-table .gh-commit-day) {
+  min-height: 0;
+  margin: 0;
+  padding: 0 0 var(--base-size-8);
+  border: 0;
+  background: transparent;
+  font-size: var(--text-body-size-medium);
+  font-weight: var(--base-text-weight-semibold);
+}

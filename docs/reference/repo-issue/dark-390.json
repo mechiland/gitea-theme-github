@@ -9,169 +9,169 @@
  "consoleErrors": [
   {
    "text": "Failed to load resource: the server responded with a status of 404 ()",
-   "url": "https://github.com/pemistahl/grex/issues/35/agent_tasks:0"
+   "url": "https://github.com/copilot/agent-sessions/pemistahl/grex/agents:0"
   },
   {
    "text": "Failed to load resource: the server responded with a status of 404 ()",
-   "url": "https://github.com/copilot/agent-sessions/pemistahl/grex/agents:0"
+   "url": "https://github.com/pemistahl/grex/issues/35/agent_tasks:0"
   }
  ],
  "consoleWarnings": [],
  "failedRequests": [
   {
-   "url": "https://github.com/pemistahl/grex/issues/35/agent_tasks",
+   "url": "https://github.com/copilot/agent-sessions/pemistahl/grex/agents",
    "status": 404,
    "type": "fetch"
   },
   {
-   "url": "https://github.com/copilot/agent-sessions/pemistahl/grex/agents",
+   "url": "https://github.com/pemistahl/grex/issues/35/agent_tasks",
    "status": 404,
    "type": "fetch"
   }
  ],
  "expectedFailures": [],
  "ignoredRequests": [],
- "cssBytes": 333734,
+ "cssBytes": 334580,
  "cssFiles": [
   {
-   "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
-   "bytes": 7575
-  },
-  {
-   "url": "https://github.githubassets.com/assets/light_high_contrast-48fdd0811afbab3c.css",
-   "bytes": 7363
-  },
-  {
-   "url": "https://github.githubassets.com/assets/react-core.c096e568423212a2.module.css",
-   "bytes": 436
+   "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
+   "bytes": 7573
   },
   {
    "url": "https://github.githubassets.com/assets/app-runtime.70b2cadcfd63fdd3.module.css",
-   "bytes": 1513
-  },
-  {
-   "url": "https://github.githubassets.com/assets/repository-11ee8a031c040c1a.css",
-   "bytes": 5284
+   "bytes": 1256
   },
   {
    "url": "https://github.githubassets.com/assets/primer-primitives-ed9ca172356fd545.css",
-   "bytes": 2575
+   "bytes": 2334
   },
   {
-   "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
-   "bytes": 7391
+   "url": "https://github.githubassets.com/assets/repository-11ee8a031c040c1a.css",
+   "bytes": 5308
   },
   {
-   "url": "https://github.githubassets.com/assets/dark-79ad2ace604703b3.css",
-   "bytes": 7271
+   "url": "https://github.githubassets.com/assets/light_high_contrast-48fdd0811afbab3c.css",
+   "bytes": 7627
   },
   {
-   "url": "https://github.githubassets.com/assets/primer-4136ede8b2650a2d.css",
-   "bytes": 43346
+   "url": "https://github.githubassets.com/assets/light-99f877e9ddfc0e51.css",
+   "bytes": 7250
   },
   {
    "url": "https://github.githubassets.com/assets/github-7338c07b3a07b8be.css",
-   "bytes": 22091
+   "bytes": 22069
   },
   {
-   "url": "https://github.githubassets.com/assets/29.d55ed336d79f0913.module.css",
-   "bytes": 6374
+   "url": "https://github.githubassets.com/assets/dark_high_contrast-24484a076f02295f.css",
+   "bytes": 7390
   },
   {
-   "url": "https://github.githubassets.com/assets/9x.87181dadfc67fd7b.module.css",
-   "bytes": 4141
+   "url": "https://github.githubassets.com/assets/issues-react.60005f9ed9f6e431.module.css",
+   "bytes": 628
   },
   {
-   "url": "https://github.githubassets.com/assets/issues-react.0de7f5047d8e7d1c.module.css",
-   "bytes": 657
+   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.c83fd3e6c58504ad.module.css",
+   "bytes": 371
+  },
+  {
+   "url": "https://github.githubassets.com/assets/notifications-subscriptions-menu.8700e38507c85ecd.module.css",
+   "bytes": 1282
   },
   {
    "url": "https://github.githubassets.com/assets/t.ee9b8e8ca9bf0b40.module.css",
-   "bytes": 3443
+   "bytes": 3683
   },
   {
-   "url": "https://github.githubassets.com/assets/app-install-banner-partial.683b6d8b6c4fce1e.module.css",
-   "bytes": 419
+   "url": "https://github.githubassets.com/assets/primer-4136ede8b2650a2d.css",
+   "bytes": 43360
   },
   {
-   "url": "https://github.githubassets.com/assets/keyboard-shortcuts-dialog.6779928e8ca626b6.module.css",
-   "bytes": 650
+   "url": "https://github.githubassets.com/assets/29.d55ed336d79f0913.module.css",
+   "bytes": 6376
   },
   {
-   "url": "https://github.githubassets.com/assets/9ec.1ab73a072f65d875.module.css",
-   "bytes": 3534
+   "url": "https://github.githubassets.com/assets/v.2ea16bc55b69e5d6.module.css",
+   "bytes": 7266
   },
   {
    "url": "https://github.githubassets.com/assets/44.d69ac6945f0198ad.module.css",
-   "bytes": 3473
+   "bytes": 3238
   },
   {
-   "url": "https://github.githubassets.com/assets/notifications-subscriptions-menu.611eba93202fabff.module.css",
-   "bytes": 1262
+   "url": "https://github.githubassets.com/assets/react-core.bd3724a91c8f1bf9.module.css",
+   "bytes": 456
   },
   {
-   "url": "https://github.githubassets.com/assets/m4.fec39dd01b1bfcab.module.css",
-   "bytes": 3920
+   "url": "https://github.githubassets.com/assets/9x.87181dadfc67fd7b.module.css",
+   "bytes": 4381
   },
   {
-   "url": "https://github.githubassets.com/assets/v.0135404953d89e91.module.css",
-   "bytes": 7279
+   "url": "https://github.githubassets.com/assets/9ec.1ab73a072f65d875.module.css",
+   "bytes": 3526
   },
   {
-   "url": "https://github.githubassets.com/assets/qt.e2d9000ad9215276.module.css",
-   "bytes": 3941
-  },
-  {
-   "url": "https://github.githubassets.com/assets/4k.bd79987fda513edc.module.css",
-   "bytes": 17572
-  },
-  {
-   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
-   "bytes": 41105
-  },
-  {
-   "url": "https://github.githubassets.com/assets/primer-react-css.e6a43c45f45572ae.module.css",
-   "bytes": 35264
+   "url": "https://github.githubassets.com/assets/4k.500dfd5e81e6862f.module.css",
+   "bytes": 17810
   },
   {
    "url": "https://github.githubassets.com/assets/primer-react-brand-css.6a01c236ff527e7e.module.css",
-   "bytes": 71989
+   "bytes": 72013
+  },
+  {
+   "url": "https://github.githubassets.com/assets/qt.e2d9000ad9215276.module.css",
+   "bytes": 3715
+  },
+  {
+   "url": "https://github.githubassets.com/assets/app-install-banner-partial.e8934decca2d3cfc.module.css",
+   "bytes": 648
+  },
+  {
+   "url": "https://github.githubassets.com/assets/m4.fec39dd01b1bfcab.module.css",
+   "bytes": 3950
+  },
+  {
+   "url": "https://github.githubassets.com/assets/global-54ba76e934a49d7c.css",
+   "bytes": 41088
+  },
+  {
+   "url": "https://github.githubassets.com/assets/primer-react-css.e6a43c45f45572ae.module.css",
+   "bytes": 35280
   },
   {
    "url": "https://github.githubassets.com/assets/kq9.8ad2074125dec7f9.module.css",
-   "bytes": 426
+   "bytes": 450
   },
   {
    "url": "https://github.githubassets.com/assets/u2l.54b6ba2af351ee33.module.css",
-   "bytes": 397
-  },
-  {
-   "url": "https://github.githubassets.com/assets/gq.fda7b9fb9ad99aaf.module.css",
-   "bytes": 4763
+   "bytes": 609
   },
   {
    "url": "https://github.githubassets.com/assets/c1.65ef997b93275132.module.css",
-   "bytes": 1779
+   "bytes": 1762
   },
   {
-   "url": "https://github.githubassets.com/assets/e8.d4da58ecac1349ff.module.css",
-   "bytes": 3767
+   "url": "https://github.githubassets.com/assets/gq.fda7b9fb9ad99aaf.module.css",
+   "bytes": 4968
   },
   {
-   "url": "https://github.githubassets.com/assets/2n.31a81531fe9f75b2.module.css",
-   "bytes": 3222
+   "url": "https://github.githubassets.com/assets/40o.48b3dd1617d257e2.module.css",
+   "bytes": 5020
   },
   {
    "url": "https://github.githubassets.com/assets/fg.2616179aabbabe22.module.css",
-   "bytes": 679
+   "bytes": 702
+  },
+  {
+   "url": "https://github.githubassets.com/assets/e8.d4da58ecac1349ff.module.css",
+   "bytes": 3773
   },
   {
    "url": "https://github.githubassets.com/assets/g.31d82d04a74d9d4e.module.css",
-   "bytes": 4016
+   "bytes": 4220
   },
   {
-   "url": "https://github.githubassets.com/assets/40o.73a8e77842ca15d1.module.css",
-   "bytes": 4817
+   "url": "https://github.githubassets.com/assets/2n.428b121a4fba52ae.module.css",
+   "bytes": 3198
   }
  ],
  "problems": [],
@@ -2128,7 +2128,9 @@
  "icons": {
   "octicons": 0,
   "nonOcticon": [],
-  "masked": []
+  "masked": [],
+  "hidden": [],
+  "githubNative": []
  },
  "unlayeredGiteaCss": [],
  "cls": {
@@ -2136,12 +2138,12 @@
   "shifts": []
  },
  "timing": {
-  "domContentLoaded": 1551,
-  "load": 2130,
-  "transferSize": 43044,
+  "domContentLoaded": 1680,
+  "load": 1694,
+  "transferSize": 43049,
   "resources": 250,
   "cssResources": 38,
-  "cssTransferBytesPerfApi": 339735
+  "cssTransferBytesPerfApi": 339727
  },
  "document": {
   "width": 390,
@@ -2149,5 +2151,5 @@
   "horizontalOverflow": false
  },
  "measureJson": "repo-issue/dark-390.measure.json",
- "ms": 3364
+ "ms": 3576
 }
