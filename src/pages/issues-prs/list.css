@@ -73,7 +73,7 @@
 }
 
 /* ---------- list Box header (#issue-filters) and bulk-action bar (#issue-actions) ---------- */
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar {
+.issue-list-toolbar {
   align-items: center;
   gap: var(--base-size-8);
   min-height: var(--base-size-48);
@@ -86,28 +86,22 @@
 }
 
 /* the rows' Box continues the header: square top corners */
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar ~ #issue-list {
+.issue-list-toolbar ~ #issue-list {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar ~ #issue-list > .item:first-child {
+.issue-list-toolbar ~ #issue-list > .item:first-child {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-/* an empty list (no rows): the header closes the Box itself */
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar:has(~ #issue-list:empty) {
-  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
-  border-radius: var(--borderRadius-medium);
-}
-
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar-left {
+.issue-list-toolbar-left {
   gap: var(--base-size-8);
 }
 
 /* select-all checkbox: aligned with the row checkboxes (row padding 16px) */
-:is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar-left > .issue-checkbox-all {
+.issue-list-toolbar-left > .issue-checkbox-all {
   margin: 0 var(--base-size-8) 0 0;
 }
 
@@ -188,7 +182,7 @@
 
 /* ---------- narrow viewports ---------- */
 @media (max-width: 767.98px) {
-  :is(.issue-list, .milestone-issue-list, .repository.milestones) .issue-list-toolbar {
+  .issue-list-toolbar {
     flex-wrap: wrap;
     align-items: flex-start;
     padding: var(--base-size-8);

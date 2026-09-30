@@ -19,15 +19,9 @@
   line-height: var(--base-size-20);
 }
 
-.ui.selection.dropdown:hover {
-  box-shadow: var(--shadow-inset);
-}
-
 /* Primer Select size="small": 28px, 8px leading padding, 12px text. Gitea .small/.tiny/.mini selections, and any
    selection inside a small input group (package list / versions search: input + type select + button) */
-.ui.small.selection.dropdown,
-.ui.tiny.selection.dropdown,
-.ui.mini.selection.dropdown,
+.ui.selection.dropdown:is(.small, .tiny, .mini),
 .ui.action.input:is(.small, .tiny, .mini) > .ui.selection.dropdown {
   min-height: var(--control-small-size);
   padding-top: calc((var(--control-small-size) - var(--base-size-20)) / 2 - 1px);
@@ -69,14 +63,12 @@
   box-shadow: none;
 }
 
-.ui.selection.dropdown > .text:not(.default),
-.ui.selection.visible.dropdown > .text:not(.default) {
+.ui.selection.dropdown > .text:not(.default) {
   color: var(--fgColor-default);
   font-weight: var(--base-text-weight-normal);
 }
 
-.ui.selection.dropdown > .default.text,
-.ui.selection.dropdown > .text.default {
+.ui.selection.dropdown > .default.text {
   color: var(--fgColor-muted);
 }
 
@@ -89,8 +81,7 @@
   padding: var(--base-size-2) var(--base-size-32) var(--base-size-2) var(--base-size-4);
 }
 
-.ui.multiple.dropdown > .text,
-.ui.multiple.search.dropdown > .text {
+.ui.multiple.dropdown > .text {
   margin: calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--base-size-2) - 1px) 0
     calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--base-size-2) - 1px) var(--base-size-8);
   line-height: var(--base-size-20);
@@ -152,12 +143,7 @@
   padding-left: var(--control-small-paddingInline-condensed);
 }
 
-.ui.search.selection.dropdown:not(.multiple) > input.search:focus {
-  outline: none;
-}
-
-.ui.selection.dropdown.disabled,
-.ui.disabled.selection.dropdown {
+.ui.selection.dropdown.disabled {
   border-color: var(--control-borderColor-disabled);
   background: var(--control-bgColor-disabled);
   box-shadow: none;
@@ -181,13 +167,7 @@ select,
   cursor: pointer;
 }
 
-select:focus,
-.ui.form select:focus {
-  border-color: var(--borderColor-accent-emphasis);
-  outline: var(--borderWidth-thick) solid var(--borderColor-accent-emphasis);
-  outline-offset: -1px;
-}
-
+/* focus ring: shared with text inputs (inputs.css) */
 select:disabled {
   border-color: var(--control-borderColor-disabled);
   background-color: var(--control-bgColor-disabled);
@@ -243,7 +223,6 @@ select.ui.dropdown {
   gap: var(--base-size-8);
 }
 
-.ui.selection.dropdown > .text > img.ui.avatar,
 .ui.selection.dropdown > .text > .avatar {
   flex-shrink: 0;
   width: var(--base-size-20);

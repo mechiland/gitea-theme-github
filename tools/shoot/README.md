@@ -21,6 +21,8 @@ admin user's **theme / language preference** (via the real settings form) and, i
 | `lib/` | browser launcher, Gitea login/appearance, Primer palette, in-page audit, measure set |
 | `budget-compare.mjs` | per-page CLS / DCL / load diff of two runs (`--ours <run> --base <run> [--json out]`), flags regressions beyond noise (CLS +0.02, DCL max(150 ms, 25 %)) |
 | `themes-offered.mjs` | read-only: prints the themes offered on /user/settings/appearance (pre/post restart check) |
+| `coverage.mjs` | CSS rule coverage of the theme over every route × scheme × viewport × state → `shots/coverage/` |
+| `pixeldiff.mjs` (+ `lib/pixeldiff.py`) | PNG-by-PNG diff of two shoot runs (Pillow), volatile-region masks, known-noisy list `pixeldiff-noisy.json` |
 
 ## shoot.mjs
 
@@ -38,7 +40,7 @@ node tools/shoot/shoot.mjs --target github --only explore-repos,repo-home --meas
 
 Options: `--routes <file>` `--only a,b` `--schemes light,dark` `--viewports 1440,390`
 `--states` `--measure` `--measure-only` `--theme <name>` `--out <dir>` `--concurrency n`
-`--no-audit` `--relogin`. Default out: `shots/<YYYYMMDD-HHMMSS>-gitea-<theme>/` for gitea,
+`--no-audit` `--relogin` `--stable` `--stable-time <iso>` `--theme-css <file>`. Default out: `shots/<YYYYMMDD-HHMMSS>-gitea-<theme>/` for gitea,
 `docs/reference/` for github. Partial runs (`--only`) into an existing dir merge `summary.json`.
 
 Viewports: 1440×900 @1x, 390×844 @2x. `colorScheme` is forced per context
@@ -111,6 +113,81 @@ and up to 3 visible samples with box size, padding, margins, radius, border widt
 family/size/weight, line-height, letter-spacing, color, background, box-shadow, outline, gap.
 Same logical names on both targets → `compare.mjs` renders a diff table. Extend per route with
 `"measure": {"gitea": [{"name": "x", "selector": "..."}], "github": [...]}`.
+
+### Deterministic captures for pixel diffs (`--stable`, `--theme-css`)
+
+- `--stable`: the page clock is fixed (`context.clock.setFixedTime`, default `2027-01-01T00:00:00Z`, `--stable-time`), so
+  `<relative-time>` text ("4 months ago") never drifts between runs, and every non-Gitea request is aborted (external
+  README badges on octo-org/grex etc. render as consistently broken images; they cause ~20 expected console errors
+  on repo-home). Recorded in `summary.json` → `stable`. Use it only for pixel comparisons, not for design review.
+- `--theme-css <file>`: serves a local file in place of `/assets/css/theme-<theme>.css` (recorded in `summary.json` →
+  `themeCss` with sha256). Lets you test a trimmed build **without deploying** and makes a baseline independent of
+  concurrent deploys.
+- Every page JSON / state entry records `volatile[]` (CSS px rects in the PNG's coordinates: footer server-timing line
+  "Page: NNms Template: NNms" across the footer width, `<relative-time>` lines across their block) and states record
+  `clipRect`; `pixeldiff.mjs` masks them.
+
+Trim workflow (baseline frozen 2026-09-30 in `shots/trim-before`, CSS copy in `shots/trim-before-css/`):
+
+```sh
+node tools/shoot/shoot.mjs --target gitea --theme github-auto --states --no-audit --stable \
+  --theme-css dist/theme-github-auto.css --out shots/trim-after            # after `npm run build`, no deploy needed
+node tools/shoot/pixeldiff.mjs --a shots/trim-before --b shots/trim-after --out shots/trim-after/pixeldiff
+```
+
+Content written to Gitea between the two runs (smoke.mjs issues/PRs/commits in octo-org/theme-playground, the
+dashboard feed) is real pixel change: those pages are flagged `knownNoisy` via `pixeldiff-noisy.json`. For a
+drift-free comparison capture a fresh baseline right before the after-run with
+`--theme-css shots/trim-before-css/theme-github-auto.css` (same flags) and diff those two.
+
+## pixeldiff.mjs
+
+```sh
+node tools/shoot/pixeldiff.mjs --a <runA> --b <runB> [--out dir] [--tolerance n] [--minor px] [--only id,id]
+     [--mask-bottom cssPx] [--no-volatile] [--noisy file] [--workers n]
+```
+
+Pairs every PNG with the same relative path (`*-FAILED.png`, `diff/`, `blind/`, `coverage/` skipped). A pixel differs
+when any RGBA channel differs by more than `--tolerance` (default 0 = exact; `--tolerance 1` absorbs the ±1
+anti-aliasing noise seen on dark-scheme avatar edges in hover states). `--minor N`: pairs with 1..N differing pixels
+are counted as `differentMinor` instead of `different` (the determinism check showed ≤ 49 px of rasterization noise on
+the navbar avatar/logo edges in some hover/menu state shots; recommended for trim checks: `--tolerance 4 --minor 50`,
+then still look at every `differentMinor` diff PNG). Different sizes: the non-overlapping area counts
+as different. Masks = union of both runs' `volatile[]` rects (×DPR; clip shots shifted by `clipRect`); full-page shots
+from a run without `volatile` data get the bottom 100 CSS px masked (footer timing line: 60 px from the bottom at 1440,
+83 px at 390); `--mask-bottom N` forces a bottom mask. Output `<out>/pixeldiff.json`
+(`totals`, `results[]: {path, diffPixels, bbox, sizeA/sizeB, maskedPixels, masks, diffPng, knownNoisy}`, sorted by
+diffPixels; `totals.different` excludes knownNoisy and minor pairs) and `<out>/diff/<path>.png` = [A | B | B dimmed with differing pixels red], cropped to the bbox + 40 px.
+Exit 0 = all non-noisy pairs identical and no missing files, 1 = differences, 2 = usage/Pillow error.
+
+## coverage.mjs
+
+```sh
+node tools/shoot/coverage.mjs [--theme github-auto] [--only a,b] [--schemes light,dark] [--viewports 1440,390]
+     [--no-states] [--concurrency 3] [--out shots/coverage]
+```
+
+Each page load (route × scheme × viewport, plus one per defined state, same actions as `shoot.mjs --states`) gets
+`dist/theme-<theme>.src.css` (unminified, real var names, one `@layer` per folder) served in place of the deployed
+theme link, with Chrome `CSS.startRuleUsageTracking` from before navigation to after the state action. Rules are
+parsed from the same text with postcss, mapped to their folder (layer block; `gh-important` by the build's
+`/* <folder>/<file> */` comments) and, by verbatim selector search, to `src/<folder>/<file>:<line>`. Every page also
+tests each selector-list member (pseudo-classes/elements stripped) with `querySelector` and every `@media` condition
+with `matchMedia`.
+
+Output `shots/coverage/report.json` (totals, per-folder numbers, every never-used rule, dead selectors inside used
+rules, low-use rules with the pages that used them, per-job status) and `shots/coverage/<folder>.md` (sorted by bytes):
+- **never used (verifiable)** — no page/state/scheme/viewport matched it;
+- **unverifiable: state** — selector needs a state (`:hover :focus* :active :checked :has() …`) or a conditional
+  pseudo-element (`::selection`, scrollbars, `::placeholder`): coverage marks a rule used only if it matched during
+  tracking, so these can be falsely unused. Split into *base element absent everywhere* (probably dead) and *base
+  element present* (state never triggered; likely needed);
+- **unverifiable: media** — inside an `@media` no tested config matched (`pointer: coarse`, `hover: none`,
+  `forced-colors`, widths other than 390/1440 are not tested);
+- **dead selectors inside used rules**.
+`minBytesSaved` is exact: the minified size (build's var renaming + lightningcss) of the stylesheet with those rules
+(and emptied at-rules) deleted, subtracted from the full one. Pages or states missing from routes.json (content not in
+the seed) show up as unused — check before deleting.
 
 ## routes.json / routes-from-manifest.mjs
 

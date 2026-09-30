@@ -13,21 +13,15 @@
 #repo-files-table {
   grid-template-columns: minmax(0, 2fr) minmax(0, 2.25fr) auto;
   margin: var(--base-size-16) 0;
-  border: var(--borderWidth-thin) solid var(--borderColor-default);
-  border-radius: var(--borderRadius-medium);
-  background: var(--bgColor-default);
-  font-size: var(--text-body-size-medium);
 }
 
 #repo-files-table .repo-file-line,
 #repo-files-table .repo-file-cell {
-  border-top: var(--borderWidth-thin) solid var(--borderColor-default);
   padding: calc((var(--base-size-40) - 1lh) / 2) 0 calc((var(--base-size-40) - 1lh) / 2) var(--base-size-16);
 }
 
 #repo-files-table .repo-file-cell.age {
   padding-right: var(--base-size-16);
-  color: var(--fgColor-muted);
 }
 
 #repo-files-table .repo-file-item:hover > .repo-file-cell,
@@ -40,42 +34,50 @@
   gap: calc(var(--base-size-8) + var(--base-size-2));
 }
 
+/* every plain --fgColor-default text colour of the code surfaces in one rule: file names, line-number hover and
+   selected line numbers (file view, diff), the first diff stat, diff code text. Each selector keeps its own
+   specificity; no rule between here and its old place sets the same property on the same element with equal
+   specificity (the diff add/del number colours stay after .code-diff .lines-num:hover). */
 #repo-files-table .repo-file-cell.name .entry-name,
-#repo-files-table .parent-link {
+#repo-files-table .parent-link,
+.file-view.code-view .lines-num:hover,
+.file-view tr.active .lines-num,
+.repository .diff-detail-box .diff-detail-stats strong:nth-of-type(1),
+.code-diff .lines-num:hover,
+.code-diff .lines-code {
   color: var(--fgColor-default);
 }
 
-#repo-files-table .repo-file-cell.name .entry-name:hover {
-  color: var(--fgColor-accent);
-  text-decoration: underline;
-}
-
-#repo-files-table .repo-file-cell.name > .svg {
+#repo-files-table .repo-file-cell.name > .svg,
+.view-file-tree-items .item-content .svg,
+.diff-file-tree-items :is(.item-file, .item-directory) .svg {
   flex-shrink: 0;
 }
 
 /* message column: muted text, issue refs keep the accent colour */
-#repo-files-table .repo-file-cell.message {
-  color: var(--fgColor-muted);
-}
+/* message column colour: shared muted rule in file-icons.css */
 
-#repo-files-table .repo-file-cell.message a {
-  color: var(--fgColor-muted);
-}
-
-#repo-files-table .repo-file-cell.message a.ref-issue {
+/* issue refs keep the accent colour (message column and latest-commit summary) */
+#repo-files-table .repo-file-cell.message a.ref-issue,
+#repo-files-table .repo-file-last-commit .commit-summary a.ref-issue {
   color: var(--fgColor-accent);
 }
 
-#repo-files-table .repo-file-cell.message a:hover {
+/* link hover (accent + underline) of every muted link in the code surfaces: file list, latest-commit rows of the
+   file list and the file view, blame messages, diff file paths — one shared declaration block */
+#repo-files-table .repo-file-cell.name .entry-name:hover,
+#repo-files-table .repo-file-cell.message a:hover,
+:is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .commit-summary a.muted:hover,
+:is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .ui.label.commit-id-short:hover,
+.lines-commit .blame-info .blame-data .blame-message a:hover,
+.diff-file-header .file-link:hover {
   color: var(--fgColor-accent);
   text-decoration: underline;
 }
 
 /* backticks in commit subjects: github.com renders plain 12px/18px mono in the file list and the latest-commit
    row (no chip: transparent, no padding, no radius, text colour inherited) */
-#repo-files-table :is(.repo-file-cell.message, .commit-summary) code.inline-code-block,
-#repo-file-commit-box .commit-summary code.inline-code-block {
+:is(#repo-files-table :is(.repo-file-cell.message, .commit-summary), #repo-file-commit-box .commit-summary) code.inline-code-block {
   padding: 0;
   border-radius: 0;
   background: transparent;
@@ -90,94 +92,75 @@
   min-height: calc(var(--base-size-28) + 2 * var(--base-size-12));
   padding: var(--base-size-12);
   border-top: 0;
-  background: var(--bgColor-muted);
   color: var(--fgColor-muted);
   gap: var(--base-size-8);
 }
 
 /* flatten .latest-commit so its parts and the age / commit-count cells can be re-ordered like github.com:
    [avatar author] [message] [status] ……… [sha · age] [N Commits] */
-#repo-files-table .repo-file-last-commit .latest-commit {
+/* The latest-commit parts below are shared with the file view's #repo-file-commit-box (file-view.css), which
+   renders the same .latest-commit markup. :is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box)
+   gives the commit-box selectors the file list's specificity (one class more); no other gh.code rule sets these
+   properties on those elements, and base + mobile rules are wrapped alike so their order still decides. */
+:is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .latest-commit {
   display: contents;
 }
 
-#repo-files-table .repo-file-last-commit .avatar-stack-names {
+:is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .avatar-stack-names {
   order: 1;
   flex-shrink: 0;
   gap: var(--base-size-8);
 }
 
-#repo-files-table .repo-file-last-commit .avatar-stack-names > a.muted {
+:is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .avatar-stack-names > a.muted {
   color: var(--fgColor-default);
-  font-weight: var(--base-text-weight-semibold);
 }
 
-#repo-files-table .repo-file-last-commit .commit-summary {
+:is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .commit-summary {
   order: 2;
   min-width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: var(--fgColor-muted);
 }
 
-#repo-files-table .repo-file-last-commit .commit-summary a.muted {
-  color: var(--fgColor-muted);
-}
-
-#repo-files-table .repo-file-last-commit .commit-summary a.muted:hover {
-  color: var(--fgColor-accent);
-  text-decoration: underline;
-}
-
-#repo-files-table .repo-file-last-commit .commit-summary a.ref-issue {
-  color: var(--fgColor-accent);
-}
-
-#repo-files-table .repo-file-last-commit .latest-commit > :not(.avatar-stack-names, .commit-summary, .commit-id-short) {
+:is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .latest-commit > :not(.avatar-stack-names, .commit-summary, .commit-id-short) {
   order: 3;
 }
 
-/* short SHA: plain muted 12px mono text, 7 characters like github.com */
-#repo-files-table .repo-file-last-commit .ui.label.commit-id-short {
+/* short SHA: plain muted 12px mono text, 7 characters like github.com (line-height differs: see below) */
+:is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .ui.label.commit-id-short {
   order: 4;
-  margin-left: auto;
   height: auto;
   max-width: 7ch;
   padding: 0;
-  overflow: hidden;
   border: 0;
   border-radius: 0;
-  background: transparent;
+  background: transparent; /* also beats Gitea's label :hover background */
   color: var(--fgColor-muted);
-  font-family: var(--fontStack-monospace);
-  font-size: var(--text-body-size-small);
-  font-weight: var(--base-text-weight-normal);
+}
+
+#repo-files-table .repo-file-last-commit .ui.label.commit-id-short {
+  margin-left: auto;
   line-height: var(--text-body-lineHeight-small);
-  white-space: nowrap;
 }
 
-#repo-files-table .repo-file-last-commit .ui.label.commit-id-short:hover {
-  color: var(--fgColor-accent);
-  text-decoration: underline;
-}
-
-/* age */
-#repo-files-table .repo-file-last-commit > div:not(.latest-commit) {
+/* age (file view: `> .age`, line-height set in file-view.css) */
+:is(#repo-files-table .repo-file-last-commit > div:not(.latest-commit), #repo-file-commit-box > .age) {
   order: 5;
   flex-shrink: 0;
   font-size: var(--text-body-size-small);
+}
+
+#repo-files-table .repo-file-last-commit > div:not(.latest-commit) {
   line-height: var(--text-body-lineHeight-small);
-  color: var(--fgColor-muted);
   white-space: nowrap;
 }
 
-#repo-files-table .repo-file-last-commit > div:not(.latest-commit)::before {
+:is(#repo-files-table .repo-file-last-commit > div:not(.latest-commit), #repo-file-commit-box > .age)::before {
   content: "·";
   margin-right: var(--base-size-4);
 }
 
-#repo-files-table .repo-file-last-commit > div:not(.latest-commit):empty::before {
+#repo-files-table .repo-file-last-commit > div:not(.latest-commit):empty::before,
+.file-view tr.active .lines-num::before {
   content: none;
 }
 
@@ -196,10 +179,6 @@
   font-size: var(--text-body-size-small);
   font-weight: var(--base-text-weight-medium);
   white-space: nowrap;
-}
-
-#repo-files-table .repo-file-last-commit .m-commit-count > b {
-  font-weight: var(--base-text-weight-semibold);
 }
 
 #repo-files-table .repo-file-last-commit .m-commit-count > .svg {
@@ -233,21 +212,21 @@
     max-width: none;
   }
 
-  #repo-files-table .repo-file-last-commit .avatar-stack-names {
+  :is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .avatar-stack-names {
     max-width: none;
     min-width: 0;
   }
 
-  /* github.com mobile: [avatar author age] ……… [history icon]; the message is hidden */
-  #repo-files-table .repo-file-last-commit .commit-summary {
+  /* github.com mobile: [avatar author age] ……… [history icon] (file view: [avatar author age]); message hidden */
+  :is(#repo-files-table .repo-file-last-commit, #repo-file-commit-box) .commit-summary {
     display: none;
   }
 
-  #repo-files-table .repo-file-last-commit > div:not(.latest-commit) {
+  :is(#repo-files-table .repo-file-last-commit > div:not(.latest-commit), #repo-file-commit-box > .age) {
     order: 2;
   }
 
-  #repo-files-table .repo-file-last-commit > div:not(.latest-commit)::before {
+  :is(#repo-files-table .repo-file-last-commit > div:not(.latest-commit), #repo-file-commit-box > .age)::before {
     content: none;
   }
 

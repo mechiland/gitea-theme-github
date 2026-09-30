@@ -25,33 +25,18 @@
   height: var(--base-size-80);
   padding: 0 var(--base-size-16) 0 var(--base-size-24);
   border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
-  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
   background: var(--bgColor-inset);
 }
 
-.job-info-header .job-info-header-title {
-  color: var(--fgColor-default);
+.job-info-header-title {
   font-size: var(--text-title-size-small);
-  font-weight: var(--text-title-weight-small);
-  line-height: var(--text-title-lineHeight-small);
-}
-
-.job-info-header .job-info-header-detail {
-  margin: 0;
-  color: var(--fgColor-muted);
-  font-size: var(--text-body-size-small);
-  line-height: var(--text-body-lineHeight-medium);
 }
 
 /* gear: github.com btn-link octicon in the CheckRun header (muted; hover default on --bgColor-neutral-muted) */
 .job-info-header-right .btn {
-  display: inline-flex;
-  align-items: center;
   justify-content: center;
   width: var(--control-medium-size);
   height: var(--control-medium-size);
-  border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-muted);
 }
 
 .job-info-header-right .btn .svg {
@@ -75,59 +60,47 @@
   margin: 0 var(--base-size-8);
 }
 
-.job-step-container .job-step-summary {
-  gap: var(--base-size-8);
+.job-step-summary {
   min-height: var(--base-size-36);
   padding: 0 var(--base-size-8);
-  border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-muted);
-  font-size: var(--text-body-size-medium);
   line-height: var(--base-size-20);
 }
 
-.job-step-container .job-step-summary.step-expandable:hover {
+.job-step-summary.step-expandable:hover {
   background: var(--control-transparent-bgColor-hover);
   color: var(--fgColor-default);
 }
 
-.job-step-container .job-step-summary.selected {
+.job-step-summary.selected {
   top: var(--base-size-80);
   background: var(--control-bgColor-active);
   color: var(--fgColor-default);
 }
 
-.job-step-container .job-step-summary .step-summary-chevron {
-  margin-right: 0;
+.job-step-summary .step-summary-chevron {
   color: var(--fgColor-muted);
   transition: transform var(--base-duration-100) var(--base-easing-linear);
 }
 
-.job-step-container .job-step-summary .step-summary-duration {
+.job-step-summary .step-summary-duration {
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
 }
 
-.job-step-container .job-step-summary .step-copy-btn {
-  display: inline-flex;
-  align-items: center;
+.job-step-summary .step-copy-btn {
   justify-content: center;
   width: var(--control-xsmall-size);
   height: var(--control-xsmall-size);
   margin: 0;
-  border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-muted);
 }
 
-.job-step-container .job-step-summary .step-copy-btn:hover {
+.job-step-summary .step-copy-btn:hover {
   background: var(--bgColor-neutral-muted);
   color: var(--fgColor-default);
 }
 
 /* ---------- log lines ---------- */
 .job-step-section .job-step-logs {
-  margin: var(--base-size-8) 0;
-  font-family: var(--fontStack-monospace);
-  font-size: var(--text-body-size-small);
   line-height: var(--base-size-20);
 }
 
@@ -148,8 +121,6 @@
 .job-log-line .log-time-seconds {
   width: var(--base-size-48);
   flex-shrink: 0;
-  color: var(--fgColor-muted);
-  text-decoration: none;
 }
 
 .job-log-line .line-num:hover {
@@ -159,11 +130,6 @@
 
 .job-log-line:target > .line-num {
   color: var(--fgColor-accent);
-}
-
-.job-log-line .log-time,
-.job-log-line .log-time-stamp {
-  color: var(--fgColor-muted);
 }
 
 .job-step-logs .job-log-line .log-msg {
@@ -214,10 +180,6 @@
 /* ::group:: rows: github.com section lines (600) with a chevron */
 .log-line-group .log-msg {
   font-weight: var(--base-text-weight-semibold);
-}
-
-.log-line-group .log-msg::before {
-  border-left-color: var(--fgColor-muted);
 }
 
 /* fullscreen: the header is 80px now */

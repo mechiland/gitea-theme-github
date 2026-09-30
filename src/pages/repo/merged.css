@@ -1,0 +1,176 @@
+/*
+ * Shared declaration blocks of src/pages/repo (size trim 2026-09-30): rules of the other files in this folder whose
+ * declarations were identical are merged here into selector lists. Imported last. Each selector keeps its own
+ * specificity, and every merged selector outranks (by specificity, not by order) the other rules of this layer that
+ * set the same properties on its element — state rules (:hover) over their base rule, :first-child / :empty /
+ * :has() / attribute variants over the plain rule — so moving them to the end of the layer changes no cascade result.
+ */
+
+/* hover: accent link, no underline (from home-sidebar.css, tags-releases.css) */
+.repo-home-sidebar-header > a.item.muted:hover,
+.repo-home-sidebar-top a.flex-text-block.muted:hover,
+.repo-home-sidebar-top a.flex-text-block.muted:hover > .svg,
+.repo-home-sidebar-bottom .flex-text-block > a:hover,
+#release-list .meta > a.muted:hover,
+.tag-list-row > .flex-text-block > a.flex-text-inline:hover {
+  color: var(--fgColor-accent);
+  text-decoration: none;
+}
+
+/* hover: accent link, underline (from commits.css, tags-releases.css) */
+#commits-table td.message a.muted:hover,
+#commits-table td.author a.muted:hover,
+#release-list .release-list-title > a.muted:hover,
+.tag-list-row-link:hover {
+  color: var(--fgColor-accent);
+  text-decoration: underline;
+}
+
+/* hover: invisible icon buttons (from commits.css, branches.css, tags-releases.css) */
+#commits-table td:last-child > .btn:hover,
+.repository.branches td > .flex-text-block > .btn:hover,
+.repository.branches td .tw-flex > .btn:hover,
+.repository.branches td .tw-flex > .ui.dropdown.btn:hover,
+#release-list .flex-left-right > div > a.muted:hover {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
+}
+
+/* accent text (hover and the release ahead link) (from home-sidebar.css, branches.css, tags-releases.css) */
+.repo-home-sidebar-top #manage_topic:hover,
+.repository.branches td > p.info > a:hover,
+.repository.branches td .ref-issue:hover,
+.repository.branches .ui.top.attached.header > a.right:hover,
+#release-list .author > a:hover,
+#release-list .ahead > a {
+  color: var(--fgColor-accent);
+}
+
+/* hidden parts (each selector outranks the rules that set display on its element) (from home-toolbar.css, home-sidebar.css, commits.css, tags-releases.css, wiki.css, new-repo.css) */
+.repo-grid-filelist-sidebar > .repo-home-filelist > .repository-summary .item[href*="/commits/"],
+.repo-home-sidebar-top #repo-topics:empty,
+#commits-table > thead,
+.commits:not(.pull) > .ui.container > .repository-summary .item[href*="/commits/"],
+#release-list details.download:not(:has(.attachment-list > .item)),
+#release-list .detail:not(:has(.attachment-list > .item)) > .divider,
+.wiki.view .wiki-content-parts > .tw-clear-both,
+.new-repo-form .inline.field > label:empty {
+  display: none;
+}
+
+/* invisible icon buttons: centred muted octicon (from commits.css, branches.css, tags-releases.css) */
+#commits-table td:last-child > .btn,
+.repository.branches td .tw-flex > .btn,
+.repository.branches td .tw-flex > .ui.dropdown.btn,
+.repository.branches td > .flex-text-block > .btn,
+#release-list .flex-left-right > div > a.muted {
+  justify-content: center;
+  color: var(--fgColor-muted);
+}
+
+/* 28px icon buttons (from commits.css, branches.css) */
+#commits-table td:last-child > .btn,
+.repository.branches td .tw-flex > .btn,
+.repository.branches td .tw-flex > .ui.dropdown.btn {
+  width: var(--control-small-size);
+  height: var(--control-small-size);
+}
+
+/* 32px icon buttons (from branches.css, tags-releases.css) */
+.repository.branches td > .flex-text-block > .btn,
+#release-list .flex-left-right > div > a.muted {
+  width: var(--control-medium-size);
+  height: var(--control-medium-size);
+}
+
+/* 16px avatars / octicons (from commits.css, branches.css) */
+#commits-table td.author .ui.avatar,
+.repository.branches td > .flex-text-block > .btn > .svg,
+.repository.branches td > p.info .ui.avatar {
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+}
+
+/* first row of a Box list: no top rule (from commits.css, branches.css, tags-releases.css, wiki.css) */
+#commits-table > tbody > tr:first-child,
+.repository.branches tr:first-child > td,
+.attachment-list > .item:first-child,
+.tag-list-row:first-child,
+.wiki .wiki-pages-list tr:first-child td {
+  border-top: 0;
+}
+
+/* 12px muted meta lines (from home-sidebar.css, tags-releases.css) */
+.repo-home-sidebar-bottom .flex-text-block + div,
+.tag-list-row > .flex-text-block {
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-small);
+}
+
+/* hover: underline (from home-sidebar.css, branches.css, tags-releases.css) */
+.repo-home-sidebar-top .repo-description + a.flex-text-block:hover > span,
+.repository.branches a.branch-name:hover,
+.attachment-list > .item > a:hover > strong > span {
+  text-decoration: underline;
+}
+
+/* hover: row background (from commits.css, branches.css, tags-releases.css) */
+#commits-table > tbody > tr:hover,
+.repository.branches tr:hover > td,
+.attachment-list > .item:hover {
+  background: var(--bgColor-muted);
+}
+
+/* 12px code / mono text (from commits.css, branches.css, tags-releases.css) */
+#commits-table td.message .commit-summary code,
+.repository.branches td > p.info .commit-message code,
+#release-list .meta > a.tw-font-mono {
+  font-size: var(--text-body-size-small);
+}
+
+/* muted, non-shrinking (from home-sidebar.css, branches.css) */
+.repo-home-sidebar-top .flex-text-block.muted > .svg,
+.repository.branches td > p.info > a {
+  flex-shrink: 0;
+  color: var(--fgColor-muted);
+}
+
+/* default text colour (from home-toolbar.css, home-sidebar.css, commits.css, tags-releases.css) */
+.repository-summary .item > b,
+.language-stats-details .item > strong,
+#commits-table td.message a.muted,
+#commits-table td.message .commit-summary,
+.tag-list-row-link {
+  color: var(--fgColor-default);
+}
+
+/* muted text colour (from home-sidebar.css, commits.css, branches.css, tags-releases.css) */
+.repo-home-sidebar-top .flex-text-block.muted > b,
+.commit-header-buttons > .ui.primary.button > .svg,
+.repository.branches td .ref-issue,
+.download-icon,
+.tag-list-row > .flex-text-block > .flex-text-inline {
+  color: var(--fgColor-muted);
+}
+
+/* 16px below (from home-sidebar.css) */
+.repo-home-sidebar-top > form,
+.repo-home-sidebar-bottom > .flex-relaxed-list,
+.repo-home-sidebar-bottom > .repo-home-sidebar-header + div {
+  margin: 0 0 var(--base-size-16);
+}
+
+/* flattened wrappers (from home-toolbar.css, wiki.css) */
+.repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row,
+.repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row > .repo-button-row-left,
+.wiki.view > .ui.container > .wiki-content-parts {
+  display: contents;
+}
+
+/* page grids: children span the full width (from commits.css, wiki.css) */
+.commits:not(.pull) > .ui.container > *,
+.wiki.view > .ui.container > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}

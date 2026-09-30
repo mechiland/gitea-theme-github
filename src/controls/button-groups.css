@@ -14,13 +14,7 @@
   vertical-align: middle;
 }
 
-.ui.basic.buttons {
-  border: 0;
-  border-radius: 0;
-}
-
-.ui.buttons .button,
-.ui.basic.buttons .button {
+.ui.buttons .button {
   position: relative;
   flex-shrink: 0;
   margin: 0 -1px 0 0;
@@ -34,7 +28,9 @@
 
 .ui.buttons .button:hover,
 .ui.buttons .button:focus-visible,
-.ui.buttons .button:active {
+.ui.buttons .button:active,
+.ui.action.input > .button:hover,
+.ui.action.input > .button:focus-visible {
   z-index: 1;
 }
 
@@ -75,9 +71,7 @@
   background: var(--controlTrack-bgColor-rest);
 }
 
-.ui.buttons:has(> .active.button) > .button,
-.ui.buttons:has(> .active.button) > .button:first-child,
-.ui.buttons:has(> .active.button) > .button:last-child {
+.ui.buttons:has(> .active.button) > .button {
   height: auto;
   min-height: 0;
   margin: -1px 0;
@@ -98,7 +92,8 @@
   margin-right: -1px;
 }
 
-.ui.buttons:has(> .active.button) > .icon.button {
+.ui.buttons:has(> .active.button) > .icon.button,
+.ui.icon.buttons:has(> .active.button) > .button {
   min-width: var(--control-medium-size);
   padding: 0 calc((var(--control-medium-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
 }
@@ -114,8 +109,7 @@
   box-shadow: inset 0 0 0 var(--base-size-4) var(--controlTrack-bgColor-rest);
 }
 
-.ui.buttons:has(> .active.button) > .active.button,
-.ui.buttons:has(> .active.button) > .active.button:hover {
+.ui.buttons:has(> .active.button) > .active.button {
   z-index: 1;
   border-color: var(--controlKnob-borderColor-rest);
   background: var(--controlKnob-bgColor-rest);
@@ -147,45 +141,26 @@
   background: var(--borderColor-default);
 }
 
-/* icon-only items (group carries .icon) are square like Primer SegmentedControl.IconButton; the inline
-   padding centres a 16px icon in the square, so an item that also has a text label (commit graph
-   Mono / Color) keeps a gutter instead of the icon touching the item edge */
-.ui.icon.buttons:has(> .active.button) > .button {
-  min-width: var(--control-medium-size);
-  padding: 0 calc((var(--control-medium-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
-}
-
 /* Primer SegmentedControl size="small" (28px, 12px text): the group or its items are Gitea small/tiny/mini
    (e.g. file view source/rendered toggle = .ui.compact.icon.buttons > .ui.mini.button) */
-.ui.small.buttons:has(> .active.button),
-.ui.tiny.buttons:has(> .active.button),
-.ui.mini.buttons:has(> .active.button),
-.ui.buttons:has(> .active.button):has(> .small.button, > .tiny.button, > .mini.button) {
+:is(.ui.buttons:is(.small, .tiny, .mini):has(> .active.button), .ui.buttons:has(> .active.button):has(> .button:is(.small, .tiny, .mini))) {
   height: var(--control-small-size);
   font-size: var(--text-body-size-small);
 }
 
-.ui.small.buttons:has(> .active.button) > .button,
-.ui.tiny.buttons:has(> .active.button) > .button,
-.ui.mini.buttons:has(> .active.button) > .button,
-.ui.buttons:has(> .active.button) > .small.button,
-.ui.buttons:has(> .active.button) > .tiny.button,
-.ui.buttons:has(> .active.button) > .mini.button {
+.ui.buttons:is(.small, .tiny, .mini):has(> .active.button) > .button,
+.ui.buttons:has(> .active.button) > .button:is(.small, .tiny, .mini) {
   padding: 0 var(--control-small-paddingInline-condensed);
   font-size: var(--text-body-size-small);
 }
 
-.ui.small.icon.buttons:has(> .active.button) > .button,
-.ui.tiny.icon.buttons:has(> .active.button) > .button,
-.ui.mini.icon.buttons:has(> .active.button) > .button,
-.ui.icon.buttons:has(> .active.button) > .small.button,
-.ui.icon.buttons:has(> .active.button) > .tiny.button,
-.ui.icon.buttons:has(> .active.button) > .mini.button {
+.ui.icon.buttons:is(.small, .tiny, .mini):has(> .active.button) > .button,
+.ui.icon.buttons:has(> .active.button) > .button:is(.small, .tiny, .mini) {
   min-width: var(--control-small-size);
   padding: 0 calc((var(--control-small-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
 }
 
-.ui.buttons:has(> .active.button):has(> .small.button, > .tiny.button, > .mini.button) > .button:not(.active, :last-child, :has(+ .active)):not(:hover)::after {
+.ui.buttons:has(> .active.button):has(> .button:is(.small, .tiny, .mini)) > .button:not(.active, :last-child, :has(+ .active)):not(:hover)::after {
   top: var(--base-size-6);
   bottom: var(--base-size-6);
 }
@@ -217,8 +192,7 @@
   background: var(--button-default-bgColor-active);
 }
 
-.ui.labeled.button:not(.icon):has(> .button:focus-visible),
-.ui.labeled.button:not(.icon):has(> .label:focus-visible) {
+.ui.labeled.button:not(.icon):has(> :is(.button, .label):focus-visible) {
   outline: var(--focus-outline-width) solid var(--focus-outlineColor);
   outline-offset: var(--focus-outline-offset);
 }
@@ -237,9 +211,7 @@
   box-shadow: none;
 }
 
-.ui.labeled.button > .small.button,
-.ui.labeled.button > .tiny.button,
-.ui.labeled.button > .mini.button {
+.ui.labeled.button > .button:is(.small, .tiny, .mini) {
   gap: var(--base-size-8);
   min-height: calc(var(--control-small-size) - 2px);
   padding-left: var(--control-small-paddingInline-normal);
@@ -251,12 +223,10 @@
 }
 
 /* Primer .btn .Counter */
-.ui.labeled.button > .label,
-.ui.labeled.button > .label:hover {
+.ui.labeled.button > .label {
   display: inline-block;
   min-width: var(--base-size-20);
-  /* Primer .btn .Counter: margin-left 2px after a text space (~3.3px at 12px) → 5px measured on github.com */
-  margin: 0 var(--control-small-paddingInline-normal) 0 calc(var(--base-size-4) + var(--borderWidth-thin)); /* !important twin in buttons.important.css */
+  /* margin: see buttons.important.css (Primer .btn .Counter, 5px after the label) */
   padding: 0 var(--base-size-6);
   border: var(--borderWidth-thin) solid var(--counter-borderColor);
   border-radius: var(--borderRadius-full);
@@ -272,8 +242,7 @@
 /* the ring is drawn by the wrapper (above), as on github.com where the Counter sits inside the one
    focusable .btn-sm. Gitea's Watch / Star <a role=button> has no href, so the counter link is the only
    keyboard stop: its focus rings the whole control too, not the counter alone. */
-.ui.labeled.button > .button:focus-visible,
-.ui.labeled.button > .label:focus-visible {
+.ui.labeled.button > :is(.button, .label):focus-visible {
   outline: none;
   box-shadow: none;
 }

@@ -10,34 +10,26 @@
  * The summary on other pages (commits, branches, release-less repos) is restyled as the same inline links.
  */
 
-/* ---------- ref summary links: github.com invisible buttons (icon, semibold count, muted label) ---------- */
-.repository .repository-summary {
+/* ---------- ref summary links: github.com invisible buttons (icon, semibold count, muted label) ----------
+   sub_menu.tmpl renders .repository-summary > .sub-menu > a.item only on .repository pages (size trim: selectors
+   shortened to .repository-summary / .repository-summary .item, every rule on these elements alike). */
+.repository-summary {
   display: flex;
-  margin: 0 0 var(--base-size-16);
-  padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
-  box-shadow: none;
 }
 
-.repository .repository-summary > .sub-menu {
-  display: flex;
+.repository-summary > .sub-menu {
   flex-wrap: wrap;
-  align-items: center;
   gap: var(--base-size-4);
-  margin: 0;
   padding: 0;
-  border: 0;
   border-radius: 0;
   background: transparent;
-  box-shadow: none;
 }
 
-.repository .repository-summary > .sub-menu > .item {
+.repository-summary .item {
   flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
   gap: var(--base-size-4);
   height: var(--control-medium-size);
   padding: 0 var(--base-size-4);
@@ -45,34 +37,27 @@
   border-radius: var(--borderRadius-medium);
   background: transparent;
   color: var(--fgColor-muted);
-  font-size: var(--text-body-size-medium);
   font-weight: var(--base-text-weight-medium);
   line-height: var(--text-body-lineHeight-medium);
   white-space: nowrap;
-  text-decoration: none;
 }
 
-.repository .repository-summary > .sub-menu > .item > .svg {
+.repository-summary .item > .svg {
   margin-right: var(--base-size-4);
   color: var(--fgColor-muted);
 }
 
-.repository .repository-summary > .sub-menu > .item > b {
-  color: var(--fgColor-default);
-  font-weight: var(--base-text-weight-semibold);
-}
-
-.repository .repository-summary > .sub-menu > .item:hover {
+.repository-summary .item:hover {
   background: var(--control-transparent-bgColor-hover);
   color: var(--button-invisible-fgColor-hover);
   text-decoration: none;
 }
 
-.repository .repository-summary > .sub-menu > .item:active {
+.repository-summary .item:active {
   background: var(--control-transparent-bgColor-active);
 }
 
-.repository .repository-summary > .sub-menu > .item.active {
+.repository-summary .item.active {
   color: var(--fgColor-default);
 }
 
@@ -91,14 +76,8 @@
   min-width: 0;
 }
 
-.repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row,
-.repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row > .repo-button-row-left {
-  display: contents;
-}
-
 .repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row > .repo-button-row-left > * {
   order: 3;
-  margin: 0;
 }
 
 .repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row > .repo-button-row-left > [data-global-init="initRepoBranchTagSelector"] {
@@ -108,10 +87,6 @@
 .repo-grid-filelist-sidebar > .repo-home-filelist > .repository-summary {
   flex: 0 1 auto;
   order: 2;
-}
-
-.repo-grid-filelist-sidebar > .repo-home-filelist > .repository-summary .item[href*="/commits/"] {
-  display: none;
 }
 
 .repo-grid-filelist-sidebar > .repo-home-filelist > .repo-button-row > .repo-button-row-right {
@@ -130,7 +105,6 @@
 /* the field itself: same 32px TextInput with the search octicon on repo home and in the directory / file view
    (view_content.tmpl renders the same .repo-button-row-right on every code view; Gitea: 30px, no icon) */
 .repository .repo-button-row-right > .repo-file-search-container .ui.small.input {
-  position: relative;
   width: 100%;
   height: var(--control-medium-size);
   font-size: var(--text-body-size-medium);
@@ -156,10 +130,7 @@
 }
 
 .repository .repo-button-row-right > .repo-file-search-container .ui.small.input > kbd {
-  position: absolute;
-  top: 50%;
   right: var(--base-size-8);
-  transform: translateY(-50%);
 }
 
 /* mobile: github.com keeps branch picker + Code on one row and drops the ref links / Go to file */

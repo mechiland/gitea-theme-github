@@ -12,7 +12,7 @@
  *   flat — everything else (forms, text, inline search forms)
  */
 
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header {
+:is(.settings, .admin) .flex-container-main .ui.top.attached.header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -35,12 +35,12 @@
 }
 
 /* every Subhead after the first section (Primer Subhead + mt-5 spacing on github.com settings) */
-:is(.page-content.settings, .page-content.admin) .flex-container-main * + .ui.top.attached.header {
+:is(.settings, .admin) .flex-container-main * + .ui.top.attached.header {
   margin-top: var(--base-size-32);
 }
 
 /* Subhead-actions: Gitea positions `.ui.right` absolutely inside the header; in a Subhead it is a flex item */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header > .ui.right {
+:is(.settings, .admin) .flex-container-main .ui.top.attached.header > .ui.right {
   position: static;
   display: flex;
   align-items: center;
@@ -51,20 +51,20 @@
 }
 
 /* Fomantic's 0.25em trailing button margin would push the last action off the Subhead's right edge */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header > .ui.right > .ui.button:last-child {
+:is(.settings, .admin) .flex-container-main .ui.top.attached.header > .ui.right > .ui.button:last-child {
   margin-right: 0;
 }
 
-/* Subhead-heading--danger: a destructive section that is not a Danger-zone Box (account: "Delete your account") */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.error.header:not(:has(+ .danger.segment)) {
-  color: var(--fgColor-danger);
+/* Subhead-heading--danger: a destructive section that is not a Danger-zone Box (account: "Delete your account");
+   the danger colour is in danger-zone.important.css */
+:is(.settings, .admin) .flex-container-main .ui.top.attached.error.header:not(:has(+ .danger.segment)) {
   font-weight: var(--base-text-weight-semibold);
 }
 
 /* ---------- section bodies ---------- */
 
 /* org settings wrap the first section in .ui.segments (a Box in data-display): on a settings page it is just a stack */
-:is(.page-content.settings, .page-content.admin) .flex-container-main > .ui.segments {
+:is(.settings, .admin) .flex-container-main > .ui.segments {
   margin: 0;
   border: 0;
   border-radius: 0;
@@ -73,7 +73,7 @@
 }
 
 /* flat body: the section's form / text on the page background */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment {
+:is(.settings, .admin) .flex-container-main .ui.attached.segment {
   width: auto; /* Fomantic attached segments are calc(100% + 2px) wide: 2px past the Subhead rule */
   margin: 0;
   padding: 0;
@@ -84,18 +84,18 @@
 }
 
 /* two bodies in a row under one Subhead (admin users: search form + table; collaborators: list + add form) */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment + .ui.attached.segment {
+:is(.settings, .admin) .flex-container-main .ui.attached.segment + .ui.attached.segment {
   margin-top: var(--base-size-16);
 }
 
 /* Box body: tables, and lists whose first row is a real row (not the section's description text) */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment:not(.danger, :has(> .divider + .flex-divided-list)):is(.table, :has(> .flex-divided-list > .item:first-child > :not(p))) {
+:is(.settings, .admin) .flex-container-main .ui.attached.segment:not(.danger, :has(> .divider + .flex-divided-list)):is(.table, :has(> .flex-divided-list > .item:first-child > :not(p))) {
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-radius: var(--borderRadius-medium);
   background: var(--bgColor-default);
 }
 
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment:not(.table, .danger, :has(> .divider + .flex-divided-list)):has(> .flex-divided-list > .item:first-child > :not(p)) {
+:is(.settings, .admin) .flex-container-main .ui.attached.segment:not(.table, .danger, :has(> .divider + .flex-divided-list)):has(> .flex-divided-list > .item:first-child > :not(p)) {
   padding: var(--base-size-16);
 }
 
@@ -105,19 +105,18 @@
  * security/openid) or follows a description + divider (webhooks): github.com shows that text on the page and only
  * the rows in the Box. The body stays flat and the rows draw the Box themselves.
  */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment > .flex-divided-list > .item:first-child:not(:has(> :not(p))) {
+:is(.settings, .admin) .flex-container-main .ui.attached.segment > .flex-divided-list > .item:first-child:not(:has(> :not(p))) {
   margin: 0;
   padding: 0;
   border: 0;
   background: transparent;
 }
 
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment > .flex-divided-list > .item:first-child:not(:has(> :not(p))) > p {
+:is(.settings, .admin) .flex-container-main .ui.attached.segment > .flex-divided-list > .item:first-child:not(:has(> :not(p))) > p {
   margin: 0;
 }
 
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment > .flex-divided-list > .item:first-child:not(:has(> :not(p))) ~ .item,
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment > .divider + .flex-divided-list > .item {
+:is(.settings, .admin) .flex-container-main .ui.attached.segment > .flex-divided-list > .item:is(:first-child:not(:has(> :not(p))) ~ *, .divider + * > *) {
   margin: 0;
   padding: var(--base-size-16);
   border-right: var(--borderWidth-thin) solid var(--borderColor-default);
@@ -125,45 +124,38 @@
   background: var(--bgColor-default);
 }
 
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment > .flex-divided-list > .item:first-child:not(:has(> :not(p))) + .item,
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment > .divider + .flex-divided-list > .item:first-child {
+:is(.settings, .admin) .flex-container-main .ui.attached.segment > .flex-divided-list > .item:is(:first-child:not(:has(> :not(p))) + *, .divider + * > :first-child) {
   margin-top: var(--base-size-16);
   border-top: var(--borderWidth-thin) solid var(--borderColor-default);
   border-top-left-radius: var(--borderRadius-medium);
   border-top-right-radius: var(--borderRadius-medium);
 }
 
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment > .flex-divided-list > .item:first-child:not(:has(> :not(p))) ~ .item:last-child,
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment > .divider + .flex-divided-list > .item:last-child {
+:is(.settings, .admin) .flex-container-main .ui.attached.segment > .flex-divided-list > .item:last-child:is(:first-child:not(:has(> :not(p))) ~ *, .divider + * > *) {
   border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
   border-bottom-left-radius: var(--borderRadius-medium);
   border-bottom-right-radius: var(--borderRadius-medium);
 }
 
 /* webhooks: the description and the Box are 16px apart; Gitea's divider between them is not drawn */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment > .divider:has(+ .flex-divided-list) {
+:is(.settings, .admin) .flex-container-main .ui.attached.segment > .divider:has(+ .flex-divided-list) {
   display: none;
 }
 
 /* a table fills its Box: header row corners follow the Box radius */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.table.segment {
+:is(.settings, .admin) .flex-container-main .ui.attached.table.segment {
   overflow-x: auto; /* clips the header row to the Box radius; wide admin tables scroll inside the Box */
 }
 
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.table.segment > .ui.table,
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.table.segment > form > .ui.table {
+:is(.settings, .admin) .flex-container-main .ui.attached.table.segment > .ui.table,
+:is(.settings, .admin) .flex-container-main .ui.attached.table.segment > form > .ui.table {
   margin: 0;
   border: 0;
   border-radius: 0;
 }
 
-/* a Box whose only child is text (no rows yet, e.g. "no webhooks") reads as the section description */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment > .flex-divided-list:empty {
-  margin: 0;
-}
-
 /* the section's own description paragraph in a flat body: 16px above the form (github.com settings intro text) */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.attached.segment > p:first-child {
+:is(.settings, .admin) .flex-container-main .ui.attached.segment > p:first-child {
   margin: 0 0 var(--base-size-16);
 }
 
@@ -174,7 +166,7 @@
  * visually hidden (still read by screen readers) and each record is one Box-row, 8px 16px.
  */
 @media (max-width: 767.98px) {
-  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.table:not(.unstackable) > thead {
+  :is(.settings, .admin) .flex-container-main .ui.table:not(.unstackable) > thead {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -183,15 +175,15 @@
     white-space: nowrap;
   }
 
-  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.table:not(.unstackable) > :is(tbody, tfoot) > tr {
+  :is(.settings, .admin) .flex-container-main .ui.table:not(.unstackable) > :is(tbody, tfoot) > tr {
     padding: var(--base-size-4) 0;
   }
 
-  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.table:not(.unstackable) > :is(tbody, tfoot) > tr + tr {
+  :is(.settings, .admin) .flex-container-main .ui.table:not(.unstackable) > :is(tbody, tfoot) > tr + tr {
     border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
   }
 
-  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.table:not(.unstackable) > :is(tbody, tfoot) > tr > td {
+  :is(.settings, .admin) .flex-container-main .ui.table:not(.unstackable) > :is(tbody, tfoot) > tr > td {
     padding: var(--base-size-4) var(--base-size-16);
     border-top: 0;
   }

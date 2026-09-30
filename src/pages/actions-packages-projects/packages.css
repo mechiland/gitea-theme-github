@@ -17,105 +17,81 @@
  */
 
 /* ---------- list: stacked one-row lists → one Box ---------- */
-.page-content.packages .flex-divided-list.items-with-main {
+.packages .items-with-main {
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-top-color: var(--borderColor-muted);
   border-bottom: 0;
   background: var(--bgColor-default);
 }
 
-.page-content.packages .flex-divided-list.items-with-main:first-child {
+.packages .items-with-main:first-child {
   border-top-color: var(--borderColor-default);
   border-top-left-radius: var(--borderRadius-medium);
   border-top-right-radius: var(--borderRadius-medium);
 }
 
-.page-content.packages .flex-divided-list.items-with-main:not(:has(~ .flex-divided-list)) {
+.packages .items-with-main:not(:has(~ .flex-divided-list)) {
   border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
   border-bottom-left-radius: var(--borderRadius-medium);
   border-bottom-right-radius: var(--borderRadius-medium);
 }
 
-.page-content.packages .flex-divided-list.items-with-main > .item {
+.packages .items-with-main > .item {
   padding: var(--base-size-16);
 }
 
-.page-content.packages .flex-divided-list.items-with-main .item-main {
+.packages .items-with-main .item-main {
   gap: 0;
 }
 
-.page-content.packages .flex-divided-list.items-with-main .item-title {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+.packages .items-with-main .item-title {
   gap: var(--base-size-4) var(--base-size-8);
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-large);
-  font-weight: var(--base-text-weight-semibold);
-  line-height: var(--text-body-lineHeight-large);
 }
 
-.page-content.packages .flex-divided-list.items-with-main .item-title > a,
-.page-content.packages .flex-divided-list.items-with-main a.item-title {
-  color: var(--fgColor-default);
-}
-
-.page-content.packages .flex-divided-list.items-with-main .item-title > a:hover,
-.page-content.packages .flex-divided-list.items-with-main a.item-title:hover {
+.packages .items-with-main :is(.item-title > a, a.item-title):hover {
   color: var(--fgColor-accent);
   text-decoration: underline;
 }
 
 /* package type: Primer Label (small) with the registry icon */
-.page-content.packages .flex-divided-list.items-with-main .item-title .label-list .ui.label {
-  gap: var(--base-size-4);
-}
 
-.page-content.packages .flex-divided-list.items-with-main .item-title .label-list .ui.label .svg {
+.packages .items-with-main .item-title .label-list .ui.label .svg {
   width: var(--base-size-12);
   height: var(--base-size-12);
 }
 
-.page-content.packages .flex-divided-list.items-with-main .item-body {
+.packages .items-with-main .item-body {
   display: block;
-  color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
-  line-height: var(--text-body-lineHeight-medium);
 }
 
-.page-content.packages .flex-divided-list.items-with-main .item-body a {
-  color: var(--fgColor-muted);
+.packages .items-with-main .item-body a {
   text-decoration: underline;
 }
 
-.page-content.packages .flex-divided-list.items-with-main .item-body a:hover {
+.packages .items-with-main .item-body a:hover {
   color: var(--fgColor-accent);
 }
 
-.page-content.packages .flex-divided-list.items-with-main .item-body strong {
-  font-weight: var(--base-text-weight-semibold);
-}
-
 /* search row above the list: 16px to the Box */
-.page-content.packages .ui.form:has(> .ui.action.input) {
+.packages .form:has(> .action.input) {
   margin-bottom: var(--base-size-16);
 }
 
 /* github.com's packages search (auto-search-group input + Type / Visibility / Sort buttons) is medium: 32px, 14px.
    Gitea marks this group .small (28px / 12px) → medium on the packages pages only: input 32px with 12px inline
    padding, the Type select 32px / 14px with Primer Select's 12px leading padding, the IconButton 32px square. */
-.page-content.packages .ui.form > .ui.small.action.input {
+.packages .form > .small.action.input {
   font-size: var(--text-body-size-medium);
 }
 
-.page-content.packages .ui.form > .ui.small.action.input > input {
+.packages .form > .small.action.input > input {
   height: var(--control-medium-size);
   padding: 0 var(--control-medium-paddingInline-normal);
   font-size: var(--text-body-size-medium);
 }
 
-.page-content.packages .ui.form > .ui.small.action.input > .ui.selection.dropdown,
-.page-content.packages .ui.form > .ui.small.action.input > select {
+.packages .form > .small.action.input > :is(.ui.selection.dropdown, select) {
   min-height: var(--control-medium-size);
   padding-top: calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--borderWidth-thin));
   padding-bottom: calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--borderWidth-thin));
@@ -123,33 +99,27 @@
   font-size: var(--text-body-size-medium);
 }
 
-.page-content.packages .ui.form > .ui.small.action.input > select {
+.packages .form > .small.action.input > select {
   height: var(--control-medium-size);
 }
 
-.page-content.packages .ui.form > .ui.small.action.input > .icon.button {
+.packages .form > .small.action.input > .icon.button {
   min-width: var(--control-medium-size);
   font-size: var(--text-body-size-medium);
 }
 
 /* ---------- package page ---------- */
-.page-content.packages .issue-title-header {
+.packages .issue-title-header {
   margin-bottom: var(--base-size-16);
   padding-bottom: 0;
   border-bottom: 0;
   color: var(--fgColor-muted);
 }
 
-.page-content.packages .issue-title-header h1 {
+.packages .issue-title-header h1 {
   color: var(--fgColor-default);
-  font-size: var(--text-title-size-large);
-  font-weight: var(--text-title-weight-large);
   line-height: var(--base-size-40);
   overflow-wrap: anywhere;
-}
-
-.page-content.packages .issue-title-header > div:last-child a {
-  color: var(--fgColor-accent);
 }
 
 .packages-content {
@@ -165,9 +135,6 @@
 }
 
 /* Boxes of the main column: 16px between them (header + segment pairs) */
-.packages-content-left > .ui.top.attached.header:not(:first-child) {
-  margin-top: var(--base-size-16);
-}
 
 /* install captions: 12px --fgColor-muted with a muted 16px octicon (github.com "Install from the command line:") */
 .packages-content-left .ui.form .field > label {
@@ -183,7 +150,6 @@
 
 .packages-content-left .ui.form .field > label > .svg {
   flex-shrink: 0;
-  color: var(--fgColor-muted);
 }
 
 .packages-content-left .ui.form .field:last-child > label {
@@ -195,13 +161,8 @@
   margin-top: var(--base-size-16);
 }
 
-.packages-content-left .ui.form .field > .markup pre {
-  margin-bottom: 0;
-}
-
 /* install commands: github.com's code-block uses 12px mono (markdown's 85% em gives 11.9px here) */
-.packages-content-left .ui.form .field > .markup pre,
-.packages-content-left .ui.form .field > .markup pre code {
+.packages-content-left .ui.form .field > .markup :is(pre, pre code) {
   font-size: var(--text-body-size-small);
 }
 
@@ -215,77 +176,61 @@
 .packages-content-right {
   flex: 0 0 auto;
   width: calc(var(--base-size-96) * 3 + var(--base-size-8));
-}
-
-.page-content.packages .ui.segment.packages-content-right {
   padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
-  box-shadow: none;
 }
 
 .packages-content-right > strong {
   display: inline-block;
   margin-bottom: var(--base-size-8);
-  color: var(--fgColor-default);
   font-size: var(--text-body-size-large);
-  font-weight: var(--base-text-weight-semibold);
-  line-height: var(--text-body-lineHeight-large);
 }
 
 .packages-content-right > a.tw-float-right {
-  color: var(--fgColor-accent);
   font-size: var(--text-body-size-small);
-  line-height: var(--text-body-lineHeight-large);
 }
 
 .packages-content-right > .divider {
   margin: var(--base-size-16) 0;
-  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
   border-bottom: 0;
 }
 
-.packages-content-right > .ui.list {
+.packages-content-right > .list {
   margin: 0;
-  padding: 0;
 }
 
-.packages-content-right > .ui.list > .item {
+.packages-content-right > .list > .item {
   gap: var(--base-size-8);
   padding: var(--base-size-4) 0;
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-medium);
-  line-height: var(--text-body-lineHeight-medium);
 }
 
-.packages-content-right > .ui.list > .item > .svg {
-  flex-shrink: 0;
+.packages-content-right > .list > .item > .svg {
   color: var(--fgColor-muted);
 }
 
-.packages-content-right > .ui.list > .item a {
+.packages-content-right > .list > .item a {
   color: var(--fgColor-default);
 }
 
-.packages-content-right > .ui.list > .item a:hover {
+.packages-content-right > .list > .item a:hover {
   color: var(--fgColor-accent);
   text-decoration: underline;
 }
 
 /* assets / versions: accent links with muted 12px trailing meta */
-.packages-content-right > .ui.list:not(.flex-items-block) > .item a {
+.packages-content-right > .list:not(.flex-items-block) > .item a {
   color: var(--fgColor-accent);
 }
 
-.packages-content-right > .ui.list:not(.flex-items-block) > .item > span {
+.packages-content-right > .list:not(.flex-items-block) > .item > span {
   color: var(--fgColor-muted);
-  font-size: var(--text-body-size-small);
 }
 
 /* "Delete version" is destructive */
-.packages-content-right > .ui.list > .item:has(> .octicon-trash) a,
-.packages-content-right > .ui.list > .item:has(> .octicon-trash) > .svg {
+.packages-content-right > .list > .item:has(> .octicon-trash) a,
+.packages-content-right > .list > .item:has(> .octicon-trash) > .svg {
   color: var(--fgColor-danger);
 }
 

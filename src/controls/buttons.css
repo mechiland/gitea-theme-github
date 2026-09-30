@@ -1,14 +1,15 @@
 /*
  * Buttons — Primer React Button (prc-Button-ButtonBase) / IconButton.
  * Gitea → Primer variant map:
- *   .ui.button, .ui.basic.button, .ui.basic.green.button   → default
+ *   .ui.button, .ui.basic.button                            → default
  *   .ui.primary.button, .ui.green.button                    → primary (green)
  *   .ui.basic.primary.button                                → outline (blue text)
  *   .ui.red.button, .ui.basic.red.button, .ui.danger.button → danger
  * Gitea → Primer size map:
  *   default / .compact / .medium             → medium 32px
  *   .small / .tiny / .mini (+ their .buttons) → small 28px
- *   .large / .big / .huge                     → large 40px
+ * (.large/.big/.huge and .basic.green buttons appear only in templates/devtest, which a prod Gitea 1.27.3 does not
+ * serve, so they have no rules here — trimmed 2026-09-30.)
  */
 
 /* ---------- base (medium, default variant) ---------- */
@@ -53,8 +54,6 @@
 .ui.button:hover {
   background: var(--button-default-bgColor-hover);
   border-color: var(--button-default-borderColor-hover);
-  color: var(--button-default-fgColor-rest);
-  text-decoration: none;
 }
 
 .ui.button:active,
@@ -126,7 +125,6 @@
 
 /* dropdown caret (octicon-triangle-down "dropdown icon"): trailing action as on github.com (Code / branch
    buttons measured: normal 12px padding, 16px caret, no pull-in) — Gitea renders it at 14px */
-.ui.button.dropdown > .dropdown.icon,
 .ui.button.dropdown > .icon.icon {
   position: static;
   transform: none;
@@ -159,26 +157,13 @@
 }
 
 /* ---------- sizes ---------- */
-.ui.small.button,
-.ui.tiny.button,
-.ui.mini.button,
-.ui.small.buttons .button,
-.ui.tiny.buttons .button,
-.ui.mini.buttons .button {
+.ui.button:is(.small, .tiny, .mini),
+.ui.buttons:is(.small, .tiny, .mini) .button {
   gap: var(--control-small-gap);
   height: var(--control-small-size);
   min-height: var(--control-small-size);
   padding: 0 var(--control-small-paddingInline-condensed);
   font-size: var(--text-body-size-small);
-}
-
-.ui.large.button,
-.ui.big.button,
-.ui.huge.button {
-  gap: var(--control-large-gap);
-  height: var(--control-large-size);
-  min-height: var(--control-large-size);
-  padding: 0 var(--control-large-paddingInline-spacious);
 }
 
 .ui.fluid.button {
@@ -196,17 +181,12 @@
   padding: 0 calc((var(--control-medium-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
 }
 
-.ui.small.icon.button,
-.ui.tiny.icon.button,
-.ui.mini.icon.button,
-.ui.small.icon.buttons .button,
-.ui.tiny.icon.buttons .button,
-.ui.mini.icon.buttons .button {
+.ui.icon.button:is(.small, .tiny, .mini),
+.ui.icon.buttons:is(.small, .tiny, .mini) .button {
   min-width: var(--control-small-size);
   padding: 0 calc((var(--control-small-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
 }
 
-.ui.icon.button > .svg,
 .ui.icon.button > .icon {
   margin: 0;
 }
@@ -297,26 +277,6 @@
   color: inherit;
 }
 
-/* ---------- basic green → default ---------- */
-.ui.basic.green.button,
-.ui.basic.green.buttons .button {
-  background: var(--button-default-bgColor-rest);
-  border-color: var(--button-default-borderColor-rest);
-  box-shadow: var(--button-default-shadow-resting);
-  color: var(--button-default-fgColor-rest);
-}
-
-.ui.basic.green.button:hover,
-.ui.basic.green.buttons .button:hover {
-  background: var(--button-default-bgColor-hover);
-  border-color: var(--button-default-borderColor-hover);
-  color: var(--button-default-fgColor-rest);
-}
-
-.ui.basic.green.button > .svg {
-  color: var(--fgColor-muted);
-}
-
 /* ---------- danger (Gitea red / basic red) ---------- */
 .ui.red.button,
 .ui.red.buttons .button,
@@ -344,7 +304,9 @@
 
 .ui.red.button:hover > .svg,
 .ui.red.buttons .button:hover > .svg,
-.ui.danger.button:hover > .svg {
+.ui.danger.button:hover > .svg,
+.ui.red.button:active > .svg,
+.ui.danger.button:active > .svg {
   color: var(--button-danger-iconColor-hover);
 }
 
@@ -356,11 +318,6 @@
   border-color: var(--button-danger-borderColor-active);
   box-shadow: none;
   color: var(--button-danger-fgColor-active);
-}
-
-.ui.red.button:active > .svg,
-.ui.danger.button:active > .svg {
-  color: var(--button-danger-iconColor-hover);
 }
 
 /* ---------- Gitea "toggle" button (active = on) ---------- */

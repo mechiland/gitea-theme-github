@@ -9,71 +9,10 @@
  * Unread / Read + purge form) + #notification_table > .notifications-item[data-status=1 unread|2 read|3 pinned].
  * ≥ 768px the .flex-left-right wrapper becomes `display: contents` so the switcher sits in a sidebar column and the
  * "mark all as read" button above the Box.
+ * Size budget: `.notification` = the page (only notification_div / notification_subscriptions carry that class);
+ * the `.notifications-*` classes exist only inside #notification_table, so they go without the id.
  */
-
-@media (min-width: 768px) {
-  .user.notification > .ui.container {
-    display: grid;
-    grid-template: auto auto 1fr / calc(var(--base-size-128) * 2) minmax(0, 1fr);
-    column-gap: var(--base-size-24);
-    align-items: start;
-  }
-
-  .user.notification .flex-left-right {
-    display: contents;
-  }
-
-  /* NavList */
-  .user.notification .small-menu-items {
-    grid-area: 1 / 1 / 4;
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--base-size-2);
-  }
-
-  .user.notification .small-menu-items > .item {
-    position: relative;
-    justify-content: space-between;
-    min-height: var(--control-medium-size);
-    color: var(--fgColor-default);
-  }
-
-  .user.notification .small-menu-items > .item.active::after {
-    content: "";
-    position: absolute;
-    top: calc(50% - var(--base-size-12));
-    left: calc(var(--base-size-8) * -1);
-    width: var(--base-size-4);
-    height: var(--base-size-24);
-    border-radius: var(--borderRadius-medium);
-    background: var(--borderColor-accent-emphasis);
-  }
-
-  .user.notification .flex-left-right > form {
-    grid-area: 1 / 2;
-    justify-self: end;
-    margin-bottom: var(--base-size-16);
-  }
-
-  .user.notification #notification_table {
-    grid-area: 2 / 2;
-  }
-
-  /* no purge button (read view / nothing unread): the Box starts at the top */
-  .user.notification .ui.container:not(:has(.flex-left-right > form)) > #notification_table {
-    grid-row: 1 / span 2;
-  }
-
-  .user.notification > .ui.container > :is(.ui.pagination.menu, .center.page.buttons) {
-    grid-area: 3 / 2;
-    justify-self: center;
-  }
-}
-
-@media (max-width: 767.98px) {
-}
-
-.user.notification .notifications-unread-count.ui.label {
+.notifications-unread-count {
   margin-left: var(--base-size-8);
 }
 
@@ -82,7 +21,7 @@
   overflow: hidden;
 }
 
-#notification_table > .notifications-item {
+.notifications-item {
   position: relative;
   gap: var(--base-size-8) var(--base-size-12);
   min-height: var(--base-size-64);
@@ -90,16 +29,12 @@
   background: var(--bgColor-default);
 }
 
-#notification_table > .notifications-item + .notifications-item {
-  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
-}
-
-#notification_table > .notifications-item:is([data-status="2"], :hover) {
+.notifications-item:is([data-status="2"], :hover) {
   background: var(--bgColor-muted);
 }
 
 /* unread dot */
-#notification_table > .notifications-item[data-status="1"]::before {
+.notifications-item[data-status="1"]::before {
   content: "";
   position: absolute;
   top: calc(50% - var(--base-size-4));
@@ -110,7 +45,7 @@
   background: var(--bgColor-accent-emphasis);
 }
 
-#notification_table .notifications-link {
+.notifications-link {
   display: flex;
   flex-direction: column;
   gap: var(--base-size-2);
@@ -119,75 +54,46 @@
 }
 
 /* the focus ring gets 2px air around the text */
-#notification_table .notifications-link:focus-visible {
+.notifications-link:focus-visible {
   outline-offset: var(--base-size-4);
 }
 
-#notification_table .notifications-link:hover {
+.notifications-link:hover {
   text-decoration: none;
 }
 
-#notification_table .notifications-link > .flex-text-block {
+.notifications-link > .flex-text-block {
   gap: var(--base-size-4);
   color: var(--fgColor-muted);
 }
 
-#notification_table .notifications-link > .flex-text-block .svg {
-  color: var(--fgColor-accent);
-}
-
-#notification_table .notifications-item:is([data-status="1"], [data-status="3"]) .notifications-link > div:last-child {
-  font-weight: var(--base-text-weight-semibold);
-}
-
-#notification_table .notifications-link:hover > div:last-child {
-  color: var(--fgColor-accent);
-}
-
-#notification_table .notifications-updated {
+/* unread (1) and pinned (3) rows: semibold title */
+.notifications-updated {
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
   white-space: nowrap;
 }
 
 /* row actions: invisible icon buttons; also shown while a button has keyboard focus (Gitea shows them on hover only) */
-#notification_table .notifications-item:focus-within .notifications-buttons {
+.notifications-item:focus-within .notifications-buttons {
   display: flex;
   align-items: center;
   justify-content: end;
 }
 
-#notification_table .notifications-item:focus-within .notifications-updated {
-  display: none;
-}
-
-#notification_table .notifications-buttons {
+.notifications-buttons {
   gap: var(--base-size-4);
   min-width: 0;
 }
 
-#notification_table .notifications-buttons .btn {
+.notifications-buttons .btn {
   justify-content: center;
   width: var(--control-small-size);
   height: var(--control-small-size);
   color: var(--fgColor-muted);
 }
 
-#notification_table .notifications-buttons .btn:hover {
-  background: var(--control-transparent-bgColor-hover);
-  color: var(--fgColor-default);
-}
-
-#notification_table .notifications-buttons .btn:active {
-  background: var(--control-transparent-bgColor-active);
-}
-
-#notification_table .notifications-buttons .btn:focus-visible {
+.notifications-buttons .btn:focus-visible {
   outline: var(--focus-outline);
   outline-offset: calc(var(--borderWidth-thick) * -1);
-}
-
-/* empty inbox: Blankslate inside the Box */
-#notification_table > .empty-placeholder {
-  color: var(--fgColor-muted);
 }

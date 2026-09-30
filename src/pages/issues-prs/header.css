@@ -35,53 +35,51 @@
   font-weight: var(--base-text-weight-light);
 }
 
-.repository.view.issue .issue-title-buttons {
+.issue-title-buttons {
   align-items: center;
   gap: var(--base-size-8);
   min-height: var(--base-size-40);
 }
 
-.repository.view.issue .issue-title-buttons > .ui.button {
+.issue-title-buttons > .ui.button {
   height: var(--control-medium-size);
   padding: 0 var(--control-medium-paddingInline-normal);
   font-size: var(--text-body-size-medium);
 }
 
 /* title editor (Edit → input + Cancel / Save) */
-.repository.view.issue #issue-title-editor .ui.input {
+#issue-title-editor .ui.input {
   height: var(--control-medium-size);
 }
 
-.repository.view.issue #issue-title-editor .ui.input input {
+#issue-title-editor .ui.input input {
   font-size: var(--text-body-size-medium);
   padding: 0 var(--control-medium-paddingInline-normal);
 }
 
 /* StateLabel → text: 10px (github.com pull/358); Gitea's `tw-ml-2` on the text is zeroed in header.important.css */
-.repository.view.issue .issue-title-meta {
+.issue-title-meta {
   gap: calc(var(--base-size-8) + var(--base-size-2));
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-medium);
   line-height: var(--text-body-lineHeight-medium);
 }
 
-.repository.view.issue .issue-title-meta a {
+.issue-title-meta a {
   color: var(--fgColor-muted);
 }
 
-.repository.view.issue .issue-title-meta a.author,
-.repository.view.issue .issue-title-meta .author,
-.repository.view.issue .pull-desc > a:not(:has(code)) {
+.pull-desc > a:not(:has(code)) {
   color: var(--fgColor-muted);
   font-weight: var(--base-text-weight-semibold);
 }
 
-.repository.view.issue .issue-title-meta a:hover {
+.issue-title-meta a:hover {
   color: var(--fgColor-accent);
 }
 
 /* BranchName tokens in "wants to merge N commits from <head> into <base>" */
-.repository.view.issue .pull-desc code {
+.pull-desc code {
   display: inline-flex;
   align-items: center;
   gap: var(--base-size-4);
@@ -96,38 +94,38 @@
   vertical-align: 1px;
 }
 
-.repository.view.issue .pull-desc code a {
+.pull-desc code a {
   color: inherit;
 }
 
-.repository.view.issue .pull-desc code a:hover {
+.pull-desc code a:hover {
   color: inherit;
   text-decoration: underline;
 }
 
 /* copy-branch button inside the head token: muted octicon like github.com's CopyToClipboard after the tokens */
-.repository.view.issue .pull-desc code .btn {
+.pull-desc code .btn {
   color: var(--fgColor-muted);
 }
 
-.repository.view.issue .pull-desc code .btn:hover {
+.pull-desc code .btn:hover {
   color: var(--fgColor-accent);
 }
 
 /* ---------- PR tab bar ---------- */
-.repository.view.issue .pull.tabs.container {
+.pull.tabs.container {
   margin-bottom: var(--base-size-16);
 }
 
 /* Files changed (fluid page): the tab bar spans the page like the header above it (github.com: full width) */
-.repository.view.issue .ui.container.fluid > .pull.tabs.container {
+.ui.container.fluid > .pull.tabs.container {
   width: auto;
   max-width: none;
   margin-left: 0;
   margin-right: 0;
 }
 
-.repository.view.issue .pull.tabular.menu .svg {
+.pull.tabular.menu .svg {
   margin-right: 0;
 }
 
@@ -155,13 +153,15 @@
   background:
     linear-gradient(to bottom, var(--borderColor-default) 0 1px, transparent 1px calc(var(--base-size-8) - 1px), var(--borderColor-default) calc(var(--base-size-8) - 1px)),
     repeating-linear-gradient(to right, var(--borderColor-default) 0 1px, var(--bgColor-neutral-muted) 1px calc(var(--base-size-8) - 1px), var(--borderColor-default) calc(var(--base-size-8) - 1px) var(--base-size-8), transparent var(--base-size-8) calc(var(--base-size-8) + 1px));
-  mask-image:
+  /* the rounded-square mask list lives in one custom property: the build emits mask-image twice (-webkit- prefix) */
+  --gh-ipsq:
     linear-gradient(to right, transparent var(--base-size-2), var(--fgColor-default) var(--base-size-2) var(--base-size-6), transparent var(--base-size-6)),
     linear-gradient(to bottom, transparent var(--base-size-2), var(--fgColor-default) var(--base-size-2) var(--base-size-6), transparent var(--base-size-6)),
     radial-gradient(circle var(--base-size-2) at var(--base-size-2) var(--base-size-2), var(--fgColor-default) 100%, transparent 100%),
     radial-gradient(circle var(--base-size-2) at var(--base-size-6) var(--base-size-2), var(--fgColor-default) 100%, transparent 100%),
     radial-gradient(circle var(--base-size-2) at var(--base-size-2) var(--base-size-6), var(--fgColor-default) 100%, transparent 100%),
     radial-gradient(circle var(--base-size-2) at var(--base-size-6) var(--base-size-6), var(--fgColor-default) 100%, transparent 100%);
+  mask-image: var(--gh-ipsq);
   mask-size: var(--base-size-8) var(--base-size-8);
   mask-repeat: space no-repeat;
 }
@@ -195,17 +195,17 @@
 /* phones (github.com PageHeader at 390): actions row above the title, title 26px / 1.25, the StateLabel on its own
    row and the meta text full width below it; BranchName tokens stay on one line and truncate with an ellipsis */
 @media (max-width: 767.98px) {
-  .repository.view.issue #issue-title-display {
+  #issue-title-display {
     flex-direction: column-reverse;
     gap: var(--base-size-8);
   }
 
-  .repository.view.issue #issue-title-display > .issue-title-buttons {
+  #issue-title-display > .issue-title-buttons {
     justify-content: flex-end;
     min-height: 0;
   }
 
-  .repository.view.issue #issue-title-display > .issue-title-buttons:not(:has(> *)) {
+  #issue-title-display > .issue-title-buttons:not(:has(> *)) {
     display: none;
   }
 
@@ -215,19 +215,19 @@
   }
 
   /* a one-column grid (Gitea's meta text is `tw-flex-1`, an !important flex-basis 0 that defeats wrapping) */
-  .repository.view.issue .issue-title-meta {
+  .issue-title-meta {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     justify-items: start;
     gap: var(--base-size-8);
   }
 
-  .repository.view.issue .pull-desc code {
+  .pull-desc code {
     max-width: 40%;
     vertical-align: bottom;
   }
 
-  .repository.view.issue .pull-desc code a {
+  .pull-desc code a {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;

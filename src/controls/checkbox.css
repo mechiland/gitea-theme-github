@@ -5,8 +5,7 @@
  * radius 6px, knob = half the track, on/off glyphs).
  */
 
-input[type="checkbox"],
-input[type="radio"] {
+input:is([type="checkbox"], [type="radio"]) {
   width: var(--base-size-16);
   height: var(--base-size-16);
   margin: 0;
@@ -29,14 +28,12 @@ input[type="checkbox"]::before {
   background: var(--control-checked-fgColor-rest);
 }
 
-input[type="checkbox"]:checked,
-input[type="checkbox"]:indeterminate {
+input[type="checkbox"]:is(:checked, :indeterminate) {
   border-color: var(--control-checked-borderColor-rest);
   background: var(--control-checked-bgColor-rest);
 }
 
-input[type="checkbox"]:checked::before,
-input[type="checkbox"]:indeterminate::before {
+input[type="checkbox"]:is(:checked, :indeterminate)::before {
   clip-path: inset(0);
 }
 
@@ -49,28 +46,24 @@ input[type="radio"]:checked {
   background: var(--control-checked-fgColor-rest);
 }
 
-input[type="checkbox"]:focus-visible,
-input[type="radio"]:focus-visible {
+input:is([type="checkbox"], [type="radio"]):focus-visible {
   outline: var(--focus-outline-width) solid var(--focus-outlineColor);
   outline-offset: 2px;
   box-shadow: none;
 }
 
-input[type="checkbox"]:disabled,
-input[type="radio"]:disabled {
+input:is([type="checkbox"], [type="radio"]):disabled {
   border-color: var(--control-borderColor-disabled);
   background: var(--control-bgColor-disabled);
   cursor: not-allowed;
 }
 
-input[type="checkbox"]:disabled:checked,
-input[type="checkbox"]:disabled:indeterminate {
+input[type="checkbox"]:disabled:is(:checked, :indeterminate) {
   border-color: var(--control-checked-borderColor-disabled);
   background: var(--control-checked-bgColor-disabled);
 }
 
-input[type="checkbox"]:disabled:checked::before,
-input[type="checkbox"]:disabled:indeterminate::before {
+input[type="checkbox"]:disabled:is(:checked, :indeterminate)::before {
   background: var(--control-checked-fgColor-disabled);
 }
 
@@ -87,11 +80,9 @@ input[type="radio"]:disabled:checked {
   line-height: var(--base-size-20);
 }
 
-.ui.checkbox input[type="checkbox"],
-.ui.checkbox input[type="radio"] {
+/* 16px box from the base rule above; only the 2px drop onto the 20px text line */
+.ui.checkbox input:is([type="checkbox"], [type="radio"]) {
   top: var(--base-size-2);
-  width: var(--base-size-16);
-  height: var(--base-size-16);
 }
 
 .ui.checkbox label,
@@ -153,11 +144,6 @@ label.gt-checkbox {
     border-color var(--base-duration-100) var(--base-easing-easeOut);
 }
 
-.ui.toggle.checkbox input:focus ~ label::before,
-.ui.toggle.checkbox label::before {
-  background-color: var(--controlTrack-bgColor-rest);
-}
-
 .ui.toggle.checkbox input:hover ~ label::before {
   background-color: var(--controlTrack-bgColor-hover);
 }
@@ -166,18 +152,10 @@ label.gt-checkbox {
   background-color: var(--controlTrack-bgColor-active);
 }
 
+/* checked track fill + on glyph (and its hover) live in checkbox.important.css, which always wins */
 .ui.toggle.checkbox input:checked ~ label::before,
 .ui.toggle.checkbox input:focus:checked ~ label::before {
   border-color: var(--control-checked-borderColor-rest);
-  background-color: var(--control-checked-bgColor-rest);
-  background-image: linear-gradient(var(--control-checked-fgColor-rest), var(--control-checked-fgColor-rest));
-  background-position: 25% 50%;
-  background-size: 1px var(--base-size-8);
-  background-repeat: no-repeat;
-}
-
-.ui.toggle.checkbox input:checked:hover ~ label::before {
-  background-color: var(--control-checked-bgColor-hover);
 }
 
 .ui.toggle.checkbox input:focus-visible ~ label::before {
@@ -186,8 +164,7 @@ label.gt-checkbox {
 }
 
 /* knob: half the track, 1px inside the border */
-.ui.toggle.checkbox label::after,
-.ui.toggle.checkbox input ~ label::after {
+.ui.toggle.checkbox label::after {
   top: var(--base-size-2);
   left: var(--base-size-2);
   box-sizing: border-box;

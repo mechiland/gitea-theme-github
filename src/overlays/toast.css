@@ -35,18 +35,16 @@
   color: var(--fgColor-onEmphasis);
 }
 
-.toastify[style*="--color-green"] .toast-icon,
-.toastify[data-toast-unique-key^="info-"] .toast-icon {
+/* toast.ts always sets the level's inline `background: var(--color-green|orange|red)` */
+.toastify[style*="--color-green"] .toast-icon {
   background-color: var(--bgColor-success-emphasis);
 }
 
-.toastify[style*="--color-orange"] .toast-icon,
-.toastify[data-toast-unique-key^="warning-"] .toast-icon {
+.toastify[style*="--color-orange"] .toast-icon {
   background-color: var(--bgColor-attention-emphasis);
 }
 
-.toastify[style*="--color-red"] .toast-icon,
-.toastify[data-toast-unique-key^="error-"] .toast-icon {
+.toastify[style*="--color-red"] .toast-icon {
   background-color: var(--bgColor-danger-emphasis);
 }
 
@@ -60,8 +58,7 @@
   visibility: hidden;
 }
 
-.toastify[style*="--color-red"] .toast-icon .gitea-exclamation,
-.toastify[data-toast-unique-key^="error-"] .toast-icon .gitea-exclamation {
+.toastify[style*="--color-red"] .toast-icon .gitea-exclamation {
   mask-image: var(--gh-octicon-stop);
 }
 
@@ -75,8 +72,7 @@
   color: var(--fgColor-muted);
 }
 
-.toast-close,
-.toastify .btn.toast-close {
+.toast-close {
   flex-shrink: 0;
   width: auto;
   height: auto;
@@ -89,11 +85,9 @@
 }
 
 .toast-close:hover {
-  background: transparent;
   opacity: 0.7;
 }
 
 .toast-close:active {
-  background: transparent;
   opacity: 0.5;
 }

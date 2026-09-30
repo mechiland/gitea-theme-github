@@ -11,31 +11,31 @@
  * Rows are Box-row--condensed (8px 16px → 37px for a one-line row); the group divider is a full-width row separator.
  */
 
-.page-content.admin .flex-container-main dl.admin-dl-horizontal {
+.admin-dl-horizontal {
   margin: 0;
   padding: 0;
 }
 
-.page-content.admin .flex-container-main dl.admin-dl-horizontal > dt,
-.page-content.admin .flex-container-main dl.admin-dl-horizontal > dd {
+.admin-dl-horizontal > dt,
+.admin-dl-horizontal > dd {
   padding: var(--base-size-8) var(--base-size-16); /* Box-row--condensed */
   line-height: var(--text-body-lineHeight-medium);
 }
 
-.page-content.admin .flex-container-main dl.admin-dl-horizontal > dt {
+.admin-dl-horizontal > dt {
   color: var(--fgColor-default);
   font-weight: var(--base-text-weight-semibold);
 }
 
-.page-content.admin .flex-container-main dl.admin-dl-horizontal > dd {
+.admin-dl-horizontal > dd {
   color: var(--fgColor-default);
 }
 
-.page-content.admin .flex-container-main dl.admin-dl-horizontal > dd .svg {
+.admin-dl-horizontal > dd .svg {
   vertical-align: text-bottom;
 }
 
-.page-content.admin .flex-container-main dl.admin-dl-horizontal > .divider {
+.admin-dl-horizontal > .divider {
   flex-basis: 100%;
   margin: 0;
   border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
@@ -44,38 +44,33 @@
 
 /* phones: key over value (a 300px key column leaves no room for the value) */
 @media (max-width: 543.98px) {
-  .page-content.admin .flex-container-main dl.admin-dl-horizontal > dt,
-  .page-content.admin .flex-container-main dl.admin-dl-horizontal > dd {
+  .admin-dl-horizontal > dt,
+  .admin-dl-horizontal > dd {
     width: 100%;
     max-width: none;
     margin-left: 0;
   }
 
-  .page-content.admin .flex-container-main dl.admin-dl-horizontal > dt {
+  .admin-dl-horizontal > dt {
     padding-bottom: 0;
   }
 
-  .page-content.admin .flex-container-main dl.admin-dl-horizontal > dd {
+  .admin-dl-horizontal > dd {
     padding-top: 0;
     overflow-wrap: anywhere;
   }
 }
 
-/* maintenance operations: the table fills the Box (Gitea adds tw-px-4 → admin.important.css) */
-.page-content.admin.dashboard .flex-container-main .ui.table > tbody > tr > td {
-  vertical-align: middle;
-}
-
 /* secondary actions that Gitea renders as green primary buttons are default buttons on github.com:
-   maintenance "Run", config "Test" (cache), Subhead "Add webhook" / "Add deploy key" (btn-sm, not btn-primary;
-   github.com keeps primary only for the page's main create action, e.g. "New SSH key") */
-:is(
-  .page-content.admin.dashboard .flex-container-main .ui.table .ui.primary.button,
-  .page-content.admin .flex-container-main dd .ui.primary.button,
-  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.jump.dropdown > .ui.primary.button,
-  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.primary.button[data-panel="#add-deploy-key-panel"],
-  .page-content.settings .flex-container-main .ui.form .ui.primary.button[name="request_reindex_type"],
-  .page-content.admin .flex-container-main .ui.top.attached.header a.ui.primary.button[href$="/-/admin/repos/unadopted"]
+   maintenance "Run" (admin dashboard table), config "Test" (cache, in a dd), Subhead "Add webhook" / "Add deploy key"
+   (btn-sm, not btn-primary; github.com keeps primary only for the page's main create action, e.g. "New SSH key"),
+   repo indexers "Add to Reindex Queue", admin repos "Unadopted repositories" */
+:is(.settings, .admin) .flex-container-main .ui.primary.button:is(
+  .admin.dashboard .ui.table *,
+  .admin dd *,
+  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"]),
+  [name="request_reindex_type"],
+  [href$="/-/admin/repos/unadopted"]
 ) {
   border-color: var(--button-default-borderColor-rest);
   background: var(--button-default-bgColor-rest);
@@ -83,46 +78,44 @@
   color: var(--button-default-fgColor-rest);
 }
 
-:is(
-  .page-content.admin.dashboard .flex-container-main .ui.table .ui.primary.button,
-  .page-content.admin .flex-container-main dd .ui.primary.button,
-  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.jump.dropdown > .ui.primary.button,
-  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.primary.button[data-panel="#add-deploy-key-panel"],
-  .page-content.settings .flex-container-main .ui.form .ui.primary.button[name="request_reindex_type"],
-  .page-content.admin .flex-container-main .ui.top.attached.header a.ui.primary.button[href$="/-/admin/repos/unadopted"]
+:is(.settings, .admin) .flex-container-main .ui.primary.button:is(
+  .admin.dashboard .ui.table *,
+  .admin dd *,
+  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"]),
+  [name="request_reindex_type"],
+  [href$="/-/admin/repos/unadopted"]
 ):hover {
   border-color: var(--button-default-borderColor-hover);
   background: var(--button-default-bgColor-hover);
   color: var(--button-default-fgColor-rest);
 }
 
-:is(
-  .page-content.admin.dashboard .flex-container-main .ui.table .ui.primary.button,
-  .page-content.admin .flex-container-main dd .ui.primary.button,
-  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.jump.dropdown > .ui.primary.button,
-  :is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.primary.button[data-panel="#add-deploy-key-panel"],
-  .page-content.settings .flex-container-main .ui.form .ui.primary.button[name="request_reindex_type"],
-  .page-content.admin .flex-container-main .ui.top.attached.header a.ui.primary.button[href$="/-/admin/repos/unadopted"]
+:is(.settings, .admin) .flex-container-main .ui.primary.button:is(
+  .admin.dashboard .ui.table *,
+  .admin dd *,
+  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"]),
+  [name="request_reindex_type"],
+  [href$="/-/admin/repos/unadopted"]
 ):active {
   background: var(--button-default-bgColor-active);
 }
 
-.page-content.admin.dashboard .flex-container-main .ui.table .ui.primary.button > .svg {
+.admin.dashboard .ui.table .ui.primary.button > .svg {
   color: var(--fgColor-muted);
 }
 
 /* filter bar above a list (search input + Filter / Sort menus) */
-.page-content.admin .flex-container-main .ui.attached.segment > .ui.form.flex-text-block {
+.admin .flex-container-main .ui.attached.segment > .ui.form.flex-text-block {
   gap: var(--base-size-8);
 }
 
 /* list tables: cells stay on one line (DataTable); a table wider than the Box scrolls inside it (Gitea:
    .admin .ui.table.segment overflow-x auto) */
-.page-content.admin .flex-container-main .ui.table:has(th[data-sortt-asc]) > tbody > tr > td {
+.admin .flex-container-main .ui.table:has(th[data-sortt-asc]) > tbody > tr > td {
   white-space: nowrap;
 }
 
-.page-content.admin .flex-container-main .ui.table > tbody > tr > td {
+.admin .flex-container-main .ui.table > tbody > tr > td {
   font-size: var(--text-body-size-medium);
   line-height: var(--text-body-lineHeight-medium);
   vertical-align: middle;
@@ -130,16 +123,16 @@
 
 /* the Subhead "Add webhook" menu: keyboard focus lands on the .ui.jump.dropdown wrapper (base_list.tmpl), whose
    radius is 0 — the focus ring follows the 6px button inside (Primer focusOutline) */
-:is(.page-content.settings, .page-content.admin) .flex-container-main .ui.top.attached.header .ui.jump.dropdown {
+:is(.settings, .admin) .flex-container-main .ui.top.attached.header .ui.jump.dropdown {
   border-radius: var(--borderRadius-medium);
 }
 
 /* admin users list: Active / Restricted / 2FA flags are check / x octicons — green check, muted x (github.com
    check-mark columns) */
-.page-content.admin .flex-container-main .ui.table > tbody > tr > td > .svg.octicon-check {
+.admin .flex-container-main .ui.table > tbody > tr > td > .svg.octicon-check {
   color: var(--fgColor-success);
 }
 
-.page-content.admin .flex-container-main .ui.table > tbody > tr > td > .svg.octicon-x {
+.admin .flex-container-main .ui.table > tbody > tr > td > .svg.octicon-x {
   color: var(--fgColor-muted);
 }

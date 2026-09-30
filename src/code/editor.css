@@ -4,55 +4,19 @@
  * active line --codeMirror-activeline-bgColor, selection --codeMirror-selection-bgColor, cursor
  * --codeMirror-cursor-fgColor; 12px/20px monospace.
  */
-.code-editor-container {
-  background-color: var(--codeMirror-bgColor);
-}
 
 .code-editor-container .cm-editor {
   background-color: var(--codeMirror-bgColor);
-  color: var(--codeMirror-fgColor);
-  font-family: var(--fontStack-monospace);
-  font-size: var(--text-body-size-small);
 }
 
-.code-editor-container .cm-scroller {
-  font-family: var(--fontStack-monospace);
-  line-height: var(--base-size-20);
-}
+/* .cm-scroller font / line-height, .cm-gutters colours, the active line (+ gutter) and the focused selection
+   background are restated !important in code.important.css (CodeMirror's unlayered base theme beats layers);
+   a normal declaration next to them would never apply. */
 
-.code-editor-container .cm-content {
-  caret-color: var(--codeMirror-cursor-fgColor);
-}
-
-.code-editor-container .cm-cursor,
-.code-editor-container .cm-dropCursor {
-  border-left-color: var(--codeMirror-cursor-fgColor);
-}
-
-.code-editor-container .cm-editor.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground,
 .code-editor-container .cm-selectionBackground,
 .code-editor-container .cm-editor .cm-line ::selection,
 .code-editor-container .cm-editor .cm-line::selection {
   background-color: var(--codeMirror-selection-bgColor);
-}
-
-.code-editor-container .cm-activeLine,
-.code-editor-container .cm-activeLineGutter {
-  background-color: var(--codeMirror-activeline-bgColor);
-}
-
-.code-editor-container .cm-gutters {
-  background-color: var(--codeMirror-gutters-bgColor);
-  color: var(--codeMirror-lineNumber-fgColor);
-  border-right: 0;
-}
-
-.code-editor-container .cm-gutters .cm-lineNumbers .cm-activeLineGutter {
-  color: var(--fgColor-default);
-}
-
-.code-editor-container .cm-foldGutter .cm-gutterElement svg {
-  color: var(--codeMirror-gutterMarker-fgColor-muted);
 }
 
 .code-editor-container .cm-editor.cm-focused .cm-matchingBracket {
@@ -123,17 +87,24 @@
   background-color: var(--bgColor-attention-muted);
 }
 
-/* CodeMirror token classes (@lezer/highlight classHighlighter) → prettylights */
+/* CodeMirror token classes (@lezer/highlight classHighlighter) → prettylights, sharing each declaration block with
+   the Chroma rules of the same colour from syntax.css (see the notes there) */
+.chroma :is(.nx, .nn, .kt, .w),
 .code-editor-container .tok-variableName { color: inherit; }
+.chroma :is(.no, .o, .ow),
 .code-editor-container .tok-propertyName { color: var(--prettylights-syntax-constant); }
-.code-editor-container .tok-typeName,
-.code-editor-container .tok-className { color: var(--prettylights-syntax-entity); }
+.chroma :is(.fm, .na),
+.code-editor-container :is(.tok-typeName, .tok-className) { color: var(--prettylights-syntax-entity); }
 .code-editor-container .tok-namespace { color: inherit; }
-.code-editor-container .tok-macroName,
-.code-editor-container .tok-labelName { color: var(--prettylights-syntax-entity); }
+.code-editor-container :is(.tok-macroName, .tok-labelName) { color: var(--prettylights-syntax-entity); }
+:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.w+.kp+.nc:has(+.w+.bp)),
 .code-editor-container .tok-operator { color: var(--prettylights-syntax-keyword); }
+.chroma .sd,
 .code-editor-container .tok-meta { color: var(--prettylights-syntax-comment); }
+.chroma .gh,
+.chroma .gu,
 .code-editor-container .tok-heading { color: var(--prettylights-syntax-markup-heading); font-weight: var(--base-text-weight-semibold); }
+:is(.page-content:has(.breadcrumb > .active.section:is([title$=".md" i], [title$=".markdown" i])) .file-view, table.chroma:is([data-path$=".md" i], [data-path$=".markdown" i])) .na,
 .code-editor-container .tok-link { color: var(--prettylights-syntax-string); text-decoration: underline; }
 .code-editor-container .tok-inserted { color: var(--prettylights-syntax-markup-inserted-text); background-color: var(--prettylights-syntax-markup-inserted-bg); }
 .code-editor-container .tok-deleted { color: var(--prettylights-syntax-markup-deleted-text); background-color: var(--prettylights-syntax-markup-deleted-bg); }

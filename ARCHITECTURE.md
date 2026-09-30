@@ -206,6 +206,10 @@ column colors, repo units, federation, wiki clone box, etc.) get the **closest P
 ## 10. Budget
 
 - ≤ 300 KB per theme file minified (build fails otherwise). Current sizes in `docs/STATUS.json`.
+  Current (after the 2026-09-30 trim round, revision `56d1bf8f9d`; KB = 1024 B): `theme-github-auto.css` **282,796 B
+  (276.2 KB)**, `theme-github-light.css` **278,760 B (272.2 KB)**, `theme-github-dark.css` **278,777 B (272.2 KB)**;
+  all three are under the 285 KB trim target, which leaves ~8.8 KB (auto) of headroom for the dark pass.
+  Before the trim: 342,815 / 338,716 / 338,733 B. Per-folder layer sizes before and after: `docs/STATUS.json → budget.trim`.
 - No added JavaScript, with one listed exception: the Dialog close button (`templates/custom/footer.tmpl`, §7) —
   a clickable control cannot be created with CSS. ~0.7 KB inline, github-* themes only, no network request.
 - No layout shift: the screenshot tool records CLS per route; must not exceed the built-in theme's.

@@ -40,10 +40,6 @@
   width: var(--overlay-width-medium);
 }
 
-.ui.modal.g-modal-confirm {
-  max-width: calc(100vw - var(--base-size-64));
-}
-
 .ui.modal > :first-child:not(.icon) {
   border-top-left-radius: var(--borderRadius-large);
   border-top-right-radius: var(--borderRadius-large);
@@ -55,12 +51,7 @@
 }
 
 /* ---------- header (Dialog.Header + Dialog.Title) ---------- */
-.ui.modal > .header,
-.ui.modal > .header:not(.ui),
-.ui.mini.modal > .header:not(.ui),
-.ui.tiny.modal > .header:not(.ui),
-.ui.small.modal > .header:not(.ui),
-.ui.modal > .close.inside + .header {
+.ui.modal > .header {
   padding: calc(var(--base-size-8) + var(--base-size-6)) var(--base-size-16);
   border: 0;
   background: transparent;
@@ -73,8 +64,7 @@
 }
 
 /* keep the title clear of the close button */
-.ui.modal:has(> .close) > .header,
-.ui.modal:has(> .close) > .header:not(.ui) {
+.ui.modal:has(> .close) > .header {
   padding-right: calc(var(--base-size-8) + var(--control-medium-size) + var(--base-size-8));
 }
 
@@ -102,10 +92,8 @@
   opacity: 1;
   cursor: pointer;
 }
-
 .ui.modal > .close:hover {
   background: var(--control-transparent-bgColor-hover);
-  color: var(--fgColor-muted);
 }
 
 .ui.modal > .close:active {
@@ -128,7 +116,9 @@
 /* ---------- footer ---------- */
 .ui.modal > .actions,
 .ui.modal .content + .actions,
-.ui.modal .content + form > .actions {
+.ui.modal .content + form > .actions,
+.ui.modal .content > form > .actions,
+.ui.modal .content > .actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
@@ -141,17 +131,10 @@
 /* a footer placed inside the body (form layouts) keeps the body's padding and adds the Primer 16px gap */
 .ui.modal .content > form > .actions,
 .ui.modal .content > .actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: var(--base-size-8);
   padding: var(--base-size-16) 0 0;
-  border: 0;
-  background: transparent;
 }
 
-.ui.modal .actions > .button,
-.ui.modal .actions > .ui.button {
+.ui.modal .actions > .button {
   margin: 0;
 }
 
@@ -172,5 +155,4 @@
 /* single danger button ("I understand the consequences…") spans the footer like GitHub's repo deletion */
 .ui.modal .actions > .ui.button.danger {
   width: 100%;
-  margin: 0;
 }

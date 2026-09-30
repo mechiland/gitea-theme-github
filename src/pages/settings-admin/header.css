@@ -7,7 +7,7 @@
  * proposed in docs/requests/integrator.md (SA-4). Without that override these rules match nothing.
  */
 
-.page-content.settings > .gh-settings-header {
+.gh-settings-header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -15,7 +15,7 @@
   margin-bottom: var(--base-size-24);
 }
 
-.page-content.settings > .gh-settings-header img.ui.avatar {
+.gh-settings-header > img {
   flex-shrink: 0;
   width: var(--base-size-48);
   height: var(--base-size-48);
@@ -23,12 +23,12 @@
   box-shadow: 0 0 0 var(--borderWidth-thin) var(--avatar-borderColor);
 }
 
-.page-content.settings > .gh-settings-header .gh-settings-header-text {
+.gh-settings-header-text {
   flex: 1 1 0;
   min-width: 0;
 }
 
-.page-content.settings > .gh-settings-header .gh-settings-header-title {
+.gh-settings-header-title {
   margin: 0;
   color: var(--fgColor-default);
   font-size: var(--text-title-size-medium);
@@ -37,29 +37,29 @@
   overflow-wrap: anywhere;
 }
 
-.page-content.settings > .gh-settings-header .gh-settings-header-title a {
+.gh-settings-header-title a {
   color: inherit;
 }
 
-.page-content.settings > .gh-settings-header .gh-settings-header-subtitle {
+.gh-settings-header-subtitle {
   margin: 0;
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-medium);
   line-height: var(--text-body-lineHeight-medium);
 }
 
-.page-content.settings > .gh-settings-header > .ui.button {
+.gh-settings-header > .ui.button {
   flex-shrink: 0;
   margin: 0;
 }
 
 @media (max-width: 767.98px) {
-  .page-content.settings > .gh-settings-header > .ui.button {
+  .gh-settings-header > .ui.button {
     margin-left: calc(var(--base-size-48) + var(--base-size-16));
   }
 }
 
 /* the header takes over the page's top spacing; the settings grid follows it */
-.page-content.settings > .gh-settings-header + .flex-container {
+.gh-settings-header + .flex-container {
   margin-top: 0;
 }

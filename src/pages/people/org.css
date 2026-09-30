@@ -10,6 +10,8 @@
  * Gitea: templates/org/header.tmpl (the page's first child: .ui.container.flex-container — org settings add a second
  * .flex-container with the settings nav, hence :first-child), org/menu.tmpl (.ui.container > overflow-menu),
  * org/home.tmpl (.ui.grid > two .column), org/member/members.tmpl, org/team/teams.tmpl.
+ * Size budget: `.profile .five.wide` = the org home sidebar column (the only `five wide` on profile pages);
+ * `.members` / `.teams` are only ever the org People / Teams page classes. Phones: media.css.
  */
 
 /* ---------- header band ---------- */
@@ -24,11 +26,9 @@
   clip-path: inset(0 -100vmax);
 }
 
-/* 100px from the template (width/height attributes) */
-.organization > .flex-container:first-child img.ui.avatar {
+/* 100px from the template (width/height attributes); radius 6 + ring come from data-display's avatar rules */
+.organization > .flex-container:first-child .avatar {
   display: block;
-  border-radius: var(--borderRadius-medium);
-  box-shadow: 0 0 0 var(--borderWidth-thin) var(--avatar-borderColor);
 }
 
 .organization > .flex-container:first-child .ui.header {
@@ -41,55 +41,29 @@
 }
 
 /* RSS: a 32px icon button with a 16px glyph */
-.organization > .flex-container:first-child .ui.label.button {
+.organization > .flex-container:first-child .label.button {
   width: var(--control-medium-size);
-  height: var(--control-medium-size);
   padding: 0;
-  justify-content: center;
   border-radius: var(--borderRadius-medium);
   color: var(--fgColor-muted);
 }
 
-/* the template asks for a 24px glyph (and .svg[width="24"] { min-width: 24px }) */
-.organization > .flex-container:first-child .ui.label.button .svg {
-  width: var(--base-size-16);
-  min-width: var(--base-size-16);
-  height: var(--base-size-16);
-  min-height: var(--base-size-16);
-}
-
-.organization > .flex-container:first-child .render-content {
-  color: var(--fgColor-muted);
-}
-
-/* meta: location / website / email in one wrapping row */
-.organization > .flex-container:first-child .flex-relaxed-list > div:last-child:not(.ui, .render-content) {
+/* (its 16px glyph: merged.css) meta: location / website / email in one wrapping row */
+.organization > .flex-container:first-child .flex-relaxed-list > :last-child {
   display: flex;
   flex-wrap: wrap;
   gap: var(--base-size-4) var(--base-size-16);
 }
 
-.organization > .flex-container:first-child .flex-relaxed-list > div:last-child > .flex-text-block {
-  gap: var(--base-size-4);
-}
-
-.organization > .flex-container:first-child .flex-relaxed-list > div:last-child .svg {
-  color: var(--fgColor-muted);
-}
-
-.organization > .flex-container:first-child .flex-relaxed-list > div:last-child a.muted:hover {
-  color: var(--fgColor-accent);
-}
-
 /* the tabs close the band; the band's bottom rule runs edge to edge */
-.organization > .flex-container:first-child + .ui.container {
+.organization > .flex-container:first-child + * {
   margin-bottom: var(--base-size-24);
   background: var(--page-header-bgColor);
   box-shadow: 0 0 0 100vmax var(--page-header-bgColor), 0 var(--borderWidth-thin) 0 100vmax var(--borderColor-muted);
   clip-path: inset(0 -100vmax calc(var(--borderWidth-thin) * -1));
 }
 
-.organization > .flex-container:first-child + .ui.container > overflow-menu {
+.organization > .flex-container:first-child + * > overflow-menu {
   box-shadow: none;
 }
 
@@ -100,7 +74,7 @@
   padding-bottom: var(--base-size-8);
 }
 
-.organization:not(.profile) > .flex-container:first-child img.ui.avatar {
+.organization:not(.profile) > .flex-container:first-child .avatar {
   width: calc(var(--base-size-28) + var(--base-size-2));
   min-width: calc(var(--base-size-28) + var(--base-size-2));
   height: calc(var(--base-size-28) + var(--base-size-2));
@@ -110,19 +84,16 @@
   line-height: var(--base-size-24);
 }
 
-.organization:not(.profile) > .flex-container:first-child :is(.ui.header .flex-text-block:last-child, .flex-relaxed-list > :not(.ui.header)) {
-  display: none;
-}
 
 /* ---------- org home body: main + 296px sidebar ---------- */
-.organization.profile > .ui.container > .ui.grid {
+.organization.profile .ui.grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) calc(var(--base-size-128) * 2 + var(--base-size-40));
   gap: var(--base-size-24) var(--base-size-48);
   margin: 0;
 }
 
-.organization.profile > .ui.container > .ui.grid:not(:has(> .column + .column)) {
+.organization.profile .ui.grid:not(:has(> .column + .column)) {
   grid-template-columns: minmax(0, 1fr);
 }
 
@@ -131,11 +102,11 @@
 }
 
 /* sidebar: plain sections instead of boxes */
-.organization.profile .column + .column > .divider {
+.profile .five.wide > .divider {
   margin: var(--base-size-16) 0;
 }
 
-.organization.profile .column + .column > .ui.top.attached.header {
+.profile .five.wide > .top.header {
   margin: 0;
   padding: var(--base-size-16) 0 var(--base-size-8);
   border: 0;
@@ -145,104 +116,50 @@
   font-size: var(--text-body-size-large);
 }
 
-.organization.profile .column + .column > :is(:first-child, .divider + *).ui.top.attached.header {
+.profile .five.wide > :is(:first-child, .divider + *).top.header {
   padding-top: 0;
   border-top: 0;
 }
 
-.organization.profile .column + .column > .ui.header > a {
+.profile .five.wide > .header > a {
   font-size: var(--text-body-size-small);
   font-weight: var(--base-text-weight-normal);
 }
 
-.organization.profile .column + .column > .ui.header > a:hover {
-  color: var(--fgColor-accent);
-  text-decoration: none;
-}
-
-.organization.profile .column + .column > .ui.attached.segment {
+.profile .five.wide > .segment {
   margin: 0 0 var(--base-size-16);
   padding: 0;
   border: 0;
   background: none;
 }
 
-.organization.profile .column + .column .flex-relaxed-list > div > a:not(.muted) {
-  font-weight: var(--base-text-weight-semibold);
-}
-
-.organization.profile .column + .column .flex-relaxed-list p {
-  font-size: var(--text-body-size-small);
-}
-
-.organization.profile .column + .column .flex-relaxed-list p strong {
-  color: var(--fgColor-default);
-}
-
-@media (max-width: 767.98px) {
-  .organization.profile > .ui.container > .ui.grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  /* mobile reversed: Gitea puts the sidebar first on phones; github.com keeps the repositories first */
-  .organization.profile .column + .column {
-    order: 1;
-  }
-
-  .organization > .flex-container:first-child {
-    flex-direction: row;
-    gap: var(--base-size-16);
-  }
-
-  .organization.profile > .flex-container:first-child img.ui.avatar {
-    width: var(--base-size-64);
-    height: var(--base-size-64);
-    min-width: var(--base-size-64);
-  }
-
-  /* "Members are managed through teams…" above its button */
-  .organization:is(.members, .teams) > .ui.container > .flex-text-block {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
 /* ---------- People (members) / Teams ---------- */
-.organization:is(.members, .teams) .ui.container > form.ui.form {
+:is(.members, .teams) .ui.container > form.ui.form {
   max-width: calc(var(--base-size-128) * 2 + var(--base-size-64));
 }
 
-.organization.members .flex-divided-list > .item {
+.members .flex-divided-list > .item {
   align-items: center;
-  padding: var(--base-size-16);
 }
 
-.organization.members .flex-divided-list .item-title {
+.members .item-title {
   gap: var(--base-size-8);
   font-weight: var(--base-text-weight-normal);
 }
 
-.organization.members .flex-divided-list .item-title > a {
-  color: var(--fgColor-accent);
-}
-
-.organization.members .flex-divided-list .item-main > .tw-flex {
+.members .item-main > .tw-flex {
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
 }
 
-.organization.members .flex-divided-list .item-main > .tw-flex strong {
-  color: var(--fgColor-default);
-}
-
 /* manage prompt row above the list */
-.organization:is(.members, .teams) > .ui.container > .flex-text-block {
+:is(.members, .teams) > .ui.container > .flex-text-block {
   gap: var(--base-size-16);
   color: var(--fgColor-muted);
 }
 
 /* Teams: Box cards, 2 columns */
-.organization.teams .ui.two.column.grid {
+.teams .ui.two.column.grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--base-size-16);
@@ -265,18 +182,4 @@
   background: var(--bgColor-default);
   color: var(--fgColor-muted);
   font-weight: var(--base-text-weight-normal);
-}
-
-.team-item-box > .ui.attached.segment .flex-text-block {
-  gap: var(--base-size-4);
-}
-
-@media (max-width: 767.98px) {
-  .organization.teams .ui.two.column.grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .organization:is(.members, .teams) .ui.container > form.ui.form {
-    max-width: none;
-  }
 }

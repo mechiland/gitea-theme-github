@@ -12,7 +12,6 @@
 }
 
 .repo-view-file-tree-container > .repo-button-row {
-  gap: var(--base-size-8);
   font-size: var(--text-title-size-small);
   font-weight: var(--base-text-weight-semibold);
 }
@@ -31,26 +30,24 @@
   grid-template-columns: var(--base-size-16) minmax(0, 1fr);
   gap: 0;
   min-height: var(--base-size-32);
-  padding: 0;
+  padding: 0 0 0 var(--gh-ti, 0px); /* --gh-ti: nesting indent, set per level below */
   border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-default);
-  font-size: var(--text-body-size-medium);
-  line-height: var(--text-body-lineHeight-medium);
 }
 
-.view-file-tree-items .tree-item:hover {
+/* hover / current item / accent bar are shared with the diff file tree (diff-tree.css); the radius and text colour
+   come from the item rules above (they apply in every state) */
+.view-file-tree-items .tree-item:hover,
+.diff-file-tree-items :is(.item-file, .item-directory):hover {
   background: var(--control-transparent-bgColor-hover);
-  border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-default);
 }
 
-.view-file-tree-items .tree-item.selected {
+.view-file-tree-items .tree-item.selected,
+.diff-file-tree-items .item-file.selected {
   background: var(--control-transparent-bgColor-selected);
-  border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-default);
 }
 
-.view-file-tree-items .tree-item.selected::after {
+.view-file-tree-items .tree-item.selected::after,
+.diff-file-tree-items .item-file.selected::after {
   content: "";
   position: absolute;
   top: calc(50% - var(--base-size-12));
@@ -79,25 +76,18 @@
   padding: 0 var(--base-size-8);
 }
 
-.view-file-tree-items .item-content .svg {
-  flex-shrink: 0;
-}
-
-/* nesting: github.com indents 8px per level inside full-width rows (no border guide) */
-.view-file-tree-items .sub-items {
+/* nesting: github.com indents 8px per level inside full-width rows (no border guide); same for the diff tree */
+:is(.view-file-tree-items, .diff-file-tree-items) .sub-items {
   gap: 0;
   margin-left: 0;
   border-left: 0;
 }
 
-.view-file-tree-items .sub-items .tree-item { padding-left: var(--base-size-8); }
-.view-file-tree-items .sub-items .sub-items .tree-item { padding-left: var(--base-size-16); }
-.view-file-tree-items .sub-items .sub-items .sub-items .tree-item { padding-left: var(--base-size-24); }
-.view-file-tree-items .sub-items .sub-items .sub-items .sub-items .tree-item { padding-left: var(--base-size-32); }
-.view-file-tree-items .sub-items .sub-items .sub-items .sub-items .sub-items .tree-item { padding-left: var(--base-size-40); }
-.view-file-tree-items .sub-items .sub-items .sub-items .sub-items .sub-items .sub-items .tree-item { padding-left: var(--base-size-48); }
-
-/* padding-left moves the grid; keep the toggle column where the padding ends */
-.view-file-tree-items .sub-items .tree-item {
-  grid-template-columns: var(--base-size-16) minmax(0, 1fr);
-}
+/* per-level indent --gh-ti (8px per level), read by the item rules of both trees (padding-left of .tree-item here,
+   of .item-directory / .item-file in diff-tree.css); the diff tree stops at level 4, the code-view tree at 6 */
+:is(.view-file-tree-items, .diff-file-tree-items) .sub-items :is(.tree-item, .item-directory, .item-file) { --gh-ti: var(--base-size-8); }
+:is(.view-file-tree-items, .diff-file-tree-items) .sub-items .sub-items :is(.tree-item, .item-directory, .item-file) { --gh-ti: var(--base-size-16); }
+:is(.view-file-tree-items, .diff-file-tree-items) .sub-items .sub-items .sub-items :is(.tree-item, .item-directory, .item-file) { --gh-ti: var(--base-size-24); }
+:is(.view-file-tree-items, .diff-file-tree-items) .sub-items .sub-items .sub-items .sub-items :is(.tree-item, .item-directory, .item-file) { --gh-ti: var(--base-size-32); }
+.view-file-tree-items .sub-items .sub-items .sub-items .sub-items .sub-items .tree-item { --gh-ti: var(--base-size-40); }
+.view-file-tree-items .sub-items .sub-items .sub-items .sub-items .sub-items .sub-items .tree-item { --gh-ti: var(--base-size-48); }

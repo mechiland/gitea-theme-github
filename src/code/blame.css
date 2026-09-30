@@ -7,7 +7,8 @@
  *   line numbers / code as in the file view (12px/20px mono).
  * Not reproducible: the per-segment "heat" age stripe (Gitea emits no age data), the Older/Newer legend.
  */
-.file-view .lines-commit {
+.file-view .lines-commit,
+#viewed-files-summary-label {
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
 }
@@ -15,7 +16,6 @@
 .lines-commit .blame-info {
   width: calc(var(--overlay-width-small) - var(--base-size-32));
   padding: 0 var(--base-size-8) 0 var(--base-size-16);
-  line-height: var(--base-size-20);
 }
 
 .lines-commit .blame-info .blame-data {
@@ -23,35 +23,25 @@
   gap: var(--base-size-8);
   min-height: var(--base-size-20);
   font-family: var(--fontStack-sansSerif);
-  font-size: var(--text-body-size-small);
 }
 
 /* github.com order: age · avatar · message */
 .lines-commit .blame-info .blame-data .blame-time {
   order: -1;
   min-width: calc(var(--base-size-80) + var(--base-size-4));
-  color: var(--fgColor-muted);
 }
 
-.blame-avatar {
-  margin-right: 0;
-}
+/* .blame-avatar margin-right: 0 — shared rule in file-view.css */
 
 .blame-avatar img.ui.avatar,
 .blame-avatar .avatar-stack img {
   width: calc(var(--base-size-16) + var(--base-size-2));
   height: calc(var(--base-size-16) + var(--base-size-2));
-  border-radius: var(--borderRadius-full);
 }
 
-.lines-commit .blame-info .blame-data .blame-message a {
-  color: var(--fgColor-muted);
-}
+/* message link colour: shared muted rule in file-icons.css */
 
-.lines-commit .blame-info .blame-data .blame-message a:hover {
-  color: var(--fgColor-accent);
-  text-decoration: underline;
-}
+/* hover: accent + underline, shared rule in file-list.css */
 
 /* re-blame button column */
 .file-view .lines-blame-btn {
@@ -68,10 +58,7 @@
   color: var(--fgColor-muted);
 }
 
-.file-view .lines-blame-btn > a:hover {
-  background: var(--control-transparent-bgColor-hover);
-  color: var(--fgColor-default);
-}
+/* hover: shared invisible-icon-button rule in file-view.css */
 
 /* segments */
 tr.top-line-blame {

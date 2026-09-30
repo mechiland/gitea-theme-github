@@ -62,19 +62,18 @@
 }
 
 /* hover/press "pill" inset 4px inside the track (Primer SegmentedControl) */
-.clone-panel-popup > .clone-panel-tab > .item:not(.active):hover {
+.clone-panel-popup > .clone-panel-tab > .item:not(.active):is(:hover, :active) {
   background: var(--controlTrack-bgColor-hover);
   box-shadow: inset 0 0 0 var(--base-size-4) var(--controlTrack-bgColor-rest);
 }
 
 .clone-panel-popup > .clone-panel-tab > .item:not(.active):active {
   background: var(--controlTrack-bgColor-active);
-  box-shadow: inset 0 0 0 var(--base-size-4) var(--controlTrack-bgColor-rest);
 }
 
 .clone-panel-popup > .clone-panel-tab > .item.active {
   z-index: 1;
-  border: var(--borderWidth-thin) solid var(--controlKnob-borderColor-rest);
+  border-color: var(--controlKnob-borderColor-rest);
   background: var(--controlKnob-bgColor-rest);
   color: var(--fgColor-default);
   font-weight: var(--base-text-weight-semibold);
@@ -128,15 +127,6 @@
   color: var(--fgColor-muted);
 }
 
-.clone-panel-field > .ui.action.input > .ui.button:hover {
-  background: var(--control-transparent-bgColor-hover);
-  color: var(--fgColor-muted);
-}
-
-.clone-panel-field > .ui.action.input > .ui.button:active {
-  background: var(--control-transparent-bgColor-active);
-}
-
 .clone-panel-field > .ui.action.input > .ui.button > .svg {
   width: var(--base-size-16);
   height: var(--base-size-16);
@@ -159,32 +149,12 @@
   display: none;
 }
 
+/* row metrics, hover/active/focus: action-menu.css */
 .clone-panel-popup > .clone-panel-list > .item {
   gap: var(--control-medium-gap);
-  min-height: var(--control-medium-size);
-  margin: 0 var(--base-size-8);
-  padding: var(--control-medium-paddingBlock) var(--control-medium-paddingInline-condensed);
-  border-radius: var(--borderRadius-medium);
   color: var(--control-fgColor-rest);
-  font-size: var(--text-body-size-medium);
-  line-height: var(--base-size-20);
   text-decoration: none;
   cursor: pointer;
-}
-
-.clone-panel-popup > .clone-panel-list > .item:hover {
-  background: var(--control-transparent-bgColor-hover);
-  color: var(--control-fgColor-rest);
-  text-decoration: none;
-}
-
-.clone-panel-popup > .clone-panel-list > .item:active {
-  background: var(--control-transparent-bgColor-active);
-}
-
-.clone-panel-popup > .clone-panel-list > .item:focus-visible {
-  outline: var(--focus-outline);
-  outline-offset: 0;
 }
 
 .clone-panel-popup > .clone-panel-list > .item > :is(svg, img) {
