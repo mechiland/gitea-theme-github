@@ -204,15 +204,16 @@
   border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
 }
 
+/* author semibold (github.com 14/600); a bot / deleted user is a bare text node in the span, not a link */
 #release-list .author {
   display: inline-flex;
   align-items: center;
   gap: var(--base-size-4);
+  font-weight: var(--base-text-weight-semibold);
 }
 
 #release-list .author > a {
   color: var(--fgColor-muted);
-  font-weight: var(--base-text-weight-semibold);
 }
 
 #release-list .author > .ui.avatar,
@@ -296,9 +297,24 @@
 }
 
 @media (max-width: 767.98px) {
-  /* github.com keeps the release title at 32px / 600 on phones */
+  /* github.com @390: the list title is 26px / 600 / 39px (no Primer type token; the single-release h1 keeps 32px,
+     reset in its @scope) */
   #release-list .release-list-title {
     column-gap: var(--base-size-8);
+    font-size: calc(var(--base-size-24) + var(--base-size-2));
+    line-height: var(--base-text-lineHeight-normal);
+  }
+
+  /* the state Label sits at the right end of the title row (github.com @390) */
+  #release-list .release-list-title > .ui.label {
+    margin-left: auto;
+  }
+
+  /* Compare sits at the card's left edge here: Gitea opens the menu leftwards at < 768 (release-tag.css) → 60% of
+     it off-screen. github.com left-aligns the overlay to the button. */
+  #release-list .branch-selector-dropdown .menu {
+    right: auto;
+    left: 0;
   }
 
   /* github.com @390: the release cards use the full page width (x=16, 358 wide) while the header row and the tags
@@ -419,6 +435,10 @@
   border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
 }
 
+#tags-table .archive-link { /* github.com: "zip" / "tar.gz" */
+  text-transform: lowercase;
+}
+
 .tag-list-row-title { /* github.com: 91px rows (16 + 24 title + 16 + meta + 16) */
   font-size: var(--text-title-size-small);
   font-weight: var(--base-text-weight-semibold);
@@ -495,6 +515,12 @@
       grid-row: 1;
     }
 
+    /* Compare sits at the card's top right: right-align its 320px menu (github.com), else it overflows the page */
+    #release-list .branch-selector-dropdown .menu {
+      right: 0;
+      left: auto;
+    }
+
     #release-list .meta > .release-branch-tag-selector {
       z-index: 1;
       grid-row: 2;
@@ -516,11 +542,16 @@
     }
   }
 
-  /* <768px: the list is already full width here (reset of the list's 12/11 widening) */
+  /* <768px: the list is already full width here (reset of the list's 12/11 widening); the h1 stays 32/600/48 */
   @media (max-width: 767.98px) {
     #release-list {
       width: auto;
       margin-left: 0;
+    }
+
+    #release-list .release-list-title {
+      font-size: var(--text-title-size-large);
+      line-height: var(--text-title-lineHeight-large);
     }
   }
 }

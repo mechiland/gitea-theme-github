@@ -1,0 +1,59 @@
+/*
+ * IssueLabel, dark scheme (DD-D1). github.com dark never fills a label: it paints
+ *   background = label colour at 18 % alpha, border = text colour at 30 % alpha,
+ *   text = label colour, lightened (HSL) when the label is dark (perceived lightness < 0.6).
+ * Gitea writes `color/background-color … !important` inline (RenderLabel), which no stylesheet can override, so:
+ *   - the inline background is clipped to the glyphs (`background-clip: text`) and the label text is painted
+ *     from it: child `.gt-ellipsis` inherits the label colour as its own background and lays a white veil over it
+ *     for dark labels (Gitea's contrast text colour #fff = "dark label", the same luminance formula GitHub uses);
+ *   - ::before = the 18 % tint, ::after = the 30 % ring (masked to 1px), both inherit the label colour.
+ * Result: #000000 labels (grex `github_actions`, `rust`) read grey-on-dark with a visible ring, like github.com.
+ */
+.ui.label[style*="background-color"] {
+  --gh-label-veil: transparent;
+  position: relative;
+  isolation: isolate;
+  /* Gitea's overflow:hidden clips to the padding box and would cut the ring off (it sits in the 1px border) */
+  overflow: clip;
+  overflow-clip-margin: var(--borderWidth-thin);
+  background-image: linear-gradient(var(--gh-label-veil), var(--gh-label-veil));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ui.label[style^="color: #fff"] {
+  --gh-label-veil: color-mix(in srgb, var(--fgColor-white) 50%, transparent);
+}
+
+.ui.label[style*="background-color"] > .gt-ellipsis {
+  background-color: inherit;
+  background-image: inherit;
+  background-clip: text;
+}
+
+.ui.label[style*="background-color"]::before,
+.ui.label[style*="background-color"]::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background-color: inherit;
+  pointer-events: none;
+}
+
+.ui.label[style*="background-color"]::before {
+  opacity: 0.18;
+}
+
+.ui.label[style*="background-color"]::after {
+  padding: var(--borderWidth-thin);
+  background-image: inherit;
+  mask: linear-gradient(currentColor, currentColor) content-box exclude, linear-gradient(currentColor, currentColor);
+  opacity: 0.3;
+}
+
+/* colour emoji must keep their own paint (a transparent text fill turns them into label-coloured silhouettes) */
+.ui.label[style*="background-color"] .emoji {
+  -webkit-text-fill-color: currentColor;
+}

@@ -40,20 +40,30 @@
 /* copy button next to the name: github.com 32px invisible IconButton, 16px octicon, --fgColor-muted
    (colour needs repo.important.css: .interact-fg forces `color: inherit !important`) */
 
-/* commit / updated line under the name */
+/* commit / updated line under the name → github.com's "Updated" column: <avatar> 8 months ago. github.com shows no
+   commit in this table, so the SHA, message and pusher name are left out; the bare "·" / "Updated" text nodes are
+   hidden by font-size 0 (every element restores it). Deleted branches (p.info without .tw-flex) keep their text. */
 .repository.branches td > p.info {
-  gap: var(--base-size-4);
+  gap: var(--base-size-8);
   overflow: hidden;
   line-height: var(--base-size-20);
   white-space: nowrap;
 }
 
-.repository.branches td > p.info > .commit-message {
-  min-width: 0;
+.repository.branches td > p.info.tw-flex {
+  font-size: 0;
 }
 
-.repository.branches td > p.info > .svg + a {
-  font-family: var(--fontStack-monospace);
+.repository.branches p.info.tw-flex > * {
+  font-size: var(--text-body-size-small);
+}
+
+.repository.branches p.info.tw-flex > :is(.svg, .svg + a, .commit-message, a:last-child:not(.avatar-with-link)) {
+  display: none;
+}
+
+.repository.branches p.info.tw-flex > .avatar-with-link {
+  order: -1;
 }
 
 /* Behind | Ahead */
@@ -233,10 +243,6 @@
     flex-wrap: wrap;
     white-space: normal;
   }
-
-  .repository.branches td > p.info > .commit-message {
-    white-space: nowrap;
-  }
 }
 
 /* ---------- ≥768px: one-line rows (github.com DataTable rows are 49px: 8 + 32px copy button + 8 + 1px rule) ----------
@@ -244,9 +250,10 @@
    which gives 75px rows. The name block floats left and the commit line (its own BFC through overflow: hidden)
    takes the rest of the cell on the same line, vertically centred on the 32px copy button. */
 @media (min-width: 768px) {
+  /* table-like columns: the name block has a fixed width, so the Updated line starts at one x on every row */
   .repository.branches td > .flex-text-block {
     float: left;
-    max-width: 50%;
+    width: 70%;
     margin-right: var(--base-size-16);
   }
 
@@ -257,7 +264,7 @@
   /* column widths (fixed table): Fomantic's eight / two / three wide = 50 / 12.5 / 18.75% leaves the one-line name +
      commit cell too narrow for the commit message; github.com gives the Branch column most of the row and keeps
      Behind | Ahead and Pull request compact. Actions keep ≥ 5 × 28px + padding (17% = 218px at 1280). */
-  .repository.branches td.eight.wide {
+  .repository.branches td:is(.eight, :first-child) { /* the default-branch row's name cell too: one Updated column */
     width: 60%;
   }
 
