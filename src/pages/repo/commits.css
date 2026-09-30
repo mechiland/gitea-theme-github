@@ -279,13 +279,13 @@ html:lang(en) .gh-commit-day-date::before {
     border-radius: var(--borderRadius-medium);
   }
 
-  .diff:not(.pull) #commits-table :is(.copy-commit-id, .view-commit-path, .commit-id-short) {
-    color: var(--button-default-fgColor-rest); /* Button--secondary icon + text */
-    background: var(--button-default-bgColor-rest);
+  /* Button--secondary: copy / browse fill is in repo.important.css (.interact-bg), the SHA's here */
+  .diff:not(.pull) #commits-table .btn {
+    color: var(--button-default-fgColor-rest);
   }
 
   /* the border is an outline: leave the shared :focus-visible ring alone */
-  .diff:not(.pull) #commits-table :is(.copy-commit-id, .view-commit-path, .commit-id-short):not(:focus-visible) {
+  .diff:not(.pull) #commits-table :is(.btn, .commit-id-short):not(:focus-visible) {
     outline: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
     outline-offset: calc(var(--borderWidth-thin) * -1);
   }
@@ -296,10 +296,11 @@ html:lang(en) .gh-commit-day-date::before {
 
   .diff:not(.pull) #commits-table .commit-id-short {
     border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
+    background: var(--button-default-bgColor-rest);
     font-size: var(--text-body-size-small);
   }
 
-  .diff:not(.pull) #commits-table :is(.copy-commit-id, .view-commit-path, .commit-id-short):hover {
+  .diff:not(.pull) #commits-table .commit-id-short:hover {
     background: var(--button-default-bgColor-hover);
   }
 }
@@ -483,7 +484,7 @@ html:lang(en) .gh-commit-day-date::before {
 
 /* Activity pages (pulse / contributors / code frequency / recent commits, page class "repository commits"): the page
    title is github.com's Insights heading — 24px normal, 24px above the chart Box, no rule */
-.commits .flex-container-main > .activity-header,
+.activity-header,
 .commits .flex-container-main > * > div > .ui.header:first-child {
   margin: 0 0 var(--base-size-24);
   font-size: var(--base-size-24); /* Primer Subhead-heading = $h2-size, no text token between 20 and 32 */
@@ -492,7 +493,7 @@ html:lang(en) .gh-commit-day-date::before {
 }
 
 /* github.com /pulse: a Subhead — 20px semibold date range, 8px + 1px --borderColor-muted rule, 8px above Overview */
-.commits .flex-container-main > .activity-header {
+.activity-header {
   margin-bottom: var(--base-size-8);
   padding-bottom: var(--base-size-8);
   border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
@@ -501,18 +502,17 @@ html:lang(en) .gh-commit-day-date::before {
   line-height: var(--text-title-lineHeight-medium);
 }
 
-/* pulse stat cells: label muted, count default (github.com) */
-.commits .flex-container-main .horizontal.segments > .segment {
+/* pulse stat cells: dividers run the full row height (Gitea pads the wrapping segment); label muted, count default */
+.horizontal.segments {
+  padding: 0;
+}
+
+.horizontal.segments > a {
   color: var(--fgColor-muted);
 }
 
-.commits .flex-container-main .horizontal.segments strong {
+.horizontal.segments strong {
   color: var(--fgColor-default);
-}
-
-/* pulse: the stat cells' dividers run the full row height (github.com); Gitea pads the wrapping segment */
-.commits .flex-container-main .horizontal.segments {
-  padding: 0;
 }
 
 #repo-contributors-chart .ui.header:first-child {
@@ -574,11 +574,11 @@ html:lang(en) .gh-commit-day-date::before {
 /* pulse < 768: github.com stacks the stat cells (Merged / Open / Closed / New) in one column; Gitea's 4 horizontal
    segments squeeze their labels to one word per line at 390 */
 @media (max-width: 767.98px) {
-  .commits .flex-container-main .horizontal.segments {
+  .horizontal.segments {
     flex-direction: column;
   }
 
-  .commits .flex-container-main .horizontal.segments > .segment + .segment {
+  .horizontal.segments > .segment + .segment {
     border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
     border-left: 0;
     border-radius: 0;

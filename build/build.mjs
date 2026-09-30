@@ -319,7 +319,7 @@ for (const [f, e] of Object.entries(report.folders)) {
 console.log(`tokens kept ${tokens.used}/${tokens.total}`);
 for (const [n, t] of Object.entries(report.themes)) {
   console.log(`${t.overBudget ? '✗ OVER BUDGET' : '✓'} theme-${n}.css ${t.kb} KB`);
-  if (t.overBudget) failed = true;
+  if (t.overBudget && !flag('budget-warn')) failed = true; // --budget-warn: report, don't fail (CI snapshot builds)
 }
 console.log(`revision ${rev}`);
 if (report.deploy) {
