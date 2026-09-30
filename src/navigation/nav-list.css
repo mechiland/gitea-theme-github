@@ -104,10 +104,6 @@
   text-transform: none;
 }
 
-.ui.vertical.menu > .header.item:not(:first-child) {
-  margin-top: var(--base-size-8);
-}
-
 /* ---------- collapsible groups (admin, repo / user / org settings: <details class="item">) ---------- */
 .ui.vertical.menu > details.item {
   display: block;
@@ -131,12 +127,19 @@
   background: var(--control-transparent-bgColor-hover);
 }
 
+/* Primer NavList: trailing chevron-down that turns up when expanded (Gitea: chevron-right turning down; FG-117).
+   Gitea only ships the chevron-right mask, so it is rotated. */
 .ui.vertical.menu > details.item > summary::after {
   width: var(--base-size-16);
   height: var(--base-size-16);
   border: 0;
   background: var(--fgColor-muted);
+  transform: rotate(90deg);
   transition: transform var(--base-duration-200) var(--base-easing-easeInOut);
+}
+
+.ui.vertical.menu > details.item[open] > summary::after {
+  transform: rotate(-90deg);
 }
 
 /* a closed group that contains the current page: selected look on the summary (NavList collapsed parent) */
@@ -171,4 +174,44 @@
     var(--control-medium-paddingBlock) calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16));
   color: var(--fgColor-default);
   font-size: var(--text-body-size-medium);
+}
+
+/* Fomantic's `.ui.secondary.menu .item { align-self: center }` shrink-wraps and centres the items of the dashboard
+   filter lists (/issues, /pulls, /milestones: `.ui.secondary.vertical.filter.menu`). Primer NavList items span the
+   whole column: text left, trailing counter right. */
+.ui.vertical.menu > .item {
+  align-self: stretch;
+}
+
+/* /milestones: the repo list is a multi-select filter (every repo is "active" = included until you toggle it off),
+   not a "current page" list. Primer ActionList multi-select: a leading check marks selected rows; no current-item
+   bar and no selected background, so selected vs unselected reads clearly. */
+.ui.vertical.filter.menu > .repo.name.item {
+  padding-left: calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16) + var(--control-medium-gap));
+}
+
+.ui.vertical.filter.menu > .repo.name.item.active {
+  background: transparent;
+  font-weight: var(--base-text-weight-normal);
+}
+
+.ui.vertical.filter.menu > .repo.name.item.active:hover {
+  background: var(--control-transparent-bgColor-hover);
+}
+
+.ui.vertical.filter.menu > .repo.name.item.active::after {
+  top: calc(50% - var(--base-size-8));
+  left: var(--control-medium-paddingInline-condensed);
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  border-radius: 0;
+  background: var(--fgColor-default);
+  mask: var(--checkbox-mask-checked) center / var(--base-size-12) no-repeat;
+}
+
+/* the static "In your repositories N" row above the repo list = NavList group heading */
+.ui.vertical.filter.menu > div.item:not(.repo) {
+  font-size: var(--text-body-size-small);
+  font-weight: var(--base-text-weight-semibold);
+  color: var(--fgColor-muted);
 }
