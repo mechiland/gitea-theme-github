@@ -35,12 +35,10 @@
   border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
   background: transparent;
   box-shadow: none;
-  color: var(--fgColor-muted);
 }
 
 :is(.branches, .tags, .commits:not(.pull)) > .ui.container > .segment > form > .input > .ui.icon.button:last-child:is(:hover, :active) {
   background: transparent;
-  color: var(--fgColor-default);
 }
 
 /* commits: the scope dropdown stays joined at the right end of the field */

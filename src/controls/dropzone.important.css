@@ -1,13 +1,6 @@
-/*
- * gh-important: file attach area (templates/repo/upload.tmpl `.ui.dropzone`, inside `.ui.form .field`) on release,
- * upload-file and any other form that does not restyle it. The dropzone library CSS is a lazy chunk
- * (dropzone.*.css, unlayered) and beats every layer:
- *   `.dropzone { min-height: 150px; border: 1px solid rgba(0,0,0,.8); border-radius: 5px; padding: 20px }`
- *   `.dropzone .dz-message { text-align: center; margin: 3em 0 }`
- * github.com's attach areas (release "Attach binaries…", upload files) are a quiet 1px dashed box in the
- * default border color on the muted surface with muted text. Issue/PR comment forms get their own file bar
- * from pages/issues-prs (composer.important.css, ID-scoped, so it wins over this generic rule).
- */
+/* gh-important: file attach area (repo/upload.tmpl `.ui.dropzone`). The dropzone lazy chunk is unlayered:
+ * `.dropzone { min-height: 150px; border: 1px solid; padding: 20px }`, `.dz-message { text-align: center; margin: 3em 0 }`.
+ * github.com: a quiet 1px dashed --borderColor-default box on --bgColor-muted. Composers: pages/issues-prs. */
 .ui.dropzone {
   min-height: 0 !important;
   padding: var(--base-size-16) !important;
@@ -20,5 +13,13 @@
   margin: 0 !important;
 }
 
-/* the "Drop files or click here" text keeps Gitea's own !important --color-text-light / hover --color-text
-   (mapped to --fgColor-muted / --fgColor-default); no font override, so the issue composer keeps its 12px */
+/* the message keeps Gitea's own !important muted colour and font size */
+
+/* inline diff comment (repo/diff/comment_form.tmpl): a slim left-aligned file bar, not a 55px drop box */
+.comment-code-cloud .ui.dropzone {
+  padding: var(--base-size-8) !important;
+}
+
+.comment-code-cloud .ui.dropzone .dz-message {
+  text-align: left !important;
+}

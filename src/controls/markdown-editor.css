@@ -1,14 +1,7 @@
-/*
- * Markdown editor chrome (templates/shared/combomarkdowneditor.tmpl, FG2-079) — github.com CommentBox for every
- * editor that is not an issue / PR composer (release, milestone, project, wiki, admin banner, comment edit, review
- * box, inline diff comment). The composers (`#comment-form`, `#new-issue`, conversation-tab reply forms) keep
- * pages/issues-prs' chrome (composer.css) and are left out here.
- *   Box: 1px --borderColor-default, radius 6px, --bgColor-muted header strip (padding 8px 8px 0) with the Write /
- *        Preview TabNav tabs (navigation) and, when the Box is ≥ 720px wide (tabs + 17 toolbar buttons), the
- *        toolbar on the right; narrower Boxes keep the toolbar as one sideways-scrolling row in the body;
- *   body: --bgColor-default, padding 8px; Preview keeps the writer's height (the writer stays in the grid cell);
- *   toolbar: 28px square invisible IconButtons, 16px --fgColor-muted Octicons, hover --fgColor-accent.
- */
+/* Markdown editor (shared/combomarkdowneditor.tmpl, FG2-079): github.com CommentBox for every editor outside the
+ * issue / PR composers (pages/issues-prs composer.css). Box: 1px border, radius 6px, --bgColor-muted header strip with
+ * the Write / Preview tabs and, when the Box is ≥ 720px wide, the toolbar; body --bgColor-default, 8px; Preview keeps
+ * the writer's height (the writer stays in the grid cell). Toolbar: 28px invisible IconButtons, muted Octicons. */
 
 .combo-markdown-editor:where(:not(:is(#comment-form, #new-issue, .code-comments-list form.comment-form) *)) {
   display: grid;
@@ -73,16 +66,24 @@
   padding: 0;
 }
 
-/* ---- toolbar (every editor; the composers restate the same look in pages/issues-prs) ---- */
-.combo-markdown-editor markdown-toolbar {
-  flex-wrap: nowrap;
-  gap: 0;
-  padding: 0 0 var(--base-size-8);
-  overflow-x: auto;
-  scrollbar-width: none;
+/* file bar text: left-aligned when it wraps too (UA centres <button>; dropzone.important.css aligns .dz-message) */
+.comment-code-cloud .dz-button {
+  text-align: left;
 }
 
-/* groups stay compact and left-aligned (Gitea: last group `flex: 1`, pushed to the far right) */
+/* a narrow cloud (split diff < 1012px) wraps the actions instead of pushing "Start review" out on the left */
+.comment-code-cloud .field.footer > .flex-text-block {
+  flex-wrap: wrap;
+}
+
+/* ---- toolbar (every editor; composers: pages/issues-prs). A Box too narrow for one row wraps whole groups
+   (Gitea's wrap), so every tool stays reachable — no CSS-only "…" overflow menu ---- */
+.combo-markdown-editor markdown-toolbar {
+  gap: 0;
+  padding: 0 0 var(--base-size-8);
+}
+
+/* compact groups, left-aligned (Gitea: last group `flex: 1`, pushed to the far right) */
 .combo-markdown-editor .markdown-toolbar-group {
   flex: none;
   gap: 0;
@@ -143,4 +144,10 @@
     right: var(--base-size-8);
     padding: 0;
   }
+}
+
+/* empty Preview: github.com's "Nothing to preview" (English UI only; .markup::before is taken by gh.markdown) */
+.combo-markdown-editor [data-tab-panel="markdown-previewer"]:has(> .render-preview:empty):lang(en)::before {
+  content: "Nothing to preview";
+  color: var(--fgColor-muted);
 }

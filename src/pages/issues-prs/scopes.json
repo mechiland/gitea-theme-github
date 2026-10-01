@@ -1,0 +1,90 @@
+{
+ ".commits.pull.repository": [
+  "repo/pulls/commits.tmpl"
+ ],
+ ".compare.diff.pull.repository": [
+  "repo/diff/compare.tmpl"
+ ],
+ ".compare.pull": [
+  "repo/diff/compare.tmpl"
+ ],
+ ".compare.pull.repository": [
+  "repo/diff/compare.tmpl"
+ ],
+ ".issue-list": [
+  "repo/issue/list.tmpl"
+ ],
+ ".issue.new": {
+  "intended": [
+   "repo/issue/new.tmpl"
+  ],
+  "waived": {
+   "repo/issue/choose.tmpl": "inert: the template chooser renders no markdown editor (element-guarded)"
+  }
+ },
+ ".issue.new.repository": {
+  "intended": [
+   "repo/issue/new.tmpl"
+  ],
+  "waived": {
+   "repo/issue/choose.tmpl": "inert: the template chooser renders no issue sidebar (element-guarded)"
+  }
+ },
+ ".issue.repository.view": [
+  "repo/issue/view.tmpl",
+  "repo/pulls/commits.tmpl",
+  "repo/pulls/files.tmpl"
+ ],
+ ".issue.view": [
+  "repo/issue/view.tmpl",
+  "repo/pulls/commits.tmpl",
+  "repo/pulls/files.tmpl"
+ ],
+ ".labels": [
+  "org/settings/labels.tmpl",
+  "repo/issue/labels.tmpl"
+ ],
+ ".labels.organization.settings": [
+  "org/settings/labels.tmpl"
+ ],
+ ".labels.repository": [
+  "repo/issue/labels.tmpl"
+ ],
+ ".milestone-issue-list": [
+  "repo/issue/milestone_issues.tmpl"
+ ],
+ ".milestones": {
+  "intended": [
+   "repo/issue/milestones.tmpl"
+  ],
+  "waived": {
+   "repo/projects/list.tmpl": "inert: probe 0/12 on /projects and /milestones",
+   "user/dashboard/milestones.tmpl": "inert: probe 0/12 on /projects and /milestones"
+  }
+ },
+ ".milestones.repository:not(.dashboard):not(.projects)": [
+  "repo/issue/milestones.tmpl"
+ ],
+ ".milestones.repository:not(.projects)": {
+  "intended": [
+   "repo/issue/milestones.tmpl"
+  ],
+  "waived": {
+   "user/dashboard/milestones.tmpl": "probe 4/16 apply: the shared list-header search input (list.css :is(.issue-list, .milestone-issue-list, .repository.milestones\u2026) .list-header*) \u2014 same component, same styling intended"
+  }
+ },
+ ".milestones:not(.dashboard):not(.projects)": [
+  "repo/issue/milestones.tmpl"
+ ],
+ ".milestones:not(.projects)": {
+  "intended": [
+   "repo/issue/milestones.tmpl"
+  ],
+  "waived": {
+   "user/dashboard/milestones.tmpl": "inert: probe 0/34 on /milestones"
+  }
+ },
+ ".repository": [
+  "*"
+ ]
+}

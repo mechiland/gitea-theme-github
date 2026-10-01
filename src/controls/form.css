@@ -50,9 +50,7 @@
   vertical-align: baseline;
 }
 
-/* FormControl.Caption: 12px / 18px (Primer React FormControl.Caption measured on primer.style, request SA-C1),
-   4px below the control, no bottom padding (Gitea modules/form.css adds 0.6em), normal wrapping — Gitea's
-   `text-wrap: balance` broke two-line captions in the middle of the field ("…named ".profile" / or …", FG-089) */
+/* FormControl.Caption: 12px / 18px (SA-C1), 4px below the control, no bottom padding, no `text-wrap: balance` */
 .form .help {
   margin-top: var(--base-size-4);
   padding-bottom: 0;
@@ -97,6 +95,4 @@
   line-height: var(--base-size-20);
 }
 
-/* No FormControl.Validation caption rules: Gitea 1.27.3 renders no `.help.error` (template request #5 was rejected)
-   and no `.error.message` inside `.field.error`/`.fields.error` (errors go to the top flash), so the former rules
-   (Primer 12px danger caption + alert octicon) were removed in the 2026-09-30 size trim. */
+/* no Validation caption rules: Gitea 1.27.3 renders no `.help.error` / field `.error.message` */

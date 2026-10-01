@@ -1,11 +1,6 @@
-/*
- * Text inputs & textareas — Primer React TextInput / Textarea (prc-components-TextInputBaseWrapper):
- * 32px, padding-inline 12px, 14px/20px, bg --bgColor-default, 1px --control-borderColor-rest,
- * radius 6px, inset shadow; focus = accent border + 2px accent outline drawn inside the box (offset -2px:
- * github.com org projects search measured ring pixels at the box edge, 32px outer);
- * disabled = --control-bgColor-disabled; error = --borderColor-danger-emphasis.
- * Small (Gitea .small/.tiny/.mini inputs) = 28px, padding-inline 8px, 12px.
- */
+/* Text inputs & textareas — Primer React TextInput / Textarea: 32px, 12px inline, 14px/20px, 1px
+ * --control-borderColor-rest, radius 6px, inset shadow; focus = accent border + 2px accent ring inside the box.
+ * Small (.small/.tiny/.mini) = 28px, 8px inline, 12px. */
 
 input:is(:not([type]), [type="text"], [type="password"], [type="email"], [type="search"], [type="url"], [type="number"], [type="tel"], [type="date"], [type="datetime-local"], [type="month"], [type="time"], [type="week"]) {
   height: var(--control-medium-size);
@@ -35,10 +30,7 @@ textarea {
   line-height: var(--base-size-20);
 }
 
-/* FG2-076: textarea heights in whole 20px lines + 8px padding + 1px border, so no half line peeks out of the
-   bottom padding: a `rows` textarea shows at least 3 lines (repo description rows="2" showed 2.5 at 390), a
-   rowless form textarea 6 (Gitea: --min-height-textarea 132px = 5.7 lines). The combo editor's autosize grows from
-   this min-height. */
+/* FG2-076: heights in whole 20px lines (no half line at 390): `rows` ≥ 3 lines, rowless form textarea 6 */
 textarea[rows] {
   min-height: calc(3 * var(--base-size-20) + 2 * var(--base-size-8) + 2 * var(--borderWidth-thin));
 }
@@ -108,11 +100,8 @@ select:focus,
   line-height: var(--base-size-20);
 }
 
-/* Primer .input-sm / TextInput size="small": 28px, 8px inline, 12px/20px. `.ui.form` is repeated so the
-   size wins over form.css's generic `.ui.form input` font-size (same layer, equal specificity, later file).
-   Not for search fields (medium TextInput, "search field" below) nor for a FormControl field's input (a small
-   `.ui.input` directly in a stacked `.field`, e.g. the label edit dialog's Name / Description: Primer form fields
-   are medium, like the dialog's Color field; FG-089). */
+/* Primer TextInput size="small". `.ui.form` repeated to beat form.css's `.ui.form input` font-size. Not for search
+   fields nor a small `.ui.input` directly in a stacked `.field` (Primer form fields are medium; FG-089). */
 .ui.input:is(.small, .tiny, .mini):not(.ui.form .field > *) > input:not([type="search"], [name="q"]),
 .ui.form .ui.input:is(.small, .tiny, .mini):not(.field > *) > input:not([type="search"], [name="q"]) {
   height: var(--control-small-size);
@@ -156,10 +145,8 @@ select:focus,
 }
 
 /* ---------- input group (.ui.action.input: input + attached button / dropdown) ---------- */
-/* The group is as tall as its input: Primer never stretches a TextInput group to its flex row (projects list:
-   the row is 40px, milestones 30px because of the Sort / Labels menus next to it), so the attached button
-   (align-self: stretch below) matches the 28 / 32px input instead of hanging below it. Auto block margins
-   centre the group in a row (and stop the stretch) and are 0 in block flow. */
+/* the group is as tall as its input (Primer never stretches a TextInput group to its flex row), so the attached
+   button matches the 28 / 32px input; auto block margins centre it in a row */
 .ui.action.input {
   align-items: stretch;
   height: fit-content;
@@ -188,9 +175,7 @@ select:focus,
   box-shadow: none;
 }
 
-/* attached IconButton is square (Primer ButtonGroup of TextInput + IconButton): 32px next to a medium input,
-   28px next to a small one (a .ui.small group whose input is its direct child; repo home's search nests a
-   medium .ui.input inside a .small group, so its button is 32px) */
+/* attached IconButton is square: 32px, 28px next to a small input that is the group's direct child */
 .ui.action.input > .icon.button {
   min-width: var(--control-medium-size);
 }
@@ -221,8 +206,7 @@ select:focus,
   border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
 }
 
-/* native <select> between the input and the button (package list / versions search, request APP-C1) is joined
-   like the dropdown (rules above) and small in a small group, so input, select and button share one 28px line */
+/* native <select> between input and button (packages search, APP-C1): joined, small in a small group */
 .ui.action.input:is(.small, .tiny, .mini):not(:has(> input:is([type="search"], [name="q"]))) > select {
   height: var(--control-small-size);
   padding-left: var(--control-small-paddingInline-condensed);
@@ -230,20 +214,11 @@ select:focus,
 }
 
 /* ---------- search field (FG-048) ---------- */
-/* Gitea: shared/search/{input,button,combo}.tmpl → `.ui.small.fluid.action.input` = input[type=search][name=q]
-   (+ optional search-mode dropdown / type select) + a joined `.ui.small.icon.button` (octicon-search, submit).
-   github.com search fields (projects list, repositories tab, branches, members…) are a medium Primer TextInput:
-   32px, 14px, the search octicon as a leading visual (8px from the edge, text at 32px + border), no attached
-   button. Every search group is medium; when the submit button directly follows the input it is drawn as that
-   leading visual (still the submit control: keyboard focus, click, Enter). A group with a dropdown or select
-   between the two keeps the joined trailing IconButton at 32px (the github.com issues search look).
-   The issue / milestone list search is laid out by pages/issues-prs with a trailing IconButton (github.com
-   issues), scoped `:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search`:
-   those pages are left out of the leading-visual rules (a page-layer padding would otherwise put the text under the
-   icon). The repo projects list (`.repository.projects.milestones`) is not in that scope and gets the leading icon,
-   like the org projects list (critic controls-wL1-r1 #1).
-   The icon colour is static (--fgColor-muted, via buttons.css `.ui.button > .svg`): github.com's leading visual and
-   Primer Button leading visuals do not change colour on hover. */
+/* Gitea shared/search/*.tmpl: input[type=search][name=q] (+ optional dropdown / select) + a joined submit
+   `.ui.small.icon.button`. github.com search fields are a medium TextInput with the search octicon as a leading
+   visual: when the submit button directly follows the input it is drawn as that visual (still the submit control).
+   With a dropdown / select between them it stays a joined trailing 32px IconButton. The issue / milestone list
+   search (pages/issues-prs, trailing IconButton) is left out; the repo projects list gets the leading icon. */
 .ui.action.input:has(> input:is([type="search"], [name="q"])) {
   font-size: var(--text-body-size-medium);
 }
@@ -300,11 +275,14 @@ select:focus,
   background: transparent;
 }
 
-/* FG2-076: the leading-visual button is still the submit control and a tab stop; its keyboard focus ring is drawn
-   on the whole field (the input's TextInput focus look) instead of a 32px square flush with the input's left edge */
+/* FG2-076: the leading-visual button's keyboard focus rings the whole field */
 .ui.action.input:not(:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search > *) > input:is([type="search"], [name="q"]) + .ui.icon.button:last-child:has(> .octicon-search):focus-visible {
   outline: none;
-  color: var(--fgColor-accent); /* the focused control is the icon, not the text field */
+}
+
+/* the focused control is the icon, not the text field (the svg carries its own muted colour, buttons.css) */
+.ui.action.input:not(:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search > *) > input:is([type="search"], [name="q"]) + .ui.icon.button:last-child:focus-visible > .octicon-search {
+  color: var(--fgColor-accent);
 }
 
 .ui.action.input:not(:is(.issue-list, .milestone-issue-list, .repository.milestones:not(.projects)) .list-header-search > *) > input:is([type="search"], [name="q"]):has(+ .ui.icon.button:last-child:focus-visible > .octicon-search) {
@@ -361,10 +339,8 @@ input[type="file"]:focus-visible::file-selector-button {
 }
 
 /* ---------- date / time inputs ---------- */
-/* Chrome's datetime editor adds 1px padding to its fields wrapper and lays the fields out with the input's
-   20px line-height inside a 26-30px box: the text sat 2-3px below the TextInput's text line and the "yyyy"
-   descenders were clipped (issue sidebar due date). With the UA padding removed and a normal line-height
-   the fields share the text input's baseline. (These two pseudo-elements exist only on date/time inputs.) */
+/* Chrome's datetime fields wrapper: no UA padding and a normal line-height, so the fields share the text
+   input's baseline and "yyyy" descenders are not clipped (issue sidebar due date) */
 input::-webkit-datetime-edit {
   line-height: normal;
 }
@@ -373,10 +349,8 @@ input::-webkit-datetime-edit-fields-wrapper {
   padding: 0;
 }
 
-/* FG2-076: the picker indicator is the calendar Octicon (clock for time inputs), 16px --fgColor-muted, like a
-   Primer TextInput trailing visual. Chrome paints its own glyph as the indicator's background-image; ours is a
-   --fgColor-muted fill cut by the Octicon mask. --_gh-picker-fill is invalid while the mask token is missing
-   (it references it), and the indicator then falls back (revert-layer) to Chrome's glyph instead of a blank box. */
+/* FG2-076: picker indicator = calendar Octicon (time: clock), 16px --fgColor-muted mask. --_gh-picker-fill is
+   invalid while the mask token is missing, and the indicator then reverts to Chrome's glyph */
 input:is([type="date"], [type="datetime-local"], [type="month"], [type="week"]) {
   --_gh-picker-color: var(--fgColor-muted);
   --_gh-picker-mask: var(--gh-octicon-calendar);

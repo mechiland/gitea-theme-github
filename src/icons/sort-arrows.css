@@ -1,0 +1,16 @@
+/* DataTable sort indicator (data-display DD-IC-1, FG2-075): Gitea's SortArrow helper (modules/templates/util_misc.go)
+   renders a filled octicon-triangle-up / -down inside the sortable admin table headers (th[data-sortt-asc]); Primer
+   DataTable marks the sorted column with arrow-up / arrow-down. Only the glyph changes here (size and colour stay
+   with data-display); the triangles elsewhere are dropdown carets and keep their drawing. */
+th[data-sortt-asc] > .svg:is(.octicon-triangle-up, .octicon-triangle-down) {
+  background-color: currentcolor;
+  mask: var(--gh-octicon-arrow-up) center / contain no-repeat;
+}
+
+th[data-sortt-asc] > .svg.octicon-triangle-down {
+  mask-image: var(--gh-octicon-arrow-down);
+}
+
+th[data-sortt-asc] > .svg:is(.octicon-triangle-up, .octicon-triangle-down) > * {
+  visibility: hidden;
+}

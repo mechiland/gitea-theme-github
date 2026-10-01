@@ -114,6 +114,12 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     for (const e of r.errors.slice(0, 50)) console.log(`   ERROR ${e.file}${e.line ? ':' + e.line : ''} ${e.msg}`);
     if (process.argv.includes('--warnings')) for (const w of r.warnings) console.log(`   warn  ${w.file}:${w.line} ${w.msg}`);
   }
+  // FG2-105 page-scope check: LEAKs are warnings here (errors in `build.mjs --strict` / `page-scope-check.mjs --strict`)
+  const {pageScopeCheck} = await import('./page-scope-check.mjs');
+  const ps = await pageScopeCheck();
+  for (const [g, f] of Object.entries(ps.folders)) for (const x of f.rows.filter((r) => r.status === 'LEAK')) console.log(`   warn  page-scope LEAK pages/${g} ${x.scope} (${x.first}) → ${x.leaks.join(', ')}`);
+  console.log(`${ps.totals.leaks ? '!' : '✓'} page-scope: ${ps.totals.leaks} LEAK, ${ps.totals.newScopes} NEW, ${ps.totals.dead} DEAD (docs/page-scope-report.md)`);
+  if (process.argv.includes('--strict') && ps.totals.leaks) errs++;
   if (process.argv.includes('--json')) fs.writeFileSync(path.join(ROOT, 'dist/lint.json'), JSON.stringify(results.map((r) => ({...r, selectors: r.selectors.size})), null, 1));
   process.exit(errs ? 1 : 0);
 }

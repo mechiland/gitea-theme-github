@@ -1,16 +1,6 @@
-/*
- * Buttons — Primer React Button (prc-Button-ButtonBase) / IconButton.
- * Gitea → Primer variant map:
- *   .ui.button, .ui.basic.button                            → default
- *   .ui.primary.button, .ui.green.button                    → primary (green)
- *   .ui.basic.primary.button                                → outline (blue text)
- *   .ui.red.button, .ui.basic.red.button, .ui.danger.button → danger
- * Gitea → Primer size map:
- *   default / .compact / .medium             → medium 32px
- *   .small / .tiny / .mini (+ their .buttons) → small 28px
- * (.large/.big/.huge and .basic.green buttons appear only in templates/devtest, which a prod Gitea 1.27.3 does not
- * serve, so they have no rules here — trimmed 2026-09-30.)
- */
+/* Buttons — Primer React Button / IconButton.
+ * Variants: .ui(.basic).button → default; .primary/.green → primary; .basic.primary → outline;
+ *   .red/.basic.red/.danger → danger. Sizes: default/.compact/.medium → 32px; .small/.tiny/.mini → 28px. */
 
 /* ---------- base (medium, default variant) ---------- */
 .ui.button {
@@ -20,9 +10,7 @@
   gap: var(--control-medium-gap);
   height: var(--control-medium-size); /* Primer: fixed height, so flex rows cannot stretch it */
   min-height: var(--control-medium-size);
-  /* Gitea sets min-width: 0, so flex rows squeeze a nowrap label out of the box on narrow screens
-     ("pdate Default Bran"). Restore the flex content minimum: github.com buttons never shrink below
-     their label; a label that really cannot fit truncates in its .text child (below). */
+  /* Gitea's min-width: 0 squeezed nowrap labels in flex rows ("pdate Default Bran"); keep the content minimum */
   min-width: auto;
   padding: 0 var(--control-medium-paddingInline-normal);
   border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
@@ -43,10 +31,7 @@
     border-color var(--base-duration-100) var(--base-easing-easeInOut);
 }
 
-/* Fomantic gives every button `margin: 0 .25em 0 0`. Between two buttons in block flow it is part of the
-   spacing (Update Avatar / Delete Current Avatar), but after the last button it only pulls a right-aligned or
-   fluid button 3.5px short of its column (Danger Zone buttons, "Sign in with OpenID", sidebar Unsubscribe).
-   Primer buttons carry no margin. */
+/* Fomantic's `margin: 0 .25em 0 0` pulled right-aligned / fluid buttons 3.5px short; Primer buttons have none */
 .ui.button:last-child {
   margin-right: 0;
 }
@@ -100,8 +85,7 @@
   line-height: var(--base-size-20);
 }
 
-/* Primer .prc-Button-Label truncation: a dropdown button's text part (e.g. compare "pull from: owner/repo:branch")
-   shrinks with an ellipsis when its container is narrower than the label, instead of spilling over the border */
+/* Primer .prc-Button-Label truncation: a dropdown button's .text shrinks with an ellipsis */
 .ui.button:has(> .text, > .gt-ellipsis) {
   min-width: 0;
 }
@@ -136,21 +120,14 @@
   height: var(--base-size-16);
 }
 
-/* A row of standalone buttons never pushes the page sideways: github.com wraps its header rows
-   (e.g. releases "RSS / New release", org members "Manage teams and members") onto a second line on
-   narrow screens instead of overflowing. Gitea's .flex-text-block is nowrap, and since buttons keep
-   their label width (min-width: auto above) the row now wraps once its items no longer fit.
-   Only rows made of buttons plus an optional tw-flex-1 filler wrap: a tw-flex-1 item has a 0 basis,
-   so the row breaks only when the content really overflows (a free-text item with an auto basis
-   would wrap as soon as its text is longer than the row, e.g. the compare page merge-status box). */
+/* a row of buttons (+ optional tw-flex-1 filler, 0 basis) wraps instead of pushing the page sideways, as
+   github.com header rows do (releases "RSS / New release"); rows with free text keep Gitea's nowrap */
 @media (max-width: 767.98px) {
   .flex-text-block:has(> .ui.button, > .ui.buttons):not(:has(> :not(.ui.button, .ui.buttons, .tw-flex-1, input[type="hidden"]))) {
     flex-wrap: wrap;
   }
 
-  /* Gitea stretches issue comment-form buttons to width: 100% on mobile (repo.css), which in a
-     wrapping row stacks "Close issue" / "Comment" full width; Primer buttons keep their natural
-     width, right-aligned, and wrap only when both labels do not fit (320px) */
+  /* Gitea stretches comment-form buttons to 100% on mobile; Primer keeps natural widths, right-aligned */
   .ui.form .field > .flex-text-block > .ui.button:not(.fluid) {
     width: auto;
   }
@@ -171,10 +148,7 @@
 }
 
 /* ---------- icon-only (Primer IconButton: square) ---------- */
-/* The inline padding centres a 16px octicon in the square (size - 16 - 2 borders) / 2, so an icon-only
-   button stays exactly 32 / 28px wide, while a Gitea "icon button" that also carries a text label
-   (commit graph Mono / Color: svg + bare text node, which CSS cannot detect) keeps a gutter instead of
-   the icon touching its left edge. */
+/* padding centres a 16px octicon in the 32 / 28px square; an icon button with a text label keeps a gutter */
 .ui.icon.button,
 .ui.icon.buttons .button {
   min-width: var(--control-medium-size);

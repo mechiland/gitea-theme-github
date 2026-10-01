@@ -112,6 +112,12 @@
   color: var(--fgColor-accent);
 }
 
+/* github.com timelineAgoLink: the event's relative-time anchor stays muted on hover (underline from foundation
+   links.css). Seam fix applied by the integrator (L2b) from docs/requests/data-display.md (foundation-wL2b-r1 #5). */
+.timeline-item.event .comment-text-line > a[href^="#"]:hover {
+  color: var(--fgColor-muted);
+}
+
 /* labels inside event lines: IssueLabel tokens on the text line */
 .comment-text-line .ui.label {
   line-height: 1;
