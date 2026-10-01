@@ -5,6 +5,11 @@
  * or a color-mix() of Primer tokens. It is scheme-independent — light/dark differ only in which
  * generated primer-color-*.css is loaded. Per-scheme values live in scheme-light.css / scheme-dark.css.
  * Source of the variable list: gitea-src-1.27.3/web_src/css/themes/theme-gitea-light.css + base.css.
+ * Loop 2 (integrator L2b, budget): 65 variables of theme-gitea-light.css that nothing references in Gitea 1.27.3
+ * (served index.css + lazy chunk CSS + index.js, web_src outside themes/, templates, Go) nor in our src/ or templates/
+ * are not mapped (e.g. the
+ * --color-{olive,pink,brown,black,gold}* family, --color-secondary-dark-9…13, --color-primary-alpha-20/40/50/70/80/90).
+ * List and the check that produced it: docs/requests/integrator.md "L2b gitea-map prune". Re-check after a Gitea upgrade.
  */
 :root {
   /* ---------- primary (Gitea uses it for links, active items, focus, checked controls) ---------- */
@@ -14,25 +19,15 @@
   --color-primary-dark-2: var(--button-outline-bgColor-active);
   --color-primary-dark-3: var(--button-outline-bgColor-active);
   --color-primary-dark-4: var(--button-outline-bgColor-active);
-  --color-primary-dark-5: var(--fgColor-default);
-  --color-primary-dark-6: var(--fgColor-default);
-  --color-primary-dark-7: var(--fgColor-default);
   --color-primary-light-1: var(--fgColor-accent);
   --color-primary-light-2: var(--fgColor-accent);
-  --color-primary-light-3: var(--borderColor-accent-emphasis);
   --color-primary-light-4: var(--borderColor-accent-muted);
   --color-primary-light-5: var(--borderColor-accent-muted);
   --color-primary-light-6: var(--bgColor-accent-muted);
   --color-primary-light-7: var(--bgColor-accent-muted);
   --color-primary-alpha-10: var(--bgColor-accent-muted);
-  --color-primary-alpha-20: var(--selection-bgColor);
   --color-primary-alpha-30: var(--selection-bgColor);
-  --color-primary-alpha-40: var(--borderColor-accent-muted);
-  --color-primary-alpha-50: var(--borderColor-accent-muted);
   --color-primary-alpha-60: var(--borderColor-accent-emphasis);
-  --color-primary-alpha-70: var(--borderColor-accent-emphasis);
-  --color-primary-alpha-80: var(--borderColor-accent-emphasis);
-  --color-primary-alpha-90: var(--borderColor-accent-emphasis);
   --color-primary-hover: var(--fgColor-accent);
   --color-primary-active: var(--button-outline-bgColor-active);
 
@@ -46,27 +41,11 @@
   --color-secondary-dark-6: var(--fgColor-muted);
   --color-secondary-dark-7: var(--fgColor-muted);
   --color-secondary-dark-8: var(--fgColor-default);
-  --color-secondary-dark-9: var(--fgColor-default);
-  --color-secondary-dark-10: var(--fgColor-default);
-  --color-secondary-dark-11: var(--fgColor-default);
-  --color-secondary-dark-12: var(--fgColor-default);
-  --color-secondary-dark-13: var(--fgColor-default);
   --color-secondary-light-1: var(--borderColor-muted);
-  --color-secondary-light-2: var(--bgColor-muted);
-  --color-secondary-light-3: var(--bgColor-muted);
-  --color-secondary-light-4: var(--bgColor-inset);
-  --color-secondary-alpha-10: var(--bgColor-neutral-muted);
   --color-secondary-alpha-20: var(--bgColor-neutral-muted);
   --color-secondary-alpha-30: var(--borderColor-muted);
-  --color-secondary-alpha-40: var(--borderColor-muted);
   --color-secondary-alpha-50: var(--borderColor-default);
   --color-secondary-alpha-60: var(--borderColor-default);
-  --color-secondary-alpha-70: var(--borderColor-default);
-  --color-secondary-alpha-80: var(--borderColor-emphasis);
-  --color-secondary-alpha-90: var(--borderColor-emphasis);
-  --color-secondary-button: var(--fgColor-muted);
-  --color-secondary-hover: var(--fgColor-muted);
-  --color-secondary-active: var(--fgColor-default);
 
   /* ---------- console (Actions logs); pages/actions may re-point these via a change request ---------- */
   --color-console-fg: var(--fgColor-default);
@@ -83,55 +62,23 @@
   --color-red: var(--fgColor-danger);
   --color-orange: var(--fgColor-severe);
   --color-yellow: var(--fgColor-attention);
-  --color-olive: var(--data-olive-color-emphasis);
   --color-green: var(--fgColor-success);
   --color-teal: var(--data-teal-color-emphasis);
   --color-blue: var(--fgColor-accent);
   --color-violet: var(--data-purple-color-emphasis);
   --color-purple: var(--fgColor-done);
-  --color-pink: var(--fgColor-sponsors);
-  --color-brown: var(--data-brown-color-emphasis);
-  --color-black: var(--fgColor-default);
   --color-grey: var(--fgColor-muted);
   --color-grey-light: var(--fgColor-muted);
   --color-gold: var(--data-yellow-color-emphasis);
   --color-white: var(--fgColor-onEmphasis);
   --color-red-light: var(--data-red-color-emphasis);
-  --color-orange-light: var(--data-orange-color-emphasis);
-  --color-yellow-light: var(--data-yellow-color-emphasis);
-  --color-olive-light: var(--data-lime-color-emphasis);
-  --color-green-light: var(--data-green-color-emphasis);
-  --color-teal-light: var(--data-teal-color-emphasis);
-  --color-blue-light: var(--data-blue-color-emphasis);
-  --color-violet-light: var(--data-purple-color-emphasis);
-  --color-purple-light: var(--data-plum-color-emphasis);
-  --color-pink-light: var(--data-pink-color-emphasis);
-  --color-brown-light: var(--data-brown-color-emphasis);
-  --color-black-light: var(--fgColor-muted);
   --color-red-dark-1: var(--button-danger-bgColor-hover);
   --color-orange-dark-1: var(--fgColor-severe);
   --color-yellow-dark-1: var(--fgColor-attention);
-  --color-olive-dark-1: var(--data-olive-color-emphasis);
   --color-green-dark-1: var(--button-primary-bgColor-hover);
-  --color-teal-dark-1: var(--data-pine-color-emphasis);
-  --color-blue-dark-1: var(--button-outline-bgColor-active);
-  --color-violet-dark-1: var(--fgColor-done);
   --color-purple-dark-1: var(--fgColor-done);
-  --color-pink-dark-1: var(--fgColor-sponsors);
-  --color-brown-dark-1: var(--data-auburn-color-emphasis);
-  --color-black-dark-1: var(--fgColor-default);
   --color-red-dark-2: var(--button-danger-bgColor-active);
-  --color-orange-dark-2: var(--fgColor-severe);
-  --color-yellow-dark-2: var(--fgColor-attention);
-  --color-olive-dark-2: var(--data-olive-color-emphasis);
   --color-green-dark-2: var(--button-primary-bgColor-active);
-  --color-teal-dark-2: var(--data-pine-color-emphasis);
-  --color-blue-dark-2: var(--button-outline-bgColor-active);
-  --color-violet-dark-2: var(--fgColor-done);
-  --color-purple-dark-2: var(--fgColor-done);
-  --color-pink-dark-2: var(--fgColor-sponsors);
-  --color-brown-dark-2: var(--data-auburn-color-emphasis);
-  --color-black-dark-2: var(--fgColor-default);
 
   /* ---------- ANSI (terminal / Actions log) ---------- */
   --color-ansi-black: var(--ansi-black);
@@ -176,7 +123,6 @@
   --color-diff-added-row-border: var(--diffBlob-additionLine-bgColor);
   --color-diff-added-word-bg: var(--diffBlob-additionWord-bgColor);
   --color-diff-moved-row-bg: var(--bgColor-attention-muted);
-  --color-diff-moved-row-border: var(--borderColor-attention-muted);
   --color-diff-removed-fg: var(--fgColor-danger);
   --color-diff-removed-linenum-bg: var(--diffBlob-deletionNum-bgColor);
   --color-diff-removed-row-bg: var(--diffBlob-deletionLine-bgColor);
@@ -199,8 +145,6 @@
   --color-info-border: var(--borderColor-accent-muted);
   --color-info-bg: var(--bgColor-accent-muted);
   --color-info-text: var(--fgColor-accent);
-  --color-priority-border: var(--borderColor-done-muted);
-  --color-priority-bg: var(--bgColor-done-muted);
   --color-priority-text: var(--fgColor-done);
   --color-red-badge: var(--fgColor-danger);
   --color-red-badge-bg: var(--bgColor-danger-muted);
@@ -247,7 +191,6 @@
   --color-button: var(--button-default-bgColor-rest);
   --color-code-bg: var(--bgColor-default);
   --color-shadow: var(--borderColor-translucent);
-  --color-shadow-opaque: var(--borderColor-default);
   --color-secondary-bg: var(--bgColor-muted);
   --color-expand-button: var(--diffBlob-hunkNum-bgColor-rest);
   --color-placeholder-text: var(--fgColor-muted);
@@ -255,7 +198,6 @@
   --color-editor-selection: var(--codeMirror-selection-bgColor);
   --color-project-column-bg: var(--bgColor-inset);
   --color-caret: var(--fgColor-default);
-  --color-reaction-bg: var(--button-default-bgColor-rest);
   --color-reaction-hover-bg: var(--button-default-bgColor-hover);
   --color-reaction-active-bg: var(--reactionButton-selected-bgColor-rest);
   --color-tooltip-text: var(--tooltip-fgColor);
@@ -267,7 +209,6 @@
   --color-label-text: var(--fgColor-default);
   --color-label-bg: var(--bgColor-neutral-muted);
   --color-label-hover-bg: var(--control-transparent-bgColor-hover);
-  --color-label-active-bg: var(--control-transparent-bgColor-active);
   --color-accent: var(--fgColor-accent);
   --color-small-accent: var(--bgColor-accent-muted);
   --color-highlight-fg: var(--fgColor-attention);
@@ -276,7 +217,6 @@
   --color-danger: var(--fgColor-danger);
   --color-transparency-grid-light: var(--bgColor-default);
   --color-transparency-grid-dark: var(--bgColor-muted);
-  --color-workflow-edge-hover: var(--borderColor-emphasis);
 
   /* ---------- syntax (github.com "prettylights") ---------- */
   --color-syntax-keyword: var(--prettylights-syntax-keyword);

@@ -459,3 +459,39 @@ overflow-x: auto; scrollbar-width: none`, groups `flex: none`), so your `< 768px
 `.markdown-toolbar-group:last-child { flex: 0 0 auto }` can go. (EasyMDE's F11 fullscreen is `position: fixed`; controls
 drops the containment while EasyMDE is on: `.combo-markdown-editor:has(.EasyMDEContainer) { container-type: normal }` —
 generic, it covers your editors too.)
+
+# From foundation (wave L2b r2, 2026-09-30): update to the "NavList runs down to the footer" request above
+foundation's footer flow changed this round (src/foundation/layout.css, deployed): instead of pinning the footer to the
+viewport bottom, the issue/PR family now mirrors github.com's React PageLayout `min-height: calc(100vh - 64px)`:
+milestones + labels → `.full.height { min-height: 100vh }` (footer at the fold: 900 @1440×900, 844 @390×844; github.com
+908 logged-out / header+836); issues + pulls lists, issue view and all PR tabs → `.page-content > .ui.container
+{ min-height: calc(100vh - 64px) }` (footer below the fold: empty issue search 976, PR commits 1000 @1440×900).
+`.full.height` padding-bottom is now 28px. **The proposed diff above still applies unchanged** — re-verified by injection
+on the new base (`shots/foundation-l2b-r2/inject.mjs`, screenshots `shots/foundation-l2b-r2/inject-*.png`):
+nav bottom = footer − 28 on milestones (393 → 872, footer 900), issues (826 → 948, footer 976) and the empty issue
+search (442 → 948, footer 976) at 1440 and 1100; labels 1026 → 1050 (footer 1078); scrollWidth = viewport at
+1440/1100/390; < 1012 unchanged. The truncated sidebar rule is now the most visible remaining issue-family gap.
+
+# From controls (wave L2b r2, 2026-09-30) — CT-L2b-4 toolbar overflow
+- controls' generic toolbar now wraps whole groups when the editor is too narrow for one row (Gitea's wrap), so every
+  tool stays reachable (critic controls-wL2b-r1 #3: the sideways scroller with `scrollbar-width: none` hid up to 60% of
+  the tools with no affordance). composer.css `@media (max-width: 767.98px)` still forces `flex-wrap: nowrap;
+  overflow-x: auto; scrollbar-width: none` on the composers (issue composer at 390: lists / mention / reference /
+  switch hidden). Proposed: delete that media block (−12 lines) so phones wrap to two rows like the other editors
+  (admin banner at 390: two 28px rows), or keep the scroller but show the scrollbar (`scrollbar-width: thin`).
+
+# Integrator (L2b, 2026-09-30): dispositions of the requests above
+- **CT-FG2-079 — PARTLY APPLIED by the integrator (budget, duplicate rules):** removed from `composer.css` the toolbar
+  button, `:hover`, `:focus-visible`, `[aria-checked="true"]` and `md-header::after` rules (identical declarations in
+  controls/markdown-editor.css). Kept the `.markdown-toolbar-group` rules: yours pad every group `0 4px`, controls zeroes the
+  first/last group's outer padding — removing yours would shift the composer toolbar by 4px. Pixel-diffed (budget.loop2).
+  Side effect to know: a pressed toolbar button now shows controls' `:active` background (yours had no `:active`).
+- **FG2-027 (IPR-L2-1)** — template edited in the project, install pending (ORCHESTRATOR.md ORC-13).
+- **Page-scope check (FG2-105):** `src/pages/issues-prs/scopes.json` declares your scopes; `.repository` is `*`
+  (element-guarded); `.milestones.repository:not(.projects)` also reaches /milestones (dashboard) through list.css's shared
+  list-header search rules — waived as the same component. Run `node build/page-scope-check.mjs --probe` after edits.
+- **OPEN, forwarded to your next round (not ownership conflicts, so the integrator did not edit them):**
+  foundation "NavList runs down to the footer" (verified diff above; foundation critic's top issue), CT-L2b-1
+  (review cloud `overflow: hidden` clips @-mentions), CT-L2b-2 (toolbar covers Write/Preview at 1012–1100px → container
+  query), CT-L2b-4 (< 768px composer scroller vs controls' wrap: data-display FG2-052 asked for github.com's one-row
+  scroller, controls for wrapping — decide in your round).

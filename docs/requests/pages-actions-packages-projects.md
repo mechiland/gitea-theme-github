@@ -139,3 +139,10 @@ Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids o
 - **#6 partly** — run title status icon 22px at ≥ md (centred on the 30px line), 16px < md; the < md selector-row icon is 16px too, both names at x=40. Re-run on its own row at 390: Vue markup, left.
 - **#7 DONE** — packages Type / versions sort: placeholder in --button-default-fgColor-rest, triangle-down octicon (template svg, Select arrows mask removed), chosen type reads "Type: npm" (English-only muted label).
 - **#8 DONE** — versions breadcrumb "/" --fgColor-muted; last crumb and "Versions" Subhead --fgColor-default.
+
+# Integrator (L2b, 2026-09-30): page-scope LEAK fixed in this folder (FG2-105)
+`packages.css`: the 12 `.packages .items-with-main …` rules also matched the org / user **settings** Packages pages
+(`organization settings packages`, `user settings packages`): the "No cleanup rules available" text became a bordered Box
+with 0 padding (shots/l2b-leaks/org-pkg.png). They now read `.packages:not(.settings) .items-with-main …` (packages list,
+package view, versions and the profile Packages tab keep them). `src/pages/actions-packages-projects/scopes.json` declares
+the folder's scopes; `.actions.repository` on repo settings → Actions is inert (probe 0/18).

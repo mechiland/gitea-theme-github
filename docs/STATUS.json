@@ -1,6 +1,6 @@
 {
  "updated": "2026-09-30T15:10:00+08:00",
- "phase": "loop iteration 2 (final gate #2: critic mean light/dark 8.44, mobile 8.09; 37/101 routes pass; blind 100%)",
+ "phase": "loop 2 complete \u2014 release v0.1.0 candidate; final gate #3 not run (subagents unavailable)",
  "pinned": {
   "gitea": "1.27.3",
   "@primer/primitives": "11.10.0",
@@ -1314,5 +1314,69 @@
     "honestNote": "Identification is dominated by things a theme cannot or must not change (Gitea logo per asset policy, Gitea-only features and strings, seeded data differences, logged-out github.com references). Theme-fixable tells (header structure, footer, several page structures) are queued for loop iterations."
    }
   }
- ]
+ ],
+ "loop2": {
+  "finalGate2Followup": true,
+  "folders": {
+   "controls": {
+    "score": 8.5,
+    "passed": true,
+    "note": "loop-2 regression (inline diff comment editor) fixed in L2b"
+   },
+   "foundation": {
+    "score": 8.5,
+    "passed": true,
+    "note": "link underline + sticky footer scope fixed in L2b"
+   },
+   "pages/repo": {
+    "score": 8.6,
+    "passed": true
+   },
+   "navigation": {
+    "score": 8.6,
+    "passed": true
+   },
+   "code": {
+    "score": 8.5,
+    "passed": true
+   },
+   "pages/issues-prs": {
+    "score": 8.6,
+    "passed": true
+   },
+   "pages/actions-packages-projects": {
+    "score": 8.6,
+    "passed": true
+   },
+   "pages/settings-admin": {
+    "score": 8.5,
+    "passed": true
+   },
+   "pages/people": {
+    "score": 8.7,
+    "passed": true
+   },
+   "pages/auth": {
+    "score": 9.0,
+    "passed": "yes (only console errors are the intentional 404 routes)"
+   },
+   "data-display": {
+    "score": 8.5,
+    "passed": true
+   },
+   "markdown": {
+    "score": 9.0,
+    "passed": true
+   }
+  },
+  "budget": {
+   "github-light": 288.9,
+   "github-dark": 289.7,
+   "github-auto": 292.6
+  },
+  "revision": "03dc4cafe7",
+  "pageScopeCheck": "build/page-scope-check.mjs: 0 LEAK (docs/page-scope-report.md)",
+  "templates": "FG2-027 repo/issue/list.tmpl installed (PR list without NavList); other themes byte-identical",
+  "note": "The L2b integrator agent failed (organization disabled Claude subscription access for subagents); the orchestrator completed the integration (strict build, deploy, template install, audit, smoke)."
+ }
 }

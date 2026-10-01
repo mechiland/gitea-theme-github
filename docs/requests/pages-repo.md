@@ -424,3 +424,38 @@ Layer gh.pages-repo 32,227 B = 31.47 KiB minified (cap 31.5). Lint 0/0.
 - Budget: the single-release @scope is English only again (`:lang(en):not([aria-label="Releases"])`), freeing ~650 B;
   other locales show the single release in the col-11 list width (stable, no CLS). A template hook would remove this trade-off.
 - Not done: foundation FYI (repo-home footer gap 87 vs 168px) and FG2-067 — no bytes left (29 B).
+
+# pages/repo builder — final gate #2, wave L2b round 1 status (2026-09-30)
+Critique: docs/critiques/pages/repo-wL2b-r0.md (8.4). Screens: shots/pages-repo-r1 (11 routes × light/dark × 1440/390,
+--states --measure, routes = shots/pages-repo-l2b-routes.json = previous file + the critic's compare-two-tags states),
+probes shots/pages-repo-l2b/probe.mjs (activity heading geometry, compare focus). Coverage: shots/pages-repo-l2b-cov.
+Layer gh.pages-repo 32,237 B minified (cap 32,256). Lint 0/0.
+- **#1 compare focus DONE** — the Button--secondary border stays an outline but only on `:not(:focus-visible)`: keyboard focus
+  on copy / SHA / browse now shows the shared 2px accent ring (offset -2) in light and dark (probe + state clips).
+- **#2 Insights rule DONE** — contributors / code frequency / recent commits: no rule, 24px heading → chart Box (github.com
+  59px title top → Box, ours 60). Pulse keeps its Subhead (github.com draws the rule on the Subhead wrapper, not the h2):
+  8px + 1px rule + 8px to Overview.
+- **#4 DONE** — compare copy / browse icons `--button-default-fgColor-rest`.
+- **#5 DONE** — Pulse stat labels `--fgColor-muted`, counts `--fgColor-default`.
+- **#6 DONE** — Pulse < 768 stacked cells: radius 0 (no notch).
+- **#3 contributors CLS** (Vue per-contributor grid) and **#7 compare tab commit Octicon** (no `--gh-octicon-git-commit` mask,
+  no bytes) — not done. Bytes freed: pulse selectors shortened to `.horizontal.segments` / `.activity-header` (pulse-only
+  markup), duplicate `.new-repo-form > .divider`, compare fill rules deduplicated with repo.important.css.
+
+# From controls (wave L2b r2, 2026-09-30) — CT-L2b-3 search icon colour
+- `list-search.css` sets `color` on the leading search `.ui.icon.button:last-child` (rest muted, hover/active
+  `--fgColor-default`). The icon never follows it: controls/buttons.css gives `.ui.button > .svg` its own
+  `--fgColor-muted`, and controls now sets `--fgColor-accent` on the svg on keyboard focus (critic controls-wL2b-r1 #1).
+  Proposed: drop both `color:` declarations (dead code, −2 lines); if the hover darkening is wanted, move it to
+  `… > .ui.icon.button:last-child:is(:hover, :active) > .svg { color: var(--fgColor-default) }`. github.com's leading
+  visual does not change on hover, so dropping it is the closer match.
+
+# Integrator (L2b, 2026-09-30)
+- **CT-L2b-3 — DONE by the integrator (budget pass, seam):** `list-search.css` — dropped the two `color:` declarations on
+  the leading search `.ui.icon.button:last-child` (rest muted, `:is(:hover, :active)` default). They never reached the icon
+  (controls colours `.ui.button > .svg`, accent on keyboard focus); pixel-diffed with the L2b budget run.
+- **Page-scope check (FG2-105):** `src/pages/repo/scopes.json` declares this folder's page scopes. Waived with evidence:
+  `.branches.repository` also matches the branch-protection rule page (`repository settings branches`, 13/64 rules apply;
+  looked fine), `.commits:not(.pull)` matches /graph (3/18 apply: container Box/padding; looked fine). If you touch those
+  rules, re-run `node build/page-scope-check.mjs --probe`. Scope `.repository` is declared `*` (element-guarded rules).
+- OPEN for your next round: foundation's repo-home footer-gap FYI; navigation's 320px FYI (releases `.attachment-right-info` 350px).

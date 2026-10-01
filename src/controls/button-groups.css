@@ -9,9 +9,7 @@
  */
 
 /* ---------- ButtonGroup ---------- */
-/* no `isolation: isolate` (request IP-C3): it made every group a stacking context, so a dropdown menu inside a
-   group (PR merge-style menu, "Update branch" split button) was painted under later page content; the z-index 1
-   of hovered / focused / pressed buttons below only has to beat their siblings, which works without it */
+/* no `isolation: isolate` (IP-C3): it trapped dropdown menus inside groups under later content */
 .ui.buttons {
   display: inline-flex;
   vertical-align: middle;
@@ -242,9 +240,7 @@
   text-decoration: none;
 }
 
-/* the ring is drawn by the wrapper (above), as on github.com where the Counter sits inside the one
-   focusable .btn-sm. Gitea's Watch / Star <a role=button> has no href, so the counter link is the only
-   keyboard stop: its focus rings the whole control too, not the counter alone. */
+/* the wrapper draws the ring (github.com: one focusable .btn-sm); the counter link's focus rings it too */
 .ui.labeled.button > :is(.button, .label):focus-visible {
   outline: none;
   box-shadow: none;
@@ -268,9 +264,7 @@
   color: var(--control-fgColor-disabled);
 }
 
-/* a Select inside a SegmentedControl group (commit graph: "Select branches" + Mono / Color in one
-   .ui.icon.buttons.tiny) fills the track height and shares its outer border instead of poking 2px above
-   and below the 28px track */
+/* a Select in a SegmentedControl group (commit graph) fills the 28px track and shares its border */
 .ui.buttons:has(> .active.button:not(.dropdown)) > .ui.selection.dropdown {
   align-self: stretch;
   min-height: 0;

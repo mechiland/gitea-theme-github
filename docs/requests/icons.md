@@ -338,3 +338,14 @@ audit lists the var as unresolved on pages with a date input (issue sidebar due 
   +    const src = path.join(OCTICONS, /-(12|16|24|48)$/.test(n) ? `${n}.svg` : `${n}-16.svg`);
   ```
   (then regenerate octicon-masks.css; the build keeps only referenced masks, so no bundle cost until pages/auth uses it).
+
+# Integrator — loop 2 follow-up (L2b, 2026-09-30)
+- **DD-IC-1 — DONE.** Masks `arrow-up` / `arrow-down` added; swap rule in `src/icons/sort-arrows.css` (layer gh.icons):
+  `th[data-sortt-asc] > .svg:is(.octicon-triangle-up, .octicon-triangle-down)` painted with the arrow masks, drawing hidden.
+  Triangles elsewhere (dropdown carets) untouched.
+- **CT-IC-1 — DONE.** `calendar` mask added (`--gh-octicon-calendar` now resolves; date inputs get the Octicon).
+- **PA-L2-IC1 — DONE (mask available).** `alert-24` is in MASKS; gen-icons now accepts size-suffixed names (`-12/-16/-24/-48`
+  → `<name>.svg`). Gitea does not ship 24px Octicons, so this one stays a data URI (~0.9 KB once referenced; pruned
+  until then). The one-token swap in src/pages/auth/status.css is pages/auth's (OPEN for its next round; budget headroom
+  after L2b: auto 292.6 / 295 KB).
+- Mask encoding changed for all masks (NAV-I6 generalised): see docs/requests/integrator.md "L2b dispositions".

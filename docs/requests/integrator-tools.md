@@ -141,3 +141,29 @@ Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids o
 - FG2-023 (pages/issues-prs, impact 18) NEW override `templates/repo/issue/navbar.tmpl` — the last slot (8/8); spec in docs/final-gate-2/issues.md → “Template decision”. Orchestrator may decline (moderate impact).
 - FG2-027 (pages/issues-prs, impact 14) EDIT of the existing `templates/repo/issue/list.tmpl` override: render `.gh-issues-nav` only when `not .PageIsPullList` (no new slot).
 - Still rejected (no slot / §7): FG2-016 branches-structure (25), FG2-019 tree-branch-picker (24), FG2-037 commit-page-h1 (11), FG2-039 labels-rows (11), FG2-041 readme-tabs (10), FG2-044 dir-table-header (9), FG2-048 about-stats (9), FG2-053 release-breadcrumb (8), FG2-057 profile-readme-caption (7), FG2-070 profile-counts (5), FG2-082 issue-new-heading (3).
+
+# Integrator — loop 2 follow-up (L2b, 2026-09-30)
+- **FG2-105 — DONE.** `build/page-scope-check.mjs` (+ `src/pages/<group>/scopes.json` per page folder, report
+  `docs/page-scope-report.md` / `.json`, live cache `shots/page-classes.json`). Runs in `npm run lint` (warnings) and in
+  every build (`build-report.json → pageScope`; `--strict` fails on any LEAK or if the check cannot run). `--live` refetches
+  the page classes of every route + 22 shared-shell URLs (EXTRA_URLS: /issues, /pulls, /milestones, /graph, settings
+  packages/actions/branch-rule pages, …; `style=` stripped so the admin's diff preference is never written), `--probe`
+  loads each leaking route and counts the elements every selector of the scope matches, `--seed` declares new scopes.
+  Scope extraction: `.page-content` compound (also inside `:has()`), else the first class compound if all its classes are
+  Gitea page classes; `:is()/:where()` expanded; `:not(.a, .b)` on that compound = negative sets. 225 templates
+  (upstream + CUSTOM_PATH + ours, `{{if}}/{{else}}` expanded, `{{.pageClass}}` resolved through 60+ `(dict "pageClass" …)` sites).
+  First run: 88 scopes, 18 unintended matches after review, probed:
+  - **LEAK fixed:** pages/actions-packages-projects `.packages .items-with-main` (12 rules) boxed the org/user settings
+    Packages "No cleanup rules" text with 0 padding (shots/l2b-leaks/org-pkg.png) → now `.packages:not(.settings) …`
+    (documented in docs/requests/pages-actions-packages-projects.md).
+  - **Waived with evidence** (reasons in scopes.json): repo `.branches.repository` on the branch-rule settings page (13/64
+    rules apply; looked: status-check table and layout fine, shots/l2b-leaks/branch-rule*.png), repo `.commits:not(.pull)`
+    on /graph (3/18 apply; looked: shots/l2b-leaks/graph.png), issues-prs `.milestones.repository:not(.projects)` on
+    /milestones (shared list-header search component), and 12 inert matches (probe 0 selectors apply).
+  - **Intended:** people `.organization` on org settings / org projects = the shared org header partial.
+  - The known cases from the request: `.repository.commits` ↔ Activity is intended (Activity NavList rules) and guarded
+    by `:not(.flex-container)` where it is not; `.dashboard.issues` no longer appears in any page folder (navigation's
+    loop-1 fix); people `.dashboard` on /issues, /pulls, /milestones is the intended shared context bar, on /-/admin inert.
+  Final state: 0 LEAK, 0 NEW, 0 DEAD.
+- FG2-043 (seed markers), FG2-102 (judge padding), FG2-023 (new navbar.tmpl override) — not part of this pass; OPEN.
+- tools/shoot/lib/audit.mjs: url()-masked Octicons (served `/octicon-*.svg`) count as Octicons (L2b mask encoding).

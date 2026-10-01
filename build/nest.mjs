@@ -3,6 +3,7 @@
 //   P X{a}P>Y{b}        →  P{& X{a}&>Y{b}}
 //   P X,P Y{a}          →  P{& X,& Y{a}}
 //   P{a}P X{b}          →  P{a;& X{b}}
+//   P{a}P:hover{b}      →  P{a;&:hover{b}}      (loop 2: compound suffixes `.x`, `#x`, `[x]`, `:x`, `::x`)
 //
 // `&` is `:is(P)`; P is one complex selector (never a list), so matching and specificity are unchanged, and only runs of
 // adjacent rules in the same container are grouped, so the cascade order inside every layer / @media is unchanged.
@@ -31,14 +32,18 @@ export function splitList(sel) {
   return out;
 }
 const PSEUDO_ELEMENT = /::|:(before|after|first-line|first-letter)\b/i;
-// every prefix of a complex selector that ends right before a top-level combinator
+// every prefix of a complex selector that ends right before a top-level combinator, or (loop 2, L2b) right before a
+// simple selector inside a compound (`.`, `#`, `[`, `:`), so `P{a}P:hover{b}P.x Y{c}` → `P{a;&:hover{b}&.x Y{c}}`:
+// `&.x` = `:is(P).x`, which matches exactly what `P.x` matches with the same specificity (P is one complex selector).
 function prefixes(sel) {
   const res = [];
   scan(sel, (c, i) => {
-    if (c === ' ' || c === '>' || c === '+' || c === '~') {
-      const p = sel.slice(0, i);
-      if (p && !/[ >+~]$/.test(p) && !PSEUDO_ELEMENT.test(p)) res.push(p);
-    }
+    let ok = false;
+    if (c === ' ' || c === '>' || c === '+' || c === '~') ok = true;
+    else if ((c === '.' || c === '#' || c === '[' || c === ':') && i > 0 && !/[ >+~(,:]/.test(sel[i - 1])) ok = true;
+    if (!ok) return;
+    const p = sel.slice(0, i);
+    if (p && !/[ >+~]$/.test(p) && !PSEUDO_ELEMENT.test(p)) res.push(p);
   });
   return res;
 }

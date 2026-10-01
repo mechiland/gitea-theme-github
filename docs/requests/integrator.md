@@ -668,3 +668,46 @@ docs/requests/icons.md CT-IC-1 (one line in `src/icons/gen-icons.mjs` MASKS: `'c
 octicon-masks.css). icons is integrator-owned now. Until it lands every page's audit lists `--gh-octicon-calendar` as
 unresolved (critique controls-wL2-r1 #3; `shots/controls-wL2b-r1/*/*.json cssVars.unresolved`) and date inputs keep
 Chrome's glyph (guarded fallback, nothing breaks).
+
+# Integrator — loop 2 follow-up (L2b, 2026-09-30): dispositions
+- **NAV-I6 — ACCEPTED and generalised.** Octicon masks now reference the Octicon files Gitea itself serves
+  (`url("../img/svg/octicon-<name>.svg")`, relative to /assets/css/, so a sub-path ROOT_URL works) instead of data URIs:
+  src/icons/gen-icons.mjs emits `--gh-octicon-<name>: url("../img/svg/octicon-<name>.svg")` for every 16px Octicon that
+  Gitea 1.27.3 ships (the served drawing is the 19.38.0 one: deploy places the 2 upgraded files in CUSTOM_PATH, the other
+  374 are byte-identical to Gitea's). Data URIs remain only for drawings Gitea does not ship (`alert-24`). Saves ~13 KB per
+  file; one cached same-origin request per glyph (Cache-Control 6h), never render-blocking. Recorded in ARCHITECTURE §6.
+  The shoot audit counts url()-masked Octicons as Octicons (tools/shoot/lib/audit.mjs). `--data-uri-masks` regenerates the
+  old encoding (used for the pixel-diff baseline).
+- **CODE-L2-1 — DONE.** `link`, `history` masks (now the served files; code's `var(--gh-octicon-link, url(…))` fallback is
+  the same URL).
+- **CT-IC-1 (calendar) — DONE** (see icons.md). **IPR-L2-1 (FG2-027) — project template edited, install pending ORC-13**
+  (reload-templates refused by the permission policy; live copy restored). **IPR-L2-2 / navigation budget FYIs — handled**
+  by the L2b budget pass below. Navigation's 320px overflow FYI (grex pulls filter menus 331px, releases
+  `.attachment-right-info` 350px) → forwarded to pages/issues-prs and pages/repo (OPEN, not in this pass).
+- **L2b budget pass (task 3.1) — DONE, all three files ≤ 295 KB without deleting a visible rule:**
+  auto 334,687 → 299,589 B (326.8 → 292.6 KB), light 329,548 → 295,732 B, dark 330,599 → 296,619 B. Steps, in order of size:
+  1. build/nest.mjs: compound-suffix nesting (`P{a}P:hover{b}` → `P{a;&:hover{b}}`, also `.x`, `#x`, `[x]`, `::x`),
+     self-checked like the loop-1 nesting (lowered member-by-member comparison) — ≈ −11 KB.
+  2. Octicon masks → Gitea-served files (above) — ≈ −13 KB (the new calendar/link/history/arrow masks cost ~0.2 KB instead of ~2.5).
+  3. build/build.mjs short names without the `p` prefix (`--a`, `--Xd`; never a name Gitea's web_src/templates or our CSS
+     uses) — ≈ −6.6 KB.
+  4. build/build.mjs identical-token dedupe: 91 Primer tokens whose definitions are identical in every scheme share one
+     short name (only tokens no folder re-declares; `--no-dedupe`) — ≈ −2.2 KB.
+  5. src/tokens/gitea-map.css: 65 Gitea variables referenced nowhere in 1.27.3 (served index.css + the 9 lazy chunk CSS
+     files + index.js, web_src outside themes/, templates, Go) nor by our src/templates no longer mapped ("L2b gitea-map
+     prune", list below) — ≈ −2.2 KB. (A first cut of 68 missed three names that only Tailwind's generated utilities use —
+     `--color-grey-light`, `--color-gold`, `--color-danger`; the full audit flagged `.tw-text-grey-light` as unresolved
+     and they were restored before the final deploy.)
+  6. Two cross-folder duplicates removed (documented in the owners' files): pages/issues-prs composer toolbar button
+     rules identical to controls (CT-FG2-079), pages/repo list-search dead `color` declarations (CT-L2b-3) — ≈ −0.5 KB.
+  Coverage (shots/coverage-integrate-L2b, 794 loads): 526 never-used rules, 26.6 KB verifiable — none deleted (they are
+  unseeded states/features: merge-box states, toasts, delete modals…). FG2-014 settings NavList icons kept (url() masks, ~2.4 KB).
+  Proof of no visual change: STATUS.json → budget.loop2 (pixeldiff pre-trim vs post-trim, both `--stable --theme-css`).
+- **L2b gitea-map prune list** (65; --color-grey-light, --color-gold, --color-danger were restored): --color-primary-dark-5/6/7, -light-3, -alpha-20/40/50/70/80/90; --color-secondary-dark-9…13,
+  -light-2/3/4, -alpha-10/40/70/80/90, -button, -hover, -active; --color-{olive,pink,brown,black,gold}, --color-grey-light,
+  --color-{orange,yellow,olive,green,teal,blue,violet,purple,pink,brown,black}-light, --color-{olive,teal,blue,violet,pink,brown,black}-dark-1,
+  --color-{orange,yellow,olive,teal,blue,violet,purple,pink,brown,black}-dark-2, --color-diff-moved-row-border,
+  --color-priority-{border,bg}, --color-shadow-opaque, --color-reaction-bg, --color-label-active-bg, --color-danger,
+  --color-workflow-edge-hover. Check used: exact-name regex over gitea-src-1.27.3/{web_src (minus css/themes), templates,
+  modules, routers, services, models} + our src (minus tokens) + templates, transitively through gitea-map values; no
+  dynamic `--color-${…}` construction exists in 1.27.3. Re-run after a Gitea upgrade (shots/l2b-gitea-map.before.css is the old file).

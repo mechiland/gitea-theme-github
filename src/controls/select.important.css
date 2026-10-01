@@ -1,9 +1,5 @@
-/*
- * gh-important (integrator seam fix, wave 2 — request OC-1 from overlays, applied because the controls builder
- * had no wave-2 round): Gitea squares the bottom (or top, when upward) corners of an open Select with !important
- * (web_src/css/modules/dropdown.css) so it joins its attached list. overlays now detaches the list as a Primer
- * overlay 4px away, so the trigger keeps its full Primer radius while open.
- */
+/* gh-important (OC-1): Gitea squares an open Select's corners with !important to join its list; overlays
+ * detaches the list 4px away, so the trigger keeps its radius */
 .ui.selection.active.dropdown,
 .ui.active.upward.selection.dropdown,
 .ui.upward.selection.dropdown.visible {

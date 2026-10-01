@@ -20,6 +20,7 @@ import {transform} from 'lightningcss';
 import {FOLDERS, THEMES, SRC, DIST, ROOT, CUSTOM_PATH, GITEA_URL, GITEA_CONTAINER, BUDGET_BYTES, layerName} from './folders.mjs';
 import {lintAll} from './lint.mjs';
 import {nest, verifyNest} from './nest.mjs';
+import {pageScopeCheck} from './page-scope-check.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (n) => argv.includes(`--${n}`);
@@ -50,6 +51,9 @@ async function compileFolder(folder) {
 
 // ---- 1. lint + compile folders -------------------------------------------------------------------------
 const lint = flag('no-lint') ? [] : await lintAll(FOLDERS);
+// FG2-105: page-folder scopes vs Gitea templates (+ cached live page classes); warning, error under --strict
+const scopeCheck = flag('no-lint') ? null : await pageScopeCheck().catch((e) => ({error: e.message, totals: {leaks: 0}}));
+if (scopeCheck) report.pageScope = scopeCheck.error ? {error: scopeCheck.error} : {...scopeCheck.totals, report: 'docs/page-scope-report.md'};
 const compiled = {};
 for (const folder of FOLDERS) {
   const entry = report.folders[folder] = {status: 'ok'};
@@ -142,34 +146,79 @@ const shortNames = new Map();
 if (RENAME) {
   const ours = new Set([...(colorTokens.light + colorTokens.dark + scaleTokens + masksCss).matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]));
   const keepVerbatim = new Set();
+  const foreign = new Set(); // every custom-property name Gitea's source or our templates mention: never generated
   const scan = (dir) => {
     if (!fs.existsSync(dir)) return;
     for (const f of fs.readdirSync(dir, {recursive: true})) {
       if (!/\.(tmpl|ts|js|vue|css|go)$/.test(f)) continue;
-      for (const m of read(path.join(dir, f)).matchAll(/--[a-zA-Z][\w-]*/g)) if (ours.has(m[0])) keepVerbatim.add(m[0]);
+      for (const m of read(path.join(dir, f)).matchAll(/--[\w-]+/g)) {
+        foreign.add(m[0]);
+        if (ours.has(m[0])) keepVerbatim.add(m[0]);
+      }
     }
   };
   const GITEA_SRC = process.env.GITEA_SRC || path.resolve(ROOT, '../gitea-src-1.27.3');
   for (const d of [path.join(GITEA_SRC, 'web_src'), path.join(GITEA_SRC, 'templates'), path.join(ROOT, 'templates')]) scan(d);
   for (const n of keepVerbatim) ours.delete(n);
   report.renamedKeptVerbatim = [...keepVerbatim].sort();
+  // Loop 2 (integrator L2b, budget): identical-token dedupe. Primer tokens whose definitions are identical in every
+  // scheme (e.g. several 8px size tokens, the two identical system font stacks, aliases of the same functional token)
+  // are served under ONE short name: references to the others are renamed to it and their definitions dropped.
+  // Lossless: every such token is defined only on :root, so `var()` inside it resolves there, never per element; tokens
+  // that any folder re-declares (subtree re-theming) and names Gitea mentions (keepVerbatim) are never merged. --no-dedupe.
+  const alias = new Map(); // dropped name → kept name
+  if (!flag('no-dedupe')) {
+    const declaredByFolders = new Set([...(allComponent + giteaMap).matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]));
+    const canon = (n) => { while (alias.has(n)) n = alias.get(n); return n; };
+    const defs = (css) => new Map([...css.matchAll(/^\s*(--[\w-]+)\s*:\s*([^;]*);/gm)].map((m) => [m[1], m[2].trim()]));
+    const refCount = new Map();
+    for (const m of [giteaMap, schemeCss.light, schemeCss.dark, tokens.scale, tokens.light, tokens.dark, allComponent].join('\n').matchAll(/var\(\s*(--[\w-]+)/g)) refCount.set(m[1], (refCount.get(m[1]) || 0) + 1);
+    for (let pass = 0; pass < 4; pass++) {
+      const L = defs(tokens.light), D = defs(tokens.dark), S = defs(tokens.scale);
+      const norm = (v) => (v == null ? '∅' : v.replace(/var\(\s*(--[\w-]+)/g, (m, n) => `var(${canon(n)}`));
+      const groups = new Map();
+      for (const n of new Set([...L.keys(), ...D.keys(), ...S.keys()])) {
+        if (!ours.has(n) || declaredByFolders.has(n) || alias.has(n)) continue;
+        const k = `${norm(L.get(n))}|${norm(D.get(n))}|${norm(S.get(n))}`;
+        if (!groups.has(k)) groups.set(k, []);
+        groups.get(k).push(n);
+      }
+      let merged = 0;
+      for (const g of groups.values()) {
+        if (g.length < 2) continue;
+        g.sort((a, b) => (refCount.get(b) || 0) - (refCount.get(a) || 0) || a.localeCompare(b));
+        for (const n of g.slice(1)) { alias.set(n, g[0]); merged++; }
+      }
+      if (!merged) break;
+      const drop = (css) => css.split('\n').filter((line) => { const m = line.match(/^\s*(--[\w-]+)\s*:/); return !m || !alias.has(m[1]); }).join('\n');
+      tokens.light = drop(tokens.light); tokens.dark = drop(tokens.dark); tokens.scale = drop(tokens.scale);
+    }
+    report.dedupedTokens = alias.size;
+  }
   const everything = [giteaMap, schemeCss.light, schemeCss.dark, masksCss, tokens.scale, tokens.light, tokens.dark, allComponent].join('\n');
   const freq = new Map();
-  for (const m of everything.matchAll(/--[\w-]+/g)) if (ours.has(m[0])) freq.set(m[0], (freq.get(m[0]) || 0) + 1);
-  const taken = new Set(everything.match(/--[\w-]+/g));
+  for (const m of everything.matchAll(/--[\w-]+/g)) { const n = alias.get(m[0]) ? (() => { let x = m[0]; while (alias.has(x)) x = alias.get(x); return x; })() : m[0]; if (ours.has(n)) freq.set(n, (freq.get(n) || 0) + 1); }
+  const taken = new Set([...everything.match(/--[\w-]+/g), ...foreign]);
+  // Loop 2 (integrator L2b, budget): names are `--<base62>` without the former `p` prefix (−1 byte on each of ~6,800
+  // references). A generated name is never one that our CSS, Gitea's web_src / templates or our templates use.
   const A = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  const gen = (i) => { let s = ''; do { s += A[i % 62]; i = Math.floor(i / 62) - 1; } while (i >= 0); return `--p${s}`; };
+  const gen = (i) => { let s = ''; do { s += A[i % 62]; i = Math.floor(i / 62) - 1; } while (i >= 0); return `--${s}`; };
   let i = 0;
   for (const [n] of [...freq].sort((a, b) => b[1] - a[1])) {
     let s; do { s = gen(i++); } while (taken.has(s));
     shortNames.set(n, s);
   }
+  for (const [n] of alias) { let c = n; while (alias.has(c)) c = alias.get(c); if (shortNames.has(c)) shortNames.set(n, shortNames.get(c)); }
 }
 const rename = (css) => (RENAME ? css.replace(/--[\w-]+/g, (n) => shortNames.get(n) || n) : css);
 report.renamedCustomProperties = shortNames.size;
 
 fs.mkdirSync(DIST, {recursive: true});
-if (RENAME) fs.writeFileSync(path.join(DIST, 'varmap.json'), JSON.stringify(Object.fromEntries([...shortNames].map(([a, b]) => [b, a])), null, 1));
+if (RENAME) {
+  const vm = {};
+  for (const [a, b] of shortNames) if (!vm[b] || b === undefined) vm[b] = a; else vm[b] = `${vm[b]} = ${a}`; // deduped tokens share a short name
+  fs.writeFileSync(path.join(DIST, 'varmap.json'), JSON.stringify(vm, null, 1));
+}
 const version = JSON.parse(read(path.join(ROOT, 'package.json'))).version;
 const primerVersion = read(path.join(SRC, 'tokens/generated/VERSION')).trim();
 for (const [name, meta] of Object.entries(THEMES)) {
@@ -325,6 +374,11 @@ console.log(`revision ${rev}`);
 if (report.deploy) {
   console.log('deploy:', JSON.stringify(report.deploy, null, 1));
   if (Object.values(report.deploy.verified).some((v) => v !== 'ok')) failed = true;
+}
+if (report.pageScope) {
+  const ps = report.pageScope;
+  console.log(ps.error ? `! page-scope check failed to run: ${ps.error}` : `${ps.leaks ? '! ' : '✓ '}page-scope: ${ps.leaks} LEAK, ${ps.newScopes} NEW, ${ps.dead} DEAD (${ps.report})`);
+  if (flag('strict') && (ps.leaks || ps.error)) failed = true;
 }
 if (flag('strict') && Object.values(report.folders).some((e) => e.status.startsWith('excluded (') && !e.status.includes('disabled'))) failed = true;
 process.exit(failed ? 1 : 0);

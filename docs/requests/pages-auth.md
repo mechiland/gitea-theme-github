@@ -86,3 +86,9 @@ Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids o
 - **DONE** issue 3a: `text-wrap: balance` on the Blankslate heading and description.
 - **OPEN (icons)** issue 3b: 16-grid alert scaled to 32px — requested a 24-grid mask (docs/requests/icons.md PA-L2-IC1).
 - **Not changed** issue 5 (404 footer follows content): foundation FG2-097 model, measured on github.com Rails pages.
+
+# Integrator (L2b, 2026-09-30)
+- PA-L2-IC1 — mask `--gh-octicon-alert-24` available (data URI, ~0.9 KB once referenced); swap it in status.css in your next round.
+- Known/expected, not a defect: the intentional 404 routes (`not-found`, `not-found-anon`) log their 404 document as one
+  console error per page ("Failed to load resource: … 404"); that is why the pages/auth pass rule (0 console errors) failed.
+  The audit totals in STATUS.json list them separately.

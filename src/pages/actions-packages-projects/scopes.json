@@ -1,0 +1,60 @@
+{
+ ".actions.repository": {
+  "intended": [
+   "repo/actions/list.tmpl"
+  ],
+  "waived": {
+   "repo/settings/actions.tmpl": "inert: probe 0/18 on /settings/actions/runners"
+  }
+ },
+ ".organization.projects": [
+  "org/projects/list.tmpl",
+  "org/projects/new.tmpl",
+  "org/projects/view.tmpl"
+ ],
+ ".packages": {
+  "intended": [
+   "package/view.tmpl",
+   "repo/packages.tmpl",
+   "user/overview/package_versions.tmpl",
+   "user/overview/packages.tmpl"
+  ],
+  "waived": {
+   "org/settings/packages.tmpl": "inert after the L2b fix: the 12 .items-with-main Box rules now read .packages:not(.settings) (they boxed the settings \"No cleanup rules\" text with 0 padding, shots/l2b-leaks/org-pkg.png); probe 0 of the remaining .packages rules apply there",
+   "org/settings/packages_cleanup_rules_edit.tmpl": "inert after the L2b fix: the 12 .items-with-main Box rules now read .packages:not(.settings) (they boxed the settings \"No cleanup rules\" text with 0 padding, shots/l2b-leaks/org-pkg.png); probe 0 of the remaining .packages rules apply there",
+   "org/settings/packages_cleanup_rules_preview.tmpl": "inert after the L2b fix: the 12 .items-with-main Box rules now read .packages:not(.settings) (they boxed the settings \"No cleanup rules\" text with 0 padding, shots/l2b-leaks/org-pkg.png); probe 0 of the remaining .packages rules apply there",
+   "user/settings/packages.tmpl": "inert after the L2b fix: the 12 .items-with-main Box rules now read .packages:not(.settings) (they boxed the settings \"No cleanup rules\" text with 0 padding, shots/l2b-leaks/org-pkg.png); probe 0 of the remaining .packages rules apply there",
+   "user/settings/packages_cleanup_rules_edit.tmpl": "inert after the L2b fix: the 12 .items-with-main Box rules now read .packages:not(.settings) (they boxed the settings \"No cleanup rules\" text with 0 padding, shots/l2b-leaks/org-pkg.png); probe 0 of the remaining .packages rules apply there",
+   "user/settings/packages_cleanup_rules_preview.tmpl": "inert after the L2b fix: the 12 .items-with-main Box rules now read .packages:not(.settings) (they boxed the settings \"No cleanup rules\" text with 0 padding, shots/l2b-leaks/org-pkg.png); probe 0 of the remaining .packages rules apply there"
+  }
+ },
+ ".packages:not(.settings)": {
+  "intended": [
+   "package/view.tmpl",
+   "repo/packages.tmpl",
+   "user/overview/package_versions.tmpl",
+   "user/overview/packages.tmpl"
+  ],
+  "waived": {
+   "user/settings/packages_cleanup_rules_preview.tmpl": "inert: pageClass \"user packages admin\" (no settings) but package/shared/cleanup_rules/preview.tmpl renders a .ui.table, no .items-with-main (static check)"
+  }
+ },
+ ".projects": [
+  "org/projects/list.tmpl",
+  "org/projects/new.tmpl",
+  "org/projects/view.tmpl",
+  "repo/projects/list.tmpl",
+  "repo/projects/new.tmpl",
+  "repo/projects/view.tmpl"
+ ],
+ ".projects.repository": [
+  "org/projects/view.tmpl",
+  "repo/projects/list.tmpl",
+  "repo/projects/new.tmpl",
+  "repo/projects/view.tmpl"
+ ],
+ ".view-project": [
+  "org/projects/view.tmpl",
+  "repo/projects/view.tmpl"
+ ]
+}

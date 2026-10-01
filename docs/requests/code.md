@@ -283,3 +283,7 @@ Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids o
    - Critic refs: C010 (commit-detail, nit)
    - PNG: `shots/final-gate-critic-0/cd-l.png`, `shots/final-gate-2/commit-detail/dark-1440.png`, `shots/final-gate-2/commit-detail/light-1440.png`
    - Not done (per-user JS toggle; nit).
+
+# Integrator (L2b, 2026-09-30)
+- CODE-L2-1 — DONE: `--gh-octicon-link` / `--gh-octicon-history` defined (they now point at the same served files as your
+  fallback, so the fallback in file-view.css is redundant: ~80 B to drop in your next round).

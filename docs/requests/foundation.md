@@ -198,3 +198,25 @@ the bottom. No change needed in foundation; if FG2-097's `:where(:not(:has(...))
   issues / empty issue search footer 843 (viewport bottom), wiki _pages 365, projects 420, PR commits 516.
   The NavList stretch is pages/issues-prs' (request with a verified diff in docs/requests/pages-issues-prs.md).
 - #3 (15px footer gap) / #4 — not in this round's brief; left open.
+
+### Critic foundation-wL2b-r1 — foundation (wave L2b, round 2)
+- **#1 (PR pages excluded) — DONE.** `layout.css`: dropped the `.pull.tabs` branch and the `:not(.files, .commits)` guard;
+  `.page-content.view.issue` (issue view + every PR tab) is in the issue family. PR commits footer 407 → 1000 @1440×900
+  (github.com 1042, logged-out header 72 vs our 64), 490 → 944 @390 (github.com 975).
+- **#3 (footer inside the viewport) — DONE.** Mirrors github.com's React root `min-height: calc(100vh - 64px)`
+  (`shots/foundation-l2b-r2/ghfoot.mjs`): milestones + labels `.full.height { min-height: 100vh; flex-shrink: 0 }` →
+  footer 900 / 844 (github.com 908 / 844); issues + pulls lists, issue view, PR tabs `.page-content > .ui.container
+  { min-height: calc(100vh - 64px) }` → empty issue search 976 / 920 (github.com 1018 / 951). Long labels page
+  unaffected (footer 1078 under content 1050; flex-shrink 0 prevents the 100vh squeeze).
+- **#4 (Rails content → footer 36 vs 48) — DONE (foundation part).** `.full.height` padding-bottom 16 → 28
+  (28 + navigation footer 1px border + 16px padding + half-leading): wiki _pages last content 290 → footer text 338 = 48
+  (github.com 48). The remaining difference is navigation's footer style (github.com's Rails footer has no rule, 48px pad).
+- **#5 (timeline ago hover) — forwarded.** data-display's `.comment-text-line a:hover` (later layer) wins over foundation;
+  exact diff, verified by injection, in docs/requests/data-display.md.
+- **#6 (author-hover state) — DONE.** Own routes file `shots/foundation-l2b-r2-routes.json`: state moved to
+  theme-playground (`pg-issues`), plus `pg-issue-1` event-ago-hover; 64 pages, 0 problems.
+- **#2 (NavList truncated)** — pending pages/issues-prs; request updated with re-verified numbers on the new base.
+
+# Integrator (L2b, 2026-09-30)
+- Timeline "ago" link hover — DONE (rule appended to data-display timeline.css by the integrator, seam fix).
+- NavList → footer (pages/issues-prs) — still OPEN, forwarded to that folder's next round (not an ownership conflict).

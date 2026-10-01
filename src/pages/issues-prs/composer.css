@@ -108,38 +108,8 @@
   flex: 0 0 auto;
 }
 
-:is(.view.issue, .new.issue, .compare.pull) markdown-toolbar .markdown-toolbar-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--control-small-size);
-  height: var(--control-small-size);
-  padding: 0;
-  border-radius: var(--borderRadius-medium);
-  color: var(--fgColor-muted);
-}
-
-:is(.view.issue, .new.issue, .compare.pull) markdown-toolbar .markdown-toolbar-button:hover {
-  background: var(--control-transparent-bgColor-hover);
-  color: var(--fgColor-accent);
-}
-
-:is(.view.issue, .new.issue, .compare.pull) markdown-toolbar .markdown-toolbar-button:focus-visible {
-  outline: var(--focus-outline);
-  outline-offset: calc(var(--borderWidth-thick) * -1);
-}
-
-:is(.view.issue, .new.issue, .compare.pull) markdown-toolbar .markdown-toolbar-button[aria-checked="true"] {
-  color: var(--fgColor-accent);
-}
-
-/* md-header digit (H¹ H² H³) */
-:is(.view.issue, .new.issue, .compare.pull) markdown-toolbar md-header::after {
-  top: var(--base-size-4);
-  right: var(--base-size-2);
-  font-size: var(--text-caption-size);
-  line-height: 1;
-}
+/* toolbar buttons, hover / focus ring / checked state and the md-header digit: identical rules live in controls
+   (src/controls/markdown-editor.css, CT-FG2-079); removed here by the integrator (L2b budget, pixel-diffed). */
 
 /* ---- textarea + file bar ---- */
 :is(#comment-form, #new-issue, .code-comments-list form.comment-form) .combo-markdown-editor textarea.markdown-text-editor {

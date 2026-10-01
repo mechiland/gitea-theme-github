@@ -1,0 +1,104 @@
+{
+ ".branches": {
+  "intended": [
+   "repo/branch/list.tmpl"
+  ],
+  "waived": {
+   "repo/settings/protected_branch.tmpl": "inert: probe 0/4 selectors match on /settings/branches/edit (integrator L2b)"
+  }
+ },
+ ".branches.repository": {
+  "intended": [
+   "repo/branch/list.tmpl"
+  ],
+  "waived": {
+   "repo/settings/protected_branch.tmpl": "probe 13/64 apply (status-check table td padding, > .ui.container); looked at shots/l2b-leaks/branch-rule*.png: settings layout and the status-check table render correctly \u2014 accepted (integrator L2b)"
+  }
+ },
+ ".commits": {
+  "intended": [
+   "repo/activity.tmpl",
+   "repo/commits.tmpl"
+  ],
+  "waived": {
+   "repo/graph.tmpl": "inert: probe 0/8 selectors match on /graph and the PR Commits tab (Activity-only elements)",
+   "repo/pulls/commits.tmpl": "inert: probe 0/8 selectors match on /graph and the PR Commits tab (Activity-only elements)"
+  }
+ },
+ ".commits.repository:not(.pull)": {
+  "intended": [
+   "repo/activity.tmpl",
+   "repo/commits.tmpl"
+  ],
+  "waived": {
+   "repo/graph.tmpl": "inert: .repository-summary is not rendered on /graph (probe 0/1)"
+  }
+ },
+ ".commits:not(.pull)": {
+  "intended": [
+   "repo/activity.tmpl",
+   "repo/commits.tmpl"
+  ],
+  "waived": {
+   "repo/graph.tmpl": "graph shares the page class \"repository commits\"; probe 3/18 apply (container Box/padding); looked at shots/l2b-leaks/graph.png: graph rows and lines aligned \u2014 accepted (integrator L2b)"
+  }
+ },
+ ".diff": [
+  "repo/commit_page.tmpl",
+  "repo/diff/compare.tmpl",
+  "repo/pulls/files.tmpl"
+ ],
+ ".diff:not(.pull)": [
+  "repo/commit_page.tmpl",
+  "repo/diff/compare.tmpl"
+ ],
+ ".file.list": {
+  "intended": [
+   "repo/home.tmpl",
+   "repo/view.tmpl"
+  ],
+  "waived": {
+   "repo/search.tmpl": "inert: code search has no .repo-view-content (probe 0/1 on /search)"
+  }
+ },
+ ".new-repo.repository": [
+  "repo/create.tmpl"
+ ],
+ ".pages.wiki": [
+  "repo/wiki/pages.tmpl"
+ ],
+ ".pull": [
+  "repo/diff/compare.tmpl",
+  "repo/issue/view.tmpl",
+  "repo/pulls/commits.tmpl",
+  "repo/pulls/files.tmpl"
+ ],
+ ".releases": [
+  "repo/release/list.tmpl"
+ ],
+ ".releases.repository": [
+  "repo/release/list.tmpl"
+ ],
+ ".repository": [
+  "*"
+ ],
+ ".repository.tags": [
+  "repo/tag/list.tmpl"
+ ],
+ ".repository.view.wiki": [
+  "repo/wiki/view.tmpl"
+ ],
+ ".tags": [
+  "repo/tag/list.tmpl"
+ ],
+ ".view.wiki": [
+  "repo/wiki/view.tmpl"
+ ],
+ ".wiki": [
+  "repo/wiki/new.tmpl",
+  "repo/wiki/pages.tmpl",
+  "repo/wiki/revision.tmpl",
+  "repo/wiki/start.tmpl",
+  "repo/wiki/view.tmpl"
+ ]
+}

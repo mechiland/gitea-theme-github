@@ -389,3 +389,7 @@ use a footer with 48px top padding and no border (footer box → first text 52px
 - #5 (focused Previous / Next turns default) DONE: hover / focus no longer set a colour (Next stays --fgColor-accent).
 - #6 (Register underlines on hover) DONE: `text-decoration: none` on the Sign in / Register base rule.
 - #7 NAV-I6 (NavList icons as `url("../img/svg/octicon-*.svg")` masks): still waiting for the integrator's decision.
+
+# Integrator (L2b, 2026-09-30)
+- NAV-I6 — ACCEPTED and generalised: every `--gh-octicon-*` mask is now the Gitea-served file (ARCHITECTURE §6); your
+  direct `url("../img/svg/octicon-*.svg")` NavList masks match that policy. FG2-014 kept (budget met without it).

@@ -36,9 +36,7 @@
   min-width: 0;
 }
 
-/* …but it never gets narrower than 160px: on a phone the row (Select + "Update Default Branch") wraps and the
-   button drops below the full-width Select, as github.com's form rows do, instead of squeezing the Select to
-   a 65-100px stub at 320px */
+/* …but never below 160px: on a phone the row wraps and the button drops below the Select */
 @media (max-width: 767.98px) {
   .flex-text-block:has(> .ui.selection.dropdown.tw-flex-1 + .ui.button) {
     flex-wrap: wrap;
@@ -50,8 +48,7 @@
   }
 }
 
-/* (The open menu's width — overlay minimum, max-content, screen cap — is owned by overlays:
-   src/overlays/action-menu.css `.ui.selection.dropdown > .menu`. Moved there by the integrator, wave 2, OV-1.) */
+/* (open menu width: overlays, action-menu.css, OV-1) */
 
 .ui.selection.dropdown:focus,
 .ui.selection.dropdown:focus-within,
@@ -72,9 +69,7 @@
   color: var(--fgColor-muted);
 }
 
-/* a `.default.text` that shows the current value, not a placeholder (repo settings → branches: the default
-   branch Select renders `<input type=hidden value=main>` + `<div class="default text">main</div>`): the value
-   colour, like a Primer Select with a selected option (FG-089) */
+/* a `.default.text` that is the current value (settings/branches default branch), not a placeholder (FG-089) */
 .ui.selection.dropdown:has(> input[type="hidden"][value]:not([value=""])) > .default.text {
   color: var(--fgColor-default);
 }

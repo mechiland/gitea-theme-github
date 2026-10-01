@@ -349,3 +349,21 @@ Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids o
 - **#3 `--gh-octicon-calendar` — still blocked** on CT-IC-1 (icons is integrator-owned; reminder in docs/requests/integrator.md).
 - Out-of-folder findings sent to pages/issues-prs (CT-L2b-1 cloud `overflow: hidden` clips the @-mention list; CT-L2b-2 composer
   toolbar covers the tabs at 1012–~1100px viewports, same viewport-vs-width bug).
+
+# Controls (wave L2b r2, 2026-09-30) — critique controls-wL2b-r1 handled
+- **#1 search icon focus colour — DONE.** The accent is set on the svg (`… + .ui.icon.button:last-child:focus-visible >
+  .octicon-search`), since buttons.css colours `.ui.button > .svg` itself. Tags, Tab from the input: svg rgb(9,105,218)
+  light / rgb(68,147,248) dark (`shots/controls-wL2b-r2/probe/search-btn-kbd-*.png`). pages/repo told its button colour is dead (CT-L2b-3).
+- **#2 "Start review" clipped in split diff < 1012 — DONE.** `.comment-code-cloud .field.footer > .flex-text-block` wraps:
+  split 768 all three buttons inside the cloud (505–734), Start review 637–725 on row 1.
+- **#3 hidden toolbar tools — DONE (wrap).** Generic toolbar no longer nowrap / scrolling: whole groups wrap, 0 tools
+  outside the toolbar at split 1440 / 1012 / 768 / 390 (scrollWidth = clientWidth). Composer phones: request CT-L2b-4.
+- **#4 inline diff dropzone — DONE.** Cloud file bar: 8px padding, left-aligned text, 39px (was 55).
+- **#5 calendar mask — still blocked** on CT-IC-1.
+- **#6 empty Preview — DONE.** "Nothing to preview" (muted) on the empty previewer panel, English UI only (`:lang(en)`).
+- **#7 size — DONE.** Folder 71,895 → 65,160 B (comments condensed; rules byte-identical apart from the fixes above).
+
+# Integrator (L2b, 2026-09-30)
+- CT-IC-1 (calendar mask) — DONE; `--gh-octicon-calendar` resolves (a Gitea-served Octicon file, see integrator.md L2b).
+- CT-L2b-3 — DONE (pages/repo colours dropped). CT-FG2-079 — duplicates dropped in pages/issues-prs except the group
+  padding rules (they differ: first/last group). CT-L2b-1/2/4 — forwarded to pages/issues-prs (OPEN).

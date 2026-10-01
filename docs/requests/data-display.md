@@ -243,3 +243,25 @@ Source: docs/final-gate-2/issues.md (full evidence, PNG paths, critic C### ids o
   go-gitea/gitea/issues), while the pulls index, labels page and issue sidebar render **600**; so only issue rows of
   `#issue-list` go to 500 (label widths now equal github.com: 96.5px "enhancement" on /issues, 100.9px on /pulls).
   Line-height kept (box 20px like github.com; its 18px is the inner text container's).
+
+# From foundation (wave L2b r2, 2026-09-30): timeline event "ago" link keeps its muted colour on hover (critic foundation-wL2b-r1 #5)
+**What / why.** github.com's timeline event relative-time link (`row-module__timelineAgoLink`, "… referenced this issue
+<u>yesterday</u>") stays `--fgColor-muted` on hover with its underline (measured live, logged out: rgb(89,99,110) light /
+rgb(145,152,161) dark). Ours turns accent (rgb(9,105,218) / rgb(68,147,248)) because `src/data-display/timeline.css:110`
+`.comment-text-line a:hover { color: var(--fgColor-accent) }` sits in a later layer than foundation's links.css, so
+foundation cannot override it (foundation still owns the at-rest underline, links.css).
+**Proposed diff** (append after the `.comment-text-line a:hover` rule in `src/data-display/timeline.css`):
+```css
+/* github.com timelineAgoLink: the event's relative-time anchor stays muted on hover (underline from foundation links.css) */
+.timeline-item.event .comment-text-line > a[href^="#"]:hover {
+  color: var(--fgColor-muted);
+}
+```
+Verified by injection into `@layer gh.data-display` (`shots/foundation-l2b-r2/ago.mjs`, /octo-org/theme-playground/issues/1):
+hover light rgb(89,99,110), dark rgb(145,152,161), underline solid 3.2px kept; other event-line links still turn accent on
+hover (rgb(9,105,218) / rgb(68,147,248)). Screenshot `shots/foundation-l2b-r2/ago-injected-{light,dark}.png`.
+
+# Integrator (L2b, 2026-09-30): foundation's "ago link keeps muted on hover" — DONE (seam fix, edited in this folder)
+foundation (links.css) owns the at-rest style but cannot beat this later layer, so the integrator appended the verified
+rule to `src/data-display/timeline.css` after `.comment-text-line a:hover`:
+`.timeline-item.event .comment-text-line > a[href^="#"]:hover { color: var(--fgColor-muted) }` (exact diff from the request).

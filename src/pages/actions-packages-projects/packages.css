@@ -17,44 +17,44 @@
  */
 
 /* ---------- list: stacked one-row lists → one Box ---------- */
-.packages .items-with-main {
+.packages:not(.settings) .items-with-main {
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-top-color: var(--borderColor-muted);
   border-bottom: 0;
   background: var(--bgColor-default);
 }
 
-.packages .items-with-main:first-child {
+.packages:not(.settings) .items-with-main:first-child {
   border-top-color: var(--borderColor-default);
   border-top-left-radius: var(--borderRadius-medium);
   border-top-right-radius: var(--borderRadius-medium);
 }
 
-.packages .items-with-main:not(:has(~ .flex-divided-list)) {
+.packages:not(.settings) .items-with-main:not(:has(~ .flex-divided-list)) {
   border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
   border-bottom-left-radius: var(--borderRadius-medium);
   border-bottom-right-radius: var(--borderRadius-medium);
 }
 
-.packages .items-with-main > .item {
+.packages:not(.settings) .items-with-main > .item {
   padding: var(--base-size-16);
 }
 
-.packages .items-with-main .item-main {
+.packages:not(.settings) .items-with-main .item-main {
   gap: 0;
 }
 
-.packages .items-with-main .item-title {
+.packages:not(.settings) .items-with-main .item-title {
   gap: var(--base-size-4) var(--base-size-8);
 }
 
-.packages .items-with-main :is(.item-title > a, a.item-title):hover {
+.packages:not(.settings) .items-with-main :is(.item-title > a, a.item-title):hover {
   color: var(--fgColor-accent);
   text-decoration: underline;
 }
 
 /* leading package octicon (github.com: 16px, --fgColor-default, 8px before the name, on the title line) */
-.packages .items-with-main div.item-title::before {
+.packages:not(.settings) .items-with-main div.item-title::before {
   content: "";
   flex-shrink: 0;
   width: var(--base-size-16);
@@ -65,21 +65,21 @@
 
 /* package type: Primer Label (small) with the registry icon */
 
-.packages .items-with-main .item-title .label-list .ui.label .svg {
+.packages:not(.settings) .items-with-main .item-title .label-list .ui.label .svg {
   width: var(--base-size-12);
   height: var(--base-size-12);
 }
 
-.packages .items-with-main .item-body {
+.packages:not(.settings) .items-with-main .item-body {
   display: block;
   font-size: var(--text-body-size-small);
 }
 
-.packages .items-with-main .item-body a {
+.packages:not(.settings) .items-with-main .item-body a {
   text-decoration: underline;
 }
 
-.packages .items-with-main .item-body a:hover {
+.packages:not(.settings) .items-with-main .item-body a:hover {
   color: var(--fgColor-accent);
 }
 

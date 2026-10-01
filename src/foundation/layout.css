@@ -33,30 +33,45 @@
 
 /* FG2-097 — the footer follows the content. Gitea (base.css:75-90, 386-389) makes body a full-height flex column and lets
  * .full.height grow, which pins the footer to the viewport bottom on short pages. github.com's Rails pages (wiki page
- * list, milestones, labels, settings…) are a normal block flow: the footer starts right after the content (measured
- * 2026-09-30, wiki _pages @1440: content ends at 321, footer box starts at 321 with its own 48px top padding, empty
- * page background below it). Kept growing (Gitea's model) where a layout needs the full height:
+ * list, projects, settings, releases, 404…) are a normal block flow: the footer starts right after the content.
+ * Kept growing (Gitea's model) where a layout needs the full height:
  *  - the fullscreen Actions log (utils.ts toggleFullScreen appends .fullscreen into .full.height, height 100%),
  *  - the Actions run list and explore pages, whose page folders turn .full.height into a flex column so their
  *    sidebar pane runs down to the footer (pages/actions-packages-projects actions-list.css, pages/people media.css);
- *  - github.com's React issue family (issues / pulls lists, milestones, labels, the issue view): a full-height
- *    PageLayout, footer below the fold at 1440×900 (docs/reference milestones, labels, repo-issues). A PR
- *    conversation (.pull.tabs) is a Rails page there and follows its content. */
-/* (:has() cannot nest, so a PR conversation — .pull.tabs — is matched by the second branch) */
+ *  - github.com's React issue/PR family (see the min-heights below). */
 .full.height:where(:not(:has(
   > .fullscreen, > .page-content .run-list, > .explore,
-  > .page-content.issue-list, > .page-content.repository.milestones:not(.projects, .dashboard), > .page-content.labels,
-  > .page-content.view.issue:not(.files, .commits)
-)), :has(> .page-content > .ui.container > .pull.tabs)) {
+  > .page-content.issue-list, > .page-content.view.issue,
+  > .page-content.repository:is(.milestones:not(.projects, .dashboard), .labels)
+))) {
   flex-grow: 0;
 }
 
-/* Space between the last page element and the footer: github.com Rails pages end their content 16px above the footer
- * box (releases, tags, profile repositories: last row → footer text 68px = 16 + the footer's 48px top padding + 4px
- * half-leading). Gitea: --page-space-bottom 64px (→ 116px). The variable itself stays 64px because page folders use
+/* github.com's issue / PR family is a React PageLayout whose app root has min-height calc(100vh - 64px) (64 = the
+ * signed-in header), so on short pages the footer sits at or below the fold, never inside the viewport (measured
+ * logged-out 2026-09-30, shots/foundation-l2b-r2/ghfoot.mjs, 1440×900 / 390×844, header 72 / 64):
+ *  - milestones, labels: the repo header is inside the app root → footer at header + (100vh - 64) = 908 / 844;
+ *  - issues + pulls lists, issue view, PR conversation / commits / files: the repo (+ PR) header sits above the app
+ *    root → footer below the fold (empty issue search 1018 / 951, /pull/42/commits 1042 / 975, /pull/358 1042).
+ * Gitea: .full.height = navbar (64) + .page-content (.secondary-nav repo header, then .ui.container), border-box. */
+/* (an explicit min-height drops the flex item's content-based minimum; flex-shrink 0 keeps a long labels page from
+ * being squeezed to 100vh under the footer) */
+.full.height:has(> .page-content.repository:is(.milestones:not(.projects, .dashboard), .labels)) {
+  flex-shrink: 0;
+  min-height: 100vh;
+}
+
+.page-content:is(.issue-list, .view.issue) > .ui.container {
+  min-height: calc(100vh - var(--base-size-64));
+}
+
+/* Space between the last page element and the footer. github.com's Rails footer has 48px top padding and no rule;
+ * the navigation folder's footer is the React one (16px padding + 1px border-top). 28 + 1 + 16 = 45px (+ the 12/18
+ * text's half-leading) = 48px from the content to the footer text, as on github.com (wiki _pages @1440: main ends at
+ * 321, footer text 369). Gitea: --page-space-bottom 64px. The variable itself stays 64px because page folders use
  * it for their own paddings (Actions list pane). */
 .full.height {
-  padding-bottom: var(--base-size-16);
+  padding-bottom: var(--base-size-28);
 }
 
 .ui.fluid.container {

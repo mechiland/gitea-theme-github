@@ -222,11 +222,11 @@
     {
      "text": "Issues",
      "box": {
-      "w": 208,
+      "w": 223,
       "h": 32
      },
      "height": "32px",
-     "width": "208px",
+     "width": "223px",
      "padding-top": "6px",
      "padding-right": "8px",
      "padding-bottom": "6px",
@@ -255,11 +255,11 @@
     {
      "text": "Assigned to me",
      "box": {
-      "w": 208,
+      "w": 223,
       "h": 32
      },
      "height": "32px",
-     "width": "208px",
+     "width": "223px",
      "padding-top": "6px",
      "padding-right": "8px",
      "padding-bottom": "6px",
@@ -288,11 +288,11 @@
     {
      "text": "Created by me",
      "box": {
-      "w": 208,
+      "w": 223,
       "h": 32
      },
      "height": "32px",
-     "width": "208px",
+     "width": "223px",
      "padding-top": "6px",
      "padding-right": "8px",
      "padding-bottom": "6px",

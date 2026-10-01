@@ -1,0 +1,162 @@
+{
+ ".dashboard": {
+  "intended": [
+   "user/dashboard/dashboard.tmpl",
+   "user/dashboard/issues.tmpl",
+   "user/dashboard/milestones.tmpl"
+  ],
+  "waived": {
+   "admin/dashboard.tmpl": "inert: probe 0/8 on /-/admin (no .secondary-nav context bar)"
+  }
+ },
+ ".explore": [
+  "explore/code.tmpl",
+  "explore/repos.tmpl",
+  "explore/users.tmpl"
+ ],
+ ".explore.repositories": [
+  "explore/repos.tmpl"
+ ],
+ ".explore.users": [
+  "explore/code.tmpl",
+  "explore/users.tmpl"
+ ],
+ ".feeds": [
+  "user/dashboard/dashboard.tmpl"
+ ],
+ ".members": [
+  "org/member/members.tmpl"
+ ],
+ ".members.organization": [
+  "org/member/members.tmpl"
+ ],
+ ".notification": [
+  "user/notification/notification_div.tmpl",
+  "user/notification/notification_subscriptions.tmpl"
+ ],
+ ".notification.user": [
+  "user/notification/notification_div.tmpl",
+  "user/notification/notification_subscriptions.tmpl"
+ ],
+ ".organization": {
+  "intended": [
+   "org/create.tmpl",
+   "org/home.tmpl",
+   "org/member/members.tmpl",
+   "org/projects/list.tmpl",
+   "org/projects/new.tmpl",
+   "org/projects/view.tmpl",
+   "org/settings/actions.tmpl",
+   "org/settings/applications.tmpl",
+   "org/settings/applications_oauth2_edit.tmpl",
+   "org/settings/blocked_users.tmpl",
+   "org/settings/hook_new.tmpl",
+   "org/settings/hooks.tmpl",
+   "org/settings/labels.tmpl",
+   "org/settings/options.tmpl",
+   "org/settings/packages.tmpl",
+   "org/settings/packages_cleanup_rules_edit.tmpl",
+   "org/settings/packages_cleanup_rules_preview.tmpl",
+   "org/settings/runners_edit.tmpl",
+   "org/team/members.tmpl",
+   "org/team/new.tmpl",
+   "org/team/repositories.tmpl",
+   "org/team/teams.tmpl",
+   "org/worktime.tmpl",
+   "package/settings.tmpl",
+   "package/view.tmpl",
+   "user/code.tmpl",
+   "user/overview/package_versions.tmpl",
+   "user/overview/packages.tmpl",
+   "user/settings/organization.tmpl"
+  ],
+  "waived": {}
+ },
+ ".organization.profile": [
+  "org/home.tmpl"
+ ],
+ ".organization.teams": [
+  "org/team/members.tmpl",
+  "org/team/repositories.tmpl",
+  "org/team/teams.tmpl"
+ ],
+ ".organization:not(.profile)": {
+  "intended": [
+   "org/create.tmpl",
+   "org/member/members.tmpl",
+   "org/projects/list.tmpl",
+   "org/projects/new.tmpl",
+   "org/projects/view.tmpl",
+   "org/settings/actions.tmpl",
+   "org/settings/applications.tmpl",
+   "org/settings/applications_oauth2_edit.tmpl",
+   "org/settings/blocked_users.tmpl",
+   "org/settings/hook_new.tmpl",
+   "org/settings/hooks.tmpl",
+   "org/settings/labels.tmpl",
+   "org/settings/options.tmpl",
+   "org/settings/packages.tmpl",
+   "org/settings/packages_cleanup_rules_edit.tmpl",
+   "org/settings/packages_cleanup_rules_preview.tmpl",
+   "org/settings/runners_edit.tmpl",
+   "org/team/members.tmpl",
+   "org/team/new.tmpl",
+   "org/team/repositories.tmpl",
+   "org/team/teams.tmpl",
+   "org/worktime.tmpl",
+   "package/settings.tmpl",
+   "package/view.tmpl",
+   "user/code.tmpl",
+   "user/overview/package_versions.tmpl",
+   "user/overview/packages.tmpl",
+   "user/settings/organization.tmpl"
+  ],
+  "waived": {}
+ },
+ ".profile": {
+  "intended": [
+   "org/home.tmpl",
+   "org/projects/list.tmpl",
+   "org/projects/new.tmpl",
+   "package/view.tmpl",
+   "user/code.tmpl",
+   "user/overview/package_versions.tmpl",
+   "user/overview/packages.tmpl",
+   "user/profile.tmpl"
+  ],
+  "waived": {
+   "user/settings/profile.tmpl": "inert: probe 0/47 on /user/settings"
+  }
+ },
+ ".profile.user": {
+  "intended": [
+   "org/projects/list.tmpl",
+   "org/projects/new.tmpl",
+   "package/view.tmpl",
+   "user/code.tmpl",
+   "user/overview/package_versions.tmpl",
+   "user/overview/packages.tmpl",
+   "user/profile.tmpl"
+  ],
+  "waived": {
+   "user/settings/profile.tmpl": "inert: probe 0/12 on /user/settings"
+  }
+ },
+ ".profile.user:not(.settings)": [
+  "org/projects/list.tmpl",
+  "org/projects/new.tmpl",
+  "package/view.tmpl",
+  "user/code.tmpl",
+  "user/overview/package_versions.tmpl",
+  "user/overview/packages.tmpl",
+  "user/profile.tmpl"
+ ],
+ ".repositories": [
+  "explore/repos.tmpl"
+ ],
+ ".teams": [
+  "org/team/members.tmpl",
+  "org/team/repositories.tmpl",
+  "org/team/teams.tmpl"
+ ]
+}

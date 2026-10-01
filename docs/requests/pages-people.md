@@ -285,3 +285,8 @@ states + measure: 20 pages, 0 console errors, 0 failed requests, max CLS 0.0117)
 - **FG2-094 DONE** — `html:lang(en)` "Organizations" heading (16/600/24, --fgColor-default, 8px above the avatars) in
   the organisations section of the profile sidebar, light + dark, 1440 + 390.
 - Not in this round's scope: FG2-070 (template, rejected), FG2-084 (notifications).
+
+# Integrator (L2b, 2026-09-30): page-scope check (FG2-105)
+`src/pages/people/scopes.json` declares your scopes. `.organization` / `.organization:not(.profile)` also match every org
+settings and org projects page: that is the shared org header partial (probe: 19/22 and 5/5 rules apply there) and is
+declared intended. `.dashboard` on /-/admin, `.profile(.user)` on /user/settings: inert (probe 0 rules apply).

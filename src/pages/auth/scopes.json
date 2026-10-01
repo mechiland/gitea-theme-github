@@ -1,0 +1,86 @@
+{
+ ".activate.user": [
+  "user/auth/activate.tmpl",
+  "user/auth/activate_prompt.tmpl",
+  "user/auth/prohibit_login.tmpl"
+ ],
+ ".activate.user:not(.openid):not(.webauthn-prompt)": [
+  "user/auth/activate.tmpl",
+  "user/auth/activate_prompt.tmpl",
+  "user/auth/prohibit_login.tmpl"
+ ],
+ ".activate.user:not(.webauthn-prompt)": [
+  "user/auth/activate.tmpl",
+  "user/auth/activate_prompt.tmpl",
+  "user/auth/prohibit_login.tmpl"
+ ],
+ ".forgot.user": [
+  "user/auth/forgot_passwd.tmpl"
+ ],
+ ".forgot.user:not(.openid):not(.webauthn-prompt)": [
+  "user/auth/forgot_passwd.tmpl"
+ ],
+ ".forgot.user:not(.webauthn-prompt)": [
+  "user/auth/forgot_passwd.tmpl"
+ ],
+ ".link-account.user": [
+  "user/auth/link_account.tmpl"
+ ],
+ ".link-account.user:not(.openid):not(.webauthn-prompt)": [
+  "user/auth/link_account.tmpl"
+ ],
+ ".link-account.user:not(.webauthn-prompt)": [
+  "user/auth/link_account.tmpl"
+ ],
+ ".openid.signin.user": [
+  "user/auth/signin_openid.tmpl"
+ ],
+ ".reset.user": [
+  "user/auth/reset_passwd.tmpl"
+ ],
+ ".reset.user:not(.openid):not(.webauthn-prompt)": [
+  "user/auth/reset_passwd.tmpl"
+ ],
+ ".reset.user:not(.webauthn-prompt)": [
+  "user/auth/reset_passwd.tmpl"
+ ],
+ ".signin.user": [
+  "user/auth/change_passwd.tmpl",
+  "user/auth/signin.tmpl",
+  "user/auth/signin_openid.tmpl",
+  "user/auth/signup.tmpl",
+  "user/auth/twofa.tmpl",
+  "user/auth/twofa_scratch.tmpl",
+  "user/auth/webauthn.tmpl"
+ ],
+ ".signin.user:not(.openid):not(.webauthn-prompt)": [
+  "user/auth/change_passwd.tmpl",
+  "user/auth/signin.tmpl",
+  "user/auth/signup.tmpl",
+  "user/auth/twofa.tmpl",
+  "user/auth/twofa_scratch.tmpl"
+ ],
+ ".signin.user:not(.webauthn-prompt)": [
+  "user/auth/change_passwd.tmpl",
+  "user/auth/signin.tmpl",
+  "user/auth/signin_openid.tmpl",
+  "user/auth/signup.tmpl",
+  "user/auth/twofa.tmpl",
+  "user/auth/twofa_scratch.tmpl"
+ ],
+ ".signup.user": [
+  "user/auth/signup_openid_connect.tmpl",
+  "user/auth/signup_openid_register.tmpl"
+ ],
+ ".signup.user:not(.openid):not(.webauthn-prompt)": [
+  "user/auth/signup_openid_connect.tmpl",
+  "user/auth/signup_openid_register.tmpl"
+ ],
+ ".signup.user:not(.webauthn-prompt)": [
+  "user/auth/signup_openid_connect.tmpl",
+  "user/auth/signup_openid_register.tmpl"
+ ],
+ ".user": [
+  "*"
+ ]
+}

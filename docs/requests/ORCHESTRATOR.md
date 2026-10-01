@@ -225,3 +225,24 @@ same tree, so nothing of theirs was lost, but the orchestrator should know that 
 - ORC-11 DONE (orchestrator): gh_head_navbar + layout_head installed + reloaded; other themes byte-identical (html-snapshot before-L1/after-L1); forgot-password auth header, admin/settings crumbs, actions/general settings header verified.
 - ORC-12 ACCEPTED (orchestrator): CSS nesting in the minified output. The theme already requires :has() (Firefox 121+, Chrome 105+, Safari 15.4+) and @layer; nesting raises the floor only to Chrome/Edge 112+ and Safari 16.5+ (2023). The 14:36:27 deploy was the orchestrator (user-requested NavList fix), not a builder.
 - Smoke hygiene: 83 leftover open "Smoke issue" issues (admin, octo-org/theme-playground) closed; smoke.mjs now closes its own issue (step close-issue).
+
+## ORC-13 (integrator, loop 2 follow-up L2b, 2026-09-30) Install the edited issues/PRs list override (FG2-027, request IPR-L2-1)
+The integrator copied the file once, but `gitea manager reload-templates` (docker exec) was refused by the session
+permission policy, so the live copy was put back to its previous bytes (`shots/l2b-list.tmpl.before`, verified with cmp)
+to keep a later `npm run deploy` reload from activating it unreviewed. Not retried.
+What changed (github-* branch only, line 4; the else output stays upstream 1.27.3 bytes): the left NavList
+`<nav class="gh-issues-nav">` is rendered only `{{if not .PageIsPullList}}` (github.com's PR list has no sidebar); the
+PR-only items (review_requested / reviewed_by) and the PR icon branch inside the nav are gone. `.gh-issues-layout`,
+`.gh-issues-main` and the `h2.gh-issues-title` (incl. its PR titles) stay for both lists. Template actions balance (depth 0),
+one `<nav>`; diff vs the live copy: `diff shots/l2b-list.tmpl.before templates/repo/issue/list.tmpl`.
+CSS is already live (pages/issues-prs issues-nav.css treats a layout without the issue-opened nav item as the PR list),
+so the rendered PR list should not change visually — only the hidden nav markup disappears.
+```sh
+cp /Users/michael/work/gitea/gitea-theme-github/templates/repo/issue/list.tmpl /Users/michael/work/gitea/gitea/gitea/templates/repo/issue/list.tmpl
+docker exec -u git gitea-server gitea manager reload-templates --config /data/gitea/conf/app.ini
+```
+Verify (github-auto cookie): `curl -s -b 'gitea_theme=github-auto; lang=en-US' http://localhost:3000/octo-org/grex/pulls | grep -c 'gh-issues-nav"'` → 0
+and `… /octo-org/grex/issues | grep -c 'gh-issues-nav"'` → 1; both contain `gh-issues-title`; gitea-auto → 0 / 0 (upstream).
+Screenshots: `node tools/shoot/shoot.mjs --target gitea --theme github-auto --only repo-pulls,repo-issues --out shots/orc13-verify`
+(PR list: centred 1232px list, title "All pull requests" 24px under the tabs, as before). Then `npm run deploy` → `templatesPending: []`.
+Rollback: `cp shots/l2b-list.tmpl.before …/templates/repo/issue/list.tmpl` + reload.

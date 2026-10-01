@@ -1,0 +1,3762 @@
+{
+ "generated": "2026-10-01T12:29:51.162Z",
+ "liveCache": "shots/page-classes.json",
+ "liveGenerated": "2026-09-30T14:38:45.427Z",
+ "templatesScanned": 225,
+ "folders": {
+  "repo": {
+   "scopes": 19,
+   "unscopedSelectors": 292,
+   "leaks": 0,
+   "newScopes": 0,
+   "dead": 0,
+   "staleDeclarations": [],
+   "rows": [
+    {
+     "scope": ".branches",
+     "status": "ok",
+     "selectors": 4,
+     "first": "src/pages/repo/list-search.css:12",
+     "example": ":is(.branches, .tags, .commits:not(.pull)) > .ui.container > .segment > form > .input",
+     "templates": [
+      "repo/branch/list.tmpl",
+      "repo/settings/protected_branch.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "branches",
+       "url": "/octo-org/grex/branches"
+      },
+      {
+       "id": "x-repo-settings-branch-rule",
+       "url": "/octo-org/grex/settings/branches/edit"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "repo/settings/protected_branch.tmpl": "inert: probe 0/4 selectors match on /settings/branches/edit (integrator L2b)"
+     }
+    },
+    {
+     "scope": ".branches.repository",
+     "status": "ok",
+     "selectors": 64,
+     "first": "src/pages/repo/branches.css:12",
+     "example": ".repository.branches td",
+     "templates": [
+      "repo/branch/list.tmpl",
+      "repo/settings/protected_branch.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "branches",
+       "url": "/octo-org/grex/branches"
+      },
+      {
+       "id": "x-repo-settings-branch-rule",
+       "url": "/octo-org/grex/settings/branches/edit"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "repo/settings/protected_branch.tmpl": "probe 13/64 apply (status-check table td padding, > .ui.container); looked at shots/l2b-leaks/branch-rule*.png: settings layout and the status-check table render correctly — accepted (integrator L2b)"
+     }
+    },
+    {
+     "scope": ".commits",
+     "status": "ok",
+     "selectors": 8,
+     "first": "src/pages/repo/commits.css:487",
+     "example": ".commits .flex-container-main > * > div > .ui.header:first-child",
+     "templates": [
+      "repo/activity.tmpl",
+      "repo/commits.tmpl",
+      "repo/graph.tmpl",
+      "repo/pulls/commits.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "repo-commits",
+       "url": "/octo-org/grex/commits/branch/main"
+      },
+      {
+       "id": "pr-commits-tab",
+       "url": "/octo-org/grex/pulls/42/commits"
+      },
+      {
+       "id": "pr-commits-tab-playground",
+       "url": "/octo-org/theme-playground/pulls/16/commits"
+      },
+      {
+       "id": "repo-activity",
+       "url": "/octo-org/grex/activity"
+      },
+      {
+       "id": "repo-activity-contributors",
+       "url": "/octo-org/grex/activity/contributors"
+      },
+      {
+       "id": "repo-activity-code-frequency",
+       "url": "/octo-org/grex/activity/code-frequency"
+      },
+      {
+       "id": "repo-activity-recent-commits",
+       "url": "/octo-org/grex/activity/recent-commits"
+      },
+      {
+       "id": "x-repo-graph",
+       "url": "/octo-org/grex/graph"
+      },
+      {
+       "id": "x-repo-activity-recent",
+       "url": "/octo-org/grex/activity/recent-commits"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "repo/graph.tmpl": "inert: probe 0/8 selectors match on /graph and the PR Commits tab (Activity-only elements)",
+      "repo/pulls/commits.tmpl": "inert: probe 0/8 selectors match on /graph and the PR Commits tab (Activity-only elements)"
+     }
+    },
+    {
+     "scope": ".commits:not(.pull)",
+     "status": "ok",
+     "selectors": 18,
+     "first": "src/pages/repo/branches.css:133",
+     "example": ".commits:not(.pull) > .ui.container:not(.flex-container)",
+     "templates": [
+      "repo/activity.tmpl",
+      "repo/commits.tmpl",
+      "repo/graph.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "repo-commits",
+       "url": "/octo-org/grex/commits/branch/main"
+      },
+      {
+       "id": "repo-activity",
+       "url": "/octo-org/grex/activity"
+      },
+      {
+       "id": "repo-activity-contributors",
+       "url": "/octo-org/grex/activity/contributors"
+      },
+      {
+       "id": "repo-activity-code-frequency",
+       "url": "/octo-org/grex/activity/code-frequency"
+      },
+      {
+       "id": "repo-activity-recent-commits",
+       "url": "/octo-org/grex/activity/recent-commits"
+      },
+      {
+       "id": "x-repo-graph",
+       "url": "/octo-org/grex/graph"
+      },
+      {
+       "id": "x-repo-activity-recent",
+       "url": "/octo-org/grex/activity/recent-commits"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "repo/graph.tmpl": "graph shares the page class \"repository commits\"; probe 3/18 apply (container Box/padding); looked at shots/l2b-leaks/graph.png: graph rows and lines aligned — accepted (integrator L2b)"
+     }
+    },
+    {
+     "scope": ".commits.repository:not(.pull)",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/repo/repo.important.css:19",
+     "example": ".repository.commits:not(.pull) > .ui.container > .repository-summary",
+     "templates": [
+      "repo/activity.tmpl",
+      "repo/commits.tmpl",
+      "repo/graph.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "repo-commits",
+       "url": "/octo-org/grex/commits/branch/main"
+      },
+      {
+       "id": "repo-activity",
+       "url": "/octo-org/grex/activity"
+      },
+      {
+       "id": "repo-activity-contributors",
+       "url": "/octo-org/grex/activity/contributors"
+      },
+      {
+       "id": "repo-activity-code-frequency",
+       "url": "/octo-org/grex/activity/code-frequency"
+      },
+      {
+       "id": "repo-activity-recent-commits",
+       "url": "/octo-org/grex/activity/recent-commits"
+      },
+      {
+       "id": "x-repo-graph",
+       "url": "/octo-org/grex/graph"
+      },
+      {
+       "id": "x-repo-activity-recent",
+       "url": "/octo-org/grex/activity/recent-commits"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "repo/graph.tmpl": "inert: .repository-summary is not rendered on /graph (probe 0/1)"
+     }
+    },
+    {
+     "scope": ".diff",
+     "status": "ok",
+     "selectors": 2,
+     "first": "src/pages/repo/commits.css:54",
+     "example": ":is(.diff, .pull) #commits-table td.message",
+     "templates": [
+      "repo/commit_page.tmpl",
+      "repo/diff/compare.tmpl",
+      "repo/pulls/files.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "repo-pull-files",
+       "url": "/octo-org/grex/pulls/42/files"
+      },
+      {
+       "id": "commit-detail",
+       "url": "/octo-org/grex/commit/99cc347707375e00514f938b76d885a201dfc110"
+      },
+      {
+       "id": "pr-files-changed-unified",
+       "url": "/octo-org/grex/pulls/42/files"
+      },
+      {
+       "id": "pr-files-changed-split-playground-large-diff",
+       "url": "/octo-org/theme-playground/pulls/16/files"
+      },
+      {
+       "id": "pr-files-changed-unified-playground-large-diff",
+       "url": "/octo-org/theme-playground/pulls/16/files"
+      },
+      {
+       "id": "compare-two-tags",
+       "url": "/octo-org/grex/compare/v1.4.5...v1.4.6"
+      },
+      {
+       "id": "pr-compare-new-playground",
+       "url": "/octo-org/theme-playground/compare/main...feature/kbd-hints"
+      },
+      {
+       "id": "pr-compare-form-playground",
+       "url": "/octo-org/theme-playground/compare/main...experiment/alt-renderer?expand=1"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".diff:not(.pull)",
+     "status": "ok",
+     "selectors": 17,
+     "first": "src/pages/repo/commits.css:231",
+     "example": ".diff:not(.pull) .ui.top.attached.header:has(+ .commit-table)",
+     "templates": [
+      "repo/commit_page.tmpl",
+      "repo/diff/compare.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "commit-detail",
+       "url": "/octo-org/grex/commit/99cc347707375e00514f938b76d885a201dfc110"
+      },
+      {
+       "id": "compare-two-tags",
+       "url": "/octo-org/grex/compare/v1.4.5...v1.4.6"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".file.list",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/repo/home-layout.css:53",
+     "example": ".file.list .repo-view-content",
+     "templates": [
+      "repo/home.tmpl",
+      "repo/search.tmpl",
+      "repo/view.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "repo-home",
+       "url": "/octo-org/grex"
+      },
+      {
+       "id": "repo-code-file",
+       "url": "/octo-org/grex/src/branch/main/src/main.rs"
+      },
+      {
+       "id": "repo-home-markdown-showcase-playground",
+       "url": "/octo-org/theme-playground"
+      },
+      {
+       "id": "file-view-markdown",
+       "url": "/octo-org/grex/src/branch/main/README.md"
+      },
+      {
+       "id": "file-view-large-file-playground",
+       "url": "/octo-org/theme-playground/src/branch/main/internal/palette/generated.go"
+      },
+      {
+       "id": "file-view-image-playground",
+       "url": "/octo-org/theme-playground/src/branch/main/assets/images/logo.png"
+      },
+      {
+       "id": "directory-tree",
+       "url": "/octo-org/grex/src/branch/main/src"
+      },
+      {
+       "id": "blame",
+       "url": "/octo-org/grex/blame/branch/main/README.md"
+      },
+      {
+       "id": "blame-playground-multiple-authors",
+       "url": "/octo-org/theme-playground/blame/branch/main/internal/render/render.go"
+      },
+      {
+       "id": "repo-home-readme-with-images-and-tables",
+       "url": "/octo-org/prom_ex"
+      },
+      {
+       "id": "x-repo-code-search",
+       "url": "/octo-org/grex/search?q=main"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "repo/search.tmpl": "inert: code search has no .repo-view-content (probe 0/1 on /search)"
+     }
+    },
+    {
+     "scope": ".new-repo.repository",
+     "status": "ok",
+     "selectors": 3,
+     "first": "src/pages/repo/new-repo.css:44",
+     "example": ".repository.new-repo .ui.attached.segment > p.ui.center",
+     "templates": [
+      "repo/create.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "repo-create",
+       "url": "/repo/create"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".pages.wiki",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/repo/wiki.css:265",
+     "example": ".wiki.pages > .ui.container > h2.ui.header",
+     "templates": [
+      "repo/wiki/pages.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "wiki-page-list",
+       "url": "/octo-org/folderify/wiki/?action=_pages"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".pull",
+     "status": "ok",
+     "selectors": 2,
+     "first": "src/pages/repo/commits.css:54",
+     "example": ":is(.diff, .pull) #commits-table td.message",
+     "templates": [
+      "repo/diff/compare.tmpl",
+      "repo/issue/view.tmpl",
+      "repo/pulls/commits.tmpl",
+      "repo/pulls/files.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "repo-issue",
+       "url": "/octo-org/grex/issues/35"
+      },
+      {
+       "id": "repo-pull",
+       "url": "/octo-org/grex/pulls/42"
+      },
+      {
+       "id": "repo-pull-files",
+       "url": "/octo-org/grex/pulls/42/files"
+      },
+      {
+       "id": "issue-detail-playground-reactions-alerts-tables",
+       "url": "/octo-org/theme-playground/issues/2"
+      },
+      {
+       "id": "pr-conversation-open",
+       "url": "/octo-org/grex/pulls/358"
+      },
+      {
+       "id": "pr-commits-tab",
+       "url": "/octo-org/grex/pulls/42/commits"
+      },
+      {
+       "id": "pr-conversation-closed-unmerged",
+       "url": "/octo-org/grex/pulls/348"
+      },
+      {
+       "id": "pr-files-changed-unified",
+       "url": "/octo-org/grex/pulls/42/files"
+      },
+      {
+       "id": "pr-conversation-playground-large-diff-reviews",
+       "url": "/octo-org/theme-playground/pulls/16"
+      },
+      {
+       "id": "pr-files-changed-split-playground-large-diff",
+       "url": "/octo-org/theme-playground/pulls/16/files"
+      },
+      {
+       "id": "pr-files-changed-unified-playground-large-diff",
+       "url": "/octo-org/theme-playground/pulls/16/files"
+      },
+      {
+       "id": "pr-commits-tab-playground",
+       "url": "/octo-org/theme-playground/pulls/16/commits"
+      },
+      {
+       "id": "pr-draft-wip-playground",
+       "url": "/octo-org/theme-playground/pulls/19"
+      },
+      {
+       "id": "pr-compare-new-playground",
+       "url": "/octo-org/theme-playground/compare/main...feature/kbd-hints"
+      },
+      {
+       "id": "issue-playground-1",
+       "url": "/octo-org/theme-playground/issues/1"
+      },
+      {
+       "id": "pr-compare-form-playground",
+       "url": "/octo-org/theme-playground/compare/main...experiment/alt-renderer?expand=1"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".releases",
+     "status": "ok",
+     "selectors": 16,
+     "first": "src/pages/repo/tags-releases.css:19",
+     "example": ":is(.releases, .tags) .small-menu-items",
+     "templates": [
+      "repo/release/list.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "releases",
+       "url": "/octo-org/grex/releases"
+      },
+      {
+       "id": "release-detail",
+       "url": "/octo-org/grex/releases/tag/v1.4.6"
+      },
+      {
+       "id": "releases-playground-with-assets-prerelease-draft",
+       "url": "/octo-org/theme-playground/releases"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".releases.repository",
+     "status": "ok",
+     "selectors": 3,
+     "first": "src/pages/repo/repo.important.css:52",
+     "example": ".repository.releases .small-menu-items .item.active",
+     "templates": [
+      "repo/release/list.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "releases",
+       "url": "/octo-org/grex/releases"
+      },
+      {
+       "id": "release-detail",
+       "url": "/octo-org/grex/releases/tag/v1.4.6"
+      },
+      {
+       "id": "releases-playground-with-assets-prerelease-draft",
+       "url": "/octo-org/theme-playground/releases"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".repository",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/repo/repo.important.css:15",
+     "example": ".repository .repository-summary",
+     "templates": [
+      "devtest/unicode-escape.tmpl",
+      "org/projects/view.tmpl",
+      "repo/actions/list.tmpl",
+      "repo/actions/view.tmpl",
+      "repo/activity.tmpl",
+      "repo/branch/list.tmpl",
+      "repo/commit_page.tmpl",
+      "repo/commits.tmpl",
+      "repo/create.tmpl",
+      "repo/diff/compare.tmpl",
+      "repo/editor/cherry_pick.tmpl",
+      "repo/editor/delete.tmpl",
+      "repo/editor/edit.tmpl",
+      "repo/editor/fork.tmpl",
+      "repo/editor/patch.tmpl",
+      "repo/editor/upload.tmpl",
+      "repo/empty.tmpl",
+      "repo/forks.tmpl",
+      "repo/graph.tmpl",
+      "repo/home.tmpl",
+      "repo/issue/choose.tmpl",
+      "repo/issue/labels.tmpl",
+      "repo/issue/list.tmpl",
+      "repo/issue/milestone_issues.tmpl",
+      "repo/issue/milestone_new.tmpl",
+      "repo/issue/milestones.tmpl",
+      "repo/issue/new.tmpl",
+      "repo/issue/view.tmpl",
+      "repo/migrate/codebase.tmpl",
+      "repo/migrate/codecommit.tmpl",
+      "repo/migrate/git.tmpl",
+      "repo/migrate/gitbucket.tmpl",
+      "repo/migrate/gitea.tmpl",
+      "repo/migrate/github.tmpl",
+      "repo/migrate/gitlab.tmpl",
+      "repo/migrate/gogs.tmpl",
+      "repo/migrate/migrate.tmpl",
+      "repo/migrate/migrating.tmpl",
+      "repo/migrate/onedev.tmpl",
+      "repo/packages.tmpl",
+      "repo/projects/list.tmpl",
+      "repo/projects/new.tmpl",
+      "repo/projects/view.tmpl",
+      "repo/pulls/commits.tmpl",
+      "repo/pulls/files.tmpl",
+      "repo/pulls/fork.tmpl",
+      "repo/release/list.tmpl",
+      "repo/release/new.tmpl",
+      "repo/search.tmpl",
+      "repo/settings/actions.tmpl",
+      "repo/settings/branches.tmpl",
+      "repo/settings/collaboration.tmpl",
+      "repo/settings/deploy_keys.tmpl",
+      "repo/settings/githook_edit.tmpl",
+      "repo/settings/githooks.tmpl",
+      "repo/settings/lfs.tmpl",
+      "repo/settings/lfs_file.tmpl",
+      "repo/settings/lfs_file_find.tmpl",
+      "repo/settings/lfs_locks.tmpl",
+      "repo/settings/lfs_pointers.tmpl",
+      "repo/settings/options.tmpl",
+      "repo/settings/protected_branch.tmpl",
+      "repo/settings/public_access.tmpl",
+      "repo/settings/runner_edit.tmpl",
+      "repo/settings/secrets.tmpl",
+      "repo/settings/tags.tmpl",
+      "repo/settings/webhook/base.tmpl",
+      "repo/settings/webhook/new.tmpl",
+      "repo/tag/list.tmpl",
+      "repo/view.tmpl",
+      "repo/watchers.tmpl",
+      "repo/wiki/new.tmpl",
+      "repo/wiki/pages.tmpl",
+      "repo/wiki/revision.tmpl",
+      "repo/wiki/start.tmpl",
+      "repo/wiki/view.tmpl",
+      "status/404.tmpl",
+      "user/dashboard/milestones.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "repo-home",
+       "url": "/octo-org/grex"
+      },
+      {
+       "id": "repo-issues",
+       "url": "/octo-org/grex/issues"
+      },
+      {
+       "id": "repo-settings",
+       "url": "/octo-org/grex/settings"
+      },
+      {
+       "id": "repo-code-file",
+       "url": "/octo-org/grex/src/branch/main/src/main.rs"
+      },
+      {
+       "id": "repo-issue",
+       "url": "/octo-org/grex/issues/35"
+      },
+      {
+       "id": "repo-pulls",
+       "url": "/octo-org/grex/pulls"
+      },
+      {
+       "id": "repo-pull",
+       "url": "/octo-org/grex/pulls/42"
+      },
+      {
+       "id": "repo-pull-files",
+       "url": "/octo-org/grex/pulls/42/files"
+      },
+      {
+       "id": "repo-commits",
+       "url": "/octo-org/grex/commits/branch/main"
+      },
+      {
+       "id": "repo-home-markdown-showcase-playground",
+       "url": "/octo-org/theme-playground"
+      },
+      {
+       "id": "file-view-markdown",
+       "url": "/octo-org/grex/src/branch/main/README.md"
+      },
+      {
+       "id": "file-view-large-file-playground",
+       "url": "/octo-org/theme-playground/src/branch/main/internal/palette/generated.go"
+      },
+      {
+       "id": "file-view-image-playground",
+       "url": "/octo-org/theme-playground/src/branch/main/assets/images/logo.png"
+      },
+      {
+       "id": "directory-tree",
+       "url": "/octo-org/grex/src/branch/main/src"
+      },
+      {
+       "id": "blame",
+       "url": "/octo-org/grex/blame/branch/main/README.md"
+      },
+      {
+       "id": "blame-playground-multiple-authors",
+       "url": "/octo-org/theme-playground/blame/branch/main/internal/render/render.go"
+      },
+      {
+       "id": "commit-detail",
+       "url": "/octo-org/grex/commit/99cc347707375e00514f938b76d885a201dfc110"
+      },
+      {
+       "id": "branches",
+       "url": "/octo-org/grex/branches"
+      },
+      {
+       "id": "tags",
+       "url": "/octo-org/grex/tags"
+      },
+      {
+       "id": "releases",
+       "url": "/octo-org/grex/releases"
+      },
+      {
+       "id": "release-detail",
+       "url": "/octo-org/grex/releases/tag/v1.4.6"
+      },
+      {
+       "id": "releases-playground-with-assets-prerelease-draft",
+       "url": "/octo-org/theme-playground/releases"
+      },
+      {
+       "id": "wiki-home",
+       "url": "/octo-org/folderify/wiki"
+      },
+      {
+       "id": "wiki-page-list",
+       "url": "/octo-org/folderify/wiki/?action=_pages"
+      },
+      {
+       "id": "wiki-page",
+       "url": "/octo-org/folderify/wiki/Home"
+      },
+      {
+       "id": "repo-home-readme-with-images-and-tables",
+       "url": "/octo-org/prom_ex"
+      },
+      {
+       "id": "wiki-page-playground",
+       "url": "/octo-org/theme-playground/wiki/Architecture"
+      },
+      {
+       "id": "issues-list-closed",
+       "url": "/octo-org/grex/issues?state=closed"
+      },
+      {
+       "id": "issue-detail-playground-reactions-alerts-tables",
+       "url": "/octo-org/theme-playground/issues/2"
+      },
+      {
+       "id": "labels",
+       "url": "/octo-org/grex/labels"
+      },
+      {
+       "id": "milestones",
+       "url": "/octo-org/grex/milestones"
+      },
+      {
+       "id": "pr-conversation-open",
+       "url": "/octo-org/grex/pulls/358"
+      },
+      {
+       "id": "pr-commits-tab",
+       "url": "/octo-org/grex/pulls/42/commits"
+      },
+      {
+       "id": "pr-conversation-closed-unmerged",
+       "url": "/octo-org/grex/pulls/348"
+      },
+      {
+       "id": "pr-files-changed-unified",
+       "url": "/octo-org/grex/pulls/42/files"
+      },
+      {
+       "id": "pr-conversation-playground-large-diff-reviews",
+       "url": "/octo-org/theme-playground/pulls/16"
+      },
+      {
+       "id": "pr-files-changed-split-playground-large-diff",
+       "url": "/octo-org/theme-playground/pulls/16/files"
+      },
+      {
+       "id": "pr-files-changed-unified-playground-large-diff",
+       "url": "/octo-org/theme-playground/pulls/16/files"
+      },
+      {
+       "id": "pr-commits-tab-playground",
+       "url": "/octo-org/theme-playground/pulls/16/commits"
+      },
+      {
+       "id": "pr-draft-wip-playground",
+       "url": "/octo-org/theme-playground/pulls/19"
+      },
+      {
+       "id": "compare-two-tags",
+       "url": "/octo-org/grex/compare/v1.4.5...v1.4.6"
+      },
+      {
+       "id": "actions-list",
+       "url": "/octo-org/theme-playground/actions"
+      },
+      {
+       "id": "action-run",
+       "url": "/octo-org/theme-playground/actions/runs/19"
+      },
+      {
+       "id": "projects-list",
+       "url": "/octo-org/theme-playground/projects"
+      },
+      {
+       "id": "project-board",
+       "url": "/octo-org/theme-playground/projects/2"
+      },
+      {
+       "id": "repo-settings-collab",
+       "url": "/octo-org/grex/settings/collaboration"
+      },
+      {
+       "id": "repo-settings-branches",
+       "url": "/octo-org/grex/settings/branches"
+      },
+      {
+       "id": "repo-settings-hooks",
+       "url": "/octo-org/grex/settings/hooks"
+      },
+      {
+       "id": "repo-settings-deploykeys",
+       "url": "/octo-org/grex/settings/keys"
+      },
+      {
+       "id": "action-job",
+       "url": "/octo-org/theme-playground/actions/runs/19/jobs/89"
+      },
+      {
+       "id": "action-job-ok",
+       "url": "/octo-org/theme-playground/actions/runs/19/jobs/84"
+      },
+      {
+       "id": "packages-repo",
+       "url": "/octo-org/theme-playground/packages"
+      },
+      {
+       "id": "actions-empty-filter",
+       "url": "/octo-org/theme-playground/actions?status=6"
+      },
+      {
+       "id": "repo-create",
+       "url": "/repo/create"
+      },
+      {
+       "id": "issue-new-playground",
+       "url": "/octo-org/theme-playground/issues/new"
+      },
+      {
+       "id": "pr-compare-new-playground",
+       "url": "/octo-org/theme-playground/compare/main...feature/kbd-hints"
+      },
+      {
+       "id": "issue-playground-1",
+       "url": "/octo-org/theme-playground/issues/1"
+      },
+      {
+       "id": "pr-compare-form-playground",
+       "url": "/octo-org/theme-playground/compare/main...experiment/alt-renderer?expand=1"
+      },
+      {
+       "id": "milestone-issues",
+       "url": "/octo-org/grex/milestone/8"
+      },
+      {
+       "id": "repo-activity",
+       "url": "/octo-org/grex/activity"
+      },
+      {
+       "id": "repo-activity-contributors",
+       "url": "/octo-org/grex/activity/contributors"
+      },
+      {
+       "id": "repo-activity-code-frequency",
+       "url": "/octo-org/grex/activity/code-frequency"
+      },
+      {
+       "id": "repo-activity-recent-commits",
+       "url": "/octo-org/grex/activity/recent-commits"
+      },
+      {
+       "id": "x-dashboard-milestones",
+       "url": "/milestones"
+      },
+      {
+       "id": "x-repo-graph",
+       "url": "/octo-org/grex/graph"
+      },
+      {
+       "id": "x-repo-projects",
+       "url": "/octo-org/theme-playground/projects"
+      },
+      {
+       "id": "x-repo-new-milestone",
+       "url": "/octo-org/grex/milestones/new"
+      },
+      {
+       "id": "x-repo-issue-choose",
+       "url": "/octo-org/theme-playground/issues/new/choose"
+      },
+      {
+       "id": "x-repo-wiki-revisions",
+       "url": "/octo-org/folderify/wiki/Home?action=_revision"
+      },
+      {
+       "id": "x-repo-settings-collab",
+       "url": "/octo-org/grex/settings/collaboration"
+      },
+      {
+       "id": "x-repo-activity-recent",
+       "url": "/octo-org/grex/activity/recent-commits"
+      },
+      {
+       "id": "x-repo-settings-branch-rule",
+       "url": "/octo-org/grex/settings/branches/edit"
+      },
+      {
+       "id": "x-repo-settings-actions",
+       "url": "/octo-org/theme-playground/settings/actions/runners"
+      },
+      {
+       "id": "x-repo-code-search",
+       "url": "/octo-org/grex/search?q=main"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".repository.tags",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/repo/repo.important.css:52",
+     "example": ".repository.tags .small-menu-items .item.active",
+     "templates": [
+      "repo/tag/list.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "tags",
+       "url": "/octo-org/grex/tags"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".repository.view.wiki",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/repo/repo.important.css:75",
+     "example": ".repository.wiki.view .ui.dividing.header .gt-ellipsis",
+     "templates": [
+      "repo/wiki/view.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "wiki-home",
+       "url": "/octo-org/folderify/wiki"
+      },
+      {
+       "id": "wiki-page",
+       "url": "/octo-org/folderify/wiki/Home"
+      },
+      {
+       "id": "wiki-page-playground",
+       "url": "/octo-org/theme-playground/wiki/Architecture"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".tags",
+     "status": "ok",
+     "selectors": 18,
+     "first": "src/pages/repo/list-search.css:12",
+     "example": ":is(.branches, .tags, .commits:not(.pull)) > .ui.container > .segment > form > .input",
+     "templates": [
+      "repo/tag/list.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "tags",
+       "url": "/octo-org/grex/tags"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".view.wiki",
+     "status": "ok",
+     "selectors": 13,
+     "first": "src/pages/repo/merged.css:48",
+     "example": ".wiki.view .wiki-content-parts > .tw-clear-both",
+     "templates": [
+      "repo/wiki/view.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "wiki-home",
+       "url": "/octo-org/folderify/wiki"
+      },
+      {
+       "id": "wiki-page",
+       "url": "/octo-org/folderify/wiki/Home"
+      },
+      {
+       "id": "wiki-page-playground",
+       "url": "/octo-org/theme-playground/wiki/Architecture"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".wiki",
+     "status": "ok",
+     "selectors": 9,
+     "first": "src/pages/repo/merged.css:91",
+     "example": ".wiki .wiki-pages-list tr:first-child td",
+     "templates": [
+      "repo/wiki/new.tmpl",
+      "repo/wiki/pages.tmpl",
+      "repo/wiki/revision.tmpl",
+      "repo/wiki/start.tmpl",
+      "repo/wiki/view.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "wiki-home",
+       "url": "/octo-org/folderify/wiki"
+      },
+      {
+       "id": "wiki-page-list",
+       "url": "/octo-org/folderify/wiki/?action=_pages"
+      },
+      {
+       "id": "wiki-page",
+       "url": "/octo-org/folderify/wiki/Home"
+      },
+      {
+       "id": "wiki-page-playground",
+       "url": "/octo-org/theme-playground/wiki/Architecture"
+      },
+      {
+       "id": "x-repo-wiki-revisions",
+       "url": "/octo-org/folderify/wiki/Home?action=_revision"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    }
+   ]
+  },
+  "issues-prs": {
+   "scopes": 19,
+   "unscopedSelectors": 250,
+   "leaks": 0,
+   "newScopes": 0,
+   "dead": 0,
+   "staleDeclarations": [],
+   "rows": [
+    {
+     "scope": ".commits.pull.repository",
+     "status": "ok",
+     "selectors": 4,
+     "first": "src/pages/issues-prs/header.css:277",
+     "example": ".repository.pull.commits > .ui.container > .ui.top.attached.header:has(+ .commit-table .gh-commit-day)",
+     "templates": [
+      "repo/pulls/commits.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "pr-commits-tab",
+       "url": "/octo-org/grex/pulls/42/commits"
+      },
+      {
+       "id": "pr-commits-tab-playground",
+       "url": "/octo-org/theme-playground/pulls/16/commits"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".compare.diff.pull.repository",
+     "status": "ok",
+     "selectors": 3,
+     "first": "src/pages/issues-prs/layout.css:46",
+     "example": ".page-content.repository.diff.compare.pull > .ui.fluid.container",
+     "templates": [
+      "repo/diff/compare.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "pr-compare-new-playground",
+       "url": "/octo-org/theme-playground/compare/main...feature/kbd-hints"
+      },
+      {
+       "id": "pr-compare-form-playground",
+       "url": "/octo-org/theme-playground/compare/main...experiment/alt-renderer?expand=1"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".compare.pull",
+     "status": "ok",
+     "selectors": 2,
+     "first": "src/pages/issues-prs/composer.css:101",
+     "example": ":is(.view.issue, .new.issue, .compare.pull) markdown-toolbar .markdown-toolbar-group",
+     "templates": [
+      "repo/diff/compare.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "pr-compare-new-playground",
+       "url": "/octo-org/theme-playground/compare/main...feature/kbd-hints"
+      },
+      {
+       "id": "pr-compare-form-playground",
+       "url": "/octo-org/theme-playground/compare/main...experiment/alt-renderer?expand=1"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".compare.pull.repository",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/issues-prs/sidebar.important.css:3",
+     "example": ":is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .issue-sidebar-project-cards.tw-my-2",
+     "templates": [
+      "repo/diff/compare.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "pr-compare-new-playground",
+       "url": "/octo-org/theme-playground/compare/main...feature/kbd-hints"
+      },
+      {
+       "id": "pr-compare-form-playground",
+       "url": "/octo-org/theme-playground/compare/main...experiment/alt-renderer?expand=1"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".issue-list",
+     "status": "ok",
+     "selectors": 20,
+     "first": "src/pages/issues-prs/issues-nav.css:22",
+     "example": ".page-content.issue-list > .secondary-nav:has(~ .ui.container > .gh-issues-layout > .gh-issues-nav .octicon-issue-opened)",
+     "templates": [
+      "repo/issue/list.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "repo-issues",
+       "url": "/octo-org/grex/issues"
+      },
+      {
+       "id": "repo-pulls",
+       "url": "/octo-org/grex/pulls"
+      },
+      {
+       "id": "issues-list-closed",
+       "url": "/octo-org/grex/issues?state=closed"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".issue.new",
+     "status": "ok",
+     "selectors": 2,
+     "first": "src/pages/issues-prs/composer.css:101",
+     "example": ":is(.view.issue, .new.issue, .compare.pull) markdown-toolbar .markdown-toolbar-group",
+     "templates": [
+      "repo/issue/choose.tmpl",
+      "repo/issue/new.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "issue-new-playground",
+       "url": "/octo-org/theme-playground/issues/new"
+      },
+      {
+       "id": "x-repo-issue-choose",
+       "url": "/octo-org/theme-playground/issues/new/choose"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "repo/issue/choose.tmpl": "inert: the template chooser renders no markdown editor (element-guarded)"
+     }
+    },
+    {
+     "scope": ".issue.new.repository",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/issues-prs/sidebar.important.css:3",
+     "example": ":is(.repository.view.issue, .repository.new.issue, .repository.compare.pull) .issue-content-right .issue-sidebar-project-cards.tw-my-2",
+     "templates": [
+      "repo/issue/choose.tmpl",
+      "repo/issue/new.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "issue-new-playground",
+       "url": "/octo-org/theme-playground/issues/new"
+      },
+      {
+       "id": "x-repo-issue-choose",
+       "url": "/octo-org/theme-playground/issues/new/choose"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "repo/issue/choose.tmpl": "inert: the template chooser renders no issue sidebar (element-guarded)"
+     }
+    },
+    {
+     "scope": ".issue.repository.view",
+     "status": "ok",
+     "selectors": 51,
+     "first": "src/pages/issues-prs/header.css:13",
+     "example": ".repository.view.issue .issue-title-header",
+     "templates": [
+      "repo/issue/view.tmpl",
+      "repo/pulls/commits.tmpl",
+      "repo/pulls/files.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "repo-issue",
+       "url": "/octo-org/grex/issues/35"
+      },
+      {
+       "id": "repo-pull",
+       "url": "/octo-org/grex/pulls/42"
+      },
+      {
+       "id": "repo-pull-files",
+       "url": "/octo-org/grex/pulls/42/files"
+      },
+      {
+       "id": "issue-detail-playground-reactions-alerts-tables",
+       "url": "/octo-org/theme-playground/issues/2"
+      },
+      {
+       "id": "pr-conversation-open",
+       "url": "/octo-org/grex/pulls/358"
+      },
+      {
+       "id": "pr-commits-tab",
+       "url": "/octo-org/grex/pulls/42/commits"
+      },
+      {
+       "id": "pr-conversation-closed-unmerged",
+       "url": "/octo-org/grex/pulls/348"
+      },
+      {
+       "id": "pr-files-changed-unified",
+       "url": "/octo-org/grex/pulls/42/files"
+      },
+      {
+       "id": "pr-conversation-playground-large-diff-reviews",
+       "url": "/octo-org/theme-playground/pulls/16"
+      },
+      {
+       "id": "pr-files-changed-split-playground-large-diff",
+       "url": "/octo-org/theme-playground/pulls/16/files"
+      },
+      {
+       "id": "pr-files-changed-unified-playground-large-diff",
+       "url": "/octo-org/theme-playground/pulls/16/files"
+      },
+      {
+       "id": "pr-commits-tab-playground",
+       "url": "/octo-org/theme-playground/pulls/16/commits"
+      },
+      {
+       "id": "pr-draft-wip-playground",
+       "url": "/octo-org/theme-playground/pulls/19"
+      },
+      {
+       "id": "issue-playground-1",
+       "url": "/octo-org/theme-playground/issues/1"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".issue.view",
+     "status": "ok",
+     "selectors": 2,
+     "first": "src/pages/issues-prs/composer.css:101",
+     "example": ":is(.view.issue, .new.issue, .compare.pull) markdown-toolbar .markdown-toolbar-group",
+     "templates": [
+      "repo/issue/view.tmpl",
+      "repo/pulls/commits.tmpl",
+      "repo/pulls/files.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "repo-issue",
+       "url": "/octo-org/grex/issues/35"
+      },
+      {
+       "id": "repo-pull",
+       "url": "/octo-org/grex/pulls/42"
+      },
+      {
+       "id": "repo-pull-files",
+       "url": "/octo-org/grex/pulls/42/files"
+      },
+      {
+       "id": "issue-detail-playground-reactions-alerts-tables",
+       "url": "/octo-org/theme-playground/issues/2"
+      },
+      {
+       "id": "pr-conversation-open",
+       "url": "/octo-org/grex/pulls/358"
+      },
+      {
+       "id": "pr-commits-tab",
+       "url": "/octo-org/grex/pulls/42/commits"
+      },
+      {
+       "id": "pr-conversation-closed-unmerged",
+       "url": "/octo-org/grex/pulls/348"
+      },
+      {
+       "id": "pr-files-changed-unified",
+       "url": "/octo-org/grex/pulls/42/files"
+      },
+      {
+       "id": "pr-conversation-playground-large-diff-reviews",
+       "url": "/octo-org/theme-playground/pulls/16"
+      },
+      {
+       "id": "pr-files-changed-split-playground-large-diff",
+       "url": "/octo-org/theme-playground/pulls/16/files"
+      },
+      {
+       "id": "pr-files-changed-unified-playground-large-diff",
+       "url": "/octo-org/theme-playground/pulls/16/files"
+      },
+      {
+       "id": "pr-commits-tab-playground",
+       "url": "/octo-org/theme-playground/pulls/16/commits"
+      },
+      {
+       "id": "pr-draft-wip-playground",
+       "url": "/octo-org/theme-playground/pulls/19"
+      },
+      {
+       "id": "issue-playground-1",
+       "url": "/octo-org/theme-playground/issues/1"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".labels",
+     "status": "ok",
+     "selectors": 12,
+     "first": "src/pages/issues-prs/labels-milestones.css:319",
+     "example": ":is(.labels, .milestones) .issue-list-navbar",
+     "templates": [
+      "org/settings/labels.tmpl",
+      "repo/issue/labels.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "labels",
+       "url": "/octo-org/grex/labels"
+      },
+      {
+       "id": "org-settings-labels",
+       "url": "/org/octo-org/settings/labels"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".labels.organization.settings",
+     "status": "ok",
+     "selectors": 12,
+     "first": "src/pages/issues-prs/labels-milestones.css:543",
+     "example": ".organization.settings.labels .org-setting-content > .flex-text-block > .new-label.ui.button",
+     "templates": [
+      "org/settings/labels.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "org-settings-labels",
+       "url": "/org/octo-org/settings/labels"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".labels.repository",
+     "status": "ok",
+     "selectors": 32,
+     "first": "src/pages/issues-prs/labels-milestones.css:11",
+     "example": ".repository.labels .issue-navbar .ui.button",
+     "templates": [
+      "repo/issue/labels.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "labels",
+       "url": "/octo-org/grex/labels"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".milestone-issue-list",
+     "status": "ok",
+     "selectors": 20,
+     "first": "src/pages/issues-prs/labels-milestones.css:620",
+     "example": ".milestone-issue-list > .ui.container > .flex-text-block > div > .ui.red.basic.button",
+     "templates": [
+      "repo/issue/milestone_issues.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "milestone-issues",
+       "url": "/octo-org/grex/milestone/8"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".milestones",
+     "status": "ok",
+     "selectors": 12,
+     "first": "src/pages/issues-prs/labels-milestones.css:319",
+     "example": ":is(.labels, .milestones) .issue-list-navbar",
+     "templates": [
+      "repo/issue/milestones.tmpl",
+      "repo/projects/list.tmpl",
+      "user/dashboard/milestones.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "milestones",
+       "url": "/octo-org/grex/milestones"
+      },
+      {
+       "id": "projects-list",
+       "url": "/octo-org/theme-playground/projects"
+      },
+      {
+       "id": "x-dashboard-milestones",
+       "url": "/milestones"
+      },
+      {
+       "id": "x-repo-projects",
+       "url": "/octo-org/theme-playground/projects"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "repo/projects/list.tmpl": "inert: probe 0/12 on /projects and /milestones",
+      "user/dashboard/milestones.tmpl": "inert: probe 0/12 on /projects and /milestones"
+     }
+    },
+    {
+     "scope": ".milestones:not(.dashboard):not(.projects)",
+     "status": "ok",
+     "selectors": 4,
+     "first": "src/pages/issues-prs/labels-milestones.css:293",
+     "example": "html:lang(en) .milestones:not(.projects, .dashboard) > .ui.container::before",
+     "templates": [
+      "repo/issue/milestones.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "milestones",
+       "url": "/octo-org/grex/milestones"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".milestones:not(.projects)",
+     "status": "ok",
+     "selectors": 34,
+     "first": "src/pages/issues-prs/labels-milestones.css:188",
+     "example": ".milestones:not(.projects) .milestone-list:not(:has(> .item))",
+     "templates": [
+      "repo/issue/milestones.tmpl",
+      "user/dashboard/milestones.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "milestones",
+       "url": "/octo-org/grex/milestones"
+      },
+      {
+       "id": "x-dashboard-milestones",
+       "url": "/milestones"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "user/dashboard/milestones.tmpl": "inert: probe 0/34 on /milestones"
+     }
+    },
+    {
+     "scope": ".milestones.repository:not(.dashboard):not(.projects)",
+     "status": "ok",
+     "selectors": 10,
+     "first": "src/pages/issues-prs/labels-milestones.css:255",
+     "example": ".repository:is(.labels, .milestones:not(.projects, .dashboard)) > .secondary-nav",
+     "templates": [
+      "repo/issue/milestones.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "milestones",
+       "url": "/octo-org/grex/milestones"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".milestones.repository:not(.projects)",
+     "status": "ok",
+     "selectors": 16,
+     "first": "src/pages/issues-prs/labels-milestones.css:11",
+     "example": ".repository.milestones:not(.projects) .list-header > .ui.button",
+     "templates": [
+      "repo/issue/milestones.tmpl",
+      "user/dashboard/milestones.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "milestones",
+       "url": "/octo-org/grex/milestones"
+      },
+      {
+       "id": "x-dashboard-milestones",
+       "url": "/milestones"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "user/dashboard/milestones.tmpl": "probe 4/16 apply: the shared list-header search input (list.css :is(.issue-list, .milestone-issue-list, .repository.milestones…) .list-header*) — same component, same styling intended"
+     }
+    },
+    {
+     "scope": ".repository",
+     "status": "ok",
+     "selectors": 19,
+     "first": "src/pages/issues-prs/labels-milestones.css:36",
+     "example": ".repository .issue-label-list > .item",
+     "templates": [
+      "devtest/unicode-escape.tmpl",
+      "org/projects/view.tmpl",
+      "repo/actions/list.tmpl",
+      "repo/actions/view.tmpl",
+      "repo/activity.tmpl",
+      "repo/branch/list.tmpl",
+      "repo/commit_page.tmpl",
+      "repo/commits.tmpl",
+      "repo/create.tmpl",
+      "repo/diff/compare.tmpl",
+      "repo/editor/cherry_pick.tmpl",
+      "repo/editor/delete.tmpl",
+      "repo/editor/edit.tmpl",
+      "repo/editor/fork.tmpl",
+      "repo/editor/patch.tmpl",
+      "repo/editor/upload.tmpl",
+      "repo/empty.tmpl",
+      "repo/forks.tmpl",
+      "repo/graph.tmpl",
+      "repo/home.tmpl",
+      "repo/issue/choose.tmpl",
+      "repo/issue/labels.tmpl",
+      "repo/issue/list.tmpl",
+      "repo/issue/milestone_issues.tmpl",
+      "repo/issue/milestone_new.tmpl",
+      "repo/issue/milestones.tmpl",
+      "repo/issue/new.tmpl",
+      "repo/issue/view.tmpl",
+      "repo/migrate/codebase.tmpl",
+      "repo/migrate/codecommit.tmpl",
+      "repo/migrate/git.tmpl",
+      "repo/migrate/gitbucket.tmpl",
+      "repo/migrate/gitea.tmpl",
+      "repo/migrate/github.tmpl",
+      "repo/migrate/gitlab.tmpl",
+      "repo/migrate/gogs.tmpl",
+      "repo/migrate/migrate.tmpl",
+      "repo/migrate/migrating.tmpl",
+      "repo/migrate/onedev.tmpl",
+      "repo/packages.tmpl",
+      "repo/projects/list.tmpl",
+      "repo/projects/new.tmpl",
+      "repo/projects/view.tmpl",
+      "repo/pulls/commits.tmpl",
+      "repo/pulls/files.tmpl",
+      "repo/pulls/fork.tmpl",
+      "repo/release/list.tmpl",
+      "repo/release/new.tmpl",
+      "repo/search.tmpl",
+      "repo/settings/actions.tmpl",
+      "repo/settings/branches.tmpl",
+      "repo/settings/collaboration.tmpl",
+      "repo/settings/deploy_keys.tmpl",
+      "repo/settings/githook_edit.tmpl",
+      "repo/settings/githooks.tmpl",
+      "repo/settings/lfs.tmpl",
+      "repo/settings/lfs_file.tmpl",
+      "repo/settings/lfs_file_find.tmpl",
+      "repo/settings/lfs_locks.tmpl",
+      "repo/settings/lfs_pointers.tmpl",
+      "repo/settings/options.tmpl",
+      "repo/settings/protected_branch.tmpl",
+      "repo/settings/public_access.tmpl",
+      "repo/settings/runner_edit.tmpl",
+      "repo/settings/secrets.tmpl",
+      "repo/settings/tags.tmpl",
+      "repo/settings/webhook/base.tmpl",
+      "repo/settings/webhook/new.tmpl",
+      "repo/tag/list.tmpl",
+      "repo/view.tmpl",
+      "repo/watchers.tmpl",
+      "repo/wiki/new.tmpl",
+      "repo/wiki/pages.tmpl",
+      "repo/wiki/revision.tmpl",
+      "repo/wiki/start.tmpl",
+      "repo/wiki/view.tmpl",
+      "status/404.tmpl",
+      "user/dashboard/milestones.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "repo-home",
+       "url": "/octo-org/grex"
+      },
+      {
+       "id": "repo-issues",
+       "url": "/octo-org/grex/issues"
+      },
+      {
+       "id": "repo-settings",
+       "url": "/octo-org/grex/settings"
+      },
+      {
+       "id": "repo-code-file",
+       "url": "/octo-org/grex/src/branch/main/src/main.rs"
+      },
+      {
+       "id": "repo-issue",
+       "url": "/octo-org/grex/issues/35"
+      },
+      {
+       "id": "repo-pulls",
+       "url": "/octo-org/grex/pulls"
+      },
+      {
+       "id": "repo-pull",
+       "url": "/octo-org/grex/pulls/42"
+      },
+      {
+       "id": "repo-pull-files",
+       "url": "/octo-org/grex/pulls/42/files"
+      },
+      {
+       "id": "repo-commits",
+       "url": "/octo-org/grex/commits/branch/main"
+      },
+      {
+       "id": "repo-home-markdown-showcase-playground",
+       "url": "/octo-org/theme-playground"
+      },
+      {
+       "id": "file-view-markdown",
+       "url": "/octo-org/grex/src/branch/main/README.md"
+      },
+      {
+       "id": "file-view-large-file-playground",
+       "url": "/octo-org/theme-playground/src/branch/main/internal/palette/generated.go"
+      },
+      {
+       "id": "file-view-image-playground",
+       "url": "/octo-org/theme-playground/src/branch/main/assets/images/logo.png"
+      },
+      {
+       "id": "directory-tree",
+       "url": "/octo-org/grex/src/branch/main/src"
+      },
+      {
+       "id": "blame",
+       "url": "/octo-org/grex/blame/branch/main/README.md"
+      },
+      {
+       "id": "blame-playground-multiple-authors",
+       "url": "/octo-org/theme-playground/blame/branch/main/internal/render/render.go"
+      },
+      {
+       "id": "commit-detail",
+       "url": "/octo-org/grex/commit/99cc347707375e00514f938b76d885a201dfc110"
+      },
+      {
+       "id": "branches",
+       "url": "/octo-org/grex/branches"
+      },
+      {
+       "id": "tags",
+       "url": "/octo-org/grex/tags"
+      },
+      {
+       "id": "releases",
+       "url": "/octo-org/grex/releases"
+      },
+      {
+       "id": "release-detail",
+       "url": "/octo-org/grex/releases/tag/v1.4.6"
+      },
+      {
+       "id": "releases-playground-with-assets-prerelease-draft",
+       "url": "/octo-org/theme-playground/releases"
+      },
+      {
+       "id": "wiki-home",
+       "url": "/octo-org/folderify/wiki"
+      },
+      {
+       "id": "wiki-page-list",
+       "url": "/octo-org/folderify/wiki/?action=_pages"
+      },
+      {
+       "id": "wiki-page",
+       "url": "/octo-org/folderify/wiki/Home"
+      },
+      {
+       "id": "repo-home-readme-with-images-and-tables",
+       "url": "/octo-org/prom_ex"
+      },
+      {
+       "id": "wiki-page-playground",
+       "url": "/octo-org/theme-playground/wiki/Architecture"
+      },
+      {
+       "id": "issues-list-closed",
+       "url": "/octo-org/grex/issues?state=closed"
+      },
+      {
+       "id": "issue-detail-playground-reactions-alerts-tables",
+       "url": "/octo-org/theme-playground/issues/2"
+      },
+      {
+       "id": "labels",
+       "url": "/octo-org/grex/labels"
+      },
+      {
+       "id": "milestones",
+       "url": "/octo-org/grex/milestones"
+      },
+      {
+       "id": "pr-conversation-open",
+       "url": "/octo-org/grex/pulls/358"
+      },
+      {
+       "id": "pr-commits-tab",
+       "url": "/octo-org/grex/pulls/42/commits"
+      },
+      {
+       "id": "pr-conversation-closed-unmerged",
+       "url": "/octo-org/grex/pulls/348"
+      },
+      {
+       "id": "pr-files-changed-unified",
+       "url": "/octo-org/grex/pulls/42/files"
+      },
+      {
+       "id": "pr-conversation-playground-large-diff-reviews",
+       "url": "/octo-org/theme-playground/pulls/16"
+      },
+      {
+       "id": "pr-files-changed-split-playground-large-diff",
+       "url": "/octo-org/theme-playground/pulls/16/files"
+      },
+      {
+       "id": "pr-files-changed-unified-playground-large-diff",
+       "url": "/octo-org/theme-playground/pulls/16/files"
+      },
+      {
+       "id": "pr-commits-tab-playground",
+       "url": "/octo-org/theme-playground/pulls/16/commits"
+      },
+      {
+       "id": "pr-draft-wip-playground",
+       "url": "/octo-org/theme-playground/pulls/19"
+      },
+      {
+       "id": "compare-two-tags",
+       "url": "/octo-org/grex/compare/v1.4.5...v1.4.6"
+      },
+      {
+       "id": "actions-list",
+       "url": "/octo-org/theme-playground/actions"
+      },
+      {
+       "id": "action-run",
+       "url": "/octo-org/theme-playground/actions/runs/19"
+      },
+      {
+       "id": "projects-list",
+       "url": "/octo-org/theme-playground/projects"
+      },
+      {
+       "id": "project-board",
+       "url": "/octo-org/theme-playground/projects/2"
+      },
+      {
+       "id": "repo-settings-collab",
+       "url": "/octo-org/grex/settings/collaboration"
+      },
+      {
+       "id": "repo-settings-branches",
+       "url": "/octo-org/grex/settings/branches"
+      },
+      {
+       "id": "repo-settings-hooks",
+       "url": "/octo-org/grex/settings/hooks"
+      },
+      {
+       "id": "repo-settings-deploykeys",
+       "url": "/octo-org/grex/settings/keys"
+      },
+      {
+       "id": "action-job",
+       "url": "/octo-org/theme-playground/actions/runs/19/jobs/89"
+      },
+      {
+       "id": "action-job-ok",
+       "url": "/octo-org/theme-playground/actions/runs/19/jobs/84"
+      },
+      {
+       "id": "packages-repo",
+       "url": "/octo-org/theme-playground/packages"
+      },
+      {
+       "id": "actions-empty-filter",
+       "url": "/octo-org/theme-playground/actions?status=6"
+      },
+      {
+       "id": "repo-create",
+       "url": "/repo/create"
+      },
+      {
+       "id": "issue-new-playground",
+       "url": "/octo-org/theme-playground/issues/new"
+      },
+      {
+       "id": "pr-compare-new-playground",
+       "url": "/octo-org/theme-playground/compare/main...feature/kbd-hints"
+      },
+      {
+       "id": "issue-playground-1",
+       "url": "/octo-org/theme-playground/issues/1"
+      },
+      {
+       "id": "pr-compare-form-playground",
+       "url": "/octo-org/theme-playground/compare/main...experiment/alt-renderer?expand=1"
+      },
+      {
+       "id": "milestone-issues",
+       "url": "/octo-org/grex/milestone/8"
+      },
+      {
+       "id": "repo-activity",
+       "url": "/octo-org/grex/activity"
+      },
+      {
+       "id": "repo-activity-contributors",
+       "url": "/octo-org/grex/activity/contributors"
+      },
+      {
+       "id": "repo-activity-code-frequency",
+       "url": "/octo-org/grex/activity/code-frequency"
+      },
+      {
+       "id": "repo-activity-recent-commits",
+       "url": "/octo-org/grex/activity/recent-commits"
+      },
+      {
+       "id": "x-dashboard-milestones",
+       "url": "/milestones"
+      },
+      {
+       "id": "x-repo-graph",
+       "url": "/octo-org/grex/graph"
+      },
+      {
+       "id": "x-repo-projects",
+       "url": "/octo-org/theme-playground/projects"
+      },
+      {
+       "id": "x-repo-new-milestone",
+       "url": "/octo-org/grex/milestones/new"
+      },
+      {
+       "id": "x-repo-issue-choose",
+       "url": "/octo-org/theme-playground/issues/new/choose"
+      },
+      {
+       "id": "x-repo-wiki-revisions",
+       "url": "/octo-org/folderify/wiki/Home?action=_revision"
+      },
+      {
+       "id": "x-repo-settings-collab",
+       "url": "/octo-org/grex/settings/collaboration"
+      },
+      {
+       "id": "x-repo-activity-recent",
+       "url": "/octo-org/grex/activity/recent-commits"
+      },
+      {
+       "id": "x-repo-settings-branch-rule",
+       "url": "/octo-org/grex/settings/branches/edit"
+      },
+      {
+       "id": "x-repo-settings-actions",
+       "url": "/octo-org/theme-playground/settings/actions/runners"
+      },
+      {
+       "id": "x-repo-code-search",
+       "url": "/octo-org/grex/search?q=main"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    }
+   ]
+  },
+  "actions-packages-projects": {
+   "scopes": 7,
+   "unscopedSelectors": 295,
+   "leaks": 0,
+   "newScopes": 0,
+   "dead": 0,
+   "staleDeclarations": [],
+   "rows": [
+    {
+     "scope": ".actions.repository",
+     "status": "ok",
+     "selectors": 18,
+     "first": "src/pages/actions-packages-projects/actions-list.css:30",
+     "example": ".page-content.repository.actions:has(.run-list) > .secondary-nav",
+     "templates": [
+      "repo/actions/list.tmpl",
+      "repo/settings/actions.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "actions-list",
+       "url": "/octo-org/theme-playground/actions"
+      },
+      {
+       "id": "actions-empty-filter",
+       "url": "/octo-org/theme-playground/actions?status=6"
+      },
+      {
+       "id": "x-repo-settings-actions",
+       "url": "/octo-org/theme-playground/settings/actions/runners"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "repo/settings/actions.tmpl": "inert: probe 0/18 on /settings/actions/runners"
+     }
+    },
+    {
+     "scope": ".organization.projects",
+     "status": "ok",
+     "selectors": 18,
+     "first": "src/pages/actions-packages-projects/pages.important.css:50",
+     "example": ":is(.repository, .organization).projects > .ui.container > .flex-left-right > .list-header-toggle",
+     "templates": [
+      "org/projects/list.tmpl",
+      "org/projects/new.tmpl",
+      "org/projects/view.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "org-projects",
+       "url": "/octo-org/-/projects"
+      },
+      {
+       "id": "x-org-projects",
+       "url": "/octo-org/-/projects"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".packages",
+     "status": "ok",
+     "selectors": 22,
+     "first": "src/pages/actions-packages-projects/packages.css:87",
+     "example": ".packages .form:has(> .action.input)",
+     "templates": [
+      "org/settings/packages.tmpl",
+      "org/settings/packages_cleanup_rules_edit.tmpl",
+      "org/settings/packages_cleanup_rules_preview.tmpl",
+      "package/view.tmpl",
+      "repo/packages.tmpl",
+      "user/overview/package_versions.tmpl",
+      "user/overview/packages.tmpl",
+      "user/settings/packages.tmpl",
+      "user/settings/packages_cleanup_rules_edit.tmpl",
+      "user/settings/packages_cleanup_rules_preview.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "packages-org",
+       "url": "/octo-org/-/packages"
+      },
+      {
+       "id": "package-detail-npm",
+       "url": "/octo-org/-/packages/npm/%40octo-org%2Ftheme-tokens/1.0.0"
+      },
+      {
+       "id": "packages-repo",
+       "url": "/octo-org/theme-playground/packages"
+      },
+      {
+       "id": "package-versions",
+       "url": "/octo-org/-/packages/npm/%40octo-org%2Ftheme-tokens/versions"
+      },
+      {
+       "id": "packages-generic",
+       "url": "/octo-org/-/packages/generic/theme-demo"
+      },
+      {
+       "id": "x-org-settings-packages",
+       "url": "/org/octo-org/settings/packages"
+      },
+      {
+       "id": "x-user-settings-packages",
+       "url": "/user/settings/packages"
+      },
+      {
+       "id": "x-user-profile-packages",
+       "url": "/octo-org/-/packages"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "org/settings/packages.tmpl": "inert after the L2b fix: the 12 .items-with-main Box rules now read .packages:not(.settings) (they boxed the settings \"No cleanup rules\" text with 0 padding, shots/l2b-leaks/org-pkg.png); probe 0 of the remaining .packages rules apply there",
+      "org/settings/packages_cleanup_rules_edit.tmpl": "inert after the L2b fix: the 12 .items-with-main Box rules now read .packages:not(.settings) (they boxed the settings \"No cleanup rules\" text with 0 padding, shots/l2b-leaks/org-pkg.png); probe 0 of the remaining .packages rules apply there",
+      "org/settings/packages_cleanup_rules_preview.tmpl": "inert after the L2b fix: the 12 .items-with-main Box rules now read .packages:not(.settings) (they boxed the settings \"No cleanup rules\" text with 0 padding, shots/l2b-leaks/org-pkg.png); probe 0 of the remaining .packages rules apply there",
+      "user/settings/packages.tmpl": "inert after the L2b fix: the 12 .items-with-main Box rules now read .packages:not(.settings) (they boxed the settings \"No cleanup rules\" text with 0 padding, shots/l2b-leaks/org-pkg.png); probe 0 of the remaining .packages rules apply there",
+      "user/settings/packages_cleanup_rules_edit.tmpl": "inert after the L2b fix: the 12 .items-with-main Box rules now read .packages:not(.settings) (they boxed the settings \"No cleanup rules\" text with 0 padding, shots/l2b-leaks/org-pkg.png); probe 0 of the remaining .packages rules apply there",
+      "user/settings/packages_cleanup_rules_preview.tmpl": "inert after the L2b fix: the 12 .items-with-main Box rules now read .packages:not(.settings) (they boxed the settings \"No cleanup rules\" text with 0 padding, shots/l2b-leaks/org-pkg.png); probe 0 of the remaining .packages rules apply there"
+     }
+    },
+    {
+     "scope": ".packages:not(.settings)",
+     "status": "ok",
+     "selectors": 12,
+     "first": "src/pages/actions-packages-projects/packages.css:20",
+     "example": ".packages:not(.settings) .items-with-main",
+     "templates": [
+      "package/view.tmpl",
+      "repo/packages.tmpl",
+      "user/overview/package_versions.tmpl",
+      "user/overview/packages.tmpl",
+      "user/settings/packages_cleanup_rules_preview.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "packages-org",
+       "url": "/octo-org/-/packages"
+      },
+      {
+       "id": "package-detail-npm",
+       "url": "/octo-org/-/packages/npm/%40octo-org%2Ftheme-tokens/1.0.0"
+      },
+      {
+       "id": "packages-repo",
+       "url": "/octo-org/theme-playground/packages"
+      },
+      {
+       "id": "package-versions",
+       "url": "/octo-org/-/packages/npm/%40octo-org%2Ftheme-tokens/versions"
+      },
+      {
+       "id": "packages-generic",
+       "url": "/octo-org/-/packages/generic/theme-demo"
+      },
+      {
+       "id": "x-user-profile-packages",
+       "url": "/octo-org/-/packages"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "user/settings/packages_cleanup_rules_preview.tmpl": "inert: pageClass \"user packages admin\" (no settings) but package/shared/cleanup_rules/preview.tmpl renders a .ui.table, no .items-with-main (static check)"
+     }
+    },
+    {
+     "scope": ".projects",
+     "status": "ok",
+     "selectors": 16,
+     "first": "src/pages/actions-packages-projects/pages.important.css:41",
+     "example": ".projects .list-item-secondary-bar a.tw-text-red",
+     "templates": [
+      "org/projects/list.tmpl",
+      "org/projects/new.tmpl",
+      "org/projects/view.tmpl",
+      "repo/projects/list.tmpl",
+      "repo/projects/new.tmpl",
+      "repo/projects/view.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "projects-list",
+       "url": "/octo-org/theme-playground/projects"
+      },
+      {
+       "id": "project-board",
+       "url": "/octo-org/theme-playground/projects/2"
+      },
+      {
+       "id": "org-projects",
+       "url": "/octo-org/-/projects"
+      },
+      {
+       "id": "x-repo-projects",
+       "url": "/octo-org/theme-playground/projects"
+      },
+      {
+       "id": "x-org-projects",
+       "url": "/octo-org/-/projects"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".projects.repository",
+     "status": "ok",
+     "selectors": 18,
+     "first": "src/pages/actions-packages-projects/pages.important.css:50",
+     "example": ":is(.repository, .organization).projects > .ui.container > .flex-left-right > .list-header-toggle",
+     "templates": [
+      "org/projects/view.tmpl",
+      "repo/projects/list.tmpl",
+      "repo/projects/new.tmpl",
+      "repo/projects/view.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "projects-list",
+       "url": "/octo-org/theme-playground/projects"
+      },
+      {
+       "id": "project-board",
+       "url": "/octo-org/theme-playground/projects/2"
+      },
+      {
+       "id": "x-repo-projects",
+       "url": "/octo-org/theme-playground/projects"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".view-project",
+     "status": "ok",
+     "selectors": 3,
+     "first": "src/pages/actions-packages-projects/projects.css:227",
+     "example": ".page-content.view-project > .ui.container.padded:not(.projects-view)",
+     "templates": [
+      "org/projects/view.tmpl",
+      "repo/projects/view.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "project-board",
+       "url": "/octo-org/theme-playground/projects/2"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    }
+   ]
+  },
+  "people": {
+   "scopes": 18,
+   "unscopedSelectors": 159,
+   "leaks": 0,
+   "newScopes": 0,
+   "dead": 0,
+   "staleDeclarations": [],
+   "rows": [
+    {
+     "scope": ".dashboard",
+     "status": "ok",
+     "selectors": 8,
+     "first": "src/pages/people/dashboard.css:27",
+     "example": ".dashboard > .secondary-nav",
+     "templates": [
+      "admin/dashboard.tmpl",
+      "user/dashboard/dashboard.tmpl",
+      "user/dashboard/issues.tmpl",
+      "user/dashboard/milestones.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "home",
+       "url": "/"
+      },
+      {
+       "id": "site-admin",
+       "url": "/-/admin"
+      },
+      {
+       "id": "x-dashboard-issues",
+       "url": "/issues"
+      },
+      {
+       "id": "x-dashboard-pulls",
+       "url": "/pulls"
+      },
+      {
+       "id": "x-dashboard-milestones",
+       "url": "/milestones"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "admin/dashboard.tmpl": "inert: probe 0/8 on /-/admin (no .secondary-nav context bar)"
+     }
+    },
+    {
+     "scope": ".explore",
+     "status": "ok",
+     "selectors": 53,
+     "first": "src/pages/people/media.css:16",
+     "example": ".explore",
+     "templates": [
+      "explore/code.tmpl",
+      "explore/repos.tmpl",
+      "explore/users.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "explore-repos",
+       "url": "/explore/repos"
+      },
+      {
+       "id": "explore-users",
+       "url": "/explore/users"
+      },
+      {
+       "id": "explore-orgs",
+       "url": "/explore/organizations"
+      },
+      {
+       "id": "x-explore-orgs",
+       "url": "/explore/organizations"
+      },
+      {
+       "id": "x-explore-code",
+       "url": "/explore/code"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".explore.repositories",
+     "status": "ok",
+     "selectors": 2,
+     "first": "src/pages/people/box.css:6",
+     "example": ".explore.repositories .flex-divided-list > .item",
+     "templates": [
+      "explore/repos.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "explore-repos",
+       "url": "/explore/repos"
+      },
+      {
+       "id": "x-explore-code",
+       "url": "/explore/code"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".explore.users",
+     "status": "ok",
+     "selectors": 6,
+     "first": "src/pages/people/box.css:6",
+     "example": ".explore.users .flex-divided-list",
+     "templates": [
+      "explore/code.tmpl",
+      "explore/users.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "explore-users",
+       "url": "/explore/users"
+      },
+      {
+       "id": "explore-orgs",
+       "url": "/explore/organizations"
+      },
+      {
+       "id": "x-explore-orgs",
+       "url": "/explore/organizations"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".feeds",
+     "status": "ok",
+     "selectors": 8,
+     "first": "src/pages/people/dashboard.css:19",
+     "example": ".feeds > .flex-container",
+     "templates": [
+      "user/dashboard/dashboard.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "home",
+       "url": "/"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".members",
+     "status": "ok",
+     "selectors": 22,
+     "first": "src/pages/people/media.css:228",
+     "example": ":is(.members, .teams) .ui.container > form.ui.form",
+     "templates": [
+      "org/member/members.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "org-members",
+       "url": "/org/octo-org/members"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".members.organization",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/people/box.css:6",
+     "example": ".organization:is(.profile, .members) .flex-divided-list",
+     "templates": [
+      "org/member/members.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "org-members",
+       "url": "/org/octo-org/members"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".notification",
+     "status": "ok",
+     "selectors": 18,
+     "first": "src/pages/people/media.css:87",
+     "example": ".notification > .ui.container",
+     "templates": [
+      "user/notification/notification_div.tmpl",
+      "user/notification/notification_subscriptions.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "notifications",
+       "url": "/notifications"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".notification.user",
+     "status": "ok",
+     "selectors": 5,
+     "first": "src/pages/people/people.important.css:55",
+     "example": ".user.notification .small-menu-items",
+     "templates": [
+      "user/notification/notification_div.tmpl",
+      "user/notification/notification_subscriptions.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "notifications",
+       "url": "/notifications"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".organization",
+     "status": "ok",
+     "selectors": 22,
+     "first": "src/pages/people/media.css:268",
+     "example": ".organization > .flex-container:first-child",
+     "templates": [
+      "org/create.tmpl",
+      "org/home.tmpl",
+      "org/member/members.tmpl",
+      "org/projects/list.tmpl",
+      "org/projects/new.tmpl",
+      "org/projects/view.tmpl",
+      "org/settings/actions.tmpl",
+      "org/settings/applications.tmpl",
+      "org/settings/applications_oauth2_edit.tmpl",
+      "org/settings/blocked_users.tmpl",
+      "org/settings/hook_new.tmpl",
+      "org/settings/hooks.tmpl",
+      "org/settings/labels.tmpl",
+      "org/settings/options.tmpl",
+      "org/settings/packages.tmpl",
+      "org/settings/packages_cleanup_rules_edit.tmpl",
+      "org/settings/packages_cleanup_rules_preview.tmpl",
+      "org/settings/runners_edit.tmpl",
+      "org/team/members.tmpl",
+      "org/team/new.tmpl",
+      "org/team/repositories.tmpl",
+      "org/team/teams.tmpl",
+      "org/worktime.tmpl",
+      "package/settings.tmpl",
+      "package/view.tmpl",
+      "user/code.tmpl",
+      "user/overview/package_versions.tmpl",
+      "user/overview/packages.tmpl",
+      "user/settings/organization.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "org-home",
+       "url": "/octo-org"
+      },
+      {
+       "id": "packages-org",
+       "url": "/octo-org/-/packages"
+      },
+      {
+       "id": "package-detail-npm",
+       "url": "/octo-org/-/packages/npm/%40octo-org%2Ftheme-tokens/1.0.0"
+      },
+      {
+       "id": "org-members",
+       "url": "/org/octo-org/members"
+      },
+      {
+       "id": "org-teams",
+       "url": "/org/octo-org/teams"
+      },
+      {
+       "id": "org-settings",
+       "url": "/org/octo-org/settings"
+      },
+      {
+       "id": "org-settings-labels",
+       "url": "/org/octo-org/settings/labels"
+      },
+      {
+       "id": "org-settings-hooks",
+       "url": "/org/octo-org/settings/hooks"
+      },
+      {
+       "id": "user-settings-orgs",
+       "url": "/user/settings/organization"
+      },
+      {
+       "id": "package-versions",
+       "url": "/octo-org/-/packages/npm/%40octo-org%2Ftheme-tokens/versions"
+      },
+      {
+       "id": "packages-generic",
+       "url": "/octo-org/-/packages/generic/theme-demo"
+      },
+      {
+       "id": "org-projects",
+       "url": "/octo-org/-/projects"
+      },
+      {
+       "id": "x-org-settings-actions",
+       "url": "/org/octo-org/settings/actions/runners"
+      },
+      {
+       "id": "x-org-settings-packages",
+       "url": "/org/octo-org/settings/packages"
+      },
+      {
+       "id": "x-org-projects",
+       "url": "/octo-org/-/projects"
+      },
+      {
+       "id": "x-user-profile-packages",
+       "url": "/octo-org/-/packages"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".organization:not(.profile)",
+     "status": "ok",
+     "selectors": 5,
+     "first": "src/pages/people/merged.css:54",
+     "example": ".organization:not(.profile) > .flex-container:first-child :is(.header .flex-text-block:last-child, .flex-relaxed-list > :not(.header))",
+     "templates": [
+      "org/create.tmpl",
+      "org/member/members.tmpl",
+      "org/projects/list.tmpl",
+      "org/projects/new.tmpl",
+      "org/projects/view.tmpl",
+      "org/settings/actions.tmpl",
+      "org/settings/applications.tmpl",
+      "org/settings/applications_oauth2_edit.tmpl",
+      "org/settings/blocked_users.tmpl",
+      "org/settings/hook_new.tmpl",
+      "org/settings/hooks.tmpl",
+      "org/settings/labels.tmpl",
+      "org/settings/options.tmpl",
+      "org/settings/packages.tmpl",
+      "org/settings/packages_cleanup_rules_edit.tmpl",
+      "org/settings/packages_cleanup_rules_preview.tmpl",
+      "org/settings/runners_edit.tmpl",
+      "org/team/members.tmpl",
+      "org/team/new.tmpl",
+      "org/team/repositories.tmpl",
+      "org/team/teams.tmpl",
+      "org/worktime.tmpl",
+      "package/settings.tmpl",
+      "package/view.tmpl",
+      "user/code.tmpl",
+      "user/overview/package_versions.tmpl",
+      "user/overview/packages.tmpl",
+      "user/settings/organization.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "packages-org",
+       "url": "/octo-org/-/packages"
+      },
+      {
+       "id": "package-detail-npm",
+       "url": "/octo-org/-/packages/npm/%40octo-org%2Ftheme-tokens/1.0.0"
+      },
+      {
+       "id": "org-members",
+       "url": "/org/octo-org/members"
+      },
+      {
+       "id": "org-teams",
+       "url": "/org/octo-org/teams"
+      },
+      {
+       "id": "org-settings",
+       "url": "/org/octo-org/settings"
+      },
+      {
+       "id": "org-settings-labels",
+       "url": "/org/octo-org/settings/labels"
+      },
+      {
+       "id": "org-settings-hooks",
+       "url": "/org/octo-org/settings/hooks"
+      },
+      {
+       "id": "user-settings-orgs",
+       "url": "/user/settings/organization"
+      },
+      {
+       "id": "package-versions",
+       "url": "/octo-org/-/packages/npm/%40octo-org%2Ftheme-tokens/versions"
+      },
+      {
+       "id": "packages-generic",
+       "url": "/octo-org/-/packages/generic/theme-demo"
+      },
+      {
+       "id": "org-projects",
+       "url": "/octo-org/-/projects"
+      },
+      {
+       "id": "x-org-settings-actions",
+       "url": "/org/octo-org/settings/actions/runners"
+      },
+      {
+       "id": "x-org-settings-packages",
+       "url": "/org/octo-org/settings/packages"
+      },
+      {
+       "id": "x-org-projects",
+       "url": "/octo-org/-/projects"
+      },
+      {
+       "id": "x-user-profile-packages",
+       "url": "/octo-org/-/packages"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".organization.profile",
+     "status": "ok",
+     "selectors": 8,
+     "first": "src/pages/people/box.css:6",
+     "example": ".organization:is(.profile, .members) .flex-divided-list",
+     "templates": [
+      "org/home.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "org-home",
+       "url": "/octo-org"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".organization.teams",
+     "status": "ok",
+     "selectors": 2,
+     "first": "src/pages/people/people.important.css:8",
+     "example": ".organization.teams .ui.two.column.grid > .column",
+     "templates": [
+      "org/team/members.tmpl",
+      "org/team/repositories.tmpl",
+      "org/team/teams.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "org-teams",
+       "url": "/org/octo-org/teams"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".profile",
+     "status": "ok",
+     "selectors": 47,
+     "first": "src/pages/people/media.css:176",
+     "example": ".profile .card",
+     "templates": [
+      "org/home.tmpl",
+      "org/projects/list.tmpl",
+      "org/projects/new.tmpl",
+      "package/view.tmpl",
+      "user/code.tmpl",
+      "user/overview/package_versions.tmpl",
+      "user/overview/packages.tmpl",
+      "user/profile.tmpl",
+      "user/settings/profile.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "user-profile",
+       "url": "/alice-dev"
+      },
+      {
+       "id": "user-settings",
+       "url": "/user/settings"
+      },
+      {
+       "id": "org-home",
+       "url": "/octo-org"
+      },
+      {
+       "id": "user-profile-stars-tab",
+       "url": "/alice-dev?tab=stars"
+      },
+      {
+       "id": "user-profile-repositories-tab",
+       "url": "/alice-dev?tab=repositories"
+      },
+      {
+       "id": "x-user-settings-profile",
+       "url": "/user/settings"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "user/settings/profile.tmpl": "inert: probe 0/47 on /user/settings"
+     }
+    },
+    {
+     "scope": ".profile.user",
+     "status": "ok",
+     "selectors": 12,
+     "first": "src/pages/people/media.css:171",
+     "example": ".user.profile .ui.grid",
+     "templates": [
+      "org/projects/list.tmpl",
+      "org/projects/new.tmpl",
+      "package/view.tmpl",
+      "user/code.tmpl",
+      "user/overview/package_versions.tmpl",
+      "user/overview/packages.tmpl",
+      "user/profile.tmpl",
+      "user/settings/profile.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "user-profile",
+       "url": "/alice-dev"
+      },
+      {
+       "id": "user-settings",
+       "url": "/user/settings"
+      },
+      {
+       "id": "user-profile-stars-tab",
+       "url": "/alice-dev?tab=stars"
+      },
+      {
+       "id": "user-profile-repositories-tab",
+       "url": "/alice-dev?tab=repositories"
+      },
+      {
+       "id": "x-user-settings-profile",
+       "url": "/user/settings"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {
+      "user/settings/profile.tmpl": "inert: probe 0/12 on /user/settings"
+     }
+    },
+    {
+     "scope": ".profile.user:not(.settings)",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/people/profile.css:24",
+     "example": ".user.profile:not(.settings) > :first-child",
+     "templates": [
+      "org/projects/list.tmpl",
+      "org/projects/new.tmpl",
+      "package/view.tmpl",
+      "user/code.tmpl",
+      "user/overview/package_versions.tmpl",
+      "user/overview/packages.tmpl",
+      "user/profile.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "user-profile",
+       "url": "/alice-dev"
+      },
+      {
+       "id": "user-profile-stars-tab",
+       "url": "/alice-dev?tab=stars"
+      },
+      {
+       "id": "user-profile-repositories-tab",
+       "url": "/alice-dev?tab=repositories"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".repositories",
+     "status": "ok",
+     "selectors": 3,
+     "first": "src/pages/people/merged.css:87",
+     "example": ".repositories .flex-divided-list > .item",
+     "templates": [
+      "explore/repos.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "explore-repos",
+       "url": "/explore/repos"
+      },
+      {
+       "id": "x-explore-code",
+       "url": "/explore/code"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".teams",
+     "status": "ok",
+     "selectors": 11,
+     "first": "src/pages/people/media.css:228",
+     "example": ":is(.members, .teams) .ui.container > form.ui.form",
+     "templates": [
+      "org/team/members.tmpl",
+      "org/team/repositories.tmpl",
+      "org/team/teams.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "org-teams",
+       "url": "/org/octo-org/teams"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    }
+   ]
+  },
+  "settings-admin": {
+   "scopes": 5,
+   "unscopedSelectors": 29,
+   "leaks": 0,
+   "newScopes": 0,
+   "dead": 0,
+   "staleDeclarations": [],
+   "rows": [
+    {
+     "scope": ".admin",
+     "status": "ok",
+     "selectors": 146,
+     "first": "src/pages/settings-admin/admin.css:104",
+     "example": ".admin .flex-container-main .ui.attached.segment > .ui.form.flex-text-block",
+     "templates": [
+      "admin/actions.tmpl",
+      "admin/applications/list.tmpl",
+      "admin/applications/oauth2_edit.tmpl",
+      "admin/auth/edit.tmpl",
+      "admin/auth/list.tmpl",
+      "admin/auth/new.tmpl",
+      "admin/badge/edit.tmpl",
+      "admin/badge/list.tmpl",
+      "admin/badge/new.tmpl",
+      "admin/badge/users.tmpl",
+      "admin/config.tmpl",
+      "admin/config_settings/config_settings.tmpl",
+      "admin/cron.tmpl",
+      "admin/dashboard.tmpl",
+      "admin/emails/list.tmpl",
+      "admin/hook_new.tmpl",
+      "admin/hooks.tmpl",
+      "admin/notice.tmpl",
+      "admin/org/list.tmpl",
+      "admin/packages/list.tmpl",
+      "admin/perftrace.tmpl",
+      "admin/queue.tmpl",
+      "admin/queue_manage.tmpl",
+      "admin/repo/list.tmpl",
+      "admin/repo/unadopted.tmpl",
+      "admin/runners/edit.tmpl",
+      "admin/self_check.tmpl",
+      "admin/stacktrace.tmpl",
+      "admin/stats.tmpl",
+      "admin/user/edit.tmpl",
+      "admin/user/list.tmpl",
+      "admin/user/new.tmpl",
+      "admin/user/view.tmpl",
+      "user/settings/packages_cleanup_rules_preview.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "site-admin",
+       "url": "/-/admin"
+      },
+      {
+       "id": "site-admin-users",
+       "url": "/-/admin/users"
+      },
+      {
+       "id": "site-admin-config",
+       "url": "/-/admin/config"
+      },
+      {
+       "id": "admin-repos",
+       "url": "/-/admin/repos"
+      },
+      {
+       "id": "admin-monitor-stats",
+       "url": "/-/admin/monitor/stats"
+      },
+      {
+       "id": "admin-orgs",
+       "url": "/-/admin/orgs"
+      },
+      {
+       "id": "admin-emails",
+       "url": "/-/admin/emails"
+      },
+      {
+       "id": "admin-user-edit",
+       "url": "/-/admin/users/1/edit"
+      },
+      {
+       "id": "admin-dashboard-config-settings",
+       "url": "/-/admin/config/settings"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".admin.dashboard",
+     "status": "ok",
+     "selectors": 4,
+     "first": "src/pages/settings-admin/admin.css:218",
+     "example": ".admin.dashboard .flex-container-main .ui.table:not(.unstackable) > tbody > tr",
+     "templates": [
+      "admin/dashboard.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "site-admin",
+       "url": "/-/admin"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".organization.settings",
+     "status": "ok",
+     "selectors": 3,
+     "first": "src/pages/settings-admin/sections.css:55",
+     "example": ".organization.settings .org-setting-content > .ui.attached.segment:has(> form[action$=\"/avatar\"])",
+     "templates": [
+      "org/settings/actions.tmpl",
+      "org/settings/applications.tmpl",
+      "org/settings/applications_oauth2_edit.tmpl",
+      "org/settings/blocked_users.tmpl",
+      "org/settings/hook_new.tmpl",
+      "org/settings/hooks.tmpl",
+      "org/settings/labels.tmpl",
+      "org/settings/options.tmpl",
+      "org/settings/packages.tmpl",
+      "org/settings/packages_cleanup_rules_edit.tmpl",
+      "org/settings/packages_cleanup_rules_preview.tmpl",
+      "org/settings/runners_edit.tmpl",
+      "package/settings.tmpl",
+      "user/settings/organization.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "org-settings",
+       "url": "/org/octo-org/settings"
+      },
+      {
+       "id": "org-settings-labels",
+       "url": "/org/octo-org/settings/labels"
+      },
+      {
+       "id": "org-settings-hooks",
+       "url": "/org/octo-org/settings/hooks"
+      },
+      {
+       "id": "user-settings-orgs",
+       "url": "/user/settings/organization"
+      },
+      {
+       "id": "x-org-settings-actions",
+       "url": "/org/octo-org/settings/actions/runners"
+      },
+      {
+       "id": "x-org-settings-packages",
+       "url": "/org/octo-org/settings/packages"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".security",
+     "status": "ok",
+     "selectors": 7,
+     "first": "src/pages/settings-admin/sections.css:12",
+     "example": ".security .user-setting-content > .ui.attached.segment:is(:has(> .inline.field > .ui.primary.button), :has(> .ui.form > #register-webauthn))",
+     "templates": [
+      "user/settings/security/security.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "user-settings-security",
+       "url": "/user/settings/security"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".settings",
+     "status": "ok",
+     "selectors": 127,
+     "first": "src/pages/settings-admin/admin.css:122",
+     "example": ":is(.settings, .admin, [class=\"page-content \"]) .flex-container-main .ui.top.attached.header .ui.jump.dropdown",
+     "templates": [
+      "admin/hook_new.tmpl",
+      "org/settings/actions.tmpl",
+      "org/settings/applications.tmpl",
+      "org/settings/applications_oauth2_edit.tmpl",
+      "org/settings/blocked_users.tmpl",
+      "org/settings/hook_new.tmpl",
+      "org/settings/hooks.tmpl",
+      "org/settings/labels.tmpl",
+      "org/settings/options.tmpl",
+      "org/settings/packages.tmpl",
+      "org/settings/packages_cleanup_rules_edit.tmpl",
+      "org/settings/packages_cleanup_rules_preview.tmpl",
+      "org/settings/runners_edit.tmpl",
+      "package/settings.tmpl",
+      "repo/settings/actions.tmpl",
+      "repo/settings/branches.tmpl",
+      "repo/settings/collaboration.tmpl",
+      "repo/settings/deploy_keys.tmpl",
+      "repo/settings/githook_edit.tmpl",
+      "repo/settings/githooks.tmpl",
+      "repo/settings/lfs.tmpl",
+      "repo/settings/lfs_file.tmpl",
+      "repo/settings/lfs_file_find.tmpl",
+      "repo/settings/lfs_locks.tmpl",
+      "repo/settings/lfs_pointers.tmpl",
+      "repo/settings/options.tmpl",
+      "repo/settings/protected_branch.tmpl",
+      "repo/settings/public_access.tmpl",
+      "repo/settings/runner_edit.tmpl",
+      "repo/settings/secrets.tmpl",
+      "repo/settings/tags.tmpl",
+      "repo/settings/webhook/base.tmpl",
+      "repo/settings/webhook/new.tmpl",
+      "user/settings/account.tmpl",
+      "user/settings/actions.tmpl",
+      "user/settings/appearance.tmpl",
+      "user/settings/applications.tmpl",
+      "user/settings/applications_oauth2_edit.tmpl",
+      "user/settings/blocked_users.tmpl",
+      "user/settings/hook_new.tmpl",
+      "user/settings/hooks.tmpl",
+      "user/settings/keys.tmpl",
+      "user/settings/notifications.tmpl",
+      "user/settings/organization.tmpl",
+      "user/settings/packages.tmpl",
+      "user/settings/packages_cleanup_rules_edit.tmpl",
+      "user/settings/profile.tmpl",
+      "user/settings/repos.tmpl",
+      "user/settings/runner_edit.tmpl",
+      "user/settings/security/security.tmpl",
+      "user/settings/security/twofa_enroll.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "user-settings",
+       "url": "/user/settings"
+      },
+      {
+       "id": "user-settings-appearance",
+       "url": "/user/settings/appearance"
+      },
+      {
+       "id": "user-settings-keys",
+       "url": "/user/settings/keys"
+      },
+      {
+       "id": "repo-settings",
+       "url": "/octo-org/grex/settings"
+      },
+      {
+       "id": "repo-settings-collab",
+       "url": "/octo-org/grex/settings/collaboration"
+      },
+      {
+       "id": "repo-settings-branches",
+       "url": "/octo-org/grex/settings/branches"
+      },
+      {
+       "id": "repo-settings-hooks",
+       "url": "/octo-org/grex/settings/hooks"
+      },
+      {
+       "id": "org-settings",
+       "url": "/org/octo-org/settings"
+      },
+      {
+       "id": "user-settings-account",
+       "url": "/user/settings/account"
+      },
+      {
+       "id": "user-settings-security",
+       "url": "/user/settings/security"
+      },
+      {
+       "id": "user-settings-applications",
+       "url": "/user/settings/applications"
+      },
+      {
+       "id": "org-settings-labels",
+       "url": "/org/octo-org/settings/labels"
+      },
+      {
+       "id": "org-settings-hooks",
+       "url": "/org/octo-org/settings/hooks"
+      },
+      {
+       "id": "user-settings-orgs",
+       "url": "/user/settings/organization"
+      },
+      {
+       "id": "repo-settings-deploykeys",
+       "url": "/octo-org/grex/settings/keys"
+      },
+      {
+       "id": "x-repo-settings-collab",
+       "url": "/octo-org/grex/settings/collaboration"
+      },
+      {
+       "id": "x-org-settings-actions",
+       "url": "/org/octo-org/settings/actions/runners"
+      },
+      {
+       "id": "x-user-settings-actions",
+       "url": "/user/settings/actions/runners"
+      },
+      {
+       "id": "x-repo-settings-branch-rule",
+       "url": "/octo-org/grex/settings/branches/edit"
+      },
+      {
+       "id": "x-repo-settings-actions",
+       "url": "/octo-org/theme-playground/settings/actions/runners"
+      },
+      {
+       "id": "x-org-settings-packages",
+       "url": "/org/octo-org/settings/packages"
+      },
+      {
+       "id": "x-user-settings-packages",
+       "url": "/user/settings/packages"
+      },
+      {
+       "id": "x-user-settings-profile",
+       "url": "/user/settings"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    }
+   ]
+  },
+  "auth": {
+   "scopes": 20,
+   "unscopedSelectors": 29,
+   "leaks": 0,
+   "newScopes": 0,
+   "dead": 0,
+   "staleDeclarations": [],
+   "rows": [
+    {
+     "scope": ".activate.user",
+     "status": "ok",
+     "selectors": 19,
+     "first": "src/pages/auth/form.css:6",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) .ui.form .field",
+     "templates": [
+      "user/auth/activate.tmpl",
+      "user/auth/activate_prompt.tmpl",
+      "user/auth/prohibit_login.tmpl"
+     ],
+     "routes": [],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".activate.user:not(.openid):not(.webauthn-prompt)",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/auth/header.css:25",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt, .openid, .gh-app-header--auth ~ *) .ui.top.attached.header:not(.segment)::before",
+     "templates": [
+      "user/auth/activate.tmpl",
+      "user/auth/activate_prompt.tmpl",
+      "user/auth/prohibit_login.tmpl"
+     ],
+     "routes": [],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".activate.user:not(.webauthn-prompt)",
+     "status": "ok",
+     "selectors": 2,
+     "first": "src/pages/auth/header.css:6",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt) .ui.top.attached.header:not(.segment)",
+     "templates": [
+      "user/auth/activate.tmpl",
+      "user/auth/activate_prompt.tmpl",
+      "user/auth/prohibit_login.tmpl"
+     ],
+     "routes": [],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".forgot.user",
+     "status": "ok",
+     "selectors": 17,
+     "first": "src/pages/auth/form.css:6",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) .ui.form .field",
+     "templates": [
+      "user/auth/forgot_passwd.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "forgot-password",
+       "url": "/user/forgot_password"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".forgot.user:not(.openid):not(.webauthn-prompt)",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/auth/header.css:25",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt, .openid, .gh-app-header--auth ~ *) .ui.top.attached.header:not(.segment)::before",
+     "templates": [
+      "user/auth/forgot_passwd.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "forgot-password",
+       "url": "/user/forgot_password"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".forgot.user:not(.webauthn-prompt)",
+     "status": "ok",
+     "selectors": 2,
+     "first": "src/pages/auth/header.css:6",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt) .ui.top.attached.header:not(.segment)",
+     "templates": [
+      "user/auth/forgot_passwd.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "forgot-password",
+       "url": "/user/forgot_password"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".link-account.user",
+     "status": "ok",
+     "selectors": 35,
+     "first": "src/pages/auth/footer-line.css:5",
+     "example": ".page-content.user:is(.signin, .signup, .link-account) .ui.container.fluid > .ui.attached.segment.header",
+     "templates": [
+      "user/auth/link_account.tmpl"
+     ],
+     "routes": [],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".link-account.user:not(.openid):not(.webauthn-prompt)",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/auth/header.css:25",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt, .openid, .gh-app-header--auth ~ *) .ui.top.attached.header:not(.segment)::before",
+     "templates": [
+      "user/auth/link_account.tmpl"
+     ],
+     "routes": [],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".link-account.user:not(.webauthn-prompt)",
+     "status": "ok",
+     "selectors": 2,
+     "first": "src/pages/auth/header.css:6",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt) .ui.top.attached.header:not(.segment)",
+     "templates": [
+      "user/auth/link_account.tmpl"
+     ],
+     "routes": [],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".openid.signin.user",
+     "status": "ok",
+     "selectors": 8,
+     "first": "src/pages/auth/app-header.css:69",
+     "example": ".gh-app-header--auth ~ .page-content.user.signin.openid > .ui.page.grid > .column > a:has(> img)",
+     "templates": [
+      "user/auth/signin_openid.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "openid-signin",
+       "url": "/user/login/openid"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".reset.user",
+     "status": "ok",
+     "selectors": 19,
+     "first": "src/pages/auth/form.css:6",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account) .ui.form .field",
+     "templates": [
+      "user/auth/reset_passwd.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "reset-password-badcode",
+       "url": "/user/recover_account?code=invalid-theme-check"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".reset.user:not(.openid):not(.webauthn-prompt)",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/auth/header.css:25",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt, .openid, .gh-app-header--auth ~ *) .ui.top.attached.header:not(.segment)::before",
+     "templates": [
+      "user/auth/reset_passwd.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "reset-password-badcode",
+       "url": "/user/recover_account?code=invalid-theme-check"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".reset.user:not(.webauthn-prompt)",
+     "status": "ok",
+     "selectors": 2,
+     "first": "src/pages/auth/header.css:6",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt) .ui.top.attached.header:not(.segment)",
+     "templates": [
+      "user/auth/reset_passwd.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "reset-password-badcode",
+       "url": "/user/recover_account?code=invalid-theme-check"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".signin.user",
+     "status": "ok",
+     "selectors": 40,
+     "first": "src/pages/auth/footer-line.css:5",
+     "example": ".page-content.user:is(.signin, .signup, .link-account) .ui.container.fluid > .ui.attached.segment.header",
+     "templates": [
+      "user/auth/change_passwd.tmpl",
+      "user/auth/signin.tmpl",
+      "user/auth/signin_openid.tmpl",
+      "user/auth/signup.tmpl",
+      "user/auth/twofa.tmpl",
+      "user/auth/twofa_scratch.tmpl",
+      "user/auth/webauthn.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "login",
+       "url": "/user/login"
+      },
+      {
+       "id": "signup",
+       "url": "/user/sign_up"
+      },
+      {
+       "id": "openid-signin",
+       "url": "/user/login/openid"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".signin.user:not(.openid):not(.webauthn-prompt)",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/auth/header.css:25",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt, .openid, .gh-app-header--auth ~ *) .ui.top.attached.header:not(.segment)::before",
+     "templates": [
+      "user/auth/change_passwd.tmpl",
+      "user/auth/signin.tmpl",
+      "user/auth/signup.tmpl",
+      "user/auth/twofa.tmpl",
+      "user/auth/twofa_scratch.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "login",
+       "url": "/user/login"
+      },
+      {
+       "id": "signup",
+       "url": "/user/sign_up"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".signin.user:not(.webauthn-prompt)",
+     "status": "ok",
+     "selectors": 2,
+     "first": "src/pages/auth/header.css:6",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt) .ui.top.attached.header:not(.segment)",
+     "templates": [
+      "user/auth/change_passwd.tmpl",
+      "user/auth/signin.tmpl",
+      "user/auth/signin_openid.tmpl",
+      "user/auth/signup.tmpl",
+      "user/auth/twofa.tmpl",
+      "user/auth/twofa_scratch.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "login",
+       "url": "/user/login"
+      },
+      {
+       "id": "signup",
+       "url": "/user/sign_up"
+      },
+      {
+       "id": "openid-signin",
+       "url": "/user/login/openid"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".signup.user",
+     "status": "ok",
+     "selectors": 29,
+     "first": "src/pages/auth/footer-line.css:5",
+     "example": ".page-content.user:is(.signin, .signup, .link-account) .ui.container.fluid > .ui.attached.segment.header",
+     "templates": [
+      "user/auth/signup_openid_connect.tmpl",
+      "user/auth/signup_openid_register.tmpl"
+     ],
+     "routes": [],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".signup.user:not(.openid):not(.webauthn-prompt)",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/auth/header.css:25",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt, .openid, .gh-app-header--auth ~ *) .ui.top.attached.header:not(.segment)::before",
+     "templates": [
+      "user/auth/signup_openid_connect.tmpl",
+      "user/auth/signup_openid_register.tmpl"
+     ],
+     "routes": [],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".signup.user:not(.webauthn-prompt)",
+     "status": "ok",
+     "selectors": 2,
+     "first": "src/pages/auth/header.css:6",
+     "example": ".page-content.user:is(.signin, .signup, .forgot, .reset, .activate, .link-account):not(.webauthn-prompt) .ui.top.attached.header:not(.segment)",
+     "templates": [
+      "user/auth/signup_openid_connect.tmpl",
+      "user/auth/signup_openid_register.tmpl"
+     ],
+     "routes": [],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    },
+    {
+     "scope": ".user",
+     "status": "ok",
+     "selectors": 1,
+     "first": "src/pages/auth/app-header.css:64",
+     "example": ".gh-app-header--auth ~ .page-content.user > .ui.page.grid > .column",
+     "templates": [
+      "admin/emails/list.tmpl",
+      "admin/org/list.tmpl",
+      "admin/packages/list.tmpl",
+      "admin/user/edit.tmpl",
+      "admin/user/list.tmpl",
+      "admin/user/new.tmpl",
+      "admin/user/view.tmpl",
+      "org/projects/list.tmpl",
+      "org/projects/new.tmpl",
+      "package/view.tmpl",
+      "user/auth/activate.tmpl",
+      "user/auth/activate_prompt.tmpl",
+      "user/auth/change_passwd.tmpl",
+      "user/auth/forgot_passwd.tmpl",
+      "user/auth/link_account.tmpl",
+      "user/auth/prohibit_login.tmpl",
+      "user/auth/reset_passwd.tmpl",
+      "user/auth/signin.tmpl",
+      "user/auth/signin_openid.tmpl",
+      "user/auth/signup.tmpl",
+      "user/auth/signup_openid_connect.tmpl",
+      "user/auth/signup_openid_register.tmpl",
+      "user/auth/twofa.tmpl",
+      "user/auth/twofa_scratch.tmpl",
+      "user/auth/webauthn.tmpl",
+      "user/code.tmpl",
+      "user/notification/notification_div.tmpl",
+      "user/notification/notification_subscriptions.tmpl",
+      "user/overview/package_versions.tmpl",
+      "user/overview/packages.tmpl",
+      "user/profile.tmpl",
+      "user/settings/account.tmpl",
+      "user/settings/actions.tmpl",
+      "user/settings/appearance.tmpl",
+      "user/settings/applications.tmpl",
+      "user/settings/applications_oauth2_edit.tmpl",
+      "user/settings/blocked_users.tmpl",
+      "user/settings/hook_new.tmpl",
+      "user/settings/hooks.tmpl",
+      "user/settings/keys.tmpl",
+      "user/settings/notifications.tmpl",
+      "user/settings/organization.tmpl",
+      "user/settings/packages.tmpl",
+      "user/settings/packages_cleanup_rules_edit.tmpl",
+      "user/settings/packages_cleanup_rules_preview.tmpl",
+      "user/settings/profile.tmpl",
+      "user/settings/repos.tmpl",
+      "user/settings/runner_edit.tmpl",
+      "user/settings/security/security.tmpl",
+      "user/settings/security/twofa_enroll.tmpl"
+     ],
+     "routes": [
+      {
+       "id": "login",
+       "url": "/user/login"
+      },
+      {
+       "id": "signup",
+       "url": "/user/sign_up"
+      },
+      {
+       "id": "user-profile",
+       "url": "/alice-dev"
+      },
+      {
+       "id": "site-admin-users",
+       "url": "/-/admin/users"
+      },
+      {
+       "id": "user-settings",
+       "url": "/user/settings"
+      },
+      {
+       "id": "user-settings-appearance",
+       "url": "/user/settings/appearance"
+      },
+      {
+       "id": "user-settings-keys",
+       "url": "/user/settings/keys"
+      },
+      {
+       "id": "notifications",
+       "url": "/notifications"
+      },
+      {
+       "id": "user-profile-stars-tab",
+       "url": "/alice-dev?tab=stars"
+      },
+      {
+       "id": "user-profile-repositories-tab",
+       "url": "/alice-dev?tab=repositories"
+      },
+      {
+       "id": "user-settings-account",
+       "url": "/user/settings/account"
+      },
+      {
+       "id": "user-settings-security",
+       "url": "/user/settings/security"
+      },
+      {
+       "id": "user-settings-applications",
+       "url": "/user/settings/applications"
+      },
+      {
+       "id": "admin-orgs",
+       "url": "/-/admin/orgs"
+      },
+      {
+       "id": "admin-emails",
+       "url": "/-/admin/emails"
+      },
+      {
+       "id": "admin-user-edit",
+       "url": "/-/admin/users/1/edit"
+      },
+      {
+       "id": "user-settings-orgs",
+       "url": "/user/settings/organization"
+      },
+      {
+       "id": "forgot-password",
+       "url": "/user/forgot_password"
+      },
+      {
+       "id": "openid-signin",
+       "url": "/user/login/openid"
+      },
+      {
+       "id": "reset-password-badcode",
+       "url": "/user/recover_account?code=invalid-theme-check"
+      },
+      {
+       "id": "x-user-settings-actions",
+       "url": "/user/settings/actions/runners"
+      },
+      {
+       "id": "x-user-settings-packages",
+       "url": "/user/settings/packages"
+      },
+      {
+       "id": "x-user-settings-profile",
+       "url": "/user/settings"
+      }
+     ],
+     "leaks": [],
+     "leakRoutes": [],
+     "waived": {}
+    }
+   ]
+  }
+ },
+ "totals": {
+  "scopes": 88,
+  "leaks": 0,
+  "newScopes": 0,
+  "dead": 0
+ }
+}
