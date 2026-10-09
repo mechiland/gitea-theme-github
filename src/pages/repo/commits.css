@@ -342,6 +342,12 @@ html:lang(en) .gh-commit-day-date::before {
   background: var(--bgColor-default);
 }
 
+/* commit message body + "merged in pull request" / contained-in branches: github.com regular weight (Gitea's
+   .ui.attached.header passes its 600 down to everything below the title) */
+.commit-header > :is(.commit-body, .branch-and-tag-area) {
+  font-weight: var(--base-text-weight-normal);
+}
+
 /* commit page "parent fa3e8ed · commit 99cc347": github.com 12px mono muted, SHAs as plain 7-character links */
 .commit-header + .segment > .tw-gap-5 {
   color: var(--fgColor-muted);
