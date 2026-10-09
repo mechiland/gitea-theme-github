@@ -44,8 +44,10 @@
   color: var(--fgColor-accent);
 }
 
-/* hidden parts (each selector outranks the rules that set display on its element) (from home-toolbar.css, home-sidebar.css, commits.css, tags-releases.css, wiki.css, new-repo.css) */
-.repo-grid-filelist-sidebar > .repo-home-filelist > .repository-summary .item[href*="/commits/"],
+/* hidden parts (each selector outranks the rules that set display on its element) (from home-toolbar.css, home-sidebar.css, commits.css, tags-releases.css, wiki.css, new-repo.css)
+   repo home: the summary bar's "N Commits" goes only while the latest-commit header renders .m-commit-count (repo/view_list.tmpl);
+   without that override the bar link is the only way to the commit history and stays. */
+.repo-grid-filelist-sidebar > .repo-home-filelist:has(.m-commit-count) > .repository-summary .item[href*="/commits/"],
 .repo-home-sidebar-top #repo-topics:empty,
 #commits-table > thead,
 .commits:not(.pull) > .ui.container > .repository-summary .item[href*="/commits/"],
