@@ -10,5 +10,5 @@
 <link rel="stylesheet" href="{{ctx.CurrentWebTheme.PublicAssetURI}}?github_revision=0000000000">
 {{else}}
 {{AssetCSSLinks "web_src/js/index.ts" "web_src/css/index.css"}}
-<link rel="stylesheet" href="{{ctx.CurrentWebTheme.PublicAssetURI}}{{if or (eq $theme "modern") (eq $theme "modern-light") (eq $theme "modern-dark")}}?modern_revision=a5295649eb{{end}}">
+<link rel="stylesheet" href="{{ctx.CurrentWebTheme.PublicAssetURI}}">
 {{end}}
