@@ -10,7 +10,7 @@
 
 ## Things that already exist and must not be broken or edited
 - Other custom themes in CUSTOM_PATH/public/assets/css: `theme-studio*.css` + `studio/`. Owned by other sessions. Do not touch.
-- The Modern theme was removed from this instance on 2026-10-09 (backup: /Users/michael/work/gitea/modern-backup-20261009). `templates/base/head_style.tmpl` and `templates/repo/view_list.tmpl` are now this project's (templates/), installed like the other overrides.
+- The Modern theme was removed from this instance on 2026-10-09 (its source stays in /Users/michael/work/gitea/gitea-theme-modern). `templates/base/head_style.tmpl` and `templates/repo/view_list.tmpl` are now this project's (templates/), installed like the other overrides.
 - Pre-seed data (see docs/baseline-pre-seed.json): user `admin`, org `ai`, repos `admin/jiri`, `ai/jiri`. Never delete or alter them.
 - The admin's own theme preference was `gitea-auto-tritanopia` before we started.
 

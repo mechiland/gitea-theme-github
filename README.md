@@ -55,7 +55,8 @@ It contains:
 ```
 public/assets/css/theme-github-{auto,light,dark}.css   the themes (one self-contained file each)
 public/assets/img/svg/*.svg                           Octicons 19.38 upgrade + Octicon replacements for non-Octicon icons
-templates/**                                          GitHub-only template blocks (other themes render Gitea's upstream HTML)
+templates/**                                          GitHub-only template blocks (other themes render Gitea's upstream HTML;
+                                                      repo/view_list.tmpl adds one link that stays hidden for them)
 INSTALL.md, LICENSE, NOTICE
 ```
 
@@ -107,10 +108,24 @@ Choose **GitHub** under *Settings → Appearance*. Anonymous visitors get `DEFAU
 
 New theme files and icons are read at startup, so only this first install needs a restart. After that, updating the CSS takes effect on reload. Template changes can be hot-reloaded with `gitea manager reload-templates`.
 
+### Upgrading
+
+Extract the new package over the old one (same command as step 2). It overwrites the theme files, icons and templates. Then reload the templates, no restart needed:
+
+```bash
+docker compose exec -u git server gitea manager reload-templates        # Docker
+sudo -u git gitea manager reload-templates --config /etc/gitea/app.ini  # binary / systemd (your app.ini path)
+```
+
+Browsers pick up the new CSS on the next page load: `base/head_style.tmpl` carries a per-build cache key. Restart Gitea instead if the release notes list new or removed icons, or if you skip the reload.
+
+Extracting never deletes files. If the release notes say a template was removed, delete that file from `templates/` yourself.
+
 ### Notes
 
 - **Gitea version:** the templates are copies of Gitea **1.27.3** templates with added GitHub-only blocks. Re-check them when you upgrade Gitea. The CSS alone still works without the templates, but you lose the cascade layering (see [ARCHITECTURE.md §3](ARCHITECTURE.md)), the GitHub-style header and a few page structures.
-- **If you already override templates:** if you override one of the shipped templates yourself (e.g. `base/head_style.tmpl`), merge the `{{if StringUtils.HasPrefix … "github-"}}` blocks by hand.
+- **If you already override templates:** the package ships these templates (all under `templates/`): `base/head_style.tmpl`, `base/head_navbar.tmpl`, `custom/footer.tmpl`, `custom/gh_head_navbar.tmpl`, `repo/blame.tmpl`, `repo/commits_list.tmpl`, `repo/issue/list.tmpl`, `repo/view_file.tmpl`, `repo/view_list.tmpl`, `repo/wiki/view.tmpl`, `user/settings/layout_head.tmpl`. If you override one of them yourself, extracting the package replaces your copy. Back it up first and merge the GitHub additions by hand: the `{{if StringUtils.HasPrefix … "github-"}}` blocks, and in `repo/view_list.tmpl` the `hidden` "N Commits" link (`a.m-commit-count`).
+- **Without the templates:** the repo home falls back to Gitea's Commits / Branches / Tags bar for the commit-history link. With `repo/view_list.tmpl`, "N Commits" sits at the right of the latest-commit row, as on github.com.
 - **Icons are global:** the SVG icons replace Gitea's icons for every theme. They depict the same things, drawn as Octicons.
 - **Browser support:** Chrome/Edge 112+, Safari 16.5+, Firefox 121+. The theme uses `@layer`, `:has()` and CSS nesting.
 - **Uninstall:** delete the files you extracted, remove the themes from `[ui] THEMES`, and restart.
