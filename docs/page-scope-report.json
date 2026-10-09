@@ -1,12 +1,12 @@
 {
- "generated": "2026-10-01T12:29:51.162Z",
+ "generated": "2026-10-09T11:20:20.727Z",
  "liveCache": "shots/page-classes.json",
  "liveGenerated": "2026-09-30T14:38:45.427Z",
  "templatesScanned": 225,
  "folders": {
   "repo": {
    "scopes": 19,
-   "unscopedSelectors": 292,
+   "unscopedSelectors": 293,
    "leaks": 0,
    "newScopes": 0,
    "dead": 0,
@@ -68,7 +68,7 @@
      "scope": ".commits",
      "status": "ok",
      "selectors": 8,
-     "first": "src/pages/repo/commits.css:487",
+     "first": "src/pages/repo/commits.css:493",
      "example": ".commits .flex-container-main > * > div > .ui.header:first-child",
      "templates": [
       "repo/activity.tmpl",
@@ -982,7 +982,7 @@
      "scope": ".view.wiki",
      "status": "ok",
      "selectors": 13,
-     "first": "src/pages/repo/merged.css:48",
+     "first": "src/pages/repo/merged.css:50",
      "example": ".wiki.view .wiki-content-parts > .tw-clear-both",
      "templates": [
       "repo/wiki/view.tmpl"
@@ -1009,7 +1009,7 @@
      "scope": ".wiki",
      "status": "ok",
      "selectors": 9,
-     "first": "src/pages/repo/merged.css:91",
+     "first": "src/pages/repo/merged.css:93",
      "example": ".wiki .wiki-pages-list tr:first-child td",
      "templates": [
       "repo/wiki/new.tmpl",

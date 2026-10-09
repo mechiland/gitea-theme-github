@@ -5,7 +5,7 @@
  * .repository-summary > .sub-menu > a.item.muted × Commits / Branches / Tags) and the toolbar as
  * .repo-button-row > .repo-button-row-left (branch picker mount, compare button) + .repo-button-row-right.
  * On the root view we flatten the toolbar (display: contents) into the file-list column's flex row and order the
- * summary links right after the branch picker. "N Commits" is dropped here: github.com shows it at the right of the
+ * summary links right after the branch picker. "N Commits" is dropped here (when present there): github.com shows it at the right of the
  * latest-commit header, which the code folder already renders (#repo-files-table .m-commit-count, request CR-1).
  * The summary on other pages (commits, branches, release-less repos) is restyled as the same inline links.
  */
@@ -140,7 +140,9 @@
     display: contents;
   }
 
-  .repo-grid-filelist-sidebar > .repo-home-filelist > .repository-summary,
+  /* the bar stays when the latest-commit header has no .m-commit-count (no view_list.tmpl): it is then the only
+     link to the commit history */
+  .repo-grid-filelist-sidebar > .repo-home-filelist:has(.m-commit-count) > .repository-summary,
   .repo-grid-filelist-sidebar .repo-button-row-left > #new-pull-request {
     display: none;
   }

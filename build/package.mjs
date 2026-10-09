@@ -6,9 +6,10 @@
 //   public/assets/css/theme-github-{auto,light,dark}.css
 //   public/assets/img/svg/*.svg          Octicons 19.38 upgrade + non-Octicon replacements (global, all themes)
 //   templates/**                         github-* branches only; other themes render Gitea's upstream bytes
+//                                        (repo/view_list.tmpl: a `hidden` link for other themes)
 //
-// templates/base/head_style.tmpl: the development copy's else-branch also carries a local Modern-theme cache key; the
-// package rewrites it to Gitea 1.27.3's upstream two lines and stamps the build revision for cache busting.
+// templates/base/head_style.tmpl: the package pins the else-branch to Gitea 1.27.3's upstream two lines (a local install may
+// carry another theme's cache key there) and stamps the build revision for cache busting.
 import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
@@ -65,6 +66,7 @@ fs.writeFileSync(path.join(out, 'INSTALL.md'), `# gitea-theme-github ${pkg.versi
 Theme files: ${Object.entries(report.themes).map(([n, t]) => `${n} ${t.kb} KB`).join(', ')} · build ${report.revision}.
 The templates are copies of Gitea ${GITEA_VERSION} templates with added github-only blocks; re-check them when upgrading Gitea.
 If you already override one of these templates, merge the github-* blocks by hand.
+templates/repo/view_list.tmpl adds the "N Commits" link to the latest-commit header (hidden for other themes).
 The SVG files replace Gitea's icons for every theme (same meaning, Octicon drawings).
 `);
 

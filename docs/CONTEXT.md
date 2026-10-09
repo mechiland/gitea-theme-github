@@ -9,8 +9,8 @@
 - Project root: `/Users/michael/work/gitea/gitea-theme-github`.
 
 ## Things that already exist and must not be broken or edited
-- Other custom themes in CUSTOM_PATH/public/assets/css: `theme-modern*.css` + `modern/`, `theme-studio*.css` + `studio/`. Owned by other sessions. Do not touch.
-- Custom template overrides owned by the Modern theme: `templates/base/head_style.tmpl`, `templates/repo/view_content.tmpl`, `templates/repo/view_list.tmpl`. Do not edit (only the integrator may, and only additively).
+- Other custom themes in CUSTOM_PATH/public/assets/css: `theme-studio*.css` + `studio/`. Owned by other sessions. Do not touch.
+- The Modern theme was removed from this instance on 2026-10-09 (backup: /Users/michael/work/gitea/modern-backup-20261009). `templates/base/head_style.tmpl` and `templates/repo/view_list.tmpl` are now this project's (templates/), installed like the other overrides.
 - Pre-seed data (see docs/baseline-pre-seed.json): user `admin`, org `ai`, repos `admin/jiri`, `ai/jiri`. Never delete or alter them.
 - The admin's own theme preference was `gitea-auto-tritanopia` before we started.
 
