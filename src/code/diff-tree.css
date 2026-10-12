@@ -39,3 +39,39 @@
 }
 
 /* nesting: 8px per level via --gh-ti (level rules in file-tree.css, up to level 4 for this tree) */
+
+/* Gitea 28.x filter row above the tree (DiffFileTree.vue .diff-file-tree-search-row): github.com's "Filter files…"
+   TextInput (16px muted search octicon 8px inside the border, text at 32px) and, 8px to its right, a 32px default
+   IconButton (octicon-filter, resting shadow) opening the file-extension menu (measured 2026-10-12, commit view) */
+.diff-file-search-icon {
+  left: calc(var(--base-size-8) + var(--borderWidth-thin));
+  width: var(--base-size-16);
+  height: var(--base-size-16);
+  color: var(--fgColor-muted);
+}
+
+.diff-file-search-input {
+  padding: 0 calc(var(--base-size-24) + var(--base-size-4)) 0 var(--base-size-32);
+}
+
+.diff-ext-filter-trigger {
+  flex-shrink: 0;
+  border-color: var(--button-default-borderColor-rest);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--fgColor-muted);
+}
+
+.diff-ext-filter-trigger:hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+}
+
+.diff-ext-filter-trigger:active {
+  background: var(--button-default-bgColor-active);
+}
+
+/* the extension menu's rows fill the overlay so the Counter is a trailing visual (Primer ActionList) */
+.diff-ext-filter-menu > .item {
+  width: 100%;
+}

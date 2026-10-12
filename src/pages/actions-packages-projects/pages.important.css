@@ -60,10 +60,10 @@
   }
 }
 
-/* Actions runs pane (actions-list.css): the sticky NavList scroll box reaches 8px past the pane padding on both sides
+/* Actions runs pane (actions-list.css): the NavList reaches 8px past the pane padding on both sides
    so the current-item bar is not clipped; Gitea pins `.ui.vertical.menu.fluid` to `width: 100% !important` */
 @media (min-width: 768px) {
-  .flex-container:has(.run-list) > .flex-container-nav > .menu {
+  .flex-container:is(:has(.run-list), :has(> .flex-container-nav > .menu + .menu)) > .flex-container-nav > .menu {
     width: calc(100% + var(--base-size-16)) !important;
   }
 }

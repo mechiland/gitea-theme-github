@@ -49,6 +49,23 @@
   vertical-align: text-bottom;
 }
 
+/* ---------- site banners = Primer .flash-full ----------
+   base/head_banner.tmpl (1.27.x `.web-banner-container`, 28.x `.site-banner-container`) and 28.x
+   base/head_impersonate_banner.tmpl (warning variant): edge to edge under the AppHeader with rules only above and below
+   (a banner right after the header or another banner drops its top rule: Gitea's container.css), square corners; the
+   text keeps to the page container (foundation/layout.css), Gitea positions the dismiss button. The impersonation
+   notice's leading alert sits inside .site-banner-content and takes the variant colour like any Flash icon. */
+.ui.message:is(.web-banner-container, .site-banner-container) {
+  margin: 0;
+  padding-inline: 0;
+  border-width: var(--borderWidth-thin) 0;
+  border-radius: 0;
+}
+
+.ui.message.site-banner-container > .site-banner-content > .svg:first-child {
+  color: var(--gh-flash-icon-color);
+}
+
 /* ---------- variants ---------- */
 .ui:is(.info, .blue).message:not(.field *) {
   --gh-flash-icon-color: var(--fgColor-accent);

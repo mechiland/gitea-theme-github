@@ -204,6 +204,180 @@ html:lang(en) .card li:has(> .user-orgs)::before {
   order: 4;
 }
 
+/* ---------- sidebar on Gitea 28.x ----------
+ * profile_big_avatar.tmpl became `#profile-avatar-card.ui.fitted.segment > .flex-divided-list > .item` (1.27.x: the
+ * .ui.card above): avatar item, name item (username + bot label + admin gear, full name, followers), then one item per
+ * detail, bio, joined date, organisations, badges, Follow, Block. Flattened the same way: the segment is the flex column,
+ * the list and the name item are `display: contents`, `order` restores github.com's sequence. Tailwind's !important
+ * tw-p-5 / tw-text-center are undone in people.important.css. */
+#profile-avatar-card.segment {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+#profile-avatar-card.segment > .flex-divided-list,
+#profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) {
+  display: contents;
+}
+
+/* vcard details: 25px rows 4px apart (see `.card li` above) */
+#profile-avatar-card.segment > .flex-divided-list > .item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--base-size-8);
+  order: 6;
+  padding: var(--base-size-8) 0 0;
+  border: 0;
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item > .svg {
+  flex-shrink: 0;
+  margin-top: var(--base-size-2);
+  color: var(--fgColor-muted);
+}
+
+/* avatar: full sidebar width, above the tab bar's full-width rule */
+#profile-avatar-card.segment > .flex-divided-list > .item:first-child {
+  position: relative;
+  z-index: 1;
+  order: 0;
+  line-height: 0;
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item:first-child > a {
+  flex: 1;
+}
+
+#profile-avatar-card.segment .profile-avatar-image {
+  width: 100%;
+  max-width: none;
+}
+
+/* full name (second span) 24px semibold, then the username 20px light muted */
+#profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) > span + span {
+  order: 1;
+  margin: var(--base-size-16) 0 0;
+  color: var(--fgColor-default);
+  font-size: var(--base-size-24);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: calc(var(--base-size-32) - var(--base-size-2));
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: var(--base-size-8);
+  order: 2;
+  color: var(--fgColor-muted);
+  font-size: var(--text-title-size-medium);
+  font-weight: var(--base-text-weight-light);
+  line-height: var(--base-size-24);
+}
+
+/* no full name: the username stands where the name would be */
+#profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) > span:first-child:nth-last-child(2) {
+  margin-top: var(--base-size-16);
+}
+
+/* followers · following */
+#profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--base-size-4);
+  order: 5;
+  margin: 0 0 var(--base-size-12);
+  color: var(--fgColor-muted);
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) > div a {
+  display: inline-flex;
+  align-items: center;
+  color: var(--fgColor-muted);
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) > div a:hover {
+  color: var(--fgColor-accent);
+  text-decoration: none;
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) > div i {
+  display: inline-flex;
+}
+
+/* bio, 16px/24px above the follower line */
+#profile-avatar-card.segment > .flex-divided-list > .item:has(> .render-content) {
+  order: 4;
+  margin-bottom: var(--base-size-16);
+  padding: 0;
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item > .render-content {
+  font-size: var(--text-body-size-large);
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item.tw-text-red {
+  order: 4;
+}
+
+/* Follow / Unfollow: full-width default button, 16px under the username */
+#profile-avatar-card.segment > .flex-divided-list > .item:has(> .button) {
+  order: 3;
+  margin: var(--base-size-16) 0;
+  padding: 0;
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item > .ui.button {
+  margin: 0;
+  border-color: var(--button-default-borderColor-rest);
+  background: var(--button-default-bgColor-rest);
+  box-shadow: var(--button-default-shadow-resting);
+  color: var(--button-default-fgColor-rest);
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item > .ui.button:hover {
+  border-color: var(--button-default-borderColor-hover);
+  background: var(--button-default-bgColor-hover);
+}
+
+/* organisations (32px rounded-square avatars, "Organizations" heading), badges, "Block user" last */
+#profile-avatar-card.segment > .flex-divided-list > .item:is(:has(> .flex-text-block > a > .avatar), :last-child:has(> a:only-child)) {
+  order: 8;
+  margin-top: var(--base-size-16);
+  padding: var(--base-size-16) 0 0;
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item:has(> .user-badges) {
+  order: 8;
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item:last-child:has(> a:only-child) {
+  order: 9;
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item > .flex-text-block > a > img.avatar {
+  width: var(--base-size-32);
+  height: var(--base-size-32);
+  border-radius: var(--borderRadius-medium);
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item:has(> .flex-text-block > a > .avatar) {
+  flex-direction: column;
+  gap: var(--base-size-8);
+}
+
+html:lang(en) #profile-avatar-card.segment > .flex-divided-list > .item:has(> .flex-text-block > a > .avatar)::before {
+  content: "Organizations";
+  color: var(--fgColor-default);
+  font: var(--text-title-shorthand-small);
+}
+
 /* ---------- main column: the UnderlineNav's bottom rule runs across the whole page ---------- */
 .user.profile overflow-menu {
   margin-bottom: var(--base-size-24);

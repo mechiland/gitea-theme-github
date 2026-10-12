@@ -241,7 +241,7 @@
 }
 
 /* comment excerpt (Box card), muted text */
-#activity-feed .item-main > .truncated-markup {
+#activity-feed .item-main > :is(.truncated-markup, .render-content) { /* 28.x dropped .truncated-markup */
   padding: var(--base-size-12) var(--base-size-16);
   color: var(--fgColor-muted);
 }

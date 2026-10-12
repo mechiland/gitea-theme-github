@@ -120,7 +120,7 @@
     background: var(--borderColor-accent-emphasis);
   }
 
-  .notification .flex-left-right > form {
+  .notification .flex-left-right > :is(form, .flex-text-block) {
     grid-area: 1 / 2;
     justify-self: end;
     margin-bottom: var(--base-size-16);
@@ -131,7 +131,7 @@
   }
 
   /* no purge button (read view / nothing unread): the Box starts at the top */
-  .notification :not(:has(.flex-left-right > form)) > #notification_table {
+  .notification :not(:has(.flex-left-right > :is(form, .flex-text-block))) > #notification_table {
     grid-row: 1 / span 2;
   }
 
@@ -161,7 +161,7 @@
   }
 
   /* "Mark all as read" next to the 32px SegmentedControl: a medium Button, so the toolbar row has one control height */
-  .notification .flex-left-right > form > .button {
+  .notification .flex-left-right > :is(form, .flex-text-block) > .button {
     height: var(--control-medium-size);
     padding: 0 var(--control-medium-paddingInline-normal);
     font-size: var(--text-body-size-medium);
@@ -216,6 +216,57 @@
   }
 
   .card li.follow {
+    order: 7;
+  }
+
+  /* Gitea 28.x sidebar (profile.css "sidebar on Gitea 28.x"): same 64px avatar beside the name */
+  #profile-avatar-card.segment {
+    display: grid;
+    grid-template-columns: var(--base-size-64) minmax(0, 1fr);
+    column-gap: var(--base-size-16);
+    align-items: center;
+  }
+
+  #profile-avatar-card.segment > .flex-divided-list > .item,
+  #profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) > * {
+    grid-column: 1 / -1;
+  }
+
+  #profile-avatar-card.segment > .flex-divided-list > .item:first-child {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  #profile-avatar-card.segment .profile-avatar-image {
+    width: 100%;
+  }
+
+  #profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) > span {
+    grid-column: 2;
+    margin-top: 0;
+    align-self: end;
+  }
+
+  #profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) > span:first-child {
+    align-self: start;
+  }
+
+  #profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) > span:first-child:nth-last-child(2) {
+    grid-row: 1 / span 2;
+    margin-top: 0;
+    align-self: center;
+  }
+
+  #profile-avatar-card.segment > .flex-divided-list > .item:has(> .render-content) {
+    margin: var(--base-size-16) 0 var(--base-size-8);
+  }
+
+  #profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) > div {
+    order: 7;
+    margin: var(--base-size-8) 0 0;
+  }
+
+  #profile-avatar-card.segment > .flex-divided-list > .item:has(> .button) {
     order: 7;
   }
 

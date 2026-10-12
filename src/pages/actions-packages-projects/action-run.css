@@ -675,3 +675,25 @@ a.graph-workflow-name:hover {
     display: none;
   }
 }
+
+/* ---------- artifact preview (Gitea 28.x repo/actions/artifact_preview.tmpl) ----------
+   The run header (back link, title, Download) is the run page's; the file list is a NavList that starts with a "Files"
+   group heading, which navigation's settings-sidebar rules (menus starting with a .header) would hide, and whose link
+   rows would get the settings 16px icon slot in front of their own octicon. Here it is a file tree: the heading shows,
+   rows keep only their file / folder octicon, and Gitea's per-row --depth indents 16px per level from the 8px inset. */
+.flex-container-nav > .menu > .header:first-child:has(~ .artifact-preview-item) {
+  display: block;
+}
+
+.flex-container-nav > .menu > a.artifact-preview-item::before {
+  content: none;
+}
+
+.ui.vertical.menu .artifact-preview-item {
+  padding-left: calc(var(--control-medium-paddingInline-condensed) + var(--depth, 0) * var(--base-size-16));
+}
+
+.ui.vertical.menu .artifact-preview-item > .svg {
+  flex-shrink: 0;
+  color: var(--fgColor-muted);
+}

@@ -1,5 +1,5 @@
-{{template "base/head" .}}
-<div role="main" aria-label="{{.Title}}" class="page-content repository wiki view">
+{{$gitea1 := StringUtils.HasPrefix AppVer "1."}}{{/* gitea-theme-github: true on Gitea 1.27.x, false on 28.x; the $gitea1 branches keep each version's upstream markup */}}{{template "base/head" .}}
+<div role="main" aria-label="{{.Title}}" class="page-content repository wiki{{if or $gitea1 (StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-")}} view{{end}}">{{/* 28.x dropped `view`; github-* themes keep it (src/pages/repo/wiki.css scopes on .wiki.view) */}}
 	{{template "repo/header" .}}
 	{{$title := .title}}
 	<div class="ui container">{{/* gitea-theme-github (ARCHITECTURE.md §7, FG-022): for github-* themes the "Page:" dropdown + clone popup row is replaced by the aside.gh-wiki-aside below (Pages Box + clone input); every other theme renders upstream bytes. */}}{{if not (StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-")}}
@@ -28,7 +28,7 @@
 					</div>
 				</div>
 			</div>
-			{{template "repo/clone_panel" .}}
+			{{if $gitea1}}{{template "repo/clone_panel" .}}{{else}}{{template "repo/clone_panel" dict "CloneButtonOriginLink" $.CloneButtonOriginLink}}{{end}}
 		</div>{{end}}
 		<div class="ui dividing header">
 			<div class="flex-text-block tw-flex-wrap tw-justify-end">
@@ -61,9 +61,9 @@
 			</div>
 		{{end}}
 
-		<div class="wiki-content-parts">{{if StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-"}}<aside class="gh-wiki-aside"><details class="gh-wiki-pages" open><summary class="gh-wiki-pages-header">{{svg "octicon-triangle-down" 16 "gh-wiki-pages-caret"}}<a class="gh-wiki-pages-title" href="{{.RepoLink}}/wiki/?action=_pages">{{ctx.Locale.Tr "repo.wiki.pages"}}</a><span class="gh-counter">{{len .Pages}}</span></summary><ul class="gh-wiki-pages-list">{{range .Pages}}<li><a class="gh-wiki-pages-item{{if eq $.Title .Name}} selected{{end}}"{{if eq $.Title .Name}} aria-current="page"{{end}} href="{{$.RepoLink}}/wiki/{{.SubURL}}">{{.Name}}</a></li>{{end}}</ul></details><div class="gh-wiki-clone ui action input"><input class="gh-wiki-clone-url" value="{{if $.CloneButtonShowHTTPS}}{{$.CloneButtonOriginLink.HTTPS}}{{else}}{{$.CloneButtonOriginLink.SSH}}{{end}}" readonly aria-label="{{ctx.Locale.Tr "copy_url"}}"><button type="button" class="ui icon button" data-clipboard-target=".gh-wiki-clone-url" data-tooltip-content="{{ctx.Locale.Tr "copy_url"}}" aria-label="{{ctx.Locale.Tr "copy_url"}}">{{svg "octicon-copy"}}</button></div></aside>{{end}}
+		<div class="wiki-content-parts">{{if StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-"}}<aside class="gh-wiki-aside"><details class="gh-wiki-pages" open><summary class="gh-wiki-pages-header">{{svg "octicon-triangle-down" 16 "gh-wiki-pages-caret"}}<a class="gh-wiki-pages-title" href="{{.RepoLink}}/wiki/?action=_pages">{{ctx.Locale.Tr "repo.wiki.pages"}}</a><span class="gh-counter">{{len .Pages}}</span></summary><ul class="gh-wiki-pages-list">{{range .Pages}}<li><a class="gh-wiki-pages-item{{if eq $.Title .Name}} selected{{end}}"{{if eq $.Title .Name}} aria-current="page"{{end}} href="{{$.RepoLink}}/wiki/{{.SubURL}}">{{.Name}}</a></li>{{end}}</ul></details><div class="gh-wiki-clone ui action input"><input class="gh-wiki-clone-url" value="{{if or (and $gitea1 $.CloneButtonShowHTTPS) (and (not $gitea1) $.CloneButtonOriginLink.SupportHTTPS)}}{{$.CloneButtonOriginLink.HTTPS}}{{else}}{{$.CloneButtonOriginLink.SSH}}{{end}}" readonly aria-label="{{ctx.Locale.Tr "copy_url"}}"><button type="button" class="ui icon button" data-clipboard-target=".gh-wiki-clone-url" data-tooltip-content="{{ctx.Locale.Tr "copy_url"}}" aria-label="{{ctx.Locale.Tr "copy_url"}}">{{svg "octicon-copy"}}</button></div></aside>{{end}}
 			{{if .WikiSidebarTocHTML}}
-			<div class="render-content markup wiki-content-sidebar wiki-content-toc">
+			<div class="render-content markup wiki-content-sidebar wiki-content-toc"{{if not $gitea1}} data-global-init="initRepoWikiSidebarToc"{{end}}>
 				{{.WikiSidebarTocHTML}}
 			</div>
 			{{end}}
