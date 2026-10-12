@@ -31,14 +31,14 @@
     margin-bottom: 0;
   }
 
-  .page-content.repository.actions:has(.run-list) > .ui.container {
+  .page-content.repository.actions:has(.run-list) > .container.ui {
     width: 100%;
     max-width: none;
     margin: 0;
   }
 
   /* alerts above the layout keep the content padding */
-  .page-content.repository.actions:has(.run-list) > .ui.container > :not(.flex-container) {
+  .page-content.repository.actions > .ui.container > :not(.flex-container):has(~ .flex-container .run-list) {
     margin: var(--base-size-16) var(--base-size-16) 0;
   }
 
@@ -52,14 +52,14 @@
      100vh). Gitea: the chain .full.height > .page-content > .ui.container > .flex-container grows to the footer
      (the page's bottom space moves into the content column), the nav is the full-height bordered pane and its menu
      is the sticky part. */
-  .full.height:has(> .page-content .run-list) {
+  .full.height:has(> .page-content > .ui.container > .flex-container > .flex-container-main > .segment > .run-list) { /* fixed child path: PERF-3 */
     display: flex;
     flex-direction: column;
     padding-bottom: 0;
   }
 
   .page-content.repository.actions:has(.run-list),
-  .page-content.repository.actions:has(.run-list) > .ui.container {
+  .page-content.repository.actions:has(.run-list) > .container.ui {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -101,7 +101,7 @@
     padding-inline: var(--base-size-24);
   }
 
-  .page-content.repository.actions:has(.run-list) > .ui.container > :not(.flex-container) {
+  .page-content.repository.actions > .ui.container > :not(.flex-container):has(~ .flex-container .run-list) {
     margin-inline: var(--base-size-24);
   }
 }
@@ -218,7 +218,7 @@ html:lang(en) .flex-container:has(> .flex-container-nav > .menu > .item.active:f
 /* workflow_dispatch notice (a workflow is selected, workflow_dispatch.tmpl `.ui.blue.info.attached.message` between
    the Box header and the runs segment): github.com renders it as a blue Box-row inside the runs Box, not a free
    Flash → no margins, the Box's side borders, a --borderColor-muted rule to the first run, Box-row padding. */
-.flex-container-main:has(> .segment > .run-list) > .ui.attached.message {
+.flex-container-main:has(> .segment > .run-list) > .message.ui.attached {
   margin: 0;
   padding: var(--base-size-16);
   border-width: 0 var(--borderWidth-thin) var(--borderWidth-thin);

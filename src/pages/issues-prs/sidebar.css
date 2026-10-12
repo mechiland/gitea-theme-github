@@ -73,7 +73,7 @@
 
 /* github.com PR sidebar: empty values ("No reviews", "No milestone") are --fgColor-default; the issue sidebar keeps
    them muted (measured on pemistahl/grex pull/358 vs issues/35). Only PR pages render the PR tab bar. */
-.repository.view.issue:has(.pull.tabs.container) .issue-content-right :is(.empty-list, .ui.list > .item.empty-list) {
+.repository.view.issue:has(> .ui.container > .pull.tabs.container) .issue-content-right :is(.empty-list, .ui.list > .item.empty-list) {
   color: var(--fgColor-default);
 }
 

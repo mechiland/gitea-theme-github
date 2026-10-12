@@ -2,8 +2,12 @@
  * src/pages/settings-admin — github.com settings layout for Gitea's user / repo / org settings and the site admin
  * panel (layer gh.pages-settings-admin).
  * Owns page-scoped selectors under .page-content.settings (user/repo/org settings: pageClass "… settings …") and
- * .page-content.admin (site admin: pageClass "admin …"), plus [class="page-content "] — the pages whose template passes
- * an empty pageClass: user / org Actions > General (actions_general.tmpl) and admin badge view (SA-5). The NavList look is navigation's, Box/Box-row/DataTable
+ * .page-content.admin (site admin: pageClass "admin …"), plus .page-content:where(:not(.dashboard, .repository)) for
+ * the pages whose template passes an empty pageClass: user / org Actions > General (actions_general.tmpl) and admin
+ * badge view (SA-5). Every selector here goes through .flex-container-main, which 1.27.3 renders only in the settings /
+ * admin layouts, the user dashboard and repo activity / actions — the two excluded classes. (It used to be
+ * [class="page-content "]: an attribute selector on class makes Chrome re-check whole subtrees on every class change,
+ * ~0.6 s per change on a large PR diff.) The NavList look is navigation's, Box/Box-row/DataTable
  * are data-display's, buttons/inputs are controls'; this folder only lays them out the way github.com settings do:
  *   header.css      page header (avatar + account name + profile button; needs the SA-4 template override)
  *   layout.css      page grid: 256px (240px md) NavList column + 24px gutter + main column (Primer Layout, sidebar-narrow)

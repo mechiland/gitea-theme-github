@@ -354,7 +354,7 @@ html:lang(en) .packages p:has(> .label-list + strong:last-child)::after {
 
 /* "Delete version" is destructive */
 .packages-content-right > .list > .item:has(> .octicon-trash) a,
-.packages-content-right > .list > .item:has(> .octicon-trash) > .svg {
+.packages-content-right > .list > .item:has(> .octicon-trash) > :where(.octicon-trash).svg {
   color: var(--fgColor-danger);
 }
 

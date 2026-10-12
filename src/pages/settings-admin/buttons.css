@@ -15,8 +15,11 @@
  * Colours: Primer --button-default-* tokens; sizes: --control-{medium,small}-* tokens.
  */
 
-/* ---------- demoted primaries → default buttons ---------- */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.primary.button:is(
+/* ---------- demoted primaries → default buttons ----------
+   The default-branch form is its own selector, without :has(): `X:has(…) *` inside :is() makes Chrome restyle the
+   whole page on every class change (PERF-2 in build/lint.mjs); its button sits in the .flex-text-block after the
+   hidden action input. The doubled .button keeps the specificity at least the :is() list's. */
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.primary.button:is(
   .admin.dashboard .ui.table *,
   .admin dd *,
   .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"], [href$="/settings/branches/edit"]),
@@ -24,18 +27,18 @@
   [href$="/-/admin/repos/unadopted"],
   #register-webauthn,
   [action$="/security/openid"] *,
-  .ui.form:has(> input[name="action"][value="default_branch"]) *,
   #repo-collab-team-form *,
   [name="cross_repo_add_target"],
   [action$="/avatar"] *
-) {
+),
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.form > input[name="action"][value="default_branch"] ~ * .ui.primary.button.button {
   border-color: var(--button-default-borderColor-rest);
   background: var(--button-default-bgColor-rest);
   box-shadow: var(--button-default-shadow-resting);
   color: var(--button-default-fgColor-rest);
 }
 
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.primary.button:is(
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.primary.button:is(
   .admin.dashboard .ui.table *,
   .admin dd *,
   .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"], [href$="/settings/branches/edit"]),
@@ -43,17 +46,17 @@
   [href$="/-/admin/repos/unadopted"],
   #register-webauthn,
   [action$="/security/openid"] *,
-  .ui.form:has(> input[name="action"][value="default_branch"]) *,
   #repo-collab-team-form *,
   [name="cross_repo_add_target"],
   [action$="/avatar"] *
-):hover {
+):hover,
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.form > input[name="action"][value="default_branch"] ~ * .ui.primary.button.button:hover {
   border-color: var(--button-default-borderColor-hover);
   background: var(--button-default-bgColor-hover);
   color: var(--button-default-fgColor-rest);
 }
 
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.primary.button:is(
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.primary.button:is(
   .admin.dashboard .ui.table *,
   .admin dd *,
   .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"], [href$="/settings/branches/edit"]),
@@ -61,21 +64,21 @@
   [href$="/-/admin/repos/unadopted"],
   #register-webauthn,
   [action$="/security/openid"] *,
-  .ui.form:has(> input[name="action"][value="default_branch"]) *,
   #repo-collab-team-form *,
   [name="cross_repo_add_target"],
   [action$="/avatar"] *
-):active {
+):active,
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.form > input[name="action"][value="default_branch"] ~ * .ui.primary.button.button:active {
   background: var(--button-default-bgColor-active);
 }
 
 /* a leading octicon in a default button is --fgColor-muted (Primer Button leadingVisual) */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.primary.button:is(.admin.dashboard .ui.table *, #register-webauthn) > .svg {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.primary.button:is(.admin.dashboard .ui.table *, #register-webauthn) > .svg {
   color: var(--fgColor-muted);
 }
 
 /* ---------- Subhead actions: medium (32px) ---------- */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.top.attached.header > .ui.right .ui.button {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.top.attached.header > .ui.right .ui.button {
   gap: var(--control-medium-gap);
   height: var(--control-medium-size);
   min-height: var(--control-medium-size);
@@ -85,7 +88,7 @@
 }
 
 /* ---------- Box-row actions: small (28px) ---------- */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment:not(.danger) .flex-divided-list > .item > .item-trailing .ui.button:not(.icon) {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.attached.segment:not(.danger) .flex-divided-list > .item > .item-trailing .ui.button:not(.icon) {
   gap: var(--control-small-gap);
   height: var(--control-small-size);
   min-height: var(--control-small-size);

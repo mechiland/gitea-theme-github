@@ -9,7 +9,7 @@
   background-color: var(--bgColor-done-emphasis) !important;
 }
 
-.page-content:has(.pull.tabular.menu) .timeline-item .badge.tw-bg-red,
+.page-content:has(> .ui.container > .pull.tabs > .pull.tabular.menu) .timeline-item .badge.tw-bg-red,
 .timeline-item .badge.tw-bg-red:not(:has(.octicon-issue-closed)) {
   background-color: var(--bgColor-closed-emphasis) !important;
 }

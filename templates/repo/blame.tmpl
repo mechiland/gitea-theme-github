@@ -29,7 +29,7 @@
 		</div>
 	</h4>
 	<div class="ui bottom attached segment file-view-container">
-		<div class="file-view code-view unicode-escaped">
+		<div class="file-view code-view unicode-escaped"{{if StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-"}} data-gh-path="{{.TreePath}}"{{end}}>{{/* gitea-theme-github: data-gh-path scopes the language-specific syntax colours (src/code/syntax.css), github-* themes only */}}
 			{{if .IsFileTooLarge}}
 				{{template "shared/filetoolarge" dict "RawFileLink" .RawFileLink}}
 			{{else if not .FileSize}}

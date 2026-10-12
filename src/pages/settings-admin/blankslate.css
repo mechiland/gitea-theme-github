@@ -21,7 +21,7 @@
  *   SSH / GPG keys, access tokens, OAuth2 applications and grants: a list whose only row is its description.
  * One selector per rule (alternatives inside :is()), so the build's prefix nesting never splits a declaration block.
  */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main :is(
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main :is(
   div:not([class]):has(+ .flex-divided-list),
   :has(> #add-deploy-key-panel.tw-hidden:last-child),
   #protected-branches-list > .tw-text-center,
@@ -39,7 +39,7 @@
   text-align: center;
 }
 
-:is(.settings, .admin, [class="page-content "]) .flex-container-main :is(
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main :is(
   div:not([class]):has(+ .flex-divided-list),
   :has(> #add-deploy-key-panel.tw-hidden:last-child),
   #protected-branches-list > .tw-text-center,
@@ -54,12 +54,12 @@
   mask: var(--gh-sa-i, var(--gh-octicon-key)) center / contain no-repeat;
 }
 
-:is(.settings, .admin, [class="page-content "]) .flex-container-main div:not([class]):has(+ .flex-divided-list) {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main div:not([class]):has(+ .flex-divided-list) {
   --gh-sa-i: var(--gh-octicon-webhook);
 }
 
 /* a one-line empty message reads as the Blankslate heading */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main :is(
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main :is(
   :has(> #add-deploy-key-panel.tw-hidden:last-child),
   #protected-branches-list > .item
 ) {
@@ -69,7 +69,7 @@
   line-height: var(--text-title-lineHeight-small);
 }
 
-:is(.settings, .admin, [class="page-content "]) .flex-container-main #protected-branches-list > .item {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main #protected-branches-list > .item {
   --gh-sa-i: var(--gh-octicon-git-branch);
 }
 
@@ -78,28 +78,28 @@
  * segment): a Box-footer (16px, --bgColor-muted) closing the list Box above it, or — with nobody added yet — the
  * header row of an empty Box; the search input and the button stay left-aligned (github.com "Manage access").
  */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.bottom.attached.segment:has(> form[id^="repo-collab"]) {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.bottom.attached.segment:has(> form[id^="repo-collab"]) {
   padding: var(--base-size-16);
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-radius: var(--borderRadius-medium);
   background: var(--bgColor-muted);
 }
 
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment + .ui.bottom.attached.segment:has(> form[id^="repo-collab"]) {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.attached.segment + .ui.bottom.attached.segment:has(> form[id^="repo-collab"]) {
   margin-top: 0;
   border-top: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment.segment.segment:has(+ .ui.bottom.attached.segment > form[id^="repo-collab"]) {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.attached.segment.segment.segment:has(+ .ui.bottom.attached.segment > form[id^="repo-collab"]) {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
 
 /* ---------- short lists as a Box of Box-rows ---------- */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment:not(.ui.form *) > .ui.list.flex-items-block:has(> .item),
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form .ui.attached.segment:has(> .ui.list) {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.attached.segment:not(.ui.form *) > .ui.list.flex-items-block:has(> .item),
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.form .ui.attached.segment:has(> .ui.list) {
   margin: 0;
   padding: 0;
   border: var(--borderWidth-thin) solid var(--borderColor-default);
@@ -107,31 +107,31 @@
   background: var(--bgColor-default);
 }
 
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > .ui.list.flex-items-block > .item,
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form .ui.attached.segment > .ui.list > .item {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.attached.segment > .ui.list.flex-items-block > .item,
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.form .ui.attached.segment > .ui.list > .item {
   align-items: center;
   margin: 0;
   padding: var(--base-size-16);
 }
 
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > .ui.list.flex-items-block > .item + .item,
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form .ui.attached.segment > .ui.list > .item + .item {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.attached.segment > .ui.list.flex-items-block > .item + .item,
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.form .ui.attached.segment > .ui.list > .item + .item {
   border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
 }
 
 /* the Actions target list is a compact Box (Box-row--condensed, 8px 16px) with the 440px width of the form column */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.form .ui.attached.segment > .ui.list > .item {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.form .ui.attached.segment > .ui.list > .item {
   padding: var(--base-size-8) var(--base-size-16);
 }
 
 /* email row: address and its Labels on one line, 8px apart (Gitea: a space and .ui.label margins) */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > .ui.list.flex-items-block > .item > .content {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.attached.segment > .ui.list.flex-items-block > .item > .content {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--base-size-8);
 }
 
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.attached.segment > .ui.list.flex-items-block > .item > .content > .ui.label {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.attached.segment > .ui.list.flex-items-block > .item > .content > .ui.label {
   margin: 0;
 }

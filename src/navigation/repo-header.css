@@ -43,7 +43,7 @@
 
 /* github.com signed-in shows the title row on the repo overview (and the empty-repo quick setup) only; every other
    repo page starts right under the local bar, the header crumbs naming the repo */
-.page-content:not(.quickstart, :has(.repo-grid-filelist-sidebar)) > .secondary-nav > .ui.container:has(> .repo-header) {
+.page-content:not(.quickstart, :has(> .ui.container > .repo-grid-filelist-sidebar)) > .secondary-nav > .container.ui:has(> .repo-header) {
   display: none;
 }
 

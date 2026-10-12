@@ -26,8 +26,10 @@
   font-size: var(--text-body-size-medium);
 }
 
-/* repo pages: the repo band follows directly (the same surface in light), header + band read as one block (C190) */
-body:has(.repo-header) .gh-app-header {
+/* repo pages: the repo band follows directly (the same surface in light), header + band read as one block (C190).
+   The :has() argument is a fixed child path: a descendant search from body is re-run over the whole page on every
+   class change (PERF-3, build/lint.mjs). */
+body:has(> .full.height > .page-content > .secondary-nav > .ui.container > .repo-header) .gh-app-header {
   box-shadow: none;
 }
 
