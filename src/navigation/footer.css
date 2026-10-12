@@ -5,8 +5,10 @@
  *   < 1012: column-reverse — the links (centred, wrapping, 16px apart, 8px below) above the mark group
  * Gitea: base/footer_content.tmpl `.page-footer > .left-links (Powered by, version, timing) + .right-links
  * (theme menu, language menu, Licenses, API)`. Gitea's logo stands in for the GitHub mark (no GitHub marks), and
- * "Powered by Gitea" for the copyright. The version and the server-timing spans are diagnostics, not functions
- * (github.com shows neither): hidden (FG2-028); admins still see the version on /-/admin/config.
+ * "Powered by Gitea" for the copyright. The Gitea version span is shown (the theme supports 1.27.x and 28.x, so the
+ * running version matters; Gitea's [other] SHOW_FOOTER_VERSION still controls it, admins get a link to /-/admin/config).
+ * The page/template timing span (the one with <strong>, SHOW_FOOTER_TEMPLATE_LOAD_TIME) is a diagnostic github.com
+ * does not show: hidden (FG2-028).
  */
 
 .page-footer {
@@ -28,7 +30,7 @@
   margin: 0 var(--base-size-8);
 }
 
-.page-footer .left-links > span {
+.page-footer .left-links > span:has(> strong) {
   display: none;
 }
 
