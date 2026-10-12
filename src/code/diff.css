@@ -89,6 +89,7 @@
 /* fold chevron, copy-path and kebab: invisible icon buttons (28px) */
 .diff-file-header .fold-file,
 .diff-file-header .diff-header-popup-btn,
+.diff-file-header .btn[data-global-init="initDiffHeaderPopupMenu"], /* 28.x kebab */
 .diff-file-header .diff-file-name .btn[data-clipboard-text] {
   justify-content: center;
   width: var(--control-small-size);

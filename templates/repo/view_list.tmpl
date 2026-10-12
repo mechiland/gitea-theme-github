@@ -1,4 +1,4 @@
-{{/* use grid layout, still use the old ID because there are many other CSS styles depending on this ID */}}
+{{$gitea1 := StringUtils.HasPrefix AppVer "1."}}{{/* gitea-theme-github: true on Gitea 1.27.x, false on 28.x; the $gitea1 branches keep each version's upstream markup */}}{{/* use grid layout, still use the old ID because there are many other CSS styles depending on this ID */}}
 <div id="repo-files-table"
 	{{if .HasFilesWithoutLatestCommit}}
 		data-fetch-url="{{.LastCommitLoaderURL}}"
@@ -39,7 +39,7 @@
 					{{end}}
 				{{else}}
 					{{if $entry.IsDir}}
-						{{$subJumpablePathName := $entry.GetSubJumpablePathName}}
+						{{$subJumpablePathName := ""}}{{if $gitea1}}{{$subJumpablePathName = $entry.GetSubJumpablePathName}}{{else}}{{$subJumpablePathName = call $.GetSubJumpablePathName $entry}}{{end}}
 						<a class="entry-name" href="{{$.TreeLink}}/{{PathEscapeSegments $subJumpablePathName}}" title="{{$subJumpablePathName}}">
 							{{$subJumpablePathFields := StringUtils.Split $subJumpablePathName "/"}}
 							{{$subJumpablePathFieldLast := (Eval (len $subJumpablePathFields) "-" 1)}}

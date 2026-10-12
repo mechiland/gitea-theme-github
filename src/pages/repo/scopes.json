@@ -12,7 +12,7 @@
    "repo/branch/list.tmpl"
   ],
   "waived": {
-   "repo/settings/protected_branch.tmpl": "probe 13/64 apply (status-check table td padding, > .ui.container); looked at shots/l2b-leaks/branch-rule*.png: settings layout and the status-check table render correctly \u2014 accepted (integrator L2b)"
+   "repo/settings/protected_branch.tmpl": "probe 13/64 apply (status-check table td padding, > .ui.container); looked at shots/l2b-leaks/branch-rule*.png: settings layout and the status-check table render correctly — accepted (integrator L2b)"
   }
  },
  ".commits": {
@@ -40,7 +40,7 @@
    "repo/commits.tmpl"
   ],
   "waived": {
-   "repo/graph.tmpl": "graph shares the page class \"repository commits\"; probe 3/18 apply (container Box/padding); looked at shots/l2b-leaks/graph.png: graph rows and lines aligned \u2014 accepted (integrator L2b)"
+   "repo/graph.tmpl": "graph shares the page class \"repository commits\"; probe 3/18 apply (container Box/padding); looked at shots/l2b-leaks/graph.png: graph rows and lines aligned — accepted (integrator L2b)"
   }
  },
  ".diff": [
@@ -48,6 +48,15 @@
   "repo/diff/compare.tmpl",
   "repo/pulls/files.tmpl"
  ],
+ ".diff.repository": {
+  "intended": [
+   "repo/commit_page.tmpl"
+  ],
+  "waived": {
+   "repo/diff/compare.tmpl": "inert: the rules need `> .container > .header.top.segment:first-child`, which only the commit page has (probe: 0 matches on /compare and on PR Files, 1.27.3 and 28.1.0)",
+   "repo/pulls/files.tmpl": "inert: the rules need `> .container > .header.top.segment:first-child`, which only the commit page has (probe: 0 matches on /compare and on PR Files, 1.27.3 and 28.1.0)"
+  }
+ },
  ".diff:not(.pull)": [
   "repo/commit_page.tmpl",
   "repo/diff/compare.tmpl"

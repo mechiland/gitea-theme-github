@@ -1,0 +1,26 @@
+/*
+ * Audit log (Gitea 28.x: shared/audit/list.tmpl in user / org / repo settings and admin Monitoring) — github.com's
+ * security / audit log: one filter row of 32px controls above a Box listing the events, nothing scrolling sideways.
+ * Gitea: `.ui.attached.segment > form` (actor input + search button, action / origin selects turned into Fomantic
+ * selection dropdowns) + `.ui.attached.table.segment > table` (Actor, Scope, Action, Origin, Details, IP, Timestamp).
+ * The filter form is the one holding the origin select; the table is the one sorted by timestamp.
+ */
+
+/* filter row: the 28px small input group grows to the selects' 32px (Primer medium controls) */
+.flex-container-main form.ui.form:has(select[name="origin"]) > .ui.small.input > input {
+  height: var(--control-medium-size);
+}
+
+/* the event table fits the Box from md: the admin DataTable keeps its cells on one line and scrolls (admin.css), but an
+   audit event's Details is prose that github.com wraps; the timestamp (relative-time, format datetime) stays on one
+   line. Below md the table keeps the DataTable behaviour (one line per cell, scrolling in the Box). */
+@media (min-width: 768px) {
+  :is(.settings, .admin) .flex-container-main .ui.table:has(th[data-sortt-asc="timestamp_asc"]) > tbody {
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  :is(.settings, .admin) .flex-container-main .ui.table:has(th[data-sortt-asc="timestamp_asc"]) relative-time {
+    white-space: nowrap;
+  }
+}

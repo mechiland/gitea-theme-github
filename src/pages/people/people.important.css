@@ -140,3 +140,13 @@
 .explore.users .flex-divided-list > .item {
   align-items: flex-start !important;
 }
+
+/* Gitea 28.x profile sidebar: the avatar item's tw-p-5 / tw-justify-center and the name block's tw-text-center */
+#profile-avatar-card.segment > .flex-divided-list > .item:first-child {
+  justify-content: flex-start !important;
+  padding: 0 !important;
+}
+
+#profile-avatar-card.segment > .flex-divided-list > .item:nth-child(2) > * {
+  text-align: left !important;
+}

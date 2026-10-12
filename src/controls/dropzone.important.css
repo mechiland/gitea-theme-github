@@ -1,7 +1,7 @@
-/* gh-important: file attach area (repo/upload.tmpl `.ui.dropzone`). The dropzone lazy chunk is unlayered:
+/* gh-important: file attach area (repo/upload.tmpl `.dropzone`). The dropzone lazy chunk is unlayered:
  * `.dropzone { min-height: 150px; border: 1px solid; padding: 20px }`, `.dz-message { text-align: center; margin: 3em 0 }`.
  * github.com: a quiet 1px dashed --borderColor-default box on --bgColor-muted. Composers: pages/issues-prs. */
-.ui.dropzone {
+.dropzone {
   min-height: 0 !important;
   padding: var(--base-size-16) !important;
   border: var(--borderWidth-thin) dashed var(--borderColor-default) !important;
@@ -9,17 +9,34 @@
   background: var(--bgColor-muted) !important;
 }
 
-.ui.dropzone .dz-message {
+.dropzone .dz-message {
   margin: 0 !important;
 }
 
-/* the message keeps Gitea's own !important muted colour and font size */
+/* muted message, default text on hover: Gitea 1.27 set this with !important, 28.x without, so the unlayered dropzone
+   chunk's `.dz-button { color: inherit }` would win there */
+.dropzone .dz-button {
+  color: var(--fgColor-muted) !important;
+}
+
+.dropzone:hover .dz-button {
+  color: var(--fgColor-default) !important;
+}
 
 /* inline diff comment (repo/diff/comment_form.tmpl): a slim left-aligned file bar, not a 55px drop box */
-.comment-code-cloud .ui.dropzone {
+.comment-code-cloud .dropzone {
   padding: var(--base-size-8) !important;
 }
 
-.comment-code-cloud .ui.dropzone .dz-message {
+.comment-code-cloud .dropzone .dz-message {
   text-align: left !important;
+}
+
+/* file preview hover labels (size, file name): the chunk paints them on fixed white (rgba(255,255,255,.4 / .8)),
+   unreadable in dark mode → Primer overlay surface with a 1px border, the theme's text colours */
+.dropzone .dz-preview .dz-details :is(.dz-size, .dz-filename) span {
+  border: var(--borderWidth-thin) solid var(--borderColor-default) !important;
+  border-radius: var(--borderRadius-small) !important;
+  background-color: var(--overlay-bgColor) !important;
+  color: var(--fgColor-default) !important;
 }

@@ -159,6 +159,13 @@ select:focus,
   border-bottom-right-radius: 0;
 }
 
+/* a group that is itself a flex item sized by its row (Gitea 28.x audit filter: `.ui.action.input.tw-flex-1`) keeps its
+   attached button inside it: the input gives way instead of Fomantic's `flex: 1 0 auto` overflowing the group */
+.ui.action.input.tw-flex-1 > input {
+  flex-shrink: 1;
+  min-width: 0;
+}
+
 .ui.action.input > input:focus,
 .ui.action.input > select:focus {
   position: relative;

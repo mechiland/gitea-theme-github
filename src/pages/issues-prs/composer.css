@@ -120,28 +120,28 @@
   line-height: var(--text-body-lineHeight-medium);
 }
 
-:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .field:has(> .ui.dropzone) {
+:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .field:has(> .dropzone) {
   padding: 0 var(--base-size-8);
 }
 
-:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .ui.dropzone {
+:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .dropzone {
   background: var(--bgColor-muted);
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
   text-align: left;
 }
 
-:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .ui.dropzone .dz-message {
+:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .dropzone .dz-message {
   margin: 0;
 }
 
-:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .ui.dropzone .dz-button {
+:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .dropzone .dz-button {
   padding: 0;
   font-size: var(--text-body-size-small);
   line-height: var(--text-body-lineHeight-medium);
 }
 
-:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .ui.dropzone:hover .dz-button {
+:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .dropzone:hover .dz-button {
   color: var(--fgColor-accent);
 }
 
@@ -169,6 +169,6 @@
   padding: var(--base-size-8) var(--base-size-16);
 }
 
-:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .field:has(> .combo-markdown-editor > .ui.tab.active[data-tab-panel="markdown-previewer"]) ~ .field:has(> .ui.dropzone) {
+:is(#comment-form, #new-issue, .code-comments-list form.comment-form) .field:has(> .combo-markdown-editor > .ui.tab.active[data-tab-panel="markdown-previewer"]) ~ .field:has(> .dropzone) {
   display: none;
 }

@@ -91,7 +91,8 @@
   max-width: 250px !important;
 }
 
-/* ---------- toast: Primer Toast surface instead of Gitea's inline green/orange/red fill ---------- */
+/* ---------- toast: Primer Toast surface instead of Gitea's inline green/orange/red fill (1.27.x) / tinted level class
+   (28.x) ---------- */
 .toastify {
   background: var(--bgColor-default) !important;
 }

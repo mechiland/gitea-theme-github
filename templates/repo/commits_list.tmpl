@@ -1,4 +1,4 @@
-<div class="ui attached table segment commit-table">
+{{$gitea1 := StringUtils.HasPrefix AppVer "1."}}{{/* gitea-theme-github: true on Gitea 1.27.x, false on 28.x; the $gitea1 branches keep each version's upstream markup */}}<div class="ui attached table segment commit-table">
 	<table class="ui very basic table unstackable" id="commits-table">
 		<thead>
 			<tr>
@@ -43,7 +43,7 @@
 						{{end}}
 						</span>
 						{{if $gitCommit.MessageBody}}
-						<button class="ui button ellipsis-button" aria-expanded="false" data-global-click="onRepoEllipsisButtonClick">...</button>
+						<button{{if not $gitea1}} type="button"{{end}} class="ui button ellipsis-button" aria-expanded="false" data-global-click="onRepoEllipsisButtonClick">...</button>
 						{{end}}
 						{{template "repo/commit_statuses" dict "Status" .Status "Statuses" .Statuses}}
 						{{if $gitCommit.MessageBody}}
@@ -57,7 +57,7 @@
 					</td>
 					<td class="tw-text-right">{{DateUtils.TimeSince $gitCommit.Committer.When}}</td>
 					<td class="tw-text-right tw-py-0">
-						<button class="btn interact-bg tw-p-2 copy-commit-id" data-tooltip-content="{{ctx.Locale.Tr "copy_hash"}}" data-clipboard-text="{{$commitID}}">{{svg "octicon-copy"}}</button>
+						<button{{if not $gitea1}} type="button"{{end}} class="btn interact-bg tw-p-2 copy-commit-id" data-tooltip-content="{{ctx.Locale.Tr "copy_hash"}}" data-clipboard-text="{{$commitID}}">{{svg "octicon-copy"}}</button>
 						{{/* at the moment, wiki doesn't support these "view" links like "view at history point" */}}
 						{{if not $.PageIsWiki}}
 							{{/* view single file diff */}}

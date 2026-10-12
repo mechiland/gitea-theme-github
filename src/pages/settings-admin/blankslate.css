@@ -16,14 +16,15 @@
  * --fgColor-muted (a section description in place of rows). The Octicon is a mask on ::before: key unless the
  * folder-local --gh-sa-i names another (webhook, git-branch).
  *   webhooks: the description <div> right before the .flex-divided-list (with hooks a .divider sits between them);
- *   deploy keys: the text node after the hidden add panel (the panel is the segment's last element);
+ *   deploy keys: the text node after the hidden add panel (the panel is the segment's last element; 28.x: after the
+ *   hidden SSH and token panels);
  *   branch protection: the lone centred row of #protected-branches-list;
  *   SSH / GPG keys, access tokens, OAuth2 applications and grants: a list whose only row is its description.
  * One selector per rule (alternatives inside :is()), so the build's prefix nesting never splits a declaration block.
  */
 :is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main :is(
   div:not([class]):has(+ .flex-divided-list),
-  :has(> #add-deploy-key-panel.tw-hidden:last-child),
+  :has(> #add-deploy-key-panel.tw-hidden:last-child, > #add-deploy-key-ssh-panel.tw-hidden + #add-deploy-key-token-panel.tw-hidden:last-child),
   #protected-branches-list > .tw-text-center,
   :is(.sshkeys, .applications) .flex-divided-list > .item:only-child:not(:has(> :not(p)))
 ) {
@@ -41,7 +42,7 @@
 
 :is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main :is(
   div:not([class]):has(+ .flex-divided-list),
-  :has(> #add-deploy-key-panel.tw-hidden:last-child),
+  :has(> #add-deploy-key-panel.tw-hidden:last-child, > #add-deploy-key-ssh-panel.tw-hidden + #add-deploy-key-token-panel.tw-hidden:last-child),
   #protected-branches-list > .tw-text-center,
   :is(.sshkeys, .applications) .flex-divided-list > .item:only-child:not(:has(> :not(p)))
 )::before {
@@ -60,7 +61,7 @@
 
 /* a one-line empty message reads as the Blankslate heading */
 :is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main :is(
-  :has(> #add-deploy-key-panel.tw-hidden:last-child),
+  :has(> #add-deploy-key-panel.tw-hidden:last-child, > #add-deploy-key-ssh-panel.tw-hidden + #add-deploy-key-token-panel.tw-hidden:last-child),
   #protected-branches-list > .item
 ) {
   color: var(--fgColor-default);

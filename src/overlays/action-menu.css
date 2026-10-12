@@ -281,6 +281,20 @@ text-expander .suggestions li {
   visibility: hidden;
 }
 
+/* Gitea 28.x repo switcher (repo/header.tmpl `.menu > .ui.icon.search.input`) renders no icon element: the same
+   leading search visual is drawn on the wrapper */
+.ui.dropdown .menu > .ui.icon.input:not(:has(> .icon))::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--control-medium-paddingInline-condensed);
+  width: var(--base-size-16);
+  background-color: var(--fgColor-muted);
+  mask: var(--gh-octicon-search) center / contain no-repeat;
+  pointer-events: none;
+}
+
 /* ---------- scrolling list area ---------- */
 .ui.scrolling.dropdown .menu {
   padding: 0;

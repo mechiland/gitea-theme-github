@@ -1,4 +1,4 @@
-<div {{if .ReadmeInList}}id="readme"{{end}} class="{{TabSizeClass .Editorconfig .FileTreePath}} non-diff-file-content"
+{{$gitea1 := StringUtils.HasPrefix AppVer "1."}}{{/* gitea-theme-github: true on Gitea 1.27.x, false on 28.x; the $gitea1 branches keep each version's upstream markup */}}<div {{if .ReadmeInList}}id="readme"{{end}} class="{{TabSizeClass .Editorconfig .FileTreePath}} non-diff-file-content"
 	data-global-init="initRepoFileView" data-raw-file-link="{{.RawFileLink}}">
 
 	{{- if .FileError}}
@@ -55,8 +55,8 @@
 					{{end}}
 					<a class="ui mini basic button" href="{{.RepoLink}}/commits/{{.RefTypeNameSubURL}}/{{PathEscapeSegments .TreePath}}">{{ctx.Locale.Tr "repo.file_history"}}</a>
 					{{if .EscapeStatus.Escaped}}
-						<button class="ui mini basic button unescape-button tw-hidden">{{ctx.Locale.Tr "repo.unescape_control_characters"}}</button>
-						<button class="ui mini basic button escape-button">{{ctx.Locale.Tr "repo.escape_control_characters"}}</button>
+						<button{{if not $gitea1}} type="button"{{end}} class="ui mini basic button unescape-button tw-hidden">{{ctx.Locale.Tr "repo.unescape_control_characters"}}</button>
+						<button{{if not $gitea1}} type="button"{{end}} class="ui mini basic button escape-button">{{ctx.Locale.Tr "repo.escape_control_characters"}}</button>
 					{{end}}
 				</div>
 				<a download class="btn-octicon" data-tooltip-content="{{ctx.Locale.Tr "repo.download_file"}}" href="{{$.RawFileLink}}">{{svg "octicon-download"}}</a>
@@ -69,7 +69,7 @@
 					{{svg "octicon-rss"}}
 				</a>
 				{{end}}
-				{{if .Repository.CanEnableEditor}}
+				{{if or (and $gitea1 .Repository.CanEnableEditor) (and (not $gitea1) .Repository.CanContentChange)}}
 					{{if .CanEditFile}}
 						<a class="btn-octicon" data-tooltip-content="{{.EditFileTooltip}}" href="{{.RepoLink}}/_edit/{{PathEscapeSegments .BranchName}}/{{PathEscapeSegments .TreePath}}">{{svg "octicon-pencil"}}</a>
 					{{else}}
@@ -82,8 +82,8 @@
 					{{end}}
 				{{end}}
 			{{else if .EscapeStatus.Escaped}}
-				<button class="ui mini basic button unescape-button tw-mr-1 tw-hidden">{{ctx.Locale.Tr "repo.unescape_control_characters"}}</button>
-				<button class="ui mini basic button escape-button tw-mr-1">{{ctx.Locale.Tr "repo.escape_control_characters"}}</button>
+				<button{{if not $gitea1}} type="button"{{end}} class="ui mini basic button unescape-button tw-mr-1 tw-hidden">{{ctx.Locale.Tr "repo.unescape_control_characters"}}</button>
+				<button{{if not $gitea1}} type="button"{{end}} class="ui mini basic button escape-button tw-mr-1">{{ctx.Locale.Tr "repo.escape_control_characters"}}</button>
 			{{end}}
 			{{if and .ReadmeInList .CanEditReadmeFile}}
 				<a class="btn-octicon" data-tooltip-content="{{ctx.Locale.Tr "repo.editor.edit_this_file"}}" href="{{.RepoLink}}/_edit/{{PathEscapeSegments .BranchName}}/{{PathEscapeSegments .FileTreePath}}">{{svg "octicon-pencil"}}</a>

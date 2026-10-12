@@ -3,32 +3,32 @@
  *   a 32px key octicon (--fgColor-muted; --fgColor-success when recently used) in a leading column,
  *   title 14px semibold --fgColor-default, fingerprint in the monospace stack 12px --fgColor-muted,
  *   "Added on … / Last used …" 12px --fgColor-muted, a red Delete btn-sm on the right, rows 16px padded.
- * Gitea: .items-with-main > .item > .item-leading (octicon-key 32) + .item-main (.item-title, .item-body ×2) +
+ * Gitea: .items-with-main > .item > .item-leading (octicon-key 32; 28.x deploy tokens: octicon-key-asterisk) + .item-main (.item-title, .item-body ×2) +
  * .item-trailing (.ui.red.tiny.button) — user/settings/keys_{ssh,gpg,principal}.tmpl, repo/settings/deploy_keys.tmpl,
  * user/settings/applications.tmpl (access tokens).
  */
 
-:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-leading {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .items-with-main > .item:has(> .item-leading :is(.octicon-key, .octicon-key-asterisk)) .item-leading {
   color: var(--fgColor-muted);
 }
 
-:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-main {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .items-with-main > .item:has(> .item-leading :is(.octicon-key, .octicon-key-asterisk)) .item-main {
   gap: var(--base-size-4);
 }
 
-:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-body {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .items-with-main > .item:has(> .item-leading :is(.octicon-key, .octicon-key-asterisk)) .item-body {
   color: var(--fgColor-muted);
   font-size: var(--text-body-size-small);
   line-height: var(--text-body-lineHeight-small);
 }
 
 /* the first body line after the title is the fingerprint (the 14px semibold title comes from the settings list-row rule below) */
-:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-title + .item-body {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .items-with-main > .item:has(> .item-leading :is(.octicon-key, .octicon-key-asterisk)) .item-title + .item-body {
   font-family: var(--fontStack-monospace);
   overflow-wrap: anywhere;
 }
 
-:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .items-with-main > .item:has(> .item-leading .octicon-key) .item-body i {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .items-with-main > .item:has(> .item-leading :is(.octicon-key, .octicon-key-asterisk)) .item-body i {
   font-style: normal;
 }
 

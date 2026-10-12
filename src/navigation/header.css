@@ -137,12 +137,12 @@ body:has(> .full.height > .page-content > .secondary-nav > .ui.container > .repo
 }
 
 /* ---------- context crumbs ---------- */
+/* no overflow clip: the crumbs ellipsize themselves (min-width 3ch) and the 28.x repo switcher's menu hangs below */
 .gh-app-header-context {
   display: flex;
   align-items: center;
   flex: 1 1 auto;
   min-width: 0;
-  overflow: hidden;
 }
 
 .gh-context-item {
@@ -161,7 +161,7 @@ body:has(> .full.height > .page-content > .secondary-nav > .ui.container > .repo
   flex: 0 100 max-content;
 }
 
-.gh-context-item:last-child {
+.gh-context-item:last-of-type {
   flex: 0 1 max-content;
   font-weight: var(--base-text-weight-semibold);
 }
@@ -174,6 +174,35 @@ a.gh-context-item:hover {
 
 .gh-context-sep {
   color: var(--fgColor-muted);
+}
+
+/* Gitea 28.x quick repo switcher (gh_head_navbar.tmpl `.gh-context-switcher`, signed in): github.com's repo crumb is a
+   two-part group, the name and a 20px caret 1px apart; hovering either part, or the open menu, shades both */
+.gh-context-switcher {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--base-size-20);
+  height: calc(var(--base-size-20) + 2 * var(--base-size-4));
+  margin-left: var(--borderWidth-thin);
+  border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
+  color: var(--fgColor-muted);
+}
+
+.gh-context-switcher > .dropdown.icon {
+  margin: 0;
+}
+
+.gh-context-repo:has(+ .gh-context-switcher) {
+  border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
+}
+
+.gh-context-repo:is(:hover, :has(+ .gh-context-switcher:is(:hover, .active))),
+.gh-context-switcher:is(:hover, .active),
+.gh-context-repo:hover + .gh-context-switcher {
+  background: var(--control-transparent-bgColor-hover);
+  color: var(--fgColor-default);
 }
 
 /* ---------- search: the field from 1012px (github.com whenRegular), an IconButton below (whenNarrow) ---------- */

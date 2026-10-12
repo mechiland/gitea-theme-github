@@ -11,6 +11,8 @@
  * Gitea's .meta column (tag, commit, Compare) is folded into the card (byline items / top-right Compare), see below.
  * Tags list (Box): rows padding 16px, tag name 16px semibold --fgColor-default, meta row 12px --fgColor-muted with
  *   16px octicons, 16px apart.
+ * Gitea 28.x release_tag_header.tmpl: `.flex-left-right > h2 + .flex-text-block (RSS, New Release)` instead of 1.27's
+ *   `.flex-text-block > .tw-flex-1 > h2 + buttons`: the header selectors take either wrapper, the buttons at any depth.
  * Gitea: templates/repo/release_tag_header.tmpl, release/list.tmpl (ul#release-list > li.release-entry > .meta +
  *   .ui.segment.detail), tag/list.tmpl (.tag-list-row); CSS web_src/css/repo/release-tag.css.
  */
@@ -48,7 +50,7 @@
   color: var(--fgColor-onEmphasis);
 }
 
-:is(.releases, .tags) > .ui.container > .flex-text-block:first-child + .divider {
+:is(.releases, .tags) > .ui.container > :is(.flex-text-block, .flex-left-right):first-child + .divider {
   margin: var(--base-size-24) 0 var(--base-size-16); /* github.com: segment → rule 24px, rule → tags Box 16px */
   border: 0;
   border-top: var(--borderWidth-thin) solid var(--borderColor-default);
@@ -56,13 +58,13 @@
 
 /* github.com /releases: 48px from the rule to the first release card (measured pemistahl/grex 2026-09-30:
    rule y=262, card y=311) */
-.releases > .ui.container > .flex-text-block:first-child + .divider {
+.releases > .ui.container > :is(.flex-text-block, .flex-left-right):first-child + .divider {
   margin-bottom: var(--base-size-48);
 }
 
 /* "RSS Feed" / "New Release": github.com's "Draft a new release" is a medium (32px, 14px) Button, the same height
    as the Releases | Tags segment next to it */
-:is(.releases, .tags) > .ui.container > .flex-text-block:first-child > a.ui.button {
+:is(.releases, .tags) > .ui.container > :is(.flex-text-block, .flex-left-right):first-child a.ui.button {
   height: var(--control-medium-size);
   min-height: 0;
   padding: 0 var(--control-medium-paddingInline-normal);
@@ -79,11 +81,11 @@
    as its accessible name), and New Release fills whatever is left — the rest of the first row when it fits, else a
    full-width second row (never a lone half-row button). */
 @media (max-width: 767.98px) {
-  :is(.releases, .tags) > .ui.container > .flex-text-block:first-child {
+  :is(.releases, .tags) > .ui.container > :is(.flex-text-block, .flex-left-right):first-child {
     flex-wrap: wrap;
   }
 
-  .releases > .ui.container > .flex-text-block:first-child + .divider {
+  .releases > .ui.container > :is(.flex-text-block, .flex-left-right):first-child + .divider {
     margin-bottom: var(--base-size-24);
   }
 
@@ -92,11 +94,21 @@
     min-width: max-content;
   }
 
-  .releases > .ui.container > .flex-text-block:first-child > a.ui.primary.button {
+  .releases > .ui.container > :is(.flex-text-block, .flex-left-right):first-child a.ui.primary.button {
     flex: 1 0 auto;
   }
 
-  :is(.releases, .tags) > .ui.container > .flex-text-block:first-child > a.ui.button[href$=".rss"] {
+  /* 28.x: the buttons' own wrapper steps aside so they flow like 1.27's (segment grows, New Release fills or wraps) */
+  :is(.releases, .tags) > .ui.container > .flex-left-right:first-child > .flex-text-block {
+    display: contents;
+  }
+
+  :is(.releases, .tags) > .ui.container > .flex-left-right:first-child > .small-menu-items {
+    flex: 1 1 0%;
+    min-width: max-content;
+  }
+
+  :is(.releases, .tags) > .ui.container > :is(.flex-text-block, .flex-left-right):first-child a.ui.button[href$=".rss"] {
     width: var(--control-medium-size);
     padding: 0;
     font-size: 0;
@@ -572,7 +584,7 @@
     max-width: calc(100% - 2 * var(--page-margin-x));
   }
 
-  :scope.repository.releases > .ui.container > .flex-text-block:first-child + .divider {
+  :scope.repository.releases > .ui.container > :is(.flex-text-block, .flex-left-right):first-child + .divider {
     margin-bottom: var(--base-size-16);
   }
 

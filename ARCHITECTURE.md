@@ -1,4 +1,4 @@
-# GitHub theme for Gitea 1.27.3 — Architecture
+# GitHub theme for Gitea 1.27.x and 28.x — Architecture
 
 Goal: a self-hosted Gitea 1.27.3 that a daily github.com user needs a second look to tell apart from github.com,
 in light and dark. Every color, size, radius, shadow, type and motion value comes from **Primer Primitives**, every
@@ -30,7 +30,7 @@ Environment facts: `docs/CONTEXT.md`. Gitea source research (with file:line cita
 | `@primer/primitives` | **11.10.0** | all tokens (`build/gen-tokens.mjs` → `src/tokens/generated/`) |
 | `@primer/octicons`   | **19.38.0** | icon source (Gitea 1.27.3 bundles 19.28.1) |
 | `@primer/css`        | **22.3.2**  | reference only for component specs (not shipped) |
-| Gitea                | **1.27.3**  | source at `../gitea-src-1.27.3` (tag v1.27.3) |
+| Gitea                | **1.27.3** and **28.1.0** | sources at `../gitea-src-1.27.3`, `../gitea-src-28.1.0`; one package for both (§7 "Two Gitea versions") |
 
 Recorded again in `docs/STATUS.json → pinned`.
 
@@ -182,11 +182,35 @@ keep the non-GitHub output byte-identical.
 | `templates/base/head_style.tmpl` | Cascade layering (§3) + cache-busting `?github_revision=`. Shared with the Modern theme's existing override: our branch is additive, the else-branch is untouched. | `github-*` themes only | integrator, wave 0 |
 | `templates/custom/footer.tmpl` | Primer Dialog close button (request OV-4): Gitea's modals mostly have no `×`; a 12-line inline script (CSP nonce) prepends `button.close.inside` to every `.ui.modal` (Fomantic closes on `> .close`). `custom/footer` is Gitea's empty extension hook, so no upstream markup is replaced. Install is done by the orchestrator (docs/requests/ORCHESTRATOR.md ORC-1). | `github-*` themes only (renders nothing otherwise) | integrator, wave 2 |
 | `templates/user/settings/layout_head.tmpl` | github.com settings page header (48px avatar, name, subtitle, profile button; request SA-4): needs the signed-in user's data, CSS cannot create it. Upstream 1.27.3 file + one trimmed `{{- if … }}` block; copy text is Gitea's `your_settings` / `your_profile` locale keys (Gitea has no "Your personal account" string). Styled by `src/pages/settings-admin/header.css`. Install: docs/requests/ORCHESTRATOR.md ORC-3. | `github-*` themes only, pages whose pageClass contains `settings` (other themes: upstream bytes) | integrator, wave 3 |
-| `templates/base/head_navbar.tmpl` + `templates/custom/gh_head_navbar.tmpl` | github.com AppHeader (FG-007, judges' #1 tell, impact 130) and the slim auth header (FG-063): hamburger drawer with Gitea's links, context crumbs, search form, Issues/PRs icon buttons — the crumbs, search and cross-container moves are not CSS-reachable (docs/final-gate/issues.md "Header decision"). The override is `{{if github-*}}{{template "custom/gh_head_navbar" .}}{{else}}` + upstream 1.27.3 verbatim + `{{end}}` (no trailing newline). All JS hooks kept, no JavaScript added (native `<details>`). Install: ORCHESTRATOR.md ORC-5. Styled by navigation (`.gh-app-header*`) and pages/auth (`.gh-app-header--auth`). | `github-*` themes only (else-branch = upstream bytes) | integrator, final-gate #1 (pending install) |
+| `templates/base/head_navbar.tmpl` + `templates/custom/gh_head_navbar.tmpl` | github.com AppHeader (FG-007, judges' #1 tell, impact 130) and the slim auth header (FG-063): hamburger drawer with Gitea's links, context crumbs, search form, Issues/PRs icon buttons — the crumbs, search and cross-container moves are not CSS-reachable (docs/final-gate/issues.md "Header decision"). The override is `{{if github-*}}{{template "custom/gh_head_navbar" .}}{{else if AppVer 1.*}}` + upstream 1.27.3 verbatim + `{{else}}` + upstream 28.1.0 verbatim + `{{end}}` (no trailing newline). All JS hooks kept, no JavaScript added (native `<details>`). Install: ORCHESTRATOR.md ORC-5. Styled by navigation (`.gh-app-header*`) and pages/auth (`.gh-app-header--auth`). | `github-*` themes only (else-branch = upstream bytes) | integrator, final-gate #1 (pending install) |
 | `templates/repo/commits_list.tmpl` | "Commits on <date>" day groups (FG-019, impact 35): per-row date state, CSS cannot insert rows. One `tr.gh-commit-day` per committer day (template funcs only: `When.Format`, `DateUtils.ParseLegacy/AbsoluteShort`); date-only label (no "Commits on" locale key). ORC-6. Styled by pages/repo. | `github-*` themes, not the wiki revision list | integrator, final-gate #1 (pending install) |
 | `templates/repo/view_file.tmpl` + `templates/repo/blame.tmpl` | Preview \| Code \| Blame SegmentedControl (FG-021, impact 29): the "Code" segment and moving Blame out of the button group need markup; existing links only, keys `preview` / `repo.code` / `repo.blame`. README box untouched. ORC-7. Styled by code. | `github-*` themes only | integrator, final-gate #1 (pending install) |
 | `templates/repo/wiki/view.tmpl` | wiki "Pages (N)" Box + clone input (FG-022, impact 27): `.Pages` and the clone link are in ctx on every wiki view (routers/web/repo/wiki.go renderViewPage); the Fomantic dropdown and tippy-only clone popup cannot be turned into a static sidebar with CSS. No filter input (would need JS) and no "Clone this wiki locally" heading (no locale key). ORC-8. Styled by pages/repo. | `github-*` themes only | integrator, final-gate #1 (pending install) |
 | `templates/repo/issue/list.tmpl` | issues / PRs left NavList + title (FG-017, impact 45): links to Gitea's existing `?type=` filters, Milestones, Labels (keys `repo.issues.filter_type.*`); CSS cannot create a sidebar column. Issue/PR list only — the Labels and Milestones pages were not given it (cap). ORC-9. Loop 2 (FG2-027): the NavList is rendered on the issue list only, not the PR list (github.com) — project copy edited, install ORC-13. Styled by pages/issues-prs. | `github-*` themes only | integrator, final-gate #1; FG2-027 edit loop 2 (install pending) |
+
+**Two Gitea versions (1.27.x and 28.x, one package).** Each template that differs between 1.27.3 and 28.1.0 starts with
+`{{$gitea1 := StringUtils.HasPrefix AppVer "1."}}` (no output) and branches only where upstream differs, so a non-github
+theme gets each version's upstream bytes (checked: anonymous HTML of all routes with vs. without the templates, both
+versions, differs only by the documented `hidden` "N Commits" link). Two rules learned the hard way:
+- Fields and methods are resolved at execution, so an untaken branch may name `.Repository.CanEnableEditor` (1.27) or
+  `CanContentChange` (28); use `and`/`or` (lazy since Go 1.18) or `{{if $gitea1}}` around them.
+- `{{template "x"}}` is checked by html/template's escaper even in a branch that never runs: an undefined name breaks the
+  whole page. Hence `templates/base/head_impersonate_banner.tmpl` (28.1.0 verbatim) ships so the name exists on 1.27.
+CSS: where 28 renamed or restructured markup, the 28 selectors are added next to the 1.27 ones and commented "28.x"
+(profile sidebar `#profile-avatar-card.segment`, commit header and its "N files changed" footer row, `.site-banner-*`,
+diff kebab, feed excerpt, `.dropzone` without `.ui`, release header `.flex-left-right`, notifications toolbar
+`.flex-text-block`, Actions sidebar with a second "Management" menu, deploy key / token panels). The wiki view template
+keeps the `view` class (dropped in 28) for github-* themes. Features only 28 has are styled to the matching Primer
+component, not left on Gitea's defaults: toasts per level (Primer Toast), site + impersonation banners (flash-full),
+repo switcher (SelectPanel on the AppHeader repo crumb, as on github.com; the repo-header copy is hidden), Actions job queue (PageLayout pane + DataTable), artifact preview (NavList file tree),
+diff file filter + extension menu (TextInput + IconButton + ActionMenu), audit log (filter row + Box table), deploy
+tokens (Box rows, Blankslate), "Mark this page as read". Verified 2026-10-12 on 1.27.3 and 28.1.0: light, dark, 390px;
+1.27 pixel-diffed against a pre-change capture of every route (only live data differs). Not seen with real data: the
+`diff-line-truncated` label (lines over 5000 characters) and a bot account's label (both plain Primer Labels).
+When 1.27 support ends, delete the `$gitea1` branches and the 1.27 selectors.
+
+Pitfall: `X > :is(A > B)` does not mean "B under A under X" — the `:is()` element must match X's child AND have an
+A parent, so it silently matches nothing. List whole paths instead (`:has(> … > A > B, > … > C)`).
 
 Final gate #1 template requests REJECTED (§7 criteria: a impact, b data in ctx, c existing locale keys, d byte-identical
 branch, e ≤ 8 new overrides; the seven files above are 7 of 8): FG-024 branches table (c: no keys for Updated / Check
@@ -246,7 +270,8 @@ column colors, repo units, federation, wiki clone box, etc.) get the **closest P
 
 ## 10. Budget
 
-- ≤ 300 KB per theme file minified (build fails otherwise); gate for every loop: ≤ 295 KB. Current sizes in `docs/STATUS.json`.
+- ≤ 340 KB per theme file minified (build fails otherwise); gate for every loop: ≤ 335 KB. Raised from 300 / 295 KB on
+  2026-10-12 (user decision) to style Gitea 28's new UI in the same single file for 1.27 and 28 (gzip at 300 KB: ~57 KB). Current sizes in `docs/STATUS.json`.
   Loop 1 (after wave L1, 2026-09-30): the wave added 63.6 KB of flat CSS (auto 283,706 → 347,273 B; per-layer growth in
   STATUS.json → budget.loop1); the lossless prefix nesting (§9) brings the files to auto 295,880 B (288.9 KB), light
   290,683 B, dark 291,734 B — no rules were deleted.

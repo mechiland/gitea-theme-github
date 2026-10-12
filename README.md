@@ -3,7 +3,7 @@
 [![Build & release](https://github.com/mechiland/gitea-theme-github/actions/workflows/release.yml/badge.svg)](https://github.com/mechiland/gitea-theme-github/actions/workflows/release.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-A GitHub look-and-feel theme for **Gitea 1.27.3**, in light, dark and auto (follows the OS color scheme).
+A GitHub look-and-feel theme for **Gitea 1.27.x and 28.x** (tested on 1.27.3 and 28.1.0; one package for both), in light, dark and auto (follows the OS color scheme).
 
 It is built from GitHub's own open-source design system, not by recolouring Gitea:
 - every color, size, radius, shadow, type and motion value comes from [Primer Primitives](https://primer.style/product/primitives/) (`@primer/primitives` 11.10.0);
@@ -48,7 +48,7 @@ The theme is a set of files for Gitea's custom directory (`CUSTOM_PATH`, `$GITEA
 
 ### 1. Download the release package
 
-Take `gitea-theme-github-<version>-gitea1.27.3.tar.gz` (or `.zip`) from [Releases](https://github.com/mechiland/gitea-theme-github/releases), or the `gitea-theme-github` artifact of the latest [CI run](https://github.com/mechiland/gitea-theme-github/actions).
+Take `gitea-theme-github-<version>-gitea1.27-28.tar.gz` (or `.zip`) from [Releases](https://github.com/mechiland/gitea-theme-github/releases), or the `gitea-theme-github` artifact of the latest [CI run](https://github.com/mechiland/gitea-theme-github/actions).
 
 It contains:
 
@@ -65,13 +65,13 @@ INSTALL.md, LICENSE, NOTICE
 **Docker (docker compose, volume `./gitea:/data`):**
 
 ```bash
-tar -xzf gitea-theme-github-*-gitea1.27.3.tar.gz -C ./gitea/gitea
+tar -xzf gitea-theme-github-*-gitea1.27-28.tar.gz -C ./gitea/gitea
 ```
 
 **Binary / systemd:**
 
 ```bash
-sudo tar -xzf gitea-theme-github-*-gitea1.27.3.tar.gz -C /var/lib/gitea/custom
+sudo tar -xzf gitea-theme-github-*-gitea1.27-28.tar.gz -C /var/lib/gitea/custom
 sudo chown -R git:git /var/lib/gitea/custom
 ```
 
@@ -90,7 +90,7 @@ With the Docker image, you can set the same values with environment variables in
 ```yaml
 services:
   server:
-    image: docker.gitea.com/gitea:1.27.3
+    image: docker.gitea.com/gitea:28.1.0   # or 1.27.x
     environment:
       - GITEA__ui__THEMES=gitea-auto,gitea-light,gitea-dark,github-auto,github-light,github-dark
       - GITEA__ui__DEFAULT_THEME=github-auto
@@ -123,8 +123,9 @@ Extracting never deletes files. If the release notes say a template was removed,
 
 ### Notes
 
-- **Gitea version:** the templates are copies of Gitea **1.27.3** templates with added GitHub-only blocks. Re-check them when you upgrade Gitea. The CSS alone still works without the templates, but you lose the cascade layering (see [ARCHITECTURE.md §3](ARCHITECTURE.md)), the GitHub-style header and a few page structures.
-- **If you already override templates:** the package ships these templates (all under `templates/`): `base/head_style.tmpl`, `base/head_navbar.tmpl`, `custom/footer.tmpl`, `custom/gh_head_navbar.tmpl`, `repo/blame.tmpl`, `repo/commits_list.tmpl`, `repo/issue/list.tmpl`, `repo/view_file.tmpl`, `repo/view_list.tmpl`, `repo/wiki/view.tmpl`, `user/settings/layout_head.tmpl`. If you override one of them yourself, extracting the package replaces your copy. Back it up first and merge the GitHub additions by hand: the `{{if StringUtils.HasPrefix … "github-"}}` blocks, and in `repo/view_list.tmpl` the `hidden` "N Commits" link (`a.m-commit-count`).
+- **Gitea version:** the templates are copies of Gitea templates with added GitHub-only blocks. Where Gitea 1.27 and 28 differ, a template carries both variants and picks one from the running Gitea version (`AppVer`), so you can install the package before upgrading Gitea from 1.27 to 28 and keep it afterwards. Packages up to v0.1.2 only work on 1.27.x: on 28.x the repository home and file pages fail to render. Re-check the templates when a new Gitea major comes out. The CSS alone still works without the templates, but you lose the cascade layering (see [ARCHITECTURE.md §3](ARCHITECTURE.md)), the GitHub-style header and a few page structures.
+- **Footer:** shows the running Gitea version next to "Powered by Gitea" (Gitea's own `[other] SHOW_FOOTER_VERSION`, on by default; admins get a link to the site configuration). Set it to `false` to hide it.
+- **If you already override templates:** the package ships these templates (all under `templates/`): `base/head_style.tmpl`, `base/head_navbar.tmpl`, `base/head_impersonate_banner.tmpl` (Gitea 28.1.0's file, needed so 1.27 can load the navbar), `custom/footer.tmpl`, `custom/gh_head_navbar.tmpl`, `repo/blame.tmpl`, `repo/commits_list.tmpl`, `repo/issue/list.tmpl`, `repo/view_file.tmpl`, `repo/view_list.tmpl`, `repo/wiki/view.tmpl`, `user/settings/layout_head.tmpl`. If you override one of them yourself, extracting the package replaces your copy. Back it up first and merge the GitHub additions by hand: the `{{if StringUtils.HasPrefix … "github-"}}` blocks, and in `repo/view_list.tmpl` the `hidden` "N Commits" link (`a.m-commit-count`).
 - **Without the templates:** the repo home falls back to Gitea's Commits / Branches / Tags bar for the commit-history link. With `repo/view_list.tmpl`, "N Commits" sits at the right of the latest-commit row, as on github.com.
 - **Icons are global:** the SVG icons replace Gitea's icons for every theme. They depict the same things, drawn as Octicons.
 - **Browser support:** Chrome/Edge 112+, Safari 16.5+, Firefox 121+. The theme uses `@layer`, `:has()` and CSS nesting.
@@ -137,7 +138,7 @@ git clone https://github.com/mechiland/gitea-theme-github && cd gitea-theme-gith
 npm ci
 npm run lint       # no literal colors outside the token layer, type/radius/shadow from tokens, selector ownership
 npm run build      # → dist/theme-github-{auto,light,dark}.css (budget: ≤ 300 KB each, minified)
-npm run package    # → dist/gitea-theme-github-<version>-gitea1.27.3.{zip,tar.gz} (the drop-in package above)
+npm run package    # → dist/gitea-theme-github-<version>-gitea1.27-28.{zip,tar.gz} (the drop-in package above)
 ```
 
 Where things live:

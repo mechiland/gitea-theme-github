@@ -22,7 +22,7 @@
 :is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.primary.button:is(
   .admin.dashboard .ui.table *,
   .admin dd *,
-  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"], [href$="/settings/branches/edit"]),
+  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel^="#add-deploy-key-"], [href$="/settings/branches/edit"]),
   [name="request_reindex_type"],
   [href$="/-/admin/repos/unadopted"],
   #register-webauthn,
@@ -41,7 +41,7 @@
 :is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.primary.button:is(
   .admin.dashboard .ui.table *,
   .admin dd *,
-  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"], [href$="/settings/branches/edit"]),
+  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel^="#add-deploy-key-"], [href$="/settings/branches/edit"]),
   [name="request_reindex_type"],
   [href$="/-/admin/repos/unadopted"],
   #register-webauthn,
@@ -59,7 +59,7 @@
 :is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.primary.button:is(
   .admin.dashboard .ui.table *,
   .admin dd *,
-  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel="#add-deploy-key-panel"], [href$="/settings/branches/edit"]),
+  .ui.top.attached.header :is(.ui.jump.dropdown > *, [data-panel^="#add-deploy-key-"], [href$="/settings/branches/edit"]),
   [name="request_reindex_type"],
   [href$="/-/admin/repos/unadopted"],
   #register-webauthn,

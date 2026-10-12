@@ -7,10 +7,13 @@
  *   background with --fgColor-onEmphasis icon, content padding 16px, 16px-padded dismiss button,
  *   max-width 450px. The inline background is overridden in overlays.important.css.
  * Level: info → success (Gitea's info toast is the green "done" toast), warning → attention, error → danger.
+ * Gitea 28.x: the level is a class (toast-success | toast-info | toast-warning | toast-error) with a tinted background and
+ * a 1px level border, no inline style; info is its own level there (octicon-info) → Primer's default blue Toast-icon.
  */
 
 .toastify {
   align-items: stretch;
+  border: 0;
   width: max-content;
   min-width: min(var(--overlay-width-small), calc(100vw - 2 * var(--base-size-16)));
   max-width: min(450px, calc(100vw - 2 * var(--base-size-16)));
@@ -36,15 +39,15 @@
 }
 
 /* toast.ts always sets the level's inline `background: var(--color-green|orange|red)` */
-.toastify[style*="--color-green"] .toast-icon {
+.toastify:is([style*="--color-green"], .toast-success) .toast-icon {
   background-color: var(--bgColor-success-emphasis);
 }
 
-.toastify[style*="--color-orange"] .toast-icon {
+.toastify:is([style*="--color-orange"], .toast-warning) .toast-icon {
   background-color: var(--bgColor-attention-emphasis);
 }
 
-.toastify[style*="--color-red"] .toast-icon {
+.toastify:is([style*="--color-red"], .toast-error) .toast-icon {
   background-color: var(--bgColor-danger-emphasis);
 }
 
@@ -58,7 +61,7 @@
   visibility: hidden;
 }
 
-.toastify[style*="--color-red"] .toast-icon .gitea-exclamation {
+.toastify:is([style*="--color-red"], .toast-error) .toast-icon .gitea-exclamation {
   mask-image: var(--gh-octicon-stop);
 }
 
