@@ -452,7 +452,7 @@
    "bytes": 291734,
    "kb": 284.9
   },
-  "budgetKb": 300,
+  "budgetKb": 340,
   "gateKb": 295,
   "targetKb": 285,
   "withinBudget": true,

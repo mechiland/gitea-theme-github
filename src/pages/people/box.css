@@ -9,7 +9,7 @@
 #notification_table,
 #readme_profile,
 #user-heatmap > div::before,
-#activity-feed .item-main > :is(div:has(> .flex-text-block > .sha), .truncated-markup) {
+#activity-feed .item-main > :is(div:has(> .flex-text-block > .sha), .truncated-markup, .render-content) { /* .render-content: 28.x comment excerpt */
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-radius: var(--borderRadius-medium);
   background: var(--bgColor-default);

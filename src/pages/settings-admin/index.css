@@ -21,6 +21,7 @@
  *   blankslate.css  empty lists as a Primer Blankslate (Octicon visual; webhooks, deploy keys, branch protection, keys,
  *                   tokens, OAuth2 apps), add-people rows as Box header / footer, email / target lists as Boxes
  *   sections.css    two-factor methods as Box rows, org profile-picture column, body-less list rows centred
+ *   audit-log.css   Gitea 28.x audit log: one row of 32px filter controls, the event table fits the Box
  */
 @import "./layout.css";
 @import "./header.css";
@@ -32,3 +33,4 @@
 @import "./buttons.css";
 @import "./blankslate.css";
 @import "./sections.css";
+@import "./audit-log.css";

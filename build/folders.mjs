@@ -19,4 +19,4 @@ export const THEMES = {
   'github-dark': {display: 'GitHub Dark', scheme: 'dark'},
   'github-auto': {display: 'GitHub', scheme: 'auto'},
 };
-export const BUDGET_BYTES = 300 * 1024;
+export const BUDGET_BYTES = 340 * 1024; // 300 KB until Gitea 28 support (2026-10-12, user decision); loop gate 335 KB

@@ -335,6 +335,10 @@ html:lang(en) .gh-commit-day-date::before {
   .commit-header-buttons {
     flex-direction: row;
   }
+
+  .repository.diff > .container > .header.top.segment:first-child > .flex-left-right {
+    flex-wrap: wrap;
+  }
 }
 
 /* commit page: github.com's commit message Box has no muted header band */
@@ -362,6 +366,44 @@ html:lang(en) .gh-commit-day-date::before {
   border: 0;
   background: none;
   color: var(--fgColor-default);
+}
+
+/* Gitea 28.x commit page: the message box lost `.commit-header`; it is the container's first `.ui.top.attached.header
+   .segment` (the only other one is the git-notes box). Same rules as the 1.27.x ones above; parents and commit SHA now
+   sit in the author row's trailing .flex-text-block. */
+.repository.diff > .container > .header.top.segment:first-child {
+  background: var(--bgColor-default);
+}
+
+.repository.diff > .container > .header.top.segment:first-child > :is(.commit-body, .branch-and-tag-area) {
+  font-weight: var(--base-text-weight-normal);
+}
+
+.repository.diff > .container > .header.top.segment:first-child + .segment > .flex-text-block:last-child {
+  color: var(--fgColor-muted);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+}
+
+.repository.diff > .container > .header.top.segment:first-child + .segment .commit-id-short {
+  width: 7ch;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--fgColor-default);
+}
+
+/* the "N files changed  +a −d ■■■■■" row closing the box (ShowDiffSummaryInCommitHeader) is github.com's commit header
+   footer row (measured 2026-10-12, CommitHeader commitFilesChangedContainer): padding 8px 12px, 14px/21px semibold count,
+   12px/18px semibold +/− */
+.repository.diff > .container > .header.top.segment:first-child + .segment + .segment.flex-left-right {
+  padding: var(--base-size-8) var(--base-size-12);
+}
+
+.repository.diff > .container > .header.top.segment:first-child + .segment + .segment.flex-left-right > .flex-text-block {
+  font-size: var(--text-body-size-small);
+  line-height: var(--base-text-lineHeight-normal);
 }
 
 /* ---------- commit page header (templates/repo/commit_page.tmpl .commit-header-buttons) ----------

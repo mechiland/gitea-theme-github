@@ -174,3 +174,9 @@ html:lang(en) .repo-header .tw-text-18 + div:not(:has(.octicon-lock, .octicon-sh
   background: var(--borderColor-muted);
   box-shadow: 50vw 0 var(--borderColor-muted), -50vw 0 var(--borderColor-muted);
 }
+
+/* Gitea 28.x quick repo switcher: shown on the AppHeader repo crumb (header.css .gh-context-switcher), like
+   github.com, not after the repo name here */
+.repo-header [data-global-init="initRepoSwitcher"] {
+  display: none;
+}

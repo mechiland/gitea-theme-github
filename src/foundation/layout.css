@@ -95,7 +95,8 @@
   width: var(--breakpoint-medium);
 }
 
-.ui.message.web-banner-container > .web-banner-content {
+.ui.message.web-banner-container > .web-banner-content,
+.ui.message.site-banner-container > .site-banner-content { /* 1.27.x, 28.x */
   width: calc(var(--breakpoint-xlarge) - 2 * var(--page-margin-x));
 }
 

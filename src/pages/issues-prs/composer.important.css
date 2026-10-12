@@ -4,7 +4,7 @@
  * github.com file bar under the comment textarea: 1px --borderColor-default (the textarea draws the dashed rule),
  * radius 0 0 6 6, padding 8px.
  */
-:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .ui.dropzone {
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .dropzone {
   min-height: 0 !important;
   padding: var(--base-size-8) !important;
   border: var(--borderWidth-thin) solid var(--borderColor-default) !important;
@@ -18,7 +18,7 @@
 }
 
 /* dropzone.css: `.dropzone .dz-message { text-align: center; margin: 3em 0 }` */
-:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .ui.dropzone .dz-message {
+:is(#comment-form, #new-issue, .code-comments-list .conversation-holder form.comment-form) .dropzone .dz-message {
   margin: 0 !important;
   text-align: left !important;
 }

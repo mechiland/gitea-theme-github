@@ -1,4 +1,4 @@
-{{if or .UsesIgnoreRevs .FaultyIgnoreRevsFile}}
+{{$gitea1 := StringUtils.HasPrefix AppVer "1."}}{{/* gitea-theme-github: true on Gitea 1.27.x, false on 28.x; the $gitea1 branches keep each version's upstream markup */}}{{if or .UsesIgnoreRevs .FaultyIgnoreRevsFile}}
 	{{$revsFileLink := print .RepoLink "/src/" .RefTypeNameSubURL "/.git-blame-ignore-revs"}}
 	{{if .UsesIgnoreRevs}}
 		<div class="ui info message">
@@ -23,8 +23,8 @@
 				{{end}}
 				<a class="ui tiny button" href="{{.RepoLink}}/src/{{.RefTypeNameSubURL}}/{{.TreePath | PathEscapeSegments}}">{{ctx.Locale.Tr "repo.normal_view"}}</a>
 				<a class="ui tiny button" href="{{.RepoLink}}/commits/{{.RefTypeNameSubURL}}/{{.TreePath | PathEscapeSegments}}">{{ctx.Locale.Tr "repo.file_history"}}</a>
-				<button class="ui tiny button unescape-button">{{ctx.Locale.Tr "repo.unescape_control_characters"}}</button>
-				<button class="ui tiny button escape-button tw-hidden">{{ctx.Locale.Tr "repo.escape_control_characters"}}</button>
+				<button{{if not $gitea1}} type="button"{{end}} class="ui tiny button unescape-button">{{ctx.Locale.Tr "repo.unescape_control_characters"}}</button>
+				<button{{if not $gitea1}} type="button"{{end}} class="ui tiny button escape-button tw-hidden">{{ctx.Locale.Tr "repo.escape_control_characters"}}</button>
 			</div>
 		</div>
 	</h4>

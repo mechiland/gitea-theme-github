@@ -22,9 +22,9 @@
   line-height: calc(var(--base-size-20) - 2 * var(--borderWidth-thin));
 }
 
-/* "Mark all as read": Gitea's icon-only green button → a small default Button; the label is the button's own
-   (localized) title */
-.notification .flex-left-right > form > .button {
+/* "Mark all as read" (28.x also "Mark this page as read"): Gitea's icon-only (green) buttons → small default Buttons;
+   the label is the button's own localized title / tooltip */
+.notification .flex-left-right > :is(form, .flex-text-block) > .button {
   height: var(--control-small-size);
   padding: 0 var(--control-small-paddingInline-condensed);
   border-color: var(--button-default-borderColor-rest);
@@ -35,21 +35,26 @@
   font-weight: var(--base-text-weight-medium);
 }
 
-.notification .flex-left-right > form > .button::after {
+.notification .flex-left-right > :is(form, .flex-text-block) > .button::after {
   content: attr(title);
 }
 
-.notification .flex-left-right > form > .button > .svg {
+/* Gitea 28.x: "Mark this page as read" + "Mark all as read" in a .flex-text-block, labelled by their tooltip text */
+.notification .flex-left-right > .flex-text-block > .button::after {
+  content: attr(data-tooltip-content);
+}
+
+.notification .flex-left-right > :is(form, .flex-text-block) > .button > .svg {
   color: var(--fgColor-muted);
 }
 
-.notification .flex-left-right > form > .button:hover {
+.notification .flex-left-right > :is(form, .flex-text-block) > .button:hover {
   border-color: var(--button-default-borderColor-hover);
   background: var(--button-default-bgColor-hover);
   color: var(--button-default-fgColor-rest);
 }
 
-.notification .flex-left-right > form > .button:active {
+.notification .flex-left-right > :is(form, .flex-text-block) > .button:active {
   border-color: var(--button-default-borderColor-active);
   background: var(--button-default-bgColor-active);
 }

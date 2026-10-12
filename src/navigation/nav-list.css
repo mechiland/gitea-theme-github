@@ -80,9 +80,18 @@
   color: var(--fgColor-muted);
 }
 
+/* Gitea 28.x: a second menu in the same sidebar (repo Actions "Management" → Job queue) is a new NavList group: a
+   --borderColor-muted rule across the list, then the group heading (a bare <div>) */
+.flex-container-nav > .ui.vertical.menu + .ui.vertical.menu {
+  margin-top: var(--base-size-8);
+  padding-top: var(--base-size-8);
+  border-top: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
 /* group heading */
 .ui.vertical.menu .header.item,
-.ui.vertical.menu .item > .header:not(.ui) {
+.ui.vertical.menu .item > .header:not(.ui),
+.flex-container-nav > .ui.vertical.menu + .ui.vertical.menu > div:first-child {
   min-height: 0;
   padding: var(--base-size-6) var(--control-medium-paddingInline-condensed);
   background: transparent;
@@ -311,6 +320,11 @@
 
 .flex-container-nav [href$="/lfs"]::before {
   mask-image: url("../img/svg/octicon-file-binary.svg");
+}
+
+/* Gitea 28.x audit log (user / org / repo settings): github.com's "Security log" / "Audit log" glyph */
+.flex-container-nav [href$="/audit_logs"]::before {
+  mask-image: url("../img/svg/octicon-log.svg");
 }
 
 .flex-container-nav details:has([href*="/actions/"]) > summary::before {

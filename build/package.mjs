@@ -1,6 +1,6 @@
 // Builds a drop-in release package for Gitea's CUSTOM_PATH from an existing `npm run build` output.
 //
-//   node build/package.mjs            → dist/gitea-theme-github-<version>-gitea<ver>.{zip,tar.gz} + dist/package/
+//   node build/package.mjs            → dist/gitea-theme-github-<version>-gitea<GITEA_SUPPORTED>.{zip,tar.gz} + dist/package/
 //
 // Layout (extract into $GITEA_CUSTOM, e.g. /data/gitea in the official Docker image):
 //   public/assets/css/theme-github-{auto,light,dark}.css
@@ -8,17 +8,19 @@
 //   templates/**                         github-* branches only; other themes render Gitea's upstream bytes
 //                                        (repo/view_list.tmpl: a `hidden` link for other themes)
 //
-// templates/base/head_style.tmpl: the package pins the else-branch to Gitea 1.27.3's upstream two lines (a local install may
-// carry another theme's cache key there) and stamps the build revision for cache busting.
+// templates/base/head_style.tmpl: the package pins the else-branch to Gitea's upstream two lines (identical in 1.27.3 and
+// 28.1.0; a local install may carry another theme's cache key there) and stamps the build revision for cache busting.
+// One package serves Gitea 1.27.x and 28.x: templates branch on `StringUtils.HasPrefix AppVer "1."` where the two differ.
 import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {ROOT, DIST, SRC, THEMES} from './folders.mjs';
 
-const GITEA_VERSION = '1.27.3';
+const GITEA_SUPPORTED = '1.27-28'; // tested on 1.27.3 and 28.1.0
+const GITEA_TESTED = '1.27.3 and 28.1.0';
 const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
 const report = JSON.parse(fs.readFileSync(path.join(DIST, 'build-report.json'), 'utf8'));
-const name = `gitea-theme-github-${pkg.version}-gitea${GITEA_VERSION}`;
+const name = `gitea-theme-github-${pkg.version}-gitea${GITEA_SUPPORTED}`;
 const out = path.join(DIST, 'package', 'gitea-theme-github');
 
 fs.rmSync(path.join(DIST, 'package'), {recursive: true, force: true});
@@ -53,7 +55,7 @@ for (const rel of fs.readdirSync(tplRoot, {recursive: true}).filter((f) => f.end
 }
 
 for (const f of ['LICENSE', 'NOTICE']) copy(path.join(ROOT, f), path.join(out, f));
-fs.writeFileSync(path.join(out, 'INSTALL.md'), `# gitea-theme-github ${pkg.version} (for Gitea ${GITEA_VERSION})
+fs.writeFileSync(path.join(out, 'INSTALL.md'), `# gitea-theme-github ${pkg.version} (for Gitea 1.27.x and 28.x, tested on ${GITEA_TESTED})
 
 1. Copy the contents of this folder into Gitea's custom directory (\`$GITEA_CUSTOM\`, \`/data/gitea\` in the official
    Docker image), keeping the paths: \`public/…\` and \`templates/…\`.
@@ -64,7 +66,9 @@ fs.writeFileSync(path.join(out, 'INSTALL.md'), `# gitea-theme-github ${pkg.versi
 4. Pick "GitHub" in Settings → Appearance.
 
 Theme files: ${Object.entries(report.themes).map(([n, t]) => `${n} ${t.kb} KB`).join(', ')} · build ${report.revision}.
-The templates are copies of Gitea ${GITEA_VERSION} templates with added github-only blocks; re-check them when upgrading Gitea.
+The templates are copies of Gitea's templates with added github-only blocks. Where Gitea 1.27 and 28 differ they carry both
+versions (picked at runtime from Gitea's version), so the same package keeps working across a 1.27 → 28 upgrade.
+templates/base/head_impersonate_banner.tmpl is Gitea 28.1.0's file verbatim: on 1.27.x it only has to exist.
 If you already override one of these templates, merge the github-* blocks by hand.
 templates/repo/view_list.tmpl adds the "N Commits" link to the latest-commit header (hidden for other themes).
 The SVG files replace Gitea's icons for every theme (same meaning, Octicon drawings).

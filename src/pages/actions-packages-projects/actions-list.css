@@ -25,24 +25,26 @@
    the repo UnderlineNav (no gap); content padding 16px 24px (16px at md), so the runs Box is 1056px wide at x=360.
    Gitea: .ui.container (1280px, centred) > .flex-container (240px nav, 16px gap) → from md the container spans the
    page and the nav becomes the bordered pane. `:has(.run-list)` = the runs list page only (also with an empty
-   filter result); the settings Actions pages share `.repository.actions` but have no .run-list. */
+   filter result); the settings Actions pages share `.repository.actions` but have no .run-list. Gitea 28.x adds a
+   second sidebar menu ("Management" → Job queue) and the Job queue page (#actions-job-queue, no .run-list) shares the
+   pane: `.menu + .menu` / #actions-job-queue select it; GitHub's Caches/Runners pages use the same PageLayout. */
 @media (min-width: 768px) {
-  .page-content.repository.actions:has(.run-list) > .secondary-nav {
+  .page-content.repository.actions:has(:is(.run-list, #actions-job-queue)) > .secondary-nav {
     margin-bottom: 0;
   }
 
-  .page-content.repository.actions:has(.run-list) > .container.ui {
+  .page-content.repository.actions:has(:is(.run-list, #actions-job-queue)) > .container.ui {
     width: 100%;
     max-width: none;
     margin: 0;
   }
 
   /* alerts above the layout keep the content padding */
-  .page-content.repository.actions > .ui.container > :not(.flex-container):has(~ .flex-container .run-list) {
+  .page-content.repository.actions > .ui.container > :not(.flex-container):has(~ .flex-container :is(.run-list, #actions-job-queue)) {
     margin: var(--base-size-16) var(--base-size-16) 0;
   }
 
-  .repository.actions > .ui.container > .flex-container:has(.run-list) {
+  .repository.actions > .ui.container > .flex-container:is(:has(.run-list), :has(> .flex-container-nav > .menu + .menu)) {
     gap: 0;
     margin-top: 0;
   }
@@ -52,62 +54,66 @@
      100vh). Gitea: the chain .full.height > .page-content > .ui.container > .flex-container grows to the footer
      (the page's bottom space moves into the content column), the nav is the full-height bordered pane and its menu
      is the sticky part. */
-  .full.height:has(> .page-content > .ui.container > .flex-container > .flex-container-main > .segment > .run-list) { /* fixed child path: PERF-3 */
+  .full.height:has(> .page-content > .ui.container > .flex-container > .flex-container-main > .segment > .run-list, > .page-content > .ui.container > .flex-container > .flex-container-main > #actions-job-queue) { /* fixed child paths: PERF-3 */
     display: flex;
     flex-direction: column;
     padding-bottom: 0;
   }
 
-  .page-content.repository.actions:has(.run-list),
-  .page-content.repository.actions:has(.run-list) > .container.ui {
+  .page-content.repository.actions:has(:is(.run-list, #actions-job-queue)),
+  .page-content.repository.actions:has(:is(.run-list, #actions-job-queue)) > .container.ui {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
   }
 
-  .repository.actions > .ui.container > .flex-container:has(.run-list) {
+  .repository.actions > .ui.container > .flex-container:is(:has(.run-list), :has(> .flex-container-nav > .menu + .menu)) {
     flex-grow: 1;
   }
 
-  .flex-container:has(.run-list) > .flex-container-nav {
+  .flex-container:is(:has(.run-list), :has(> .flex-container-nav > .menu + .menu)) > .flex-container-nav {
     flex: 0 0 auto;
     width: calc(var(--base-size-128) * 2);
+    /* the pane's content is the sticky scroll box (one box: 28.x stacks two menus in it); the full-height divider is
+       drawn by the content column into this transparent border, at the same x as before */
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    max-height: 100vh;
+    overflow-y: auto;
     padding: var(--base-size-16);
-    border-right: var(--borderWidth-thin) solid var(--borderColor-default);
+    border-right: var(--borderWidth-thin) solid transparent;
   }
 
-  .flex-container:has(.run-list) > .flex-container-nav > .menu {
-    position: sticky;
-    top: var(--base-size-16);
-    max-height: calc(100vh - var(--base-size-32));
-    overflow-y: auto;
-    /* the scroll box also clips inline: keep the NavList's current-item bar (8px left of the item) inside it; the
-       matching width is in pages.important.css (Gitea: `.ui.vertical.menu.fluid { width: 100% !important }`) */
+  /* keep the NavList's current-item bar (8px left of the item) clear of the item box; the matching width is in
+     pages.important.css (Gitea: `.ui.vertical.menu.fluid { width: 100% !important }`) */
+  .flex-container:is(:has(.run-list), :has(> .flex-container-nav > .menu + .menu)) > .flex-container-nav > .menu {
     margin-inline: calc(var(--base-size-8) * -1);
     padding-inline: var(--base-size-8);
   }
 
-  .flex-container:has(.run-list) > .flex-container-main {
+  .flex-container:is(:has(.run-list), :has(> .flex-container-nav > .menu + .menu)) > .flex-container-main {
     padding: var(--base-size-16) var(--base-size-16) var(--page-space-bottom);
+    box-shadow: calc(var(--borderWidth-thin) * -1) 0 0 var(--borderColor-default);
   }
 }
 
 @media (min-width: 1012px) {
-  .flex-container:has(.run-list) > .flex-container-nav {
+  .flex-container:is(:has(.run-list), :has(> .flex-container-nav > .menu + .menu)) > .flex-container-nav {
     width: calc(var(--base-size-128) * 2 + var(--base-size-64));
   }
 
-  .flex-container:has(.run-list) > .flex-container-main {
+  .flex-container:is(:has(.run-list), :has(> .flex-container-nav > .menu + .menu)) > .flex-container-main {
     padding-inline: var(--base-size-24);
   }
 
-  .page-content.repository.actions > .ui.container > :not(.flex-container):has(~ .flex-container .run-list) {
+  .page-content.repository.actions > .ui.container > :not(.flex-container):has(~ .flex-container :is(.run-list, #actions-job-queue)) {
     margin-inline: var(--base-size-24);
   }
 }
 
 @media (min-width: 1280px) {
-  .flex-container:has(.run-list) > .flex-container-nav {
+  .flex-container:is(:has(.run-list), :has(> .flex-container-nav > .menu + .menu)) > .flex-container-nav {
     width: calc(var(--base-size-128) * 2 + var(--base-size-80));
   }
 }
@@ -120,7 +126,7 @@
    template was rejected, FG-049) → English-only generated text; a selected workflow's name is not reachable from
    CSS, so the PageHeader shows only while "All workflows" is the current item. */
 @media (min-width: 768px) {
-  html:lang(en) .flex-container:has(.run-list) > .flex-container-nav > .menu::before {
+  html:lang(en) .flex-container:is(:has(.run-list), :has(> .flex-container-nav > .menu + .menu)) > .flex-container-nav > .menu:first-child::before {
     content: "Actions";
     margin: var(--base-size-4) 0 var(--base-size-8);
     font-size: var(--text-title-size-medium);
@@ -129,11 +135,11 @@
   }
 
   /* the rule is the second item's ::before (Gitea hides `.ui.vertical.menu .item:first-child::before` !important) */
-  .flex-container:has(.run-list) > .flex-container-nav > .menu > .item:first-child + .item {
+  .flex-container:is(:has(.run-list), :has(> .flex-container-nav > .menu + .menu)) > .flex-container-nav > .menu > .item:first-child + .item {
     margin-top: var(--base-size-16);
   }
 
-  .flex-container:has(.run-list) > .flex-container-nav > .menu > .item:first-child + .item::before {
+  .flex-container:is(:has(.run-list), :has(> .flex-container-nav > .menu + .menu)) > .flex-container-nav > .menu > .item:first-child + .item::before {
     content: "";
     display: block;
     position: absolute;
@@ -493,4 +499,14 @@ a.run-list-ref:hover {
     align-items: flex-start;
     gap: var(--base-size-4);
   }
+}
+
+/* Gitea 28.x job queue (shared/actions/job_queue_list.tmpl, repo Actions and the admin / user / org settings pages):
+   a DataTable — cells on one line, a table wider than the Box scrolls inside it (github.com's tables on small screens) */
+#actions-job-queue > .table.segment {
+  overflow-x: auto;
+}
+
+#actions-job-queue > .table.segment > .ui.table > tbody {
+  white-space: nowrap;
 }

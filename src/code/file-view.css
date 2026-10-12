@@ -88,6 +88,7 @@
 .file-view .lines-blame-btn > a:hover,
 .diff-file-header .fold-file:hover,
 .diff-file-header .diff-header-popup-btn:hover,
+.diff-file-header .btn[data-global-init="initDiffHeaderPopupMenu"]:hover,
 .diff-file-header .diff-file-name .btn[data-clipboard-text]:hover {
   background: var(--control-transparent-bgColor-hover);
   color: var(--fgColor-default);
