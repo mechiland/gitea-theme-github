@@ -159,7 +159,9 @@
 }
 
 /* while a menu is open its caret carries .active (Fomantic), which turns the group into controls' SegmentedControl
-   (track background, transparent knobs); keep the ButtonGroup look with the caret pressed instead */
+   (track background, transparent knobs); keep the ButtonGroup look with the caret pressed instead. Item rules test
+   the open caret from the item (`:is(.active.dropdown, .active.dropdown ~ *, :has(~ .active.dropdown))`, see
+   controls/button-groups.css, PERF-2); the icon rules are keyed by the merge button's two octicons. */
 .pull-merge-box .ui.buttons:has(> .active.dropdown) {
   align-items: normal;
   height: auto;
@@ -168,7 +170,7 @@
   background: transparent;
 }
 
-.pull-merge-box .ui.buttons:has(> .active.dropdown) > .button {
+.pull-merge-box .ui.buttons > .button:is(.active.dropdown, .active.dropdown ~ *, :has(~ .active.dropdown)) {
   height: var(--control-medium-size);
   margin: 0 calc(var(--borderWidth-thin) * -1) 0 0;
   border: var(--borderWidth-thin) solid var(--button-default-borderColor-rest);
@@ -179,12 +181,12 @@
   font-weight: var(--base-text-weight-medium);
 }
 
-.pull-merge-box .ui.buttons:has(> .active.dropdown) > .button:last-child {
+.pull-merge-box .ui.buttons > .button:is(.active.dropdown, .active.dropdown ~ *, :has(~ .active.dropdown)):last-child {
   margin: 0;
   border-radius: 0 var(--borderRadius-medium) var(--borderRadius-medium) 0;
 }
 
-.pull-merge-box .ui.buttons:has(> .active.dropdown) > .button:hover {
+.pull-merge-box .ui.buttons > .button:is(.active.dropdown, .active.dropdown ~ *, :has(~ .active.dropdown)):hover {
   border-color: var(--button-default-borderColor-hover);
   background: var(--button-default-bgColor-hover);
 }
@@ -197,14 +199,14 @@
 }
 
 /* merge button: primary (green) */
-.pull-merge-box .ui.primary.buttons:has(> .active.dropdown) > .button {
+.pull-merge-box .ui.primary.buttons > .button:is(.active.dropdown, .active.dropdown ~ *, :has(~ .active.dropdown)) {
   border-color: var(--button-primary-borderColor-rest);
   background: var(--button-primary-bgColor-rest);
   box-shadow: var(--shadow-resting-small);
   color: var(--button-primary-fgColor-rest);
 }
 
-.pull-merge-box .ui.primary.buttons:has(> .active.dropdown) > .button:hover {
+.pull-merge-box .ui.primary.buttons > .button:is(.active.dropdown, .active.dropdown ~ *, :has(~ .active.dropdown)):hover {
   border-color: var(--button-primary-borderColor-hover);
   background: var(--button-primary-bgColor-hover);
 }
@@ -215,18 +217,20 @@
   box-shadow: none;
 }
 
-.pull-merge-box .ui.primary.buttons:has(> .active.dropdown) > .button > .svg {
+.pull-merge-box .ui.primary.buttons:has(> .active.dropdown) > .button > :where(.octicon-git-merge).svg,
+.pull-merge-box .ui.primary.buttons:has(> .active.dropdown) > .button > :where(.octicon-triangle-down).svg {
   color: var(--button-primary-iconColor-rest);
 }
 
 /* merge button when checks failed / manual merge: danger */
-.pull-merge-box .ui.red.buttons:has(> .active.dropdown) > .button {
+.pull-merge-box .ui.red.buttons > .button:is(.active.dropdown, .active.dropdown ~ *, :has(~ .active.dropdown)) {
   border-color: var(--button-danger-borderColor-rest);
   background: var(--button-danger-bgColor-rest);
   color: var(--button-danger-fgColor-rest);
 }
 
-.pull-merge-box .ui.red.buttons:has(> .active.dropdown) > .button > .svg {
+.pull-merge-box .ui.red.buttons:has(> .active.dropdown) > .button > :where(.octicon-git-merge).svg,
+.pull-merge-box .ui.red.buttons:has(> .active.dropdown) > .button > :where(.octicon-triangle-down).svg {
   color: var(--button-danger-iconColor-rest);
 }
 

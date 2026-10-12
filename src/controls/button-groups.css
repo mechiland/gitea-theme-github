@@ -62,7 +62,12 @@
   border-color: var(--button-primary-borderColor-rest);
 }
 
-/* ---------- SegmentedControl ---------- */
+/* ---------- SegmentedControl ----------
+   A group with an active (non-dropdown) button. Rules on its items test that from the item itself —
+   `.button:is(.active…, .active… ~ *, :has(~ .active…))` = the active item or a sibling after / before it, same
+   specificity as `.ui.buttons:has(> .active…) > .button` — because a :has() in front of the subject makes Chrome
+   restyle every .button / .ui of the page (one per diff line when signed in) on any class change (PERF-2). The
+   icon rule keeps the :has() but is keyed by the icon classes Gitea puts in such groups. */
 .ui.buttons:has(> .active.button:not(.dropdown)) {
   align-items: stretch;
   height: var(--control-medium-size);
@@ -72,7 +77,7 @@
   background: var(--controlTrack-bgColor-rest);
 }
 
-.ui.buttons:has(> .active.button:not(.dropdown)) > .button {
+.ui.buttons > .button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))) {
   height: auto;
   min-height: 0;
   margin: -1px 0;
@@ -85,27 +90,27 @@
   font-weight: var(--base-text-weight-normal);
 }
 
-.ui.buttons:has(> .active.button:not(.dropdown)) > .button:first-child {
+.ui.buttons > .button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))):first-child {
   margin-left: -1px;
 }
 
-.ui.buttons:has(> .active.button:not(.dropdown)) > .button:last-child {
+.ui.buttons > .button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))):last-child {
   margin-right: -1px;
 }
 
-.ui.buttons:has(> .active.button:not(.dropdown)) > .icon.button,
-.ui.icon.buttons:has(> .active.button:not(.dropdown)) > .button {
+.ui.buttons > .icon.button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))),
+.ui.icon.buttons > .button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))) {
   min-width: var(--control-medium-size);
   padding: 0 calc((var(--control-medium-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
 }
 
 /* inner hover/press "pill" inset by 4px (Primer --segmented-control-button-bg-inset) */
-.ui.buttons:has(> .active.button:not(.dropdown)) > .button:not(.active):hover {
+.ui.buttons > .button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))):not(.active):hover {
   background: var(--controlTrack-bgColor-hover);
   box-shadow: inset 0 0 0 var(--base-size-4) var(--controlTrack-bgColor-rest);
 }
 
-.ui.buttons:has(> .active.button:not(.dropdown)) > .button:not(.active):active {
+.ui.buttons > .button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))):not(.active):active {
   background: var(--controlTrack-bgColor-active);
   box-shadow: inset 0 0 0 var(--base-size-4) var(--controlTrack-bgColor-rest);
 }
@@ -120,19 +125,22 @@
 }
 
 /* Primer SegmentedControl icons are 16px in both sizes (Gitea's file-view Code / Preview toggle passes 15) */
-.ui.buttons:has(> .active.button:not(.dropdown)) > .button > .svg {
+.ui.buttons:has(> .active.button:not(.dropdown)) > .button > :where(.octicon-code).svg,
+.ui.buttons:has(> .active.button:not(.dropdown)) > .button > :where(.octicon-file).svg,
+.ui.buttons:has(> .active.button:not(.dropdown)) > .button > :where(.material-invert-colors).svg,
+.ui.buttons:has(> .active.button:not(.dropdown)) > .button > :where(.material-palette).svg {
   width: var(--base-size-16);
   height: var(--base-size-16);
   color: var(--fgColor-muted);
 }
 
-.ui.buttons:has(> .active.button:not(.dropdown)) > .button:focus-visible {
+.ui.buttons > .button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))):focus-visible {
   outline: var(--focus-outline-width) solid var(--fgColor-accent);
   outline-offset: -1px;
 }
 
 /* divider between two unselected items */
-.ui.buttons:has(> .active.button:not(.dropdown)) > .button:not(.active, :last-child, :has(+ .active)):not(:hover)::after {
+.ui.buttons > .button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))):not(.active, :last-child, :has(+ .active)):not(:hover)::after {
   content: "";
   position: absolute;
   top: var(--base-size-8);
@@ -149,19 +157,19 @@
   font-size: var(--text-body-size-small);
 }
 
-.ui.buttons:is(.small, .tiny, .mini):has(> .active.button:not(.dropdown)) > .button,
-.ui.buttons:has(> .active.button:not(.dropdown)) > .button:is(.small, .tiny, .mini) {
+.ui.buttons:is(.small, .tiny, .mini) > .button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))),
+.ui.buttons > .button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))):is(.small, .tiny, .mini) {
   padding: 0 var(--control-small-paddingInline-condensed);
   font-size: var(--text-body-size-small);
 }
 
-.ui.icon.buttons:is(.small, .tiny, .mini):has(> .active.button:not(.dropdown)) > .button,
-.ui.icon.buttons:has(> .active.button:not(.dropdown)) > .button:is(.small, .tiny, .mini) {
+.ui.icon.buttons:is(.small, .tiny, .mini) > .button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))),
+.ui.icon.buttons > .button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))):is(.small, .tiny, .mini) {
   min-width: var(--control-small-size);
   padding: 0 calc((var(--control-small-size) - var(--base-size-16)) / 2 - var(--borderWidth-thin));
 }
 
-.ui.buttons:has(> .active.button:not(.dropdown)):has(> .button:is(.small, .tiny, .mini)) > .button:not(.active, :last-child, :has(+ .active)):not(:hover)::after {
+.ui.buttons > .button:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))):is(.button:is(.small, .tiny, .mini), .button:is(.small, .tiny, .mini) ~ *, :has(~ .button:is(.small, .tiny, .mini))):not(.active, :last-child, :has(+ .active)):not(:hover)::after {
   top: var(--base-size-6);
   bottom: var(--base-size-6);
 }
@@ -265,7 +273,7 @@
 }
 
 /* a Select in a SegmentedControl group (commit graph) fills the 28px track and shares its border */
-.ui.buttons:has(> .active.button:not(.dropdown)) > .ui.selection.dropdown {
+.ui.buttons > .ui.selection.dropdown:is(.active.button:not(.dropdown), .active.button:not(.dropdown) ~ *, :has(~ .active.button:not(.dropdown))) {
   align-self: stretch;
   min-height: 0;
   margin: -1px var(--base-size-4) -1px -1px;

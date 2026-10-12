@@ -32,7 +32,7 @@
 
 /* the theme / language dropdowns take Fomantic's `line-height: normal` (16px boxes): the band's 18px line keeps every
    row the same height, so the stacked < 768 rows sit at a steady 26px pitch like github.com's */
-.full.height:has(> .gh-app-header--auth) + .page-footer > .right-links > .ui.dropdown {
+.full.height:has(> .gh-app-header--auth) + .page-footer > .right-links > .dropdown.ui { /* .dropdown first: PERF-2 */
   line-height: inherit;
 }
 

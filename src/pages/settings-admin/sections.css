@@ -70,7 +70,7 @@
 }
 
 /* list rows: a title without a body line is centred on the row's avatar / icon */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .items-with-main > .item > .item-main {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .items-with-main > .item > .item-main {
   align-self: stretch;
   justify-content: center;
 }

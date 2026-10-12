@@ -97,14 +97,14 @@
 .code-editor-container :is(.tok-typeName, .tok-className) { color: var(--prettylights-syntax-entity); }
 .code-editor-container .tok-namespace { color: inherit; }
 .code-editor-container :is(.tok-macroName, .tok-labelName) { color: var(--prettylights-syntax-entity); }
-:is(.page-content:has(.breadcrumb > .active.section[title$=".rs" i]) .file-view, table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.w+.kp+.nc:has(+.w+.bp)).nc,
+:is(.file-view[data-gh-path$=".rs" i], table.chroma[data-path$=".rs" i], code.chroma.language-rust) :where(.w+.kp+.nc:has(+.w+.bp)).nc,
 .code-editor-container .tok-operator { color: var(--prettylights-syntax-keyword); }
 .chroma .sd,
 .code-editor-container .tok-meta { color: var(--prettylights-syntax-comment); }
 .chroma .gh,
 .chroma .gu,
 .code-editor-container .tok-heading { color: var(--prettylights-syntax-markup-heading); font-weight: var(--base-text-weight-semibold); }
-:is(.page-content:has(.breadcrumb > .active.section:is([title$=".md" i], [title$=".markdown" i])) .file-view.code-view, table.chroma:is([data-path$=".md" i], [data-path$=".markdown" i])) .na,
+:is(.file-view.code-view:is([data-gh-path$=".md" i], [data-gh-path$=".markdown" i]), table.chroma:is([data-path$=".md" i], [data-path$=".markdown" i])) .na,
 .code-editor-container .tok-link { color: var(--prettylights-syntax-string); text-decoration: underline; }
 .code-editor-container .tok-inserted { color: var(--prettylights-syntax-markup-inserted-text); background-color: var(--prettylights-syntax-markup-inserted-bg); }
 .code-editor-container .tok-deleted { color: var(--prettylights-syntax-markup-deleted-text); background-color: var(--prettylights-syntax-markup-deleted-bg); }

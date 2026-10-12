@@ -56,6 +56,145 @@ const IMPORTANT_DISPLAY_ALLOW = new Set([
   '.repository .diff-detail-box .diff-detail-stats',
 ]);
 
+// PERF-2 (2026-10-12): Chrome restyles every element that can match a rule's subject on *any* class change when a
+// compound in front of that subject contains :has() or an attribute selector on class ([class*=…], [class="…"]),
+// whether or not the anchor exists. With a keyless subject (`X:has(…) > *`, `… > :not(.a)`, `X:has(…) *` inside
+// :is()) or a span / td subject that is the whole page: ~0.4–0.6 s per hover or toggle on a 47-file PR diff
+// (300k elements), 1.2 s in total before PERF-2. Keep such subjects keyed by a class or id (or a rare element type).
+const POPULOUS_TYPES = new Set(['span', 'td', 'tr', 'div', 'li']);
+function splitTop(s, isSep) {
+  const out = [];
+  let depth = 0, cur = '', quote = null;
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (quote) { cur += c; if (c === quote) quote = null; continue; }
+    if (c === '"' || c === "'") { quote = c; cur += c; continue; }
+    if (c === '\\') { cur += c + (s[++i] ?? ''); continue; }
+    if (c === '(' || c === '[') depth++;
+    else if (c === ')' || c === ']') depth--;
+    if (!depth && isSep(c)) { out.push(cur); cur = ''; continue; }
+    cur += c;
+  }
+  out.push(cur);
+  return out.map((x) => x.trim()).filter(Boolean);
+}
+function topLevelOf(compound) { // the compound without anything inside (…) or […]
+  let depth = 0, out = '';
+  for (const c of compound) {
+    if (c === '(' || c === '[') depth++;
+    else if (c === ')' || c === ']') depth--;
+    else if (!depth) out += c;
+  }
+  return out;
+}
+// a complex selector → compounds and the combinators between them (' ', '>', '+', '~')
+function parseComplex(selector) {
+  const compounds = [], combinators = [];
+  let depth = 0, cur = '', comb = null;
+  for (let i = 0; i < selector.length; i++) {
+    const c = selector[i];
+    if (c === '\\') { cur += c + (selector[++i] ?? ''); continue; }
+    if (c === '(' || c === '[') depth++;
+    else if (c === ')' || c === ']') depth--;
+    if (!depth && /[\s>+~]/.test(c)) {
+      if (cur) { compounds.push(cur); cur = ''; comb = ' '; }
+      if (c !== ' ' && c !== '\n') comb = c;
+      continue;
+    }
+    if (comb && !cur) { combinators.push(comb); comb = null; }
+    cur += c;
+  }
+  if (cur) compounds.push(cur);
+  return {compounds, combinators};
+}
+// the arguments of each top-level :is() / :where() / :not() / :has() of a selector
+function pseudoArgs(selector, names) {
+  const out = [];
+  for (const m of selector.matchAll(new RegExp(`:(${names})\\(`, 'g'))) {
+    let depth = 1, j = m.index + m[0].length;
+    for (; j < selector.length && depth; j++) depth += selector[j] === '(' ? 1 : selector[j] === ')' ? -1 : 0;
+    out.push(...splitTop(selector.slice(m.index + m[0].length, j - 1), (c) => c === ','));
+  }
+  return out;
+}
+// Classes with thousands of elements on a large PR diff (Chrome, signed in: every code line has a
+// button.ui.primary.button.add-code-comment with an svg.octicon-plus), plus the Chroma token classes.
+const POPULOUS_CLASSES = new Set(['ui', 'button', 'primary', 'svg', 'chroma', 'code-inner', 'tw-font-mono', 'add-code-comment', 'octicon-plus', 'add-code', 'del-code', 'same-code', 'added-code', 'removed-code']);
+const CHROMA_TOKENS = new Set('bp c c1 ch cm cp cpf cs dl err fm g gd ge gh gi gl go gp gr gs gt gu hl il k kc kd kn kp kr kt l ld lnt m mb mf mh mi mo n na nb nc nd ne nf ni nl nn no nt nv nx o ow p py s s1 s2 sa sb sc sd se sh si sr ss sx vc vg vi vm w x'.split(' '));
+const populousClass = (c) => POPULOUS_CLASSES.has(c) || CHROMA_TOKENS.has(c) || c.startsWith('lines-') || c.startsWith('add-code-comment');
+// The feature Chrome keys a compound's invalidation by (measured): an id anywhere in it; else the first class, a
+// single-argument :is() / :where() counting as its argument (`:where(.rare).button` → .rare, `:is(.a, .b).button` →
+// .button); else, when every alternative of an :is() / :where() is keyed, those; else the element type.
+function keyed(compound) {
+  const top = topLevelOf(compound);
+  if (/#[\w-]/.test(top)) return true;
+  const units = [];
+  for (let i = 0, depth = 0, start = 0; i <= compound.length; i++) {
+    const c = compound[i];
+    if (!depth && (i === compound.length || (i > start && /[.:[#]/.test(c) && compound[i - 1] !== '\\' && compound[i - 1] !== ':'))) { units.push(compound.slice(start, i)); start = i; }
+    if (c === '(' || c === '[') depth++;
+    else if (c === ')' || c === ']') depth--;
+  }
+  const multi = [];
+  const typeFirst = /^[a-z]/i.test(units[0] ?? ''); // `a:where(.rare).button` is keyed by .button (measured), not .rare
+  for (const u of units) {
+    if (u.startsWith('.')) return !populousClass(/^\.([\w-]+)/.exec(u)[1]);
+    const m = /^:(is|where)\((.*)\)$/s.exec(u);
+    if (!m) continue;
+    const alts = splitTop(m[2], (c) => c === ',');
+    if (alts.length === 1 && /^\.[\w-]+$/.test(alts[0]) && !typeFirst) return !populousClass(alts[0].slice(1));
+    multi.push(alts);
+  }
+  if (multi.some((alts) => alts.every((a) => keyed(parseComplex(a).compounds.at(-1) ?? '')))) return true;
+  const type = /^[a-z][\w-]*/i.exec(top)?.[0]?.toLowerCase();
+  return !!type && !POPULOUS_TYPES.has(type); // `span:where(.nb, .kt)` is keyed by span (0.39 s vs 0.07 s)
+}
+// Measured (Chrome, 300k-element PR diff): `X:has(…) > *` / `X:has(…) ~ *` 0.4–0.55 s at the top level; inside an
+// :is() of a keyed compound only a descendant / child chain (`.a:is(X:has(…) *)`) stays expensive, a sibling chain
+// (`.item:is(:first-child:not(:has(…)) ~ *)`) does not.
+export function invalidationErrors(selector, nested = false) {
+  const errors = [];
+  const {compounds, combinators} = parseComplex(selector);
+  const first = compounds.slice(0, -1).findIndex((c) => c.includes(':has(') || /\[class[\]*^$~|=]/.test(c));
+  if (first >= 0 && !keyed(compounds.at(-1)) && (!nested || combinators.slice(first).some((c) => c === ' ' || c === '>')))
+    errors.push(`"${selector}": subject "${compounds.at(-1)}" needs a rare class (first) or an id after a :has() / [class…] compound (PERF-2, build/lint.mjs)`);
+  for (const arg of pseudoArgs(selector, 'is|where|not')) errors.push(...invalidationErrors(arg, true));
+  // PERF-3: a :has() anchored on a page-level element (html, body, .full.height, .page-content, the issue / PR view)
+  // whose argument searches descendants (`body:has(.repo-header)`) is re-run over the whole page on every class
+  // change, ~13 ms each on a 330k-element diff; a fixed child path (`body:has(> .full.height > … > .repo-header)`)
+  // is bounded.
+  for (const m of selector.matchAll(/:has\(/g)) {
+    // the anchor: the top-level compound the :has() sits in (also through `.page-content:not(.a, :has(…))`)
+    let start = 0;
+    for (let i = 0, depth = 0; i < m.index; i++) {
+      const c = selector[i];
+      if (c === '(' || c === '[') depth++;
+      else if (c === ')' || c === ']') depth--;
+      else if (!depth && /[\s>+~]/.test(c)) start = i + 1;
+    }
+    const anchor = selector.slice(start, m.index);
+    if (!anchor) continue;
+    const top = topLevelOf(anchor).replace(/::?[\w-]+/g, '');
+    const type = /^[a-z][\w-]*/i.exec(top)?.[0]?.toLowerCase();
+    const classes = [...top.matchAll(/\.([\w-]+)/g)].map((x) => x[1]);
+    const pageLevel = type === 'html' || type === 'body' || /:root/.test(anchor) || (!type && classes.length > 0 && classes.every((c) => PAGE_LEVEL_CLASSES.has(c)));
+    if (!pageLevel) continue;
+    let depth = 1, j = m.index + 5;
+    for (; j < selector.length && depth; j++) depth += selector[j] === '(' ? 1 : selector[j] === ')' ? -1 : 0;
+    const searches = splitTop(selector.slice(m.index + 5, j - 1), (c) => c === ',').some((alt) => {
+      const {combinators} = parseComplex(alt.replace(/^([>+~])/, '$1 '));
+      return !/^[>+~]/.test(alt) || combinators.some((c) => c === ' ');
+    });
+    if (searches && !PERF3_ALLOW.some((a) => selector.startsWith(a))) errors.push(`"${selector}": :has() on page-level "${anchor}" searches descendants; use a fixed child path (PERF-3, build/lint.mjs)`);
+  }
+  return [...new Set(errors)];
+}
+const PAGE_LEVEL_CLASSES = new Set(['full', 'height', 'page-content', 'repository', 'view', 'issue', 'pull', 'diff', 'files']);
+// Waived: the destructive-confirmation scope (overlays/dialog.css) must look for its triggers anywhere on the page.
+// Chrome only evaluates it (and re-runs it on class changes) while an id-less modal with an OK button exists, i.e.
+// after a data-modal-confirm trigger was used on a small page (labels, Actions runs…), never on a plain diff.
+const PERF3_ALLOW = ['body:has(:is([data-modal-confirm], [data-modal-confirm-content])'];
+
 export async function lintFolder(folder) {
   const dir = path.join(SRC, folder);
   const result = {folder, errors: [], warnings: [], selectors: new Set()};
@@ -80,6 +219,7 @@ export async function lintFolder(folder) {
       if (r.parent?.type === 'atrule' && /keyframes/.test(r.parent.name)) return;
       for (const s of r.selectors) {
         const norm = s.replace(/\s+/g, ' ').trim();
+        for (const msg of invalidationErrors(norm)) result.errors.push({file: path.relative(ROOT, file), line: r.source?.start?.line, msg});
         if (norm === ':root' || norm.startsWith('gitea-theme-meta-info')) continue;
         const ctx = r.parent?.type === 'atrule' ? `@${r.parent.name} ${r.parent.params} ` : '';
         result.selectors.add(ctx + norm);

@@ -231,7 +231,7 @@ select:focus,
   font-size: var(--text-body-size-medium);
 }
 
-.ui.action.input:has(> input:is([type="search"], [name="q"])) > .ui.selection.dropdown {
+.ui.action.input:has(> input:is([type="search"], [name="q"])) > .selection.ui.dropdown { /* .selection first: PERF-2 */
   min-height: var(--control-medium-size);
   padding-top: calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--borderWidth-thin));
   padding-bottom: calc((var(--control-medium-size) - var(--base-size-20)) / 2 - var(--borderWidth-thin));

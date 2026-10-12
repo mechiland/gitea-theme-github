@@ -166,11 +166,12 @@
    2. modals without an id — the ones fetch-action builds from `data-modal-confirm*` (ConfirmModal.ts, or a clone of a
       template modal with the id removed) — on pages where every confirm trigger is a destructive one (a delete /
       remove URL or a red trigger), e.g. the Labels page's "Delete Label". Pages that mix in a harmless
-      confirmation (projects "set default column") keep Gitea's colour: CSS cannot tell which trigger opened the modal. */
+      confirmation (projects "set default column") keep Gitea's colour: CSS cannot tell which trigger opened the modal.
+   The rare class leads each compound after the body:has() (.modal.ui, .ok.ui…): PERF-2 in build/lint.mjs. */
 :is(
   .ui.modal:is(.delete, [id*="delete"], [id*="remove"], [id*="leave"], [id*="revoke"], [id^="disable-"], [id^="cancel-"]),
-  body:has(:is([data-modal-confirm], [data-modal-confirm-content]):is(.red, [data-url*="delete"], [data-url*="remove"])):not(:has(:is([data-modal-confirm], [data-modal-confirm-content]):not(.red, [data-url*="delete"], [data-url*="remove"]))) .ui.modal:not([id])
-) .actions > .ui.primary.ok.button {
+  body:has(:is([data-modal-confirm], [data-modal-confirm-content]):is(.red, [data-url*="delete"], [data-url*="remove"])):not(:has(:is([data-modal-confirm], [data-modal-confirm-content]):not(.red, [data-url*="delete"], [data-url*="remove"]))) .modal.ui:not([id])
+) .actions > .ok.ui.primary.button {
   /* the controls' primary-button rules (rest / hover / pressed / disabled) then draw Primer's danger variant */
   --button-primary-bgColor-rest: var(--button-danger-bgColor-rest);
   --button-primary-bgColor-hover: var(--button-danger-bgColor-hover);
@@ -190,8 +191,8 @@
 /* filled red while hovered / pressed: white label */
 :is(
   .ui.modal:is(.delete, [id*="delete"], [id*="remove"], [id*="leave"], [id*="revoke"], [id^="disable-"], [id^="cancel-"]),
-  body:has(:is([data-modal-confirm], [data-modal-confirm-content]):is(.red, [data-url*="delete"], [data-url*="remove"])):not(:has(:is([data-modal-confirm], [data-modal-confirm-content]):not(.red, [data-url*="delete"], [data-url*="remove"]))) .ui.modal:not([id])
-) .actions > .ui.primary.ok.button:is(:hover, :active) {
+  body:has(:is([data-modal-confirm], [data-modal-confirm-content]):is(.red, [data-url*="delete"], [data-url*="remove"])):not(:has(:is([data-modal-confirm], [data-modal-confirm-content]):not(.red, [data-url*="delete"], [data-url*="remove"]))) .modal.ui:not([id])
+) .actions > .ok.ui.primary.button:is(:hover, :active) {
   --button-primary-fgColor-rest: var(--button-danger-fgColor-hover);
   box-shadow: none;
 }

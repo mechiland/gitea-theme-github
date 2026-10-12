@@ -85,10 +85,11 @@
   font-weight: var(--base-text-weight-semibold);
 }
 
-/* duplicates of the switch (see the header comment) */
+/* duplicates of the switch (see the header comment). Keyed by Gitea's button classes, not .button (file view:
+   `ui mini basic button`, blame: `ui tiny button`): PERF-2 in build/lint.mjs */
 .file-header:has(.gh-file-view-switch) .file-view-toggle-buttons,
-.file-header:has(.gh-file-view-switch) .file-actions > .ui.buttons > a.button[href*="/blame/"],
-.page-content.blame .file-header:has(.gh-file-view-switch) .file-actions > .ui.buttons > a.button[href*="/src/"]:not([href*="/src/commit/"]) {
+.file-header:has(.gh-file-view-switch) .file-actions > .ui.buttons > :where(.basic):is(a).button[href*="/blame/"],
+.page-content.blame .file-header:has(.gh-file-view-switch) .file-actions > .ui.buttons > :where(.tiny):is(a).button[href*="/src/"]:not([href*="/src/commit/"]) {
   display: none;
 }
 

@@ -185,8 +185,9 @@
 
 /* icons P-1: Gitea glyphs in the Vue list → Octicons via CSS mask (the icons are bundled in JS). The only gitea-*
    icons of the repo tab are gitea-exclamation (commit status) and gitea-double-chevron-left/right (paging). The glyph
-   is chosen through the folder-local --gh-i so the (prefixed) mask shorthand is written once. */
-.dashboard-repos [class*="gitea-"] {
+   is chosen through the folder-local --gh-i so the (prefixed) mask shorthand is written once. The classes are listed:
+   a [class*=…] selector makes every class change on the page re-check whole subtrees. */
+.dashboard-repos :is(.gitea-exclamation, .gitea-double-chevron-left, .gitea-double-chevron-right) {
   --gh-i: var(--gh-octicon-alert);
   background-color: currentColor;
   mask: var(--gh-i) center / contain no-repeat;
@@ -200,7 +201,7 @@
   --gh-i: var(--gh-octicon-move-to-end);
 }
 
-.dashboard-repos [class*="gitea-"] > * {
+.dashboard-repos :is(.gitea-exclamation, .gitea-double-chevron-left, .gitea-double-chevron-right) > * {
   visibility: hidden;
 }
 

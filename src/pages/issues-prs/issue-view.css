@@ -9,34 +9,34 @@
  * Scope: the issue view is `.repository.view.issue` without the PR tab bar (.pull.tabs).
  */
 @media (min-width: 768px) {
-  .repository.view.issue:not(:has(.pull.tabs)) .comment-list {
+  .repository.view.issue:not(:has(> .ui.container > .pull.tabs)) .comment-list {
     margin-left: 0;
     padding-left: 0;
   }
 
   /* the line through the badge centres (item edge = Box edge + 16px) */
-  .repository.view.issue:not(:has(.pull.tabs)) .comment-list::before {
+  .repository.view.issue:not(:has(> .ui.container > .pull.tabs)) .comment-list::before {
     left: var(--base-size-16);
   }
 
-  .repository.view.issue:not(:has(.pull.tabs)) .comment-list .timeline-item .timeline-avatar {
+  .repository.view.issue:not(:has(> .ui.container > .pull.tabs)) .comment-list .timeline-item .timeline-avatar {
     display: none;
   }
 
   /* no avatar to point at: no speech-bubble caret on the comment header or the composer */
-  .repository.view.issue:not(:has(.pull.tabs)) .comment-list .avatar-content-left-arrow::before,
-  .repository.view.issue:not(:has(.pull.tabs)) .comment-list .avatar-content-left-arrow::after {
+  .repository.view.issue:not(:has(> .ui.container > .pull.tabs)) .comment-list .avatar-content-left-arrow::before,
+  .repository.view.issue:not(:has(> .ui.container > .pull.tabs)) .comment-list .avatar-content-left-arrow::after {
     display: none;
   }
 
-  .repository.view.issue:not(:has(.pull.tabs)) .comment-list .timeline-item .comment-header-left > .inline-timeline-avatar {
+  .repository.view.issue:not(:has(> .ui.container > .pull.tabs)) .comment-list .timeline-item .comment-header-left > .inline-timeline-avatar {
     display: inline-flex;
     flex: 0 0 auto;
     align-items: center;
     margin: 0 var(--base-size-4) 0 0;
   }
 
-  .repository.view.issue:not(:has(.pull.tabs)) .comment-list .comment-header-left > .inline-timeline-avatar img.ui.avatar {
+  .repository.view.issue:not(:has(> .ui.container > .pull.tabs)) .comment-list .comment-header-left > .inline-timeline-avatar img.avatar.ui {
     width: var(--base-size-20);
     height: var(--base-size-20);
   }

@@ -183,7 +183,7 @@
 }
 
 /* Raw is the first button of the [Raw | copy | download] group */
-.file-header .file-actions:has(> [download]) > .ui.buttons > .button:first-child {
+.file-header .file-actions:has(> [download]) > .ui.buttons > :where(.basic).button:first-child { /* keyed by .basic: PERF-2 */
   border-radius: var(--borderRadius-medium) 0 0 var(--borderRadius-medium);
 }
 

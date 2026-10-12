@@ -20,7 +20,9 @@
   gap: var(--base-size-4) var(--base-size-16);
 }
 
-:is(.profile, .explore) .item-main:has(> .item-header) > * {
+/* children of a row with a header, without `:has(> .item-header) > *` (see code/file-tree.css) */
+:is(.profile, .explore) .item-main > .item-header,
+:is(.profile, .explore) .item-main > .item-header ~ * {
   grid-column: 1 / -1;
   min-width: 0;
 }
