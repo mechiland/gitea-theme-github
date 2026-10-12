@@ -38,9 +38,11 @@
  *  - the fullscreen Actions log (utils.ts toggleFullScreen appends .fullscreen into .full.height, height 100%),
  *  - the Actions run list and explore pages, whose page folders turn .full.height into a flex column so their
  *    sidebar pane runs down to the footer (pages/actions-packages-projects actions-list.css, pages/people media.css);
- *  - github.com's React issue/PR family (see the min-heights below). */
+ *  - github.com's React issue/PR family (see the min-heights below).
+ * Every :has() alternative is a fixed child path (PERF-3 in build/lint.mjs: a descendant search from .full.height
+ * re-runs over the whole page on every class change). */
 .full.height:where(:not(:has(
-  > .fullscreen, > .page-content .run-list, > .explore,
+  > .fullscreen, > .page-content > .ui.container > .flex-container > .flex-container-main > .segment > .run-list, > .explore,
   > .page-content.issue-list, > .page-content.view.issue,
   > .page-content.repository:is(.milestones:not(.projects, .dashboard), .labels)
 ))) {

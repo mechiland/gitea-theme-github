@@ -63,8 +63,8 @@
   cursor: pointer;
 }
 
-/* the page behind does not scroll while the drawer is open */
-html:has(.gh-app-header-menu[open]) {
+/* the page behind does not scroll while the drawer is open (fixed child path: PERF-3) */
+html:has(> body > .full.height > .gh-app-header > .gh-app-header-start > .gh-app-header-menu[open]) {
   overflow: hidden;
 }
 

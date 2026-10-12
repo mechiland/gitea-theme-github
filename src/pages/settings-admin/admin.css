@@ -107,8 +107,8 @@
 
 /* list tables: cells stay on one line (DataTable); a table wider than the Box scrolls inside it (Gitea:
    .admin .ui.table.segment overflow-x auto) */
-.admin .flex-container-main .ui.table:has(th[data-sortt-asc]) > tbody > tr > td {
-  white-space: nowrap;
+.admin .flex-container-main .ui.table:has(th[data-sortt-asc]) > tbody {
+  white-space: nowrap; /* inherited by the cells: a `> td` subject after :has() costs a full-page restyle */
 }
 
 .admin .flex-container-main .ui.table > tbody > tr > td {
@@ -119,7 +119,7 @@
 
 /* the Subhead "Add webhook" menu: keyboard focus lands on the .ui.jump.dropdown wrapper (base_list.tmpl), whose
    radius is 0 — the focus ring follows the 6px button inside (Primer focusOutline) */
-:is(.settings, .admin, [class="page-content "]) .flex-container-main .ui.top.attached.header .ui.jump.dropdown {
+:is(.settings, .admin, .page-content:where(:not(.dashboard, .repository))) .flex-container-main .ui.top.attached.header .ui.jump.dropdown {
   border-radius: var(--borderRadius-medium);
 }
 

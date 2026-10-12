@@ -409,7 +409,7 @@
    is min(100vh - 400px) tall, so the wells stopped mid-page above an empty band. The page chain grows to the footer
    (the page's bottom space moves into the board's own 8px) and the board fills it; tall columns still scroll inside
    (Gitea: cards `overflow: clip auto`, board max-height 100vh - 120px). */
-.full.height:has(> .page-content #project-board) {
+.full.height:has(> .page-content > .ui.container > #project-board) { /* fixed child path: PERF-3 */
   display: flex;
   flex-direction: column;
   padding-bottom: 0;

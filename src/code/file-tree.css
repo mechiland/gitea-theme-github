@@ -34,7 +34,10 @@
     margin-top: calc(-1 * var(--base-size-24));
   }
 
-  .repo-view-container:has(> .repo-view-file-tree-container:not(.tw-hidden)) > * {
+  /* the two children named, not `:has(…) > *`: a :has() compound followed by a keyless subject makes Chrome restyle
+     every element of the page on any class change (1 s per hover / toggle on a 47-file diff) */
+  .repo-view-file-tree-container:not(.tw-hidden),
+  .repo-view-file-tree-container:not(.tw-hidden) + .repo-view-content {
     padding-top: var(--base-size-8);
   }
 }

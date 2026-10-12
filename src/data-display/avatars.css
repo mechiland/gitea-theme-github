@@ -20,7 +20,7 @@ img.ui.avatar,
 /* organisation avatars: org header (org home / members / teams), profile "Organizations", explore → organizations */
 .page-content.organization img.ui.avatar[width="100"],
 .user-orgs img.ui.avatar,
-.page-content.explore.users:has(.active.item[href$="/explore/organizations"]) .flex-divided-list img.ui.avatar {
+.page-content.explore.users:has(.active.item[href$="/explore/organizations"]) .flex-divided-list img.avatar.ui {
   border-radius: var(--borderRadius-medium);
 }
 

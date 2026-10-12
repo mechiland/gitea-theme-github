@@ -80,7 +80,7 @@
 
 /* `btn-invisible` 28x28 (control-small-size), radius 6px, no border, octicon-copy in fgColor-muted.
  * Hover / active backgrounds (opaque button-default-bgColor-*) are in copy-button.important.css. */
-.file-view.markup .code-block-container:has(> pre:not(.is-loading)) > .ui.button.code-copy {
+.file-view.markup .code-block-container:has(> pre:not(.is-loading)) > .code-copy.ui.button {
   position: static;
   flex-shrink: 0;
   width: var(--control-small-size);

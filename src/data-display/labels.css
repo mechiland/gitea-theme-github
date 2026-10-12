@@ -36,7 +36,7 @@
 
 /* FG2-091: github.com's issues index renders its IssueLabel tokens 500 (probed 2026-09-30: pemistahl/grex/issues,
    go-gitea/gitea/issues); the pulls index, the labels page and the issue sidebar stay 600 */
-#issue-list > .item:has(.octicon-issue-opened, .octicon-issue-closed) .ui.label[style] {
+#issue-list > .item:has(.octicon-issue-opened, .octicon-issue-closed) .label.ui[style] {
   font-weight: var(--base-text-weight-medium);
 }
 
