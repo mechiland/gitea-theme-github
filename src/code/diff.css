@@ -422,3 +422,118 @@
 .diff-file-body .data-table {
   background: var(--bgColor-default);
 }
+
+/* PR files for a single commit: github.com's commit message Box above the diff (templates/custom/footer.tmpl puts it
+   in place of Gitea's "showing only changes of commit X" banner). Measured on github.com 2026-10-16: muted band with
+   the 16px semibold title, 12px mono body and a row with the Prev / Next ButtonGroup left and "Browse files" right;
+   a default-background row below with the author sentence and "commit <sha>" + copy button in muted 12px. */
+.gh-pr-commit {
+  margin-bottom: var(--base-size-16);
+  overflow: hidden;
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  background: var(--bgColor-default);
+}
+
+.gh-pr-commit-message {
+  display: flex;
+  flex-direction: column;
+  gap: var(--base-size-8);
+  padding: var(--base-size-16);
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  background: var(--bgColor-muted);
+}
+
+.gh-pr-commit-title {
+  margin: 0;
+  color: var(--fgColor-default);
+  font-size: var(--text-title-size-small);
+  font-weight: var(--base-text-weight-semibold);
+  line-height: var(--text-title-lineHeight-small);
+  overflow-wrap: anywhere;
+}
+
+.gh-pr-commit-body {
+  margin: 0;
+  color: var(--fgColor-default);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+  line-height: var(--text-body-lineHeight-small);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* a body longer than 10 lines shows its first 8 and fades out over the last 2 (footer.tmpl adds .is-collapsed) */
+.gh-pr-commit-body.is-collapsed {
+  max-height: 8lh;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, currentColor calc(100% - 2lh), transparent);
+}
+
+.gh-pr-commit-toggle {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--fgColor-accent);
+  font-size: var(--text-body-size-small);
+  cursor: pointer;
+}
+
+.gh-pr-commit-toggle:hover {
+  text-decoration: underline;
+}
+
+.gh-pr-commit-toggle > span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base-size-4);
+}
+
+.gh-pr-commit-toggle[aria-expanded="true"] > .gh-pr-commit-toggle-more,
+.gh-pr-commit-toggle[aria-expanded="false"] > .gh-pr-commit-toggle-less {
+  display: none;
+}
+
+.gh-pr-commit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--base-size-8);
+  margin-top: var(--base-size-8);
+}
+
+.gh-pr-commit-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--base-size-8);
+  padding: var(--base-size-8) var(--base-size-16);
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-medium);
+}
+
+.gh-pr-commit-people .avatar {
+  margin-right: var(--base-size-4);
+  vertical-align: middle;
+}
+
+.gh-pr-commit-people strong {
+  color: var(--fgColor-default);
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.gh-pr-commit-sha {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base-size-4);
+  font-family: var(--fontStack-monospace);
+  font-size: var(--text-body-size-small);
+}
+
+.gh-pr-commit-sha > a {
+  color: var(--fgColor-default);
+}

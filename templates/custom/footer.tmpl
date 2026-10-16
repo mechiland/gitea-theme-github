@@ -15,4 +15,109 @@
     .observe(document.body, {childList: true, subtree: true});
 })();
 </script>
+{{- /* PR "Files changed" for a single commit (/pulls/N/commits/<sha>): github.com shows the commit's message box
+     (title, body, Prev / Next ButtonGroup, Browse files; author row with the short SHA) above the diff. Gitea only has
+     the "showing only changes of commit X" banner (repo/diff/box.tmpl, same in 1.27.3 and 28.1.0), so the box is
+     rendered here and replaces that banner instead of overriding box.tmpl (which differs between the two versions).
+     CompareInfo.Commits is newest first (git log base..head): Prev = the item after the current one, Next = the item
+     before it. */ -}}
+{{- if and .PageIsPullFiles .IsShowingOnlySingleCommit .CompareInfo -}}
+{{- $prev := "" -}}{{- $next := "" -}}{{- $newer := "" -}}{{- $cur := false -}}
+{{- range .CompareInfo.Commits -}}
+	{{- $id := .ID.String -}}
+	{{- if and $cur (not $prev) -}}{{- $prev = $id -}}{{- end -}}
+	{{- if eq $id $.AfterCommitID -}}{{- $cur = . -}}{{- $next = $newer -}}{{- end -}}
+	{{- $newer = $id -}}
+{{- end -}}
+{{- if $cur -}}
+{{- $query := print "?style=" (Iif $.IsSplitStyle "split" "unified") "&whitespace=" $.WhitespaceBehavior "&show-outdated=" $.ShowOutdatedComments -}}
+{{- $author := HTMLFormat "%s<strong>%s</strong>" (ctx.AvatarUtils.AvatarByEmail $cur.Author.Email $cur.Author.Email 20) $cur.Author.Name -}}
+{{- /* github.com's labels in English: Gitea's "Previous" reads "Prev"; other languages keep their translation */ -}}
+{{- $prevLabel := ctx.Locale.Tr "repo.issues.previous" -}}{{- if eq (print $prevLabel) "Previous" -}}{{- $prevLabel = "Prev" -}}{{- end -}}
+{{- /* likewise "Browse files" for Gitea's English "Browse Source" */ -}}
+{{- $browseLabel := ctx.Locale.Tr "repo.diff.browse_source" -}}{{- if eq (print $browseLabel) "Browse Source" -}}{{- $browseLabel = "Browse files" -}}{{- end -}}
+{{- $committerIsAuthor := and (eq $cur.Committer.Name $cur.Author.Name) (eq $cur.Committer.Email $cur.Author.Email) -}}
+<template id="gh-pr-commit"><div class="gh-pr-commit">
+	<div class="gh-pr-commit-message">
+		<h3 class="gh-pr-commit-title" title="{{$cur.MessageTitle}}">{{ctx.RenderUtils.RenderCommitMessage $cur.MessageUTF8 $.Repository}}</h3>
+		{{- if $cur.MessageBody}}
+		<pre class="gh-pr-commit-body">{{ctx.RenderUtils.RenderCommitBody $cur.MessageUTF8 $.Repository}}</pre>
+		{{- /* a body longer than 10 lines is folded to 8 (the script below decides after layout). Gitea has "Show more"
+		     (repo.diff.show_more) but no "Show less": the theme carries it for Gitea's default languages, English otherwise */ -}}
+		{{- $showMore := ctx.Locale.Tr "repo.diff.show_more" -}}{{- $isEn := or (eq (print $showMore) "Show More") (eq (print $showMore) "Show more") -}}
+		{{- $showLessByLang := dict "zh-CN" "收起" "zh-HK" "收起" "zh-TW" "收合" "ja-JP" "折りたたむ" "ko-KR" "접기"
+			"de-DE" "Weniger anzeigen" "fr-FR" "Afficher moins" "es-ES" "Mostrar menos" "pt-BR" "Mostrar menos" "pt-PT" "Mostrar menos"
+			"it-IT" "Mostra meno" "nl-NL" "Minder weergeven" "ru-RU" "Свернуть" "uk-UA" "Згорнути" "pl-PL" "Pokaż mniej"
+			"cs-CZ" "Zobrazit méně" "sv-SE" "Visa mindre" "fi-FI" "Näytä vähemmän" "tr-TR" "Daha az göster" "hu-HU" "Kevesebb megjelenítése"
+			"bg-BG" "Покажи по-малко" "el-GR" "Εμφάνιση λιγότερων" "lv-LV" "Rādīt mazāk" "id-ID" "Tampilkan lebih sedikit"
+			"fa-IR" "نمایش کمتر" "ga-IE" "Taispeáin níos lú" "ml-IN" "കുറച്ച് കാണിക്കുക" -}}
+		{{- $showLess := or (index $showLessByLang ctx.Locale.Language) "Show less" -}}
+		<button type="button" class="gh-pr-commit-toggle tw-hidden" aria-expanded="false">
+			<span class="gh-pr-commit-toggle-more">{{svg "octicon-chevron-down"}}{{if $isEn}}Show more{{else}}{{$showMore}}{{end}}</span>
+			<span class="gh-pr-commit-toggle-less">{{svg "octicon-chevron-up"}}{{$showLess}}</span>
+		</button>
+		{{- end}}
+		<div class="gh-pr-commit-actions">
+			<div class="ui small buttons gh-commit-nav">
+				{{- if $prev -}}
+				<a class="ui small button" href="{{$.Issue.Link}}/commits/{{$prev}}{{$query}}">{{svg "octicon-chevron-left"}}{{$prevLabel}}</a>
+				{{- else -}}
+				<span class="ui small disabled button" aria-disabled="true">{{svg "octicon-chevron-left"}}{{$prevLabel}}</span>
+				{{- end -}}
+				{{- if $next -}}
+				<a class="ui small button" href="{{$.Issue.Link}}/commits/{{$next}}{{$query}}">{{ctx.Locale.Tr "repo.issues.next"}}{{svg "octicon-chevron-right"}}</a>
+				{{- else -}}
+				<span class="ui small disabled button" aria-disabled="true">{{ctx.Locale.Tr "repo.issues.next"}}{{svg "octicon-chevron-right"}}</span>
+				{{- end -}}
+			</div>
+			<a class="ui small button" href="{{$.Repository.Link}}/src/commit/{{PathEscape $.AfterCommitID}}">{{svg "octicon-file-code"}}{{$browseLabel}}</a>
+		</div>
+	</div>
+	<div class="gh-pr-commit-meta">
+		<span class="gh-pr-commit-people">
+			{{- /* 28.x has github.com's "A authored and B committed <time>" sentence; 1.27.x has only "committed by" */ -}}
+			{{- if StringUtils.HasPrefix AppVer "1." -}}
+			{{$author}}
+			{{- if not $committerIsAuthor}} {{ctx.Locale.Tr "repo.diff.committed_by"}} {{HTMLFormat "%s<strong>%s</strong>" (ctx.AvatarUtils.AvatarByEmail $cur.Committer.Email $cur.Committer.Email 20) $cur.Committer.Name}}{{end}}
+			{{DateUtils.TimeSince $cur.Committer.When}}
+			{{- else if $committerIsAuthor -}}
+			{{ctx.Locale.Tr "repo.diff.committed_at" $author (DateUtils.TimeSince $cur.Committer.When)}}
+			{{- else -}}
+			{{ctx.Locale.Tr "repo.diff.authored_committed_at" $author (HTMLFormat "%s<strong>%s</strong>" (ctx.AvatarUtils.AvatarByEmail $cur.Committer.Email $cur.Committer.Email 20) $cur.Committer.Name) (DateUtils.TimeSince $cur.Committer.When)}}
+			{{- end -}}
+		</span>
+		<span class="gh-pr-commit-sha">{{ctx.Locale.Tr "repo.diff.commit"}} <a href="{{$.Repository.Link}}/commit/{{PathEscape $.AfterCommitID}}">{{printf "%.7s" $.AfterCommitID}}</a>
+			<button type="button" class="btn interact-fg" data-tooltip-content="{{ctx.Locale.Tr "copy_hash"}}" data-clipboard-text="{{$.AfterCommitID}}">{{svg "octicon-copy"}}</button>
+		</span>
+	</div>
+</div></template>
+<script nonce="{{ctx.CspScriptNonce}}">
+(() => {
+  const banner = document.querySelector('.diff-detail-box ~ .ui.info.message');
+  if (!banner) return;
+  const box = document.querySelector('#gh-pr-commit').content.firstElementChild;
+  banner.replaceWith(box);
+  const body = box.querySelector('.gh-pr-commit-body');
+  const toggle = box.querySelector('.gh-pr-commit-toggle');
+  if (!body || !toggle) return;
+  // fold only when the body is longer than 10 lines; re-measured on resize until the reader expands it
+  const measure = () => {
+    if (toggle.getAttribute('aria-expanded') === 'true') return;
+    body.classList.remove('is-collapsed');
+    const long = body.scrollHeight > parseFloat(getComputedStyle(body).lineHeight) * 10 + 1;
+    body.classList.toggle('is-collapsed', long);
+    toggle.classList.toggle('tw-hidden', !long);
+  };
+  measure();
+  window.addEventListener('resize', measure);
+  toggle.addEventListener('click', () => {
+    const expand = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(expand));
+    body.classList.toggle('is-collapsed', !expand);
+    if (!expand && box.getBoundingClientRect().top < 0) box.scrollIntoView({block: 'start'});
+  });
+})();
+</script>
+{{- end -}}
+{{- end -}}
 {{- end -}}
