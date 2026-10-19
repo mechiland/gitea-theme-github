@@ -168,6 +168,14 @@ Pushing a tag `v*` builds with `--strict`, which enforces the 300 KB budget, and
 npm version patch && git push --follow-tags
 ```
 
+## Contributing
+
+Bug reports, visual fixes and documentation improvements are welcome. Changes must remain compatible with both **Gitea 1.27.x and 28.x**.
+
+- **Report a bug:** open an issue with your Gitea and browser versions, steps to reproduce, and screenshots when relevant.
+- **Make a change:** read [ARCHITECTURE.md](ARCHITECTURE.md), keep changes focused, and edit `src/` or `templates/` rather than generated files in `dist/`. Reuse the existing Primer tokens.
+- **Submit a PR:** run `npm run lint` and `npm run build`, and verify changes on both supported Gitea versions. For visual changes, check light and dark themes and include before/after screenshots.
+
 ## Status
 
 This is a work in progress. Current numbers, open issues, budgets and pinned versions are in [docs/STATUS.json](docs/STATUS.json).
