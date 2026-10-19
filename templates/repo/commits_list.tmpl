@@ -36,7 +36,7 @@
 								{{$gitCommit.MessageTitle | ctx.RenderUtils.RenderEmoji}}
 							</span>
 						{{else}}
-							{{$commitLink:= printf "%s/commit/%s" $commitRepoLink (PathEscape $commitID)}}
+							{{$commitLink:= printf "%s/commit/%s" $commitRepoLink (PathEscape $commitID)}}{{/* gitea-theme-github: on a PR's Commits tab github.com opens the commit inside the PR (Prev / Next, custom/footer.tmpl) from the title too, not only from the SHA; github-* themes only. */}}{{if and $.PageIsPullCommits (StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-")}}{{$commitLink = printf "%s/%s" $commitBaseLink (PathEscape $commitID)}}{{end}}
 							<span class="commit-summary {{if gt $gitCommit.ParentCount 1}} grey text{{end}}" title="{{$gitCommit.MessageTitle}}">
 								{{ctx.RenderUtils.RenderCommitMessageLinkSubject $gitCommit.MessageUTF8 $commitLink $.Repository}}
 							</span>
