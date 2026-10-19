@@ -137,7 +137,7 @@ Extracting never deletes files. If the release notes say a template was removed,
 git clone https://github.com/mechiland/gitea-theme-github && cd gitea-theme-github
 npm ci
 npm run lint       # no literal colors outside the token layer, type/radius/shadow from tokens, selector ownership
-npm run build      # → dist/theme-github-{auto,light,dark}.css (budget: ≤ 300 KB each, minified)
+npm run build      # → dist/theme-github-{auto,light,dark}.css (budget: ≤ 340 KB each, minified)
 npm run package    # → dist/gitea-theme-github-<version>-gitea1.27-28.{zip,tar.gz} (the drop-in package above)
 ```
 
@@ -154,6 +154,10 @@ Tooling used during development, against a local Gitea described in [docs/CONTEX
 - `tools/shoot/`: Playwright screenshots and audits (off-palette colors, unresolved variables, non-Octicon icons, layout shift), github.com reference capture, pixel diff, CSS coverage, and a functional smoke test.
 - `tools/judge/`: blind A/B pairs.
 
+Captures and reports are local artifacts: `shots/`, `docs/reference/`, `docs/page-scope-report.{json,md}` and
+`dist/` are ignored by Git. The screenshot tool recreates reference captures; lint and build recreate the scope reports.
+`docs/seed-manifest.json` and `docs/baseline-pre-seed.json` stay tracked because the development tools use them.
+
 ### CI / releases
 
 [`.github/workflows/release.yml`](.github/workflows/release.yml) runs on every push and pull request:
@@ -162,7 +166,7 @@ Tooling used during development, against a local Gitea described in [docs/CONTEX
 3. package;
 4. upload the package as a workflow artifact.
 
-Pushing a tag `v*` builds with `--strict`, which enforces the 300 KB budget, and publishes a GitHub Release with the `.zip` and `.tar.gz` attached:
+Pushing a tag `v*` builds with `--strict`, which enforces the 340 KB budget, and publishes a GitHub Release with the `.zip` and `.tar.gz` attached:
 
 ```bash
 npm version patch && git push --follow-tags
@@ -178,9 +182,8 @@ Bug reports, visual fixes and documentation improvements are welcome. Changes mu
 
 ## Status
 
-This is a work in progress. Current numbers, open issues, budgets and pinned versions are in [docs/STATUS.json](docs/STATUS.json).
-
-Every page was reviewed by independent critics that compare screenshots and measurements against github.com. The latest whole-site score is about 8.4 of 10 (light and dark) and 8.1 (mobile) across 101 pages.
+This is a work in progress. Pinned dependencies are in [package.json](package.json); the size budget is defined in
+[build/folders.mjs](build/folders.mjs). Run `npm run build` for current sizes and diagnostics in `dist/build-report.json`.
 
 The remaining visible differences are mostly Gitea's own features, wording and page structure, which a theme should not remove.
 

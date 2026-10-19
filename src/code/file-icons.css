@@ -1,5 +1,5 @@
 /*
- * File-type icons like github.com (docs/requests/code.md C-1, C-2).
+ * File-type icons like github.com (see ARCHITECTURE.md §6).
  * github.com: directories `file-directory-fill` in --treeViewItem-leadingVisual-iconColor-rest (light blue in light,
  * muted in dark), files `file` in --fgColor-muted, 16px, monochrome.
  * Gitea keeps FILE_ICON_THEME = material (global app.ini setting, shared with other themes), so the coloured

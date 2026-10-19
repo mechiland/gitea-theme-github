@@ -9,7 +9,7 @@
  * (served index.css + lazy chunk CSS + index.js, web_src outside themes/, templates, Go) nor in our src/ or templates/
  * are not mapped (e.g. the
  * --color-{olive,pink,brown,black,gold}* family, --color-secondary-dark-9…13, --color-primary-alpha-20/40/50/70/80/90).
- * List and the check that produced it: docs/requests/integrator.md "L2b gitea-map prune". Re-check after a Gitea upgrade.
+ * Re-check the unused variables against Gitea's CSS, JS, templates and Go sources after a Gitea upgrade.
  */
 :root {
   /* ---------- primary (Gitea uses it for links, active items, focus, checked controls) ---------- */

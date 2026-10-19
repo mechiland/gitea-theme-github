@@ -8,7 +8,7 @@
  * Specs: github.com CSS read from the live site 2026-09-30 (.UnderlineNav*, .tabnav*, prc-Pagination-*,
  * prc-ActionList-* as used by NavList, footer metrics) + @primer/css pagination/, navigation/.
  * Note: gh.data-display is a LATER layer, so whatever it sets on .ui.label / .ui.avatar wins over the counter and
- * avatar rules here (see docs/requests/data-display.md, navigation section).
+ * avatar rules here.
  */
 @import "./header.css";
 @import "./drawer.css";

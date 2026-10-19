@@ -1,7 +1,17 @@
-node_modules
-dist
-.cache
+node_modules/
+dist/
+.cache/
 tools/seed/.token
 shots/
 *.log
-docs/reference/**/*.png
+.DS_Store
+
+# Local captures, generated reports, and historical development records.
+docs/reference/
+docs/page-scope-report.json
+docs/page-scope-report.md
+docs/STATUS.json
+docs/critiques/
+docs/requests/
+docs/final-gate*/
+docs/*.bak

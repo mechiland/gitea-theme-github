@@ -32,7 +32,7 @@ Environment facts: `docs/CONTEXT.md`. Gitea source research (with file:line cita
 | `@primer/css`        | **22.3.2**  | reference only for component specs (not shipped) |
 | Gitea                | **1.27.3** and **28.1.0** | sources at `../gitea-src-1.27.3`, `../gitea-src-28.1.0`; one package for both (§7 "Two Gitea versions") |
 
-Recorded again in `docs/STATUS.json → pinned`.
+Dependency versions are pinned in `package.json` and `package-lock.json`.
 
 ## 3. Cascade architecture (why a template override is required)
 
@@ -124,8 +124,8 @@ Useful Primer tokens (all available as `var(--…)`): `--fgColor-{default,muted,
 ## 5. Component layer — folders, layers, ownership
 
 One folder per surface; each compiles into its own `@layer`. Each folder has `index.css` (entry, `@import`s the
-folder's files) and optionally `*.important.css` (see §3). **A builder edits only its own folder.** Shared needs
-(new token mapping, build change, template) go to the integrator as a change request in `docs/requests/<folder>.md`.
+folder's files) and optionally `*.important.css` (see §3). Keep shared token, build and template changes consistent
+with the component ownership below; review cross-folder selectors together to avoid cascade conflicts.
 
 | Folder → layer | Surface | Owns (Gitea selector families) | GitHub/Primer reference |
 |---|---|---|---|
@@ -149,7 +149,7 @@ Ownership rules: component folders own **generic** selectors (`.ui.button` every
 **scoped to their page** (`.repository.releases .ui.button` only if the page really deviates). The lint rejects the
 same exact selector in two folders. When in doubt, the component folder owns it; pages request changes there.
 
-## 6. Icon policy (`src/icons/`, owner: icons builder in wave 1, then integrator)
+## 6. Icon policy (`src/icons/`)
 
 - Server-rendered icons: the `svg` template helper reads `assets/img/svg/*.svg` through `public.AssetFS()`, which layers
   `CUSTOM_PATH/public` **over** the built-in assets, once at startup (`modules/svg/svg.go Init`). So
@@ -177,16 +177,21 @@ CSS first. A template override is allowed only when a layout cannot be reached w
 upgrades, so each one is listed here with its reason, is conditional on the GitHub themes where possible, and must
 keep the non-GitHub output byte-identical.
 
-| Template | Reason | Scope | Added by |
-|---|---|---|---|
-| `templates/base/head_style.tmpl` | Cascade layering (§3) + cache-busting `?github_revision=`. Shared with the Modern theme's existing override: our branch is additive, the else-branch is untouched. | `github-*` themes only | integrator, wave 0 |
-| `templates/custom/footer.tmpl` | Primer Dialog close button (request OV-4): Gitea's modals mostly have no `×`; a 12-line inline script (CSP nonce) prepends `button.close.inside` to every `.ui.modal` (Fomantic closes on `> .close`). `custom/footer` is Gitea's empty extension hook, so no upstream markup is replaced. Install is done by the orchestrator (docs/requests/ORCHESTRATOR.md ORC-1). | `github-*` themes only (renders nothing otherwise) | integrator, wave 2 |
-| `templates/user/settings/layout_head.tmpl` | github.com settings page header (48px avatar, name, subtitle, profile button; request SA-4): needs the signed-in user's data, CSS cannot create it. Upstream 1.27.3 file + one trimmed `{{- if … }}` block; copy text is Gitea's `your_settings` / `your_profile` locale keys (Gitea has no "Your personal account" string). Styled by `src/pages/settings-admin/header.css`. Install: docs/requests/ORCHESTRATOR.md ORC-3. | `github-*` themes only, pages whose pageClass contains `settings` (other themes: upstream bytes) | integrator, wave 3 |
-| `templates/base/head_navbar.tmpl` + `templates/custom/gh_head_navbar.tmpl` | github.com AppHeader (FG-007, judges' #1 tell, impact 130) and the slim auth header (FG-063): hamburger drawer with Gitea's links, context crumbs, search form, Issues/PRs icon buttons — the crumbs, search and cross-container moves are not CSS-reachable (docs/final-gate/issues.md "Header decision"). The override is `{{if github-*}}{{template "custom/gh_head_navbar" .}}{{else if AppVer 1.*}}` + upstream 1.27.3 verbatim + `{{else}}` + upstream 28.1.0 verbatim + `{{end}}` (no trailing newline). All JS hooks kept, no JavaScript added (native `<details>`). Install: ORCHESTRATOR.md ORC-5. Styled by navigation (`.gh-app-header*`) and pages/auth (`.gh-app-header--auth`). | `github-*` themes only (else-branch = upstream bytes) | integrator, final-gate #1 (pending install) |
-| `templates/repo/commits_list.tmpl` | "Commits on <date>" day groups (FG-019, impact 35): per-row date state, CSS cannot insert rows. One `tr.gh-commit-day` per committer day (template funcs only: `When.Format`, `DateUtils.ParseLegacy/AbsoluteShort`); date-only label (no "Commits on" locale key). ORC-6. Styled by pages/repo. | `github-*` themes, not the wiki revision list | integrator, final-gate #1 (pending install) |
-| `templates/repo/view_file.tmpl` + `templates/repo/blame.tmpl` | Preview \| Code \| Blame SegmentedControl (FG-021, impact 29): the "Code" segment and moving Blame out of the button group need markup; existing links only, keys `preview` / `repo.code` / `repo.blame`. README box untouched. ORC-7. Styled by code. | `github-*` themes only | integrator, final-gate #1 (pending install) |
-| `templates/repo/wiki/view.tmpl` | wiki "Pages (N)" Box + clone input (FG-022, impact 27): `.Pages` and the clone link are in ctx on every wiki view (routers/web/repo/wiki.go renderViewPage); the Fomantic dropdown and tippy-only clone popup cannot be turned into a static sidebar with CSS. No filter input (would need JS) and no "Clone this wiki locally" heading (no locale key). ORC-8. Styled by pages/repo. | `github-*` themes only | integrator, final-gate #1 (pending install) |
-| `templates/repo/issue/list.tmpl` | issues / PRs left NavList + title (FG-017, impact 45): links to Gitea's existing `?type=` filters, Milestones, Labels (keys `repo.issues.filter_type.*`); CSS cannot create a sidebar column. Issue/PR list only — the Labels and Milestones pages were not given it (cap). ORC-9. Loop 2 (FG2-027): the NavList is rendered on the issue list only, not the PR list (github.com) — project copy edited, install ORC-13. Styled by pages/issues-prs. | `github-*` themes only | integrator, final-gate #1; FG2-027 edit loop 2 (install pending) |
+| Template | Reason | Scope |
+|---|---|---|
+| `templates/base/head_style.tmpl` | Cascade layering (§3) and cache-busting `?github_revision=`. | `github-*` themes only |
+| `templates/base/head_impersonate_banner.tmpl` | Gitea 28.1.0's template, included so the navbar's template reference also resolves on 1.27. | Upstream markup |
+| `templates/custom/footer.tmpl` | Adds a Primer Dialog close button to Fomantic modals through Gitea's extension hook; uses a small inline script with a CSP nonce. | `github-*` themes only |
+| `templates/user/settings/layout_head.tmpl` | Settings page header needs the signed-in user's name, avatar and profile link; styled by `src/pages/settings-admin/header.css`. | `github-*` settings pages |
+| `templates/base/head_navbar.tmpl` + `templates/custom/gh_head_navbar.tmpl` | AppHeader and auth header need context crumbs, search and existing Gitea links rearranged across containers. Preserve Gitea's JS hooks; use native `<details>` for the drawer. | `github-*` themes only |
+| `templates/repo/commits_list.tmpl` | Groups commits by day with template state and a `tr.gh-commit-day` row. | `github-*` themes, excluding wiki revisions |
+| `templates/repo/view_file.tmpl` + `templates/repo/blame.tmpl` | Preview / Code / Blame segments require markup and existing Gitea links. | `github-*` themes only |
+| `templates/repo/wiki/view.tmpl` | Static Pages sidebar and clone input need page data and structure unavailable to CSS. | `github-*` themes only |
+| `templates/repo/issue/list.tmpl` | Issue list NavList uses existing Gitea filters, Milestones and Labels links. | `github-*` issue lists; PR lists keep their own layout |
+| `templates/repo/view_list.tmpl` | Places the existing commit-history link at the right of the latest-commit row. | The added link is hidden for other themes |
+
+Install these files into `CUSTOM_PATH/templates/` and reload templates as described in README.md's upgrade instructions.
+`npm run deploy` checks for template drift but does not install template overrides.
 
 **Two Gitea versions (1.27.x and 28.x, one package).** Each template that differs between 1.27.3 and 28.1.0 starts with
 `{{$gitea1 := StringUtils.HasPrefix AppVer "1."}}` (no output) and branches only where upstream differs, so a non-github
@@ -212,16 +217,9 @@ When 1.27 support ends, delete the `$gitea1` branches and the 1.27 selectors.
 Pitfall: `X > :is(A > B)` does not mean "B under A under X" — the `:is()` element must match X's child AND have an
 A parent, so it silently matches nothing. List whole paths instead (`:has(> … > A > B, > … > C)`).
 
-Final gate #1 template requests REJECTED (§7 criteria: a impact, b data in ctx, c existing locale keys, d byte-identical
-branch, e ≤ 8 new overrides; the seven files above are 7 of 8): FG-024 branches table (c: no keys for Updated / Check
-status / Behind|Ahead column headers; kebab needs a full row rewrite; e), FG-025 tree-pane branch picker and FG-044
-directory header row (both live in the Modern theme's `repo/view_content.tmpl` / `repo/view_list.tmpl` overrides — an
-edit there risks Modern's byte-identity for low/medium impact 22 / 9; a, d), FG-034 README|license tabs (a 13, e),
-FG-043 / FG-045 / FG-049 / FG-051 / FG-053 / FG-110 (a ≤ 10, e), FG-017 on the Labels / Milestones pages (e).
-Reasons in full: docs/requests/integrator-tools.md.
-
-(Pre-existing overrides owned by the Modern theme — `repo/view_content.tmpl`, `repo/view_list.tmpl` — render
-Gitea's standard markup for non-Modern themes; we build against that output and never edit them.)
+Prefer Gitea's existing locale keys and links. Avoid adding a template override solely to change wording or
+reproduce a GitHub control for which Gitea has no equivalent feature. Re-check overrides against both supported
+Gitea versions when upstream templates change.
 
 ## 8. Gitea-only features
 
@@ -255,12 +253,12 @@ column colors, repo units, federation, wiki clone box, etc.) get the **closest P
   (container path + selector + declarations, in order); on any difference the flat output is kept and the report says why
   (`build-report.json → nest`). Saves ≈ 51 KB per file (auto 347,273 → 295,880 B at revision 85fbd66d9d). Browser floor
   (TARGETS): Chrome/Edge 112+ (target 120), Safari 16.5+, Firefox 117+ — all evergreen since 2023. `--no-nest` builds the
-  flat file (identical rendering: pixel-diffed, STATUS.json → budget.loop1). `*.src.css` stays flat, so coverage and the
+  flat file for comparison. `*.src.css` stays flat, so coverage and the
   lint are unaffected; in DevTools nested rules show as `& …` under their parent.
 - Page-scope check (FG2-105, `build/page-scope-check.mjs`): page-folder selector scopes vs every Gitea template's
   `.page-content` classes (+ live route classes cached in `shots/page-classes.json`); each page folder declares its intended
   templates in `src/pages/<group>/scopes.json`; an unintended match is a LEAK (warning in `npm run lint` and the build,
-  error under `--strict`). Report: `docs/page-scope-report.md`. `--live` refetches, `--probe` counts matched elements.
+  error under `--strict`). Reports: `docs/page-scope-report.{md,json}` (generated locally, ignored by Git). `--live` refetches, `--probe` counts matched elements.
 - `npm run deploy` — build, then atomically copy the three files to `CUSTOM_PATH/public/assets/css/`, copy icons,
   bump `github_revision` in `head_style.tmpl`, `gitea manager reload-templates`, then **fetch each file back from
   Gitea and compare SHA-256** (the deploy fails if Gitea serves different bytes). Reports `restartRequired` when theme
@@ -270,19 +268,9 @@ column colors, repo units, federation, wiki clone box, etc.) get the **closest P
 
 ## 10. Budget
 
-- ≤ 340 KB per theme file minified (build fails otherwise); gate for every loop: ≤ 335 KB. Raised from 300 / 295 KB on
-  2026-10-12 (user decision) to style Gitea 28's new UI in the same single file for 1.27 and 28 (gzip at 300 KB: ~57 KB). Current sizes in `docs/STATUS.json`.
-  Loop 1 (after wave L1, 2026-09-30): the wave added 63.6 KB of flat CSS (auto 283,706 → 347,273 B; per-layer growth in
-  STATUS.json → budget.loop1); the lossless prefix nesting (§9) brings the files to auto 295,880 B (288.9 KB), light
-  290,683 B, dark 291,734 B — no rules were deleted.
-  Current (after the 2026-09-30 trim round, revision `56d1bf8f9d`; KB = 1024 B): `theme-github-auto.css` **282,796 B
-  (276.2 KB)**, `theme-github-light.css` **278,760 B (272.2 KB)**, `theme-github-dark.css` **278,777 B (272.2 KB)**;
-  all three are under the 285 KB trim target, which leaves ~8.8 KB (auto) of headroom for the dark pass.
-  Before the trim: 342,815 / 338,716 / 338,733 B. Per-folder layer sizes before and after: `docs/STATUS.json → budget.trim`.
-  Loop 2 (L2b, 2026-09-30): wave L2 grew auto to 334,687 B; the integrator pass brought the files to auto **299,589 B
-  (292.6 KB)**, light 295,732 B, dark 296,619 B without deleting a visible rule (compound-suffix nesting, served-file Octicon
-  masks, shorter names, identical-token dedupe, 65 unreferenced Gitea variables unmapped, two cross-folder duplicates);
-  pixel-diffed, details in `docs/STATUS.json → budget.loop2`.
+- ≤ 340 KB per theme file minified (defined by `BUDGET_BYTES` in `build/folders.mjs`; build fails otherwise).
+  This accommodates Gitea 1.27 and 28 in one self-contained theme. Run `npm run build` for current per-theme and
+  per-folder sizes in `dist/build-report.json`; that generated report is ignored by Git.
 - No added JavaScript, with one listed exception: the Dialog close button (`templates/custom/footer.tmpl`, §7) —
   a clickable control cannot be created with CSS. ~0.7 KB inline, github-* themes only, no network request.
 - No layout shift: the screenshot tool records CLS per route; must not exceed the built-in theme's.
@@ -315,11 +303,16 @@ Mona, Hubot, Copilot marks or other trademarks; the Gitea logo stays. Fonts: sys
 - `tools/shoot/smoke.mjs` — functional smoke test (issue, comment, label, PR open+merge, web editor, setting, theme
   switch) after every round.
 
-## 14. Process
+## 14. Generated files and local artifacts
 
-Waves: (0) architecture, tokens, build, seed, tooling → (1) foundation, controls, icons → (2) overlays, navigation,
-data-display, code, markdown → (3) pages/*, then whole-site dark pass. Between waves the integrator (only agent
-allowed to touch `src/tokens/`, `build/`, `templates/`, app.ini) applies change requests and fixes seams.
-Every builder round is followed by an independent critic (writes no code) scoring 0–10 against `docs/reference/`
-with measurements; pass = ≥ 8.5, zero console errors, zero literal colors, smoke test green; up to 4 rounds.
-Final gate: whole-site critic + blind A/B judges. State persists in `docs/STATUS.json`.
+- Keep theme source, templates, build and verification tools, source research, icon decisions, and the curated
+  README screenshots in Git.
+- Keep `src/tokens/generated/`, `src/icons/svg/`, `src/icons/octicon-masks.css` and `src/icons/manifest.json`:
+  these generated assets are inputs to the normal build. Regenerate them deliberately when changing tokens or icons.
+- Keep `docs/seed-manifest.json` and `docs/baseline-pre-seed.json`: route generation reads the manifest, and the
+  smoke test uses the baseline to protect pre-existing repositories.
+- `dist/`, `shots/`, `docs/reference/` and `docs/page-scope-report.{md,json}` are reproducible local output and ignored
+  by Git. Reference JSON, measurements and screenshots should be captured together with `--target github` before
+  comparisons. See `tools/shoot/README.md`.
+- Historical status snapshots, per-round critiques, handoff requests, final-gate results and template backups are
+  not maintained. Git history retains past development records.

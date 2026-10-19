@@ -1,5 +1,9 @@
 # tools/shoot — screenshots, audits, reference captures, smoke test
 
+Capture output (`shots/` and `docs/reference/`, including JSON logs and measurements) is local and ignored by Git.
+Capture fresh references with `--target github` before running comparisons or creating blind A/B pairs.
+The README's curated comparison images remain tracked in `docs/screenshots/`.
+
 Node ESM + Playwright (headless chromium). Nothing here modifies Gitea except the
 admin user's **theme / language preference** (via the real settings form) and, in
 `smoke.mjs`, content inside the seeded repo `octo-org/theme-playground`.

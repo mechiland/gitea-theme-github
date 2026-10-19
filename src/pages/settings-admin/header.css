@@ -4,7 +4,7 @@
  *   (14px --fgColor-muted), and a default button "Go to your personal profile" on the right; 24px below it.
  *   Below 768px the button wraps under the name.
  * Gitea has no such markup: it comes from the github-* only override of templates/user/settings/layout_head.tmpl
- * proposed in docs/requests/integrator.md (SA-4). Without that override these rules match nothing.
+ * (see ARCHITECTURE.md §7). Without that override these rules match nothing.
  */
 
 .gh-settings-header {
