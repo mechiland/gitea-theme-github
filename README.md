@@ -3,7 +3,7 @@
 [![Build & release](https://github.com/mechiland/gitea-theme-github/actions/workflows/release.yml/badge.svg)](https://github.com/mechiland/gitea-theme-github/actions/workflows/release.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-A GitHub look-and-feel theme for **Gitea 1.27.x and 28.x** (tested on 1.27.3 and 28.1.0; one package for both), in light, dark and auto (follows the OS color scheme).
+A GitHub look-and-feel theme for **Gitea 1.27.x and 28.x** (tested on 1.27.3, 28.0.0, 28.1.0, 28.2.0 and 28.3.0; one package for all), in light, dark and auto (follows the OS color scheme).
 
 It is built from GitHub's own open-source design system, not by recolouring Gitea:
 - every color, size, radius, shadow, type and motion value comes from [Primer Primitives](https://primer.style/product/primitives/) (`@primer/primitives` 11.10.0);
@@ -57,6 +57,7 @@ public/assets/css/theme-github-{auto,light,dark}.css   the themes (one self-cont
 public/assets/img/svg/*.svg                           Octicons 19.38 upgrade + Octicon replacements for non-Octicon icons
 templates/**                                          GitHub-only template blocks (other themes render Gitea's upstream HTML;
                                                       repo/view_list.tmpl adds one link that stays hidden for them)
+COMPATIBILITY.json                                   supported series, CI versions and build revision
 INSTALL.md, LICENSE, NOTICE
 ```
 
@@ -90,7 +91,7 @@ With the Docker image, you can set the same values with environment variables in
 ```yaml
 services:
   server:
-    image: docker.gitea.com/gitea:28.1.0   # or 1.27.x
+    image: docker.gitea.com/gitea:28.3.0   # or 1.27.3 / another supported 28.x version
     environment:
       - GITEA__ui__THEMES=gitea-auto,gitea-light,gitea-dark,github-auto,github-light,github-dark
       - GITEA__ui__DEFAULT_THEME=github-auto
@@ -136,8 +137,10 @@ Extracting never deletes files. If the release notes say a template was removed,
 ```bash
 git clone https://github.com/mechiland/gitea-theme-github && cd gitea-theme-github
 npm ci
+npm run upstream   # cache templates + frontend sources for every version in build/gitea-versions.json
+npm test           # build/packaging regression tests
 npm run lint       # no literal colors outside the token layer, type/radius/shadow from tokens, selector ownership
-npm run build      # → dist/theme-github-{auto,light,dark}.css (budget: ≤ 340 KB each, minified)
+npm run build -- --strict  # → dist/theme-github-{auto,light,dark}.css (budget: ≤ 340 KB each, minified)
 npm run package    # → dist/gitea-theme-github-<version>-gitea1.27-28.{zip,tar.gz} (the drop-in package above)
 ```
 
@@ -158,25 +161,56 @@ Captures and reports are local artifacts: `shots/`, `docs/reference/`, `docs/pag
 `dist/` are ignored by Git. The screenshot tool recreates reference captures; lint and build recreate the scope reports.
 `docs/seed-manifest.json` and `docs/baseline-pre-seed.json` stay tracked because the development tools use them.
 
-### CI / releases
+### Compatibility and CI / releases
+
+One package supports both **Gitea 1.27.x and 28.x**. The CI matrix is defined once in
+[`build/gitea-versions.json`](build/gitea-versions.json): **1.27.3, 28.0.0, 28.1.0, 28.2.0 and 28.3.0**.
+It is also used for upstream source checks and the package's `INSTALL.md` and `COMPATIBILITY.json`.
+Older 1.27 patch releases are not separate CI targets. A future Gitea release is added to this matrix after review;
+existing targets stay in the matrix when support is extended.
 
 [`.github/workflows/release.yml`](.github/workflows/release.yml) runs on every push and pull request:
 
 1. visual regression on Gitea 1.27.3 and 28.2.0 (light/dark, desktop/mobile), with screenshot diffs and reports;
-2. lint;
-3. build;
-4. package;
-5. upload the package as a workflow artifact.
+2. run build regression tests, fetch all matrix versions' upstream sources, and check selectors against each version;
+3. build the release candidate with strict checks and the **340 KB** budget, then package **once** for the compatibility matrix;
+4. install that unchanged archive in a fresh container for every matrix version;
+5. check native and GitHub navigation, forced password changes, repository/file/blame/wiki/issue/PR pages,
+   theme switching, Mermaid and code copy, in light/dark at 1440/390px;
+6. retain screenshots, logs and a JSON report recording the archive SHA-256 for each version.
 
-The visual jobs must pass before packaging or publishing. They create their own fixed test data and
+The visual jobs must pass before packaging the release candidate or publishing. They create their own fixed test data and
 compare the candidate with an explicitly approved source revision in the same CI environment.
 See [`tools/visual/README.md`](tools/visual/README.md) for local runs, reports and baseline updates.
 
-Pushing a tag `v*` builds with `--strict`, which enforces the 340 KB budget, and publishes a GitHub Release with the `.zip` and `.tar.gz` attached:
+A `v*` tag publishes a GitHub Release **only after every matrix job succeeds**, using the same archives tested above.
+The release job also verifies that every version's report names the same archive SHA-256. CI failure prevents publication.
+The `.zip` and `.tar.gz` remain named `gitea-theme-github-<version>-gitea1.27-28.*`.
+
+To run the same container check locally (requires Docker and Playwright Chromium):
 
 ```bash
-npm version patch && git push --follow-tags
+npx playwright install chromium
+npm run package
+npm run compat -- --version 28.3.0 --package dist/gitea-theme-github-<version>-gitea1.27-28.tar.gz
 ```
+
+Use each version from the matrix to run the complete check. The tool creates disposable data and removes its
+container afterwards; it does not use your existing Gitea instance. Reports go to `shots/compat/<Gitea version>/`.
+See [tools/compat/README.md](tools/compat/README.md) for the checks and limitations.
+
+Source downloads are cached in `.cache/gitea-sources/<version>/`; existing read-only `../gitea-src-<version>`
+checkouts can also be used. Set `GITEA_SOURCE_ROOT` to a directory containing all matrix version directories to
+use another cache. Missing sources fail the build rather than silently reducing its compatibility checks.
+Page-scope reports and live caches are separated by version under `.cache/page-scope/`; live caches also include
+the instance URL and are checked against its running version:
+
+```bash
+node build/page-scope-check.mjs --version 28.3.0 --strict
+GITEA_URL=http://localhost:3001 node build/page-scope-check.mjs --version 28.3.0 --live
+```
+
+The live command needs an authenticated shoot-tool session for that instance; after `npm run upstream`, normal build and source checks need no network access. Set `GITEA_STORAGE_STATE` to select a browser storage-state file for a live check.
 
 ## Contributing
 
@@ -184,7 +218,7 @@ Bug reports, visual fixes and documentation improvements are welcome. Changes mu
 
 - **Report a bug:** open an issue with your Gitea and browser versions, steps to reproduce, and screenshots when relevant.
 - **Make a change:** read [ARCHITECTURE.md](ARCHITECTURE.md), keep changes focused, and edit `src/` or `templates/` rather than generated files in `dist/`. Reuse the existing Primer tokens.
-- **Submit a PR:** run `npm run lint` and `npm run build`, and verify changes on both supported Gitea versions. For visual changes, check light and dark themes and include before/after screenshots.
+- **Submit a PR:** run `npm test`, `npm run lint -- --strict` and `npm run build -- --strict`, then verify the same package across the CI matrix. For visual changes, check light and dark themes and include before/after screenshots.
 
 ## Status
 

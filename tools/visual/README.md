@@ -8,6 +8,10 @@ packages into two disposable Gitea containers, and seeds both through the API. I
 database, migrations from GitHub, service credentials or pre-existing Gitea installation. Both servers
 bind to random loopback ports and are removed after the test run; their logs remain in the report.
 
+The runner fetches the upstream source matrix required by each checkout when it provides `build/fetch-gitea.mjs`.
+These sources share `.cache/gitea-sources` (or `GITEA_SOURCE_ROOT`) so the strict candidate build is checked against
+all supported versions, while older approved baselines can still build with their original tooling.
+
 For each version, Playwright compares screenshots of the reference and candidate in the **same browser
 and operating system**, using light/dark themes and 1440px/390px viewports. This avoids maintaining PNGs
 specific to a developer's OS. The reference commit stays fixed until an intentional visual change is

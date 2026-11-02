@@ -6,6 +6,8 @@ import {startGitea, login, cleanup, REPO} from './fixture.mjs';
 
 const root = path.resolve(import.meta.dirname, '../..');
 process.chdir(root);
+// Share checked upstream sources with the reference checkout when it also supports the version matrix.
+process.env.GITEA_SOURCE_ROOT ||= path.join(root, '.cache/gitea-sources');
 const version = process.env.VISUAL_GITEA_VERSION || '28.2.0';
 if (!/^\d+\.\d+\.\d+$/.test(version)) throw new Error('VISUAL_GITEA_VERSION must be an exact Gitea version.');
 const baseline = JSON.parse(fs.readFileSync(new URL('./baseline.json', import.meta.url), 'utf8'));
@@ -27,6 +29,7 @@ try {
   execFileSync('tar', ['-xf', '-', '-C', referenceSource], {input: archive});
   run('npm', ['ci', '--ignore-scripts', '--no-audit'], referenceSource);
   for (const source of [referenceSource, root]) {
+    if (fs.existsSync(path.join(source, 'build/fetch-gitea.mjs'))) run(process.execPath, ['build/fetch-gitea.mjs'], source);
     run(process.execPath, ['build/build.mjs', '--strict'], source);
     run(process.execPath, ['build/package.mjs'], source);
   }

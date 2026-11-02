@@ -27,6 +27,10 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - uses: actions/cache@v6
+        with:
+          path: .cache/gitea-sources
+          key: gitea-sources-v1-${{ hashFiles('build/gitea-versions.json') }}
       - name: Install the pinned Chromium browser and its system dependencies
         run: npx playwright install --with-deps chromium
       - name: Compare the candidate with the approved visual baseline

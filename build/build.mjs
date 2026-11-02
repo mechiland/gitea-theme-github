@@ -21,6 +21,7 @@ import {FOLDERS, THEMES, SRC, DIST, ROOT, CUSTOM_PATH, GITEA_URL, GITEA_CONTAINE
 import {lintAll} from './lint.mjs';
 import {nest, verifyNest} from './nest.mjs';
 import {pageScopeCheck} from './page-scope-check.mjs';
+import {sourceDirectories} from './gitea-versions.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (n) => argv.includes(`--${n}`);
@@ -28,6 +29,15 @@ const opt = (n) => { const i = argv.indexOf(`--${n}`); return i >= 0 ? argv[i + 
 const excluded = new Set((opt('exclude') || '').split(',').filter(Boolean));
 const report = {startedAt: new Date().toISOString(), folders: {}, themes: {}, deploy: null};
 const read = (p) => fs.readFileSync(p, 'utf8');
+const upstream = sourceDirectories(); // Fail closed, including builds with --no-lint.
+report.giteaVersions = upstream.map(s => s.version);
+const externalProperties = new Set();
+for (const dir of [...upstream.flatMap(s => ['web_src', 'templates'].map(d => path.join(s.directory, d))), path.join(ROOT, 'templates')]) {
+  for (const f of fs.readdirSync(dir, {recursive: true}).sort()) {
+    if (!/\.(tmpl|ts|js|vue|css|go)$/.test(f)) continue;
+    for (const m of read(path.join(dir, f)).matchAll(/--[\w-]+/g)) externalProperties.add(m[0]);
+  }
+}
 // Browsers with CSS nesting (`&`): Chrome/Edge 112+, Safari 16.5+, Firefox 117+ (build/nest.mjs output needs it).
 const TARGETS = {chrome: 120 << 16, firefox: 117 << 16, safari: (16 << 16) | (5 << 8)};
 const NEST = !flag('no-nest');
@@ -90,6 +100,7 @@ function prune(allComponentCss) {
   }
   const used = new Set();
   const queue = [...(giteaMap + schemeCss.light + schemeCss.dark + allComponentCss).matchAll(/var\(\s*(--[\w-]+)/g)].map((m) => m[1]);
+  queue.push(...[...externalProperties].filter(name => defs.has(name))); // Also retain upstream-only Primer tokens.
   while (queue.length) {
     const n = queue.pop();
     if (used.has(n)) continue;
@@ -145,20 +156,8 @@ const RENAME = !flag('no-rename');
 const shortNames = new Map();
 if (RENAME) {
   const ours = new Set([...(colorTokens.light + colorTokens.dark + scaleTokens + masksCss).matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]));
-  const keepVerbatim = new Set();
-  const foreign = new Set(); // every custom-property name Gitea's source or our templates mention: never generated
-  const scan = (dir) => {
-    if (!fs.existsSync(dir)) return;
-    for (const f of fs.readdirSync(dir, {recursive: true})) {
-      if (!/\.(tmpl|ts|js|vue|css|go)$/.test(f)) continue;
-      for (const m of read(path.join(dir, f)).matchAll(/--[\w-]+/g)) {
-        foreign.add(m[0]);
-        if (ours.has(m[0])) keepVerbatim.add(m[0]);
-      }
-    }
-  };
-  const GITEA_SRC = process.env.GITEA_SRC || path.resolve(ROOT, '../gitea-src-1.27.3');
-  for (const d of [path.join(GITEA_SRC, 'web_src'), path.join(GITEA_SRC, 'templates'), path.join(ROOT, 'templates')]) scan(d);
+  const foreign = externalProperties;
+  const keepVerbatim = new Set([...foreign].filter(n => ours.has(n)));
   for (const n of keepVerbatim) ours.delete(n);
   report.renamedKeptVerbatim = [...keepVerbatim].sort();
   // Loop 2 (integrator L2b, budget): identical-token dedupe. Primer tokens whose definitions are identical in every
