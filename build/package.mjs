@@ -15,11 +15,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {ROOT, DIST, SRC, THEMES} from './folders.mjs';
+import {GITEA_VERSIONS, GITEA_SERIES, GITEA_PACKAGE_SUFFIX} from './gitea-versions.mjs';
 
-const GITEA_SUPPORTED = '1.27-28'; // tested on 1.27.3 and 28.1.0
-const GITEA_TESTED = '1.27.3 and 28.1.0';
+const GITEA_SUPPORTED = GITEA_PACKAGE_SUFFIX;
+const GITEA_TESTED = GITEA_VERSIONS.join(', ');
 const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
 const report = JSON.parse(fs.readFileSync(path.join(DIST, 'build-report.json'), 'utf8'));
+if (JSON.stringify(report.giteaVersions) !== JSON.stringify(GITEA_VERSIONS)) throw new Error('Build source matrix is stale; rebuild before packaging.');
 const name = `gitea-theme-github-${pkg.version}-gitea${GITEA_SUPPORTED}`;
 const out = path.join(DIST, 'package', 'gitea-theme-github');
 
@@ -55,6 +57,7 @@ for (const rel of fs.readdirSync(tplRoot, {recursive: true}).filter((f) => f.end
 }
 
 for (const f of ['LICENSE', 'NOTICE']) copy(path.join(ROOT, f), path.join(out, f));
+fs.writeFileSync(path.join(out, 'COMPATIBILITY.json'), JSON.stringify({series: GITEA_SERIES, versions: GITEA_VERSIONS, buildRevision: report.revision}, null, 2) + '\n');
 fs.writeFileSync(path.join(out, 'INSTALL.md'), `# gitea-theme-github ${pkg.version} (for Gitea 1.27.x and 28.x, tested on ${GITEA_TESTED})
 
 1. Copy the contents of this folder into Gitea's custom directory (\`$GITEA_CUSTOM\`, \`/data/gitea\` in the official

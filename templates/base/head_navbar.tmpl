@@ -1,4 +1,4 @@
-{{if StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-"}}{{/* gitea-theme-github (ARCHITECTURE.md §7, FG-007): github.com AppHeader for github-* themes only, markup in custom/gh_head_navbar.tmpl. The other two branches are Gitea's templates/base/head_navbar.tmpl verbatim: 1.27.3 when AppVer starts with "1.", else 28.1.0; no newline after the final end, so other themes render upstream bytes exactly. */}}{{template "custom/gh_head_navbar" .}}{{else if StringUtils.HasPrefix AppVer "1."}}<nav id="navbar" aria-label="{{ctx.Locale.Tr "aria.navbar"}}">
+{{if StringUtils.HasPrefix ctx.CurrentWebTheme.InternalName "github-"}}{{/* gitea-theme-github (ARCHITECTURE.md §7, FG-007): github.com AppHeader for github-* themes only, markup in custom/gh_head_navbar.tmpl. The other two branches are Gitea's templates/base/head_navbar.tmpl verbatim: 1.27.3 when AppVer starts with "1.", else 28.x (the avatar layout follows the pre-28.2 / 28.2+ upstream variants); no newline after the final end, so other themes render upstream bytes exactly. */}}{{template "custom/gh_head_navbar" .}}{{else if StringUtils.HasPrefix AppVer "1."}}<nav id="navbar" aria-label="{{ctx.Locale.Tr "aria.navbar"}}">
 	<div class="navbar-left">
 		<!-- the logo -->
 		<a class="item" id="navbar-logo" href="{{AppSubUrl}}/" aria-label="{{if .IsSigned}}{{ctx.Locale.Tr "dashboard"}}{{else}}{{ctx.Locale.Tr "home_title"}}{{end}}">
@@ -180,7 +180,7 @@
 	{{end}}
 </nav>
 {{template "base/head_banner"}}
-{{else}}<nav id="navbar" aria-label="{{ctx.Locale.Tr "aria.navbar"}}">
+{{else}}{{$legacyNavbar := or (StringUtils.HasPrefix AppVer "28.0.") (StringUtils.HasPrefix AppVer "28.1.")}}<nav id="navbar" aria-label="{{ctx.Locale.Tr "aria.navbar"}}">
 	<div class="navbar-left">
 		<!-- the logo -->
 		<a class="item" id="navbar-logo" href="{{AppSubUrl}}/" aria-label="{{if .IsSigned}}{{ctx.Locale.Tr "dashboard"}}{{else}}{{ctx.Locale.Tr "home_title"}}{{end}}">
@@ -226,8 +226,8 @@
 	<div class="navbar-right">
 		{{if and .IsSigned .MustChangePassword}}
 			<div class="ui dropdown jump item" data-tooltip-content="{{ctx.Locale.Tr "user_profile_and_more"}}">
-				<span class="text">
-					{{ctx.AvatarUtils.Avatar .SignedUser 24 "tw-mr-1"}}
+				<span class="{{if $legacyNavbar}}text{{else}}flex-text-block{{end}}">
+					{{if $legacyNavbar}}{{ctx.AvatarUtils.Avatar .SignedUser 24 "tw-mr-1"}}{{else}}{{ctx.AvatarUtils.Avatar .SignedUser 24}}{{end}}
 					<span class="only-mobile">{{.SignedUser.Name}}</span>
 					<span class="not-mobile flex-text-block">{{svg "octicon-triangle-down"}}</span>
 				</span>

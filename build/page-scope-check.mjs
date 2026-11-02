@@ -9,14 +9,14 @@
 //    of its classes is a Gitea page class (vocabulary = union of the class sets found in step 2, minus `ui`, `container`,
 //    `page-content`, `tw-*`). `:not(.a, .b)` on that compound becomes a negative set. Selectors whose first class
 //    compound is not made of page classes are "unscoped" (component-style rules inside a page folder) and not checked.
-// 2. Templates → page classes (static). gitea-src-1.27.3/templates/**/*.tmpl + our templates/ overrides (they win) +
-//    the Modern theme's overrides in CUSTOM_PATH/templates (read-only): every `class="page-content …"` attribute is
+// 2. Templates → page classes (static). each supported Gitea version's templates + our templates/ overrides (they win);
+//    with --live, also CUSTOM_PATH/templates (read-only): every `class="page-content …"` attribute is
 //    expanded over its `{{if}}…{{else}}…{{end}}` branches; `{{.pageClass}}` is resolved through every
 //    `(dict "pageClass" "…")` call site of that layout template (the caller is reported as the template).
 // 3. Routes → page classes (live, authoritative). With --live every route of tools/shoot/routes.json (+ EXTRA_URLS,
 //    the known shared shells that no route covers) is fetched from Gitea (admin session from the shoot tool's storage
 //    state; anonymous for `auth: false`; the `style` query parameter is dropped so the admin's diff-style preference is
-//    never written) and the classes of the first `.page-content` element are cached in shots/page-classes.json.
+//    never written) and page classes are cached by version and instance URL under .cache/page-scope/.
 //    Without --live the cache is used when present.
 // 4. Match: a scope matches a page when its classes ⊆ the page's classes and no negative set ⊆ the page's classes.
 // 5. Intent: src/pages/<group>/scopes.json declares, per scope key (sorted classes, e.g. ".commits.repository" or
@@ -29,12 +29,13 @@
 //    Exit code: 0; with --strict 1 when there is any LEAK (build.mjs --strict and the final gate use that).
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
+import {GITEA_VERSIONS, sourceDirectory} from './gitea-versions.mjs';
 import postcss from 'postcss';
 import {parse as parseSelector} from 'css-what'; // transitive dependency of svgo (pinned by package-lock.json)
 import {ROOT, SRC, CUSTOM_PATH, GITEA_URL, PAGE_GROUPS} from './folders.mjs';
 
-const GITEA_SRC = path.resolve(ROOT, '../gitea-src-1.27.3');
-const CACHE = path.join(ROOT, 'shots/page-classes.json');
+const cacheRoot = path.join(ROOT, '.cache/page-scope');
 const REPORT_MD = path.join(ROOT, 'docs/page-scope-report.md');
 const REPORT_JSON = path.join(ROOT, 'docs/page-scope-report.json');
 const GENERIC = new Set(['ui', 'container', 'page-content']);
@@ -136,10 +137,10 @@ function expandAttr(value, pageClassValues) {
   return {variants: out.map((s) => s.split(/\s+/).filter(Boolean)), unknown};
 }
 
-function scanTemplates() {
+function scanTemplates(source, live) {
   const sources = new Map(); // rel → {file, origin}
-  for (const rel of listTemplates(path.join(GITEA_SRC, 'templates'))) sources.set(rel, {file: path.join(GITEA_SRC, 'templates', rel), origin: 'upstream'});
-  for (const rel of listTemplates(path.join(CUSTOM_PATH, 'templates'))) sources.set(rel, {file: path.join(CUSTOM_PATH, 'templates', rel), origin: 'custom (live)'});
+  for (const rel of listTemplates(path.join(source, 'templates'))) sources.set(rel, {file: path.join(source, 'templates', rel), origin: 'upstream'});
+  if (live) for (const rel of listTemplates(path.join(CUSTOM_PATH, 'templates'))) sources.set(rel, {file: path.join(CUSTOM_PATH, 'templates', rel), origin: 'custom (live)'});
   for (const rel of listTemplates(path.join(ROOT, 'templates'))) sources.set(rel, {file: path.join(ROOT, 'templates', rel), origin: 'ours'});
   const text = new Map([...sources].map(([rel, s]) => [rel, fs.readFileSync(s.file, 'utf8')]));
   // pageClass call sites: {{template "admin/layout_head" (dict "pageClass" "admin config")}}
@@ -186,16 +187,18 @@ function scanTemplates() {
 
 // ---------------------------------------------------------------------------------------------------------------------
 // 3. live routes → class sets
-async function fetchLive() {
+async function fetchLive(cache, version) {
+  const running = await (await fetch(`${GITEA_URL}/api/v1/version`)).json();
+  if (running.version?.split(/[+-]/)[0] !== version) throw new Error(`Expected Gitea ${version}, got ${running.version} at ${GITEA_URL}`);
   const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/shoot/routes.json'), 'utf8'));
-  const stateFile = path.join(ROOT, '.cache/gitea-admin-storage.json');
+  const stateFile = process.env.GITEA_STORAGE_STATE || path.join(ROOT, '.cache/gitea-admin-storage.json');
   let cookie = 'lang=en-US';
   if (fs.existsSync(stateFile)) {
     const st = JSON.parse(fs.readFileSync(stateFile, 'utf8'));
     cookie = st.cookies.map((c) => `${c.name}=${c.value}`).join('; ');
   }
   const targets = [...cfg.routes.map((r) => ({id: r.id, url: r.gitea, anon: r.auth === false})), ...EXTRA_URLS];
-  const out = {generated: new Date().toISOString(), gitea: GITEA_URL, routes: {}};
+  const out = {version, generated: new Date().toISOString(), gitea: GITEA_URL, routes: {}};
   for (const r of targets) {
     const u = new URL(r.url, GITEA_URL);
     u.searchParams.delete('style'); // never write the admin's diff-style preference
@@ -210,8 +213,8 @@ async function fetchLive() {
       out.routes[r.id] = {url: r.url, error: e.message};
     }
   }
-  fs.mkdirSync(path.dirname(CACHE), {recursive: true});
-  fs.writeFileSync(CACHE, JSON.stringify(out, null, 1));
+  fs.mkdirSync(path.dirname(cache), {recursive: true});
+  fs.writeFileSync(cache, JSON.stringify(out, null, 1));
   return out;
 }
 
@@ -339,7 +342,7 @@ async function probeLeaks(result, liveData) {
   const {chromium} = await import('playwright');
   const {launchBrowser} = await import('../tools/shoot/lib/browser.mjs').catch(() => ({}));
   const browser = launchBrowser ? await launchBrowser() : await chromium.launch();
-  const stateFile = path.join(ROOT, '.cache/gitea-admin-storage.json');
+  const stateFile = process.env.GITEA_STORAGE_STATE || path.join(ROOT, '.cache/gitea-admin-storage.json');
   const ctxs = {admin: await browser.newContext({storageState: fs.existsSync(stateFile) ? stateFile : undefined, locale: 'en-US'}),
     anon: await browser.newContext({locale: 'en-US'})};
   for (const c of Object.values(ctxs)) await c.addCookies([{name: 'lang', value: 'en-US', url: GITEA_URL}]);
@@ -364,14 +367,20 @@ async function probeLeaks(result, liveData) {
   await browser.close();
 }
 
-export async function pageScopeCheck({live = false, seed = false, write = true, probe = false} = {}) {
-  const templates = scanTemplates();
+async function checkVersion({version, live = false, seed = false, write = true, probe = false}) {
+  const source = sourceDirectory(version);
+  const dir = path.join(cacheRoot, version);
+  const cache = path.join(dir, `live-${crypto.createHash('sha256').update(GITEA_URL).digest('hex').slice(0, 12)}.json`);
+  const templates = scanTemplates(source, live || probe);
   const vocab = new Set(templates.flatMap((t) => t.classes).filter((c) => !GENERIC.has(c)));
   let liveData = null;
-  if (live) liveData = await fetchLive();
-  else if (fs.existsSync(CACHE)) liveData = JSON.parse(fs.readFileSync(CACHE, 'utf8'));
+  if (live || probe) liveData = await fetchLive(cache, version);
+  else if (fs.existsSync(cache)) {
+    const cached = JSON.parse(fs.readFileSync(cache, 'utf8'));
+    if (cached.version === version && cached.gitea === GITEA_URL) liveData = cached;
+  }
   const routes = liveData ? Object.entries(liveData.routes).filter(([, r]) => r.classes) : [];
-  const result = {generated: new Date().toISOString(), liveCache: liveData ? path.relative(ROOT, CACHE) : null,
+  const result = {version, source, generated: new Date().toISOString(), liveCache: liveData ? path.relative(ROOT, cache) : null,
     liveGenerated: liveData?.generated || null, templatesScanned: templates.length, folders: {}, totals: {scopes: 0, leaks: 0, newScopes: 0, dead: 0}};
   for (const group of PAGE_GROUPS) {
     const {scopes, unscoped} = collectScopes(group, vocab);
@@ -406,6 +415,29 @@ export async function pageScopeCheck({live = false, seed = false, write = true, 
   if (probe && liveData) await probeLeaks(result, liveData);
   for (const f of Object.values(result.folders)) for (const row of f.rows) delete row.selectorsAll;
   if (write) {
+    fs.mkdirSync(dir, {recursive: true});
+    fs.writeFileSync(path.join(dir, 'report.json'), JSON.stringify(result, null, 1));
+    fs.writeFileSync(path.join(dir, 'report.md'), toMarkdown(result));
+  }
+  return result;
+}
+
+// The default checks every supported source independently, rather than merging template paths across versions.
+export async function pageScopeCheck(options = {}) {
+  if ((options.live || options.probe) && !options.version) throw new Error('--live/--probe requires --version to select the running Gitea');
+  if (options.version) return checkVersion(options);
+  const versions = [];
+  for (const version of GITEA_VERSIONS) versions.push(await checkVersion({...options, version}));
+  const result = {generated: new Date().toISOString(), versions: GITEA_VERSIONS, templatesScanned: versions.reduce((n, r) => n + r.templatesScanned, 0),
+    folders: {}, totals: {scopes: 0, leaks: 0, newScopes: 0, dead: 0}};
+  for (const group of PAGE_GROUPS) {
+    const parts = versions.map(r => ({...r.folders[group], rows: r.folders[group].rows.map(row => ({...row, version: r.version}))}));
+    result.folders[group] = {rows: parts.flatMap(p => p.rows), staleDeclarations: [...new Set(parts.flatMap(p => p.staleDeclarations))]};
+    for (const key of ['scopes', 'unscopedSelectors', 'leaks', 'newScopes', 'dead']) result.folders[group][key] = parts.reduce((n, p) => n + p[key], 0);
+  }
+  for (const key of Object.keys(result.totals)) result.totals[key] = versions.reduce((n, r) => n + r.totals[key], 0);
+  if (options.write !== false) {
+    fs.mkdirSync(path.dirname(REPORT_JSON), {recursive: true});
     fs.writeFileSync(REPORT_JSON, JSON.stringify(result, null, 1));
     fs.writeFileSync(REPORT_MD, toMarkdown(result));
   }
@@ -415,17 +447,17 @@ export async function pageScopeCheck({live = false, seed = false, write = true, 
 function toMarkdown(r) {
   const L = [];
   L.push('# Page-scope report (FG2-105)', '');
-  L.push(`Generated ${r.generated} by \`node build/page-scope-check.mjs${r.liveCache ? '' : ''}\`. Templates scanned: ${r.templatesScanned} (upstream 1.27.3 + CUSTOM_PATH + ours); live page classes: ${r.liveCache ? `${r.liveCache} (${r.liveGenerated})` : 'none (run with --live)'}.`);
+  L.push(`Generated ${r.generated} by \`node build/page-scope-check.mjs${r.version ? ` --version ${r.version}` : ''}\`. Templates scanned: ${r.templatesScanned} (upstream ${r.version || r.versions.join(", ")} + ours (live custom overrides only with --live)); live page classes: ${r.liveCache ? `${r.liveCache} (${r.liveGenerated})` : 'none (run with --live)'}.`);
   L.push('', `Totals: ${r.totals.scopes} scopes, **${r.totals.leaks} LEAK**, ${r.totals.newScopes} NEW (undeclared), ${r.totals.dead} DEAD (match nothing).`, '');
   L.push('Scope = class set of the `.page-content` compound (or of the leading page-class compound). A LEAK is a template the scope', 'matches that `src/pages/<group>/scopes.json` neither intends nor waives. Declare intent there; waive with a reason.', '');
-  L.push('| folder | scope | status | sel. | first rule | matched templates | matched routes |', '|---|---|---|---|---|---|---|');
+  L.push('| version | folder | scope | status | sel. | first rule | matched templates | matched routes |', '|---|---|---|---|---|---|---|---|');
   const order = {LEAK: 0, NEW: 1, DEAD: 2, ok: 3};
   const rows = Object.entries(r.folders).flatMap(([g, f]) => f.rows.map((x) => ({g, ...x}))).sort((a, b) => order[a.status] - order[b.status] || a.g.localeCompare(b.g) || a.scope.localeCompare(b.scope));
   for (const x of rows) {
     const t = x.templates.map((t) => (x.leaks.includes(t) ? `**${t}**` : t in (x.waived || {}) ? `~~${t}~~` : t)).join(', ') || '—';
     const rt = x.routes.map((q) => (x.leakRoutes.some((l) => l.id === q.id) ? `**${q.id}**` : q.id)).join(', ') || '—';
     const pr = (x.probe || []).map((p) => `${p.route}: ${p.applied}/${p.of} applied`).join('; ');
-    L.push(`| ${x.g} | \`${x.scope}\` | ${x.status}${pr ? ` (probe ${pr})` : ''} | ${x.selectors} | ${x.first} | ${t} | ${rt} |`);
+    L.push(`| ${x.version || r.version} | ${x.g} | \`${x.scope}\` | ${x.status}${pr ? ` (probe ${pr})` : ''} | ${x.selectors} | ${x.first} | ${t} | ${rt} |`);
   }
   L.push('', 'Bold = leak (unintended match); struck = waived (reason in scopes.json).', '');
   for (const [g, f] of Object.entries(r.folders)) {
@@ -439,7 +471,9 @@ function toMarkdown(r) {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const r = await pageScopeCheck({live: flag('live'), seed: flag('seed'), probe: flag('probe')});
+  const version = process.argv[process.argv.indexOf('--version') + 1];
+  if (flag('version') && (!version || version.startsWith('--'))) throw new Error('--version requires a Gitea version');
+  const r = await pageScopeCheck({version: flag('version') ? version : undefined, live: flag('live'), seed: flag('seed'), probe: flag('probe')});
   if (!flag('quiet')) {
     for (const [g, f] of Object.entries(r.folders)) {
       console.log(`${f.leaks ? '!' : '✓'} pages/${g}: ${f.scopes} scopes, ${f.leaks} LEAK, ${f.newScopes} NEW, ${f.dead} DEAD, ${f.unscopedSelectors} unscoped selectors${f.staleDeclarations.length ? `, stale declarations: ${f.staleDeclarations.join(' ')}` : ''}`);
@@ -448,7 +482,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
         for (const p of x.probe || []) console.log(`        probe ${p.route}: ${p.applied}/${p.of} selectors match elements${p.examples.length ? ` e.g. ${p.examples.slice(0, 2).map((e) => `${e.sel} (${e.count}) @${e.at}`).join(' | ')}` : ''}`);
       }
     }
-    console.log(`page-scope: ${r.totals.leaks} LEAK · report ${path.relative(ROOT, REPORT_MD)}`);
+    console.log(`page-scope: ${r.totals.leaks} LEAK · report ${path.relative(ROOT, r.version ? path.join(cacheRoot, r.version, 'report.md') : REPORT_MD)}`);
   }
   process.exit(flag('strict') && r.totals.leaks ? 1 : 0);
 }

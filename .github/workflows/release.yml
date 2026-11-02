@@ -1,7 +1,5 @@
-name: Build & release
+name: Build, compatibility & release
 
-# Every push / PR builds the theme and uploads a drop-in package as a workflow artifact.
-# Pushing a tag v* also creates a GitHub Release with the .zip / .tar.gz attached.
 on:
   push:
     branches: [main]
@@ -10,55 +8,126 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.versions.outputs.matrix }}
     env:
       PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
     steps:
       - uses: actions/checkout@v7
-
       - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
-
       - run: npm ci
-
-      - name: Lint (no literal colors, tokens only, selector ownership)
-        run: npm run lint
-
-      - name: Build theme files
-        # Release tags must meet the 300 KB budget; branch builds only report it.
-        run: |
-          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
-            node build/build.mjs --strict
-          else
-            node build/build.mjs --budget-warn
-          fi
-
-      - name: Package for Gitea CUSTOM_PATH
-        run: node build/package.mjs
-
+      - id: versions
+        name: Read the shared Gitea version matrix
+        run: echo "matrix=$(node build/gitea-versions.mjs)" >> "$GITHUB_OUTPUT"
+      - run: npm test
+      - uses: actions/cache@v6
+        with:
+          path: .cache/gitea-sources
+          key: gitea-sources-v1-${{ hashFiles('build/gitea-versions.json') }}
+      - name: Fetch all supported upstream source trees
+        run: npm run upstream
+      - name: Lint and check page scopes on every supported version
+        run: npm run lint -- --strict
+      - name: Build once (strict checks and 340 KB budget)
+        run: npm run build -- --strict
+      - name: Package once for the entire matrix
+        run: npm run package
       - name: Summary
         run: |
-          echo "### Theme files" >> "$GITHUB_STEP_SUMMARY"
-          node -e "const r=require('./dist/build-report.json');for(const [n,t] of Object.entries(r.themes))console.log('- theme-'+n+'.css: '+t.kb+' KB'+(t.overBudget?' (over 300 KB budget)':''))" >> "$GITHUB_STEP_SUMMARY"
-
+          node --input-type=module <<'JS' >> "$GITHUB_STEP_SUMMARY"
+          import fs from 'node:fs';
+          const r = JSON.parse(fs.readFileSync('dist/build-report.json'));
+          console.log('### One package for Gitea ' + r.giteaVersions.join(', '));
+          for (const [name, theme] of Object.entries(r.themes)) console.log(`- theme-${name}.css: ${theme.kb} KB`);
+          JS
       - uses: actions/upload-artifact@v7
         with:
           name: gitea-theme-github
           path: |
-            dist/gitea-theme-github-*.zip
             dist/gitea-theme-github-*.tar.gz
+            dist/gitea-theme-github-*.zip
             dist/theme-github-*.css
+            dist/build-report.json
           if-no-files-found: error
 
-      - name: GitHub Release
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v3
+  compatibility:
+    needs: build
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.build.outputs.matrix) }}
+    env:
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+      GITEA_VERSION: ${{ matrix.version }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v8
+        with:
+          name: gitea-theme-github
+          path: dist
+      - run: npx playwright install --with-deps chromium
+      - name: Test the unchanged package on Gitea ${{ matrix.version }}
+        run: |
+          packages=(dist/gitea-theme-github-*.tar.gz)
+          test "${#packages[@]}" -eq 1
+          npm run compat -- --version "$GITEA_VERSION" --package "${packages[0]}" --out "shots/compat/$GITEA_VERSION"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: compatibility-${{ matrix.version }}
+          path: shots/compat/${{ matrix.version }}/
+          if-no-files-found: warn
+
+  release:
+    needs: [build, compatibility]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    env:
+      GITEA_MATRIX: ${{ needs.build.outputs.matrix }}
+    steps:
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v8
+        with:
+          name: gitea-theme-github
+          path: dist
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: compatibility-*
+          path: compatibility-reports
+      - name: Verify every matrix result tested exactly this archive
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          const archives = fs.readdirSync('dist').filter(name => name.endsWith('.tar.gz'));
+          assert.equal(archives.length, 1);
+          const sha = crypto.createHash('sha256').update(fs.readFileSync(`dist/${archives[0]}`)).digest('hex');
+          for (const version of JSON.parse(process.env.GITEA_MATRIX).version) {
+            const report = JSON.parse(fs.readFileSync(`compatibility-reports/compatibility-${version}/report.json`));
+            assert.equal(report.version, version);
+            assert.equal(report.ok, true);
+            assert.equal(report.packageSha256, sha);
+          }
+          JS
+      - uses: softprops/action-gh-release@v3
         with:
           files: |
             dist/gitea-theme-github-*.zip

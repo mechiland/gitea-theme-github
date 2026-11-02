@@ -1,6 +1,8 @@
 {
  ".actions.repository": {
   "intended": [
+   "repo/actions/artifact_preview.tmpl",
+   "repo/actions/job_queue.tmpl",
    "repo/actions/list.tmpl"
   ],
   "waived": {

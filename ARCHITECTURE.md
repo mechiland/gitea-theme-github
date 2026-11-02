@@ -30,7 +30,7 @@ Environment facts: `docs/CONTEXT.md`. Gitea source research (with file:line cita
 | `@primer/primitives` | **11.10.0** | all tokens (`build/gen-tokens.mjs` → `src/tokens/generated/`) |
 | `@primer/octicons`   | **19.38.0** | icon source (Gitea 1.27.3 bundles 19.28.1) |
 | `@primer/css`        | **22.3.2**  | reference only for component specs (not shipped) |
-| Gitea                | **1.27.3** and **28.1.0** | sources at `../gitea-src-1.27.3`, `../gitea-src-28.1.0`; one package for both (§7 "Two Gitea versions") |
+| Gitea                | **1.27.3**, **28.0.0**, **28.1.0**, **28.2.0**, **28.3.0** | CI/source matrix: `build/gitea-versions.json`; one package (§7 "Two Gitea series") |
 
 Dependency versions are pinned in `package.json` and `package-lock.json`.
 
@@ -193,10 +193,12 @@ keep the non-GitHub output byte-identical.
 Install these files into `CUSTOM_PATH/templates/` and reload templates as described in README.md's upgrade instructions.
 `npm run deploy` checks for template drift but does not install template overrides.
 
-**Two Gitea versions (1.27.x and 28.x, one package).** Each template that differs between 1.27.3 and 28.1.0 starts with
+**Two Gitea series (1.27.x and 28.x, one package).** Each template that differs between 1.27.3 and 28.1.0 starts with
 `{{$gitea1 := StringUtils.HasPrefix AppVer "1."}}` (no output) and branches only where upstream differs, so a non-github
 theme gets each version's upstream bytes (checked: anonymous HTML of all routes with vs. without the templates, both
-versions, differs only by the documented `hidden` "N Commits" link). Two rules learned the hard way:
+versions, differs only by the documented `hidden` "N Commits" link). The native navbar also preserves the old avatar markup on 28.0/28.1 and the flex markup introduced in 28.2;
+the GitHub navbar uses a flex layout supported by every target. The disposable compatibility check compares each
+version's native forced-password navbar before and after loading the overrides. Two rules learned the hard way:
 - Fields and methods are resolved at execution, so an untaken branch may name `.Repository.CanEnableEditor` (1.27) or
   `CanContentChange` (28); use `and`/`or` (lazy since Go 1.18) or `{{if $gitea1}}` around them.
 - `{{template "x"}}` is checked by html/template's escaper even in a branch that never runs: an undefined name breaks the
@@ -241,7 +243,9 @@ column colors, repo units, federation, wiki clone box, etc.) get the **closest P
   use), −100 KB per file. Loop 2 also merges Primer tokens whose definitions are identical in every scheme into one short
   name (91 tokens; only tokens no folder re-declares, which are all resolved on :root; `--no-dedupe`). Gitea's own names (`--color-*`, `--is-dark-theme`, anything in gitea-map.css /
   scheme-*.css / folder-local names) and any Primer name mentioned in Gitea's web_src/templates or our templates are
-  never renamed. `dist/theme-github-*.src.css` keeps the real names; `dist/varmap.json` maps short → Primer name.
+  never renamed. The build scans the union of every matrix version's templates and frontend sources, also retaining
+  tokens used only by upstream code. Missing source trees are an error; fetch them with `npm run upstream`.
+  `dist/theme-github-*.src.css` keeps the real names; `dist/varmap.json` maps short → Primer name.
   So in DevTools a computed `--fgColor-muted` reads as `--…` — look it up in varmap.json, or build with `--no-rename`
   (identical rendering: pixel-diffed on 8 routes × 2 schemes, only the footer's server-timing text differs).
 - Prefix nesting (loop 1, integrator; `build/nest.mjs`): as the last step, in the minified `dist/theme-github-*.css` only,
@@ -255,10 +259,12 @@ column colors, repo units, federation, wiki clone box, etc.) get the **closest P
   (TARGETS): Chrome/Edge 112+ (target 120), Safari 16.5+, Firefox 117+ — all evergreen since 2023. `--no-nest` builds the
   flat file for comparison. `*.src.css` stays flat, so coverage and the
   lint are unaffected; in DevTools nested rules show as `& …` under their parent.
-- Page-scope check (FG2-105, `build/page-scope-check.mjs`): page-folder selector scopes vs every Gitea template's
-  `.page-content` classes (+ live route classes cached in `shots/page-classes.json`); each page folder declares its intended
+- Page-scope check (FG2-105, `build/page-scope-check.mjs`): page-folder selector scopes vs each matrix version's Gitea templates independently
+  (`.page-content` classes, plus optional instance-specific live caches under `.cache/page-scope/<version>/`); each page folder declares its intended
   templates in `src/pages/<group>/scopes.json`; an unintended match is a LEAK (warning in `npm run lint` and the build,
-  error under `--strict`). Reports: `docs/page-scope-report.{md,json}` (generated locally, ignored by Git). `--live` refetches, `--probe` counts matched elements.
+  error under `--strict`). Aggregate reports: `docs/page-scope-report.{md,json}`; version reports: `.cache/page-scope/<version>/report.{md,json}` (all ignored by Git).
+  `--version <version> --live` refetches a matching instance; `--version <version> --probe` verifies the instance, refetches
+  and counts matched elements. Static checks use upstream + tracked overrides; `--live`/`--probe` include live custom overrides.
 - `npm run deploy` — build, then atomically copy the three files to `CUSTOM_PATH/public/assets/css/`, copy icons,
   bump `github_revision` in `head_style.tmpl`, `gitea manager reload-templates`, then **fetch each file back from
   Gitea and compare SHA-256** (the deploy fails if Gitea serves different bytes). Reports `restartRequired` when theme
@@ -293,6 +299,14 @@ Mona, Hubot, Copilot marks or other trademarks; the Gitea logo stays. Fonts: sys
 - Deploy is atomic per file (write tmp + rename); a template reload failure leaves the previous template active.
 
 ## 13. Verification loop
+
+- `npm test` — build regressions: reserve names across upstream versions, retain upstream-only tokens, reject missing
+  source trees, detect version-specific page leaks, ignore unrelated live caches, and keep package metadata in sync.
+- `npm run compat -- --version <version> --package <archive.tar.gz>` — fresh disposable Docker database and users;
+  original native navbar vs package, forced-password layout, all overridden page structures, light/dark, desktop/mobile,
+  fixed themes, Mermaid, clipboard, JavaScript errors and CSS layering. The same tarball is used for every CI target.
+  GitHub Release publication waits for the matrix and validates its report checksums. The older seeded tools below
+  remain useful for deeper visual reviews and write-heavy functional tests.
 
 - `tools/seed/seed.mjs` — idempotent seed via API (admin token): migrated public GitHub repos (same pages exist on
   github.com), users, org + teams, a playground repo with a markdown torture-test README, large multi-file PR, Actions
