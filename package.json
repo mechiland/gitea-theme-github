@@ -1,7 +1,7 @@
 {
   "name": "gitea-theme-github",
   "private": true,
-  "version": "0.2.2",
+  "version": "0.3.0",
   "type": "module",
   "description": "GitHub (Primer) theme for Gitea 1.27.x and 28.x",
   "scripts": {
@@ -17,7 +17,6 @@
     "test": "node --test build/tests/*.test.mjs",
     "upstream": "node build/fetch-gitea.mjs",
     "compat": "node tools/compat/check.mjs"
-
   },
   "devDependencies": {
     "@primer/css": "22.3.2",
