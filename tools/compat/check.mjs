@@ -131,7 +131,8 @@ LEVEL = Warn
   await api('POST', `${repoApi}/wiki/new`, {title: 'Home', content_base64: Buffer.from(readme).toString('base64')});
   browser = await launchBrowser();
   const nativeBefore = await forcedNavbar('gitea-auto');
-  fs.renameSync(path.join(custom, 'templates-package'), path.join(custom, 'templates'));
+  // The image chowns /data to git at startup; the host runner no longer owns this directory on Linux.
+  docker('exec', '-u', 'git', container, 'mv', '/data/gitea/templates-package', '/data/gitea/templates');
   docker('exec', '-u', 'git', container, 'gitea', 'manager', 'reload-templates', '--config', '/data/gitea/conf/app.ini');
   assert.equal(await forcedNavbar('gitea-auto'), nativeBefore, 'the package must preserve this version’s native forced-password navbar');
   await forcedNavbar('github-auto');
