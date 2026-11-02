@@ -9,8 +9,9 @@
  *    and the reply trigger (a default Button here, github.com has no green button in threads).
  */
 
+/* Menus in comment headers must be able to extend past the thread (issue #6).
+   Round the header/footer backgrounds themselves instead of clipping the whole Box. */
 .code-comments-list .conversation-holder {
-  overflow: hidden;
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-radius: var(--borderRadius-medium);
   background: var(--bgColor-default);
@@ -25,8 +26,12 @@
   padding-right: var(--base-size-16);
   border: 0;
   border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
-  border-radius: 0;
+  border-radius: var(--borderRadius-medium) var(--borderRadius-medium) 0 0;
   background: var(--bgColor-muted);
+}
+
+.code-comments-list .conversation-holder > .collapsible-comment-box:has(~ .comment-code-cloud.tw-hidden) {
+  border-radius: var(--borderRadius-medium);
 }
 
 .code-comments-list .conversation-holder .file-comment {
@@ -101,6 +106,7 @@
 .code-comments-list .conversation-holder > .comment-code-cloud > .flex-text-block {
   padding: var(--base-size-8) var(--base-size-16);
   border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
   background: var(--bgColor-muted);
 }
 
@@ -125,6 +131,7 @@
 .code-comments-list .conversation-holder > .comment-code-cloud > form.comment-form {
   padding: 0 var(--base-size-8);
   border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
   background: var(--bgColor-muted);
 }
 
@@ -157,12 +164,13 @@
    1px --borderColor-muted — then a --bgColor-muted footer with the thread actions. Gitea: every comment is its own
    bordered Box with a caret and the avatar outside, the timeline's .comment-list gutter + line around them. */
 .repository.view.issue .code-diff .conversation-holder > .comment-code-cloud {
-  overflow: hidden;
   border: var(--borderWidth-thin) solid var(--borderColor-default);
   border-radius: var(--borderRadius-medium);
 }
 
 .repository.view.issue .code-diff .conversation-holder .comment-code-cloud > .comment-list {
+  /* The timeline line is hidden here; its stacking context would trap menus below later diff files. */
+  isolation: auto;
   margin: 0;
   padding: 0;
 }
@@ -228,6 +236,7 @@
 .repository.view.issue .code-diff .conversation-holder .comment-code-cloud > .flex-text-block {
   padding: var(--base-size-8) var(--base-size-16);
   border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
   background: var(--bgColor-muted);
 }
 
@@ -252,6 +261,7 @@
   margin: 0;
   padding: var(--base-size-8) var(--base-size-16) 0;
   border-top: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: 0 0 var(--borderRadius-medium) var(--borderRadius-medium);
   background: var(--bgColor-muted);
 }
 

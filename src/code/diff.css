@@ -368,6 +368,13 @@
     overflow-x: auto;
   }
 
+  /* A horizontal scroller also clips vertically. Let an open review menu extend below the diff;
+     horizontal scrolling (including its previous offset) resumes when the dropdown closes. */
+  .repository .diff-file-box .code-diff-split:has(.comment-code-cloud .ui.dropdown.active) {
+    overflow-x: clip;
+    z-index: var(--zIndex-dropdown);
+  }
+
   .repository .diff-file-box .code-diff-split table {
     width: max(100%, 2 * (var(--base-size-64) + var(--base-size-8) + 6 * var(--base-size-48)));
   }
