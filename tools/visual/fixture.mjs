@@ -143,6 +143,11 @@ export function cleanup(servers, output) {
       const logs = spawnSync('docker', ['logs', server.name], {encoding: 'utf8'});
       fs.writeFileSync(path.join(output, `${server.label}.log`), (logs.stdout || '') + (logs.stderr || ''));
     } catch { /* Preserve the original failure. */ }
+    // The image creates root-owned SSH files in /data even when Gitea uses USER_UID.
+    // Restore ownership inside this disposable container before removing its bind-mounted directory.
+    try {
+      docker('exec', '--user', 'root', server.name, 'chown', '-R', `${process.getuid?.() ?? 1000}:${process.getgid?.() ?? 1000}`, '/data');
+    } catch (error) { console.error(`Could not restore fixture ownership for ${server.name}: ${error.message}`); }
     try { docker('rm', '-f', server.name); } catch (error) { console.error(`Could not remove test container ${server.name}: ${error.message}`); }
   }
 }
