@@ -12,6 +12,7 @@
     "seed": "node tools/seed/seed.mjs",
     "shoot": "node tools/shoot/shoot.mjs",
     "smoke": "node tools/shoot/smoke.mjs",
+    "test:visual": "node tools/visual/run.mjs",
     "package": "node build/package.mjs"
   },
   "devDependencies": {
