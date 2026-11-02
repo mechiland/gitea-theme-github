@@ -11,7 +11,13 @@ permissions:
   contents: read
 
 jobs:
+  visual:
+    uses: ./.github/workflows/visual.yml
+    permissions:
+      contents: read
+
   build:
+    needs: visual
     runs-on: ubuntu-24.04
     outputs:
       matrix: ${{ steps.versions.outputs.matrix }}

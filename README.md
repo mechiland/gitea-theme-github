@@ -170,12 +170,18 @@ Older 1.27 patch releases are not separate CI targets. A future Gitea release is
 existing targets stay in the matrix when support is extended.
 
 [`.github/workflows/release.yml`](.github/workflows/release.yml) runs on every push and pull request:
-1. run build regression tests, fetch all matrix versions' upstream sources, and check selectors against each version;
-2. build with strict checks and the **340 KB** budget, then package **once**;
-3. install that unchanged archive in a fresh container for every matrix version;
-4. check native and GitHub navigation, forced password changes, repository/file/blame/wiki/issue/PR pages,
+
+1. visual regression on Gitea 1.27.3 and 28.2.0 (light/dark, desktop/mobile), with screenshot diffs and reports;
+2. run build regression tests, fetch all matrix versions' upstream sources, and check selectors against each version;
+3. build the release candidate with strict checks and the **340 KB** budget, then package **once** for the compatibility matrix;
+4. install that unchanged archive in a fresh container for every matrix version;
+5. check native and GitHub navigation, forced password changes, repository/file/blame/wiki/issue/PR pages,
    theme switching, Mermaid and code copy, in light/dark at 1440/390px;
-5. retain screenshots, logs and a JSON report recording the archive SHA-256 for each version.
+6. retain screenshots, logs and a JSON report recording the archive SHA-256 for each version.
+
+The visual jobs must pass before packaging the release candidate or publishing. They create their own fixed test data and
+compare the candidate with an explicitly approved source revision in the same CI environment.
+See [`tools/visual/README.md`](tools/visual/README.md) for local runs, reports and baseline updates.
 
 A `v*` tag publishes a GitHub Release **only after every matrix job succeeds**, using the same archives tested above.
 The release job also verifies that every version's report names the same archive SHA-256. CI failure prevents publication.

@@ -1,0 +1,45 @@
+name: Visual regression
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  visual:
+    name: Gitea ${{ matrix.gitea }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        gitea: ['1.27.3', '28.2.0']
+    env:
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+      VISUAL_GITEA_VERSION: ${{ matrix.gitea }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # The approved visual baseline is pinned to a full commit SHA.
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/cache@v6
+        with:
+          path: .cache/gitea-sources
+          key: gitea-sources-v1-${{ hashFiles('build/gitea-versions.json') }}
+      - name: Install the pinned Chromium browser and its system dependencies
+        run: npx playwright install --with-deps chromium
+      - name: Compare the candidate with the approved visual baseline
+        run: npm run test:visual
+      - name: Upload screenshots, diffs, traces and Gitea logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: visual-gitea-${{ matrix.gitea }}
+          path: shots/visual/${{ matrix.gitea }}/
+          if-no-files-found: warn
+          retention-days: 14

@@ -12,10 +12,12 @@
     "seed": "node tools/seed/seed.mjs",
     "shoot": "node tools/shoot/shoot.mjs",
     "smoke": "node tools/shoot/smoke.mjs",
+    "test:visual": "node tools/visual/run.mjs",
     "package": "node build/package.mjs",
     "test": "node --test build/tests/*.test.mjs",
     "upstream": "node build/fetch-gitea.mjs",
     "compat": "node tools/compat/check.mjs"
+
   },
   "devDependencies": {
     "@primer/css": "22.3.2",
