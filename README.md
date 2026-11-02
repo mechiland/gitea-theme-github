@@ -161,10 +161,16 @@ Captures and reports are local artifacts: `shots/`, `docs/reference/`, `docs/pag
 ### CI / releases
 
 [`.github/workflows/release.yml`](.github/workflows/release.yml) runs on every push and pull request:
-1. lint;
-2. build;
-3. package;
-4. upload the package as a workflow artifact.
+
+1. visual regression on Gitea 1.27.3 and 28.2.0 (light/dark, desktop/mobile), with screenshot diffs and reports;
+2. lint;
+3. build;
+4. package;
+5. upload the package as a workflow artifact.
+
+The visual jobs must pass before packaging or publishing. They create their own fixed test data and
+compare the candidate with an explicitly approved source revision in the same CI environment.
+See [`tools/visual/README.md`](tools/visual/README.md) for local runs, reports and baseline updates.
 
 Pushing a tag `v*` builds with `--strict`, which enforces the 340 KB budget, and publishes a GitHub Release with the `.zip` and `.tar.gz` attached:
 

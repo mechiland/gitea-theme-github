@@ -13,7 +13,13 @@ permissions:
   contents: write
 
 jobs:
+  visual:
+    uses: ./.github/workflows/visual.yml
+    permissions:
+      contents: read
+
   build:
+    needs: visual
     runs-on: ubuntu-24.04
     env:
       PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
